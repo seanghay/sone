@@ -1,27 +1,47 @@
 import { createCanvas } from "canvas";
 import fs from "node:fs/promises";
-import { Align, Direction } from "yoga-layout";
+import { Align, Direction, FlexDirection, PositionType } from "yoga-layout";
 import { renderPattern } from "./utils.js";
 import { Box, Column, renderToCanvas, Row } from "./layout.js";
 
 export function Document() {
   return Column(
-    Box().margin(20, 20, 20, 20).size("100%", 200).backgroundColor("red"),
-    Box()
-      .size(200, 200)
-      .marginRight(100)
-      .alignSelf(Align.FlexEnd)
-      .backgroundColor("blue"),
-    Box().size(400, 300).alignSelf(Align.Center).backgroundColor("green"),
+    Box().margin(50, 20).size("100%", 200).bg("red"),
+    Box().size(200, 20).marginRight(100).alignSelf(Align.FlexEnd).bg("blue"),
+    Box().size(400, 300).alignSelf(Align.Center).bg("green"),
+    Box().size(400, 300).bg("gray"),
+    Box().size(100, 100).bg("gold"),
     Row(
-      Box().size(500, 500).backgroundColor("orange"),
-      Box().size(200, 200).backgroundColor("lime"),
-      Box().size(200, 200).backgroundColor("deepskyblue"),
-      Box().size(200, 200).backgroundColor("salmon"),
-      Box().size(200, "100%").backgroundColor("darkred"),
+      Box().size(300, 500).bg("orange"),
+      Box().size(200, 200).bg("lime"),
+      Box().size(200, 200).bg("deepskyblue"),
+      Box().size(400).bg("salmon"),
+      Box().size(200, "100%").bg("darkred"),
     )
       .gap(20)
-      .padding(20, 20, 20, 20),
+      .padding(20),
+    Box(
+      Box().maxHeight(120).grow(2).bg("red"),
+      Box(
+        Box()
+          .marginLeft(20)
+          .marginRight(20)
+          .aspectRatio(16 / 9)
+          .size("auto", "auto")
+          .bg("blue"),
+      )
+        .paddingTop(20)
+        .grow(1)
+        .bg("orange"),
+    )
+      .gap(10)
+      .padding(10)
+      .size(500, 500)
+      .marginLeft(150)
+      .marginTop(20)
+      .position(PositionType.Absolute)
+      .bg("black")
+      .direction(FlexDirection.Column),
   );
 }
 
@@ -37,6 +57,7 @@ const canvas = createCanvas(
 const ctx = canvas.getContext("2d");
 renderPattern(ctx, canvas.width, canvas.height, 20);
 renderToCanvas(ctx, root, 0, 0, canvas.width, canvas.height);
+root.node.freeRecursive();
 console.timeEnd("render");
 
 await fs.mkdir("examples", { recursive: true });

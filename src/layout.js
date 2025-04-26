@@ -26,8 +26,16 @@ function createNode(props, node = Yoga.Node.createDefault()) {
      * @param {number} h
      */
     size(w, h) {
+      let _h = h;
+      if (_h == null) {
+        _h = w;
+      }
       node.setWidth(w);
-      node.setHeight(h);
+      node.setHeight(_h);
+      return this;
+    },
+    position(type) {
+      node.setPositionType(type);
       return this;
     },
     /**
@@ -53,11 +61,11 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
     maxWidth(value) {
-      node.setMinWidth(value);
+      node.setMaxWidth(value);
       return this;
     },
     maxHeight(value) {
-      node.setMinHeight(value);
+      node.setMaxHeight(value);
       return this;
     },
     paddingTop(value) {
@@ -76,11 +84,32 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       node.setPadding(Yoga.EDGE_BOTTOM, value);
       return this;
     },
-    padding(top = 0, right = 0, bottom = 0, left = 0) {
-      node.setPadding(Yoga.EDGE_TOP, top);
-      node.setPadding(Yoga.EDGE_RIGHT, right);
-      node.setPadding(Yoga.EDGE_BOTTOM, bottom);
-      node.setPadding(Yoga.EDGE_LEFT, left);
+    padding(...args) {
+      const [top, right, bottom, left] = args;
+
+      if (args.length === 1) {
+        if (top != null) node.setPadding(Yoga.EDGE_ALL, top);
+        return this;
+      }
+
+      if (args.length === 2) {
+        if (top != null) {
+          node.setPadding(Yoga.EDGE_TOP, top);
+          node.setPadding(Yoga.EDGE_BOTTOM, top);
+        }
+
+        if (right != null) {
+          node.setPadding(Yoga.EDGE_RIGHT, right);
+          node.setPadding(Yoga.EDGE_LEFT, right);
+        }
+        return this;
+      }
+
+      if (top != null) node.setPadding(Yoga.EDGE_TOP, top);
+      if (right != null) node.setPadding(Yoga.EDGE_RIGHT, right);
+      if (bottom != null) node.setPadding(Yoga.EDGE_BOTTOM, bottom);
+      if (left != null) node.setPadding(Yoga.EDGE_LEFT, left);
+
       return this;
     },
     marginTop(value) {
@@ -99,11 +128,32 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       node.setMargin(Yoga.EDGE_BOTTOM, value);
       return this;
     },
-    margin(top = 0, right = 0, bottom = 0, left = 0) {
-      node.setMargin(Yoga.EDGE_TOP, top);
-      node.setMargin(Yoga.EDGE_RIGHT, right);
-      node.setMargin(Yoga.EDGE_BOTTOM, bottom);
-      node.setMargin(Yoga.EDGE_LEFT, left);
+    margin(...args) {
+      const [top, right, bottom, left] = args;
+
+      if (args.length === 1) {
+        if (top != null) node.setMargin(Yoga.EDGE_ALL, top);
+        return this;
+      }
+
+      if (args.length === 2) {
+        if (top != null) {
+          node.setMargin(Yoga.EDGE_TOP, top);
+          node.setMargin(Yoga.EDGE_BOTTOM, top);
+        }
+
+        if (right != null) {
+          node.setMargin(Yoga.EDGE_RIGHT, right);
+          node.setMargin(Yoga.EDGE_LEFT, right);
+        }
+        return this;
+      }
+
+      if (top != null) node.setMargin(Yoga.EDGE_TOP, top);
+      if (right != null) node.setMargin(Yoga.EDGE_RIGHT, right);
+      if (bottom != null) node.setMargin(Yoga.EDGE_BOTTOM, bottom);
+      if (left != null) node.setMargin(Yoga.EDGE_LEFT, left);
+
       return this;
     },
     gap(value) {
@@ -189,20 +239,30 @@ export function Column(...children) {
 
 export function Box(...children) {
   const node = Yoga.Node.createDefault();
+
   for (const item of children) {
     node.insertChild(item.node, node.getChildCount());
   }
+
   return createNode(
     {
       type: Box,
       children,
       style: {
-        backgroundColor: "black",
+        backgroundColor: null,
       },
       backgroundColor(color) {
         this.style.backgroundColor = color;
         return this;
       },
+      bg(color) {
+        this.style.backgroundColor = color;
+        return this;
+      },
+      direction(value) {
+        node.setFlexDirection(value)
+        return this;
+      }
     },
     node,
   );
@@ -250,8 +310,6 @@ export function Paragraph(...children) {
   };
 }
 
-
-
 /**
  * @param {CanvasRenderingContext2D} ctx
  * @param {ReturnType<App>} component
@@ -280,6 +338,5 @@ export function renderToCanvas(ctx, component, x, y, width, height) {
     }
   }
 }
-
 
 // console.dir(tree.node.getComputedWidth(), { depth: Number.Infinity });
