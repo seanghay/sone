@@ -1,0 +1,8 @@
+{
+  "include": ["src/**/*", "test/**/*"],
+  "compilerOptions": {
+    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "jsx": "react-jsx"
+  }
+}
