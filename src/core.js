@@ -29,8 +29,8 @@ function createNode(props, node = Yoga.Node.createDefault()) {
     style: {
       ...(props.style || {}),
     },
-    borderRadius(...values) {
-      this.style.borderRadius = values;
+    cornerRadius(...values) {
+      this.style.cornerRadius = values;
       return this;
     },
     /**
@@ -343,6 +343,19 @@ export function Text(text) {
   };
 }
 
+export function Photo(src) {
+  const node = Yoga.Node.create();
+
+  return createNode(
+    {
+      type: Photo,
+      style: {},
+      src,
+    },
+    node,
+  );
+}
+
 export function Paragraph(...children) {
   return {
     type: Paragraph,
@@ -361,7 +374,7 @@ export function Paragraph(...children) {
 export function renderToCanvas(ctx, component, x, y) {
   // drawing
   if (component.style.backgroundColor) {
-    let radius = component.style.borderRadius;
+    let radius = component.style.cornerRadius;
 
     if (radius == null) {
       radius = 0;
@@ -391,6 +404,16 @@ export function renderToCanvas(ctx, component, x, y) {
     );
 
     ctx.fill();
+  }
+
+  if (component.type === Photo) {
+    ctx.drawImage(
+      component.src,
+      x,
+      y,
+      component.node.getComputedWidth(),
+      component.node.getComputedHeight(),
+    );
   }
 
   // text
