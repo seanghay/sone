@@ -212,7 +212,7 @@ function createNode(props, node = Yoga.Node.createDefault()) {
 }
 
 export function Row(...children) {
-  const node = Yoga.Node.createDefault();
+  const node = Yoga.Node.create();
   node.setFlexDirection(FlexDirection.Row);
 
   for (const item of children) {
@@ -229,7 +229,7 @@ export function Row(...children) {
 }
 
 export function Column(...children) {
-  const node = Yoga.Node.createDefault();
+  const node = Yoga.Node.create();
   node.setFlexDirection(FlexDirection.Column);
 
   for (const item of children) {
@@ -246,7 +246,7 @@ export function Column(...children) {
 }
 
 export function Box(...children) {
-  const node = Yoga.Node.createDefault();
+  const node = Yoga.Node.create();
 
   for (const item of children) {
     node.insertChild(item.node, node.getChildCount());
@@ -280,23 +280,24 @@ export function Box(...children) {
  * @param {string} text
  */
 export function Text(text) {
-  const node = Yoga.Node.createDefault();
+  const node = Yoga.Node.create();
+
+  /**
+   * @type {import("./types.js").SoneTextOptions}
+   */
   const style = {
     size: 12,
     font: "sans-serif",
     color: "black",
     weight: 400,
-    lineHeight: 1
+    lineHeight: 1,
+    indentSize: 0,
+    align: "left",
   };
 
-  node.setMeasureFunc((width, widthMode, height, heightMode) => {
-    return textMeasureFunc(
-      text,
-      stringifyFont(style),
-      style.lineHeight,
-      width,
-    );
-  });
+  node.setMeasureFunc((width, widthMode, height, heightMode) =>
+    textMeasureFunc(text, style, width),
+  );
 
   return {
     node,
@@ -321,8 +322,20 @@ export function Text(text) {
     },
     lineHeight(value) {
       this.style.lineHeight = value;
-      return this
-    }
+      return this;
+    },
+    indentSize(value) {
+      this.style.indentSize = value;
+      return this;
+    },
+    /**
+     * @param {import("./types.js").SoneTextOptions['align']} value
+     * @returns
+     */
+    align(value) {
+      this.style.align = value;
+      return this;
+    },
   };
 }
 
@@ -355,26 +368,84 @@ export function renderToCanvas(ctx, component, x, y) {
 
   // text
   if (component.type === Text) {
+    /**
+     * @type {import("./types.js").SoneTextOptions}
+     */
+    const style = component.style;
+
     ctx.save();
     ctx.textBaseline = "top";
-    
-    const lineHeight = component.style.lineHeight || 1.0;
-    ctx.font = stringifyFont(component.style);
-    ctx.fillStyle = component.style.color;
+
+    const lineHeight = style.lineHeight || 1.0;
+    const font = stringifyFont(style);
+
+    ctx.font = font;
+    ctx.fillStyle = style.color;
+
+    const width = component.node.getComputedWidth();
 
     const lines = splitLines({
+      font,
+      lineHeight,
       text: component.text,
-      font: ctx.font,
-      lineHeight: 1,
-      maxWidth: component.node.getComputedWidth(),
+      maxWidth: width,
     });
 
     let offsetY = y;
+    let i = 0;
+
     for (const line of lines) {
-      const segment = line.join("");
-      const m = measureText({ text: segment, font: ctx.font, lineHeight: 1 });
-      ctx.fillText(segment, x, offsetY);
-      offsetY += m.height * lineHeight;
+      i++;
+      let offsetX = x;
+      
+      const isLastLine = i === lines.length;
+      const segment = line.join("").trim();
+      const m = measureText({ text: segment, font, lineHeight });
+
+      if (style.align === "justify") {
+        if (isLastLine) {
+          ctx.fillText(segment, offsetX, offsetY);
+          continue;
+        }
+
+        const items = line.join("").trim().split(" ");
+        let lineWidth = 0;
+        const totalSpaceCount = items.length - 1;
+
+        // draw;
+        if (totalSpaceCount === 0) {
+          ctx.fillText(segment, offsetX, offsetY);
+          continue;
+        }
+
+        const queue = [];
+        for (const item of items) {
+          const c = measureText({ text: item, font, lineHeight });
+          lineWidth += c.width;
+          queue.push([item, c.width]);
+        }
+
+        const spaceWidth = (width - lineWidth) / totalSpaceCount;
+
+        for (const [text, w] of queue) {
+          ctx.fillText(text, offsetX, offsetY);
+          offsetX += w + spaceWidth;
+        }
+
+        offsetY += m.height;
+        continue;
+      }
+
+      if (style.align === "right") {
+        offsetX += width - m.width;
+      }
+
+      if (style.align === "center") {
+        offsetX += (width - m.width) / 2;
+      }
+
+      ctx.fillText(segment, offsetX, offsetY);
+      offsetY += m.height;
     }
 
     ctx.restore();
@@ -392,7 +463,7 @@ export function renderToCanvas(ctx, component, x, y) {
 }
 
 export function createRoot(root, width, height) {
-  const node = Yoga.Node.createDefault();
+  const node = Yoga.Node.create();
   node.setWidth(width);
   node.setHeight(height);
 
@@ -421,9 +492,31 @@ export function renderAsImageBuffer(component) {
     root.node.getComputedWidth(),
     root.node.getComputedHeight(),
   );
+
   const ctx = canvas.getContext("2d");
-  renderPattern(ctx, canvas.width, canvas.height, 20);
+  renderPattern(ctx, canvas.width, canvas.height, 15);
   root.render(ctx);
   root.free();
-  return canvas.toBuffer("image/jpeg", { quality: 0.9 });
+
+  return canvas.toBuffer("image/jpeg", { quality: 0.98 });
+}
+
+/**
+ * @param {Function} component
+ * @returns {Buffer}
+ */
+export function renderAsPdfBuffer(component) {
+  const root = createRoot(component);
+  const canvas = createCanvas(
+    root.node.getComputedWidth(),
+    root.node.getComputedHeight(),
+    "pdf",
+  );
+
+  const ctx = canvas.getContext("2d");
+  renderPattern(ctx, canvas.width, canvas.height, 15);
+  root.render(ctx);
+  root.free();
+
+  return canvas.toBuffer("application/pdf");
 }

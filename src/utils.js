@@ -8,7 +8,7 @@
 export function renderPattern(ctx, w, h, blockSize) {
 	ctx.fillStyle = "#fff";
 	ctx.fillRect(0, 0, w, h);
-
+	
 	const columns = Math.round(w / blockSize) / 2;
 	const rows = Math.round(h / blockSize);
 
@@ -16,7 +16,7 @@ export function renderPattern(ctx, w, h, blockSize) {
 	for (let r = 0; r < rows; r++) {
 		let offsetX = r % 2 === 0 ? 0 : blockSize;
 		for (let i = 0; i < columns; i++) {
-			ctx.fillStyle = "#eee";
+			ctx.fillStyle = "#fff";
 			ctx.fillRect(offsetX, offsetY, blockSize, blockSize);
 			offsetX += blockSize * 2;
 		}

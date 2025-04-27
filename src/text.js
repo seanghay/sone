@@ -56,18 +56,23 @@ export function splitLines({ text, maxWidth, font, lineHeight = 1 }) {
   return lines;
 }
 
-export function textMeasureFunc(text, font, lineHeight, maxWidth) {
-  
+/**
+ * @param {string} text
+ * @param {import("./types.js").SoneTextOptions} style
+ * @param {number} maxWidth
+ * @returns {ReturnType<import("yoga-layout").MeasureFunction>}
+ */
+export function textMeasureFunc(text, style, maxWidth) {
+  const font = stringifyFont(style);
   const dimensions = measureText({
     text,
     font,
-    lineHeight,
+    lineHeight: style.lineHeight,
   });
 
   if (Number.isNaN(maxWidth)) {
     return dimensions;
   }
-  
 
   if (dimensions.width <= maxWidth) {
     return dimensions;
@@ -80,11 +85,16 @@ export function textMeasureFunc(text, font, lineHeight, maxWidth) {
   let width = 0;
   let height = 0;
 
-  const lines = splitLines({ text, maxWidth, font, lineHeight });
+  const lines = splitLines({
+    text,
+    maxWidth,
+    font,
+    lineHeight: style.lineHeight,
+  });
 
   for (const line of lines) {
-    const str = line.join("");
-    const m = measureText({ text: str, font, lineHeight });
+    const str = line.join("").trim();
+    const m = measureText({ text: str, font, lineHeight: style.lineHeight });
     width = Math.max(width, m.width);
     height += m.height;
   }
