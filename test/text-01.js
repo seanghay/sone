@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { FlexDirection, Justify } from "yoga-layout";
+import { Align, FlexDirection, Justify } from "yoga-layout";
 import { Box, Column, Row, Text, renderAsImageBuffer } from "../src/core.js";
 
 function Document() {
@@ -9,7 +9,12 @@ function Document() {
   const defaultFont = "Inter Khmer";
 
   return Column(
-    Row(Box().size(120).bg("green"), Box().size(200).bg("orange")).gap(10),
+    Row(
+      Box().size(300).borderRadius(80, 0).bg("green"),
+      Box().size(200).borderRadius(200).bg("orange"),
+    )
+      .alignItems(Align.Center)
+      .gap(44),
     Text(
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dignissim vehicula ultrices. Proin a purus interdum neque eleifend volutpat quis vitae ipsum. Quisque at sollicitudin dolor. Cras ut enim rhoncus nibh consectetur fermentum nec a lorem. In ut sapien mauris. Praesent vel urna elit. Pellentesque iaculis mollis arcu, lobortis fermentum odio euismod quis.",
     )
@@ -36,9 +41,10 @@ function Document() {
           .size(44)
           .align("right")
           .weight(700)
-          .indentSize(60),
+          .indentSize(0),
       )
         .padding(20, 30)
+        .borderRadius(44)
         .bg("#FBE4D6"),
       Text(sample).color("#333").font(defaultFont).lineHeight(1.2).size(22),
       Box().height(4).bg("#eee"),
@@ -61,7 +67,7 @@ function Document() {
   )
     .padding(60)
     .maxWidth(1300)
-    .gap(30);
+    .gap(50);
 }
 
 await fs.writeFile("test/text-01.jpg", renderAsImageBuffer(Document()));

@@ -29,6 +29,10 @@ function createNode(props, node = Yoga.Node.createDefault()) {
     style: {
       ...(props.style || {}),
     },
+    borderRadius(...values) {
+      this.style.borderRadius = values;
+      return this;
+    },
     /**
      * @param {number} w
      * @param {number} h
@@ -357,13 +361,36 @@ export function Paragraph(...children) {
 export function renderToCanvas(ctx, component, x, y) {
   // drawing
   if (component.style.backgroundColor) {
+    let radius = component.style.borderRadius;
+
+    if (radius == null) {
+      radius = 0;
+    }
+
+    if (typeof radius === "number") {
+      radius = [radius];
+    }
+
+    const maxRadius = Math.min(
+      component.node.getComputedWidth(),
+      component.node.getComputedHeight(),
+    );
+
+    for (let i = 0; i < radius.length; i++) {
+      radius[i] = Math.max(0, Math.min(radius[i], maxRadius / 2));
+    }
+
     ctx.fillStyle = component.style.backgroundColor;
-    ctx.fillRect(
+    ctx.beginPath();
+    ctx.roundRect(
       x,
       y,
       component.node.getComputedWidth(),
       component.node.getComputedHeight(),
+      radius,
     );
+
+    ctx.fill();
   }
 
   // text
