@@ -8,7 +8,6 @@
     "canvas": "^3.1.0"
   },
   "dependencies": {
-    "nanoid": "^5.1.5",
     "yoga-layout": "^3.2.1"
   }
 }
