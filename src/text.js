@@ -33,24 +33,39 @@ export function measureText({ text, font, lineHeight = 1 }) {
   };
 }
 
-export function splitLines({ text, maxWidth, font, lineHeight = 1 }) {
+export function splitLines({
+  text,
+  maxWidth,
+  font,
+  indentSize = 0,
+  lineHeight = 1,
+}) {
   const lines = [[]];
   let currentText = "";
+  let i = 0;
 
   for (const item of segmenter.segment(text)) {
+    let indentWidth = 0;
+
+    if (lines.length === 1) {
+      indentWidth = indentSize;
+    }
+
     const { width } = measureText({
       text: currentText + item.segment,
       font,
       lineHeight,
     });
 
-    if (width < maxWidth) {
+    if (width + indentSize < maxWidth) {
       lines[lines.length - 1].push(item.segment);
       currentText += item.segment;
     } else {
       lines.push([item.segment]);
       currentText = item.segment;
     }
+
+    i++;
   }
 
   return lines;
@@ -64,6 +79,7 @@ export function splitLines({ text, maxWidth, font, lineHeight = 1 }) {
  */
 export function textMeasureFunc(text, style, maxWidth) {
   const font = stringifyFont(style);
+
   const dimensions = measureText({
     text,
     font,
@@ -90,11 +106,17 @@ export function textMeasureFunc(text, style, maxWidth) {
     maxWidth,
     font,
     lineHeight: style.lineHeight,
+    indentSize: style.indentSize,
   });
 
   for (const line of lines) {
     const str = line.join("").trim();
-    const m = measureText({ text: str, font, lineHeight: style.lineHeight });
+    const m = measureText({
+      text: str,
+      font,
+      lineHeight: style.lineHeight,
+    });
+
     width = Math.max(width, m.width);
     height += m.height;
   }

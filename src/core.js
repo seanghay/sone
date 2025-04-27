@@ -389,15 +389,26 @@ export function renderToCanvas(ctx, component, x, y) {
       lineHeight,
       text: component.text,
       maxWidth: width,
+      indentSize: style.indentSize,
     });
 
     let offsetY = y;
     let i = 0;
 
     for (const line of lines) {
+      let indentWidth = 0;
+
+      if (i === 0) {
+        // indent width doesnt work with text align center
+        if (style.align !== "center") {
+          indentWidth = style.indentSize;
+        }
+      }
+
       i++;
-      let offsetX = x;
-      
+
+      let offsetX = x + indentWidth;
+
       const isLastLine = i === lines.length;
       const segment = line.join("").trim();
       const m = measureText({ text: segment, font, lineHeight });
@@ -412,7 +423,7 @@ export function renderToCanvas(ctx, component, x, y) {
         let lineWidth = 0;
         const totalSpaceCount = items.length - 1;
 
-        // draw;
+        // draw
         if (totalSpaceCount === 0) {
           ctx.fillText(segment, offsetX, offsetY);
           continue;
@@ -425,7 +436,7 @@ export function renderToCanvas(ctx, component, x, y) {
           queue.push([item, c.width]);
         }
 
-        const spaceWidth = (width - lineWidth) / totalSpaceCount;
+        const spaceWidth = (width - lineWidth - indentWidth) / totalSpaceCount;
 
         for (const [text, w] of queue) {
           ctx.fillText(text, offsetX, offsetY);
@@ -437,7 +448,7 @@ export function renderToCanvas(ctx, component, x, y) {
       }
 
       if (style.align === "right") {
-        offsetX += width - m.width;
+        offsetX += width - m.width - indentWidth * 2;
       }
 
       if (style.align === "center") {
