@@ -8,6 +8,10 @@
     "canvas": "^3.1.0"
   },
   "dependencies": {
+    "canvg": "^4.0.3",
+    "css-box-shadow": "^1.0.0-3",
+    "css-font-parser": "^2.0.1",
+    "figma-squircle": "^1.1.0",
     "yoga-layout": "^3.2.1"
   }
 }

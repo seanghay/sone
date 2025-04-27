@@ -1,12 +1,28 @@
 import { createCanvas } from "canvas";
 import Yoga, { Direction, FlexDirection, Gutter } from "yoga-layout";
-import { renderPattern } from "./utils.js";
+import {
+  parseAlign,
+  parseFlexDirection,
+  parseJustify,
+  parsePositionType,
+  renderPattern,
+} from "./utils.js";
 import {
   measureText,
   splitLines,
   stringifyFont,
   textMeasureFunc,
 } from "./text.js";
+
+/**
+ * Span
+ * @param {string} text
+ */
+function Span(text) {
+  return {
+    text,
+  };
+}
 
 function createIdGenerator() {
   let id = -1;
@@ -46,8 +62,11 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       node.setHeight(_h);
       return this;
     },
+    /**
+     * @param {Parameters<parsePositionType>[0]} type
+     */
     position(type) {
-      node.setPositionType(type);
+      node.setPositionType(parsePositionType(type));
       return this;
     },
     /**
@@ -172,20 +191,33 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       node.setGap(Gutter.All, value);
       return this;
     },
+    /**
+     * @param {Parameters<parseAlign>[0]} value
+     */
     alignContent(value) {
-      node.setAlignContent(value);
+      node.setAlignContent(parseAlign(value));
       return this;
     },
+    /**
+     * @param {Parameters<parseAlign>[0]} value
+     */
     alignItems(value) {
-      node.setAlignItems(value);
+      node.setAlignItems(parseAlign(value));
       return this;
     },
+    /**
+     * @param {Parameters<parseAlign>[0]} value
+     */
+
     alignSelf(value) {
-      node.setAlignSelf(value);
+      node.setAlignSelf(parseAlign(value));
       return this;
     },
+    /**
+     * @param {Parameters<parseJustify>[0]} value
+     */
     justifyContent(value) {
-      node.setJustifyContent(value);
+      node.setJustifyContent(parseJustify(value));
       return this;
     },
     wrap() {
@@ -272,7 +304,7 @@ export function Box(...children) {
         return this;
       },
       direction(value) {
-        node.setFlexDirection(value);
+        node.setFlexDirection(parseFlexDirection(value));
         return this;
       },
     },

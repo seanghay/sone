@@ -1,18 +1,18 @@
 import { loadImage } from "canvas";
 import fs from "node:fs/promises";
-import { Align, FlexDirection, Justify } from "yoga-layout";
 import {
   Box,
   Column,
   Photo,
   Row,
   Text,
-  renderAsImageBuffer
+  renderAsImageBuffer,
 } from "../src/core.js";
 
 async function Document() {
   const imageSrc = await loadImage("test/Flag_of_Cambodia.svg");
-  const sample = "ពិធីបុណ្យ ព្រះសពរបស់ សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។";
+  const sample =
+    "ពិធីបុណ្យ ព្រះសពរបស់ សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។";
   const defaultFont = "Inter Khmer";
 
   return Column(
@@ -21,7 +21,7 @@ async function Document() {
       Box().size(200).cornerRadius(200).bg("orange"),
       Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
     )
-      .alignItems(Align.Center)
+      .alignItems("center")
       .gap(44),
     Text(
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dignissim vehicula ultrices. Proin a purus interdum neque eleifend volutpat quis vitae ipsum. Quisque at sollicitudin dolor. Cras ut enim rhoncus nibh consectetur fermentum nec a lorem. In ut sapien mauris. Praesent vel urna elit. Pellentesque iaculis mollis arcu, lobortis fermentum odio euismod quis.",
@@ -69,8 +69,8 @@ async function Document() {
         Box().size("auto").grow(1),
         Text("Example Footer | Rendering Engine").color("#333").size(18),
       )
-        .justifyContent(Justify.FlexEnd)
-        .direction(FlexDirection.Row),
+        .justifyContent("flex-end")
+        .direction("row"),
     ).gap(20),
   )
     .padding(60)

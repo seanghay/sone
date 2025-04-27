@@ -1,12 +1,11 @@
 import fs from "node:fs/promises";
-import { Align, FlexDirection, PositionType } from "yoga-layout";
 import { Box, Column, renderAsImageBuffer, Row } from "../src/core.js";
 
 function Document() {
   return Column(
     Box().margin(20, 20).size("auto", 200).bg("red"),
-    Box().size(200, 20).marginRight(100).alignSelf(Align.FlexEnd).bg("blue"),
-    Box().size(400, 300).alignSelf(Align.Center).bg("green"),
+    Box().size(200, 20).marginRight(100).alignSelf("flex-end").bg("blue"),
+    Box().size(400, 300).alignSelf("center").bg("green"),
     Box().size(400, 300).bg("gray"),
     Box().size(100, 100).bg("gold"),
     Row(
@@ -37,9 +36,9 @@ function Document() {
       .size(500, 500)
       .marginLeft(150)
       .marginTop(50)
-      .position(PositionType.Absolute)
+      .position("absolute")
       .bg("black")
-      .direction(FlexDirection.Column),
+      .direction("column"),
   ).padding(40);
 }
 
