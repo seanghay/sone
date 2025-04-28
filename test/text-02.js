@@ -1,11 +1,5 @@
 import fs from "node:fs/promises";
-import {
-  Box,
-  Column,
-  Span,
-  Text,
-  renderAsImageBuffer
-} from "../src/core.js";
+import { Box, Column, Span, Text, renderAsImageBuffer } from "../src/core.js";
 
 function Document() {
   return Column(
@@ -14,7 +8,7 @@ function Document() {
       Span("ពិធីបុណ្យ ព្រះសពរបស់ ").color("green"),
       Span("លោក សុិន សុខខា").font("Moul").color("red").size(23),
       Span(" បានប្រព្រឹត្តិធ្វើទៅ Internal នៅ"),
-      Span("ថ្ងៃសៅរ៍ ទី២៦មេសា").weight(700),
+      Span(" ថ្ងៃសៅរ៍ ទី២៦មេសា").weight(700),
       Span(
         "នេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ",
       ),

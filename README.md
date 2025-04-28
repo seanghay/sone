@@ -6,6 +6,8 @@
 - [ ] Box Shadow
 - [ ] Text Shadow
 - [ ] Border
-- [ ] Text Span
+- [x] Text Span
 - [x] Align/Justify Enum -> Literal String
 - [ ] SVG to Path2D
+- [ ] Image Scale Type
+- [ ] Transforms

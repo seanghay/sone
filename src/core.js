@@ -502,7 +502,7 @@ export function renderToCanvas(ctx, component, x, y) {
      * @type {import("./types.js").SoneSpanNode[]}
      */
     const spans = component.spans;
-    const { lines, maxHeight } = splitLines({
+    const { lines, maxHeight, forceBreaks } = splitLines({
       spans,
       indentSize,
       lineHeight,
@@ -524,7 +524,10 @@ export function renderToCanvas(ctx, component, x, y) {
       let textAlign = style.align;
 
       // always left for last line when text align is justify
-      if (textAlign === "justify" && lineNumber === lines.length - 1) {
+      if (
+        (textAlign === "justify" && lineNumber === lines.length - 1) ||
+        forceBreaks.indexOf(lineNumber) !== -1
+      ) {
         textAlign = "left";
       }
 

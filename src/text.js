@@ -1,8 +1,5 @@
 import { createCanvas } from "canvas";
-
-const segmenter = new Intl.Segmenter(undefined, {
-  granularity: "word",
-});
+import { lineBreakTokenizer } from "./segmenter.js";
 
 export function stringifyFont({
   font = "sans-serif",
@@ -51,13 +48,15 @@ export function measureText({ text, font }) {
 /**
  * @typedef {import("./types.js").SoneSpanNode} SpanNode
  * @param {{spans: SpanNode[], maxWidth: number, indentSize: number}} param0
- * @returns {{lines: import("./types.js").SoneSpanRenderNode[][], maxHeight: number}} an array of lines
+ * @returns {{lines: import("./types.js").SoneSpanRenderNode[][], maxHeight: number, forceBreaks: number[]}} an array of lines
  */
 export function splitLines({ spans, maxWidth, indentSize = 0 }) {
   /**
    * @type {import("./types.js").SoneSpanRenderNode[][]}
    */
   const outputs = [];
+  const forceBreaks = [];
+
   let currentLineWidth = indentSize;
   let maxHeight = 0;
 
@@ -66,9 +65,9 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
     style = { ...span.style, ...style }; // merge with parent style
     const font = stringifyFont(style);
 
-    for (const segment of segmenter.segment(span.text)) {
+    for (const segment of lineBreakTokenizer(span.text)) {
       const { width, height, textMetrics } = measureText({
-        text: segment.segment,
+        text: segment,
         font,
       });
 
@@ -77,28 +76,31 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
       }
 
       currentLineWidth += width;
-      if (currentLineWidth < maxWidth) {
+      if (currentLineWidth < maxWidth && segment !== "\n") {
         if (outputs.length === 0) {
           outputs.push([]);
         }
 
         const length = outputs[outputs.length - 1].length;
-
         // remove trailing whitespace
-        if (length === 0 && /\s+/.test(segment.segment)) {
+        if (length === 0 && /\s+/.test(segment)) {
           currentLineWidth -= width;
           continue;
         }
 
         outputs[outputs.length - 1].push({
           ...span,
-          text: segment.segment,
+          text: segment,
           width,
           height,
           textMetrics,
         });
-        
       } else {
+
+        if (segment === "\n") {
+          forceBreaks.push(outputs.length - 1);
+        }
+
         if (outputs.length > 0) {
           const tail = outputs[outputs.length - 1];
           while (tail.length > 0 && /\s+/.test(tail[tail.length - 1].text)) {
@@ -112,14 +114,14 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
 
         outputs.push([]);
 
-        if (/\s+/.test(segment.segment)) {
+        if (/\s+/.test(segment)) {
           currentLineWidth = 0;
           continue;
         }
 
         outputs[outputs.length - 1].push({
           ...span,
-          text: segment.segment,
+          text: segment,
           width,
           height,
           textMetrics,
@@ -133,6 +135,7 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
   return {
     lines: outputs,
     maxHeight,
+    forceBreaks,
   };
 }
 
