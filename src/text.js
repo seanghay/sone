@@ -96,7 +96,6 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
           textMetrics,
         });
       } else {
-
         if (segment === "\n") {
           forceBreaks.push(outputs.length - 1);
         }
@@ -115,7 +114,7 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
         outputs.push([]);
 
         if (/\s+/.test(segment)) {
-          currentLineWidth = 0;
+          currentLineWidth = segment === "\n" ? indentSize : 0;
           continue;
         }
 

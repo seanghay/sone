@@ -81,9 +81,9 @@ async function Document() {
       )
         .align("justify")
         .font(defaultFont)
-        .lineHeight(1.6)
+        .lineHeight(1.8)
         .size(24)
-        .weight(500)
+        .weight(400)
         .indentSize(50)
         .color("gray"),
       Box().height(4).bg("#eee"),

@@ -523,10 +523,12 @@ export function renderToCanvas(ctx, component, x, y) {
       let spaceWidth = 0;
       let textAlign = style.align;
 
+      const hasForceBreak = forceBreaks.indexOf(lineNumber) !== -1;
+
       // always left for last line when text align is justify
       if (
         (textAlign === "justify" && lineNumber === lines.length - 1) ||
-        forceBreaks.indexOf(lineNumber) !== -1
+        hasForceBreak
       ) {
         textAlign = "left";
       }
@@ -542,9 +544,14 @@ export function renderToCanvas(ctx, component, x, y) {
         }
       }
 
+      const indentable =
+        lineNumber === 0 ||
+        (lineNumber > 0 && forceBreaks.indexOf(lineNumber - 1) !== -1);
+
       if (textAlign === "justify") {
         let fullWidth = width;
-        if (lineNumber === 0) {
+        
+        if (indentable) {
           fullWidth -= indentSize;
         }
 
@@ -553,15 +560,14 @@ export function renderToCanvas(ctx, component, x, y) {
       }
 
       if (textAlign === "left" || textAlign === "justify") {
-        if (lineNumber === 0) {
+        if (indentable) {
           lineOffsetX += indentSize;
         }
       }
 
       if (textAlign === "right") {
         lineOffsetX = width - lineWidth;
-
-        if (lineNumber === 0) {
+        if (indentable) {
           lineOffsetX -= indentSize;
         }
       }
