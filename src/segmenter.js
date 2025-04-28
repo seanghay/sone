@@ -15,4 +15,8 @@ export function* lineBreakTokenizer(text) {
     yield prepend + segment.segment;
     prepend = "";
   }
+
+  if (prepend) {
+    yield prepend;
+  }
 }
