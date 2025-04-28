@@ -1,5 +1,6 @@
 import { createCanvas } from "canvas";
 import Yoga, { Direction, FlexDirection, Gutter } from "yoga-layout";
+import { splitLines, stringifyFont, textMeasureFunc } from "./text.js";
 import {
   parseAlign,
   parseFlexDirection,
@@ -7,22 +8,6 @@ import {
   parsePositionType,
   renderPattern,
 } from "./utils.js";
-import {
-  measureText,
-  splitLines,
-  stringifyFont,
-  textMeasureFunc,
-} from "./text.js";
-
-/**
- * Span
- * @param {string} text
- */
-function Span(text) {
-  return {
-    text,
-  };
-}
 
 function createIdGenerator() {
   let id = -1;
@@ -313,11 +298,11 @@ export function Box(...children) {
 }
 
 /**
- * @param {string} text
+ * @param  {...string} children this can be string or Span object
+ * @returns
  */
-export function Text(text) {
+export function Text(...children) {
   const node = Yoga.Node.create();
-
   /**
    * @type {import("./types.js").SoneTextOptions}
    */
@@ -331,14 +316,33 @@ export function Text(text) {
     align: "left",
   };
 
+  /**
+   * @type {import("./types.js").SoneSpanNode[]}
+   */
+  const spans = children.map((child) => {
+    if (typeof child !== "object") {
+      return {
+        type: Span,
+        text: child,
+        style,
+      };
+    }
+
+    return {
+      ...child,
+      style,
+      spanStyle: child.style,
+    };
+  });
+
   node.setMeasureFunc((width, widthMode, height, heightMode) =>
-    textMeasureFunc(text, style, width),
+    textMeasureFunc(spans, style, width),
   );
 
   return {
     node,
     type: Text,
-    text,
+    spans,
     style,
     size(value) {
       this.style.size = value;
@@ -375,6 +379,39 @@ export function Text(text) {
   };
 }
 
+/**
+ * Span
+ * @param {string} text
+ */
+export function Span(text) {
+  /**
+   * @type {Partial<import("./types.js").SoneSpanOptions>}
+   */
+  const style = {};
+
+  return {
+    text,
+    style,
+    type: Span,
+    size(value) {
+      this.style.size = value;
+      return this;
+    },
+    font(...values) {
+      this.style.font = values.join(", ");
+      return this;
+    },
+    color(value) {
+      this.style.color = value;
+      return this;
+    },
+    weight(value) {
+      this.style.weight = value;
+      return this;
+    },
+  };
+}
+
 export function Photo(src) {
   const node = Yoga.Node.create();
 
@@ -388,10 +425,10 @@ export function Photo(src) {
   );
 }
 
-export function Paragraph(...children) {
+export function Svg(src) {
   return {
-    type: Paragraph,
-    children,
+    type: Svg,
+    src,
   };
 }
 
@@ -454,91 +491,101 @@ export function renderToCanvas(ctx, component, x, y) {
      * @type {import("./types.js").SoneTextOptions}
      */
     const style = component.style;
+    const indentSize = style.indentSize || 0.0;
+    const lineHeight = style.lineHeight || 1.0;
+    const width = component.node.getComputedWidth();
 
     ctx.save();
     ctx.textBaseline = "top";
 
-    const lineHeight = style.lineHeight || 1.0;
-    const font = stringifyFont(style);
-
-    ctx.font = font;
-    ctx.fillStyle = style.color;
-
-    const width = component.node.getComputedWidth();
-
-    const lines = splitLines({
-      font,
+    /**
+     * @type {import("./types.js").SoneSpanNode[]}
+     */
+    const spans = component.spans;
+    const { lines, maxHeight } = splitLines({
+      spans,
+      indentSize,
       lineHeight,
-      text: component.text,
       maxWidth: width,
-      indentSize: style.indentSize,
     });
 
+    const offsetX = x;
     let offsetY = y;
-    let i = 0;
+    let lineNumber = -1;
 
-    for (const line of lines) {
-      let indentWidth = 0;
+    for (const spanNodes of lines) {
+      lineNumber++;
 
-      if (i === 0) {
-        // indent width doesnt work with text align center
-        if (style.align !== "center") {
-          indentWidth = style.indentSize;
+      let lineWidth = 0;
+      let lineOffsetX = 0;
+      let totalSpacesCount = 0;
+      let totalSpaceWidth = 0;
+      let spaceWidth = 0;
+      let textAlign = style.align;
+
+      // always left for last line when text align is justify
+      if (textAlign === "justify" && lineNumber === lines.length - 1) {
+        textAlign = "left";
+      }
+
+      for (const node of spanNodes) {
+        lineWidth += node.width;
+
+        if (textAlign === "justify") {
+          if (/\s+/.test(node.text)) {
+            totalSpacesCount++;
+            totalSpaceWidth += node.width;
+          }
         }
       }
 
-      i++;
-
-      let offsetX = x + indentWidth;
-
-      const isLastLine = i === lines.length;
-      const segment = line.join("").trim();
-      const m = measureText({ text: segment, font, lineHeight });
-
-      if (style.align === "justify") {
-        if (isLastLine) {
-          ctx.fillText(segment, offsetX, offsetY);
-          continue;
+      if (textAlign === "justify") {
+        let fullWidth = width;
+        if (lineNumber === 0) {
+          fullWidth -= indentSize;
         }
 
-        const items = line.join("").trim().split(" ");
-        let lineWidth = 0;
-        const totalSpaceCount = items.length - 1;
-
-        // draw
-        if (totalSpaceCount === 0) {
-          ctx.fillText(segment, offsetX, offsetY);
-          continue;
-        }
-
-        const queue = [];
-        for (const item of items) {
-          const c = measureText({ text: item, font, lineHeight });
-          lineWidth += c.width;
-          queue.push([item, c.width]);
-        }
-
-        const spaceWidth = (width - lineWidth - indentWidth) / totalSpaceCount;
-
-        for (const [text, w] of queue) {
-          ctx.fillText(text, offsetX, offsetY);
-          offsetX += w + spaceWidth;
-        }
-
-        offsetY += m.height;
-        continue;
+        spaceWidth =
+          (fullWidth - lineWidth + totalSpaceWidth) / totalSpacesCount;
       }
 
-      if (style.align === "right") {
-        offsetX += width - m.width - indentWidth * 2;
+      if (textAlign === "left" || textAlign === "justify") {
+        if (lineNumber === 0) {
+          lineOffsetX += indentSize;
+        }
       }
 
-      if (style.align === "center") {
-        offsetX += (width - m.width) / 2;
+      if (textAlign === "right") {
+        lineOffsetX = width - lineWidth;
+
+        if (lineNumber === 0) {
+          lineOffsetX -= indentSize;
+        }
       }
 
-      ctx.fillText(segment, offsetX, offsetY);
-      offsetY += m.height;
+      if (textAlign === "center") {
+        lineOffsetX = (width - lineWidth) / 2;
+      }
+
+      for (const node of spanNodes) {
+        let style = node.spanStyle || {};
+        style = { ...node.style, ...style };
+
+        if (textAlign === "justify") {
+          if (/\s+/.test(node.text)) {
+            lineOffsetX += spaceWidth;
+            continue;
+          }
+        }
+
+        ctx.fillStyle = style.color;
+        ctx.font = stringifyFont(style);
+        ctx.fillText(node.text, offsetX + lineOffsetX, offsetY);
+
+        lineOffsetX += node.width;
+      }
+
+      offsetY += maxHeight * style.lineHeight;
     }
 
     ctx.restore();

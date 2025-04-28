@@ -5,6 +5,7 @@ import {
   Column,
   Photo,
   Row,
+  Span,
   Text,
   renderAsImageBuffer,
 } from "../src/core.js";
@@ -17,7 +18,7 @@ async function Document() {
 
   return Column(
     Row(
-      Box().size(300).cornerRadius(100, 0).bg("green"),
+      Box().size(200, 100).cornerRadius(100, 0).bg("blue"),
       Box().size(200).cornerRadius(200).bg("orange"),
       Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
     )
@@ -31,38 +32,60 @@ async function Document() {
       .size(32)
       .font("SF Pro Text")
       .align("center"),
-    Text("const date = new Date();")
+    Text(
+      Span("const ").color("red"),
+      Span("date ").weight(700).color("blue"),
+      Span("= "),
+      Span("new ").color("red"),
+      Span("Date();").color("blue"),
+    )
       .size(32)
       .color("#A55B4B")
       .font("Geist Mono"),
-    Text(sample).font(defaultFont).lineHeight(1.2).size(22).color("blue"),
+    Text(sample).font(defaultFont).lineHeight(1.5).size(22).color("blue"),
     Row(
       Box().cornerRadius(20).grow(1).size(50, "auto").bg("#ACD3A8"),
       Box().cornerRadius(20).size(100).bg("#57B4BA"),
     ).gap(50),
     Column(
       Box(
-        Text(sample)
+        Text(
+          "ពិធីបុណ្យ ព្រះសពរបស់ ",
+          Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ").font("Moul").size(34).color("#FE7743"),
+          " បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
+        )
           .color("#261FB3")
           .font(defaultFont)
-          .lineHeight(1.3)
+          .lineHeight(1.4)
           .size(44)
           .align("right")
-          .weight(700)
-          .indentSize(0),
+          .weight(500)
+          .indentSize(50),
       )
         .padding(20, 30)
         .cornerRadius(44)
         .bg("#FBE4D6"),
-      Text(sample).color("#333").font(defaultFont).lineHeight(1.2).size(22),
+      Text(sample)
+        .color("#333")
+        .font(defaultFont)
+        .lineHeight(1.5)
+        .size(22)
+        .align("center"),
       Box().height(4).bg("#eee"),
-      Text([sample, sample, sample, sample].join(" "))
+      Text(
+        [sample, sample].join(" "),
+        " ",
+        Span([sample, sample].join(" ")).weight(700).color("black"),
+        " ",
+        Span([sample].join(" ")).color("#C5172E"),
+      )
         .align("justify")
         .font(defaultFont)
-        .lineHeight(1.3)
+        .lineHeight(1.6)
         .size(24)
-        .weight(600)
-        .indentSize(50),
+        .weight(500)
+        .indentSize(50)
+        .color("gray"),
       Box().height(4).bg("#eee"),
       Box(
         Text("Page 1").color("#333").weight("bold").size(18),
