@@ -3,9 +3,9 @@
 - [x] Linear Gradient / Repeating Linear Gradient
 - [ ] Figma Squircle
 - [x] Text Stroke (https://jsfiddle.net/vtmnyea8/)
-- [ ] Box Shadow
+- [x] Box Shadow
 - [x] Text Shadow
-- [ ] Border
+- [x] Border
 - [x] Text Span
 - [x] Align/Justify Enum -> Literal String
 - [ ] SVG to Path2D

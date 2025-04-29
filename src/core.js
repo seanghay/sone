@@ -1,3 +1,4 @@
+import boxshadowparser from "css-box-shadow";
 import { createCanvas } from "canvas";
 import Yoga, { Direction, Gutter } from "yoga-layout";
 import {
@@ -239,6 +240,19 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
 
+    strokeWidth(value) {
+      this.style.strokeWidth = value;
+      return this;
+    },
+    strokeColor(value) {
+      this.style.strokeColor = value;
+      return this;
+    },
+    shadow(value) {
+      this.style.shadow = boxshadowparser.parse(value);
+      return this;
+    },
+
     [DrawSymbol]: (args) => {
       const { ctx, component, x, y } = args;
       const style = component.style;
@@ -263,6 +277,46 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         }
         return radius;
       };
+
+      if (style.strokeWidth > 0) {
+        ctx.save();
+        ctx.strokeStyle = style.strokeColor;
+        ctx.lineWidth = style.strokeWidth;
+        ctx.lineJoin = "round";
+        ctx.miterLimit = 2;
+
+        ctx.beginPath();
+        ctx.roundRect(
+          x,
+          y,
+          component.node.getComputedWidth(),
+          component.node.getComputedHeight(),
+          createRadiusValue(),
+        );
+
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      if (Array.isArray(style.shadow)) {
+        for (const shadowItem of style.shadow) {
+          ctx.save();
+          ctx.shadowColor = shadowItem.color;
+          ctx.shadowOffsetY = shadowItem.offsetY;
+          ctx.shadowOffsetX = shadowItem.offsetX;
+          ctx.shadowBlur = shadowItem.blurRadius;
+          ctx.beginPath();
+          ctx.roundRect(
+            x,
+            y,
+            component.node.getComputedWidth(),
+            component.node.getComputedHeight(),
+            createRadiusValue(),
+          );
+          ctx.fill();
+          ctx.restore();
+        }
+      }
 
       // drawing
       if (style.backgroundColor) {

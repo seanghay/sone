@@ -450,33 +450,35 @@ export function Text(...children) {
       for (const cmd of drawCommands) {
         const strokeWidth = cmd.strokeWidth || 0;
         if (strokeWidth > 0) {
+          ctx.save();
           ctx.font = cmd.font;
           ctx.strokeStyle = cmd.strokeColor || "black";
           ctx.lineWidth = strokeWidth;
           ctx.lineJoin = "round";
           ctx.miterLimit = 2;
           ctx.strokeText(cmd.text, cmd.x, cmd.y);
+          ctx.restore();
         }
       }
 
       // start drawing fill
-      ctx.save();
       for (const cmd of drawCommands) {
         ctx.font = cmd.font;
         ctx.fillStyle = cmd.fillStyle;
         if (Array.isArray(cmd.shadow)) {
           for (const shadowItem of cmd.shadow) {
+            ctx.save();
             ctx.shadowBlur = shadowItem.blurRadius;
             ctx.shadowColor = shadowItem.color;
             ctx.shadowOffsetX = shadowItem.offsetX;
             ctx.shadowOffsetY = shadowItem.offsetY;
             ctx.fillText(cmd.text, cmd.x, cmd.y);
+            ctx.restore();
           }
           continue;
         }
         ctx.fillText(cmd.text, cmd.x, cmd.y);
       }
-      ctx.restore();
 
       ctx.restore();
     },

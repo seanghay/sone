@@ -30,7 +30,10 @@ async function Document() {
       .alignItems("center")
       .gap(44),
     Text(
-      Span("Lorem ipsum").color("green").weight(800),
+      Span("Lorem ipsum")
+        .color("green")
+        .weight(800)
+        .shadow("3px 3px 0px lightgreen"),
       " dolor sit amet, consectetur adipiscing elit. Praesent dignissim vehicula ultrices. Proin a purus interdum neque eleifend volutpat quis vitae ipsum. Quisque at sollicitudin dolor. Cras ut enim rhoncus nibh consectetur fermentum nec a lorem. In ut sapien mauris. Praesent vel urna elit. Pellentesque iaculis mollis arcu, lobortis fermentum odio euismod quis.",
     )
       .lineHeight(1.5)
@@ -55,8 +58,14 @@ async function Document() {
         .cornerRadius(20)
         .grow(1)
         .size(50, "auto")
-        .bg("linear-gradient(to left, #a18cd1 0%, #fbc2eb 100%)"),
-      Flex().cornerRadius(20).size(100).bg("#57B4BA"),
+        .bg("linear-gradient(to left, #a18cd1 0%, #fbc2eb 100%)")
+        .strokeColor("orange")
+        .strokeWidth(6),
+      Flex()
+        .cornerRadius(20)
+        .size(100)
+        .bg("#57B4BA")
+        .shadow("-8px -8px 0px salmon"),
     ).gap(50),
     Column(
       Flex(
