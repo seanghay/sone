@@ -1,28 +1,18 @@
 import { createCanvas } from "canvas";
-import Yoga, { Direction, FlexDirection, Gutter } from "yoga-layout";
-import { splitLines, stringifyFont, textMeasureFunc } from "./text.js";
+import Yoga, { Direction, Gutter } from "yoga-layout";
 import {
+  createId,
+  DrawSymbol,
   parseAlign,
-  parseFlexDirection,
   parseJustify,
   parsePositionType,
   renderPattern,
 } from "./utils.js";
 
-function createIdGenerator() {
-  let id = -1;
-  return () => {
-    id++;
-    return id;
-  };
-}
-
-export const createId = createIdGenerator();
-
 /**
  * @param {{children: any[], type: Function, style: Record<string, any>}} props
  */
-function createNode(props, node = Yoga.Node.createDefault()) {
+export function createNode(props, node = Yoga.Node.createDefault()) {
   return {
     id: createId(),
     ...props,
@@ -31,6 +21,7 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       backgroundColor: null,
       ...(props.style || {}),
     },
+
     backgroundColor(color) {
       this.style.backgroundColor = color;
       return this;
@@ -39,7 +30,6 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       this.style.backgroundColor = color;
       return this;
     },
-
     cornerRadius(...values) {
       this.style.cornerRadius = values;
       return this;
@@ -239,196 +229,50 @@ function createNode(props, node = Yoga.Node.createDefault()) {
       node.setFlexShrink(value);
       return this;
     },
-  };
-}
 
-export function Row(...children) {
-  const node = Yoga.Node.create();
-  node.setFlexDirection(FlexDirection.Row);
+    [DrawSymbol]: (args) => {
+      const { ctx, component, x, y } = args;
 
-  for (const item of children) {
-    node.insertChild(item.node, node.getChildCount());
-  }
+      // drawing
+      if (component.style.backgroundColor) {
+        let radius = component.style.cornerRadius;
 
-  return createNode(
-    {
-      type: Row,
-      children,
-    },
-    node,
-  );
-}
+        if (radius == null) {
+          radius = 0;
+        }
 
-export function Column(...children) {
-  const node = Yoga.Node.create();
-  node.setFlexDirection(FlexDirection.Column);
+        if (typeof radius === "number") {
+          radius = [radius];
+        }
 
-  for (const item of children) {
-    node.insertChild(item.node, node.getChildCount());
-  }
+        const maxRadius = Math.min(
+          component.node.getComputedWidth(),
+          component.node.getComputedHeight(),
+        );
 
-  return createNode(
-    {
-      type: Column,
-      children,
-    },
-    node,
-  );
-}
+        for (let i = 0; i < radius.length; i++) {
+          radius[i] = Math.max(0, Math.min(radius[i], maxRadius / 2));
+        }
 
-export function Box(...children) {
-  const node = Yoga.Node.create();
+        ctx.fillStyle = component.style.backgroundColor;
+        ctx.beginPath();
+        ctx.roundRect(
+          x,
+          y,
+          component.node.getComputedWidth(),
+          component.node.getComputedHeight(),
+          radius,
+        );
 
-  for (const item of children) {
-    node.insertChild(item.node, node.getChildCount());
-  }
+        ctx.fill();
+      }
 
-  return createNode(
-    {
-      type: Box,
-      children,
-      direction(value) {
-        node.setFlexDirection(parseFlexDirection(value));
-        return this;
-      },
-    },
-    node,
-  );
-}
-
-/**
- * @param  {...string} children this can be string or Span object
- * @returns
- */
-export function Text(...children) {
-  const node = Yoga.Node.create();
-  /**
-   * @type {import("./types.js").SoneTextOptions}
-   */
-  const style = {
-    size: 12,
-    font: "sans-serif",
-    color: "black",
-    weight: 400,
-    lineHeight: 1,
-    indentSize: 0,
-    align: "left",
-  };
-
-  /**
-   * @type {import("./types.js").SoneSpanNode[]}
-   */
-  const spans = children.map((child) => {
-    if (typeof child !== "object") {
-      return {
-        type: Span,
-        text: child,
-        style,
-      };
-    }
-
-    return {
-      ...child,
-      style,
-      spanStyle: child.style,
-    };
-  });
-
-  node.setMeasureFunc((width, widthMode, height, heightMode) =>
-    textMeasureFunc(spans, style, width),
-  );
-
-  return {
-    node,
-    type: Text,
-    spans,
-    style,
-    size(value) {
-      this.style.size = value;
-      return this;
-    },
-    font(...values) {
-      this.style.font = values.join(", ");
-      return this;
-    },
-    color(value) {
-      this.style.color = value;
-      return this;
-    },
-    weight(value) {
-      this.style.weight = value;
-      return this;
-    },
-    lineHeight(value) {
-      this.style.lineHeight = value;
-      return this;
-    },
-    indentSize(value) {
-      this.style.indentSize = value;
-      return this;
-    },
-    /**
-     * @param {import("./types.js").SoneTextOptions['align']} value
-     * @returns
-     */
-    align(value) {
-      this.style.align = value;
-      return this;
+      // call to props draw symbol
+      if (DrawSymbol in props) {
+        props[DrawSymbol](args);
+      }
     },
   };
-}
-
-/**
- * Span
- * @param {string} text
- */
-export function Span(text) {
-  /**
-   * @type {Partial<import("./types.js").SoneSpanOptions>}
-   */
-  const style = {};
-
-  return {
-    text,
-    style,
-    position: {
-      offsetY: 0,
-    },
-    type: Span,
-    size(value) {
-      this.style.size = value;
-      return this;
-    },
-    font(...values) {
-      this.style.font = values.join(", ");
-      return this;
-    },
-    color(value) {
-      this.style.color = value;
-      return this;
-    },
-    weight(value) {
-      this.style.weight = value;
-      return this;
-    },
-    offsetY(value) {
-      this.position.offsetY = value;
-      return this;
-    },
-  };
-}
-
-export function Photo(src) {
-  const node = Yoga.Node.create();
-
-  return createNode(
-    {
-      type: Photo,
-      style: {},
-      src,
-    },
-    node,
-  );
 }
 
 export function Svg(src) {
@@ -447,170 +291,14 @@ export function Svg(src) {
  * @param {number} height
  */
 export function renderToCanvas(ctx, component, x, y) {
-  // drawing
-  if (component.style.backgroundColor) {
-    let radius = component.style.cornerRadius;
-
-    if (radius == null) {
-      radius = 0;
-    }
-
-    if (typeof radius === "number") {
-      radius = [radius];
-    }
-
-    const maxRadius = Math.min(
-      component.node.getComputedWidth(),
-      component.node.getComputedHeight(),
-    );
-
-    for (let i = 0; i < radius.length; i++) {
-      radius[i] = Math.max(0, Math.min(radius[i], maxRadius / 2));
-    }
-
-    ctx.fillStyle = component.style.backgroundColor;
-    ctx.beginPath();
-    ctx.roundRect(
+  if (DrawSymbol in component) {
+    const onDraw = component[DrawSymbol];
+    onDraw({
+      component,
+      ctx,
       x,
       y,
-      component.node.getComputedWidth(),
-      component.node.getComputedHeight(),
-      radius,
-    );
-
-    ctx.fill();
-  }
-
-  if (component.type === Photo) {
-    ctx.drawImage(
-      component.src,
-      x,
-      y,
-      component.node.getComputedWidth(),
-      component.node.getComputedHeight(),
-    );
-  }
-
-  // text
-  if (component.type === Text) {
-    /**
-     * @type {import("./types.js").SoneTextOptions}
-     */
-    const style = component.style;
-    const indentSize = style.indentSize || 0.0;
-    const lineHeight = style.lineHeight || 1.0;
-    const width = component.node.getComputedWidth();
-
-    ctx.save();
-    ctx.textBaseline = "top";
-
-    /**
-     * @type {import("./types.js").SoneSpanNode[]}
-     */
-    const spans = component.spans;
-    const { lines, maxHeight, forceBreaks } = splitLines({
-      spans,
-      indentSize,
-      lineHeight,
-      maxWidth: width,
     });
-
-    const offsetX = x;
-    let offsetY = y;
-    let lineNumber = -1;
-
-    for (const spanNodes of lines) {
-      lineNumber++;
-
-      let lineWidth = 0;
-      let lineOffsetX = 0;
-      let totalSpacesCount = 0;
-      let totalSpaceWidth = 0;
-      let spaceWidth = 0;
-      let textAlign = style.align;
-
-      const hasForceBreak = forceBreaks.indexOf(lineNumber) !== -1;
-
-      // always left for last line when text align is justify
-      if (
-        (textAlign === "justify" && lineNumber === lines.length - 1) ||
-        hasForceBreak
-      ) {
-        textAlign = "left";
-      }
-
-      for (const node of spanNodes) {
-        lineWidth += node.width;
-
-        if (textAlign === "justify") {
-          if (/\s+/.test(node.text)) {
-            totalSpacesCount++;
-            totalSpaceWidth += node.width;
-          }
-        }
-      }
-
-      const indentable =
-        lineNumber === 0 ||
-        (lineNumber > 0 && forceBreaks.indexOf(lineNumber - 1) !== -1);
-
-      if (textAlign === "justify") {
-        let fullWidth = width;
-
-        if (indentable) {
-          fullWidth -= indentSize;
-        }
-
-        spaceWidth =
-          (fullWidth - lineWidth + totalSpaceWidth) / totalSpacesCount;
-      }
-
-      if (textAlign === "left" || textAlign === "justify") {
-        if (indentable) {
-          lineOffsetX += indentSize;
-        }
-      }
-
-      if (textAlign === "right") {
-        lineOffsetX = width - lineWidth;
-        if (indentable) {
-          lineOffsetX -= indentSize;
-        }
-      }
-
-      if (textAlign === "center") {
-        lineOffsetX = (width - lineWidth) / 2;
-      }
-
-      for (const node of spanNodes) {
-        let style = node.spanStyle || {};
-        style = { ...node.style, ...style };
-
-        if (textAlign === "justify") {
-          if (/\s+/.test(node.text)) {
-            lineOffsetX += spaceWidth;
-            continue;
-          }
-        }
-
-        const position = node.position;
-        let spanOffsetY = 0;
-
-        if (node.position) {
-          spanOffsetY = position.offsetY;
-        }
-
-        ctx.fillStyle = style.color;
-        ctx.font = stringifyFont(style);
-        ctx.fillText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
-
-        lineOffsetX += node.width;
-      }
-
-      offsetY += maxHeight * style.lineHeight;
-    }
-
-    ctx.restore();
   }
 
   // draw children

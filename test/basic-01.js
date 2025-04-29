@@ -1,26 +1,26 @@
 import fs from "node:fs/promises";
-import { Box, Column, renderAsImageBuffer, Row } from "../src/core.js";
+import { Flex, Column, renderAsImageBuffer, Row } from "../src/sone.js";
 
 function Document() {
   return Column(
-    Box().margin(20, 20).size("auto", 200).bg("red"),
-    Box().size(200, 20).marginRight(100).alignSelf("flex-end").bg("blue"),
-    Box().size(400, 300).alignSelf("center").bg("green"),
-    Box().size(400, 300).bg("gray"),
-    Box().size(100, 100).bg("gold"),
+    Flex().margin(20, 20).size("auto", 200).bg("red"),
+    Flex().size(200, 20).marginRight(100).alignSelf("flex-end").bg("blue"),
+    Flex().size(400, 300).alignSelf("center").bg("green"),
+    Flex().size(400, 300).bg("gray"),
+    Flex().size(100, 100).bg("gold"),
     Row(
-      Box().size(300, 500).bg("orange"),
-      Box().size(200, 200).bg("lime"),
-      Box().size(200, 200).bg("deepskyblue"),
-      Box().size(400).bg("salmon"),
-      Box().size(200, "100%").bg("darkred"),
+      Flex().size(300, 500).bg("orange"),
+      Flex().size(200, 200).bg("lime"),
+      Flex().size(200, 200).bg("deepskyblue"),
+      Flex().size(400).bg("salmon"),
+      Flex().size(200, "100%").bg("darkred"),
     )
       .gap(20)
       .padding(20),
-    Box(
-      Box().maxHeight(120).grow(2).bg("red"),
-      Box(
-        Box()
+    Flex(
+      Flex().maxHeight(120).grow(2).bg("red"),
+      Flex(
+        Flex()
           .marginLeft(20)
           .marginRight(20)
           .aspectRatio(16 / 9)

@@ -1,14 +1,14 @@
 import { loadImage } from "canvas";
 import fs from "node:fs/promises";
 import {
-  Box,
+  Flex,
   Column,
   Photo,
   Row,
   Span,
   Text,
   renderAsImageBuffer,
-} from "../src/core.js";
+} from "../src/sone.js";
 
 async function Document() {
   const imageSrc = await loadImage("test/Flag_of_Cambodia.svg");
@@ -18,8 +18,8 @@ async function Document() {
 
   return Column(
     Row(
-      Box().size(200, 100).cornerRadius(100, 0).bg("blue"),
-      Box().size(200).cornerRadius(200).bg("orange"),
+      Flex().size(200, 100).cornerRadius(100, 0).bg("blue"),
+      Flex().size(200).cornerRadius(200).bg("orange"),
       Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
     )
       .alignItems("center")
@@ -45,12 +45,12 @@ async function Document() {
       .font("Geist Mono"),
     Text(sample).font(defaultFont).lineHeight(1.5).size(22).color("blue"),
     Row(
-      Box().cornerRadius(20).grow(1).size(50, "auto").bg("#ACD3A8"),
-      Box().cornerRadius(20).size(100).bg("#57B4BA"),
+      Flex().cornerRadius(20).grow(1).size(50, "auto").bg("#ACD3A8"),
+      Flex().cornerRadius(20).size(100).bg("#57B4BA"),
     ).gap(50),
     Column(
-      Box(
-        Box(
+      Flex(
+        Flex(
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
             Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
@@ -72,7 +72,7 @@ async function Document() {
           .cornerRadius(44)
           .alignSelf("center")
           .bg("#FBE4D6"),
-        Box(
+        Flex(
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
             Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
@@ -102,7 +102,7 @@ async function Document() {
         .lineHeight(1.5)
         .size(22)
         .align("center"),
-      Box().height(4).bg("#eee"),
+      Flex().height(4).bg("#eee"),
       Text(
         [sample, sample].join(" "),
         "\n",
@@ -117,10 +117,10 @@ async function Document() {
         .weight(400)
         .indentSize(50)
         .color("gray"),
-      Box().height(4).bg("#eee"),
-      Box(
+      Flex().height(4).bg("#eee"),
+      Flex(
         Text("Page 1").color("#333").weight("bold").size(18),
-        Box().size("auto").grow(1),
+        Flex().size("auto").grow(1),
         Text(
           Span("Example Footer").color("blue").weight(600),
           " | Rendering Engine",

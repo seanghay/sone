@@ -1,5 +1,7 @@
 import { createCanvas } from "canvas";
 import { lineBreakTokenizer } from "./segmenter.js";
+import Yoga from "yoga-layout";
+import { DrawSymbol } from "./utils.js";
 
 const measureCanvas = createCanvas(1, 1);
 const measureCache = new Map();
@@ -218,4 +220,247 @@ export function textMeasureFunc(spans, style, maxWidth) {
   }
 
   return { width, height };
+}
+
+/**
+ * @param  {...string} children this can be string or Span object
+ * @returns
+ */
+export function Text(...children) {
+  const node = Yoga.Node.create();
+  /**
+   * @type {import("./types.js").SoneTextOptions}
+   */
+  const style = {
+    size: 12,
+    font: "sans-serif",
+    color: "black",
+    weight: 400,
+    lineHeight: 1,
+    indentSize: 0,
+    align: "left",
+  };
+
+  /**
+   * @type {import("./types.js").SoneSpanNode[]}
+   */
+  const spans = children.map((child) => {
+    if (typeof child !== "object") {
+      return {
+        type: Span,
+        text: child,
+        style,
+      };
+    }
+
+    return {
+      ...child,
+      style,
+      spanStyle: child.style,
+    };
+  });
+
+  node.setMeasureFunc((width, widthMode, height, heightMode) =>
+    textMeasureFunc(spans, style, width),
+  );
+
+  return {
+    node,
+    type: Text,
+    spans,
+    style,
+    size(value) {
+      this.style.size = value;
+      return this;
+    },
+    font(...values) {
+      this.style.font = values.join(", ");
+      return this;
+    },
+    color(value) {
+      this.style.color = value;
+      return this;
+    },
+    weight(value) {
+      this.style.weight = value;
+      return this;
+    },
+    lineHeight(value) {
+      this.style.lineHeight = value;
+      return this;
+    },
+    indentSize(value) {
+      this.style.indentSize = value;
+      return this;
+    },
+    /**
+     * @param {import("./types.js").SoneTextOptions['align']} value
+     * @returns
+     */
+    align(value) {
+      this.style.align = value;
+      return this;
+    },
+
+    [DrawSymbol]: ({ ctx, component, x, y }) => {
+      /**
+       * @type {import("./types.js").SoneTextOptions}
+       */
+      const style = component.style;
+      const indentSize = style.indentSize || 0.0;
+      const lineHeight = style.lineHeight || 1.0;
+      const width = component.node.getComputedWidth();
+
+      ctx.save();
+      ctx.textBaseline = "top";
+
+      /**
+       * @type {import("./types.js").SoneSpanNode[]}
+       */
+      const spans = component.spans;
+      const { lines, maxHeight, forceBreaks } = splitLines({
+        spans,
+        indentSize,
+        lineHeight,
+        maxWidth: width,
+      });
+
+      const offsetX = x;
+      let offsetY = y;
+      let lineNumber = -1;
+
+      for (const spanNodes of lines) {
+        lineNumber++;
+
+        let lineWidth = 0;
+        let lineOffsetX = 0;
+        let totalSpacesCount = 0;
+        let totalSpaceWidth = 0;
+        let spaceWidth = 0;
+        let textAlign = style.align;
+
+        const hasForceBreak = forceBreaks.indexOf(lineNumber) !== -1;
+
+        // always left for last line when text align is justify
+        if (
+          (textAlign === "justify" && lineNumber === lines.length - 1) ||
+          hasForceBreak
+        ) {
+          textAlign = "left";
+        }
+
+        for (const node of spanNodes) {
+          lineWidth += node.width;
+
+          if (textAlign === "justify") {
+            if (/\s+/.test(node.text)) {
+              totalSpacesCount++;
+              totalSpaceWidth += node.width;
+            }
+          }
+        }
+
+        const indentable =
+          lineNumber === 0 ||
+          (lineNumber > 0 && forceBreaks.indexOf(lineNumber - 1) !== -1);
+
+        if (textAlign === "justify") {
+          let fullWidth = width;
+
+          if (indentable) {
+            fullWidth -= indentSize;
+          }
+
+          spaceWidth =
+            (fullWidth - lineWidth + totalSpaceWidth) / totalSpacesCount;
+        }
+
+        if (textAlign === "left" || textAlign === "justify") {
+          if (indentable) {
+            lineOffsetX += indentSize;
+          }
+        }
+
+        if (textAlign === "right") {
+          lineOffsetX = width - lineWidth;
+          if (indentable) {
+            lineOffsetX -= indentSize;
+          }
+        }
+
+        if (textAlign === "center") {
+          lineOffsetX = (width - lineWidth) / 2;
+        }
+
+        for (const node of spanNodes) {
+          let style = node.spanStyle || {};
+          style = { ...node.style, ...style };
+
+          if (textAlign === "justify") {
+            if (/\s+/.test(node.text)) {
+              lineOffsetX += spaceWidth;
+              continue;
+            }
+          }
+
+          const position = node._position;
+          let spanOffsetY = 0;
+
+          if (position) {
+            spanOffsetY = position.offsetY;
+          }
+
+          ctx.fillStyle = style.color;
+          ctx.font = stringifyFont(style);
+          ctx.fillText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
+
+          lineOffsetX += node.width;
+        }
+
+        offsetY += maxHeight * style.lineHeight;
+      }
+
+      ctx.restore();
+    },
+  };
+}
+
+/**
+ * Span
+ * @param {string} text
+ */
+export function Span(text) {
+  /**
+   * @type {Partial<import("./types.js").SoneSpanOptions>}
+   */
+  const style = {};
+
+  return {
+    text,
+    style,
+    _position: {
+      offsetY: 0,
+    },
+    type: Span,
+    size(value) {
+      this.style.size = value;
+      return this;
+    },
+    font(...values) {
+      this.style.font = values.join(", ");
+      return this;
+    },
+    color(value) {
+      this.style.color = value;
+      return this;
+    },
+    weight(value) {
+      this.style.weight = value;
+      return this;
+    },
+    offsetY(value) {
+      this._position.offsetY = value;
+      return this;
+    },
+  };
 }

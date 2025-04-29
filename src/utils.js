@@ -1,5 +1,19 @@
 import { Align, FlexDirection, Justify, PositionType } from "yoga-layout";
 
+export const DrawSymbol = Symbol();
+
+
+function createIdGenerator() {
+  let id = -1;
+  return () => {
+    id++;
+    return id;
+  };
+}
+
+export const createId = createIdGenerator();
+
+
 /**
  *
  * @param {CanvasRenderingContext2D} ctx

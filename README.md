@@ -14,3 +14,12 @@
 - [ ] Mesh Gradient
 - [x] Span OffsetY
 - [ ] Text Decoration
+- [ ] Mask
+
+
+
+### Reference
+
+- https://github.com/chearon/dropflow
+- https://github.com/vercel/satori
+- https://github.com/GuptaSiddhant/recanvas
