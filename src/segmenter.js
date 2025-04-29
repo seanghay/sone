@@ -1,3 +1,4 @@
+// TODO: Add fallback to icu4x when Intl.Segmenter is unavailable
 const segmenter = new Intl.Segmenter(undefined, {
   granularity: "word",
 });

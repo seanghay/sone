@@ -8,6 +8,7 @@ import {
   parsePositionType,
   renderPattern,
 } from "./utils.js";
+import { createGradientFillStyleList, isColor } from "./gradient.js";
 
 /**
  * @param {{children: any[], type: Function, style: Record<string, any>}} props
@@ -19,15 +20,23 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
     node,
     style: {
       backgroundColor: null,
+      backgroundGradient: null,
       ...(props.style || {}),
     },
-
     backgroundColor(color) {
-      this.style.backgroundColor = color;
+      if (isColor(color)) {
+        this.style.backgroundColor = color;
+        return this;
+      }
+      this.style.backgroundGradient = color;
       return this;
     },
     bg(color) {
-      this.style.backgroundColor = color;
+      if (isColor(color)) {
+        this.style.backgroundColor = color;
+        return this;
+      }
+      this.style.backgroundGradient = color;
       return this;
     },
     cornerRadius(...values) {
@@ -232,10 +241,9 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
 
     [DrawSymbol]: (args) => {
       const { ctx, component, x, y } = args;
-
-      // drawing
-      if (component.style.backgroundColor) {
-        let radius = component.style.cornerRadius;
+      const style = component.style;
+      const createRadiusValue = () => {
+        let radius = style.cornerRadius;
 
         if (radius == null) {
           radius = 0;
@@ -253,18 +261,45 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         for (let i = 0; i < radius.length; i++) {
           radius[i] = Math.max(0, Math.min(radius[i], maxRadius / 2));
         }
+        return radius;
+      };
 
-        ctx.fillStyle = component.style.backgroundColor;
+      // drawing
+      if (style.backgroundColor) {
+        ctx.fillStyle = style.backgroundColor;
         ctx.beginPath();
         ctx.roundRect(
           x,
           y,
           component.node.getComputedWidth(),
           component.node.getComputedHeight(),
-          radius,
+          createRadiusValue(),
+        );
+        ctx.fill();
+      }
+
+      if (style.backgroundGradient) {
+        const values = createGradientFillStyleList(
+          ctx,
+          style.backgroundGradient,
+          x,
+          y,
+          component.node.getComputedWidth(),
+          component.node.getComputedHeight(),
         );
 
-        ctx.fill();
+        for (const fillStyle of values) {
+          ctx.fillStyle = fillStyle;
+          ctx.beginPath();
+          ctx.roundRect(
+            x,
+            y,
+            component.node.getComputedWidth(),
+            component.node.getComputedHeight(),
+            createRadiusValue(),
+          );
+          ctx.fill();
+        }
       }
 
       // call to props draw symbol

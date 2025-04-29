@@ -79,10 +79,10 @@ async function Document() {
               .offsetY(-4)
               .font("Moul")
               .size(35)
-              .color("#FE7743"),
+              .color("#fff"),
             " បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
           )
-            .color("#261FB3")
+            .color("#fff")
             .font(defaultFont)
             .lineHeight(1.6)
             .size(40)
@@ -92,7 +92,9 @@ async function Document() {
           .width(700)
           .padding(20, 30)
           .cornerRadius(44)
-          .bg("#FBE4D6"),
+          .bg(`linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%),
+                      repeating-linear-gradient(-115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px),
+                      repeating-linear-gradient(115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px)`),
       )
         .gap(40)
         .direction("row"),
