@@ -25,7 +25,8 @@ async function Document() {
       .alignItems("center")
       .gap(44),
     Text(
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dignissim vehicula ultrices. Proin a purus interdum neque eleifend volutpat quis vitae ipsum. Quisque at sollicitudin dolor. Cras ut enim rhoncus nibh consectetur fermentum nec a lorem. In ut sapien mauris. Praesent vel urna elit. Pellentesque iaculis mollis arcu, lobortis fermentum odio euismod quis.",
+      Span("Lorem ipsum").color("green").weight(800),
+      " dolor sit amet, consectetur adipiscing elit. Praesent dignissim vehicula ultrices. Proin a purus interdum neque eleifend volutpat quis vitae ipsum. Quisque at sollicitudin dolor. Cras ut enim rhoncus nibh consectetur fermentum nec a lorem. In ut sapien mauris. Praesent vel urna elit. Pellentesque iaculis mollis arcu, lobortis fermentum odio euismod quis.",
     )
       .lineHeight(1.5)
       .color("#205781")
@@ -49,22 +50,48 @@ async function Document() {
     ).gap(50),
     Column(
       Box(
-        Text(
-          "ពិធីបុណ្យ ព្រះសពរបស់ ",
-          Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ").font("Moul").size(34).color("#FE7743"),
-          " បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
+        Box(
+          Text(
+            "ពិធីបុណ្យ ព្រះសពរបស់ ",
+            Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
+              .font("Moul")
+              .size(22)
+              .color("#FE7743")
+              .offsetY(-2),
+            " បានប្រព្រឹត្តិ ធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
+          )
+            .color("#261FB3")
+            .font(defaultFont)
+            .lineHeight(1.7)
+            .size(24)
+            .align("justify")
+            .weight(500),
         )
-          .color("#261FB3")
-          .font(defaultFont)
-          .lineHeight(1.4)
-          .size(44)
-          .align("right")
-          .weight(500)
-          .indentSize(50),
+          .maxWidth(440)
+          .padding(30, 30)
+          .cornerRadius(44)
+          .alignSelf("center")
+          .bg("#FBE4D6"),
+        Box(
+          Text(
+            "ពិធីបុណ្យ ព្រះសពរបស់ ",
+            Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ").font("Moul").size(34).color("#FE7743"),
+            " បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
+          )
+            .color("#261FB3")
+            .font(defaultFont)
+            .lineHeight(1.6)
+            .size(40)
+            .align("right")
+            .weight(600),
+        )
+          .width(700)
+          .padding(20, 30)
+          .cornerRadius(44)
+          .bg("#FBE4D6"),
       )
-        .padding(20, 30)
-        .cornerRadius(44)
-        .bg("#FBE4D6"),
+        .gap(40)
+        .direction("row"),
       Text(sample)
         .color("#333")
         .font(defaultFont)
@@ -90,7 +117,12 @@ async function Document() {
       Box(
         Text("Page 1").color("#333").weight("bold").size(18),
         Box().size("auto").grow(1),
-        Text("Example Footer | Rendering Engine").color("#333").size(18),
+        Text(
+          Span("Example Footer").color("blue").weight(600),
+          " | Rendering Engine",
+        )
+          .color("#333")
+          .size(18),
       )
         .justifyContent("flex-end")
         .direction("row"),

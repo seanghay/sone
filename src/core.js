@@ -392,6 +392,9 @@ export function Span(text) {
   return {
     text,
     style,
+    position: {
+      offsetY: 0,
+    },
     type: Span,
     size(value) {
       this.style.size = value;
@@ -407,6 +410,10 @@ export function Span(text) {
     },
     weight(value) {
       this.style.weight = value;
+      return this;
+    },
+    offsetY(value) {
+      this.position.offsetY = value;
       return this;
     },
   };
@@ -550,7 +557,7 @@ export function renderToCanvas(ctx, component, x, y) {
 
       if (textAlign === "justify") {
         let fullWidth = width;
-        
+
         if (indentable) {
           fullWidth -= indentSize;
         }
@@ -587,9 +594,16 @@ export function renderToCanvas(ctx, component, x, y) {
           }
         }
 
+        const position = node.position;
+        let spanOffsetY = 0;
+
+        if (node.position) {
+          spanOffsetY = position.offsetY;
+        }
+
         ctx.fillStyle = style.color;
         ctx.font = stringifyFont(style);
-        ctx.fillText(node.text, offsetX + lineOffsetX, offsetY);
+        ctx.fillText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
 
         lineOffsetX += node.width;
       }

@@ -11,3 +11,6 @@
 - [ ] SVG to Path2D
 - [ ] Image Scale Type
 - [ ] Transforms
+- [ ] Mesh Gradient
+- [x] Span OffsetY
+- [ ] Text Decoration

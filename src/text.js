@@ -1,6 +1,9 @@
 import { createCanvas } from "canvas";
 import { lineBreakTokenizer } from "./segmenter.js";
 
+const measureCanvas = createCanvas(1, 1);
+const measureCache = new Map();
+
 export function stringifyFont({
   font = "sans-serif",
   size = 12,
@@ -29,7 +32,12 @@ export function measureText({ text, font }) {
       },
     };
 
-  const canvas = createCanvas(1, 1);
+  const cacheKey = `${text}:${font}`;
+  if (measureCache.has(cacheKey)) {
+    return measureCache.get(cacheKey);
+  }
+
+  const canvas = measureCanvas;
   const ctx = canvas.getContext("2d");
 
   ctx.textBaseline = "top";
@@ -38,11 +46,14 @@ export function measureText({ text, font }) {
   const m = ctx.measureText(text);
   const height = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
 
-  return {
+  const result = {
     height,
     width: m.width,
     textMetrics: m,
   };
+
+  measureCache.set(cacheKey, result);
+  return result;
 }
 
 /**
