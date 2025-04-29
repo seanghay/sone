@@ -18,7 +18,12 @@ async function Document() {
 
   return Column(
     Row(
-      Flex().size(200, 100).cornerRadius(100, 0).bg("blue"),
+      Flex()
+        .size(200, 100)
+        .cornerRadius(100, 0)
+        .bg(
+          "linear-gradient(45deg, turquoise 20%, yellow 20%, yellow 40%, turquoise 40%, turquoise 60%, yellow 60%, yellow 80%, turquoise 80%, turquoise 100%)",
+        ),
       Flex().size(200).cornerRadius(200).bg("orange"),
       Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
     )
@@ -42,10 +47,15 @@ async function Document() {
     )
       .size(32)
       .color("#A55B4B")
-      .font("Geist Mono"),
+      .font("Geist Mono")
+      .shadow("2px 4px 4px black, 2px -4px 4px orange"),
     Text(sample).font(defaultFont).lineHeight(1.5).size(22).color("blue"),
     Row(
-      Flex().cornerRadius(20).grow(1).size(50, "auto").bg("#ACD3A8"),
+      Flex()
+        .cornerRadius(20)
+        .grow(1)
+        .size(50, "auto")
+        .bg("linear-gradient(to left, #a18cd1 0%, #fbc2eb 100%)"),
       Flex().cornerRadius(20).size(100).bg("#57B4BA"),
     ).gap(50),
     Column(
@@ -79,7 +89,9 @@ async function Document() {
               .offsetY(-4)
               .font("Moul")
               .size(35)
-              .color("#fff"),
+              .color("#F5C45E")
+              .strokeColor("black")
+              .strokeWidth(8),
             " បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
           )
             .color("#fff")
@@ -121,7 +133,12 @@ async function Document() {
         .color("gray"),
       Flex().height(4).bg("#eee"),
       Flex(
-        Text("Page 1").color("#333").weight("bold").size(18),
+        Text("Page 1")
+          .color("#fff")
+          .weight("bold")
+          .size(18)
+          .strokeColor("black")
+          .strokeWidth(4),
         Flex().size("auto").grow(1),
         Text(
           Span("Example Footer").color("blue").weight(600),

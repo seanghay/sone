@@ -1,3 +1,4 @@
+import boxshadowparser from "css-box-shadow";
 import { createCanvas } from "canvas";
 import { lineBreakTokenizer } from "./segmenter.js";
 import Yoga from "yoga-layout";
@@ -301,6 +302,19 @@ export function Text(...children) {
       this.style.align = value;
       return this;
     },
+    strokeWidth(value) {
+      this.style.strokeWidth = value;
+      return this;
+    },
+    strokeColor(value) {
+      this.style.strokeColor = value;
+      return this;
+    },
+
+    shadow(value) {
+      this.style.shadow = boxshadowparser.parse(value);
+      return this;
+    },
 
     [DrawSymbol]: ({ ctx, component, x, y }) => {
       /**
@@ -328,6 +342,8 @@ export function Text(...children) {
       const offsetX = x;
       let offsetY = y;
       let lineNumber = -1;
+
+      const drawCommands = [];
 
       for (const spanNodes of lines) {
         lineNumber++;
@@ -410,15 +426,57 @@ export function Text(...children) {
             spanOffsetY = position.offsetY;
           }
 
-          ctx.fillStyle = style.color;
-          ctx.font = stringifyFont(style);
-          ctx.fillText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
+          // ctx.strokeText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
+          // ctx.fillText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
+
+          drawCommands.push({
+            text: node.text,
+            x: offsetX + lineOffsetX,
+            y: offsetY + spanOffsetY,
+            fillStyle: style.color,
+            font: stringifyFont(style),
+            strokeWidth: style.strokeWidth,
+            strokeColor: style.strokeColor,
+            shadow: style.shadow,
+          });
 
           lineOffsetX += node.width;
         }
 
         offsetY += maxHeight * style.lineHeight;
       }
+
+      // start drawing stroke
+      for (const cmd of drawCommands) {
+        const strokeWidth = cmd.strokeWidth || 0;
+        if (strokeWidth > 0) {
+          ctx.font = cmd.font;
+          ctx.strokeStyle = cmd.strokeColor || "black";
+          ctx.lineWidth = strokeWidth;
+          ctx.lineJoin = "round";
+          ctx.miterLimit = 2;
+          ctx.strokeText(cmd.text, cmd.x, cmd.y);
+        }
+      }
+
+      // start drawing fill
+      ctx.save();
+      for (const cmd of drawCommands) {
+        ctx.font = cmd.font;
+        ctx.fillStyle = cmd.fillStyle;
+        if (Array.isArray(cmd.shadow)) {
+          for (const shadowItem of cmd.shadow) {
+            ctx.shadowBlur = shadowItem.blurRadius;
+            ctx.shadowColor = shadowItem.color;
+            ctx.shadowOffsetX = shadowItem.offsetX;
+            ctx.shadowOffsetY = shadowItem.offsetY;
+            ctx.fillText(cmd.text, cmd.x, cmd.y);
+          }
+          continue;
+        }
+        ctx.fillText(cmd.text, cmd.x, cmd.y);
+      }
+      ctx.restore();
 
       ctx.restore();
     },
@@ -460,6 +518,18 @@ export function Span(text) {
     },
     offsetY(value) {
       this._position.offsetY = value;
+      return this;
+    },
+    strokeWidth(value) {
+      this.style.strokeWidth = value;
+      return this;
+    },
+    strokeColor(value) {
+      this.style.strokeColor = value;
+      return this;
+    },
+    shadow(value) {
+      this.style.shadow = boxshadowparser.parse(value);
       return this;
     },
   };

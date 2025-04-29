@@ -2,9 +2,9 @@
 
 - [x] Linear Gradient / Repeating Linear Gradient
 - [ ] Figma Squircle
-- [ ] Text Stroke (https://jsfiddle.net/vtmnyea8/)
+- [x] Text Stroke (https://jsfiddle.net/vtmnyea8/)
 - [ ] Box Shadow
-- [ ] Text Shadow
+- [x] Text Shadow
 - [ ] Border
 - [x] Text Span
 - [x] Align/Justify Enum -> Literal String
@@ -24,3 +24,4 @@
 - https://github.com/vercel/satori
 - https://github.com/GuptaSiddhant/recanvas
 - https://github.com/catalinmiron/react-native-css-gradient
+- https://jsfiddle.net/vtmnyea8/
