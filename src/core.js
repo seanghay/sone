@@ -1,6 +1,6 @@
 import boxshadowparser from "css-box-shadow";
 import { createCanvas } from "canvas";
-import Yoga, { Direction, Gutter } from "yoga-layout";
+import Yoga, { Direction, Edge, Gutter } from "yoga-layout";
 import {
   createId,
   DrawSymbol,
@@ -40,6 +40,10 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       this.style.backgroundGradient = color;
       return this;
     },
+    opacity(value) {
+      this.style.opacity = value;
+      return this;
+    },
     cornerRadius(...values) {
       this.style.cornerRadius = values;
       return this;
@@ -64,6 +68,23 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       node.setPositionType(parsePositionType(type));
       return this;
     },
+    top(value) {
+      node.setPosition(Edge.Top, value);
+      return this;
+    },
+    left(value) {
+      node.setPosition(Edge.Left, value);
+      return this;
+    },
+    right(value) {
+      node.setPosition(Edge.Right, value);
+      return this;
+    },
+    bottom(value) {
+      node.setPosition(Edge.Bottom, value);
+      return this;
+    },
+
     /**
      * @param {number} value
      */
@@ -256,6 +277,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
     [DrawSymbol]: (args) => {
       const { ctx, component, x, y } = args;
       const style = component.style;
+
       const createRadiusValue = () => {
         let radius = style.cornerRadius;
 
@@ -379,7 +401,13 @@ export function Svg(src) {
  * @param {number} width
  * @param {number} height
  */
-export function renderToCanvas(ctx, component, x, y) {
+export function renderToCanvas(ctx, component, x, y, w, h) {
+  ctx.save();
+
+  if (component.style.opacity >= 0) {
+    ctx.globalAlpha = component.style.opacity;
+  }
+
   if (DrawSymbol in component) {
     const onDraw = component[DrawSymbol];
     onDraw({
@@ -396,9 +424,11 @@ export function renderToCanvas(ctx, component, x, y) {
       const childNode = child.node;
       const childX = x + childNode.getComputedLeft();
       const childY = y + childNode.getComputedTop();
-      renderToCanvas(ctx, child, childX, childY);
+      renderToCanvas(ctx, child, childX, childY, w, h);
     }
   }
+
+  ctx.restore();
 }
 
 export function createRoot(root, width, height) {
@@ -413,7 +443,14 @@ export function createRoot(root, width, height) {
     root,
     node,
     render(ctx) {
-      renderToCanvas(ctx, root, 0, 0);
+      renderToCanvas(
+        ctx,
+        root,
+        0,
+        0,
+        node.getComputedWidth(),
+        node.getComputedHeight(),
+      );
     },
     free() {
       root.node.freeRecursive();

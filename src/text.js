@@ -229,6 +229,7 @@ export function textMeasureFunc(spans, style, maxWidth) {
  */
 export function Text(...children) {
   const node = Yoga.Node.create();
+
   /**
    * @type {import("./types.js").SoneTextOptions}
    */
@@ -425,9 +426,6 @@ export function Text(...children) {
           if (position) {
             spanOffsetY = position.offsetY;
           }
-
-          // ctx.strokeText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
-          // ctx.fillText(node.text, offsetX + lineOffsetX, offsetY + spanOffsetY);
 
           drawCommands.push({
             text: node.text,

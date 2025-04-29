@@ -10,11 +10,12 @@
 - [x] Align/Justify Enum -> Literal String
 - [ ] SVG to Path2D
 - [ ] Image Scale Type
-- [ ] Transforms
+- [ ] Transforms (Scale, Rotate, Translate)
 - [ ] Mesh Gradient
 - [x] Span OffsetY
-- [ ] Text Decoration
+- [ ] Text Decoration (Underline, Cross, Overline)
 - [ ] Mask
+- [x] Opacity
 
 
 

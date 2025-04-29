@@ -32,7 +32,7 @@ export function renderPattern(ctx, w, h, blockSize) {
   for (let r = 0; r < rows; r++) {
     let offsetX = r % 2 === 0 ? 0 : blockSize;
     for (let i = 0; i < columns; i++) {
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = "#f2f2f2";
       ctx.fillRect(offsetX, offsetY, blockSize, blockSize);
       offsetX += blockSize * 2;
     }

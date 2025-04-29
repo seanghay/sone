@@ -90,7 +90,10 @@ async function Document() {
           .padding(30, 30)
           .cornerRadius(44)
           .alignSelf("center")
-          .bg("#FBE4D6"),
+          .bg("#FBE4D6")
+          .opacity(0.4)
+          .strokeColor("rgba(0,0,0,.4)")
+          .strokeWidth(1),
         Flex(
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
@@ -111,6 +114,7 @@ async function Document() {
             .weight(600),
         )
           .width(700)
+          .opacity(1)
           .padding(20, 30)
           .cornerRadius(44)
           .bg(`linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%),
@@ -159,6 +163,17 @@ async function Document() {
         .justifyContent("flex-end")
         .direction("row"),
     ).gap(20),
+
+    Flex(
+      Flex(Text("I am absolute!").color("#fff").size(44)).alignSelf("center"),
+    )
+      .size(400, "auto")
+      .cornerRadius(20)
+      .position("absolute")
+      .left(100)
+      .top(200)
+      .bg("rgba(0,0,0,.3)")
+      .padding(10, 20),
   )
     .padding(60)
     .maxWidth(1300)
