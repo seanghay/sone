@@ -28,8 +28,18 @@ function createNode(props, node = Yoga.Node.createDefault()) {
     ...props,
     node,
     style: {
+      backgroundColor: null,
       ...(props.style || {}),
     },
+    backgroundColor(color) {
+      this.style.backgroundColor = color;
+      return this;
+    },
+    bg(color) {
+      this.style.backgroundColor = color;
+      return this;
+    },
+
     cornerRadius(...values) {
       this.style.cornerRadius = values;
       return this;
@@ -277,17 +287,6 @@ export function Box(...children) {
     {
       type: Box,
       children,
-      style: {
-        backgroundColor: null,
-      },
-      backgroundColor(color) {
-        this.style.backgroundColor = color;
-        return this;
-      },
-      bg(color) {
-        this.style.backgroundColor = color;
-        return this;
-      },
       direction(value) {
         node.setFlexDirection(parseFlexDirection(value));
         return this;
