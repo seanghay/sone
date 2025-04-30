@@ -333,7 +333,6 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           style.cornerSmoothing,
           "stroke",
         );
-
         ctx.restore();
       }
 
@@ -344,7 +343,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           ctx.shadowOffsetY = shadowItem.offsetY;
           ctx.shadowOffsetX = shadowItem.offsetX;
           ctx.shadowBlur = shadowItem.blurRadius;
-          
+
           smoothRoundRect(
             ctx,
             x,
@@ -362,6 +361,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
 
       // drawing
       if (style.backgroundColor) {
+        ctx.save();
         ctx.fillStyle = style.backgroundColor;
         smoothRoundRect(
           ctx,
@@ -373,9 +373,11 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           style.cornerSmoothing,
           "fill",
         );
+        ctx.restore();
       }
 
       if (style.backgroundGradient) {
+        ctx.save();
         const values = createGradientFillStyleList(
           ctx,
           style.backgroundGradient,
@@ -398,9 +400,12 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
             "fill",
           );
         }
+
+        ctx.restore();
       }
 
       if (style.backgroudImage) {
+        ctx.save();
         const scaleType = style.backgroudImageScaleType || "fill";
         const containerWidth = component.node.getComputedWidth();
         const containerHeight = component.node.getComputedHeight();
@@ -469,6 +474,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           destWidth,
           destHeight,
         );
+        ctx.restore();
       }
 
       // call to props draw symbol

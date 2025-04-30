@@ -47,6 +47,7 @@ export function Photo(src) {
         const containerWidth = component.node.getComputedWidth();
         const containerHeight = component.node.getComputedHeight();
         const image = component.src;
+        ctx.save();
 
         smoothRoundRect(
           ctx,
@@ -112,6 +113,7 @@ export function Photo(src) {
           destWidth,
           destHeight,
         );
+        ctx.restore();
       },
     },
     node,
