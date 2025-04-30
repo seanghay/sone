@@ -7,7 +7,7 @@ import {
   Row,
   Span,
   Text,
-  renderAsImageBuffer
+  renderAsImageBuffer,
 } from "../src/sone.js";
 
 async function Document() {
@@ -18,6 +18,7 @@ async function Document() {
 
   const sample =
     "ពិធីបុណ្យ ព្រះសពរបស់ សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។";
+
   const defaultFont = "Inter Khmer";
 
   return Column(
@@ -32,7 +33,8 @@ async function Document() {
       Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
       Photo(imageSrc)
         .size(200)
-        .cornerRadius(40)
+        .cornerRadius(44)
+        .cornerSmoothing(0.7)
         .bg("green")
         .scaleType("cover")
         .strokeColor("rgba(0,0,0,.4)")
@@ -79,11 +81,7 @@ async function Document() {
         .bg("linear-gradient(to left, #a18cd1 0%, #fbc2eb 100%)")
         .strokeColor("orange")
         .strokeWidth(6),
-      Flex()
-        .cornerRadius(20)
-        .size(100)
-        .bg("#57B4BA")
-        .shadow("-8px -8px 0px salmon"),
+      Flex().cornerRadius(20).size(100).bg("#57B4BA").cornerSmoothing(1),
     ).gap(50),
     Column(
       Flex(
@@ -108,7 +106,8 @@ async function Document() {
         )
           .maxWidth(400)
           .padding(30, 30)
-          .cornerRadius(44)
+          .cornerRadius(56)
+          .cornerSmoothing(0.7)
           .alignSelf("center")
           .bg(bgSrc, "cover")
           .bg("#eee")
@@ -139,6 +138,7 @@ async function Document() {
           .opacity(1)
           .padding(20, 30)
           .cornerRadius(28)
+          .cornerSmoothing(0.7)
           .shadow("5px 5px 10px rgba(255, 137, 110, .6)")
           .bg(`linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%),
                       repeating-linear-gradient(-115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px),

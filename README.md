@@ -1,14 +1,14 @@
 ### Roadmap
 
 - [x] Linear Gradient / Repeating Linear Gradient
-- [ ] Figma Squircle
+- [x] Figma Squircle
 - [x] Text Stroke (https://jsfiddle.net/vtmnyea8/)
 - [x] Box Shadow
 - [x] Text Shadow
 - [x] Border
 - [x] Text Span
 - [x] Align/Justify Enum -> Literal String
-- [ ] SVG to Path2D
+- [x] SVG to Path2D
 - [x] Image Scale Type
 - [ ] Transforms (Scale, Rotate, Translate)
 - [ ] Mesh Gradient
@@ -21,6 +21,7 @@
 - [ ] Table
 - [ ] Grid
 - [x] Background Image
+- [ ] Emoji
 
 ### Reference
 

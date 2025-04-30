@@ -1,6 +1,7 @@
 import Yoga from "yoga-layout";
 import { createNode } from "./core.js";
 import { DrawSymbol } from "./utils.js";
+import { smoothRoundRect } from "./corner.js";
 
 export function Photo(src) {
   const node = Yoga.Node.create();
@@ -47,16 +48,16 @@ export function Photo(src) {
         const containerHeight = component.node.getComputedHeight();
         const image = component.src;
 
-        ctx.beginPath();
-        ctx.roundRect(
+        smoothRoundRect(
+          ctx,
           x,
           y,
           containerWidth,
           containerHeight,
           createRadiusValue(),
+          component.style.cornerSmoothing,
+          "clip",
         );
-
-        ctx.clip();
 
         let sourceWidth = image.width;
         let sourceHeight = image.height;

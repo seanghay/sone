@@ -11,6 +11,7 @@ import {
   renderPattern,
 } from "./utils.js";
 import { createGradientFillStyleList, isColor } from "./gradient.js";
+import { smoothRoundRect } from "./corner.js";
 
 /**
  * @param {{children: any[], type: Function, style: Record<string, any>}} props
@@ -25,6 +26,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       backgroundGradient: null,
       backgroudImage: null,
       backgroudImageScaleType: null,
+      cornerSmoothing: 0,
       ...(props.style || {}),
     },
     /**
@@ -52,6 +54,10 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
     },
     cornerRadius(...values) {
       this.style.cornerRadius = values;
+      return this;
+    },
+    cornerSmoothing(value) {
+      this.style.cornerSmoothing = value;
       return this;
     },
     /**
@@ -307,6 +313,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         for (let i = 0; i < radius.length; i++) {
           radius[i] = Math.max(0, Math.min(radius[i], maxRadius / 2));
         }
+
         return radius;
       };
 
@@ -316,17 +323,17 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         ctx.lineWidth = style.strokeWidth;
         ctx.lineJoin = "round";
         ctx.miterLimit = 2;
-
-        ctx.beginPath();
-        ctx.roundRect(
+        smoothRoundRect(
+          ctx,
           x,
           y,
           component.node.getComputedWidth(),
           component.node.getComputedHeight(),
           createRadiusValue(),
+          style.cornerSmoothing,
+          "stroke",
         );
 
-        ctx.stroke();
         ctx.restore();
       }
 
@@ -337,15 +344,18 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           ctx.shadowOffsetY = shadowItem.offsetY;
           ctx.shadowOffsetX = shadowItem.offsetX;
           ctx.shadowBlur = shadowItem.blurRadius;
-          ctx.beginPath();
-          ctx.roundRect(
+          
+          smoothRoundRect(
+            ctx,
             x,
             y,
             component.node.getComputedWidth(),
             component.node.getComputedHeight(),
             createRadiusValue(),
+            style.cornerSmoothing,
+            "fill",
           );
-          ctx.fill();
+
           ctx.restore();
         }
       }
@@ -353,38 +363,40 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       // drawing
       if (style.backgroundColor) {
         ctx.fillStyle = style.backgroundColor;
-        ctx.beginPath();
-        ctx.roundRect(
+        smoothRoundRect(
+          ctx,
           x,
           y,
           component.node.getComputedWidth(),
           component.node.getComputedHeight(),
           createRadiusValue(),
+          style.cornerSmoothing,
+          "fill",
         );
-        ctx.fill();
       }
 
       if (style.backgroundGradient) {
         const values = createGradientFillStyleList(
           ctx,
           style.backgroundGradient,
-          x,
-          y,
+          0,
+          0,
           component.node.getComputedWidth(),
           component.node.getComputedHeight(),
         );
 
         for (const fillStyle of values) {
           ctx.fillStyle = fillStyle;
-          ctx.beginPath();
-          ctx.roundRect(
+          smoothRoundRect(
+            ctx,
             x,
             y,
             component.node.getComputedWidth(),
             component.node.getComputedHeight(),
             createRadiusValue(),
+            style.cornerSmoothing,
+            "fill",
           );
-          ctx.fill();
         }
       }
 
@@ -392,19 +404,17 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         const scaleType = style.backgroudImageScaleType || "fill";
         const containerWidth = component.node.getComputedWidth();
         const containerHeight = component.node.getComputedHeight();
-
         const image = style.backgroudImage;
-
-        ctx.beginPath();
-        ctx.roundRect(
+        smoothRoundRect(
+          ctx,
           x,
           y,
           containerWidth,
           containerHeight,
           createRadiusValue(),
+          style.cornerSmoothing,
+          "clip",
         );
-
-        ctx.clip();
 
         let sourceWidth = image.width;
         let sourceHeight = image.height;
