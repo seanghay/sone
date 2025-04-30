@@ -9,15 +9,18 @@
 - [x] Text Span
 - [x] Align/Justify Enum -> Literal String
 - [ ] SVG to Path2D
-- [ ] Image Scale Type
+- [x] Image Scale Type
 - [ ] Transforms (Scale, Rotate, Translate)
 - [ ] Mesh Gradient
 - [x] Span OffsetY
 - [ ] Text Decoration (Underline, Cross, Overline)
 - [ ] Mask
 - [x] Opacity
-
-
+- [ ] JSON Serialization
+- [ ] JSON Deserialization
+- [ ] Table
+- [ ] Grid
+- [x] Background Image
 
 ### Reference
 

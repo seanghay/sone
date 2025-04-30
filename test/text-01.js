@@ -11,7 +11,11 @@ import {
 } from "../src/sone.js";
 
 async function Document() {
-  const imageSrc = await loadImage("test/Flag_of_Cambodia.svg");
+  const [imageSrc, bgSrc] = await Promise.all([
+    loadImage("test/Flag_of_Cambodia.svg"),
+    loadImage("test/248-700x400.jpg"),
+  ]);
+
   const sample =
     "ពិធីបុណ្យ ព្រះសពរបស់ សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។";
   const defaultFont = "Inter Khmer";
@@ -26,6 +30,19 @@ async function Document() {
         ),
       Flex().size(200).cornerRadius(200).bg("orange"),
       Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
+      Photo(imageSrc)
+        .size(200)
+        .cornerRadius(40)
+        .bg("green")
+        .scaleType("cover")
+        .strokeColor("rgba(0,0,0,.4)")
+        .strokeWidth(1)
+        .shadow(
+          "0px 10px 10px red",
+          "0px -10px 10px blue",
+          "-10px 0px 10px orange",
+          "10px 0px 10px lightgreen",
+        ),
     )
       .alignItems("center")
       .gap(44),
@@ -84,16 +101,19 @@ async function Document() {
             .lineHeight(1.7)
             .size(24)
             .align("justify")
-            .weight(500),
+            .weight(500)
+            .strokeColor("white")
+            .strokeWidth(4),
         )
-          .maxWidth(440)
+          .maxWidth(400)
           .padding(30, 30)
           .cornerRadius(44)
           .alignSelf("center")
-          .bg("#FBE4D6")
-          .opacity(0.4)
+          .bg(bgSrc, "cover")
+          .bg("#eee")
           .strokeColor("rgba(0,0,0,.4)")
-          .strokeWidth(1),
+          .strokeWidth(1)
+          .shadow("5px 5px 10px rgba(0,0,0,.2)"),
         Flex(
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",

@@ -1,4 +1,5 @@
 import { Align, FlexDirection, Justify, PositionType } from "yoga-layout";
+import { Image } from 'canvas'
 
 export const DrawSymbol = Symbol();
 
@@ -13,6 +14,10 @@ function createIdGenerator() {
 
 export const createId = createIdGenerator();
 
+
+export function isImage(image) {
+  return image instanceof Image
+}
 
 /**
  *
@@ -32,7 +37,7 @@ export function renderPattern(ctx, w, h, blockSize) {
   for (let r = 0; r < rows; r++) {
     let offsetX = r % 2 === 0 ? 0 : blockSize;
     for (let i = 0; i < columns; i++) {
-      ctx.fillStyle = "#f2f2f2";
+      ctx.fillStyle = "#fff";
       ctx.fillRect(offsetX, offsetY, blockSize, blockSize);
       offsetX += blockSize * 2;
     }

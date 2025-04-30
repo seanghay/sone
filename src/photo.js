@@ -4,18 +4,112 @@ import { DrawSymbol } from "./utils.js";
 
 export function Photo(src) {
   const node = Yoga.Node.create();
+
   return createNode(
     {
       type: Photo,
-      style: {},
+      style: {
+        scaleType: "fill",
+      },
       src,
+      /**
+       * @param {"cover"|"fill"|"contain"} scaleType
+       */
+      scaleType(scaleType) {
+        this.style.scaleType = scaleType;
+        return this;
+      },
       [DrawSymbol]: ({ ctx, component, x, y }) => {
-        ctx.drawImage(
-          component.src,
+        const createRadiusValue = () => {
+          let radius = component.style.cornerRadius;
+
+          if (radius == null) {
+            radius = 0;
+          }
+
+          if (typeof radius === "number") {
+            radius = [radius];
+          }
+
+          const maxRadius = Math.min(
+            component.node.getComputedWidth(),
+            component.node.getComputedHeight(),
+          );
+
+          for (let i = 0; i < radius.length; i++) {
+            radius[i] = Math.max(0, Math.min(radius[i], maxRadius / 2));
+          }
+          return radius;
+        };
+
+        const scaleType = component.style.scaleType || "fill";
+        const containerWidth = component.node.getComputedWidth();
+        const containerHeight = component.node.getComputedHeight();
+        const image = component.src;
+
+        ctx.beginPath();
+        ctx.roundRect(
           x,
           y,
-          component.node.getComputedWidth(),
-          component.node.getComputedHeight(),
+          containerWidth,
+          containerHeight,
+          createRadiusValue(),
+        );
+
+        ctx.clip();
+
+        let sourceWidth = image.width;
+        let sourceHeight = image.height;
+        let destX = x;
+        let destY = y;
+        let destWidth = containerWidth;
+        let destHeight = containerHeight;
+
+        const imageRatio = image.width / image.height;
+        const containerRatio = containerWidth / containerHeight;
+
+        switch (scaleType) {
+          case "cover":
+            if (imageRatio > containerRatio) {
+              // Image is wider than container (relatively)
+              const newWidth = (image.width * containerHeight) / image.height;
+              sourceWidth = image.width;
+              sourceHeight = image.height;
+              destWidth = newWidth;
+              destHeight = containerHeight;
+              destX = x + (containerWidth - newWidth) / 2;
+            } else {
+              const newHeight = (image.height * containerWidth) / image.width;
+              sourceWidth = image.width;
+              sourceHeight = image.height;
+              destWidth = containerWidth;
+              destHeight = newHeight;
+              destY = y + (containerHeight - newHeight) / 2;
+            }
+            break;
+          case "contain":
+            if (imageRatio > containerRatio) {
+              destWidth = containerWidth;
+              destHeight = containerWidth / imageRatio;
+              destY = y + (containerHeight - destHeight) / 2;
+            } else {
+              destHeight = containerHeight;
+              destWidth = containerHeight * imageRatio;
+              destX = x + (containerWidth - destWidth) / 2;
+            }
+            break;
+        }
+
+        ctx.drawImage(
+          component.src,
+          0,
+          0,
+          sourceWidth,
+          sourceHeight,
+          destX,
+          destY,
+          destWidth,
+          destHeight,
         );
       },
     },

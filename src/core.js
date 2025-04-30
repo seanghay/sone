@@ -4,6 +4,7 @@ import Yoga, { Direction, Edge, Gutter } from "yoga-layout";
 import {
   createId,
   DrawSymbol,
+  isImage,
   parseAlign,
   parseJustify,
   parsePositionType,
@@ -22,22 +23,27 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
     style: {
       backgroundColor: null,
       backgroundGradient: null,
+      backgroudImage: null,
+      backgroudImageScaleType: null,
       ...(props.style || {}),
     },
-    backgroundColor(color) {
-      if (isColor(color)) {
-        this.style.backgroundColor = color;
+    /**
+     * @param {string|HTMLImageElement} value
+     * @param {"cover"|"fill"|"contain"} scaleType
+     * @returns
+     */
+    bg(value, scaleType) {
+      if (isImage(value)) {
+        this.style.backgroudImage = value;
+        this.style.backgroudImageScaleType = scaleType;
         return this;
       }
-      this.style.backgroundGradient = color;
-      return this;
-    },
-    bg(color) {
-      if (isColor(color)) {
-        this.style.backgroundColor = color;
+
+      if (isColor(value)) {
+        this.style.backgroundColor = value;
         return this;
       }
-      this.style.backgroundGradient = color;
+      this.style.backgroundGradient = value;
       return this;
     },
     opacity(value) {
@@ -269,11 +275,15 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       this.style.strokeColor = value;
       return this;
     },
-    shadow(value) {
+    shadow(...values) {
+      const value = values.join(",");
       this.style.shadow = boxshadowparser.parse(value);
       return this;
     },
 
+    /**
+     * @param {import("./types.js").SoneDrawingContext} args
+     */
     [DrawSymbol]: (args) => {
       const { ctx, component, x, y } = args;
       const style = component.style;
@@ -376,6 +386,79 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           );
           ctx.fill();
         }
+      }
+
+      if (style.backgroudImage) {
+        const scaleType = style.backgroudImageScaleType || "fill";
+        const containerWidth = component.node.getComputedWidth();
+        const containerHeight = component.node.getComputedHeight();
+
+        const image = style.backgroudImage;
+
+        ctx.beginPath();
+        ctx.roundRect(
+          x,
+          y,
+          containerWidth,
+          containerHeight,
+          createRadiusValue(),
+        );
+
+        ctx.clip();
+
+        let sourceWidth = image.width;
+        let sourceHeight = image.height;
+        let destX = x;
+        let destY = y;
+        let destWidth = containerWidth;
+        let destHeight = containerHeight;
+
+        const imageRatio = image.width / image.height;
+        const containerRatio = containerWidth / containerHeight;
+
+        switch (scaleType) {
+          case "cover":
+            if (imageRatio > containerRatio) {
+              // Image is wider than container (relatively)
+              const newWidth = (image.width * containerHeight) / image.height;
+              sourceWidth = image.width;
+              sourceHeight = image.height;
+              destWidth = newWidth;
+              destHeight = containerHeight;
+              destX = x + (containerWidth - newWidth) / 2;
+            } else {
+              const newHeight = (image.height * containerWidth) / image.width;
+              sourceWidth = image.width;
+              sourceHeight = image.height;
+              destWidth = containerWidth;
+              destHeight = newHeight;
+              destY = y + (containerHeight - newHeight) / 2;
+            }
+            break;
+          case "contain":
+            if (imageRatio > containerRatio) {
+              destWidth = containerWidth;
+              destHeight = containerWidth / imageRatio;
+              destY = y + (containerHeight - destHeight) / 2;
+            } else {
+              destHeight = containerHeight;
+              destWidth = containerHeight * imageRatio;
+              destX = x + (containerWidth - destWidth) / 2;
+            }
+            break;
+        }
+
+        ctx.drawImage(
+          image,
+          0,
+          0,
+          sourceWidth,
+          sourceHeight,
+          destX,
+          destY,
+          destWidth,
+          destHeight,
+        );
       }
 
       // call to props draw symbol
@@ -491,6 +574,7 @@ export function renderAsPdfBuffer(component) {
 
   const ctx = canvas.getContext("2d");
   renderPattern(ctx, canvas.width, canvas.height, 15);
+
   root.render(ctx);
   root.free();
 

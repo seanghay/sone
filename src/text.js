@@ -312,7 +312,8 @@ export function Text(...children) {
       return this;
     },
 
-    shadow(value) {
+    shadow(...values) {
+      const value = values.join(",")
       this.style.shadow = boxshadowparser.parse(value);
       return this;
     },

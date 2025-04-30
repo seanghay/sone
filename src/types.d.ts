@@ -27,3 +27,11 @@ export type SoneSpanRenderNode = SoneSpanNode & {
   height: number;
   textMetrics: TextMetrics;
 }
+
+
+export interface SoneDrawingContext {
+  ctx: CanvasRenderingContext2D;
+  component: () => unknown;
+  x: number;
+  y: number;
+}
