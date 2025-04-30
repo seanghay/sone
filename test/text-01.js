@@ -1,13 +1,13 @@
 import { loadImage } from "canvas";
 import fs from "node:fs/promises";
 import {
-  Flex,
   Column,
+  Flex,
   Photo,
   Row,
   Span,
   Text,
-  renderAsImageBuffer,
+  renderAsImageBuffer
 } from "../src/sone.js";
 
 async function Document() {
@@ -55,17 +55,18 @@ async function Document() {
     )
       .lineHeight(1.5)
       .color("#205781")
-      .size(32)
+      .size(20)
       .font("SF Pro Text")
       .align("center"),
     Text(
       Span("const ").color("red"),
-      Span("date ").weight(700).color("blue"),
+      Span("date").weight(700).color("blue").line(-8, 3, "yellow"),
+      " ",
       Span("= "),
       Span("new ").color("red"),
       Span("Date();").color("blue"),
     )
-      .size(32)
+      .size(24)
       .color("#A55B4B")
       .font("Geist Mono")
       .shadow("2px 4px 4px black, 2px -4px 4px orange"),
@@ -118,9 +119,9 @@ async function Document() {
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
             Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
-              .offsetY(-4)
+              .offsetY(-3)
               .font("Moul")
-              .size(35)
+              .size(27)
               .color("#F5C45E")
               .strokeColor("black")
               .strokeWidth(8),
@@ -129,14 +130,16 @@ async function Document() {
             .color("#fff")
             .font(defaultFont)
             .lineHeight(1.6)
-            .size(40)
+            .size(30)
             .align("right")
             .weight(600),
         )
+          .alignSelf("center")
           .width(700)
           .opacity(1)
           .padding(20, 30)
-          .cornerRadius(44)
+          .cornerRadius(28)
+          .shadow("5px 5px 10px rgba(255, 137, 110, .6)")
           .bg(`linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%),
                       repeating-linear-gradient(-115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px),
                       repeating-linear-gradient(115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px)`),
@@ -148,7 +151,8 @@ async function Document() {
         .font(defaultFont)
         .lineHeight(1.5)
         .size(22)
-        .align("center"),
+        .align("center")
+        .line(4, -2, "lightgreen"),
       Flex().height(4).bg("#eee"),
       Text(
         [sample, sample].join(" "),
@@ -156,6 +160,12 @@ async function Document() {
         Span([sample, sample].join(" ")).weight(700).color("black"),
         " ",
         Span([sample].join(" ")).color("#C5172E"),
+        Span(
+          " ສປປ ລາວ ແລະ ສາທາລະນະລັດ ອິນເດຍ (ສ ອິນເດຍ) ລົງນາມເອກະສານຮ່ວມມືສອງຝ່າຍ ຈໍານວນ 7 ສະບັບ ປະກອບມີ: ການຮ່ວມມືຂົງເຂດວຽກງານປ້ອງກັນຊາດ. ສັນຍາວ່າດ້ວຍການຮ່ວມມືການຊ່ວຍເຫຼືອເຊິ່ງກັນ ແລະ ກັນ ໃນດ້ານວຽກງານພາສີ. ການຮ່ວມມືການກະຈາຍສຽງ ແລະ ພາບ ລະຫວ່າງລາວ- ອິນເດຍ.",
+        ).line(4, 2, "rgba(0,0,0,.2)"),
+        Span(
+          " โดยการแจกเงินยังคงเป็นไปตามไทม์ไลน์คือไตรมาสที่ 2 ช่วงเดือน พ.ค.-มิ.ย.2568 ทั้งนี้ กระทรวงการคลัง ยืนยันว่า การดำเนินโครงการขณะนี้มีความคืบหน้าตามลำดับ โดยที่ผ่านมาได้ประชุมกับหน่วยงานที่เกี่ยวข้อง รวมถึงการหารือกับสถาบันการเงินที่เข้าร่วมโครงการ เพื่อเชื่อมระบบการทำธุรกรรมทางการเงิน ซึ่งเบื้องต้นก็เป็นไปด้วยความเรียบร้อย ไม่มีปัญหาอะไร... อ่านข่าวต้นฉบับได้ที่",
+        ).color("green"),
       )
         .align("justify")
         .font(defaultFont)
@@ -197,7 +207,7 @@ async function Document() {
   )
     .padding(60)
     .maxWidth(1300)
-    .gap(50);
+    .gap(40);
 }
 
 await fs.writeFile("test/text-01.jpg", renderAsImageBuffer(await Document()));

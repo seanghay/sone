@@ -13,7 +13,7 @@
 - [ ] Transforms (Scale, Rotate, Translate)
 - [ ] Mesh Gradient
 - [x] Span OffsetY
-- [ ] Text Decoration (Underline, Cross, Overline)
+- [x] Text Decoration (Underline, Cross, Overline)
 - [ ] Mask
 - [x] Opacity
 - [ ] JSON Serialization

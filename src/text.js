@@ -313,11 +313,27 @@ export function Text(...children) {
     },
 
     shadow(...values) {
-      const value = values.join(",")
+      const value = values.join(",");
       this.style.shadow = boxshadowparser.parse(value);
       return this;
     },
+    /**
+     * @param {number} offset
+     * @param {number} lineWidth
+     * @param {string} color
+     * @returns
+     */
+    line(offset = 0, lineWidth = 2, color = null) {
+      this.style.lineOffset = offset;
+      this.style.lineWidth = lineWidth;
+      this.style.lineColor = color;
+      return this;
+    },
 
+    /**
+     *
+     * @param {import("./types.js").SoneDrawingContext} param0
+     */
     [DrawSymbol]: ({ ctx, component, x, y }) => {
       /**
        * @type {import("./types.js").SoneTextOptions}
@@ -437,6 +453,9 @@ export function Text(...children) {
             strokeWidth: style.strokeWidth,
             strokeColor: style.strokeColor,
             shadow: style.shadow,
+            width: node.width,
+            height: style.size,
+            style,
           });
 
           lineOffsetX += node.width;
@@ -464,6 +483,31 @@ export function Text(...children) {
       for (const cmd of drawCommands) {
         ctx.font = cmd.font;
         ctx.fillStyle = cmd.fillStyle;
+
+        let textDecorationLineWidth = cmd.style.lineWidth;
+        let textDecorationBehind = false;
+
+        if (textDecorationLineWidth < 0) {
+          textDecorationLineWidth = Math.abs(textDecorationLineWidth);
+          textDecorationBehind = true;
+        }
+
+        const drawLine = () => {
+          if (typeof cmd.style.lineOffset === "number") {
+            const offset = cmd.height + cmd.style.lineOffset;
+            ctx.beginPath();
+            ctx.strokeStyle = cmd.style.lineColor || ctx.fillStyle;
+            ctx.lineWidth = textDecorationLineWidth || 2;
+            ctx.moveTo(cmd.x, cmd.y + offset);
+            ctx.lineTo(cmd.x + cmd.width, cmd.y + offset);
+            ctx.stroke();
+          }
+        };
+
+        if (textDecorationBehind) {
+          drawLine();
+        }
+
         if (Array.isArray(cmd.shadow)) {
           for (const shadowItem of cmd.shadow) {
             ctx.save();
@@ -473,10 +517,18 @@ export function Text(...children) {
             ctx.shadowOffsetY = shadowItem.offsetY;
             ctx.fillText(cmd.text, cmd.x, cmd.y);
             ctx.restore();
+            if (!textDecorationBehind) {
+              drawLine();
+            }
           }
+
           continue;
         }
+
         ctx.fillText(cmd.text, cmd.x, cmd.y);
+        if (!textDecorationBehind) {
+          drawLine();
+        }
       }
 
       ctx.restore();
@@ -531,6 +583,18 @@ export function Span(text) {
     },
     shadow(value) {
       this.style.shadow = boxshadowparser.parse(value);
+      return this;
+    },
+    /**
+     * @param {number} offset
+     * @param {number} lineWidth
+     * @param {string} color
+     * @returns
+     */
+    line(offset = 0, lineWidth = 2, color = null) {
+      this.style.lineOffset = offset;
+      this.style.lineWidth = lineWidth;
+      this.style.lineColor = color;
       return this;
     },
   };
