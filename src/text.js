@@ -1,11 +1,10 @@
 import boxshadowparser from "css-box-shadow";
-import { createCanvas } from "canvas";
-import { lineBreakTokenizer } from "./segmenter.js";
+import memoize from "fast-memoize";
 import Yoga from "yoga-layout";
-import { DrawSymbol } from "./utils.js";
+import { DrawSymbol, SoneConfig } from "./utils.js";
+import { createGradientFillStyleList, isColor } from "./gradient.js";
 
-const measureCanvas = createCanvas(1, 1);
-const measureCache = new Map();
+const measureCanvas = SoneConfig.createCanvas(1, 1);
 
 export function stringifyFont({
   font = "sans-serif",
@@ -16,13 +15,13 @@ export function stringifyFont({
   return `${style} ${weight} ${size}px ${font}`.trim();
 }
 
-export function measureText({ text, font }) {
+export function _measureText({ text, font }) {
   if (text.length === 0)
     return {
       width: 0,
       height: 0,
       textMetrics: {
-        alphabeticBaseline: Number.MIN_SAFE_INTEGER,
+        alphabeticBaseline: 0,
         actualBoundingBoxAscent: 0,
         actualBoundingBoxDescent: 0,
         actualBoundingBoxLeft: 0,
@@ -35,11 +34,6 @@ export function measureText({ text, font }) {
       },
     };
 
-  const cacheKey = `${text}:${font}`;
-  if (measureCache.has(cacheKey)) {
-    return measureCache.get(cacheKey);
-  }
-
   const canvas = measureCanvas;
   const ctx = canvas.getContext("2d");
 
@@ -48,16 +42,14 @@ export function measureText({ text, font }) {
 
   const m = ctx.measureText(text);
   const height = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
-
-  const result = {
+  return {
     height,
     width: m.width,
     textMetrics: m,
   };
-
-  measureCache.set(cacheKey, result);
-  return result;
 }
+
+export const measureText = memoize(_measureText);
 
 /**
  * @typedef {import("./types.js").SoneSpanNode} SpanNode
@@ -79,7 +71,7 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
     style = { ...span.style, ...style }; // merge with parent style
     const font = stringifyFont(style);
 
-    for (const segment of lineBreakTokenizer(span.text)) {
+    for (const segment of SoneConfig.lineBreakTokenizer(span.text)) {
       const { width, height, textMetrics } = measureText({
         text: segment,
         font,
@@ -189,26 +181,15 @@ export function measureSpans(spans, style) {
  * @returns {ReturnType<import("yoga-layout").MeasureFunction>}
  */
 export function textMeasureFunc(spans, style, maxWidth) {
-  const dimensions = measureSpans(spans, style);
-
-  if (Number.isNaN(maxWidth)) {
-    return dimensions;
-  }
-
-  if (dimensions.width <= maxWidth) {
-    return dimensions;
-  }
-
-  if (dimensions.width >= 1 && maxWidth > 0 && maxWidth < 1) {
-    return dimensions;
-  }
+  let w = maxWidth;
+  if (Number.isNaN(w)) w = Number.POSITIVE_INFINITY;
 
   let width = 0;
   let height = 0;
 
-  const { lines, maxHeight } = splitLines({
+  const { lines, maxHeight, forceBreaks } = splitLines({
     spans,
-    maxWidth,
+    maxWidth: w,
     lineHeight: style.lineHeight,
     indentSize: style.indentSize,
   });
@@ -220,7 +201,7 @@ export function textMeasureFunc(spans, style, maxWidth) {
     height += maxHeight * style.lineHeight;
   }
 
-  return { width, height };
+  return { width, height, lines, maxHeight, forceBreaks };
 }
 
 /**
@@ -229,6 +210,7 @@ export function textMeasureFunc(spans, style, maxWidth) {
  */
 export function Text(...children) {
   const node = Yoga.Node.create();
+  const properties = {};
 
   /**
    * @type {import("./types.js").SoneTextOptions}
@@ -262,15 +244,18 @@ export function Text(...children) {
     };
   });
 
-  node.setMeasureFunc((width, widthMode, height, heightMode) =>
-    textMeasureFunc(spans, style, width),
-  );
+  node.setMeasureFunc((width, widthMode, height, heightMode) => {
+    const result = textMeasureFunc(spans, style, width);
+    Object.assign(properties, result);
+    return result;
+  });
 
   return {
     node,
     type: Text,
     spans,
     style,
+    properties,
     size(value) {
       this.style.size = value;
       return this;
@@ -340,22 +325,12 @@ export function Text(...children) {
        */
       const style = component.style;
       const indentSize = style.indentSize || 0.0;
-      const lineHeight = style.lineHeight || 1.0;
       const width = component.node.getComputedWidth();
 
       ctx.save();
       ctx.textBaseline = "top";
 
-      /**
-       * @type {import("./types.js").SoneSpanNode[]}
-       */
-      const spans = component.spans;
-      const { lines, maxHeight, forceBreaks } = splitLines({
-        spans,
-        indentSize,
-        lineHeight,
-        maxWidth: width,
-      });
+      const { lines, maxHeight, forceBreaks } = component.properties;
 
       const offsetX = x;
       let offsetY = y;
@@ -482,52 +457,69 @@ export function Text(...children) {
       // start drawing fill
       for (const cmd of drawCommands) {
         ctx.font = cmd.font;
-        ctx.fillStyle = cmd.fillStyle;
-
-        let textDecorationLineWidth = cmd.style.lineWidth;
-        let textDecorationBehind = false;
-
-        if (textDecorationLineWidth < 0) {
-          textDecorationLineWidth = Math.abs(textDecorationLineWidth);
-          textDecorationBehind = true;
+        let fillStyles = [];
+        if (cmd.style.fillGradient) {
+          const gradientFillStyles = createGradientFillStyleList(
+            ctx,
+            cmd.style.fillGradient,
+            cmd.x,
+            cmd.y,
+            cmd.width,
+            cmd.height,
+          );
+          fillStyles = gradientFillStyles;
+        } else {
+          fillStyles.push(cmd.fillStyle);
         }
 
-        const drawLine = () => {
-          if (typeof cmd.style.lineOffset === "number") {
-            const offset = cmd.height + cmd.style.lineOffset;
-            ctx.beginPath();
-            ctx.strokeStyle = cmd.style.lineColor || ctx.fillStyle;
-            ctx.lineWidth = textDecorationLineWidth || 2;
-            ctx.moveTo(cmd.x, cmd.y + offset);
-            ctx.lineTo(cmd.x + cmd.width, cmd.y + offset);
-            ctx.stroke();
+        for (const fillStyle of fillStyles) {
+          ctx.fillStyle = fillStyle;
+
+          let textDecorationLineWidth = cmd.style.lineWidth;
+          let textDecorationBehind = false;
+
+          if (textDecorationLineWidth < 0) {
+            textDecorationLineWidth = Math.abs(textDecorationLineWidth);
+            textDecorationBehind = true;
           }
-        };
 
-        if (textDecorationBehind) {
-          drawLine();
-        }
-
-        if (Array.isArray(cmd.shadow)) {
-          for (const shadowItem of cmd.shadow) {
-            ctx.save();
-            ctx.shadowBlur = shadowItem.blurRadius;
-            ctx.shadowColor = shadowItem.color;
-            ctx.shadowOffsetX = shadowItem.offsetX;
-            ctx.shadowOffsetY = shadowItem.offsetY;
-            ctx.fillText(cmd.text, cmd.x, cmd.y);
-            ctx.restore();
-            if (!textDecorationBehind) {
-              drawLine();
+          const drawLine = () => {
+            if (typeof cmd.style.lineOffset === "number") {
+              const offset = cmd.height + cmd.style.lineOffset;
+              ctx.beginPath();
+              ctx.strokeStyle = cmd.style.lineColor || ctx.fillStyle;
+              ctx.lineWidth = textDecorationLineWidth || 2;
+              ctx.moveTo(cmd.x, cmd.y + offset);
+              ctx.lineTo(cmd.x + cmd.width, cmd.y + offset);
+              ctx.stroke();
             }
+          };
+
+          if (textDecorationBehind) {
+            drawLine();
           }
 
-          continue;
-        }
+          if (Array.isArray(cmd.shadow)) {
+            for (const shadowItem of cmd.shadow) {
+              ctx.save();
+              ctx.shadowBlur = shadowItem.blurRadius;
+              ctx.shadowColor = shadowItem.color;
+              ctx.shadowOffsetX = shadowItem.offsetX;
+              ctx.shadowOffsetY = shadowItem.offsetY;
+              ctx.fillText(cmd.text, cmd.x, cmd.y);
+              ctx.restore();
+              if (!textDecorationBehind) {
+                drawLine();
+              }
+            }
 
-        ctx.fillText(cmd.text, cmd.x, cmd.y);
-        if (!textDecorationBehind) {
-          drawLine();
+            continue;
+          }
+
+          ctx.fillText(cmd.text, cmd.x, cmd.y);
+          if (!textDecorationBehind) {
+            drawLine();
+          }
         }
       }
 
@@ -562,7 +554,11 @@ export function Span(text) {
       return this;
     },
     color(value) {
-      this.style.color = value;
+      if (isColor(value)) {
+        this.style.color = value;
+        return this;
+      }
+      this.style.fillGradient = value;
       return this;
     },
     weight(value) {

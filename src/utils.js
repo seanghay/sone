@@ -1,8 +1,15 @@
 import { Align, FlexDirection, Justify, PositionType } from "yoga-layout";
-import { Image } from 'canvas'
+import { createCanvas, Image, loadImage } from "canvas";
+import { lineBreakTokenizer } from "./segmenter.js";
+
+export const SoneConfig = {
+  createCanvas,
+  loadImage,
+  dpr: 1,
+  lineBreakTokenizer,
+};
 
 export const DrawSymbol = Symbol();
-
 
 function createIdGenerator() {
   let id = -1;
@@ -14,9 +21,8 @@ function createIdGenerator() {
 
 export const createId = createIdGenerator();
 
-
 export function isImage(image) {
-  return image instanceof Image
+  return image instanceof Image;
 }
 
 /**

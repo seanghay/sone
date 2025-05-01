@@ -1,17 +1,17 @@
 import boxshadowparser from "css-box-shadow";
-import { createCanvas } from "canvas";
 import Yoga, { Direction, Edge, Gutter } from "yoga-layout";
+import { smoothRoundRect } from "./corner.js";
+import { createGradientFillStyleList, isColor } from "./gradient.js";
 import {
-  createId,
   DrawSymbol,
+  SoneConfig,
+  createId,
   isImage,
   parseAlign,
   parseJustify,
   parsePositionType,
   renderPattern,
 } from "./utils.js";
-import { createGradientFillStyleList, isColor } from "./gradient.js";
-import { smoothRoundRect } from "./corner.js";
 
 /**
  * @param {{children: any[], type: Function, style: Record<string, any>}} props
@@ -321,31 +321,6 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         return radius;
       };
 
-      if (style.strokeWidth > 0) {
-        ctx.save();
-        ctx.strokeStyle = style.strokeColor;
-        ctx.lineWidth = style.strokeWidth;
-        ctx.lineJoin = "round";
-        ctx.miterLimit = 2;
-
-        if (Array.isArray(style.lineDash)) {
-          ctx.setLineDash(style.lineDash);
-        }
-
-        smoothRoundRect(
-          ctx,
-          x,
-          y,
-          component.node.getComputedWidth(),
-          component.node.getComputedHeight(),
-          createRadiusValue(),
-          style.cornerSmoothing,
-          "stroke",
-        );
-
-        ctx.restore();
-      }
-
       if (Array.isArray(style.shadow)) {
         for (const shadowItem of style.shadow) {
           ctx.save();
@@ -487,6 +462,32 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         ctx.restore();
       }
 
+      if (style.strokeWidth > 0) {
+        ctx.save();
+
+        ctx.strokeStyle = style.strokeColor;
+        ctx.lineWidth = style.strokeWidth;
+        ctx.lineJoin = "round";
+        ctx.miterLimit = 2;
+
+        if (Array.isArray(style.lineDash)) {
+          ctx.setLineDash(style.lineDash);
+        }
+
+        smoothRoundRect(
+          ctx,
+          x,
+          y,
+          component.node.getComputedWidth(),
+          component.node.getComputedHeight(),
+          createRadiusValue(),
+          style.cornerSmoothing,
+          "stroke",
+        );
+
+        ctx.restore();
+      }
+
       // call to props draw symbol
       if (DrawSymbol in props) {
         props[DrawSymbol](args);
@@ -573,7 +574,7 @@ export function createRoot(root, width, height) {
  */
 export function renderAsImageBuffer(component) {
   const root = createRoot(component);
-  const canvas = createCanvas(
+  const canvas = SoneConfig.createCanvas(
     root.node.getComputedWidth(),
     root.node.getComputedHeight(),
   );
@@ -592,7 +593,7 @@ export function renderAsImageBuffer(component) {
  */
 export function renderAsPdfBuffer(component) {
   const root = createRoot(component);
-  const canvas = createCanvas(
+  const canvas = SoneConfig.createCanvas(
     root.node.getComputedWidth(),
     root.node.getComputedHeight(),
     "pdf",

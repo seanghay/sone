@@ -22,6 +22,8 @@
 - [ ] Grid
 - [x] Background Image
 - [ ] Emoji
+- [ ] Font
+- [x] Text Fill Gradient
 
 ### Reference
 

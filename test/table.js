@@ -106,9 +106,9 @@ function Document() {
       .shadow("10px 10px 0px rgba(0,0,0,.1)"),
     Table(
       TableRow(
-        StylishHeader("មកចូលរួម"),
+        StylishHeader("មកចូលរួម", [8, 0, 0, 0]),
         StylishHeader("Column 2"),
-        StylishHeader("Column 3"),
+        StylishHeader("Column 3", [0, 8, 0, 0]),
       ),
       TableRow(
         StylishCell("This is a text"),
@@ -122,14 +122,15 @@ function Document() {
       ),
       TableRow(StylishCell("Hello world")),
     )
-      .alignSelf("flex-start")
+      .alignSelf("center")
       .marginTop(20)
       .strokeWidth(2)
       .strokeColor("red")
-      .shadow("10px 10px 0px rgba(0,0,0, 0.4)")
-      .width(600),
+      .shadow("10px 10px 0px rgba(255,0,0, 0.4)")
+      .cornerRadius(8)
+      .cornerSmoothing(0.7),
   )
-    .maxWidth(700)
+    .maxWidth(800)
     .padding(40)
     .gap(10);
 }

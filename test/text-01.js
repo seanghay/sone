@@ -121,7 +121,7 @@ async function Document() {
               .offsetY(-3)
               .font("Moul")
               .size(27)
-              .color("#F5C45E")
+              .color("linear-gradient(to left, orange 0%, yellow 100%)")
               .strokeColor("black")
               .strokeWidth(8),
             " បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
