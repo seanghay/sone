@@ -1,12 +1,16 @@
 // TODO: Add fallback to icu4x when Intl.Segmenter is unavailable
-const segmenter = new Intl.Segmenter(undefined, {
-  granularity: "word",
-});
-
+let segmenter = null;
 /**
  * @param {string} text
  */
 export function* lineBreakTokenizer(text) {
+  // lazily load
+  if (segmenter == null) {
+    segmenter = new Intl.Segmenter(undefined, {
+      granularity: "word",
+    });
+  }
+
   let prepend = "";
   for (const segment of segmenter.segment(text)) {
     if (segment.segment.endsWith("\u17d2")) {
