@@ -281,6 +281,10 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       this.style.strokeColor = value;
       return this;
     },
+    lineDash(...values) {
+      this.style.lineDash = values;
+      return this;
+    },
     shadow(...values) {
       const value = values.join(",");
       this.style.shadow = boxshadowparser.parse(value);
@@ -323,6 +327,11 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
         ctx.lineWidth = style.strokeWidth;
         ctx.lineJoin = "round";
         ctx.miterLimit = 2;
+
+        if (Array.isArray(style.lineDash)) {
+          ctx.setLineDash(style.lineDash);
+        }
+
         smoothRoundRect(
           ctx,
           x,
@@ -333,6 +342,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
           style.cornerSmoothing,
           "stroke",
         );
+
         ctx.restore();
       }
 
@@ -500,7 +510,7 @@ export function Svg(src) {
  * @param {number} width
  * @param {number} height
  */
-export function renderToCanvas(ctx, component, x, y, w, h) {
+export function renderToCanvas(ctx, component, x, y) {
   ctx.save();
 
   if (component.style.opacity >= 0) {
@@ -523,7 +533,7 @@ export function renderToCanvas(ctx, component, x, y, w, h) {
       const childNode = child.node;
       const childX = x + childNode.getComputedLeft();
       const childY = y + childNode.getComputedTop();
-      renderToCanvas(ctx, child, childX, childY, w, h);
+      renderToCanvas(ctx, child, childX, childY);
     }
   }
 
@@ -573,7 +583,7 @@ export function renderAsImageBuffer(component) {
   root.render(ctx);
   root.free();
 
-  return canvas.toBuffer("image/jpeg", { quality: 0.98 });
+  return canvas.toBuffer("image/jpeg", { quality: 1.0 });
 }
 
 /**
