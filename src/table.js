@@ -7,8 +7,9 @@ import memoize from "fast-memoize";
  * cell with the same row shares the same height.
  * cell with the same column shares the same width.
  */
-function _getTableSize(children) {
+function _getTableSize(children, maxWidth, widthMode) {
   const rows = children.length;
+
   let columns = 0;
   let width = 0;
   let height = 0;
@@ -33,6 +34,7 @@ function _getTableSize(children) {
   const columnWidths = [];
   for (let c = 0; c < columns; c++) {
     let cellWidth = 0;
+
     for (let r = 0; r < rows; r++) {
       if (c < children[r].length) {
         const cell = children[r][c];
@@ -40,6 +42,10 @@ function _getTableSize(children) {
           cellWidth = cell.node.getComputedWidth();
         }
       }
+    }
+
+    if (widthMode === 1) {
+      cellWidth = Math.max(maxWidth / columns, cellWidth);
     }
 
     columnWidths.push(cellWidth);
@@ -74,8 +80,9 @@ export function Table(...children) {
   const node = Yoga.Node.create();
   let tableSize = null;
 
-  node.setMeasureFunc((maxWidth) => {
-    tableSize = getTableSize(children);
+  node.setMeasureFunc((width, widthMode, height, heightMode) => {
+    console.log({ width, widthMode, height, heightMode });
+    tableSize = getTableSize(children, width, widthMode);
     return tableSize;
   });
 
@@ -106,6 +113,7 @@ export function Table(...children) {
 
         let offsetX = 0;
         ctx.save();
+
         for (let c = 0; c < tableSize.columns; c++) {
           let offsetY = 0;
           const w = tableSize.columnWidths[c];

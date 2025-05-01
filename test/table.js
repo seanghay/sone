@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { Flex, Column, Span, Text, renderAsImageBuffer } from "../src/sone.js";
+import { Column, Flex, Span, Text, renderAsImageBuffer } from "../src/sone.js";
 import { Table, TableRow } from "../src/table.js";
 
 function StylishHeader(t, corners = [0]) {
@@ -118,9 +118,9 @@ function Document() {
       .alignSelf("flex-start")
       .marginTop(20)
       .strokeWidth(2)
-      .strokeColor("rgba(0,0,0,1)")
+      .strokeColor("red")
       .shadow("10px 10px 0px rgba(0,0,0, 0.4)")
-      .borderStyle("row"),
+      .width(600),
   )
     .maxWidth(700)
     .padding(40)
