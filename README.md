@@ -18,7 +18,7 @@
 - [x] Opacity
 - [ ] JSON Serialization
 - [ ] JSON Deserialization
-- [ ] Table
+- [x] Table
 - [ ] Grid
 - [x] Background Image
 - [ ] Emoji
