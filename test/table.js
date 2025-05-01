@@ -1,6 +1,13 @@
 import fs from "node:fs/promises";
-import { Column, Flex, Span, Text, renderAsImageBuffer } from "../src/sone.js";
-import { Table, TableRow } from "../src/table.js";
+import {
+  Column,
+  Flex,
+  Span,
+  Text,
+  renderAsImageBuffer,
+  Table,
+  TableRow,
+} from "../src/sone.js";
 
 function StylishHeader(t, corners = [0]) {
   return Flex(

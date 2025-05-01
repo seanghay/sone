@@ -81,7 +81,6 @@ export function Table(...children) {
   let tableSize = null;
 
   node.setMeasureFunc((width, widthMode, height, heightMode) => {
-    console.log({ width, widthMode, height, heightMode });
     tableSize = getTableSize(children, width, widthMode);
     return tableSize;
   });
