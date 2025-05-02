@@ -7,10 +7,10 @@
     "src"
   ],
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "canvas": "^3.1.0"
+    "@biomejs/biome": "1.9.4"
   },
   "dependencies": {
+    "canvas": "^3.1.0",
     "@xmldom/xmldom": "^0.9.8",
     "canvg": "^4.0.3",
     "css-box-shadow": "^1.0.0-3",

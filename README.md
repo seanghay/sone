@@ -1,8 +1,18 @@
-## Sone
-
-A Swift UI-inspired canvas layout engine.
+# Sone
 
 > **សូន** - *ប្រមូលអ្វីៗដែលមានសាច់ទន់ជ្រាយឱ្យកើតជាដុំ, ជាគ្រាប់ឬជារូប*
+
+SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is built to generate PDF or Image on the server with minimal memory footprint and performance. It provides some features such as
+
+- Flex Layout ([yoga-layout](https://www.yogalayout.dev/))
+- SVG Support without rasterizing through ([Canvg](https://github.com/canvg/canvg))
+- Squircle Rounded Corner (iOS-like)
+- Text Alignment (Left, Right, Center, **Justify**) for Khmer, Thai, Lao and some langauges.
+- Font Tracing - Get a list of fonts that used in the component tree. (See [test/text-01.js](test/text-01.js))
+- Table (See [test/table.js](test/table.js))
+- Repeating Linear Gradient & Linear Gradient
+- Composable
+
 
 ### Get started 
 
@@ -27,6 +37,7 @@ function Document() {
         .color("orange")
         .weight("bold")
         .shadow("2px 2px 0px rgba(0,0,0,.2)"),
+        " 😍🇰🇭"
     ).size(34),
   ).padding(40);
 }
@@ -46,6 +57,7 @@ Preview
 
 <img src=test/output.png>
 
+[test/output.pdf](test/output.pdf)
 
 A complex Sone component looks like this
 
@@ -142,3 +154,4 @@ function Document() {
 - https://github.com/GuptaSiddhant/recanvas
 - https://github.com/catalinmiron/react-native-css-gradient
 - https://jsfiddle.net/vtmnyea8/
+- https://github.com/Automattic/node-canvas

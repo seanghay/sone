@@ -9,10 +9,10 @@ function Document() {
         .color("orange")
         .weight("bold")
         .shadow("2px 2px 0px rgba(0,0,0,.2)"),
+      " 😍 🇰🇭",
     ).size(34),
   ).padding(40);
 }
-
 const document = Document();
 
 const canvas = renderAsCanvas(Document(), undefined, undefined);
