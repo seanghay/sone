@@ -1,6 +1,7 @@
 {
   "name": "sone.js",
   "repository": "seanghay/sone",
+  "version": "0.0.0",
   "type": "module",
   "main": "src/core.js",
   "files": [
