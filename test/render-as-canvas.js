@@ -13,10 +13,10 @@ function Document() {
     ).size(34),
   ).padding(40);
 }
-const document = Document();
+
 
 const canvas = renderAsCanvas(Document(), undefined, undefined);
 await fs.writeFile("test/output.png", canvas.toBuffer("image/png"));
 
-const canvas2 = renderAsCanvas(document, undefined, undefined, "pdf");
+const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
 await fs.writeFile("test/output.pdf", canvas2.toBuffer("application/pdf"));

@@ -1,5 +1,7 @@
 # Sone
 
+<img src=test/cover.svg>
+
 > **សូន** - *ប្រមូលអ្វីៗដែលមានសាច់ទន់ជ្រាយឱ្យកើតជាដុំ, ជាគ្រាប់ឬជារូប*
 
 SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is built to generate PDF or Image on the server with minimal memory footprint and performance. It provides some features such as
@@ -12,7 +14,7 @@ SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is b
 - Table (See [test/table.js](test/table.js))
 - Repeating Linear Gradient & Linear Gradient
 - Composable
-
+- Output as SVG, PDF, and Image
 
 ### Get started 
 
@@ -42,14 +44,12 @@ function Document() {
   ).padding(40);
 }
 
-const document = Document();
-
 // save as Image
 const canvas = renderAsCanvas(Document(), undefined, undefined);
 await fs.writeFile("test/output.png", canvas.toBuffer("image/png"));
 
 // save as PDF
-const canvas2 = renderAsCanvas(document, undefined, undefined, "pdf");
+const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
 await fs.writeFile("test/output.pdf", canvas2.toBuffer("application/pdf"));
 ```
 

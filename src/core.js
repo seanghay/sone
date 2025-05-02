@@ -567,7 +567,7 @@ export function createRoot(root, width, height) {
  * @param {number | undefined} height
  * @param {"pdf" | "svg" | undefined} type
  */
-export function renderAsCanvas(component, width, height, type) {
+export function renderAsCanvas(component, width, height, type, bg = true) {
   const root = createRoot(component, width, height);
   const canvas = SoneConfig.createCanvas(
     root.node.getComputedWidth(),
@@ -576,9 +576,13 @@ export function renderAsCanvas(component, width, height, type) {
   );
 
   const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if (bg) {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
   root.render(ctx);
+
   root.free();
   return canvas;
 }
