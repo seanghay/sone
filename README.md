@@ -29,7 +29,7 @@ import {
   Column, 
   Text, 
   Span
-} from "sone.js";
+} from "sonejs";
 
 function Document() {
   return Column(

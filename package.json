@@ -6,7 +6,7 @@
   },
   "version": "0.0.2",
   "type": "module",
-  "main": "src/core.js",
+  "main": "src/sone.js",
   "files": [
     "src"
   ],
