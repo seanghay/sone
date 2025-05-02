@@ -578,7 +578,7 @@ export function renderAsImageBuffer(component) {
   root.render(ctx);
   root.free();
 
-  return canvas.toBuffer("image/jpeg", { quality: 1.0 });
+  return canvas.toBuffer("image/jpeg", { quality: 0.98 });
 }
 
 /**
