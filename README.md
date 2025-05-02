@@ -4,8 +4,50 @@ A Swift UI-inspired canvas layout engine.
 
 > **សូន** - *ប្រមូលអ្វីៗដែលមានសាច់ទន់ជ្រាយឱ្យកើតជាដុំ, ជាគ្រាប់ឬជារូប*
 
+### Get started 
 
-Sone component looks like this
+```shell
+npm install sone.js
+```
+
+```js
+import fs from "node:fs/promises";
+import { 
+  renderAsCanvas, 
+  Column, 
+  Text, 
+  Span
+} from "sone.js";
+
+function Document() {
+  return Column(
+    Text(
+      "Hello world! ",
+      Span("Sone.")
+        .color("orange")
+        .weight("bold")
+        .shadow("2px 2px 0px rgba(0,0,0,.2)"),
+    ).size(34),
+  ).padding(40);
+}
+
+const document = Document();
+
+// save as Image
+const canvas = renderAsCanvas(Document(), undefined, undefined);
+await fs.writeFile("test/output.png", canvas.toBuffer("image/png"));
+
+// save as PDF
+const canvas2 = renderAsCanvas(document, undefined, undefined, "pdf");
+await fs.writeFile("test/output.pdf", canvas2.toBuffer("application/pdf"));
+```
+
+Preview
+
+<img src=test/output.png>
+
+
+A complex Sone component looks like this
 
 ```js
 function Document() {
@@ -43,7 +85,7 @@ function Document() {
 ```
 
 
-### Examples
+### See Examples
 
 [test/text-01.js](test/text-01.js)
 
@@ -61,9 +103,9 @@ function Document() {
 
 <img width=400 src="test/basic-01.jpg">
 
-
 #### Roadmap
 
+- [x] Flex Engine (Yoga Layout)
 - [x] Linear Gradient / Repeating Linear Gradient
 - [x] Figma Squircle
 - [x] Text Stroke (https://jsfiddle.net/vtmnyea8/)
