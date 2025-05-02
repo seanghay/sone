@@ -311,6 +311,7 @@ export function generateGradient(value, size) {
  */
 export function createGradientFillStyleList(ctx, value, x, y, width, height) {
   const items = generateGradient(value, { width, height });
+
   const values = [];
   for (const item of items) {
     const gradient = ctx.createLinearGradient(

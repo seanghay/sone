@@ -1,20 +1,30 @@
+import path from "node:path";
 import { loadImage } from "canvas";
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
 import {
   Column,
   Flex,
   Photo,
   Row,
   Span,
+  Svg,
   Text,
+  loadSvg,
   renderAsImageBuffer,
 } from "../src/sone.js";
+import { Font } from "../src/font.js";
 
 async function Document() {
-  const [imageSrc, bgSrc] = await Promise.all([
+  console.time("resource");
+  const [imageSrc, bgSrc, svgBuffer] = await Promise.all([
     loadImage("test/Flag_of_Cambodia.svg"),
     loadImage("test/248-700x400.jpg"),
+    fs.readFile("test/Flag_of_Cambodia.svg"),
   ]);
+
+  const svgSrc = loadSvg(svgBuffer);
+  console.timeEnd("resource");
 
   const sample =
     "ពិធីបុណ្យ ព្រះសពរបស់ សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ បានប្រព្រឹត្តិធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។";
@@ -30,7 +40,11 @@ async function Document() {
           "linear-gradient(45deg, turquoise 20%, yellow 20%, yellow 40%, turquoise 40%, turquoise 60%, yellow 60%, yellow 80%, turquoise 80%, turquoise 100%)",
         ),
       Flex().size(200).cornerRadius(200).bg("orange"),
-      Photo(imageSrc).size("auto", 200).aspectRatio(1.5625),
+      Svg(svgSrc)
+        .size(200)
+        .cornerRadius(40)
+        .cornerSmoothing(0.7)
+        .scaleType("cover"),
       Photo(imageSrc)
         .size(200)
         .cornerRadius(44)
@@ -119,7 +133,7 @@ async function Document() {
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
             Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
               .offsetY(-3)
-              .font("Moul")
+              .font("KdamThmorPro")
               .size(27)
               .color("linear-gradient(to left, orange 0%, yellow 100%)")
               .strokeColor("black")
@@ -210,4 +224,17 @@ async function Document() {
     .gap(40);
 }
 
-await fs.writeFile("test/text-01.jpg", renderAsImageBuffer(await Document()));
+const document = await Document();
+
+// automatic font registration
+const fonts = Font.trace(document);
+for (const fontFamily of fonts) {
+  const fontPath = path.join("test", "fonts", `${fontFamily}.ttf`);
+  if (fsSync.existsSync(fontPath)) {
+    Font.registerFont(fontPath, { family: fontFamily });
+  }
+}
+
+console.time("render");
+await fs.writeFile("test/text-01.jpg", renderAsImageBuffer(document));
+console.timeEnd("render");

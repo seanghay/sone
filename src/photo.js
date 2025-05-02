@@ -6,6 +6,9 @@ import { smoothRoundRect } from "./corner.js";
 export function Photo(src) {
   const node = Yoga.Node.create();
 
+  node.setWidth(src.width);
+  node.setHeight(src.height);
+
   return createNode(
     {
       type: Photo,
@@ -113,6 +116,7 @@ export function Photo(src) {
           destWidth,
           destHeight,
         );
+        
         ctx.restore();
       },
     },

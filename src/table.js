@@ -88,6 +88,7 @@ export function Table(...children) {
   return createNode(
     {
       children: [],
+      rows: children,
       type: Table,
       style: {
         tableBorderStyle: ["row", "column"],

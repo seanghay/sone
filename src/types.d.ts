@@ -35,3 +35,6 @@ export interface SoneDrawingContext {
   x: number;
   y: number;
 }
+
+export type SoneDefaultFont = "sans-serif" | "monospace" | "serif"
+export type SoneFont = SoneDefaultFont

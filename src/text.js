@@ -260,6 +260,9 @@ export function Text(...children) {
       this.style.size = value;
       return this;
     },
+    /**
+     * @param  {...import("./types.js").SoneFont} values
+     */
     font(...values) {
       this.style.font = values.join(", ");
       return this;

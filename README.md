@@ -24,6 +24,9 @@
 - [ ] Emoji
 - [ ] Font
 - [x] Text Fill Gradient
+- [x] Non-rasterized SVG (Canvg)
+- [x] Font Tracing
+
 
 ### Reference
 

@@ -496,13 +496,6 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
   };
 }
 
-export function Svg(src) {
-  return {
-    type: Svg,
-    src,
-  };
-}
-
 /**
  * @param {CanvasRenderingContext2D} ctx
  * @param {ReturnType<App>} component
@@ -581,6 +574,7 @@ export function renderAsImageBuffer(component) {
 
   const ctx = canvas.getContext("2d");
   renderPattern(ctx, canvas.width, canvas.height, 15);
+
   root.render(ctx);
   root.free();
 

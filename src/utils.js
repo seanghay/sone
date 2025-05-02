@@ -1,5 +1,5 @@
 import { Align, FlexDirection, Justify, PositionType } from "yoga-layout";
-import { createCanvas, Image, loadImage } from "canvas";
+import { createCanvas, Image, loadImage, registerFont } from "canvas";
 import { lineBreakTokenizer } from "./segmenter.js";
 
 export const SoneConfig = {
@@ -7,6 +7,7 @@ export const SoneConfig = {
   loadImage,
   dpr: 1,
   lineBreakTokenizer,
+  registerFont,
 };
 
 export const DrawSymbol = Symbol();
