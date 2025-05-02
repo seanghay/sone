@@ -1,6 +1,9 @@
 {
-  "name": "sone.js",
-  "repository": "seanghay/sone",
+  "name": "sonejs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanghay/sone.git"
+  },
   "version": "0.0.1",
   "type": "module",
   "main": "src/core.js",

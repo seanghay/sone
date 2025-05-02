@@ -19,7 +19,7 @@ SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is b
 ### Get started 
 
 ```shell
-npm install sone.js
+npm install sonejs
 ```
 
 ```js
