@@ -3,6 +3,9 @@ import memoize from "fast-memoize";
 import Yoga from "yoga-layout";
 import { DrawSymbol, SoneConfig } from "./utils.js";
 import { createGradientFillStyleList, isColor } from "./gradient.js";
+import emojiRegex from "emoji-regex";
+
+const emoji = emojiRegex();
 
 const measureCanvas = SoneConfig.createCanvas(1, 1);
 
@@ -459,6 +462,9 @@ export function Text(...children) {
 
       // start drawing fill
       for (const cmd of drawCommands) {
+        const isEmoji = emoji.test(cmd.text);
+        if (isEmoji) ctx.textDrawingMode = "glyph";
+        
         ctx.font = cmd.font;
         let fillStyles = [];
         if (cmd.style.fillGradient) {

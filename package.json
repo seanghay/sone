@@ -13,6 +13,7 @@
     "canvg": "^4.0.3",
     "css-box-shadow": "^1.0.0-3",
     "css-font-parser": "^2.0.1",
+    "emoji-regex": "^10.4.0",
     "fast-memoize": "^2.5.2",
     "figma-squircle": "^1.1.0",
     "gradient-parser": "^1.1.1",

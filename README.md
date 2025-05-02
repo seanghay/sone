@@ -21,8 +21,8 @@
 - [x] Table
 - [ ] Grid
 - [x] Background Image
-- [ ] Emoji
-- [ ] Font
+- [x] Emoji
+- [x] Font
 - [x] Text Fill Gradient
 - [x] Non-rasterized SVG (Canvg)
 - [x] Font Tracing
