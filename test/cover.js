@@ -4,7 +4,7 @@ import { Column, Flex } from "../src/flex.js";
 import { Span, Text } from "../src/text.js";
 import { loadSvg, Svg } from "../src/svg.js";
 
-const svgSrc = loadSvg(await fs.readFile("test/sone.svg"));
+const svgSrc = loadSvg(await fs.readFile("test/sone.svg", "utf8"));
 
 function SoneCover() {
   return Column(

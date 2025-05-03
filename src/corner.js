@@ -1,8 +1,5 @@
-import { CanvasRenderingContext2D } from "canvas";
 import { getSvgPath } from "figma-squircle";
-import { Path2D, applyPath2DToCanvasRenderingContext } from "path2d";
-
-applyPath2DToCanvasRenderingContext(CanvasRenderingContext2D);
+import { SoneConfig } from "./utils.js";
 
 /**
  * @param {CanvasRenderingContext2D} ctx
@@ -70,8 +67,10 @@ export function smoothRoundRect(
     ...corners,
   });
 
-  const p = new Path2D(svgPath);
+  const p = new SoneConfig.Path2D(svgPath);
   ctx.translate(x, y);
+
   ctx[op](p);
+
   ctx.translate(-x, -y);
 }

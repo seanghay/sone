@@ -1,6 +1,22 @@
 import { Align, FlexDirection, Justify, PositionType } from "yoga-layout";
-import { createCanvas, Image, loadImage, registerFont } from "canvas";
 import { lineBreakTokenizer } from "./segmenter.js";
+import {
+  createCanvas,
+  loadImage,
+  registerFont,
+  Image,
+  CanvasRenderingContext2D,
+} from "canvas";
+import { applyPath2DToCanvasRenderingContext, Path2D } from "path2d";
+
+let Path2DPolyfill = null;
+
+if (CanvasRenderingContext2D) {
+  applyPath2DToCanvasRenderingContext(CanvasRenderingContext2D);
+  Path2DPolyfill = Path2D;
+} else {
+  Path2DPolyfill = window.Path2D;
+}
 
 export const SoneConfig = {
   createCanvas,
@@ -8,7 +24,15 @@ export const SoneConfig = {
   dpr: 1,
   lineBreakTokenizer,
   registerFont,
+  Image,
+  Path2D: Path2DPolyfill,
 };
+
+if (SoneConfig.Image == null) {
+  if (typeof window !== "undefined") {
+    SoneConfig.Image = window.Image;
+  }
+}
 
 export const DrawSymbol = Symbol();
 
@@ -23,7 +47,7 @@ function createIdGenerator() {
 export const createId = createIdGenerator();
 
 export function isImage(image) {
-  return image instanceof Image;
+  return image instanceof SoneConfig.Image;
 }
 
 /**

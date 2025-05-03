@@ -1,5 +1,4 @@
 import path from "node:path";
-import { loadImage } from "canvas";
 import fs from "node:fs/promises";
 import fsSync from "node:fs";
 import {
@@ -7,6 +6,7 @@ import {
   Flex,
   Photo,
   Row,
+  SoneConfig,
   Span,
   Svg,
   Text,
@@ -18,9 +18,9 @@ import { Font } from "../src/font.js";
 async function Document() {
   console.time("resource");
   const [imageSrc, bgSrc, svgBuffer] = await Promise.all([
-    loadImage("test/Flag_of_Cambodia.svg"),
-    loadImage("test/248-700x400.jpg"),
-    fs.readFile("test/Flag_of_Cambodia.svg"),
+    SoneConfig.loadImage("test/Flag_of_Cambodia.svg"),
+    SoneConfig.loadImage("test/248-700x400.jpg"),
+    fs.readFile("test/Flag_of_Cambodia.svg", 'utf8'),
   ]);
 
   const svgSrc = loadSvg(svgBuffer);

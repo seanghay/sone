@@ -1,35 +1,25 @@
 import { DOMParser } from "@xmldom/xmldom";
-import nodecanvas from "canvas";
 import { Canvg, Document, Parser, presets } from "canvg";
-import isSvg from "is-svg";
 import Yoga from "yoga-layout";
 import { createNode } from "./core.js";
-import { DrawSymbol } from "./utils.js";
+import { DrawSymbol, SoneConfig } from "./utils.js";
 import { smoothRoundRect } from "./corner.js";
 
 const preset = presets.node({
   DOMParser,
-  canvas: nodecanvas,
+  canvas: {
+    createCanvas: SoneConfig.createCanvas,
+    loadImage: SoneConfig.loadImage,
+  },
   fetch,
 });
 
-const parser = new Parser(preset);
-
 /**
- * @param {string|Buffer} src
+ * @param {string} src
  */
 export function loadSvg(src) {
-  let value = null;
-  if (typeof src === "string") {
-    if (isSvg(src)) {
-      value = src;
-    }
-  }
-
-  if (Buffer.isBuffer(src)) value = src.toString("utf8");
-  if (value == null) return null;
-
-  const root = parser.parseFromString(value);
+  const parser = new Parser(preset);
+  const root = parser.parseFromString(src);
   let documentElement = null;
 
   return {

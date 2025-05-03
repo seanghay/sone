@@ -104,7 +104,7 @@ export function Photo(src) {
             }
             break;
         }
-
+        
         ctx.drawImage(
           component.src,
           0,
