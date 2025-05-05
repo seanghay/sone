@@ -55,7 +55,9 @@ await watcher.subscribe(path.join(process.cwd(), "test"), (err, events) => {
   for (const event of events) {
     if (!event.path.endsWith(".sone.js")) continue;
     if (event.type === "delete") continue;
+    const ss = Date.now()
     refreshModule(event.path).then((result) => {
+      console.log(`[render] time ${Date.now() - ss}ms`);
       for (const client of clients) {
         client.send(result);
       }

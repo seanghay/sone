@@ -1,18 +1,8 @@
 import fs from "node:fs/promises";
-import {
-  Column,
-  Row,
-  Span,
-  Svg,
-  Table,
-  TableRow,
-  Text,
-  loadSvg,
-  keywords,
-} from "../src/sone.js";
+import { Column, Row, Span, Svg, Table, TableRow, Text, loadSvg } from "sonejs";
 
 const colors = {
-  primary: keywords.coral,
+  primary: "#222831",
   white: "#fff",
   green: "#00AF50",
   red: "#FF0101",
@@ -21,12 +11,12 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const svgSrc = loadSvg(await fs.readFile("test/sone-white.svg", "utf8"));
+const svgSrc = loadSvg(await fs.readFile("sone.svg", "utf8"));
 
 function StatusIndicator(text, color) {
   return Row(
     Row(Text(text).size(20).weight(500)).grow(1),
-    Row().size(18, 18).bg(color).cornerRadius(6).cornerSmoothing(0.7),
+    Row().size(60, 18).bg(color),
   );
 }
 
@@ -103,7 +93,7 @@ function Achievement(info) {
   return [
     Column(Text("Achievement for This Week").size(22).color(colors.white))
       .bg(colors.primary)
-      .padding(14, 14)
+      .padding(24, 14)
       .strokeColor(colors.primary)
       .strokeWidth(4),
     Column(Text(info).lineHeight(1.4).size(18).color(colors.black))
@@ -118,7 +108,7 @@ function NextPlan(info) {
   return [
     Column(Text("Plan for Next Week").size(22).color(colors.white))
       .bg(colors.primary)
-      .padding(14, 14)
+      .padding(24, 14)
       .strokeColor(colors.primary)
       .strokeWidth(4),
     Column(Text(info).lineHeight(1.4).size(18).color(colors.black))
@@ -188,20 +178,15 @@ function KeyMilestone(items) {
     .strokeColor("rgba(0,0,0,.1)");
 }
 
-function Document(data) {
+export function ReportDocument(data) {
   const ProjectTimelineHeaderCell = (label) =>
-    Row(Text(label).size(18).weight("bold")).padding(6, 12).bg(colors.gray);
+    Row(Text(label).size(18).weight(500)).padding(6, 12).bg(colors.gray);
 
   const TrackBar = (start, end, color) =>
-    Row()
-      .size(end, 20)
-      .left(start)
-      .bg(color)
-      .cornerRadius(8)
-      .cornerSmoothing(0.7);
+    Row().size(end, 14).left(start).bg(color).cornerRadius(14);
 
   return Column(
-    Header(data.project),
+    Header(data.project).opacity(Math.min(10*(data.progress/100), 1)),
     Row(
       Column(
         ...Achievement(data.achivements.join("\n")),
@@ -232,7 +217,7 @@ function Document(data) {
             .marginTop(8)
             .gap(8),
           Column(
-            Row().size(3, "80%").bg("rgba(255,0,0,.6)").cornerRadius(4),
+            Row().size(3, 150).bg("rgba(255,0,0,.6)").cornerRadius(4),
             Text("We are here ", Span("🔥").offsetY(-4))
               .size(18)
               .color(colors.red),
@@ -242,25 +227,25 @@ function Document(data) {
             .position("absolute")
             .top(10)
             .width(150)
-            .height("100%")
             .left(-150 / 2)
             .marginLeft(`${data.progress}%`),
-        ).grow(1),
+        ).height(200 * Math.min(1, 8 * (data.progress / 100))),
         KeyMilestone(data.milestones),
       ).grow(1),
     )
       .margin(14, 44, 44, 44)
       .grow(1)
-      .gap(14),
+      .gap(14)
+      .opacity(Math.min(1.0, (data.progress * 16) / 100)),
   )
     .minWidth(1280)
-    .minHeight(800)
+    .minHeight(720)
     .bg("#fff");
 }
 
-const data = {
+export const defaultData = {
   project: {
-    manager: "Example",
+    manager: "Seanghay",
     name: "Project Name",
     date: "01/05/2025 - 12:00 AM",
     status: colors.green,
@@ -274,25 +259,19 @@ const data = {
     { issue: "Issue 1", solution: "Solution 1" },
     { issue: "Issue 2", solution: "Solution 2" },
     { issue: "Issue 3", solution: "Solution 3" },
-    { issue: "Issue 3", solution: "Solution 3" },
   ],
   milestones: [
     ["Project Study", "", "", ""],
     ["Initial Meeting 0", "20/01/2025", "100%", colors.green],
     ["Initial Meeting 1", "20/01/2025", "100%", colors.red],
-    ["Initial Meeting 1", "20/01/2025", "100%", colors.red],
+    ["Initial Meeting 2", "20/01/2025", "100%", colors.orange],
   ],
   tracks: [
-    { start: 0, end: 30, color: colors.green },
+    { start: 0, end: 20, color: colors.gray },
     { start: 20, end: 40, color: colors.gray },
     { start: 30, end: 60, color: colors.gray },
     { start: 50, end: 80, color: colors.gray },
-    { start: 70, end: 90, color: colors.green },
-    { start: 90, end: 100, color: colors.orange },
+    { start: 70, end: 100, color: colors.green },
   ],
   progress: 80,
-};
-
-export default () => {
-  return Document(data);
 };
