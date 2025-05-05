@@ -151,6 +151,8 @@ function Document() {
 - [x] Font Tracing
 
 
+### News
+- Sone got featured on Khmerload [https://www.khmerload.com/article/208169]
 
 ### Reference
 
