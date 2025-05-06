@@ -1,6 +1,10 @@
 import fs from "node:fs/promises";
 import { Column, Row, Span, Svg, Table, TableRow, Text, loadSvg } from "sonejs";
 
+function ease(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+}
+
 const colors = {
   primary: "#222831",
   white: "#fff",
@@ -186,7 +190,7 @@ export function ReportDocument(data) {
     Row().size(end, 14).left(start).bg(color).cornerRadius(14);
 
   return Column(
-    Header(data.project).opacity(Math.min(10*(data.progress/100), 1)),
+    Header(data.project).opacity(ease(Math.min(10 * (data.progress / 100), 1))),
     Row(
       Column(
         ...Achievement(data.achivements.join("\n")),
@@ -228,15 +232,15 @@ export function ReportDocument(data) {
             .top(10)
             .width(150)
             .left(-150 / 2)
-            .marginLeft(`${data.progress}%`),
-        ).height(200 * Math.min(1, 8 * (data.progress / 100))),
+            .marginLeft(`${ease(data.progress/100) * 100}%`),
+        ).height(200 * ease(Math.min(1, 8 * (data.progress / 100)))),
         KeyMilestone(data.milestones),
       ).grow(1),
     )
       .margin(14, 44, 44, 44)
       .grow(1)
       .gap(14)
-      .opacity(Math.min(1.0, (data.progress * 16) / 100)),
+      .opacity(ease(Math.min(1.0, (data.progress * 16) / 100))),
   )
     .minWidth(1280)
     .minHeight(720)

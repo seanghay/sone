@@ -13,10 +13,6 @@ function lerp(start, end, t) {
   return start * (1 - t) + end * t;
 }
 
-function easeInOut(t) {
-  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
-}
-
 function interpolateTriangle(t) {
   // Ensure t is between 0 and 1
   t = t % 1;
@@ -29,24 +25,30 @@ function interpolateTriangle(t) {
   }
 }
 
+function ease(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+}
+
+
 for (let i = 0; i < totalFrameCount; i++) {
   const p = interpolateTriangle(i / totalFrameCount);
 
   const root = createRoot(
     ReportDocument({
       ...defaultData,
-      progress: easeInOut(p) * 100,
+      progress: p * 100,
       project: {
         ...defaultData.project,
         name: `Sone Video.js (${i})`,
       },
       tracks: defaultData.tracks.map((track) => ({
         ...track,
-        start: track.start * Math.min(p * 2, 1),
-        end: track.end * Math.min(p * 2, 1),
+        start: track.start * ease(Math.min(p * 2, 1)),
+        end: track.end * ease(Math.min(p * 2, 1)),
       })),
     }),
   );
+  
 
   if (canvas == null) {
     const width = root.node.getComputedWidth();
@@ -63,4 +65,6 @@ for (let i = 0; i < totalFrameCount; i++) {
     `frames/${filename}`,
     canvas.toBuffer("image/jpeg", { quality: 1.0 }),
   );
+
+  console.log(i/totalFrameCount)
 }
