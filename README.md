@@ -151,6 +151,7 @@ function Document() {
 - [x] Text Fill Gradient
 - [x] Non-rasterized SVG (Canvg)
 - [x] Font Tracing
+- [ ] Move from `node-canvas` to `skia-canvas` (Emoji, Colored Fonts, Font Fallback, SVG, Path2D, Variable Fonts)
 
 
 ### News
