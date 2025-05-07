@@ -1,5 +1,7 @@
 # Sone
 
+>  Seanghay Optimized Nesting Engine 😉
+
 <img src=test/cover.svg>
 
 > **សូន** - *ប្រមូលអ្វីៗដែលមានសាច់ទន់ជ្រាយឱ្យកើតជាដុំ, ជាគ្រាប់ឬជារូប*
