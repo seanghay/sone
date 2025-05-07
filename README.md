@@ -1,6 +1,6 @@
 # Sone
 
->  Seanghay Optimized Nesting Engine 😉
+>  Seanghay's Optimized Nesting Engine 😉
 
 <img src=test/cover.svg>
 
