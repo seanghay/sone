@@ -320,9 +320,12 @@ export function createGradientFillStyleList(ctx, value, x, y, width, height) {
       x + item.end.x * width,
       y + item.end.y * height,
     );
+
     for (let i = 0; i < item.colors.length; i++) {
       const color = item.colors[i];
-      const location = item.locations[i];
+      let location = item.locations[i];
+      if (location < 0) location = 0;
+      if (location > 1) location = 1;
       gradient.addColorStop(location, color);
     }
     values.push(gradient);

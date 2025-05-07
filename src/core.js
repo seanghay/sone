@@ -589,9 +589,9 @@ export function renderAsCanvas(component, width, height, type, bg = true) {
 
 /**
  * @param {Function} component
- * @returns {Buffer}
+ * @returns {Promise<Buffer>}
  */
-export function renderAsImageBuffer(component) {
+export async function renderAsImageBuffer(component) {
   const root = createRoot(component);
   const canvas = SoneConfig.createCanvas(
     root.node.getComputedWidth(),
@@ -604,14 +604,14 @@ export function renderAsImageBuffer(component) {
   root.render(ctx);
   root.free();
 
-  return canvas.toBuffer("image/jpeg", { quality: 1 });
+  return canvas.toBuffer("jpeg", { quality: 1 });
 }
 
 /**
  * @param {Function} component
- * @returns {Buffer}
+ * @returns {Promise<Buffer>}
  */
-export function renderAsPdfBuffer(component) {
+export async function renderAsPdfBuffer(component) {
   const root = createRoot(component);
   const canvas = SoneConfig.createCanvas(
     root.node.getComputedWidth(),
@@ -625,5 +625,5 @@ export function renderAsPdfBuffer(component) {
   root.render(ctx);
   root.free();
 
-  return canvas.toBuffer("application/pdf");
+  return canvas.toBuffer("pdf");
 }

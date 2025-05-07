@@ -135,4 +135,4 @@ function Document() {
     .gap(10);
 }
 
-await fs.writeFile("test/table.jpg", renderAsImageBuffer(Document()));
+await fs.writeFile("test/table.jpg", await renderAsImageBuffer(Document()));

@@ -34,4 +34,4 @@ function Document() {
     .gap(10);
 }
 
-await fs.writeFile("test/text-02.jpg", renderAsImageBuffer(Document()));
+await fs.writeFile("test/text-02.jpg", await renderAsImageBuffer(Document()));

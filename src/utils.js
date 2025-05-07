@@ -1,31 +1,15 @@
 import { Align, FlexDirection, Justify, PositionType } from "yoga-layout";
 import { lineBreakTokenizer } from "./segmenter.js";
-import {
-  createCanvas,
-  loadImage,
-  registerFont,
-  Image,
-  CanvasRenderingContext2D,
-} from "canvas";
-import { applyPath2DToCanvasRenderingContext, Path2D } from "path2d";
-
-let Path2DPolyfill = null;
-
-if (CanvasRenderingContext2D) {
-  applyPath2DToCanvasRenderingContext(CanvasRenderingContext2D);
-  Path2DPolyfill = Path2D;
-} else {
-  Path2DPolyfill = window.Path2D;
-}
+import { Path2D, Canvas, loadImage, FontLibrary, Image } from "skia-canvas";
 
 export const SoneConfig = {
-  createCanvas,
+  createCanvas: (width, height) => new Canvas(width, height),
   loadImage,
-  dpr: 1,
   lineBreakTokenizer,
-  registerFont,
+  registerFont: (fontPath, { family }) => FontLibrary.use(family, [fontPath]),
   Image,
-  Path2D: Path2DPolyfill,
+  Path2D,
+  dpr: 1,
 };
 
 if (SoneConfig.Image == null) {

@@ -20,7 +20,7 @@ async function Document() {
   const [imageSrc, bgSrc, svgBuffer] = await Promise.all([
     SoneConfig.loadImage("test/Flag_of_Cambodia.svg"),
     SoneConfig.loadImage("test/248-700x400.jpg"),
-    fs.readFile("test/Flag_of_Cambodia.svg", 'utf8'),
+    fs.readFile("test/Flag_of_Cambodia.svg", "utf8"),
   ]);
 
   const svgSrc = loadSvg(svgBuffer);
@@ -236,5 +236,5 @@ for (const fontFamily of fonts) {
 }
 
 console.time("render");
-await fs.writeFile("test/text-01.jpg", renderAsImageBuffer(document));
+await fs.writeFile("test/text-01.jpg", await renderAsImageBuffer(document));
 console.timeEnd("render");

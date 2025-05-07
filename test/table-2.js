@@ -286,5 +286,5 @@ const data = {
   progress: 80,
 };
 
-await fs.writeFile("test/table-2.jpg", renderAsImageBuffer(Document(data)));
-await fs.writeFile("test/table-2.pdf", renderAsPdfBuffer(Document(data)));
+await fs.writeFile("test/table-2.jpg", await renderAsImageBuffer(Document(data)));
+await fs.writeFile("test/table-2.pdf", await renderAsPdfBuffer(Document(data)));
