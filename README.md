@@ -151,8 +151,7 @@ function Document() {
 - [x] Text Fill Gradient
 - [x] Non-rasterized SVG (Canvg)
 - [x] Font Tracing
-- [ ] Move from `node-canvas` to `skia-canvas` (Emoji, Colored Fonts, Font Fallback, SVG, Path2D, Variable Fonts)
-
+- [x] Move from `node-canvas` to `skia-canvas` (Emoji, Colored Fonts, Font Fallback, SVG, Path2D, Variable Fonts)
 
 ### News
 - Sone got featured on Khmerload [https://www.khmerload.com/article/208169]
@@ -165,3 +164,6 @@ function Document() {
 - https://github.com/catalinmiron/react-native-css-gradient
 - https://jsfiddle.net/vtmnyea8/
 - https://github.com/Automattic/node-canvas
+- https://www.myfirstfont.com/glossary.html
+- https://en.wikipedia.org/wiki/X-height
+- https://github.com/foliojs/fontkit

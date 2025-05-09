@@ -1,13 +1,13 @@
 import fs from "node:fs/promises";
 import {
   Column,
+  Photo,
   Row,
+  SoneConfig,
   Span,
-  Svg,
   Table,
   TableRow,
   Text,
-  loadSvg,
   renderAsImageBuffer,
   renderAsPdfBuffer,
 } from "../src/sone.js";
@@ -22,7 +22,7 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const svgSrc = loadSvg(await fs.readFile("test/sone.svg", "utf8"));
+const imageSrc = await SoneConfig.loadImage("test/sone.svg");
 
 function StatusIndicator(text, color) {
   return Row(
@@ -38,7 +38,7 @@ function Header(project) {
   return Row(
     Row(
       Row(
-        Row(Svg(svgSrc).size(90).scaleType("contain"))
+        Row(Photo(imageSrc).size(90).scaleType("contain"))
           .alignSelf("center")
           .padding(38, 34),
         Column(
@@ -286,5 +286,8 @@ const data = {
   progress: 80,
 };
 
-await fs.writeFile("test/table-2.jpg", await renderAsImageBuffer(Document(data)));
+await fs.writeFile(
+  "test/table-2.jpg",
+  await renderAsImageBuffer(Document(data)),
+);
 await fs.writeFile("test/table-2.pdf", await renderAsPdfBuffer(Document(data)));

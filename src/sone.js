@@ -5,7 +5,6 @@ export * from "./gradient.js";
 export * from "./segmenter.js";
 export * from "./utils.js";
 export * from "./photo.js";
-export * from "./svg.js";
 export * from "./text.js";
 export * from "./flex.js";
 export * from "./table.js";

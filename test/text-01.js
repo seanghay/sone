@@ -1,6 +1,7 @@
-import path from "node:path";
-import fs from "node:fs/promises";
 import fsSync from "node:fs";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { Font } from "../src/font.js";
 import {
   Column,
   Flex,
@@ -8,22 +9,17 @@ import {
   Row,
   SoneConfig,
   Span,
-  Svg,
   Text,
-  loadSvg,
   renderAsImageBuffer,
 } from "../src/sone.js";
-import { Font } from "../src/font.js";
 
 async function Document() {
   console.time("resource");
-  const [imageSrc, bgSrc, svgBuffer] = await Promise.all([
+  const [imageSrc, bgSrc] = await Promise.all([
     SoneConfig.loadImage("test/Flag_of_Cambodia.svg"),
     SoneConfig.loadImage("test/248-700x400.jpg"),
-    fs.readFile("test/Flag_of_Cambodia.svg", "utf8"),
   ]);
 
-  const svgSrc = loadSvg(svgBuffer);
   console.timeEnd("resource");
 
   const sample =
@@ -40,7 +36,7 @@ async function Document() {
           "linear-gradient(45deg, turquoise 20%, yellow 20%, yellow 40%, turquoise 40%, turquoise 60%, yellow 60%, yellow 80%, turquoise 80%, turquoise 100%)",
         ),
       Flex().size(200).cornerRadius(200).bg("orange"),
-      Svg(svgSrc)
+      Photo(imageSrc)
         .size(200)
         .cornerRadius(40)
         .cornerSmoothing(0.7)
@@ -102,11 +98,7 @@ async function Document() {
         Flex(
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
-            Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
-              .font("Moul")
-              .size(22)
-              .color("#FE7743")
-              .offsetY(-2),
+            Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ").font("Moul").size(22).color("#FE7743"),
             " បានប្រព្រឹត្តិ ធ្វើទៅនៅបុរីវ៉ាទីកង់ នៅថ្ងៃសៅរ៍ ទី២៦មេសានេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ។",
           )
             .color("#261FB3")
@@ -132,7 +124,6 @@ async function Document() {
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
             Span("សម្តេច ប៉ាបហ្វ្រង់ស្វ័រ")
-              .offsetY(-3)
               .font("KdamThmorPro")
               .size(27)
               .color("linear-gradient(to left, orange 0%, yellow 100%)")
@@ -150,7 +141,7 @@ async function Document() {
           .alignSelf("center")
           .width(700)
           .opacity(1)
-          .padding(20, 30)
+          .padding(30, 25)
           .cornerRadius(28)
           .cornerSmoothing(0.7)
           .shadow("5px 5px 10px rgba(255, 137, 110, .6)")
@@ -183,7 +174,7 @@ async function Document() {
       )
         .align("justify")
         .font(defaultFont)
-        .lineHeight(1.8)
+        .lineHeight(2)
         .size(24)
         .weight(400)
         .indentSize(50)

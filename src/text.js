@@ -1,11 +1,8 @@
 import boxshadowparser from "css-box-shadow";
 import memoize from "fast-memoize";
-import Yoga from "yoga-layout";
-import { DrawSymbol, SoneConfig } from "./utils.js";
+import Yoga, { MeasureMode } from "yoga-layout";
 import { createGradientFillStyleList, isColor } from "./gradient.js";
-import emojiRegex from "emoji-regex";
-
-const emoji = emojiRegex();
+import { DrawSymbol, SoneConfig } from "./utils.js";
 
 const measureCanvas = SoneConfig.createCanvas(1, 1);
 
@@ -40,13 +37,12 @@ export function _measureText({ text, font }) {
   const canvas = measureCanvas;
   const ctx = canvas.getContext("2d");
 
-  ctx.textBaseline = "top";
+  ctx.textBaseline = "alphabetic";
   ctx.font = font;
 
   const m = ctx.measureText(text);
-  const height = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+
   return {
-    height,
     width: m.width,
     textMetrics: m,
   };
@@ -57,7 +53,7 @@ export const measureText = memoize(_measureText);
 /**
  * @typedef {import("./types.js").SoneSpanNode} SpanNode
  * @param {{spans: SpanNode[], maxWidth: number, indentSize: number}} param0
- * @returns {{lines: import("./types.js").SoneSpanRenderNode[][], maxHeight: number, forceBreaks: number[]}} an array of lines
+ * @returns {{lines: import("./types.js").SoneSpanRenderNode[][], forceBreaks: number[]}} an array of lines
  */
 export function splitLines({ spans, maxWidth, indentSize = 0 }) {
   /**
@@ -67,7 +63,6 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
   const forceBreaks = [];
 
   let currentLineWidth = indentSize;
-  let maxHeight = 0;
 
   for (const span of spans) {
     let style = span.spanStyle || {};
@@ -75,15 +70,12 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
     const font = stringifyFont(style);
 
     for (const segment of SoneConfig.lineBreakTokenizer(span.text)) {
-      const { width, height, textMetrics } = measureText({
+      const { width, textMetrics } = measureText({
         text: segment,
         font,
       });
 
-      if (maxHeight < style.size) {
-        maxHeight = style.size;
-      }
-
+      const height = style.size * 0.75;
       currentLineWidth += width;
       if (currentLineWidth < maxWidth && segment !== "\n") {
         if (outputs.length === 0) {
@@ -142,39 +134,8 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
 
   return {
     lines: outputs,
-    maxHeight,
     forceBreaks,
   };
-}
-
-/**
- * @param {import("./types.js").SoneTextOptions} style
- * @param {import("./types.js").SoneSpanNode[]} spans
- * @returns {ReturnType<import("yoga-layout").MeasureFunction>}
- */
-export function measureSpans(spans, style) {
-  const size = {
-    width: 0,
-    height: 0,
-  };
-
-  for (const span of spans) {
-    let style = span.spanStyle || {};
-    style = { ...span.style, ...style }; // merge with parent style
-
-    const dimen = measureText({
-      text: span.text,
-      font: stringifyFont(style),
-    });
-
-    size.width += dimen.width;
-    if (size.height < style.size) {
-      size.height = style.size;
-    }
-  }
-
-  size.height *= style.lineHeight;
-  return size;
 }
 
 /**
@@ -190,21 +151,39 @@ export function textMeasureFunc(spans, style, maxWidth) {
   let width = 0;
   let height = 0;
 
-  const { lines, maxHeight, forceBreaks } = splitLines({
+  const { lines, forceBreaks } = splitLines({
     spans,
     maxWidth: w,
     lineHeight: style.lineHeight,
     indentSize: style.indentSize,
   });
 
+  let i = 0;
+
   for (const nodes of lines) {
+    let lineWidth = 0;
+    let lineMaxHeight = 0;
+
     for (const node of nodes) {
-      width += node.width;
+      if (lineMaxHeight < node.height) {
+        lineMaxHeight = node.height;
+      }
+      lineWidth += node.width;
     }
-    height += maxHeight * style.lineHeight;
+
+    if (width < lineWidth) width = lineWidth;
+    let multipllier = style.lineHeight + 0.35;
+    if (i === lines.length - 1) multipllier = 1;
+    height += lineMaxHeight * multipllier;
+    i++;
   }
 
-  return { width, height, lines, maxHeight, forceBreaks };
+  return {
+    width,
+    height,
+    lines,
+    forceBreaks,
+  };
 }
 
 /**
@@ -213,7 +192,7 @@ export function textMeasureFunc(spans, style, maxWidth) {
  */
 export function Text(...children) {
   const node = Yoga.Node.create();
-  const properties = {};
+  node.setFlexGrow(1);
 
   /**
    * @type {import("./types.js").SoneTextOptions}
@@ -249,7 +228,8 @@ export function Text(...children) {
 
   node.setMeasureFunc((width, widthMode, height, heightMode) => {
     const result = textMeasureFunc(spans, style, width);
-    Object.assign(properties, result);
+    if (widthMode === MeasureMode.AtMost)
+      result.width = Math.min(width, result.width);
     return result;
   });
 
@@ -258,7 +238,11 @@ export function Text(...children) {
     type: Text,
     spans,
     style,
-    properties,
+    width(size) {
+      node.setWidth(size);
+      return this;
+    },
+
     size(value) {
       this.style.size = value;
       return this;
@@ -334,9 +318,13 @@ export function Text(...children) {
       const width = component.node.getComputedWidth();
 
       ctx.save();
-      ctx.textBaseline = "top";
+      ctx.textBaseline = "alphabetic";
 
-      const { lines, maxHeight, forceBreaks } = component.properties;
+      const { lines, maxHeight, forceBreaks } = textMeasureFunc(
+        component.spans,
+        component.style,
+        width,
+      );
 
       const offsetX = x;
       let offsetY = y;
@@ -407,9 +395,14 @@ export function Text(...children) {
           lineOffsetX = (width - lineWidth) / 2;
         }
 
+        let maxLineHeight = 0;
         for (const node of spanNodes) {
           let style = node.spanStyle || {};
           style = { ...node.style, ...style };
+
+          if (maxLineHeight < style.size * 0.75) {
+            maxLineHeight = style.size * 0.75;
+          }
 
           if (textAlign === "justify") {
             if (/\s+/.test(node.text)) {
@@ -428,7 +421,11 @@ export function Text(...children) {
           drawCommands.push({
             text: node.text,
             x: offsetX + lineOffsetX,
-            y: offsetY + spanOffsetY,
+            y:
+              offsetY +
+              spanOffsetY +
+              style.size * 0.75 +
+              (node.style.size - style.size) * 0.75,
             fillStyle: style.color,
             font: stringifyFont(style),
             strokeWidth: style.strokeWidth,
@@ -442,7 +439,7 @@ export function Text(...children) {
           lineOffsetX += node.width;
         }
 
-        offsetY += maxHeight * style.lineHeight;
+        offsetY += maxLineHeight * (style.lineHeight + 0.35);
       }
 
       // start drawing stroke
@@ -462,9 +459,6 @@ export function Text(...children) {
 
       // start drawing fill
       for (const cmd of drawCommands) {
-        const isEmoji = emoji.test(cmd.text);
-        if (isEmoji) ctx.textDrawingMode = "glyph";
-        
         ctx.font = cmd.font;
         let fillStyles = [];
         if (cmd.style.fillGradient) {
@@ -494,7 +488,7 @@ export function Text(...children) {
 
           const drawLine = () => {
             if (typeof cmd.style.lineOffset === "number") {
-              const offset = cmd.height + cmd.style.lineOffset;
+              const offset = cmd.style.lineOffset;
               ctx.beginPath();
               ctx.strokeStyle = cmd.style.lineColor || ctx.fillStyle;
               ctx.lineWidth = textDecorationLineWidth || 2;

@@ -42,4 +42,4 @@ function Document() {
   ).padding(40);
 }
 
-await fs.writeFile("test/basic-01.jpg", renderAsImageBuffer(Document()));
+await fs.writeFile("test/basic-01.jpg", await renderAsImageBuffer(Document()));
