@@ -4,7 +4,7 @@ import { ReportDocument, defaultData } from "./components.js";
 
 await fs.mkdir("frames", { recursive: true });
 
-const totalFrameCount = 60 * 8;
+const totalFrameCount = 30 * 10;
 
 let canvas = null;
 
@@ -40,7 +40,7 @@ for (let i = 0; i < totalFrameCount; i++) {
       progress: p * 100,
       project: {
         ...defaultData.project,
-        name: `Sone Video.js (${i})`,
+        name: `សូន Video (${i})`,
       },
       tracks: defaultData.tracks.map((track) => ({
         ...track,

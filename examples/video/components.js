@@ -1,4 +1,3 @@
-import fs from "node:fs/promises";
 import {
   Column,
   Photo,
@@ -33,14 +32,15 @@ function StatusIndicator(text, color) {
   );
 }
 
-function Header(project) {
+function Header(project, rotation,weight) {
   const KeyItem = (label) => Text(label).size(22).color(colors.white);
-  const ValueItem = (label) => Text(label).size(22).weight("bold");
+  const ValueItem = (label) =>
+    Text(label).size(22).weight(weight).font("Inter Khmer");
 
   return Row(
     Row(
       Row(
-        Row(Photo(svgSrc).size(90).scaleType("contain"))
+        Row(Photo(svgSrc).rotate(rotation).size(90).scaleType("contain"))
           .alignSelf("center")
           .padding(38, 34),
         Column(
@@ -199,7 +199,9 @@ export function ReportDocument(data) {
     Row().size(end, 14).left(start).bg(color).cornerRadius(14);
 
   return Column(
-    Header(data.project).opacity(ease(Math.min(10 * (data.progress / 100), 1))),
+    Header(data.project, 360 * 4 * ease(data.progress / 100), Math.round((100 + 800 * ease(data.progress / 100)))).opacity(
+      ease(Math.min(10 * (data.progress / 100), 1)),
+    ),
     Row(
       Column(
         ...Achievement(data.achivements.join("\n")),
