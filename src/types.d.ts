@@ -34,6 +34,8 @@ export interface SoneDrawingContext {
   component: () => unknown;
   x: number;
   y: number;
+  computedWidth: number;
+  computedHeight: number;
 }
 
 export type SoneDefaultFont = "sans-serif" | "monospace" | "serif"

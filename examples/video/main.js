@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
-import { createRoot } from "sonejs";
+import { createRoot, SoneConfig } from "sonejs";
 import { ReportDocument, defaultData } from "./components.js";
-import { createCanvas } from "canvas";
 
 await fs.mkdir("frames", { recursive: true });
 
@@ -29,6 +28,8 @@ function ease(t) {
   return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
 }
 
+let w = 0;
+let h = 0;
 
 for (let i = 0; i < totalFrameCount; i++) {
   const p = interpolateTriangle(i / totalFrameCount);
@@ -48,13 +49,12 @@ for (let i = 0; i < totalFrameCount; i++) {
       })),
     }),
   );
-  
 
   if (canvas == null) {
-    const width = root.node.getComputedWidth();
-    const height = root.node.getComputedHeight() + 1;
-    canvas = createCanvas(width, height);
+    w = root.node.getComputedWidth();
+    h = root.node.getComputedHeight() ;
   }
+  canvas = SoneConfig.createCanvas(w, h);
 
   const ctx = canvas.getContext("2d");
   root.render(ctx);
@@ -63,8 +63,8 @@ for (let i = 0; i < totalFrameCount; i++) {
   const filename = `${i}`.padStart(4, "0") + ".jpg";
   await fs.writeFile(
     `frames/${filename}`,
-    canvas.toBuffer("image/jpeg", { quality: 1.0 }),
+    await canvas.toBuffer("jpeg", { quality: 1.0 }),
   );
 
-  console.log(i/totalFrameCount)
+  console.log(i / totalFrameCount);
 }

@@ -1,5 +1,14 @@
 import fs from "node:fs/promises";
-import { Column, Row, Span, Svg, Table, TableRow, Text, loadSvg } from "sonejs";
+import {
+  Column,
+  Photo,
+  Row,
+  SoneConfig,
+  Span,
+  Table,
+  TableRow,
+  Text,
+} from "sonejs";
 
 function ease(t) {
   return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
@@ -15,7 +24,7 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const svgSrc = loadSvg(await fs.readFile("sone.svg", "utf8"));
+const svgSrc = await SoneConfig.loadImage("sone.svg");
 
 function StatusIndicator(text, color) {
   return Row(
@@ -31,7 +40,7 @@ function Header(project) {
   return Row(
     Row(
       Row(
-        Row(Svg(svgSrc).size(90).scaleType("contain"))
+        Row(Photo(svgSrc).size(90).scaleType("contain"))
           .alignSelf("center")
           .padding(38, 34),
         Column(
@@ -232,7 +241,7 @@ export function ReportDocument(data) {
             .top(10)
             .width(150)
             .left(-150 / 2)
-            .marginLeft(`${ease(data.progress/100) * 100}%`),
+            .marginLeft(`${ease(data.progress / 100) * 100}%`),
         ).height(200 * ease(Math.min(1, 8 * (data.progress / 100)))),
         KeyMilestone(data.milestones),
       ).grow(1),

@@ -48,11 +48,11 @@ function Document() {
 
 // save as Image
 const canvas = renderAsCanvas(Document(), undefined, undefined);
-await fs.writeFile("test/output.png", canvas.toBuffer("image/png"));
+await fs.writeFile("test/output.png", await canvas.toBuffer("png"));
 
 // save as PDF
 const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
-await fs.writeFile("test/output.pdf", canvas2.toBuffer("application/pdf"));
+await fs.writeFile("test/output.pdf", await canvas2.toBuffer("pdf"));
 ```
 
 Preview

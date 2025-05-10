@@ -192,7 +192,6 @@ export function textMeasureFunc(spans, style, maxWidth) {
  */
 export function Text(...children) {
   const node = Yoga.Node.create();
-  node.setFlexGrow(1);
 
   /**
    * @type {import("./types.js").SoneTextOptions}
@@ -240,6 +239,11 @@ export function Text(...children) {
     style,
     width(size) {
       node.setWidth(size);
+      return this;
+    },
+
+    grow(value) {
+      node.setFlexGrow(value);
       return this;
     },
 
@@ -320,7 +324,7 @@ export function Text(...children) {
       ctx.save();
       ctx.textBaseline = "alphabetic";
 
-      const { lines, maxHeight, forceBreaks } = textMeasureFunc(
+      const { lines, forceBreaks } = textMeasureFunc(
         component.spans,
         component.style,
         width,
@@ -439,7 +443,8 @@ export function Text(...children) {
           lineOffsetX += node.width;
         }
 
-        offsetY += maxLineHeight * (style.lineHeight + 0.35);
+        const actualLineHeight = maxLineHeight * (style.lineHeight + 0.35);
+        offsetY += actualLineHeight;
       }
 
       // start drawing stroke
@@ -520,6 +525,7 @@ export function Text(...children) {
           }
 
           ctx.fillText(cmd.text, cmd.x, cmd.y);
+
           if (!textDecorationBehind) {
             drawLine();
           }

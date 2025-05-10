@@ -27,7 +27,15 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       backgroudImage: null,
       backgroudImageScaleType: null,
       cornerSmoothing: 0,
+      rotationInDegrees: 0,
       ...(props.style || {}),
+    },
+    /**
+     * @param {number} value
+     */
+    rotate(value) {
+      this.style.rotationInDegrees = value;
+      return this;
     },
     /**
      * @param {string|HTMLImageElement} value
@@ -391,10 +399,12 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
 
       if (style.backgroudImage) {
         ctx.save();
+
         const scaleType = style.backgroudImageScaleType || "fill";
         const containerWidth = component.node.getComputedWidth();
         const containerHeight = component.node.getComputedHeight();
         const image = style.backgroudImage;
+
         smoothRoundRect(
           ctx,
           x,
@@ -501,11 +511,33 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
  * @param {ReturnType<App>} component
  * @param {number} x
  * @param {number} y
- * @param {number} width
- * @param {number} height
+ * @param {number} computedWidth
+ * @param {number} computedHeight
  */
-export function renderToCanvas(ctx, component, x, y) {
+export function renderToCanvas(
+  ctx,
+  component,
+  x,
+  y,
+  computedWidth,
+  computedHeight,
+) {
   ctx.save();
+
+  // handle rotation
+  const rotationInDegrees = component.style.rotationInDegrees;
+  const hasRotation =
+    typeof rotationInDegrees === "number" && rotationInDegrees !== 0;
+
+  if (hasRotation) {
+    // the center won't change if the width/height changes linearly?
+    const centerX = x + component.node.getComputedWidth() / 2;
+    const centerY = y + component.node.getComputedHeight() / 2;
+
+    ctx.translate(centerX, centerY);
+    ctx.rotate((rotationInDegrees * Math.PI) / 180);
+    ctx.translate(-centerX, -centerY);
+  }
 
   if (component.style.opacity >= 0) {
     ctx.globalAlpha = component.style.opacity;
@@ -518,6 +550,8 @@ export function renderToCanvas(ctx, component, x, y) {
       ctx,
       x,
       y,
+      computedWidth,
+      computedHeight,
     });
   }
 
@@ -527,10 +561,46 @@ export function renderToCanvas(ctx, component, x, y) {
       const childNode = child.node;
       const childX = x + childNode.getComputedLeft();
       const childY = y + childNode.getComputedTop();
-      renderToCanvas(ctx, child, childX, childY);
+      renderToCanvas(
+        ctx,
+        child,
+        childX,
+        childY,
+        childNode.getComputedWidth(),
+        childNode.getComputedHeight(),
+      );
     }
   }
 
+  ctx.restore();
+  // draw debug bbox
+  // drawBBox(ctx, x, y, component, rotationInDegrees);
+}
+
+function drawBBox(ctx, x, y, component, rotationInDegrees = 0) {
+  const w = component.node.getComputedWidth();
+  const h = component.node.getComputedHeight();
+  const rotationRadians = (rotationInDegrees * Math.PI) / 180;
+
+  const newWidth =
+    Math.abs(w * Math.cos(rotationRadians)) +
+    Math.abs(h * Math.sin(rotationRadians));
+
+  const newHeight =
+    Math.abs(w * Math.sin(rotationRadians)) +
+    Math.abs(h * Math.cos(rotationRadians));
+
+  ctx.save();
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "magenta";
+  ctx.rect(
+    x - (newWidth - w) / 2,
+    y - (newHeight - h) / 2,
+    newWidth,
+    newHeight,
+  );
+
+  ctx.stroke();
   ctx.restore();
 }
 

@@ -45,6 +45,7 @@ async function Document() {
         .size(200)
         .cornerRadius(44)
         .cornerSmoothing(0.7)
+        .rotate(-40)
         .bg("green")
         .scaleType("cover")
         .strokeColor("rgba(0,0,0,.4)")
@@ -82,7 +83,9 @@ async function Document() {
       .color("#A55B4B")
       .font("Geist Mono")
       .shadow("2px 4px 4px black, 2px -4px 4px orange"),
-    Text(sample).font(defaultFont).lineHeight(1.5).size(22).color("blue"),
+    Column(
+      Text(sample).font(defaultFont).lineHeight(1.5).size(22).color("blue"),
+    ).rotate(-2),
     Row(
       Flex()
         .cornerRadius(20)
@@ -112,14 +115,16 @@ async function Document() {
         )
           .maxWidth(400)
           .padding(30, 30)
-          .cornerRadius(56)
+          .cornerRadius(0)
           .cornerSmoothing(0.7)
           .alignSelf("center")
           .bg(bgSrc, "cover")
           .bg("#eee")
           .strokeColor("rgba(0,0,0,.4)")
-          .strokeWidth(1)
-          .shadow("5px 5px 10px rgba(0,0,0,.2)"),
+          .strokeWidth(2)
+          .shadow("5px 5px 10px rgba(0,0,0,.2)")
+          .rotate(170)
+          .marginBottom(30),
         Flex(
           Text(
             "ពិធីបុណ្យ ព្រះសពរបស់ ",
@@ -180,23 +185,21 @@ async function Document() {
         .indentSize(50)
         .color("gray"),
       Flex().height(4).bg("#eee"),
-      Flex(
+      Row(
         Text("Page 1")
           .color("#fff")
           .weight("bold")
           .size(18)
           .strokeColor("black")
-          .strokeWidth(4),
-        Flex().size("auto").grow(1),
+          .strokeWidth(4)
+          .grow(1),
         Text(
           Span("Example Footer").color("blue").weight(600),
           " | Rendering Engine",
         )
           .color("#333")
           .size(18),
-      )
-        .justifyContent("flex-end")
-        .direction("row"),
+      ),
     ).gap(20),
 
     Flex(
