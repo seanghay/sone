@@ -346,13 +346,11 @@ export function Text(...children) {
         let spaceWidth = 0;
         let textAlign = style.align;
 
+        // TODO: This isn't right.
         const hasForceBreak = forceBreaks.indexOf(lineNumber) !== -1;
 
         // always left for last line when text align is justify
-        if (
-          (textAlign === "justify" && lineNumber === lines.length - 1) ||
-          hasForceBreak
-        ) {
+        if (textAlign === "justify" && lineNumber === lines.length - 1) {
           textAlign = "left";
         }
 

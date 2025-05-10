@@ -55,7 +55,7 @@ await watcher.subscribe(path.join(process.cwd(), "test"), (err, events) => {
   for (const event of events) {
     if (!event.path.endsWith(".sone.js")) continue;
     if (event.type === "delete") continue;
-    const ss = Date.now()
+    const ss = Date.now();
     refreshModule(event.path).then((result) => {
       console.log(`[render] time ${Date.now() - ss}ms`);
       for (const client of clients) {
@@ -70,16 +70,17 @@ function refreshModule(p) {
   return new Promise((resolve) => {
     import(modulePath).then((module) => {
       const Component = module.default;
-      const imageBuffer = renderAsImageBuffer(Component());
-      resolve(
-        pack({
-          type: "image",
-          image: imageBuffer,
-          name: path.relative(process.cwd(), p),
-          mimeType: "image/jpeg",
-        }),
-      );
-    });
+      renderAsImageBuffer(Component()).then((imageBuffer) => {
+        resolve(
+          pack({
+            type: "image",
+            image: imageBuffer,
+            name: path.relative(process.cwd(), p),
+            mimeType: "image/jpeg",
+          }),
+        );
+      });
+    }).catch(err => console.error(err));
   });
 }
 

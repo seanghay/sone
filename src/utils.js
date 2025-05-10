@@ -7,6 +7,7 @@ export const SoneConfig = {
   loadImage,
   lineBreakTokenizer,
   registerFont: (fontPath, { family }) => FontLibrary.use(family, [fontPath]),
+  resetFonts: () => FontLibrary.reset(),
   Image,
   Path2D,
   dpr: 1,

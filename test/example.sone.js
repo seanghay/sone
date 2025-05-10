@@ -1,13 +1,12 @@
-import fs from "node:fs/promises";
 import {
   Column,
+  Photo,
   Row,
+  SoneConfig,
   Span,
-  Svg,
   Table,
   TableRow,
   Text,
-  loadSvg,
   keywords,
 } from "../src/sone.js";
 
@@ -21,7 +20,7 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const svgSrc = loadSvg(await fs.readFile("test/sone-white.svg", "utf8"));
+const svgSrc = await SoneConfig.loadImage("test/sone-white.svg");
 
 function StatusIndicator(text, color) {
   return Row(
@@ -37,7 +36,7 @@ function Header(project) {
   return Row(
     Row(
       Row(
-        Row(Svg(svgSrc).size(90).scaleType("contain"))
+        Row(Photo(svgSrc).size(90).scaleType("contain"))
           .alignSelf("center")
           .padding(38, 34),
         Column(
