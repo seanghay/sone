@@ -192,8 +192,8 @@ export function textMeasureFunc(spans, style, maxWidth) {
  */
 export function Text(...children) {
   const node = Yoga.Node.create();
-  node.setFlexShrink(1)
-  
+  node.setFlexShrink(1);
+
   /**
    * @type {import("./types.js").SoneTextOptions}
    */
@@ -314,7 +314,7 @@ export function Text(...children) {
      *
      * @param {import("./types.js").SoneDrawingContext} param0
      */
-    [DrawSymbol]: ({ ctx, component, x, y }) => {
+    [DrawSymbol]: ({ ctx, component, x, y, config }) => {
       /**
        * @type {import("./types.js").SoneTextOptions}
        */
@@ -504,6 +504,19 @@ export function Text(...children) {
 
           if (textDecorationBehind) {
             drawLine();
+          }
+
+          if (config.debug) {
+            ctx.save();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "rgba(255,0,0,.8)";
+            ctx.strokeRect(
+              cmd.x,
+              cmd.y - cmd.height * 0.75,
+              cmd.width,
+              cmd.height * 0.75,
+            );
+            ctx.restore();
           }
 
           if (Array.isArray(cmd.shadow)) {

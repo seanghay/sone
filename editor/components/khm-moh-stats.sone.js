@@ -1,8 +1,7 @@
 import path from "node:path";
 import { Column, Photo, Row, Font, Text, loadImage } from "sonejs";
 
-const bg = await loadImage("components/khm-moh-stats-sample.jpg");
-const logo = await loadImage("components/moh.png");
+const logo = await loadImage("components/sone.svg");
 
 const fonts = {
   text: "Siemreap",
@@ -12,13 +11,13 @@ const fonts = {
 };
 
 const colors = {
-  darkblue: "#080291",
-  red: "#fe0102",
+  darkblue: "#183B4E",
+  red: "#2A4759",
   blue: "#0470c1",
-  pink: "#f574bf",
-  gray: "#595959",
-  brown: "#c5590f",
-  gold: "#c09001",
+  pink: "#7F55B1",
+  gray: "#537D5D",
+  brown: "#129990",
+  gold: "#F4631E",
 };
 
 // register fonts
@@ -40,16 +39,12 @@ function LetterHead() {
       .color(colors.darkblue),
     Text("\uf09a¯\uf09b").font(fonts.wingding).size(30).color(colors.darkblue),
   )
-
     .gap(30)
     .alignItems("center")
     .alignSelf("center")
     .marginTop(124);
 }
 
-function Background() {
-  return Column().size("100%").position("absolute").bg(bg).opacity(0.1);
-}
 
 function Headline() {
   return Column(
@@ -122,13 +117,12 @@ function Statistics() {
         "ថ្មី = 0 (ក្នុងនេះ\nមិនបានចាក់វ៉ាក់សាំង = 0)",
       ).bg(colors.gray),
     )
-      .gap(40)
-      .opacity(1),
+      .gap(40),
     //
     HorizontalCase("ករណីនាំចូលពីក្រៅប្រទេសសរុប", "21,246", "(ថ្មី = 0)").bg(
       colors.brown,
     ),
-    HorizontalCase("ករណីឆ្លងក្នុងសហគមន៍", "17,506", "(ថ្មី = 3)").bg(colors.gold),
+    HorizontalCase("ករណីឆ្លងក្នុងសហគមន៍", "17,506", "(ថ្មី = 1)").bg(colors.gold),
   )
     .gap(40)
     .marginTop(50)
@@ -142,7 +136,7 @@ function Statistics() {
 function Logo() {
   return Column(
     Photo(logo).size(190).scaleType("contain"),
-    Text("ក្រសួងសុខាភិបាល").size(28).font(fonts.heading).color(colors.darkblue),
+    Text("ក្រសួងសូន").size(28).font(fonts.heading).color(colors.darkblue),
   )
     .position("absolute")
     .alignItems("center")
@@ -155,7 +149,7 @@ function Footer() {
   return Column(
     Column().size("auto", 2).alignSelf("stretch").bg(colors.gray),
     Text(
-      "ទីស្ដីការក្រសួងសុខាភិបាល ដីឡូត៏លេខ៨០ វិថីសម្តេច ប៉ែន នុត (២៨៩) ភ្នំពេញ ទូរសព្ទ-ទូរសារ៖ (៨៥៥-២៣) ៨៨៥ ៩៧០ / ៨៨៤ ៩០៩",
+      "ទីស្ដីការក្រសួងសូន ដីឡូត៏លេខ៨០ វិថី (២៨៩) ភ្នំពេញ ទូរសព្ទ-ទូរសារ៖ (៣១២-២៣) ១២៣ ៩៧០ / ៨៨៤ ៩០៩",
     )
       .color(colors.darkblue)
       .size(24)

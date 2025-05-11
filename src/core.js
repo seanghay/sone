@@ -521,13 +521,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
  * @param {number} computedWidth
  * @param {number} computedHeight
  */
-export function renderToCanvas(
-  ctx,
-  component,
-  x,
-  y,
-  config,
-) {
+export function renderToCanvas(ctx, component, x, y, config) {
   ctx.save();
 
   // handle rotation
@@ -572,13 +566,7 @@ export function renderToCanvas(
       const childNode = child.node;
       const childX = x + childNode.getComputedLeft();
       const childY = y + childNode.getComputedTop();
-      renderToCanvas(
-        ctx,
-        child,
-        childX,
-        childY,
-        config
-      );
+      renderToCanvas(ctx, child, childX, childY, config);
     }
   }
 
@@ -589,6 +577,15 @@ export function renderToCanvas(
   }
 }
 
+/**
+ *
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {number} x
+ * @param {number} y
+ * @param {() => unknown} component
+ * @param {number} rotationInDegrees
+ * @param {number} scale
+ */
 function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
   const w = component.node.getComputedWidth();
   const h = component.node.getComputedHeight();
@@ -599,9 +596,8 @@ function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
 
   let [scaleX, scaleY] = scale;
 
-  if (scaleY == null) {
-    scaleY = scaleX;
-  }
+  if (scaleX == null) scaleX = 1;
+  if (scaleY == null) scaleY = scaleX;
 
   const rotationRadians = (rotationInDegrees * Math.PI) / 180;
 
@@ -619,14 +615,23 @@ function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
   ctx.save();
   ctx.lineWidth = 2;
   ctx.strokeStyle = "magenta";
-  ctx.rect(
+  ctx.strokeRect(
     x - (newWidth - w) / 2,
     y - (newHeight - h) / 2,
     newWidth,
     newHeight,
   );
 
-  ctx.stroke();
+  const fontSize = 16;
+  ctx.font = `${fontSize}px sans-serif`;
+  const t = component.type.name;
+  const m = ctx.measureText(t);
+  ctx.fillStyle = "magenta";
+  const p = 4;
+  ctx.fillRect(x, y, m.width, fontSize * 0.75 + p * 2);
+  ctx.fillStyle = "white";
+  ctx.fillText(t, x, y + fontSize * 0.75 + p / 2);
+
   ctx.restore();
 }
 
@@ -664,13 +669,7 @@ export function sone(
     }
 
     // render to canvas context
-    renderToCanvas(
-      ctx,
-      root,
-      0,
-      0,
-      config
-    );
+    renderToCanvas(ctx, root, 0, 0, config);
 
     node.freeRecursive();
     return canvas;
