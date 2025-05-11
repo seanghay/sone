@@ -192,7 +192,8 @@ export function textMeasureFunc(spans, style, maxWidth) {
  */
 export function Text(...children) {
   const node = Yoga.Node.create();
-
+  node.setFlexShrink(1)
+  
   /**
    * @type {import("./types.js").SoneTextOptions}
    */

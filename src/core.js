@@ -28,6 +28,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       backgroudImageScaleType: null,
       cornerSmoothing: 0,
       rotationInDegrees: 0,
+      scale: null,
       ...(props.style || {}),
     },
     /**
@@ -35,6 +36,13 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
      */
     rotate(value) {
       this.style.rotationInDegrees = value;
+      return this;
+    },
+    /**
+     * @param {number} value
+     */
+    scale(...values) {
+      this.style.scale = values;
       return this;
     },
     /**
@@ -526,16 +534,22 @@ export function renderToCanvas(
 
   // handle rotation
   const rotationInDegrees = component.style.rotationInDegrees;
-  const hasRotation =
-    typeof rotationInDegrees === "number" && rotationInDegrees !== 0;
+  const scale = component.style.scale;
 
-  if (hasRotation) {
-    // the center won't change if the width/height changes linearly?
-    const centerX = x + component.node.getComputedWidth() / 2;
-    const centerY = y + component.node.getComputedHeight() / 2;
+  const centerX = x + component.node.getComputedWidth() / 2;
+  const centerY = y + component.node.getComputedHeight() / 2;
 
+  if (typeof rotationInDegrees === "number" && rotationInDegrees !== 0) {
     ctx.translate(centerX, centerY);
     ctx.rotate((rotationInDegrees * Math.PI) / 180);
+    ctx.translate(-centerX, -centerY);
+  }
+
+  if (Array.isArray(scale)) {
+    let [scaleX, scaleY] = scale;
+    if (scaleY == null) scaleY = scaleX;
+    ctx.translate(centerX, centerY);
+    ctx.scale(scaleX, scaleY);
     ctx.translate(-centerX, -centerY);
   }
 
@@ -573,22 +587,37 @@ export function renderToCanvas(
   }
 
   ctx.restore();
+
   // draw debug bbox
-  // drawBBox(ctx, x, y, component, rotationInDegrees);
+  // drawBBox(ctx, x, y, component, rotationInDegrees, scale);
 }
 
-function drawBBox(ctx, x, y, component, rotationInDegrees = 0) {
+function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
   const w = component.node.getComputedWidth();
   const h = component.node.getComputedHeight();
+
+  if (!Array.isArray(scale)) {
+    scale = [];
+  }
+
+  let [scaleX, scaleY] = scale;
+
+  if (scaleY == null) {
+    scaleY = scaleX;
+  }
+
   const rotationRadians = (rotationInDegrees * Math.PI) / 180;
 
-  const newWidth =
+  let newWidth =
     Math.abs(w * Math.cos(rotationRadians)) +
     Math.abs(h * Math.sin(rotationRadians));
+    
+  newWidth *= scaleX;
 
-  const newHeight =
+  let newHeight =
     Math.abs(w * Math.sin(rotationRadians)) +
     Math.abs(h * Math.cos(rotationRadians));
+  newHeight *= scaleY;
 
   ctx.save();
   ctx.lineWidth = 2;
