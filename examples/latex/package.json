@@ -1,9 +1,9 @@
 {
   "type": "module",
   "dependencies": {
-    "@resvg/resvg-js": "^2.6.2",
     "mathjax": "^3.2.2",
     "sonejs": "^0.1.1",
-    "texsvg": "^2.3.1"
+    "texsvg": "^2.3.1",
+    "usvgjs": "^0.1.0"
   }
 }
