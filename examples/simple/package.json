@@ -2,6 +2,6 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "sonejs": "^0.0.3"
+    "sonejs": "^0.1.1"
   }
 }

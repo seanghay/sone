@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { renderAsCanvas, Column, Text, Span } from "sonejs";
+import { sone, Column, Text, Span } from "sonejs";
 
 function Document() {
   return Column(
@@ -15,10 +15,5 @@ function Document() {
 }
 
 // save as Image
-const canvas = renderAsCanvas(Document(), undefined, undefined);
-await fs.writeFile("output.png", canvas.toBuffer("image/png"));
-
-// save as PDF
-const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
-await fs.writeFile("output.pdf", canvas2.toBuffer("application/pdf"));
-
+await fs.writeFile("output.png", await sone(Document).png());
+await fs.writeFile("output.png", await sone(Document).pdf());
