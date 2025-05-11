@@ -165,3 +165,7 @@ function Document() {
 - https://www.myfirstfont.com/glossary.html
 - https://en.wikipedia.org/wiki/X-height
 - https://github.com/foliojs/fontkit
+- https://raphlinus.github.io/text/2020/10/26/text-layout.html
+- https://raphlinus.github.io/rust/skribo/text/2019/04/04/font-fallback.html
+- https://simoncozens.github.io/fonts-and-layout/
+- https://mrandri19.github.io/2019/07/24/modern-text-rendering-linux-overview.html

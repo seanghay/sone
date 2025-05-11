@@ -74,7 +74,7 @@ function refreshModule(p) {
     import(modulePath)
       .then((module) => {
         const Component = module.default;
-        sone(Component, { debug: true, backgroundColor: "white" })
+        sone(Component, { debug: false, backgroundColor: "white" })
           .jpg()
           .then((imageBuffer) => {
             resolve(

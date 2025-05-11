@@ -11,7 +11,8 @@
     "fast-glob": "^3.3.3",
     "micromatch": "^4.0.8",
     "msgpackr": "^1.11.2",
-    "ws": "^8.18.2",
-    "sonejs": "file:.."
+    "progress": "^2.0.3",
+    "sonejs": "file:..",
+    "ws": "^8.18.2"
   }
 }

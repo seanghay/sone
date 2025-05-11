@@ -55,7 +55,7 @@ export const measureText = memoize(_measureText);
  * @param {{spans: SpanNode[], maxWidth: number, indentSize: number}} param0
  * @returns {{lines: import("./types.js").SoneSpanRenderNode[][], forceBreaks: number[]}} an array of lines
  */
-export function splitLines({ spans, maxWidth, indentSize = 0 }) {
+function _splitLines({ spans, maxWidth, indentSize = 0 }) {
   /**
    * @type {import("./types.js").SoneSpanRenderNode[][]}
    */
@@ -137,6 +137,8 @@ export function splitLines({ spans, maxWidth, indentSize = 0 }) {
     forceBreaks,
   };
 }
+
+export const splitLines = memoize(_splitLines)
 
 /**
  * @param {import("./types.js").SoneSpanNode[]} spans

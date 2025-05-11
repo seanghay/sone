@@ -45,7 +45,6 @@ function LetterHead() {
     .marginTop(124);
 }
 
-
 function Headline() {
   return Column(
     Text(
@@ -82,7 +81,8 @@ function PandemicCaseStatistic(title, value, desc) {
       .alignItems("center"),
   )
     .grow(1)
-    .cornerRadius(20);
+    .cornerRadius(30)
+    .cornerSmoothing(0.7);
 }
 
 function HorizontalCase(text, value, desc) {
@@ -97,40 +97,50 @@ function HorizontalCase(text, value, desc) {
   )
 
     .padding(30, 0)
-    .cornerRadius(20);
+    .cornerRadius(30)
+    .cornerSmoothing(0.7);
 }
 
-function Statistics() {
+function Statistics({
+  totalCount,
+  newCount,
+  recoveredCount,
+  deathCount,
+  importCount,
+  communityCount,
+}) {
   return Column(
-    HorizontalCase("ករណីឆ្លងសរុប", "139,336").bg(colors.red),
+    HorizontalCase("ករណីឆ្លងសរុប", totalCount).bg(colors.red),
     // 3 cols
     Row(
-      PandemicCaseStatistic("ករណីឆ្លងថ្មី", 3, "(លទ្ធផលបញ្ជាក់ដោយ PCR)").bg(
+      PandemicCaseStatistic("ករណីឆ្លងថ្មី", newCount, "(លទ្ធផលបញ្ជាក់ដោយ PCR)").bg(
         colors.blue,
       ),
-      PandemicCaseStatistic("ករណីជាសះស្បើយសរុប", "136,276", "(ថ្មី = 1)").bg(
+      PandemicCaseStatistic("ករណីជាសះស្បើយសរុប", recoveredCount, "(ថ្មី = 1)").bg(
         colors.pink,
       ),
       PandemicCaseStatistic(
         "ករណីស្លាប់សរុប",
-        3,
+        deathCount,
         "ថ្មី = 0 (ក្នុងនេះ\nមិនបានចាក់វ៉ាក់សាំង = 0)",
       ).bg(colors.gray),
-    )
-      .gap(40),
+    ).gap(40),
     //
-    HorizontalCase("ករណីនាំចូលពីក្រៅប្រទេសសរុប", "21,246", "(ថ្មី = 0)").bg(
+    HorizontalCase("ករណីនាំចូលពីក្រៅប្រទេសសរុប", importCount, "(ថ្មី = 0)").bg(
       colors.brown,
     ),
-    HorizontalCase("ករណីឆ្លងក្នុងសហគមន៍", "17,506", "(ថ្មី = 1)").bg(colors.gold),
+    HorizontalCase("ករណីឆ្លងក្នុងសហគមន៍", communityCount, "(ថ្មី = 1)").bg(
+      colors.gold,
+    ),
   )
     .gap(40)
     .marginTop(50)
     .marginLeft(80)
     .marginRight(80)
-    .strokeColor("#333")
-    .strokeWidth(4)
-    .padding(40);
+    .padding(40)
+    .bg("#eee")
+    .cornerRadius(60)
+    .cornerSmoothing(0.7);
 }
 
 function Logo() {
@@ -179,14 +189,32 @@ function DateStamp() {
     .marginRight(100);
 }
 
-export default function Document() {
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+const lerp = (start, end, t) => (1 - t) * start + t * end;
+
+const formatter = new Intl.NumberFormat("en-US");
+
+const number = (x) => formatter.format(Math.round(x));
+
+export default function Document(progress = 1.0) {
+  const stats = ease(progress);
+  const scale = ease(Math.min(1, progress / 0.1));
+
   return Column(
-    // Background(),
     LetterHead(),
     Logo(),
     Footer(),
     Headline(),
-    Statistics(),
+    Statistics({
+      totalCount: number(139336 * stats),
+      newCount: number(3 * stats),
+      recoveredCount: number(136276 * stats),
+      deathCount: number(3 * stats),
+      importCount: number(21246 * stats),
+      communityCount: number(17506 * stats),
+    })
+      .scale(scale)
+      .rotate(-180 * (1 - scale)),
     DateStamp(),
-  ).size(1447, 2048);
+  ).size(1448, 2048);
 }
