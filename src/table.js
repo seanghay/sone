@@ -108,7 +108,7 @@ export function Table(...children) {
       /**
        * @param {import("./types.js").SoneDrawingContext} param0
        */
-      [DrawSymbol]: ({ ctx, x, y, component }) => {
+      [DrawSymbol]: ({ ctx, x, y, component, config }) => {
         const { tableBorderStyle } = component.style;
 
         let offsetX = 0;
@@ -125,7 +125,7 @@ export function Table(...children) {
 
             if (c < children[r].length) {
               const cell = children[r][c];
-              renderToCanvas(ctx, cell, cellX, cellY);
+              renderToCanvas(ctx, cell, cellX, cellY, config);
             }
 
             offsetY += h;

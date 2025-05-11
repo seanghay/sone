@@ -28,6 +28,12 @@ export type SoneSpanRenderNode = SoneSpanNode & {
   textMetrics: TextMetrics;
 }
 
+export type SoneContextConfig = {
+  debug?: boolean | undefined;
+  width?: number | undefined;
+  height?: number | undefined;
+  backgroundColor?: string | undefined;
+}
 
 export interface SoneDrawingContext {
   ctx: CanvasRenderingContext2D;
@@ -36,6 +42,7 @@ export interface SoneDrawingContext {
   y: number;
   computedWidth: number;
   computedHeight: number;
+  config: SoneContextConfig;
 }
 
 export type SoneDefaultFont = "sans-serif" | "monospace" | "serif"

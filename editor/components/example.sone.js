@@ -2,16 +2,15 @@ import {
   Column,
   Photo,
   Row,
-  SoneConfig,
+  loadImage,
   Span,
   Table,
   TableRow,
   Text,
-  keywords,
-} from "../src/sone.js";
+} from "sonejs";
 
 const colors = {
-  primary: keywords.coral,
+  primary: "coral",
   white: "#fff",
   green: "#00AF50",
   red: "#FF0101",
@@ -20,7 +19,7 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const svgSrc = await SoneConfig.loadImage("test/sone-white.svg");
+const svgSrc = await loadImage("components/sone-white.svg");
 
 function StatusIndicator(text, color) {
   return Row(
@@ -289,7 +288,7 @@ const data = {
     { start: 70, end: 90, color: colors.green },
     { start: 90, end: 100, color: colors.orange },
   ],
-  progress: 80,
+  progress: 30,
 };
 
 export default () => {

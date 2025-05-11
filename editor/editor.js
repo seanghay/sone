@@ -5,11 +5,11 @@ import { pack } from "msgpackr";
 import { createServer } from "node:http";
 import path from "node:path";
 import { WebSocketServer } from "ws";
-import { renderAsImageBuffer } from "./src/sone.js";
+import { sone } from "../src/sone.js";
 
 const app = express();
 
-app.use(express.static("editor"));
+app.use(express.static("public"));
 const server = createServer(app);
 
 const ws = new WebSocketServer({
@@ -23,7 +23,7 @@ ws.on("connection", (client) => {
   clients.add(client);
 
   // emit component files
-  const files = fg.sync("test/*.sone.js");
+  const files = fg.sync("components/*.sone.js");
   files.sort();
 
   client.send(
@@ -46,7 +46,7 @@ ws.on("connection", (client) => {
   });
 });
 
-await watcher.subscribe(path.join(process.cwd(), "test"), (err, events) => {
+await watcher.subscribe(path.join(process.cwd(), "components"), (err, events) => {
   if (err) {
     console.error(err);
     return;
@@ -68,20 +68,27 @@ await watcher.subscribe(path.join(process.cwd(), "test"), (err, events) => {
 function refreshModule(p) {
   const modulePath = `${p}?t=${Date.now()}`;
   return new Promise((resolve) => {
-    import(modulePath).then((module) => {
-      const Component = module.default;
-      renderAsImageBuffer(Component()).then((imageBuffer) => {
-        resolve(
-          pack({
-            type: "image",
-            image: imageBuffer,
-            name: path.relative(process.cwd(), p),
-            mimeType: "image/jpeg",
-          }),
-        );
-      });
-    }).catch(err => console.error(err));
+    import(modulePath)
+      .then((module) => {
+        const Component = module.default;
+
+        sone(Component)
+          .jpg()
+          .then((imageBuffer) => {
+            resolve(
+              pack({
+                type: "image",
+                image: imageBuffer,
+                name: path.relative(process.cwd(), p),
+                mimeType: "image/jpeg",
+              }),
+            );
+          });
+      })
+      .catch((err) => console.error(err));
   });
 }
 
-server.listen(8080);
+server.listen(8080, () =>
+  console.log("editor is live at http://localhost:8080"),
+);

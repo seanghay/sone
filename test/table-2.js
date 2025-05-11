@@ -3,13 +3,12 @@ import {
   Column,
   Photo,
   Row,
-  SoneConfig,
   Span,
   Table,
   TableRow,
   Text,
-  renderAsImageBuffer,
-  renderAsPdfBuffer,
+  sone,
+  loadImage,
 } from "../src/sone.js";
 
 const colors = {
@@ -22,7 +21,7 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const imageSrc = await SoneConfig.loadImage("test/sone.svg");
+const imageSrc = await loadImage("test/sone.svg");
 
 function StatusIndicator(text, color) {
   return Row(
@@ -257,7 +256,7 @@ const data = {
   project: {
     manager: "Seanghay",
     name: "Project Name",
-    date: "01/05/2025 - 12:00 AM",
+    date: new Date().toISOString(),
     status: colors.green,
   },
   achivements: [
@@ -286,8 +285,5 @@ const data = {
   progress: 80,
 };
 
-await fs.writeFile(
-  "test/table-2.jpg",
-  await renderAsImageBuffer(Document(data)),
-);
-await fs.writeFile("test/table-2.pdf", await renderAsPdfBuffer(Document(data)));
+await fs.writeFile("test/table-2.jpg", await sone(() => Document(data)).jpg());
+await fs.writeFile("test/table-2.pdf", await sone(() => Document(data)).pdf());

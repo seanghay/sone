@@ -4,7 +4,7 @@ import {
   Flex,
   Span,
   Text,
-  renderAsImageBuffer,
+  sone,
   Table,
   TableRow,
 } from "../src/sone.js";
@@ -135,4 +135,4 @@ function Document() {
     .gap(10);
 }
 
-await fs.writeFile("test/table.jpg", await renderAsImageBuffer(Document()));
+await fs.writeFile("test/table.jpg", await sone(Document).jpg());

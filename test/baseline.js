@@ -1,12 +1,5 @@
 import fs from "node:fs/promises";
-import {
-  Column,
-  Row,
-  Span,
-  Text,
-  renderAsImageBuffer,
-  renderAsPdfBuffer,
-} from "../src/sone.js";
+import { Column, Row, Span, Text, sone } from "../src/sone.js";
 
 const SAMPLE = `បណ្តាថ្នាក់ដឹកនាំអឺរ៉ុប បង្ហាញស្មារតីសាមគ្គីភាព និងបញ្ចេញសារគាំទ្រអ៊ុយក្រែនយ៉ាងច្រើនព្រោងព្រាតព្រមៗគ្នា បន្ទាប់ពីការប្រកែកខ្វែងសម្តីគ្នា រវាងប្រធានាធិបតីអ៊ុយក្រែន វ៉ូឡូឌីមៀរ ហ្សេឡេនស្គី និងប្រធានាធិបតីអាមេរិក ដូណាល់ ត្រាំ នៅសេតវិមានអាមេរិក។ ក្នុងគ្រាដ៏លំបាកនេះ តើមានមេដឹកនាំអឺរ៉ុបរូបណាខ្លះ ដែលមិនទុកលោក ហ្សេឡេនស្គី ឲ្យនៅឯកា ?\nJSDoc is a markup language used to annotate JavaScript source code files. Using comments containing JSDoc, programmers can add documentation describing the application programming interface of the code they're creating.`;
 
@@ -41,7 +34,7 @@ function Document() {
         .shrink(1)
         .rotate(-190)
         .scale(1.2)
-        .opacity(.8)
+        .opacity(0.8)
         .strokeColor("red")
         .strokeWidth(4)
         .padding(18, 20)
@@ -58,5 +51,5 @@ function Document() {
     .width(1200);
 }
 
-await fs.writeFile("test/baseline.jpg", await renderAsImageBuffer(Document()));
-await fs.writeFile("test/baseline.pdf", await renderAsPdfBuffer(Document()));
+await fs.writeFile("test/baseline.jpg", await sone(Document).jpg());
+await fs.writeFile("test/baseline.pdf", await sone(Document).pdf());

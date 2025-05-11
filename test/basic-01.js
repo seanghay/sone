@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { Flex, Column, renderAsImageBuffer, Row } from "../src/sone.js";
+import { Flex, Column, Row, sone } from "../src/sone.js";
 
 function Document() {
   return Column(
@@ -42,4 +42,4 @@ function Document() {
   ).padding(40);
 }
 
-await fs.writeFile("test/basic-01.jpg", await renderAsImageBuffer(Document()));
+await fs.writeFile("test/basic-01.jpg", await sone(Document).jpg());

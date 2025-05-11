@@ -1,4 +1,4 @@
-import { Column, Flex, Span, Text } from "../src/sone.js";
+import { Column, Flex, Span, Text } from "sonejs";
 
 export default function Document() {
   return Column(

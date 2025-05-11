@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { renderAsCanvas, Column, Text, Span } from "../src/sone.js";
+import { sone, Column, Text, Span } from "../src/sone.js";
 
 function Document() {
   return Column(
@@ -14,9 +14,6 @@ function Document() {
   ).padding(40);
 }
 
-
-const canvas = renderAsCanvas(Document(), undefined, undefined);
-await fs.writeFile("test/output.png", canvas.toBuffer("image/png"));
-
-const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
-await fs.writeFile("test/output.pdf", canvas2.toBuffer("application/pdf"));
+const canvas = sone(Document).canvas();
+await fs.writeFile("test/output.png", await canvas.toBuffer("image/png"));
+await fs.writeFile("test/output.pdf", await canvas.toBuffer("application/pdf"));

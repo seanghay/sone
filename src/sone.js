@@ -1,11 +1,7 @@
-export * from "./core.js";
-export * from "./corner.js";
-export * from "./font.js";
-export * from "./gradient.js";
-export * from "./segmenter.js";
-export * from "./utils.js";
-export * from "./photo.js";
-export * from "./text.js";
+export { sone, createNode, renderToCanvas } from "./core.js";
 export * from "./flex.js";
+export * from "./photo.js";
+export * from "./font.js";
 export * from "./table.js";
-
+export { Span, Text } from "./text.js";
+export { loadImage, loadImageData } from "skia-canvas";

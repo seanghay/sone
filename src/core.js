@@ -10,7 +10,6 @@ import {
   parseAlign,
   parseJustify,
   parsePositionType,
-  renderPattern,
 } from "./utils.js";
 
 /**
@@ -527,8 +526,7 @@ export function renderToCanvas(
   component,
   x,
   y,
-  computedWidth,
-  computedHeight,
+  config,
 ) {
   ctx.save();
 
@@ -564,8 +562,7 @@ export function renderToCanvas(
       ctx,
       x,
       y,
-      computedWidth,
-      computedHeight,
+      config,
     });
   }
 
@@ -580,16 +577,16 @@ export function renderToCanvas(
         child,
         childX,
         childY,
-        childNode.getComputedWidth(),
-        childNode.getComputedHeight(),
+        config
       );
     }
   }
 
   ctx.restore();
 
-  // draw debug bbox
-  // drawBBox(ctx, x, y, component, rotationInDegrees, scale);
+  if (config.debug) {
+    drawBBox(ctx, x, y, component, rotationInDegrees, scale);
+  }
 }
 
 function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
@@ -611,7 +608,7 @@ function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
   let newWidth =
     Math.abs(w * Math.cos(rotationRadians)) +
     Math.abs(h * Math.sin(rotationRadians));
-    
+
   newWidth *= scaleX;
 
   let newHeight =
@@ -633,96 +630,99 @@ function drawBBox(ctx, x, y, component, rotationInDegrees = 0, scale = [1, 1]) {
   ctx.restore();
 }
 
-export function createRoot(root, width, height) {
-  const node = Yoga.Node.create();
-  node.setWidth(width);
-  node.setHeight(height);
+/**
+ * Sone builder
+ * @param {() => unknown} factory
+ * @param {import("./types.js").SoneContextConfig} config
+ */
+export function sone(
+  factory,
+  config = { backgroundColor: "white", debug: false },
+) {
+  const createSoneCanvas = () => {
+    const root = factory();
+    const node = Yoga.Node.create();
 
-  node.insertChild(root.node, 0);
-  node.calculateLayout(undefined, undefined, Direction.LTR);
+    node.setWidth(config.width);
+    node.setHeight(config.height);
+    node.insertChild(root.node, 0);
+
+    // layout
+    node.calculateLayout(undefined, undefined, Direction.LTR);
+
+    // root size is available now
+    const canvas = SoneConfig.createCanvas(
+      node.getComputedWidth(),
+      node.getComputedHeight(),
+    );
+
+    const ctx = canvas.getContext("2d");
+
+    if (config.backgroundColor != null) {
+      ctx.fillStyle = config.backgroundColor || "white";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // render to canvas context
+    renderToCanvas(
+      ctx,
+      root,
+      0,
+      0,
+      config
+    );
+
+    node.freeRecursive();
+    return canvas;
+  };
 
   return {
-    root,
-    node,
-    render(ctx) {
-      renderToCanvas(
-        ctx,
-        root,
-        0,
-        0,
-        node.getComputedWidth(),
-        node.getComputedHeight(),
-      );
+    canvas() {
+      return createSoneCanvas();
     },
-    free() {
-      root.node.freeRecursive();
+    png() {
+      return createSoneCanvas().toBuffer("png");
+    },
+    /**
+     * @param {number} quality
+     */
+    jpg(quality) {
+      return createSoneCanvas().toBuffer("jpeg", { quality });
+    },
+    webp() {
+      return createSoneCanvas().toBuffer("webp");
+    },
+    /**
+     * @param {Pick<import("skia-canvas").RenderOptions, 'density' | 'matte' | "outline" | "page">} options
+     */
+    pdf(options) {
+      return createSoneCanvas().toBuffer("pdf", options);
+    },
+    svg() {
+      return createSoneCanvas().toBuffer("svg");
+    },
+    sync: {
+      png() {
+        return createSoneCanvas().toBufferSync("png");
+      },
+      /**
+       * @param {number} quality
+       */
+      jpg(quality) {
+        return createSoneCanvas().toBufferSync("jpeg", { quality });
+      },
+      webp() {
+        return createSoneCanvas().toBufferSync("webp");
+      },
+      /**
+       * @param {Pick<import("skia-canvas").RenderOptions, 'density' | 'matte' | "outline" | "page">} options
+       */
+      pdf(options) {
+        return createSoneCanvas().toBufferSync("pdf", options);
+      },
+      svg() {
+        return createSoneCanvas().toBufferSync("svg");
+      },
     },
   };
-}
-
-/**
- * @param {() => void)} component
- * @param {number | undefined} width
- * @param {number | undefined} height
- * @param {"pdf" | "svg" | undefined} type
- */
-export function renderAsCanvas(component, width, height, type, bg = true) {
-  const root = createRoot(component, width, height);
-  const canvas = SoneConfig.createCanvas(
-    root.node.getComputedWidth(),
-    root.node.getComputedHeight(),
-    type,
-  );
-
-  const ctx = canvas.getContext("2d");
-  if (bg) {
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
-
-  root.render(ctx);
-
-  root.free();
-  return canvas;
-}
-
-/**
- * @param {Function} component
- * @returns {Promise<Buffer>}
- */
-export async function renderAsImageBuffer(component) {
-  const root = createRoot(component);
-  const canvas = SoneConfig.createCanvas(
-    root.node.getComputedWidth(),
-    root.node.getComputedHeight(),
-  );
-
-  const ctx = canvas.getContext("2d");
-  renderPattern(ctx, canvas.width, canvas.height, 15);
-
-  root.render(ctx);
-  root.free();
-
-  return canvas.toBuffer("jpeg", { quality: 1 });
-}
-
-/**
- * @param {Function} component
- * @returns {Promise<Buffer>}
- */
-export async function renderAsPdfBuffer(component) {
-  const root = createRoot(component);
-  const canvas = SoneConfig.createCanvas(
-    root.node.getComputedWidth(),
-    root.node.getComputedHeight(),
-    "pdf",
-  );
-
-  const ctx = canvas.getContext("2d");
-  renderPattern(ctx, canvas.width, canvas.height, 15);
-
-  root.render(ctx);
-  root.free();
-
-  return canvas.toBuffer("pdf");
 }

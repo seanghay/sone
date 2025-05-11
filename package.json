@@ -4,20 +4,14 @@
     "type": "git",
     "url": "git+https://github.com/seanghay/sone.git"
   },
-  "version": "0.0.3",
+  "version": "0.1.0",
   "type": "module",
   "main": "src/sone.js",
   "files": [
     "src"
   ],
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@parcel/watcher": "^2.5.1",
-    "express": "^5.1.0",
-    "fast-glob": "^3.3.3",
-    "micromatch": "^4.0.8",
-    "msgpackr": "^1.11.2",
-    "ws": "^8.18.2"
+    "@biomejs/biome": "1.9.4"
   },
   "dependencies": {
     "css-box-shadow": "^1.0.0-3",

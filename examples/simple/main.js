@@ -21,3 +21,4 @@ await fs.writeFile("output.png", canvas.toBuffer("image/png"));
 // save as PDF
 const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
 await fs.writeFile("output.pdf", canvas2.toBuffer("application/pdf"));
+

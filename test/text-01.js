@@ -1,23 +1,23 @@
 import fsSync from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { Font } from "../src/font.js";
 import {
   Column,
   Flex,
   Photo,
   Row,
-  SoneConfig,
+  Font,
   Span,
   Text,
-  renderAsImageBuffer,
+  sone,
+  loadImage,
 } from "../src/sone.js";
 
 async function Document() {
   console.time("resource");
   const [imageSrc, bgSrc] = await Promise.all([
-    SoneConfig.loadImage("test/Flag_of_Cambodia.svg"),
-    SoneConfig.loadImage("test/248-700x400.jpg"),
+    loadImage("test/Flag_of_Cambodia.svg"),
+    loadImage("test/248-700x400.jpg"),
   ]);
 
   console.timeEnd("resource");
@@ -230,5 +230,5 @@ for (const fontFamily of fonts) {
 }
 
 console.time("render");
-await fs.writeFile("test/text-01.jpg", await renderAsImageBuffer(document));
+await fs.writeFile("test/text-01.jpg", await sone(() => document).jpg());
 console.timeEnd("render");

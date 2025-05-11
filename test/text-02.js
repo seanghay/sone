@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { Flex, Column, Span, Text, renderAsImageBuffer } from "../src/sone.js";
+import { Flex, Column, Span, Text, sone } from "../src/sone.js";
 
 function Document() {
   return Column(
@@ -39,4 +39,4 @@ function Document() {
     .gap(10);
 }
 
-await fs.writeFile("test/text-02.jpg", await renderAsImageBuffer(Document()));
+await fs.writeFile("test/text-02.jpg", await sone(Document).jpg());

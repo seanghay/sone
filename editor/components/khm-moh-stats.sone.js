@@ -1,9 +1,8 @@
 import path from "node:path";
-import { Column, Photo, Row, SoneConfig, Text } from "../src/sone.js";
+import { Column, Photo, Row, Font, Text, loadImage } from "sonejs";
 
-SoneConfig.resetFonts();
-const bg = await SoneConfig.loadImage("test/khm-moh-stats-sample.jpg");
-const logo = await SoneConfig.loadImage("test/moh.png");
+const bg = await loadImage("components/khm-moh-stats-sample.jpg");
+const logo = await loadImage("components/moh.png");
 
 const fonts = {
   text: "Siemreap",
@@ -24,7 +23,7 @@ const colors = {
 
 // register fonts
 for (const font of Object.values(fonts)) {
-  SoneConfig.registerFont(path.join("test", "fonts", `${font}-Regular.ttf`), {
+  Font.register(path.join("components", "fonts", `${font}-Regular.ttf`), {
     family: font,
   });
 }

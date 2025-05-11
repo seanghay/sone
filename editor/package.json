@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "private": true,
+  "main": "editor.js",
+  "scripts": {
+    "dev": "node editor.js"
+  },
+  "dependencies": {
+    "@parcel/watcher": "^2.5.1",
+    "express": "^5.1.0",
+    "fast-glob": "^3.3.3",
+    "micromatch": "^4.0.8",
+    "msgpackr": "^1.11.2",
+    "ws": "^8.18.2",
+    "sonejs": "file:.."
+  }
+}

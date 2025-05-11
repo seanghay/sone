@@ -37,5 +37,7 @@ export const Font = {
     return Array.from(fonts);
   },
   registerFont: SoneConfig.registerFont,
+  register: SoneConfig.registerFont,
+  reset: SoneConfig.resetFonts,
 };
 

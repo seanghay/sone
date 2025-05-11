@@ -9,16 +9,16 @@
 SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is built to generate PDF or Image on the server with minimal memory footprint and performance. It provides some features such as
 
 - Flex Layout ([yoga-layout](https://www.yogalayout.dev/))
-- SVG Support without rasterizing through ([Canvg](https://github.com/canvg/canvg))
+- SVG Support without rasterizing.
 - Squircle Rounded Corner (iOS-like)
 - Text Alignment (Left, Right, Center, **Justify**) for Khmer, Thai, Lao and some langauges.
 - Font Tracing - Get a list of fonts that used in the component tree. (See [test/text-01.js](test/text-01.js))
 - Table (See [test/table.js](test/table.js))
 - Repeating Linear Gradient & Linear Gradient
 - Composable
-- Output as SVG, PDF, and Image
+- Output as SVG, PDF, and Image(JPG,PNG,WEBP)
 
-### Get started 
+### Get started
 
 ```shell
 npm install sonejs
@@ -27,7 +27,7 @@ npm install sonejs
 ```js
 import fs from "node:fs/promises";
 import { 
-  renderAsCanvas, 
+  sone, 
   Column, 
   Text, 
   Span
@@ -47,12 +47,10 @@ function Document() {
 }
 
 // save as Image
-const canvas = renderAsCanvas(Document(), undefined, undefined);
-await fs.writeFile("test/output.png", await canvas.toBuffer("png"));
+await fs.writeFile("test/output.png", await sone(Document).png());
 
 // save as PDF
-const canvas2 = renderAsCanvas(Document(), undefined, undefined, "pdf");
-await fs.writeFile("test/output.pdf", await canvas2.toBuffer("pdf"));
+await fs.writeFile("test/output.pdf", await sone(Document).pdf());
 ```
 
 Preview

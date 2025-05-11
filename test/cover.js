@@ -1,15 +1,20 @@
 import fs from "node:fs/promises";
-import { renderAsCanvas } from "../src/core.js";
-import { Column, Flex } from "../src/flex.js";
-import { Span, Text } from "../src/text.js";
-import { loadSvg, Svg } from "../src/svg.js";
+import {
+  sone,
+  Column,
+  Flex,
+  Photo,
+  Span,
+  Text,
+  loadImage,
+} from "../src/sone.js";
 
-const svgSrc = loadSvg(await fs.readFile("test/sone.svg", "utf8"));
+const svgSrc = await loadImage("test/sone.svg");
 
 function SoneCover() {
   return Column(
     Column(
-      Flex(Svg(svgSrc).size(100).scaleType("contain"))
+      Flex(Photo(svgSrc).size(100).scaleType("contain"))
         .alignSelf("flex-start")
         .strokeColor("#eee")
         .strokeWidth(2)
@@ -65,21 +70,6 @@ function SoneCover() {
     .bg("linear-gradient(to top, #dfe9f3 0%, white 100%);");
 }
 
-const canvas = renderAsCanvas(SoneCover(), undefined, undefined);
-
-await fs.writeFile(
-  "test/cover.png",
-  canvas.toBuffer("image/png", { quality: 1 }),
-);
-
-const canvas2 = renderAsCanvas(SoneCover(), undefined, undefined, "pdf");
-await fs.writeFile("test/cover.pdf", canvas2.toBuffer("application/pdf"));
-
-const canvas3 = renderAsCanvas(
-  SoneCover().cornerRadius(56).cornerSmoothing(0.7),
-  undefined,
-  undefined,
-  "svg",
-  false,
-);
-await fs.writeFile("test/cover.svg", canvas3.toBuffer("image/svg+xml"));
+await fs.writeFile("test/cover.jpg", await sone(SoneCover).jpg());
+await fs.writeFile("test/cover.png", await sone(SoneCover).png());
+await fs.writeFile("test/cover.pdf", await sone(SoneCover).pdf());
