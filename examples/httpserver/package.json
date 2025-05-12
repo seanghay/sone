@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "express": "^5.1.0",
+    "http-graceful-shutdown": "^3.1.14",
     "sonejs": "^0.1.1"
   }
 }

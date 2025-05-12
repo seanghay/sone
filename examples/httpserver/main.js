@@ -1,6 +1,7 @@
 import express from "express";
 import { sone } from "sonejs";
 import { ReportDocument } from "./components.js";
+import gracefulShutdown from "http-graceful-shutdown";
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,8 @@ app.post("/api/render", async (req, res, next) => {
   }
 });
 
-app.listen(8080, () =>
+const server = app.listen(8080, () =>
   console.log("server is listening at http://localhost:8080"),
 );
+
+gracefulShutdown(server);
