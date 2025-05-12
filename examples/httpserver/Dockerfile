@@ -1,8 +1,6 @@
 FROM node:22-alpine
 
-RUN apk update && apk add --update --no-cache \
-    bash curl git python3 perl build-base g++ linux-headers \
-    musl-dev openssl-dev fontconfig-dev fontconfig ttf-dejavu
+RUN apk update && apk add --update --no-cache fontconfig-dev fontconfig ttf-dejavu
 
 WORKDIR /app
 
