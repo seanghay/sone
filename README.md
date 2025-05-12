@@ -20,18 +20,21 @@ SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is b
 
 ### Get started
 
+🙏 Thanks to [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
+
 ```shell
-npm install sonejs
+npm install sone
 ```
 
 ```js
 import fs from "node:fs/promises";
+
 import { 
   sone, 
   Column, 
   Text, 
   Span
-} from "sonejs";
+} from "sone";
 
 function Document() {
   return Column(
