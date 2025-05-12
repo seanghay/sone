@@ -1,5 +1,4 @@
-import fs from "node:fs/promises";
-import { Column, Row, Span, Svg, Table, TableRow, Text, loadSvg } from "sonejs";
+import { Column, Row, Span, Table, TableRow, Text, loadImage, Photo } from "sonejs";
 
 const colors = {
   primary: "#222831",
@@ -11,7 +10,7 @@ const colors = {
   gray: "rgba(0,0,0,.2)",
 };
 
-const svgSrc = loadSvg(await fs.readFile("sone.svg", "utf8"));
+const svgSrc = await loadImage("sone.svg");
 
 function StatusIndicator(text, color) {
   return Row(
@@ -27,7 +26,7 @@ function Header(project) {
   return Row(
     Row(
       Row(
-        Row(Svg(svgSrc).size(90).scaleType("contain"))
+        Row(Photo(svgSrc).size(90).scaleType("contain"))
           .alignSelf("center")
           .padding(38, 34),
         Column(
@@ -242,7 +241,7 @@ export function ReportDocument(data) {
     .bg("#fff");
 }
 
-const defaultData = {
+export const defaultData = {
   project: {
     manager: "Seanghay",
     name: "Project Name",

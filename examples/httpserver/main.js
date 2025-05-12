@@ -1,5 +1,5 @@
 import express from "express";
-import { renderAsImageBuffer } from "sonejs";
+import { sone } from "sonejs";
 import { ReportDocument } from "./components.js";
 
 const app = express();
@@ -7,8 +7,7 @@ app.use(express.json());
 
 app.post("/api/render", async (req, res, next) => {
   try {
-    const component = ReportDocument(req.body);
-    const buffer = renderAsImageBuffer(component);
+    const buffer = await sone(() => ReportDocument(req.body)).jpg();
     res.type("jpeg");
     res.send(buffer);
   } catch (e) {

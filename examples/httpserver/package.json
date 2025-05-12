@@ -3,6 +3,6 @@
   "private": true,
   "dependencies": {
     "express": "^5.1.0",
-    "sonejs": "file:../.."
+    "sonejs": "^0.1.1"
   }
 }
