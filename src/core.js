@@ -28,6 +28,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       cornerSmoothing: 0,
       rotationInDegrees: 0,
       scale: null,
+      filters: [],
       ...(props.style || {}),
     },
     /**
@@ -305,6 +306,39 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       this.style.shadow = boxshadowparser.parse(value);
       return this;
     },
+    // filters
+    blur(value) {
+      this.style.filters.push(`blur(${value}px)`);
+      return this;
+    },
+    brightness(value) {
+      this.style.filters.push(`brightness(${value})`);
+      return this;
+    },
+    contrast(value) {
+      this.style.filters.push(`contrast(${value})`);
+      return this;
+    },
+    grayscale(value) {
+      this.style.filters.push(`grayscale(${value})`);
+      return this;
+    },
+    huerotate(value) {
+      this.style.filters.push(`hue-rotate(${value})`);
+      return this;
+    },
+    invert(value) {
+      this.style.filters.push(`invert(${value})`);
+      return this;
+    },
+    saturate(value) {
+      this.style.filters.push(`saturate(${value})`);
+      return this;
+    },
+    sepia(value) {
+      this.style.filters.push(`sepia(${value})`);
+      return this;
+    },
 
     /**
      * @param {import("./types.js").SoneDrawingContext} args
@@ -335,6 +369,11 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
 
         return radius;
       };
+
+      // apply filter
+      if (Array.isArray(style.filters) && style.filters.length > 0) {
+        ctx.filter = style.filters.join(" ");
+      }
 
       if (Array.isArray(style.shadow)) {
         for (const shadowItem of style.shadow) {

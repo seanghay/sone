@@ -124,6 +124,8 @@ async function Document() {
           .strokeWidth(2)
           .shadow("5px 5px 10px rgba(0,0,0,.2)")
           .rotate(170)
+          .contrast(1.1)
+          .saturate(0)
           .marginBottom(30),
         Flex(
           Text(
