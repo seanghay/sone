@@ -1,4 +1,4 @@
-import { sone, Column, Text } from "../src/sone.js";
+import { sone, Column, Text, Photo, qrcode } from "../src/sone.js";
 import fs from "node:fs/promises";
 
 function Root() {
@@ -13,6 +13,14 @@ function Root() {
       .color("red"),
     Text("Hello world world\nworld").size(44).align("left").color("green"),
     Text("Hello world world\nworld").size(44).align("right").color("blue"),
+    Photo(
+      qrcode("https://google.com", {
+        color: "blue",
+        size: 100,
+        background: null,
+        margin: 0,
+      }),
+    ),
   )
     .padding(20)
     .gap(18);
