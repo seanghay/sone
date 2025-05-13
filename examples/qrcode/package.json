@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "qrcode-svg": "^1.1.0",
+    "sone": "^0.1.3",
+    "uqr": "^0.1.2"
+  }
+}
