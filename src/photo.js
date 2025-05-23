@@ -3,13 +3,16 @@ import { createNode } from "./core.js";
 import { DrawSymbol } from "./utils.js";
 import { smoothRoundRect } from "./corner.js";
 
+/**
+ * @param {import("skia-canvas").Image} src
+ */
 export function Photo(src) {
   const node = Yoga.Node.create();
 
   node.setWidth(src.width);
   node.setHeight(src.height);
 
-  return createNode(
+  const result = createNode(
     {
       type: Photo,
       style: {
@@ -104,7 +107,7 @@ export function Photo(src) {
             }
             break;
         }
-        
+
         ctx.drawImage(
           component.src,
           0,
@@ -116,10 +119,12 @@ export function Photo(src) {
           destWidth,
           destHeight,
         );
-        
+
         ctx.restore();
       },
     },
     node,
   );
+
+  return result;
 }

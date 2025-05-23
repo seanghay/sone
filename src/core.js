@@ -13,7 +13,9 @@ import {
 } from "./utils.js";
 
 /**
- * @param {{children: any[], type: Function, style: Record<string, any>}} props
+ * Create a common layout node
+ * @template {Record<string, any>} T
+ * @param {T & {children?: any[], type?: Function, style?: Record<string, any>}} props
  */
 export function createNode(props, node = Yoga.Node.createDefault()) {
   return {
@@ -90,7 +92,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
     /**
-     * @param {Parameters<parsePositionType>[0]} type
+     * @param {import("./types.js").LayoutPositionType} type
      */
     position(type) {
       node.setPositionType(parsePositionType(type));
@@ -236,21 +238,21 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
     /**
-     * @param {Parameters<parseAlign>[0]} value
+     * @param {import("./types.js").FlexAlign} value
      */
     alignContent(value) {
       node.setAlignContent(parseAlign(value));
       return this;
     },
     /**
-     * @param {Parameters<parseAlign>[0]} value
+     * @param {import("./types.js").FlexAlign} value
      */
     alignItems(value) {
       node.setAlignItems(parseAlign(value));
       return this;
     },
     /**
-     * @param {Parameters<parseAlign>[0]} value
+     * @param {import("./types.js").FlexAlign} value
      */
 
     alignSelf(value) {
@@ -258,7 +260,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
     /**
-     * @param {Parameters<parseJustify>[0]} value
+     * @param {import("./types.js").FlexJustify} value
      */
     justifyContent(value) {
       node.setJustifyContent(parseJustify(value));
@@ -288,7 +290,6 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       node.setFlexShrink(value);
       return this;
     },
-
     strokeWidth(value) {
       this.style.strokeWidth = value;
       return this;

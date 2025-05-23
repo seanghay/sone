@@ -36,7 +36,7 @@ export function isImage(image) {
 }
 
 /**
- * @param {"auto" | "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "space-between" | "space-around" | "space-evenly"} value
+ * @param {import("./types.js").FlexAlign} value
  */
 export function parseAlign(value) {
   if (value === "auto") return Align.Auto;
@@ -52,7 +52,7 @@ export function parseAlign(value) {
 }
 
 /**
- * @param {"flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly"} value
+ * @param {import("./types.js").FlexJustify} value
  */
 export function parseJustify(value) {
   if (value === "flex-start") return Justify.FlexStart;
@@ -65,7 +65,7 @@ export function parseJustify(value) {
 }
 
 /**
- * @param {"static" | "relative" | "absolute"} value
+ * @param {import("./types.js").LayoutPositionType} value
  */
 export function parsePositionType(value) {
   if (value === "static") return PositionType.Static;
@@ -75,7 +75,7 @@ export function parsePositionType(value) {
 }
 
 /**
- * @param {"column" | "column-reverse" | "row" | "row-reverse"} value
+ * @param {import("./types.js").FlexDirection} value
  */
 export function parseFlexDirection(value) {
   if (value === "column") return FlexDirection.Column;

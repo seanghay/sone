@@ -5,7 +5,7 @@ export interface SoneTextOptions {
   weight: number;
   lineHeight: number;
   indentSize: number;
-  align: "left" | "right" | "center" | "justify"
+  align: "left" | "right" | "center" | "justify";
 }
 
 export interface SoneSpanOptions {
@@ -20,20 +20,20 @@ export type SoneSpanNode = {
   style: SoneSpanOptions;
   spanStyle?: SoneSpanOptions;
   type: (...args: unknown[]) => unknown;
-}
+};
 
 export type SoneSpanRenderNode = SoneSpanNode & {
   width: number;
   height: number;
   textMetrics: TextMetrics;
-}
+};
 
 export type SoneContextConfig = {
   debug?: boolean | undefined;
   width?: number | undefined;
   height?: number | undefined;
   backgroundColor?: string | undefined;
-}
+};
 
 export interface SoneDrawingContext {
   ctx: CanvasRenderingContext2D;
@@ -45,5 +45,27 @@ export interface SoneDrawingContext {
   config: SoneContextConfig;
 }
 
-export type SoneDefaultFont = "sans-serif" | "monospace" | "serif"
-export type SoneFont = SoneDefaultFont
+export type SoneDefaultFont = "sans-serif" | "monospace" | "serif";
+export type SoneFont = SoneDefaultFont;
+
+export type FlexAlign =
+  | "auto"
+  | "flex-start"
+  | "center"
+  | "flex-end"
+  | "stretch"
+  | "baseline"
+  | "space-between"
+  | "space-around"
+  | "space-evenly";
+
+export type FlexJustify =
+  | "flex-start"
+  | "center"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | "space-evenly";
+
+export type LayoutPositionType = "static" | "relative" | "absolute";
+export type FlexDirection = "column" | "column-reverse" | "row" | "row-reverse";
