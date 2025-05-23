@@ -24,7 +24,7 @@ export function Photo(src) {
        */
       scaleType(scaleType) {
         this.style.scaleType = scaleType;
-        return this;
+        return result;
       },
       [DrawSymbol]: ({ ctx, component, x, y }) => {
         const createRadiusValue = () => {

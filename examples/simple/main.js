@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
-import { sone, Column, Text, Span } from "sone";
+import { Column, Span, Text, sone } from "sone";
+
 
 function Document() {
   return Column(
