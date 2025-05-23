@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import { sone, Column, Text, Span } from "sonejs";
+import { sone, Column, Text, Span } from "sone";
 
 function Document() {
   return Column(
