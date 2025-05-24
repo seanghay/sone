@@ -153,6 +153,7 @@ function Document() {
 - [x] Non-rasterized SVG (Canvg)
 - [x] Font Tracing
 - [x] Move from `node-canvas` to `skia-canvas` (Emoji, Colored Fonts, Font Fallback, SVG, Path2D, Variable Fonts)
+- [ ] Sone Socket Server & Socket Image Viewer
 
 ### News
 - Sone got featured on Khmerload [https://www.khmerload.com/article/208169]
