@@ -238,21 +238,21 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
     /**
-     * @param {import("./types.js").FlexAlign} value
+     * @param {import("./types.js").AlignContent} value
      */
     alignContent(value) {
       node.setAlignContent(parseAlign(value));
       return this;
     },
     /**
-     * @param {import("./types.js").FlexAlign} value
+     * @param {import("./types.js").AlignItems} value
      */
     alignItems(value) {
       node.setAlignItems(parseAlign(value));
       return this;
     },
     /**
-     * @param {import("./types.js").FlexAlign} value
+     * @param {import("./types.js").AlignItems} value
      */
 
     alignSelf(value) {
@@ -260,7 +260,7 @@ export function createNode(props, node = Yoga.Node.createDefault()) {
       return this;
     },
     /**
-     * @param {import("./types.js").FlexJustify} value
+     * @param {import("./types.js").JustifyContent} value
      */
     justifyContent(value) {
       node.setJustifyContent(parseJustify(value));

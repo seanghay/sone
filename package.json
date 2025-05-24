@@ -16,6 +16,7 @@
   "dependencies": {
     "css-box-shadow": "^1.0.0-3",
     "css-font-parser": "^2.0.1",
+    "devalue": "^5.1.1",
     "fast-memoize": "^2.5.2",
     "figma-squircle": "^1.1.0",
     "gradient-parser": "^1.1.1",
