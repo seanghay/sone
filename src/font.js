@@ -1,3 +1,4 @@
+import { FontLibrary } from "skia-canvas";
 import { SoneConfig } from "./utils.js";
 
 function traceFonts(node, callback) {
@@ -39,5 +40,8 @@ export const Font = {
   registerFont: SoneConfig.registerFont,
   register: SoneConfig.registerFont,
   reset: SoneConfig.resetFonts,
+  use: FontLibrary.use,
+  has: FontLibrary.has,
+  family: FontLibrary.family,
+  families: FontLibrary.families,
 };
-
