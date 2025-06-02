@@ -1,7 +1,8 @@
 import { hot } from "hot-hook";
+
 await hot.init({
   root: import.meta.filename,
-  boundaries: ["src/main.sone.js"],
+  boundaries: ["./src/**/*.js"],
 });
 
 import { pack } from "msgpackr";
@@ -9,15 +10,26 @@ import { sone, loadImage } from "sone";
 import { WebSocketServer } from "ws";
 import { watch } from "chokidar";
 import memoize from "fast-memoize";
+import { resolve } from "node:path";
 
 const clients = new Set();
 
-const _loadImage = memoize(loadImage);
+let componentFile = process.argv[2];
+
+if (!componentFile) {
+  throw Error("[error] component file required");
+}
+
+componentFile = resolve(componentFile);
+
+const loadAsset = memoize(loadImage);
+
+let counter = 0;
 
 async function refresh(client) {
   try {
     const module = await import(
-      "./src/main.sone.js",
+      `${componentFile}?v=${counter++}`,
       import.meta.hot?.boundary
     );
 
@@ -32,18 +44,21 @@ async function refresh(client) {
 
     let loaderData = null;
 
+    const ss = Date.now();
     if (loader) {
-      loaderData = await loader({ loadImage: _loadImage });
+      loaderData = await loader({ loadAsset, isDev: true });
     }
 
     const canvas = sone(() => Component(loaderData), cfg).canvas();
-
     const imageBuffer = await canvas.toBuffer("raw");
+
     const buffer = pack({
       image: imageBuffer,
       width: canvas.width,
       height: canvas.height,
     });
+
+    console.log(`render: ${Date.now() - ss}ms`);
 
     if (client) {
       client.send(buffer);
@@ -58,7 +73,6 @@ async function refresh(client) {
   }
 }
 
-
 watch("src").on("all", async (event, path) => {
   if (event === "change") {
     await refresh();
@@ -70,11 +84,8 @@ const wss = new WebSocketServer({ port: 5003 });
 wss.on("connection", async function connection(ws) {
   await refresh(ws);
   clients.add(ws);
-  console.log("client connected");
-
   ws.on("error", console.error);
   ws.on("close", () => {
-    console.log("client disconnected");
     clients.delete(ws);
   });
 });
