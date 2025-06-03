@@ -12,6 +12,7 @@ import { WebSocketServer } from "ws";
 import { watch } from "chokidar";
 import memoize from "fast-memoize";
 import { resolve } from "node:path";
+import "./font.js";
 
 const clients = new Set();
 

@@ -2,10 +2,8 @@
   "type": "module",
   "devDependencies": {
     "chokidar": "^4.0.3",
-    "fast-memoize": "^2.5.2",
     "hot-hook": "^0.4.0",
     "msgpackr": "^1.11.4",
-    "sone": "^0.1.5",
     "ws": "^8.18.2"
   },
   "dependencies": {
@@ -13,6 +11,8 @@
     "express": "^5.1.0",
     "fast-glob": "^3.3.3",
     "http-graceful-shutdown": "^3.1.14",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "fast-memoize": "^2.5.2",
+    "sone": "^0.1.5"
   }
 }

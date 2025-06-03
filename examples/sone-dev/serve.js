@@ -16,6 +16,7 @@ app.use(express.json());
 
 // route registration
 for await (const file of fg.stream("./src/**/render.js")) {
+  
   const module = await import(file);
   const templateId = path.basename(path.dirname(file));
 
