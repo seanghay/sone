@@ -12,7 +12,7 @@ export const config = {
   backgroundColor: "white",
 };
 
-export async function loader({ loadAsset, isDev }) {
+export async function loader({ loadAsset, isDev, req }) {
   const [bgImage, usdImage, khrImage] = await Promise.all([
     loadAsset(join(assetsDir, "bg.png")),
     loadAsset(join(assetsDir, "USD.png")),
@@ -35,7 +35,7 @@ export async function loader({ loadAsset, isDev }) {
     bgImage,
     khrImage,
     usdImage,
-    name: "Example",
+    name: req.query.name ?? "Example",
     username: "example@example",
     currency: "USD",
     data: "xxxxxxxxxxxxxxx-0000000000-11111111111111xxxxxxxxxxxxxxx-0000000000-11111111111111",
@@ -63,7 +63,8 @@ export default function KHQR({
     Column(
       Photo(qrcode(data, { background: null, margin: 0 }))
         .size(580)
-        .rotate(0)
+        .rotate(-40)
+        .scale(1.1)
         .marginTop(660),
       Photo(currencyImage).position("absolute").size(140).marginTop(400),
       Column(
@@ -74,7 +75,7 @@ export default function KHQR({
         .gap(36)
         .marginTop(100),
     )
-      .gap(30)
+      .gap(100)
       .width("100%")
       .justifyContent("center")
       .alignItems("center")

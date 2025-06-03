@@ -7,5 +7,12 @@
     "msgpackr": "^1.11.4",
     "sone": "^0.1.5",
     "ws": "^8.18.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "fast-glob": "^3.3.3",
+    "http-graceful-shutdown": "^3.1.14",
+    "morgan": "^1.10.0"
   }
 }

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { hot } from "hot-hook";
 
 await hot.init({
