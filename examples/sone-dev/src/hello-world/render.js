@@ -14,8 +14,7 @@ export default function () {
     // image
     Photo(qrcode("hello, world", { color: "red" })).size(300),
     // text
-    Text("សួស្ដី", Span("ស្រុកខ្មែរ").font("Moulpali").color("orange"))
-      .font("Moul")
+    Text("សួស្ដី 😄", Span("ស្រុកខ្មែរ").font("Moulpali").color("orange"))
       .size(100)
       .lineHeight(1.3)
       .align("right"),
