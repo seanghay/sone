@@ -15,26 +15,69 @@ SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is b
 - Font Tracing - Get a list of fonts that used in the component tree. (See [test/text-01.js](test/text-01.js))
 - Table (See [test/table.js](test/table.js))
 - Repeating Linear Gradient & Linear Gradient
+- High performance
+- Minimal memory footprint
 - Composable
 - Output as SVG, PDF, and Image(JPG,PNG,WEBP)
 
-### Get started
-
 🙏 Thanks to [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
+
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Core Concepts](#core-concepts)
+- [Components](#components)
+- [Advanced Usage](#advanced-usage)
+- [Examples](#examples)
+- [API Reference](#api-reference)
+
+## Features
+
+1. **Layout System**
+   - Flex Layout powered by [yoga-layout](https://www.yogalayout.dev/)
+   - Advanced positioning and alignment
+   - Gap and spacing control
+   - Maximum width constraints
+
+2. **Rich Text Support**
+   - Multiple text alignment options (Left, Right, Center, Justify)
+   - Support for complex scripts (Khmer, Thai, Lao)
+   - Font tracing capabilities
+   - Text shadows and decorations
+   - Gradient text fill
+
+3. **Graphics Capabilities**
+   - SVG support without rasterization
+   - Squircle rounded corners (iOS-style)
+   - Linear and repeating gradients
+   - Box shadows
+   - Border controls
+   - Opacity management
+
+4. **Table Support**
+   - Flexible table layouts
+   - Complex data presentation
+   - Customizable styling
+
+5. **Output Formats**
+   - SVG
+   - PDF
+   - Image (JPG, PNG, WEBP)
+
+## Installation
 
 ```shell
 npm install sone
 ```
 
-```js
-import fs from "node:fs/promises";
+## Getting Started
 
-import { 
-  sone, 
-  Column, 
-  Text, 
-  Span
-} from "sone";
+### Basic Usage
+
+```javascript
+import { sone, Column, Text, Span } from "sone";
+import fs from "node:fs/promises";
 
 function Document() {
   return Column(
@@ -44,83 +87,137 @@ function Document() {
         .color("orange")
         .weight("bold")
         .shadow("2px 2px 0px rgba(0,0,0,.2)"),
-        " 😍🇰🇭"
+      " 😍"
     ).size(34),
   ).padding(40);
 }
 
-// save as Image
-await fs.writeFile("test/output.png", await sone(Document).png());
+// Generate PNG
+await fs.writeFile("output.png", await sone(Document).png());
 
-// save as PDF
-await fs.writeFile("test/output.pdf", await sone(Document).pdf());
+// Generate PDF
+await fs.writeFile("output.pdf", await sone(Document).pdf());
 ```
 
-Preview
+## Core Concepts
 
-<img src=test/output.png>
+### Component Structure
+Sone uses a composable component structure where elements can be nested and styled using a chainable API:
 
-[test/output.pdf](test/output.pdf)
+1. **Column**: Vertical layout container
+2. **Text**: Text container supporting rich text features
+3. **Span**: Inline text styling component
+4. **Flex**: Flexible layout component
 
-A complex Sone component looks like this
+### Styling
+Components can be styled using chainable methods:
+- `.color()`: Sets text color
+- `.size()`: Sets font size
+- `.weight()`: Sets font weight
+- `.shadow()`: Adds text shadow
+- `.padding()`: Sets padding
+- `.gap()`: Sets spacing between elements
+- `.maxWidth()`: Sets maximum width constraint
 
-```js
-function Document() {
-  return Column(
-    Text(
-      "ភ្នំពេញ៖ ",
-      Span("ពិធីបុណ្យ ព្រះសពរបស់ ").color("green"),
-      Span("លោក សុិន សុខខា").font("Moul").color("red").size(23),
-      Span(" បានប្រព្រឹត្តិធ្វើទៅ Internal នៅ"),
-      Span(" ថ្ងៃសៅរ៍ ទី២៦មេសា").weight(700),
-      Span(
-        "នេះ។ ព្រះមហាក្សត្រ ប្រមុខរដ្ឋ ប្រមុខរដ្ឋាភិបាល និងគណៈប្រតិភូសរុបជាង១៦០ បានមកចូលរួម នៅក្នុងកម្មវិធីនេះ",
-      ),
-      Span(" លោក សុិន សុខខុង ").font("Moul").color("salmon").size(27),
-      Span("។").color("orange"),
-    )
-      .font("Inter Khmer")
-      .size(32)
-      .align("justify")
-      .color("#333")
-      .lineHeight(1.45),
-    Flex().height(2, "auto").bg("#eee"),
-    Text(
-      "....",
-    )
-      .size(18)
-      .font("Inter Khmer")
-      .lineHeight(1.4)
-      .color("gray"),
-  )
-    .maxWidth(700)
-    .padding(40)
-    .gap(10);
-}
+## Components
+
+### Column
+Used for vertical layouts:
+```javascript
+Column(
+  // child components
+).padding(40).gap(10);
 ```
 
+### Text
+Text container with rich formatting:
+```javascript
+Text(
+  "Regular text",
+  Span("styled text").color("orange")
+).size(34).align("justify");
+```
 
-### See Examples
+### Span
+Inline text styling:
+```javascript
+Span("text")
+  .color("orange")
+  .weight("bold")
+  .shadow("2px 2px 0px rgba(0,0,0,.2)");
+```
 
-[test/text-01.js](test/text-01.js)
+### Table
+Table layout component:
+```javascript
+// See examples in test/table.js for table implementation
+```
 
-<img width=400 src="test/text-01.jpg">
+## Advanced Usage
 
-[test/text-02.js](test/text-02.js)
+### Font Tracing
+Get a list of fonts used in the component tree:
+```javascript
+// See test/text-01.js for font tracing implementation
+```
 
-<img width=400 src="test/text-02.jpg">
+### Custom Styling
+Advanced styling options:
+```javascript
+Text()
+  .font("Inter Khmer")
+  .size(32)
+  .align("justify")
+  .color("#333")
+  .lineHeight(1.45);
+```
 
-[test/table.js](test/table.js)
+### Video Frame Generation
+For creating video frames:
+```shell
+# Create frames
+node main.js
 
-<img width=400 src="test/table.jpg">
+# Encode frames into mp4
+ffmpeg -y -framerate 60 -i "frames/%04d.jpg" -c:v libx264 -pix_fmt yuv420p -crf 18 output.mp4
+```
 
-[test/basic-01.js](test/basic-01.js)
+## Examples
 
-<img width=400 src="test/basic-01.jpg">
+The repository includes several example implementations:
+- Text layouts: `test/text-01.js`, `test/text-02.js`
+- Tables: `test/table.js`, `test/table-2.js`
+- Basic layouts: `test/basic-01.js`
 
-[test/table-2.js](test/table-2.js)
+## API Reference
 
-<img width=400 src="test/table-2.jpg">
+### Main Functions
+- `sone()`: Main entry point for rendering
+- `Column()`: Creates vertical layout
+- `Text()`: Creates text container
+- `Span()`: Creates styled text span
+
+### Output Methods
+- `.png()`: Renders to PNG
+- `.pdf()`: Renders to PDF
+- `.svg()`: Renders to SVG
+
+### Styling Methods
+- `.color(value)`: Sets color
+- `.size(value)`: Sets size
+- `.weight(value)`: Sets font weight
+- `.shadow(value)`: Sets shadow
+- `.padding(value)`: Sets padding
+- `.gap(value)`: Sets gap between elements
+- `.maxWidth(value)`: Sets maximum width
+- `.lineHeight(value)`: Sets line height
+- `.align(value)`: Sets text alignment
+- `.font(value)`: Sets font family
+- `.bg(value)`: Sets background color
+
+## Current Status
+
+Sone is actively maintained and has implemented many key features. Check the current implementation status in the repository's README for the latest updates on feature implementation.
 
 
 #### Roadmap
@@ -155,6 +252,7 @@ function Document() {
 - [x] Move from `node-canvas` to `skia-canvas` (Emoji, Colored Fonts, Font Fallback, SVG, Path2D, Variable Fonts)
 - [ ] Sone Socket Server & Socket Image Viewer
 
+
 ### News
 - Sone got featured on Khmerload [https://www.khmerload.com/article/208169]
 
@@ -173,3 +271,4 @@ function Document() {
 - https://raphlinus.github.io/rust/skribo/text/2019/04/04/font-fallback.html
 - https://simoncozens.github.io/fonts-and-layout/
 - https://mrandri19.github.io/2019/07/24/modern-text-rendering-linux-overview.html
+
