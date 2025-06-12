@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "marked": "^15.0.12",
+    "sone": "^0.1.5"
+  }
+}
