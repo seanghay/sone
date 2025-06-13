@@ -20,204 +20,346 @@ SwiftUI-inspired canvas layout engine with advanced rich text support. Sone is b
 - Composable
 - Output as SVG, PDF, and Image(JPG,PNG,WEBP)
 
-🙏 Thanks to [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
 
 ## Table of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-- [Core Concepts](#core-concepts)
-- [Components](#components)
-- [Advanced Usage](#advanced-usage)
-- [Examples](#examples)
-- [API Reference](#api-reference)
+1. [Installation & Setup](#installation--setup)
+2. [Main Components](#main-components)
+3. [Layout System](#layout-system)
+4. [Styling API](#styling-api)
+5. [Image & Graphics](#image--graphics)
+6. [Advanced Features](#advanced-features)
+7. [Font Management](#font-management)
+8. [Output Generation](#output-generation)
 
-## Features
+## Installation & Setup
 
-1. **Layout System**
-   - Flex Layout powered by [yoga-layout](https://www.yogalayout.dev/)
-   - Advanced positioning and alignment
-   - Gap and spacing control
-   - Maximum width constraints
+🙏 Thanks to [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
 
-2. **Rich Text Support**
-   - Multiple text alignment options (Left, Right, Center, Justify)
-   - Support for complex scripts (Khmer, Thai, Lao)
-   - Font tracing capabilities
-   - Text shadows and decorations
-   - Gradient text fill
-
-3. **Graphics Capabilities**
-   - SVG support without rasterization
-   - Squircle rounded corners (iOS-style)
-   - Linear and repeating gradients
-   - Box shadows
-   - Border controls
-   - Opacity management
-
-4. **Table Support**
-   - Flexible table layouts
-   - Complex data presentation
-   - Customizable styling
-
-5. **Output Formats**
-   - SVG
-   - PDF
-   - Image (JPG, PNG, WEBP)
-
-## Installation
-
-```shell
+```bash
 npm install sone
 ```
 
-## Getting Started
-
-### Basic Usage
-
+Basic imports:
 ```javascript
-import { sone, Column, Text, Span } from "sone";
-import fs from "node:fs/promises";
-
-function Document() {
-  return Column(
-    Text(
-      "Hello world! ",
-      Span("Sone.")
-        .color("orange")
-        .weight("bold")
-        .shadow("2px 2px 0px rgba(0,0,0,.2)"),
-      " 😍"
-    ).size(34),
-  ).padding(40);
-}
-
-// Generate PNG
-await fs.writeFile("output.png", await sone(Document).png());
-
-// Generate PDF
-await fs.writeFile("output.pdf", await sone(Document).pdf());
+import {
+  sone,
+  Column,
+  Flex,
+  Photo,
+  Row,
+  Font,
+  Span,
+  Text,
+  Table,
+  TableRow,
+  loadImage
+} from "sone";
 ```
 
-## Core Concepts
+## Main Components
 
-### Component Structure
-Sone uses a composable component structure where elements can be nested and styled using a chainable API:
+### 1. Text Component
 
-1. **Column**: Vertical layout container
-2. **Text**: Text container supporting rich text features
-3. **Span**: Inline text styling component
-4. **Flex**: Flexible layout component
-
-### Styling
-Components can be styled using chainable methods:
-- `.color()`: Sets text color
-- `.size()`: Sets font size
-- `.weight()`: Sets font weight
-- `.shadow()`: Adds text shadow
-- `.padding()`: Sets padding
-- `.gap()`: Sets spacing between elements
-- `.maxWidth()`: Sets maximum width constraint
-
-## Components
-
-### Column
-Used for vertical layouts:
-```javascript
-Column(
-  // child components
-).padding(40).gap(10);
+#### Method Signature
+```typescript
+Text(...children: (string | SpanComponent)[]): TextComponent
 ```
 
-### Text
-Text container with rich formatting:
+#### Properties
+| Method | Type | Description | Example |
+|--------|------|-------------|---------|
+| size(value: number) | number | Font size in pixels | `.size(24)` |
+| align(value: string) | "left" \| "center" \| "right" \| "justify" | Text alignment | `.align("justify")` |
+| font(value: string) | string | Font family name | `.font("Inter Khmer")` |
+| color(value: string) | string | Text color (hex, rgb, gradient) | `.color("#205781")` |
+| lineHeight(value: number) | number | Line height multiplier | `.lineHeight(1.5)` |
+| weight(value: number\|string) | number\|string | Font weight | `.weight(700)` |
+| strokeColor(value: string) | string | Text outline color | `.strokeColor("white")` |
+| strokeWidth(value: number) | number | Text outline width | `.strokeWidth(4)` |
+| indentSize(value: number) | number | Text indentation | `.indentSize(50)` |
+
+#### Example
 ```javascript
 Text(
-  "Regular text",
-  Span("styled text").color("orange")
-).size(34).align("justify");
+  Span("Hello").color("green").weight(800),
+  " World",
+  Span("!").color("red")
+)
+  .size(24)
+  .font("SF Pro Text")
+  .align("center")
+  .lineHeight(1.5)
+  .color("#205781")
+  .shadow("2px 4px 4px black")
 ```
 
-### Span
-Inline text styling:
+### 2. Span Component
+
+#### Method Signature
+```typescript
+Span(text: string): SpanComponent
+```
+
+#### Properties
+| Method | Type | Description | Example |
+|--------|------|-------------|---------|
+| color(value: string) | string | Text color | `.color("orange")` |
+| weight(value: number\|string) | number\|string | Font weight | `.weight(700)` |
+| font(value: string) | string | Font family | `.font("Moul")` |
+| size(value: number) | number | Font size | `.size(27)` |
+| offsetY(value: number) | number | Vertical offset | `.offsetY(-2)` |
+| line(offset: number, thickness: number, color: string) | void | Underline style | `.line(4, 2, "yellow")` |
+| strokeColor(value: string) | string | Outline color | `.strokeColor("black")` |
+| strokeWidth(value: number) | number | Outline width | `.strokeWidth(8)` |
+
+#### Example with Gradient and Effects
 ```javascript
-Span("text")
-  .color("orange")
-  .weight("bold")
-  .shadow("2px 2px 0px rgba(0,0,0,.2)");
+Span("Styled Text")
+  .font("KdamThmorPro")
+  .size(27)
+  .color("linear-gradient(to left, orange 0%, yellow 100%)")
+  .strokeColor("black")
+  .strokeWidth(8)
+  .line(4, 2, "rgba(0,0,0,.2)")
 ```
 
-### Table
-Table layout component:
+### 3. Layout Components
+
+#### Flex Component
+```typescript
+interface FlexOptions {
+  direction?: "row" | "column";
+  grow?: number;
+  width?: number | string;
+  height?: number | string;
+  position?: "relative" | "absolute";
+  left?: number;
+  top?: number;
+}
+
+Flex(...children: Component[]): FlexComponent
+```
+
+#### Examples
 ```javascript
-// See examples in test/table.js for table implementation
+// Basic Flex container
+Flex(
+  Text("Content")
+)
+  .size(200, 100)
+  .cornerRadius(100, 0)
+  .bg("linear-gradient(45deg, turquoise 20%, yellow 20%)")
+  .cornerSmoothing(0.7)
+  .position("absolute")
+  .left(100)
+  .top(200)
+
+// Flex with multiple backgrounds
+Flex()
+  .bg(`linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%),
+      repeating-linear-gradient(-115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px),
+      repeating-linear-gradient(115deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px)`)
 ```
 
-## Advanced Usage
+### 4. Photo Component
 
-### Font Tracing
-Get a list of fonts used in the component tree:
+#### Method Signature
+```typescript
+interface PhotoOptions {
+  scaleType?: "contain" | "cover";
+  rotate?: number;
+}
+
+Photo(source: ImageSource): PhotoComponent
+```
+
+#### Properties
+| Method | Type | Description |
+|--------|------|-------------|
+| size(value: number) | number | Image size |
+| cornerRadius(value: number) | number | Corner radius |
+| cornerSmoothing(value: number) | number | iOS-style corner smoothing (0-1) |
+| scaleType(value: string) | "contain" \| "cover" | Image scaling mode |
+| rotate(value: number) | number | Rotation in degrees |
+
+#### Example
 ```javascript
-// See test/text-01.js for font tracing implementation
+Photo(imageSrc)
+  .size(200)
+  .cornerRadius(44)
+  .cornerSmoothing(0.7)
+  .rotate(-40)
+  .scaleType("cover")
+  .strokeColor("rgba(0,0,0,.4)")
+  .strokeWidth(1)
+  .shadow(
+    "0px 10px 10px red",
+    "0px -10px 10px blue"
+  )
 ```
 
-### Custom Styling
-Advanced styling options:
+### 5. Table Component
+
+#### Method Signature
+```typescript
+Table(...rows: TableRow[]): TableComponent
+TableRow(...cells: Component[]): TableRowComponent
+```
+
+#### Example with Styled Headers and Cells
 ```javascript
-Text()
-  .font("Inter Khmer")
-  .size(32)
-  .align("justify")
-  .color("#333")
-  .lineHeight(1.45);
+// Helper functions for consistent styling
+function StylishHeader(text, corners = [0]) {
+  return Flex(
+    Text(text)
+      .lineHeight(1.4)
+      .color("white")
+      .weight("bold")
+      .font("Inter Khmer")
+      .size(18)
+  )
+    .padding(10, 0)
+    .bg("black")
+    .alignItems("center")
+    .cornerRadius(...corners)
+    .cornerSmoothing(0.7);
+}
+
+function StylishCell(text) {
+  return Flex(
+    Text(text)
+      .lineHeight(1.2)
+      .color("black")
+      .size(18)
+  )
+    .padding(10, 14)
+    .maxWidth(140);
+}
+
+// Table implementation
+Table(
+  TableRow(
+    StylishHeader("Column 1", [18, 0, 0, 0]),
+    StylishHeader("Column 2", [0]),
+    StylishHeader("Column 3", [0, 18, 0, 0])
+  ),
+  TableRow(
+    StylishCell("Cell 1"),
+    StylishCell("Cell 2").bg("yellow"),
+    StylishCell("Cell 3")
+  )
+)
+  .alignSelf("flex-start")
+  .marginTop(20)
+  .strokeWidth(2)
+  .strokeColor("rgba(0,0,0,.2)")
+  .cornerRadius(18)
+  .lineDash(5, 4)
+  .cornerSmoothing(0.7)
+  .shadow("10px 10px 0px rgba(0,0,0,.1)")
 ```
 
-### Video Frame Generation
-For creating video frames:
-```shell
-# Create frames
-node main.js
+## Font Management
 
-# Encode frames into mp4
-ffmpeg -y -framerate 60 -i "frames/%04d.jpg" -c:v libx264 -pix_fmt yuv420p -crf 18 output.mp4
+### Font Registration and Tracing
+
+```javascript
+// Trace used fonts in a document
+const fonts = Font.trace(document);
+
+// Register fonts
+Font.registerFont("path/to/font.ttf", { 
+  family: "FontFamilyName" 
+});
+
+// Example of automatic font registration
+for (const fontFamily of fonts) {
+  const fontPath = path.join("fonts", `${fontFamily}.ttf`);
+  if (fsSync.existsSync(fontPath)) {
+    Font.registerFont(fontPath, { family: fontFamily });
+  }
+}
 ```
 
-## Examples
+## Output Generation
 
-The repository includes several example implementations:
-- Text layouts: `test/text-01.js`, `test/text-02.js`
-- Tables: `test/table.js`, `test/table-2.js`
-- Basic layouts: `test/basic-01.js`
+### Methods
+| Method | Description | Options |
+|--------|-------------|---------|
+| .jpg() | Generate JPEG output | quality (0-100) |
+| .png() | Generate PNG output | compression |
+| .svg() | Generate SVG output | - |
+| .pdf() | Generate PDF output | - |
 
-## API Reference
+### Example
+```javascript
+// Create document
+async function Document() {
+  return Column(
+    // ... components
+  );
+}
 
-### Main Functions
-- `sone()`: Main entry point for rendering
-- `Column()`: Creates vertical layout
-- `Text()`: Creates text container
-- `Span()`: Creates styled text span
+// Generate different formats
+await sone(Document).jpg()  // -> Buffer
+await sone(Document).png()  // -> Buffer
+await sone(Document).svg()  // -> String
+await sone(Document).pdf()  // -> Buffer
 
-### Output Methods
-- `.png()`: Renders to PNG
-- `.pdf()`: Renders to PDF
-- `.svg()`: Renders to SVG
+// Save to file
+await fs.writeFile("output.jpg", await sone(Document).jpg());
+```
 
-### Styling Methods
-- `.color(value)`: Sets color
-- `.size(value)`: Sets size
-- `.weight(value)`: Sets font weight
-- `.shadow(value)`: Sets shadow
-- `.padding(value)`: Sets padding
-- `.gap(value)`: Sets gap between elements
-- `.maxWidth(value)`: Sets maximum width
-- `.lineHeight(value)`: Sets line height
-- `.align(value)`: Sets text alignment
-- `.font(value)`: Sets font family
-- `.bg(value)`: Sets background color
+## Styling Reference
 
-## Current Status
+### Colors and Gradients
+```javascript
+// Solid colors
+.color("#205781")
+.color("rgb(255, 0, 0)")
+.color("rgba(0, 0, 0, 0.5)")
 
-Sone is actively maintained and has implemented many key features. Check the current implementation status in the repository's README for the latest updates on feature implementation.
+// Gradients
+.color("linear-gradient(to left, orange 0%, yellow 100%)")
+.bg("linear-gradient(-225deg, #231557 0%, #44107A 29%)")
+
+// Multiple backgrounds
+.bg(`linear-gradient(-225deg, #231557 0%, #44107A 29%),
+     repeating-linear-gradient(-115deg, transparent, transparent 20px)`)
+```
+
+### Shadows
+```javascript
+// Single shadow
+.shadow("5px 5px 10px rgba(0,0,0,.2)")
+
+// Multiple shadows
+.shadow(
+  "0px 10px 10px red",
+  "0px -10px 10px blue",
+  "-10px 0px 10px orange"
+)
+```
+
+### Image Effects
+```javascript
+.contrast(1.1)      // Increase contrast
+.saturate(0)        // Remove saturation
+.opacity(0.8)       // Set opacity
+.rotate(-40)        // Rotate by degrees
+```
+
+This documentation covers the main features of the Sone library based on the actual implementation in the test files. The library supports complex layouts, rich text formatting, and various visual effects, making it suitable for generating high-quality documents and images.
+
+The library excels in handling:
+- Complex scripts (Khmer, Thai, Lao)
+- Emojis and Unicode text
+- Flexible layouts
+- Rich text styling
+- Image processing
+- Multiple output formats
+
+For more examples and advanced usage, refer to the test files in the repository.
 
 
 #### Roadmap
