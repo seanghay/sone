@@ -3,11 +3,12 @@ import { createNode } from "./core.js";
 import { parseFlexDirection } from "./utils.js";
 
 export function Row(...children) {
+  children = children.filter((c) => c != null);
+
   const node = Yoga.Node.create();
   node.setFlexDirection(FlexDirection.Row);
 
   for (const item of children) {
-    if (item == null) continue;
     node.insertChild(item.node, node.getChildCount());
   }
 
@@ -21,11 +22,12 @@ export function Row(...children) {
 }
 
 export function Column(...children) {
+  children = children.filter((c) => c != null);
+
   const node = Yoga.Node.create();
   node.setFlexDirection(FlexDirection.Column);
 
   for (const item of children) {
-    if (item == null) continue;
     node.insertChild(item.node, node.getChildCount());
   }
 
@@ -39,10 +41,11 @@ export function Column(...children) {
 }
 
 export function Flex(...children) {
+  children = children.filter((c) => c != null);
+
   const node = Yoga.Node.create();
 
   for (const item of children) {
-    if (item == null) continue;
     node.insertChild(item.node, node.getChildCount());
   }
 
