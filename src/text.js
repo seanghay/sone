@@ -138,7 +138,7 @@ function _splitLines({ spans, maxWidth, indentSize = 0 }) {
   };
 }
 
-export const splitLines = memoize(_splitLines)
+export const splitLines = memoize(_splitLines);
 
 /**
  * @param {import("./types.js").SoneSpanNode[]} spans
@@ -190,9 +190,10 @@ export function textMeasureFunc(spans, style, maxWidth) {
 
 /**
  * @param  {...string} children this can be string or Span object
- * @returns
  */
 export function Text(...children) {
+  children = children.filter((c) => c != null);
+
   const node = Yoga.Node.create();
   node.setFlexShrink(1);
 

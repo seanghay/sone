@@ -7,6 +7,7 @@ export function Row(...children) {
   node.setFlexDirection(FlexDirection.Row);
 
   for (const item of children) {
+    if (item == null) continue;
     node.insertChild(item.node, node.getChildCount());
   }
 
@@ -24,6 +25,7 @@ export function Column(...children) {
   node.setFlexDirection(FlexDirection.Column);
 
   for (const item of children) {
+    if (item == null) continue;
     node.insertChild(item.node, node.getChildCount());
   }
 
@@ -40,6 +42,7 @@ export function Flex(...children) {
   const node = Yoga.Node.create();
 
   for (const item of children) {
+    if (item == null) continue;
     node.insertChild(item.node, node.getChildCount());
   }
 
