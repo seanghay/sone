@@ -418,6 +418,7 @@ For more examples and advanced usage, refer to the test files in the repository.
 - [ ] Sone Socket Server & Socket Image Viewer
 - [ ] No-wrap
 - [ ] Non breaking space
+- [ ] Font Alias
 
 
 ### News
