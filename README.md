@@ -416,6 +416,8 @@ For more examples and advanced usage, refer to the test files in the repository.
 - [x] Font Tracing
 - [x] Move from `node-canvas` to `skia-canvas` (Emoji, Colored Fonts, Font Fallback, SVG, Path2D, Variable Fonts)
 - [ ] Sone Socket Server & Socket Image Viewer
+- [ ] No-wrap
+- [ ] Non breaking space
 
 
 ### News
