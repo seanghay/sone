@@ -100,6 +100,7 @@ function _CanvasViewer({ ref, image }) {
           destHeight,
         );
 
+        image.close()
         ctx.font = "50px monospace";
 
         const controller = new AbortController();
