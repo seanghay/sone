@@ -5,6 +5,7 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 function _CanvasViewer({ ref, image }) {
   const canvasRef = ref;
   const imageRef = useRef(null);
+  const [position, setPosition] = useState(null);
 
   const configureCanvas = useCallback(
     /**
@@ -24,6 +25,24 @@ function _CanvasViewer({ ref, image }) {
       ctx.fillStyle = "#333";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      ctx.strokeStyle = "rgba(255,255,255,.1)";
+      ctx.lineWidth = devicePixelRatio;
+
+      ctx.beginPath();
+
+      const gridSize = 30 * devicePixelRatio;
+
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+      }
+
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+      }
+
+      ctx.stroke();
       /**
        * @type {ImageData}
        */
@@ -75,16 +94,50 @@ function _CanvasViewer({ ref, image }) {
           destWidth,
           destHeight,
         );
+
+        ctx.font = "50px monospace";
+
+        const controller = new AbortController();
+        const mouseEventHandler = (e, leave) => {
+          const x = (e.clientX * devicePixelRatio - destX) / destWidth;
+          const y = (e.clientY * devicePixelRatio - destY) / destHeight;
+
+          setPosition([
+            (x * image.width).toFixed(2),
+            (y * image.height).toFixed(2),
+
+            (x * 100).toFixed(2),
+            (y * 100).toFixed(2),
+
+            !leave ? e.clientX : null,
+            !leave ? e.clientY : null,
+          ]);
+        };
+
+        canvas.addEventListener("mousemove", mouseEventHandler, {
+          signal: controller.signal,
+        });
+
+        canvas.addEventListener("mouseenter", mouseEventHandler, {
+          signal: controller.signal,
+        });
+
+        canvas.addEventListener("mouseleave", (e) =>
+          mouseEventHandler(e, true),
+        );
+
+        return () => {
+          controller.abort();
+        };
       }
     },
     [],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: ignored
   useEffect(() => {
     imageRef.current = image;
-    configureCanvas(canvasRef.current);
-  }, [image, configureCanvas]);
+    return configureCanvas(canvasRef.current);
+  }, [image, configureCanvas, canvasRef]);
 
   useEffect(() => {
     configureCanvas(canvasRef.current);
@@ -99,9 +152,41 @@ function _CanvasViewer({ ref, image }) {
     return () => controller.abort();
   }, [canvasRef, configureCanvas]);
 
-  return useMemo(() => {
+  const canvasElement = useMemo(() => {
     return <canvas ref={canvasRef} />;
   }, [canvasRef]);
+
+  return (
+    <>
+      {position != null ? (
+        <>
+          <div className="fixed text-white/70 text-xs px-2 py-1 m-2 bg-black/10 rounded-lg">
+            <pre>
+              x: {position[0]}px ({position[2]}%)
+            </pre>
+            <pre>
+              y: {position[1]}px ({position[3]}%)
+            </pre>
+          </div>
+
+          {typeof position[4] === "number" ? (
+            <div
+              className="fixed top-0 bottom-0 w-[1px] bg-cyan-400/90 pointer-events-none"
+              style={{ left: `${position[4]}px` }}
+            />
+          ) : null}
+
+          {typeof position[5] === "number" ? (
+            <div
+              className="fixed left-0 right-0 top-0 h-[1px] bg-cyan-400/90 pointer-events-none"
+              style={{ top: `${position[5]}px` }}
+            />
+          ) : null}
+        </>
+      ) : null}
+      {canvasElement}
+    </>
+  );
 }
 
 export const CanvasViewer = memo(_CanvasViewer);
