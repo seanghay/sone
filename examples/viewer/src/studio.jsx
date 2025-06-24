@@ -21,8 +21,13 @@ function _CanvasViewer({ ref, image }) {
       canvas.style.height = `${h}px`;
 
       const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 
-      ctx.fillStyle = "#333";
+      gradient.addColorStop(0, "#333");
+      gradient.addColorStop(1, "#222");
+
+      ctx.fillStyle = gradient;
+
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.strokeStyle = "rgba(255,255,255,.1)";
