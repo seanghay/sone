@@ -100,7 +100,6 @@ function _CanvasViewer({ ref, image }) {
           destHeight,
         );
 
-        image.close()
         ctx.font = "50px monospace";
 
         const controller = new AbortController();
@@ -234,6 +233,11 @@ export function Studio() {
           );
 
           const bitmap = await createImageBitmap(imageData);
+          
+          if (currentImage) {
+            currentImage.close()
+          }
+
           setCurrentImage(bitmap);
         },
         {
