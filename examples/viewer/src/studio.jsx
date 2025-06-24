@@ -30,7 +30,7 @@ function _CanvasViewer({ ref, image }) {
 
       ctx.beginPath();
 
-      const gridSize = 30 * devicePixelRatio;
+      const gridSize = Math.min(canvas.width, canvas.height) / 20;
 
       for (let y = 0; y < canvas.height; y += gridSize) {
         ctx.moveTo(0, y);
@@ -160,7 +160,7 @@ function _CanvasViewer({ ref, image }) {
     <>
       {position != null ? (
         <>
-          <div className="fixed text-white/70 text-xs px-2 py-1 m-2 bg-black/10 rounded-lg">
+          <div className="fixed text-white/70 text-sm px-2 py-1 m-2 bg-black/10 rounded-lg">
             <pre>
               x: {position[0]}px ({position[2]}%)
             </pre>
