@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/seanghay/sone.git"
   },
-  "version": "0.1.7",
+  "version": "0.1.8",
   "type": "module",
   "main": "src/sone.js",
   "files": [
