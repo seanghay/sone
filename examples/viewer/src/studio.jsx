@@ -233,9 +233,9 @@ export function Studio() {
           );
 
           const bitmap = await createImageBitmap(imageData);
-          
+
           if (currentImage) {
-            currentImage.close()
+            currentImage.close();
           }
 
           setCurrentImage(bitmap);
