@@ -30,7 +30,7 @@ async function Document() {
   return Column(
     Row(
       Flex()
-        .size(200, 100)
+        .size(200, 120)
         .cornerRadius(100, 0)
         .bg(
           "linear-gradient(45deg, turquoise 20%, yellow 20%, yellow 40%, turquoise 40%, turquoise 60%, yellow 60%, yellow 80%, turquoise 80%, turquoise 100%)",
@@ -71,6 +71,10 @@ async function Document() {
       .size(20)
       .font("SF Pro Text")
       .align("center"),
+    Text("This is not a wrap! This is not a wrap! This is not a wrap!")
+      .size(56)
+      .weight("bold")
+      .nowrap(),
     Text(
       Span("const ").color("red"),
       Span("date").weight(700).color("blue").line(-8, 3, "yellow"),

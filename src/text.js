@@ -148,6 +148,12 @@ export const splitLines = memoize(_splitLines);
  */
 export function textMeasureFunc(spans, style, maxWidth) {
   let w = maxWidth;
+  const nowrap = style.nowrap;
+
+  if (true === nowrap) {
+    w = Number.NaN;
+  }
+
   if (Number.isNaN(w)) w = Number.POSITIVE_INFINITY;
 
   let width = 0;
@@ -310,6 +316,10 @@ export function Text(...children) {
       this.style.lineOffset = offset;
       this.style.lineWidth = lineWidth;
       this.style.lineColor = color;
+      return this;
+    },
+    nowrap() {
+      this.style.nowrap = true;
       return this;
     },
 
