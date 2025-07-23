@@ -10,9 +10,9 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "fast-glob": "^3.3.3",
+    "fast-memoize": "^2.5.2",
     "http-graceful-shutdown": "^3.1.14",
     "morgan": "^1.10.0",
-    "fast-memoize": "^2.5.2",
-    "sone": "^0.1.5"
+    "sone": "^0.1.9"
   }
 }
