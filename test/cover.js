@@ -40,7 +40,7 @@ function SoneCover() {
           "SwiftUI-inspired canvas layout engine with ",
           Span("Advanced Rich Text")
             .weight("bold")
-            .color("linear-gradient(to top, #9be15d 0%, #00e3ae 100%)")
+            .color("linear-gradient(45deg, #9be15d 0%, #00e3ae 100%)")
             .strokeColor("white")
             .strokeWidth(8),
           " support.",
