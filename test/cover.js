@@ -67,7 +67,7 @@ function SoneCover() {
     .padding(72)
     .width(1280)
     .height(640)
-    .bg("linear-gradient(to top, #dfe9f3 0%, white 100%);");
+    .bg("linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);");
 }
 
 await fs.writeFile("test/cover.jpg", await sone(SoneCover).jpg());
