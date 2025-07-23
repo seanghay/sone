@@ -73,3 +73,4 @@ function SoneCover() {
 await fs.writeFile("test/cover.jpg", await sone(SoneCover).jpg());
 await fs.writeFile("test/cover.png", await sone(SoneCover).png());
 await fs.writeFile("test/cover.pdf", await sone(SoneCover).pdf());
+await fs.writeFile("test/cover.svg", await sone(SoneCover).svg());
