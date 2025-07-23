@@ -737,8 +737,11 @@ export function sone(
     pdf(options) {
       return createSoneCanvas().toBuffer("pdf", options);
     },
-    svg() {
-      return createSoneCanvas().toBuffer("svg");
+    /**
+     * @param {boolean} outline
+     */
+    svg(outline = true) {
+      return createSoneCanvas().toBuffer("svg", { outline });
     },
     sync: {
       png() {
