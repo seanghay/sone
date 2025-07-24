@@ -40,8 +40,10 @@ export const Font = {
   registerFont: SoneConfig.registerFont,
   register: SoneConfig.registerFont,
   reset: SoneConfig.resetFonts,
-  use: FontLibrary.use,
-  has: FontLibrary.has,
-  family: FontLibrary.family,
-  families: FontLibrary.families,
+  use: FontLibrary.use.bind(FontLibrary),
+  has: FontLibrary.has.bind(FontLibrary),
+  family: FontLibrary.family.bind(FontLibrary),
+  get families() {
+    return FontLibrary.families;
+  },
 };
