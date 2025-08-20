@@ -1,0 +1,57 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { Canvas } from "skia-canvas";
+import {
+  Column,
+  Photo,
+  render,
+  renderer,
+  Text,
+  TextDefault,
+} from "../../src/node.ts";
+
+const root = Column(
+  Photo(
+    "https://upload.wikimedia.org/wikipedia/commons/d/dd/RFI_logo_2013.svg",
+  ).size(220),
+  //
+  TextDefault(
+    Text("ក្រុមសង្កេតការណ៍អន្តរកាល ៧ប្រទេសចុះពិនិត្យបទឈប់បាញ់នៅព្រំដែនកម្ពុជា-ថៃ")
+      .weight("bold")
+      .marginTop(64),
+    Text(
+      "អនុព័ន្ធយោធាម៉ាឡេស៊ី នៅថ្ងៃទី៨ ខែសីហា ឆ្នាំ២០២៥ ដឹកនាំក្រុមអ្នកសង្កេតការណ៍ អន្តរកាលមកពីប្រទេសចំនួន ៧ ទៅបំពេញទស្សនកិច្ចនៅព្រំដែនកម្ពុជា-ថៃ។ កម្មវត្ថុនៃដំណើរទស្សនកិច្ចរបស់ក្រុមអ្នកសង្កេតការណ៍អន្តរជាតិនេះ គឺពិនិត្យមើលការអនុវត្តបទឈប់បាញ់ផ្អែកតាមខ្លឹមសារ ដែលបានឯកភាពគ្នារវាងភាគីកម្ពុជា-ថៃ ក្នុងកិច្ចប្រជុំវិសាមញ្ញនៃ គណៈកម្មាធិការព្រំដែនទូទៅ GBC នៅប្រទេសម៉ាឡេស៊ី កាលពីថ្ងៃទី៧ ខែសីហា ឆ្នាំ២០២៥។",
+    )
+      .color("#333")
+      .indent(100)
+      .align("justify")
+      .marginTop(40),
+  )
+    .size(69)
+    .font("Hanuman")
+    .color("black"),
+  //
+  Text("Dynamic Generation by Sone.js")
+    .marginTop(100)
+    .size(56)
+    .color("white")
+    .font("Kantumruy Pro")
+    .bg("black")
+    .weight(500)
+    .padding(8, 30)
+    .rounded(24)
+    .cornerSmoothing(0.7)
+    .alignSelf("flex-end"),
+)
+  .bg("#eee")
+  .padding(100)
+  .maxWidth(1800);
+
+const canvas = await render<Canvas>(root, renderer);
+const file = path.parse(fileURLToPath(import.meta.url));
+const filename = `${file.name}.jpg`;
+await fs.writeFile(
+  path.join(file.dir, filename),
+  await canvas.toBuffer("jpg", { quality: 1 }),
+);

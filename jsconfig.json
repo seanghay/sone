@@ -1,7 +1,0 @@
-{
-  "include": ["src/**/*", "test/**/*", "icu4x/**/*"],
-  "compilerOptions": {
-    "moduleResolution": "nodenext",
-    "module": "NodeNext",
-  }
-}

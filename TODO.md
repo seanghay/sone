@@ -1,0 +1,31 @@
+- [x] Text Stroke
+- [x] Box Shadow
+- [x] Text Shadow
+- [x] Text Alignment
+- [x] Text Indent
+- [x] Text Decoration (line-through, Overline)
+- [x] Opacity
+- [x] JSON Serialization
+- [x] Span Background
+- [x] Hanging Indent
+- [x] Linear Gradient / Repeating Linear Gradient
+- [x] Text Fill Gradient
+- [x] Background Image
+- [x] Filters
+- [x] Table
+- [x] QR Code
+- [x] Forced Break (\n)
+- [x] Merge Same Spans (Optimization)
+- [x] Octagon
+- [x] Image Scale Alignment
+- [ ] Table Column Span, Row Span
+- [ ] Improve Line Breaking Algorithm
+- [ ] Polygon Shape
+- [ ] SVG Color Fill
+- [ ] Mask
+- [ ] Image Clip Mask with Text
+- [ ] Text Sticker
+- [ ] Browser
+- [ ] Sone Editor
+- [ ] Sone reference API
+- [ ] Fumadocs

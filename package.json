@@ -1,31 +1,111 @@
 {
   "name": "sone",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seanghay/sone.git"
-  },
+  "description": "A declarative Canvas layout engine for JavaScript.",
   "version": "0.1.11",
-  "type": "module",
-  "main": "src/sone.js",
-  "files": [
-    "src"
+  "repository": "seanghay/sone",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Seanghay Yath",
+    "email": "seanghay.dev@gmail.com",
+    "url": "https://github.com/seanghay"
+  },
+  "keywords": [
+    "canvas",
+    "skia-canvas",
+    "flexbox",
+    "layout",
+    "khmer",
+    "layout-engine",
+    "2d"
   ],
+  "sideEffects": false,
+  "main": "dist/node.js",
+  "module": "dist/node.mjs",
+  "types": "dist/node.d.ts",
+  "type": "commonjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "browser": {
+        "import": {
+          "types": "./dist/browser.d.mts",
+          "default": "./dist/browser.mjs"
+        },
+        "require": {
+          "types": "./dist/browser.d.ts",
+          "default": "./dist/browser.js"
+        }
+      },
+      "node": {
+        "import": {
+          "types": "./dist/node.d.mts",
+          "default": "./dist/node.mjs"
+        },
+        "require": {
+          "types": "./dist/node.d.ts",
+          "default": "./dist/node.js"
+        }
+      },
+      "import": {
+        "types": "./dist/node.d.mts",
+        "default": "./dist/node.mjs"
+      },
+      "require": {
+        "types": "./dist/node.d.ts",
+        "default": "./dist/node.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest --run",
+    "test:dev": "vitest",
+    "format": "biome format --write src/ test/",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build"
+  },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4"
+    "@biomejs/biome": "2.2.0",
+    "@types/gradient-parser": "^0.1.5",
+    "@types/object.pick": "^1.3.4",
+    "lint-staged": "^16.1.5",
+    "simple-git-hooks": "^2.13.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4"
+  },
+  "peerDependencies": {
+    "skia-canvas": "^3.0.1"
   },
   "dependencies": {
-    "css-box-shadow": "^1.0.0-3",
-    "css-font-parser": "^2.0.1",
-    "devalue": "^5.1.1",
+    "@types/svg-path-bounds": "^1.0.2",
+    "css-line-break": "^2.1.0",
+    "dequal": "^2.0.3",
     "fast-memoize": "^2.5.2",
     "figma-squircle": "^1.1.0",
     "gradient-parser": "^1.1.1",
     "hex-color-regex": "^1.1.0",
     "hsl-regex": "^1.0.0",
     "hsla-regex": "^1.0.0",
+    "json-colorizer": "^3.0.1",
+    "klona": "^2.0.6",
+    "object.pick": "^1.3.0",
+    "p-memoize": "^7.1.1",
     "rgb-regex": "^1.0.1",
     "rgba-regex": "^1.0.0",
-    "skia-canvas": "git+https://github.com/samizdatco/skia-canvas.git#v2.0.3-rc12",
+    "svg-path-bounds": "^1.0.2",
+    "uqr": "^0.1.2",
     "yoga-layout": "^3.2.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }

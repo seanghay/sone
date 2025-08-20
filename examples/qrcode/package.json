@@ -1,8 +1,0 @@
-{
-  "type": "module",
-  "private": true,
-  "dependencies": {
-    "sone": "^0.1.4",
-    "uqr": "^0.1.2"
-  }
-}
