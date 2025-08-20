@@ -1,6 +1,7 @@
 /**
  * Node.js platform implementation using skia-canvas for server-side rendering
  */
+import { Buffer } from "node:buffer";
 import skia, { Canvas, type ExportOptions, FontLibrary } from "skia-canvas";
 import type { SoneNode } from "./core.ts";
 import {
