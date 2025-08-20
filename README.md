@@ -48,6 +48,8 @@ import fs from "node:fs/promises";
 await fs.writeFile("image.jpg", buffer);
 ```
 
+More examples can be found at [test/visual](test/visual) directory
+
 **Font Registration**
 
 ```javascript
