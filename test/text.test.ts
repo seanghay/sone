@@ -22,7 +22,7 @@ test("create paragraph without max width", async () => {
     Span("ឈាង រ៉ា រដ្ឋមន្ត្រីក្រសួងសុខាភិបាល បានប្រកាសថា ក្រុមគ្រូពេទ្យកម្ពុជាគឺជា").size(32),
     "លោកសាស្ត្រាចារ្យ ឈាង រ៉ា រដ្ឋមន្ត្រីក្រសួងសុខាភិបាល",
     Span("ឈាង រ៉ា រដ្ឋមន្ត្រីក្រសួងសុខាភិបាល បានប្រកាសថា"),
-  );
+  ).font("NotoSansKhmer");
 
   const context: SoneCompileContext = {
     defaultTextProps: renderer.getDefaultTextProps(),
@@ -42,14 +42,14 @@ test("create paragraph without max width", async () => {
 
   const paragraph = blocks[0].paragraph;
 
-  expect(Math.round(paragraph.width)).toBe(1751);
-  expect(Math.round(paragraph.height)).toBe(64);
+  expect(Math.round(paragraph.width)).toBe(1722);
+  expect(Math.round(paragraph.height)).toBe(44);
 });
 
 test("createMultilineParagraph with simple text", () => {
   const baseProps: TextProps = {
     size: 14,
-    font: ["Arial", "sans-serif"],
+    font: ["44", "sans-serif"],
     color: "black",
     lineHeight: 1.2,
     indentSize: 0,
@@ -74,7 +74,7 @@ test("createMultilineParagraph with simple text", () => {
 test("createMultilineParagraph with mixed spans", () => {
   const baseProps: TextProps = {
     size: 14,
-    font: ["Arial"],
+    font: ["NotoSansKhmer"],
     color: "black",
   };
 
@@ -98,13 +98,13 @@ test("createMultilineParagraph with mixed spans", () => {
 test("createMultilineParagraph with line height multiplier", () => {
   const basePropsNormal: TextProps = {
     size: 14,
-    font: ["Arial"],
+    font: ["NotoSansKhmer"],
     lineHeight: 1.0,
   };
 
   const basePropsLarge: TextProps = {
     size: 14,
-    font: ["Arial"],
+    font: ["NotoSansKhmer"],
     lineHeight: 2.0,
   };
 
@@ -130,13 +130,13 @@ test("createMultilineParagraph with line height multiplier", () => {
 test("createMultilineParagraph with indentation", () => {
   const basePropsNoIndent: TextProps = {
     size: 14,
-    font: ["Arial"],
+    font: ["NotoSansKhmer"],
     indentSize: 0,
   };
 
   const basePropsWithIndent: TextProps = {
     size: 14,
-    font: ["Arial"],
+    font: ["NotoSansKhmer"],
     indentSize: 20,
   };
 
@@ -162,7 +162,7 @@ test("createMultilineParagraph with indentation", () => {
 test("createMultilineParagraph with offsetY variations", () => {
   const baseProps: TextProps = {
     size: 14,
-    font: ["Arial"],
+    font: ["NotoSansKhmer"],
   };
 
   const spans = [
