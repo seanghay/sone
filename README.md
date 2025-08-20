@@ -15,29 +15,26 @@ npm install sone
 ```
 
 ```javascript
-import { sone, Column, Text } from 'sone';
+import { Column, Span, sone, Text } from "sone";
 
 function Document() {
   return Column(
-    Text(
-      "Hello, ",
-      Span("World").color("blue"),
-    )
-    .size(44)
-    .color("black")
+    Text("Hello, ", Span("World").color("blue").weight("bold"))
+      .size(44)
+      .color("black"),
   )
-  .padding(24)
-  .bg("white")
+    .padding(24)
+    .bg("white");
 }
 
 // save as buffer
 const buffer = await sone(Document()).jpg();
 
 // save to file
-import fs from 'node:fs/promises';
+import fs from "node:fs/promises";
+
 fs.writeFile("image.jpg", buffer);
 ```
-
 
 #### Acknowledgement
 
