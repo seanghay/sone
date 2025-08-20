@@ -16,7 +16,8 @@
     "layout",
     "khmer",
     "layout-engine",
-    "2d"
+    "2d",
+    "text-rendering"
   ],
   "sideEffects": false,
   "main": "dist/node.js",
@@ -85,7 +86,6 @@
     "@types/svg-path-bounds": "^1.0.2",
     "css-line-break": "^2.1.0",
     "dequal": "^2.0.3",
-    "fast-memoize": "^2.5.2",
     "figma-squircle": "^1.1.0",
     "gradient-parser": "^1.1.1",
     "hex-color-regex": "^1.1.0",

@@ -102,3 +102,54 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
     canvas: async () => build(),
   };
 }
+
+/**
+ * Font management utility for handling font loading, unloading, and checking availability.
+ * This module provides a clean interface to interact with the underlying renderer's font system.
+ */
+export const Font = {
+  /**
+   * Loads a font and registers it with the renderer for use in rendering operations.
+   *
+   * @param name - The name identifier for the font (used to reference it later)
+   * @param source - The source path, URL, or data for the font file
+   * @returns Promise that resolves when the font is successfully loaded and registered
+   *
+   * @example
+   * await Font.load('MyCustomFont', '/assets/fonts/custom-font.ttf');
+   */
+  async load(name: string, source: string) {
+    return renderer.registerFont(name, source);
+  },
+
+  /**
+   * Unloads a previously loaded font and removes it from the renderer.
+   * This frees up memory and removes the font from the available font list.
+   *
+   * @param name - The name identifier of the font to unload
+   * @returns Promise that resolves when the font is successfully unloaded
+   *
+   * @example
+   * await Font.unload('MyCustomFont');
+   */
+  async unload(name: string) {
+    return renderer.unregisterFont(name);
+  },
+
+  /**
+   * Checks if a font with the given name is currently loaded and available.
+   *
+   * @param name - The name identifier of the font to check
+   * @returns true if the font is loaded and available, false otherwise
+   *
+   * @example
+   * if (Font.has('MyCustomFont')) {
+   *   // Use the font in rendering
+   * } else {
+   *   // Load the font first or use a fallback
+   * }
+   */
+  has(name: string): boolean {
+    return renderer.hasFont(name);
+  },
+};

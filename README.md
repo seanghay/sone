@@ -48,6 +48,16 @@ import fs from "node:fs/promises";
 fs.writeFile("image.jpg", buffer);
 ```
 
+**Font Registration**
+
+```javascript
+import { Font } from 'sone';
+
+if (!Font.has("NotoSansKhmer")) {
+  await Font.load('NotoSansKhmer', "test/font/NotoSansKhmer.ttf");
+}
+```
+
 #### Acknowledgements
 
 - Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
