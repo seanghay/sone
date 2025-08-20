@@ -4,6 +4,7 @@
 A declarative Canvas layout engine for JavaScript with advanced rich text support.
 
 [![Tests](https://github.com/seanghay/sone/actions/workflows/tests.yaml/badge.svg)](https://github.com/seanghay/sone/actions/workflows/tests.yaml)
+[![install size](https://packagephobia.com/badge?p=sone)](https://packagephobia.com/result?p=sone)
 
 - Declarative API
 - Flex Layout
