@@ -1,6 +1,11 @@
+<img src="test/image/sone.svg" width=24>
+
 **Sone**
 
 A declarative Canvas layout engine for JavaScript with advanced rich text support.
+
+[![Tests](https://github.com/seanghay/sone/actions/workflows/tests.yaml/badge.svg)](https://github.com/seanghay/sone/actions/workflows/tests.yaml)
+
 
 - Flex Layout
 - Squircle
@@ -9,6 +14,13 @@ A declarative Canvas layout engine for JavaScript with advanced rich text suppor
 - Rich Text
 - Composable
 - Output as SVG, PDF, Image
+
+---
+
+### Overview
+
+- This project uses `skia-canvas` if you encounter an installation issue, please follow [the skia-canvas instruction](https://github.com/samizdatco/skia-canvas)
+- Node.js 16+ or equivalent
 
 ```shell
 npm install sone
@@ -36,9 +48,10 @@ import fs from "node:fs/promises";
 fs.writeFile("image.jpg", buffer);
 ```
 
-#### Acknowledgement
+#### Acknowledgements
 
-- [skia-canvas](https://skia-canvas.org/)
+- Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
+- [skia-canvas](https://skia-canvas.org/) Awesome JavaScript Skia Canvas binding
 - [node-canvas](https://github.com/Automattic/node-canvas)
 - [@napi-rs/canvas](https://github.com/Brooooooklyn/canvas)
 - [dropflow](https://github.com/chearon/dropflow)
@@ -49,6 +62,8 @@ fs.writeFile("image.jpg", buffer);
 - https://jsfiddle.net/vtmnyea8/
 - https://raphlinus.github.io/text/2020/10/26/text-layout.html
 - https://mrandri19.github.io/2019/07/24/modern-text-rendering-linux-overview.html
+- https://www.khmerload.com/article/208169
+- [Tep Sovichet](https://github.com/sovichet)
 
 ### License
 
