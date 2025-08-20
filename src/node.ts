@@ -88,17 +88,63 @@ export const renderer: SoneRenderer = {
   },
 };
 
+/**
+ * Creates a Sone renderer with multiple export format options
+ * @param node - The SoneNode to render
+ * @param config - Optional rendering configuration
+ * @returns Object with methods for exporting in different formats
+ */
 export function sone(node: SoneNode, config?: SoneRenderConfig) {
+  // Build function that renders the node to a Canvas using the specified renderer
   const build = async () => render<Canvas>(node, renderer, config);
+
   return {
+    /**
+     * Export as JPEG image
+     * @param quality - JPEG quality from 0.0 to 1.0 (default: 1.0)
+     * @returns Promise<Buffer> - JPEG image buffer
+     */
     jpg: async (quality = 1.0) => (await build()).toBuffer("jpg", { quality }),
+
+    /**
+     * Export as PNG image
+     * @returns Promise<Buffer> - PNG image buffer
+     */
     png: async () => (await build()).toBuffer("png"),
+
+    /**
+     * Export as SVG vector graphic
+     * @param outline - Whether to include outline information (default: true)
+     * @returns Promise<Buffer> - SVG image buffer
+     */
     svg: async (outline = true) => (await build()).toBuffer("svg", { outline }),
+
+    /**
+     * Export as PDF document
+     * @param options - Optional PDF export settings
+     * @returns Promise<Buffer> - PDF document buffer
+     */
     pdf: async (options?: ExportOptions) =>
       (await build()).toBuffer("pdf", options),
+
+    /**
+     * Export as WebP image
+     * @param options - Optional WebP export settings
+     * @returns Promise<Buffer> - WebP image buffer
+     */
     webp: async (options?: ExportOptions) =>
       (await build()).toBuffer("webp", options),
+
+    /**
+     * Export as raw buffer data
+     * @returns Promise<Buffer> - Raw image data buffer
+     */
     raw: async () => (await build()).toBuffer("raw"),
+
+    /**
+     * Get the rendered Canvas object directly
+     * @returns Promise<Canvas> - The rendered Canvas instance
+     */
     canvas: async () => build(),
   };
 }
@@ -117,8 +163,9 @@ export const Font = {
    *
    * @example
    * await Font.load('MyCustomFont', '/assets/fonts/custom-font.ttf');
+   * await Font.load('MyCustomFont', ['/assets/fonts/custom-font.ttf']);
    */
-  async load(name: string, source: string) {
+  async load(name: string, source: string | string[]) {
     return renderer.registerFont(name, source);
   },
 

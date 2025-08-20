@@ -90,7 +90,7 @@ export interface SoneRenderer {
   /** Check if font is available */
   hasFont(name: string): boolean;
   /** Register custom font from file/URL */
-  registerFont(name: string, source: string): Promise<void>;
+  registerFont(name: string, source: string[] | string): Promise<void>;
   /** Remove registered font */
   unregisterFont(name: string): Promise<void>;
   /** Clear all registered fonts */
