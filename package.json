@@ -1,6 +1,6 @@
 {
   "name": "sone",
-  "description": "A declarative Canvas layout engine for JavaScript.",
+  "description": "A declarative Canvas layout engine for JavaScript with advanced rich text support.",
   "version": "0.1.11",
   "repository": "seanghay/sone",
   "license": "Apache-2.0",

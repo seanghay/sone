@@ -1,6 +1,14 @@
 **Sone**
 
-A declarative Canvas layout engine for JavaScript.
+A declarative Canvas layout engine for JavaScript with advanced rich text support.
+
+- Flex Layout
+- Squircle
+- Text Justification
+- Table
+- Rich Text
+- Composable
+- Output as SVG, PDF, Image
 
 ```shell
 npm install sone
@@ -31,15 +39,22 @@ fs.writeFile("image.jpg", buffer);
 ```
 
 
-### Acknowledgement
+#### Acknowledgement
 
-- skia-canvas
-- node-canvas
-- dropflow
-- harfbuzz
+- [skia-canvas](https://skia-canvas.org/)
+- [node-canvas](https://github.com/Automattic/node-canvas)
+- [@napi-rs/canvas](https://github.com/Brooooooklyn/canvas)
+- [dropflow](https://github.com/chearon/dropflow)
+- [harfbuzz](https://harfbuzz.github.io/)
+- [yoga-layout](https://yogalayout.dev/)
+- [vercel/satori](https://github.com/vercel/satori)
+- [recanvas](https://github.com/GuptaSiddhant/recanvas)
+- https://jsfiddle.net/vtmnyea8/
+- https://raphlinus.github.io/text/2020/10/26/text-layout.html
+- https://mrandri19.github.io/2019/07/24/modern-text-rendering-linux-overview.html
 
 ### License
 
 `Apache-2.0`
 
-<small>Seanghay's Optimized Nesting Engine</small>
+*Seanghay's Optimized Nesting Engine*
