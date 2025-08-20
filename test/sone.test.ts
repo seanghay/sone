@@ -1,5 +1,5 @@
-import { Column, Span, sone, Text } from "sone";
 import { expect, test } from "vitest";
+import { Column, Span, sone, Text } from "../src/node.ts";
 
 test("generate a simple jpeg buffer", async () => {
   function Document() {
