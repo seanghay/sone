@@ -1,4 +1,4 @@
-import { Edge, type Node } from "yoga-layout";
+import { Edge, type Node } from "yoga-layout/load";
 import type { LayoutProps } from "./core.ts";
 
 export function drawBorder(

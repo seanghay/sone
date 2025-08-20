@@ -3,11 +3,13 @@ import { klona } from "klona";
 import pick from "object.pick";
 import pMemoize from "p-memoize";
 import getBounds from "svg-path-bounds";
-import Yoga, {
+import {
+  loadYoga,
   type MeasureFunction,
   MeasureMode,
   type Node,
-} from "yoga-layout";
+  type Yoga as YogaLayout,
+} from "yoga-layout/load";
 import {
   type ColorValue,
   type ColumnNode,
@@ -30,6 +32,8 @@ import { createSmoothRoundRect, parseRadius } from "./rect.ts";
 import { applyPropsToYogaNode } from "./serde.ts";
 import { type CssShadowProperties, parseShadow } from "./shadow.ts";
 import { createParagraph, drawTextNode } from "./text.ts";
+
+const _yoga = loadYoga();
 
 /**
  * Default text styling properties used as fallbacks
@@ -450,6 +454,7 @@ export function findFonts(node: SoneNode): Set<FontValue> | undefined {
 export function createLayoutNode(
   node: SoneNode,
   renderer: SoneRenderer,
+  Yoga: YogaLayout,
 ): Node | undefined {
   if (node == null) return;
   if (node.type === "text-default") {
@@ -518,7 +523,7 @@ export function createLayoutNode(
 
   for (const child of node.children) {
     if (child == null) continue;
-    const childNode = createLayoutNode(child, renderer);
+    const childNode = createLayoutNode(child, renderer, Yoga);
     if (childNode == null) continue;
     yogaNode.insertChild(childNode, yogaNode.getChildCount());
   }
@@ -588,6 +593,9 @@ export async function render<T = HTMLCanvasElement>(
   renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ): Promise<T> {
+  // create yoga
+  const Yoga = await _yoga;
+
   // compile the node
   const fonts = findFonts(node);
 
@@ -621,7 +629,7 @@ export async function render<T = HTMLCanvasElement>(
     cache.clear();
   }
 
-  const layout = createLayoutNode(compiledNode, renderer);
+  const layout = createLayoutNode(compiledNode, renderer, Yoga);
 
   if (layout == null) {
     throw new Error("Unable to create canvas!");

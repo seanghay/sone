@@ -1,6 +1,6 @@
 import { dequal } from "dequal";
 import { klona } from "klona";
-import { Edge, type Node } from "yoga-layout";
+import { Edge, type Node } from "yoga-layout/load";
 import type { SpanNode, SpanProps, TextNode, TextProps } from "./core.ts";
 import { createGradientFillStyleList } from "./gradient.ts";
 import type { SoneRenderer } from "./renderer.ts";

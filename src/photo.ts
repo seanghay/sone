@@ -1,4 +1,4 @@
-import { type Node } from "yoga-layout";
+import { type Node } from "yoga-layout/load";
 import type { PhotoNode } from "./core.ts";
 import { drawBorder } from "./op.ts";
 import { createSmoothRoundRect, parseRadius } from "./rect.ts";

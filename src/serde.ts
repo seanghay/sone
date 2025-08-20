@@ -1,4 +1,4 @@
-import Yoga, {
+import {
   Align,
   BoxSizing,
   Direction,
@@ -7,10 +7,11 @@ import Yoga, {
   FlexDirection,
   Gutter,
   Justify,
+  Node,
   Overflow,
   PositionType,
   Wrap,
-} from "yoga-layout";
+} from "yoga-layout/load";
 
 import type { LayoutProps, Required } from "./core.ts";
 
@@ -20,10 +21,7 @@ import type { LayoutProps, Required } from "./core.ts";
  * @param node - Yoga node to configure (creates new if not provided)
  * @returns configured Yoga node
  */
-export function applyPropsToYogaNode(
-  props: LayoutProps,
-  node = Yoga.Node.create(),
-) {
+export function applyPropsToYogaNode(props: LayoutProps, node: Node) {
   for (const key of Object.keys(props)) {
     switch (key) {
       case "alignContent":
