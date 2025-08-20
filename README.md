@@ -1,4 +1,4 @@
-<img src="test/image/sone.svg" width=24>
+<img src="test/image/sone.svg" width=28>
 
 **Sone**
 
@@ -6,12 +6,12 @@ A declarative Canvas layout engine for JavaScript with advanced rich text suppor
 
 [![Tests](https://github.com/seanghay/sone/actions/workflows/tests.yaml/badge.svg)](https://github.com/seanghay/sone/actions/workflows/tests.yaml)
 
-
+- Declarative API
 - Flex Layout
 - Squircle
 - Text Justification
 - Table
-- Rich Text
+- Rich Text Rendering
 - Composable
 - Output as SVG, PDF, Image
 
