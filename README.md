@@ -60,6 +60,30 @@ if (!Font.has("NotoSansKhmer")) {
 }
 ```
 
+**Next.js**
+
+To make it work with Next.js, update your config file:
+
+```typescript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  serverExternalPackages: ["skia-canvas"],
+  webpack: (config, options) => {
+    if (options.isServer) {
+      config.externals = [
+        ...config.externals,
+        { "skia-canvas": "commonjs skia-canvas" },
+      ];
+    }
+    return config;
+  },
+};
+
+export default nextConfig;
+
+```
+
 #### Acknowledgements
 
 - Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
