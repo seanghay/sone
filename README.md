@@ -45,7 +45,7 @@ const buffer = await sone(Document()).jpg();
 // save to file
 import fs from "node:fs/promises";
 
-fs.writeFile("image.jpg", buffer);
+await fs.writeFile("image.jpg", buffer);
 ```
 
 **Font Registration**
