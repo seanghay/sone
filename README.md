@@ -2,21 +2,44 @@
 
 A declarative Canvas layout engine for JavaScript.
 
-### Install
+```shell
+npm install sone
+```
 
-### Usage
+```javascript
+import { sone, Column, Text } from 'sone';
 
-### Advanced Usage
+function Document() {
+  return Column(
+    Text(
+      "Hello, ",
+      Span("World").color("blue"),
+    )
+    .size(44)
+    .color("black")
+  )
+  .padding(24)
+  .bg("white")
+}
 
-### License
+// save as buffer
+const buffer = await sone(Document()).jpg();
 
-`Apache-2.0`
+// save to file
+import fs from 'node:fs/promises';
+fs.writeFile("image.jpg", buffer);
+```
 
-### Thanks
+
+### Acknowledgement
 
 - skia-canvas
 - node-canvas
 - dropflow
 - harfbuzz
 
-### API
+### License
+
+`Apache-2.0`
+
+<small>Seanghay's Optimized Nesting Engine</small>
