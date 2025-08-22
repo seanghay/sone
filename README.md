@@ -1,7 +1,6 @@
 <img src="test/image/sone.svg" width=28>
 
-**Sone**
-A declarative Canvas layout engine for JavaScript with advanced rich text support.
+**Sone** — A declarative Canvas layout engine for JavaScript with advanced rich text support.
 
 [![Tests](https://github.com/seanghay/sone/actions/workflows/tests.yaml/badge.svg)](https://github.com/seanghay/sone/actions/workflows/tests.yaml)
 [![install size](https://packagephobia.com/badge?p=sone)](https://packagephobia.com/result?p=sone)
@@ -13,7 +12,10 @@ A declarative Canvas layout engine for JavaScript with advanced rich text suppor
 - Table
 - Rich Text Rendering
 - Composable
+- QR Code
 - Output as SVG, PDF, Image
+- Metadata API (Text Recognition Dataset Generation)
+- All features from [skia-canvas](https://skia-canvas.org/)
 
 ---
 
@@ -84,7 +86,7 @@ export default nextConfig;
 
 ```
 
-#### Acknowledgements
+### Acknowledgements
 
 - Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
 - [skia-canvas](https://skia-canvas.org/) Awesome JavaScript Skia Canvas binding
