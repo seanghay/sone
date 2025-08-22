@@ -1,7 +1,6 @@
-import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { Canvas } from "skia-canvas";
-import { Column, Row, render, renderer, Text } from "../../src/node.ts";
+import { Column, Row, renderer, Text } from "../../src/node.ts";
+import { writeCanvasToFile } from "./utils.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 
@@ -113,6 +112,4 @@ const component = Column(
   .height(800)
   .bg("#ffffff");
 
-const canvas = await render<Canvas>(component, renderer);
-const buffer = canvas.toBufferSync("png");
-writeFileSync(relative("layout-test.png"), buffer);
+await writeCanvasToFile(component, import.meta.url);

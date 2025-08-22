@@ -18,6 +18,7 @@
 - [x] Merge Same Spans (Optimization)
 - [x] Octagon
 - [x] Image Scale Alignment
+- [ ] Side Borders
 - [ ] Table Column Span, Row Span
 - [ ] Improve Line Breaking Algorithm
 - [ ] Polygon Shape
@@ -29,3 +30,6 @@
 - [ ] Sone Editor
 - [ ] Sone reference API
 - [ ] Fumadocs
+- [ ] JSX
+- [x] Annotations API
+- [ ] Pattern

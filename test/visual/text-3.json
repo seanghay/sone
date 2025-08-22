@@ -1,0 +1,1769 @@
+{
+  "type": "column",
+  "props": {
+    "background": ["cornsilk"],
+    "padding": 44,
+    "gap": 44
+  },
+  "children": [
+    {
+      "type": "text",
+      "children": [
+        "ធី សុវណ្ណថា\nត្រូវបញ្ជប់តួនាទីពី\nអភិបាលរងក្រុងអរិយក្សត្រ\nនិងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋទាំងអស់ ",
+        {
+          "type": "span",
+          "children": "JBC ចាត់ទុកការរាយបន្លាលួស\nរបស់យោធាថៃ\nគឺល្មើសច្បាប់អន្តរជាតិ និងរំលោភ MOU ឆ្នាំ២០០០",
+          "props": {
+            "size": 44,
+            "color": "red",
+            "font": ["Moul"],
+            "style": "normal",
+            "weight": 400,
+            "letterSpacing": 0,
+            "wordSpacing": 0,
+            "strokeColor": "black",
+            "strokeWidth": 0,
+            "underline": 0,
+            "overline": 0,
+            "lineThrough": 0,
+            "dropShadows": []
+          }
+        }
+      ],
+      "props": {
+        "size": 44,
+        "color": "brown",
+        "font": ["Khmer"],
+        "style": "normal",
+        "weight": 400,
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "center",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 1413,
+              "height": 75.1953125,
+              "lines": [
+                {
+                  "baseline": 49.4140625,
+                  "height": 75.1953125,
+                  "width": 227.87999725341797,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 33.29999923706055,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 33.29999923706055,
+                        "actualBoundingBoxAscent": 46.4140625,
+                        "actualBoundingBoxDescent": 0.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 3,
+                            "y": -46.4140625,
+                            "width": 27,
+                            "height": 47,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 2,
+                            "runs": [
+                              {
+                                "x": 3,
+                                "y": -46.4140625,
+                                "width": 27,
+                                "height": 47,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ធី សុវណ្ណថា",
+                      "height": 75.1953125,
+                      "width": 227.87999725341797,
+                      "props": {
+                        "size": 44,
+                        "color": "brown",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "borderWidth": 2,
+                        "borderColor": "red",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          },
+          {
+            "paragraph": {
+              "width": 1413,
+              "height": 75.1953125,
+              "lines": [
+                {
+                  "baseline": 49.4140625,
+                  "height": 75.1953125,
+                  "width": 333.00000381469727,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 66.5999984741211,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 66.5999984741211,
+                        "actualBoundingBoxAscent": 36.4140625,
+                        "actualBoundingBoxDescent": 16.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 1,
+                            "y": -36.4140625,
+                            "width": 63.951171875,
+                            "height": 53,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 5,
+                            "runs": [
+                              {
+                                "x": 1,
+                                "y": -36.4140625,
+                                "width": 63.951171875,
+                                "height": 53,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ត្រូវបញ្ជប់តួនាទីពី",
+                      "height": 75.1953125,
+                      "width": 333.00000381469727,
+                      "props": {
+                        "size": 44,
+                        "color": "brown",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "borderWidth": 2,
+                        "borderColor": "red",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          },
+          {
+            "paragraph": {
+              "width": 1413,
+              "height": 75.1953125,
+              "lines": [
+                {
+                  "baseline": 49.4140625,
+                  "height": 75.1953125,
+                  "width": 499.510009765625,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 216.4600067138672,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 216.4600067138672,
+                        "actualBoundingBoxAscent": 44.4140625,
+                        "actualBoundingBoxDescent": 5.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 1,
+                            "y": -44.4140625,
+                            "width": 210.154296875,
+                            "height": 50,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 8,
+                            "runs": [
+                              {
+                                "x": 1,
+                                "y": -44.4140625,
+                                "width": 210.154296875,
+                                "height": 50,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "អភិបាលរងក្រុងអរិយក្សត្រ",
+                      "height": 75.1953125,
+                      "width": 499.510009765625,
+                      "props": {
+                        "size": 44,
+                        "color": "brown",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "borderWidth": 2,
+                        "borderColor": "red",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          },
+          {
+            "paragraph": {
+              "width": 1413,
+              "height": 80.931640625,
+              "lines": [
+                {
+                  "baseline": 54.4306640625,
+                  "height": 80.931640625,
+                  "width": 1412.1499891281128,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 66.5999984741211,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 66.5999984741211,
+                        "actualBoundingBoxAscent": 44.4140625,
+                        "actualBoundingBoxDescent": 0.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 5,
+                            "y": -44.4140625,
+                            "width": 56.30078125,
+                            "height": 45,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 3,
+                            "runs": [
+                              {
+                                "x": 5,
+                                "y": -44.4140625,
+                                "width": 56.30078125,
+                                "height": 45,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋទាំងអស់ ",
+                      "height": 75.1953125,
+                      "width": 777.3299903869629,
+                      "props": {
+                        "size": 44,
+                        "color": "brown",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "borderWidth": 2,
+                        "borderColor": "red",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    },
+                    {
+                      "metrics": {
+                        "width": 83.12000274658203,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 83.12000274658203,
+                        "actualBoundingBoxAscent": 33.880859375,
+                        "actualBoundingBoxDescent": 2.119140625,
+                        "fontBoundingBoxAscent": 33.880859375,
+                        "fontBoundingBoxDescent": 10.119140625,
+                        "emHeightAscent": 33.880859375,
+                        "emHeightDescent": 10.119140625,
+                        "hangingBaseline": 43.544532775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -26.5009765625,
+                        "lines": [
+                          {
+                            "x": -1,
+                            "y": -33.880859375,
+                            "width": 83.34765625,
+                            "height": 36,
+                            "baseline": 0,
+                            "hangingBaseline": -43.544532775878906,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": 26.5009765625,
+                            "ascent": -33.880859375,
+                            "descent": 10.119140625,
+                            "startIndex": 0,
+                            "endIndex": 3,
+                            "runs": [
+                              {
+                                "x": -1,
+                                "y": -33.880859375,
+                                "width": 83.34765625,
+                                "height": 36,
+                                "family": "Helvetica",
+                                "ascent": -33.880859375,
+                                "descent": 10.119140625,
+                                "capHeight": -31.560546875,
+                                "xHeight": -23.009765625,
+                                "underline": 3.330078125,
+                                "strikethrough": -11
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "JBC ចាត់ទុកការរាយបន្លាលួស",
+                      "height": 80.931640625,
+                      "width": 634.8199987411499,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Moul"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          },
+          {
+            "paragraph": {
+              "width": 1413,
+              "height": 80.931640625,
+              "lines": [
+                {
+                  "baseline": 54.4306640625,
+                  "height": 80.931640625,
+                  "width": 314.1099967956543,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 108.06999969482422,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 108.06999969482422,
+                        "actualBoundingBoxAscent": 52.4306640625,
+                        "actualBoundingBoxDescent": 0.5693359375,
+                        "fontBoundingBoxAscent": 54.4306640625,
+                        "fontBoundingBoxDescent": 26.5009765625,
+                        "emHeightAscent": 54.4306640625,
+                        "emHeightDescent": 26.5009765625,
+                        "hangingBaseline": 43.544532775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -26.5009765625,
+                        "lines": [
+                          {
+                            "x": 2,
+                            "y": -52.4306640625,
+                            "width": 104.0078125,
+                            "height": 53,
+                            "baseline": 0.068359375,
+                            "hangingBaseline": -43.476173400878906,
+                            "alphabeticBaseline": 0.068359375,
+                            "ideographicBaseline": 26.5693359375,
+                            "ascent": -54.3623046875,
+                            "descent": 26.5693359375,
+                            "startIndex": 0,
+                            "endIndex": 4,
+                            "runs": [
+                              {
+                                "x": 2,
+                                "y": -52.4306640625,
+                                "width": 104.0078125,
+                                "height": 53,
+                                "family": "Moul",
+                                "ascent": -53.642578125,
+                                "descent": 25.849609375,
+                                "capHeight": -47.669921875,
+                                "xHeight": -35.724609375,
+                                "underline": 4.73046875,
+                                "strikethrough": -11.318359375
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "របស់យោធាថៃ",
+                      "height": 80.931640625,
+                      "width": 314.1099967956543,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Moul"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          },
+          {
+            "paragraph": {
+              "width": 1413,
+              "height": 80.931640625,
+              "lines": [
+                {
+                  "baseline": 54.4306640625,
+                  "height": 80.931640625,
+                  "width": 1027.0499925613403,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 38.66999816894531,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 38.66999816894531,
+                        "actualBoundingBoxAscent": 55.4306640625,
+                        "actualBoundingBoxDescent": 0.5693359375,
+                        "fontBoundingBoxAscent": 54.4306640625,
+                        "fontBoundingBoxDescent": 26.5009765625,
+                        "emHeightAscent": 54.4306640625,
+                        "emHeightDescent": 26.5009765625,
+                        "hangingBaseline": 43.544532775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -26.5009765625,
+                        "lines": [
+                          {
+                            "x": 2,
+                            "y": -55.4306640625,
+                            "width": 37,
+                            "height": 56,
+                            "baseline": 0.068359375,
+                            "hangingBaseline": -43.476173400878906,
+                            "alphabeticBaseline": 0.068359375,
+                            "ideographicBaseline": 26.5693359375,
+                            "ascent": -54.3623046875,
+                            "descent": 26.5693359375,
+                            "startIndex": 0,
+                            "endIndex": 2,
+                            "runs": [
+                              {
+                                "x": 2,
+                                "y": -55.4306640625,
+                                "width": 37,
+                                "height": 56,
+                                "family": "Moul",
+                                "ascent": -53.642578125,
+                                "descent": 25.849609375,
+                                "capHeight": -47.669921875,
+                                "xHeight": -35.724609375,
+                                "underline": 4.73046875,
+                                "strikethrough": -11.318359375
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "គឺល្មើសច្បាប់អន្តរជាតិ និងរំលោភ MOU ឆ្នាំ២០០០",
+                      "height": 80.931640625,
+                      "width": 1027.0499925613403,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Moul"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "borderWidth": 2,
+        "borderColor": "red",
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 44,
+      "y": 44,
+      "width": 1417,
+      "height": 473,
+      "position": {
+        "top": 44,
+        "bottom": 0,
+        "left": 44,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": [
+        "រាជធានីភ្នំពេញ៖ ",
+        {
+          "type": "span",
+          "children": "សម្ដេចតេជោហ៊ុន សែន",
+          "props": {
+            "size": 44,
+            "color": "red",
+            "font": ["Moul"],
+            "style": "normal",
+            "weight": 400,
+            "letterSpacing": 0,
+            "wordSpacing": 0,
+            "strokeColor": "black",
+            "strokeWidth": 0,
+            "underline": 0,
+            "overline": 0,
+            "lineThrough": 0,
+            "dropShadows": []
+          }
+        },
+        " ប្រធានព្រឹទ្ធសភា និងជាប្រធានគណបក្សប្រជាជនកម្ពុជាបានសម្រេចឲ្យអភិបាលខេត្តកណ្តាលបញ្ចប់មុខតំណែង អ្នកនាង ធី សុវណ្ណថាពីអភិបាលរងក្រុងអរិយក្សត្រ និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋទាំងអស់ ។",
+        {
+          "type": "span",
+          "children": "\nសម្តេចតេជោ បានសរសេរលើបណ្តាញសង្គម នៅមុននេះ ដែលមានខ្លឹមយ៉ាងដូច្នេះថា ៖ យើងគ្មានពេលអប់រំមន្ត្រីដែលគ្មានវិន័យ ក្នុងពេលដែលកិច្ចការជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ ។",
+          "props": {
+            "size": 44,
+            "color": "red",
+            "font": ["Khmer"],
+            "style": "normal",
+            "weight": 400,
+            "letterSpacing": 0,
+            "wordSpacing": 0,
+            "strokeColor": "black",
+            "strokeWidth": 0,
+            "underline": 0,
+            "overline": 0,
+            "lineThrough": 0,
+            "dropShadows": []
+          }
+        }
+      ],
+      "props": {
+        "size": 44,
+        "color": "black",
+        "font": ["Hanuman"],
+        "style": "normal",
+        "weight": 400,
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": 1.1,
+        "indentSize": 72,
+        "hangingIndentSize": 0,
+        "align": "left",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 1000,
+              "height": 390.60312500000003,
+              "lines": [
+                {
+                  "baseline": 59.873730468750004,
+                  "height": 89.02480468750001,
+                  "width": 956.8699998855591,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 124.18000030517578,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 124.18000030517578,
+                        "actualBoundingBoxAscent": 42.9033203125,
+                        "actualBoundingBoxDescent": 1.0966796875,
+                        "fontBoundingBoxAscent": 43.9033203125,
+                        "fontBoundingBoxDescent": 22.4189453125,
+                        "emHeightAscent": 43.9033203125,
+                        "emHeightDescent": 22.4189453125,
+                        "hangingBaseline": 35.122657775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -22.4189453125,
+                        "lines": [
+                          {
+                            "x": 0,
+                            "y": -42.9033203125,
+                            "width": 121.25,
+                            "height": 44,
+                            "baseline": -0.322265625,
+                            "hangingBaseline": -35.444923400878906,
+                            "alphabeticBaseline": -0.322265625,
+                            "ideographicBaseline": 22.0966796875,
+                            "ascent": -44.2255859375,
+                            "descent": 22.0966796875,
+                            "startIndex": 0,
+                            "endIndex": 7,
+                            "runs": [
+                              {
+                                "x": 0,
+                                "y": -42.9033203125,
+                                "width": 121.25,
+                                "height": 44,
+                                "family": "Hanuman",
+                                "ascent": -43.291015625,
+                                "descent": 21.162109375,
+                                "capHeight": -32.548828125,
+                                "xHeight": -24.814453125,
+                                "underline": 2.986328125,
+                                "strikethrough": -11.322265625
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "រាជធានីភ្នំពេញ៖ ",
+                      "height": 66.322265625,
+                      "width": 266.91999912261963,
+                      "props": {
+                        "size": 44,
+                        "color": "black",
+                        "font": ["Hanuman"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.1,
+                        "indentSize": 72,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "maxWidth": 1000,
+                        "padding": 44,
+                        "borderWidth": 2,
+                        "borderColor": "black",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    },
+                    {
+                      "metrics": {
+                        "width": 146.74000549316406,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 146.74000549316406,
+                        "actualBoundingBoxAscent": 34.4306640625,
+                        "actualBoundingBoxDescent": 16.5693359375,
+                        "fontBoundingBoxAscent": 54.4306640625,
+                        "fontBoundingBoxDescent": 26.5009765625,
+                        "emHeightAscent": 54.4306640625,
+                        "emHeightDescent": 26.5009765625,
+                        "hangingBaseline": 43.544532775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -26.5009765625,
+                        "lines": [
+                          {
+                            "x": 2,
+                            "y": -34.4306640625,
+                            "width": 144.06640625,
+                            "height": 51,
+                            "baseline": 0.068359375,
+                            "hangingBaseline": -43.476173400878906,
+                            "alphabeticBaseline": 0.068359375,
+                            "ideographicBaseline": 26.5693359375,
+                            "ascent": -54.3623046875,
+                            "descent": 26.5693359375,
+                            "startIndex": 0,
+                            "endIndex": 6,
+                            "runs": [
+                              {
+                                "x": 2,
+                                "y": -34.4306640625,
+                                "width": 144.06640625,
+                                "height": 51,
+                                "family": "Moul",
+                                "ascent": -53.642578125,
+                                "descent": 25.849609375,
+                                "capHeight": -47.669921875,
+                                "xHeight": -35.724609375,
+                                "underline": 4.73046875,
+                                "strikethrough": -11.318359375
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "សម្ដេចតេជោហ៊ុន សែន",
+                      "height": 80.931640625,
+                      "width": 494.5500020980835,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Moul"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    },
+                    {
+                      "metrics": {
+                        "width": 13.1899995803833,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 13.1899995803833,
+                        "actualBoundingBoxAscent": 0,
+                        "actualBoundingBoxDescent": 0,
+                        "fontBoundingBoxAscent": 43.9033203125,
+                        "fontBoundingBoxDescent": 22.4189453125,
+                        "emHeightAscent": 43.9033203125,
+                        "emHeightDescent": 22.4189453125,
+                        "hangingBaseline": 35.122657775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -22.4189453125,
+                        "lines": [
+                          {
+                            "x": 0,
+                            "y": 0,
+                            "width": 0,
+                            "height": 0,
+                            "baseline": -0.322265625,
+                            "hangingBaseline": -35.444923400878906,
+                            "alphabeticBaseline": -0.322265625,
+                            "ideographicBaseline": 22.0966796875,
+                            "ascent": -44.2255859375,
+                            "descent": 22.0966796875,
+                            "startIndex": 0,
+                            "endIndex": 1,
+                            "runs": [
+                              {
+                                "x": 0,
+                                "y": 0,
+                                "width": 0,
+                                "height": 0,
+                                "family": "Hanuman",
+                                "ascent": -43.291015625,
+                                "descent": 21.162109375,
+                                "capHeight": -32.548828125,
+                                "xHeight": -24.814453125,
+                                "underline": 2.986328125,
+                                "strikethrough": -11.322265625
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": " ប្រធាន",
+                      "height": 66.322265625,
+                      "width": 123.39999866485596,
+                      "props": {
+                        "size": 44,
+                        "color": "black",
+                        "font": ["Hanuman"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.1,
+                        "indentSize": 72,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "maxWidth": 1000,
+                        "padding": 44,
+                        "borderWidth": 2,
+                        "borderColor": "black",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 3
+                },
+                {
+                  "baseline": 48.293652343750004,
+                  "height": 72.95449218750001,
+                  "width": 992.0099840164185,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 152.11000061035156,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 152.11000061035156,
+                        "actualBoundingBoxAscent": 43.9033203125,
+                        "actualBoundingBoxDescent": 15.0966796875,
+                        "fontBoundingBoxAscent": 43.9033203125,
+                        "fontBoundingBoxDescent": 22.4189453125,
+                        "emHeightAscent": 43.9033203125,
+                        "emHeightDescent": 22.4189453125,
+                        "hangingBaseline": 35.122657775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -22.4189453125,
+                        "lines": [
+                          {
+                            "x": 0,
+                            "y": -43.9033203125,
+                            "width": 149.21484375,
+                            "height": 59,
+                            "baseline": -0.322265625,
+                            "hangingBaseline": -35.444923400878906,
+                            "alphabeticBaseline": -0.322265625,
+                            "ideographicBaseline": 22.0966796875,
+                            "ascent": -44.2255859375,
+                            "descent": 22.0966796875,
+                            "startIndex": 0,
+                            "endIndex": 10,
+                            "runs": [
+                              {
+                                "x": 0,
+                                "y": -43.9033203125,
+                                "width": 149.21484375,
+                                "height": 59,
+                                "family": "Hanuman",
+                                "ascent": -43.291015625,
+                                "descent": 21.162109375,
+                                "capHeight": -32.548828125,
+                                "xHeight": -24.814453125,
+                                "underline": 2.986328125,
+                                "strikethrough": -11.322265625
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ព្រឹទ្ធសភា និងជាប្រធានគណបក្សប្រជាជនកម្ពុជាបានសម្រេចឲ្យ",
+                      "height": 66.322265625,
+                      "width": 992.0099840164185,
+                      "props": {
+                        "size": 44,
+                        "color": "black",
+                        "font": ["Hanuman"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.1,
+                        "indentSize": 72,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "maxWidth": 1000,
+                        "padding": 44,
+                        "borderWidth": 2,
+                        "borderColor": "black",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 1
+                },
+                {
+                  "baseline": 48.293652343750004,
+                  "height": 72.95449218750001,
+                  "width": 964.2499990463257,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 207.97000122070312,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 207.97000122070312,
+                        "actualBoundingBoxAscent": 42.9033203125,
+                        "actualBoundingBoxDescent": 15.0966796875,
+                        "fontBoundingBoxAscent": 43.9033203125,
+                        "fontBoundingBoxDescent": 22.4189453125,
+                        "emHeightAscent": 43.9033203125,
+                        "emHeightDescent": 22.4189453125,
+                        "hangingBaseline": 35.122657775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -22.4189453125,
+                        "lines": [
+                          {
+                            "x": 0,
+                            "y": -42.9033203125,
+                            "width": 206.0390625,
+                            "height": 58,
+                            "baseline": -0.322265625,
+                            "hangingBaseline": -35.444923400878906,
+                            "alphabeticBaseline": -0.322265625,
+                            "ideographicBaseline": 22.0966796875,
+                            "ascent": -44.2255859375,
+                            "descent": 22.0966796875,
+                            "startIndex": 0,
+                            "endIndex": 11,
+                            "runs": [
+                              {
+                                "x": 0,
+                                "y": -42.9033203125,
+                                "width": 206.0390625,
+                                "height": 58,
+                                "family": "Hanuman",
+                                "ascent": -43.291015625,
+                                "descent": 21.162109375,
+                                "capHeight": -32.548828125,
+                                "xHeight": -24.814453125,
+                                "underline": 2.986328125,
+                                "strikethrough": -11.322265625
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "អភិបាលខេត្តកណ្តាលបញ្ចប់មុខតំណែង អ្នកនាង ធី សុវណ្ណថា",
+                      "height": 66.322265625,
+                      "width": 964.2499990463257,
+                      "props": {
+                        "size": 44,
+                        "color": "black",
+                        "font": ["Hanuman"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.1,
+                        "indentSize": 72,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "maxWidth": 1000,
+                        "padding": 44,
+                        "borderWidth": 2,
+                        "borderColor": "black",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 3
+                },
+                {
+                  "baseline": 48.293652343750004,
+                  "height": 72.95449218750001,
+                  "width": 944.9700136184692,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 55.86000061035156,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 55.86000061035156,
+                        "actualBoundingBoxAscent": 42.9033203125,
+                        "actualBoundingBoxDescent": 1.0966796875,
+                        "fontBoundingBoxAscent": 43.9033203125,
+                        "fontBoundingBoxDescent": 22.4189453125,
+                        "emHeightAscent": 43.9033203125,
+                        "emHeightDescent": 22.4189453125,
+                        "hangingBaseline": 35.122657775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -22.4189453125,
+                        "lines": [
+                          {
+                            "x": 2.9296875,
+                            "y": -42.9033203125,
+                            "width": 52,
+                            "height": 44,
+                            "baseline": -0.322265625,
+                            "hangingBaseline": -35.444923400878906,
+                            "alphabeticBaseline": -0.322265625,
+                            "ideographicBaseline": 22.0966796875,
+                            "ascent": -44.2255859375,
+                            "descent": 22.0966796875,
+                            "startIndex": 0,
+                            "endIndex": 3,
+                            "runs": [
+                              {
+                                "x": 2.9296875,
+                                "y": -42.9033203125,
+                                "width": 52,
+                                "height": 44,
+                                "family": "Hanuman",
+                                "ascent": -43.291015625,
+                                "descent": 21.162109375,
+                                "capHeight": -32.548828125,
+                                "xHeight": -24.814453125,
+                                "underline": 2.986328125,
+                                "strikethrough": -11.322265625
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ពីអភិបាលរងក្រុងអរិយក្សត្រ និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋ",
+                      "height": 66.322265625,
+                      "width": 944.9700136184692,
+                      "props": {
+                        "size": 44,
+                        "color": "black",
+                        "font": ["Hanuman"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.1,
+                        "indentSize": 72,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "maxWidth": 1000,
+                        "padding": 44,
+                        "borderWidth": 2,
+                        "borderColor": "black",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 1
+                },
+                {
+                  "baseline": 54.35546875000001,
+                  "height": 82.71484375,
+                  "width": 179.69999408721924,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 139.64999389648438,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 139.64999389648438,
+                        "actualBoundingBoxAscent": 42.9033203125,
+                        "actualBoundingBoxDescent": 1.0966796875,
+                        "fontBoundingBoxAscent": 43.9033203125,
+                        "fontBoundingBoxDescent": 22.4189453125,
+                        "emHeightAscent": 43.9033203125,
+                        "emHeightDescent": 22.4189453125,
+                        "hangingBaseline": 35.122657775878906,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -22.4189453125,
+                        "lines": [
+                          {
+                            "x": 3,
+                            "y": -42.9033203125,
+                            "width": 135.75390625,
+                            "height": 44,
+                            "baseline": -0.322265625,
+                            "hangingBaseline": -35.444923400878906,
+                            "alphabeticBaseline": -0.322265625,
+                            "ideographicBaseline": 22.0966796875,
+                            "ascent": -44.2255859375,
+                            "descent": 22.0966796875,
+                            "startIndex": 0,
+                            "endIndex": 7,
+                            "runs": [
+                              {
+                                "x": 3,
+                                "y": -42.9033203125,
+                                "width": 135.75390625,
+                                "height": 44,
+                                "family": "Hanuman",
+                                "ascent": -43.291015625,
+                                "descent": 21.162109375,
+                                "capHeight": -32.548828125,
+                                "xHeight": -24.814453125,
+                                "underline": 2.986328125,
+                                "strikethrough": -11.322265625
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ទាំងអស់ ។",
+                      "height": 66.322265625,
+                      "width": 179.69999408721924,
+                      "props": {
+                        "size": 44,
+                        "color": "black",
+                        "font": ["Hanuman"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.1,
+                        "indentSize": 72,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "maxWidth": 1000,
+                        "padding": 44,
+                        "borderWidth": 2,
+                        "borderColor": "black",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    },
+                    {
+                      "metrics": {
+                        "width": 0,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 0,
+                        "actualBoundingBoxAscent": 0,
+                        "actualBoundingBoxDescent": 0,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": []
+                      },
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      },
+                      "text": "",
+                      "width": 0,
+                      "height": 75.1953125
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": -1.3964843750000013
+            }
+          },
+          {
+            "paragraph": {
+              "width": 1000,
+              "height": 330.859375,
+              "lines": [
+                {
+                  "baseline": 54.35546875000001,
+                  "height": 82.71484375,
+                  "width": 915.9300079345703,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 133.1999969482422,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 133.1999969482422,
+                        "actualBoundingBoxAscent": 32.4140625,
+                        "actualBoundingBoxDescent": 17.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 5,
+                            "y": -32.4140625,
+                            "width": 124.90234375,
+                            "height": 50,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 6,
+                            "runs": [
+                              {
+                                "x": 5,
+                                "y": -32.4140625,
+                                "width": 124.90234375,
+                                "height": 50,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "សម្តេចតេជោ បានសរសេរលើបណ្តាញសង្គម",
+                      "height": 75.1953125,
+                      "width": 843.9300079345703,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 1
+                },
+                {
+                  "baseline": 54.35546875000001,
+                  "height": 82.71484375,
+                  "width": 951.1200008392334,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 133.1999969482422,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 133.1999969482422,
+                        "actualBoundingBoxAscent": 41.4140625,
+                        "actualBoundingBoxDescent": 17.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 5,
+                            "y": -41.4140625,
+                            "width": 122.90234375,
+                            "height": 59,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 5,
+                            "runs": [
+                              {
+                                "x": 5,
+                                "y": -41.4140625,
+                                "width": 122.90234375,
+                                "height": 59,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "នៅមុននេះ ដែលមានខ្លឹមយ៉ាងដូច្នេះថា ៖ យើងគ្មាន",
+                      "height": 75.1953125,
+                      "width": 951.1200008392334,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 3
+                },
+                {
+                  "baseline": 54.35546875000001,
+                  "height": 82.71484375,
+                  "width": 960.4800033569336,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 99.9000015258789,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 99.9000015258789,
+                        "actualBoundingBoxAscent": 32.4140625,
+                        "actualBoundingBoxDescent": 0.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 5,
+                            "y": -32.4140625,
+                            "width": 93.951171875,
+                            "height": 33,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 3,
+                            "runs": [
+                              {
+                                "x": 5,
+                                "y": -32.4140625,
+                                "width": 93.951171875,
+                                "height": 33,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ពេលអប់រំមន្ត្រីដែលគ្មានវិន័យ ក្នុងពេលដែលកិច្ចការ",
+                      "height": 75.1953125,
+                      "width": 960.4800033569336,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 1
+                },
+                {
+                  "baseline": 54.35546875000001,
+                  "height": 82.71484375,
+                  "width": 905.7000160217285,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 83.25,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 83.25,
+                        "actualBoundingBoxAscent": 44.4140625,
+                        "actualBoundingBoxDescent": 0.5859375,
+                        "fontBoundingBoxAscent": 49.4140625,
+                        "fontBoundingBoxDescent": 25.78125,
+                        "emHeightAscent": 49.4140625,
+                        "emHeightDescent": 25.78125,
+                        "hangingBaseline": 39.53125,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -25.78125,
+                        "lines": [
+                          {
+                            "x": 3,
+                            "y": -44.4140625,
+                            "width": 76.951171875,
+                            "height": 45,
+                            "baseline": -0.1953125,
+                            "hangingBaseline": -39.7265625,
+                            "alphabeticBaseline": -0.1953125,
+                            "ideographicBaseline": 25.5859375,
+                            "ascent": -49.609375,
+                            "descent": 25.5859375,
+                            "startIndex": 0,
+                            "endIndex": 4,
+                            "runs": [
+                              {
+                                "x": 3,
+                                "y": -44.4140625,
+                                "width": 76.951171875,
+                                "height": 45,
+                                "family": "Khmer",
+                                "ascent": -49.609375,
+                                "descent": 25.5859375,
+                                "capHeight": -31.60546875,
+                                "xHeight": -23.78515625,
+                                "underline": 3.11328125,
+                                "strikethrough": -10.89453125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "ជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ ។",
+                      "height": 75.1953125,
+                      "width": 905.7000160217285,
+                      "props": {
+                        "size": 44,
+                        "color": "red",
+                        "font": ["Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "wordSpacing": 0,
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "underline": 0,
+                        "overline": 0,
+                        "lineThrough": 0,
+                        "dropShadows": []
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": -1.181640625000001
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "maxWidth": 1000,
+        "padding": 44,
+        "borderWidth": 2,
+        "borderColor": "black",
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 44,
+      "y": 560,
+      "width": 1092,
+      "height": 814,
+      "position": {
+        "top": 560,
+        "bottom": 0,
+        "left": 44,
+        "right": 0
+      },
+      "padding": {
+        "top": 44,
+        "left": 44,
+        "right": 44,
+        "bottom": 44
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 1504,
+  "height": 1418,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 44,
+    "left": 44,
+    "right": 44,
+    "bottom": 44
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}

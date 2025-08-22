@@ -1,0 +1,223 @@
+{
+  "type": "column",
+  "props": {
+    "background": ["#eee"],
+    "justifyContent": "center",
+    "padding": 28,
+    "position": "relative"
+  },
+  "children": [
+    {
+      "type": "path",
+      "props": {
+        "d": "M 250 100\n       A 45 45, 0, 1, 0, 295 145\n       L 295 100 Z",
+        "fill": "orange",
+        "stroke": "#000",
+        "strokeDashArray": [14],
+        "strokeWidth": 4,
+        "strokeDashOffset": 0,
+        "scalePath": 3.5,
+        "bounds": [205, 100, 295, 190]
+      },
+      "children": [],
+      "x": 28,
+      "y": 28,
+      "width": 315,
+      "height": 315,
+      "position": {
+        "top": 28,
+        "bottom": 0,
+        "left": 28,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": ["Path"],
+      "props": {
+        "size": 64,
+        "color": "#000",
+        "font": ["sans-serif"],
+        "style": "normal",
+        "weight": "bold",
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "left",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 137,
+              "height": 87.423828125,
+              "lines": [
+                {
+                  "baseline": 64,
+                  "height": 87.423828125,
+                  "width": 136.8300018310547,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 136.8300018310547,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 136.8300018310547,
+                        "actualBoundingBoxAscent": 50,
+                        "actualBoundingBoxDescent": 2,
+                        "fontBoundingBoxAscent": 64,
+                        "fontBoundingBoxDescent": 23.423828125,
+                        "emHeightAscent": 64,
+                        "emHeightDescent": 23.423828125,
+                        "hangingBaseline": 51.20000076293945,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -23.423828125,
+                        "lines": [
+                          {
+                            "x": 3,
+                            "y": -50,
+                            "width": 131.34400939941406,
+                            "height": 52,
+                            "baseline": -0.423828125,
+                            "hangingBaseline": -51.62382888793945,
+                            "alphabeticBaseline": -0.423828125,
+                            "ideographicBaseline": 23,
+                            "ascent": -64.423828125,
+                            "descent": 23,
+                            "startIndex": 0,
+                            "endIndex": 4,
+                            "runs": [
+                              {
+                                "x": 3,
+                                "y": -50,
+                                "width": 131.34400939941406,
+                                "height": 52,
+                                "family": "Avenir Next",
+                                "ascent": -64.423828125,
+                                "descent": 23,
+                                "capHeight": -45.7358283996582,
+                                "xHeight": -32.29582977294922,
+                                "underline": 4.376172065734863,
+                                "strikethrough": -16.423828125
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "props": {
+                        "size": 64,
+                        "color": "#000",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "position": "absolute",
+                        "alignSelf": "center",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "text": "Path",
+                      "width": 136.8300018310547,
+                      "height": 87.423828125
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "position": "absolute",
+        "alignSelf": "center",
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 117,
+      "y": 141,
+      "width": 137,
+      "height": 89,
+      "position": {
+        "top": 141,
+        "bottom": 0,
+        "left": 117,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 371,
+  "height": 371,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 28,
+    "left": 28,
+    "right": 28,
+    "bottom": 28
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}

@@ -19,4 +19,4 @@ const root = Row(
   .padding(20)
   .gap(20);
 
-writeCanvasToFile(root, import.meta.url);
+await writeCanvasToFile(root, import.meta.url);

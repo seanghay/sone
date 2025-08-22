@@ -1,0 +1,1206 @@
+{
+  "type": "column",
+  "props": {
+    "background": [
+      {
+        "type": "linear-gradient",
+        "orientation": {
+          "type": "directional",
+          "value": "top"
+        },
+        "colorStops": [
+          {
+            "type": "literal",
+            "value": "white"
+          },
+          {
+            "type": "hex",
+            "value": "fff3d8ff",
+            "length": {
+              "type": "%",
+              "value": "100"
+            }
+          }
+        ]
+      }
+    ],
+    "width": 750,
+    "height": 1334
+  },
+  "children": [
+    {
+      "type": "column",
+      "props": {
+        "flex": 1
+      },
+      "children": [],
+      "x": 0,
+      "y": 0,
+      "width": 750,
+      "height": 231,
+      "position": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "photo",
+      "props": {
+        "src": "./test/image/kouprey.jpg",
+        "width": 200,
+        "height": 200,
+        "scaleType": "cover",
+        "borderColor": "orange",
+        "borderWidth": 4,
+        "alignSelf": "center",
+        "cornerRadius": [100],
+        "marginTop": 44,
+        "image": {}
+      },
+      "children": [],
+      "x": 275,
+      "y": 275,
+      "width": 200,
+      "height": 200,
+      "position": {
+        "top": 275,
+        "bottom": 0,
+        "left": 275,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 44,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": ["Choose Language"],
+      "props": {
+        "size": 50,
+        "color": "black",
+        "font": ["Inter Khmer"],
+        "style": "normal",
+        "weight": "bold",
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "center",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 750,
+              "height": 61.931610107421875,
+              "lines": [
+                {
+                  "baseline": 48.4375,
+                  "height": 61.931610107421875,
+                  "width": 441.48999977111816,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 188.1300048828125,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 188.1300048828125,
+                        "actualBoundingBoxAscent": 38.4375,
+                        "actualBoundingBoxDescent": 1.5625,
+                        "fontBoundingBoxAscent": 48.4375,
+                        "fontBoundingBoxDescent": 13.494110107421875,
+                        "emHeightAscent": 48.4375,
+                        "emHeightDescent": 13.494110107421875,
+                        "hangingBaseline": 38.75,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -13.494110107421875,
+                        "lines": [
+                          {
+                            "x": 1,
+                            "y": -38.4375,
+                            "width": 186.2454376220703,
+                            "height": 40,
+                            "baseline": 0.068389892578125,
+                            "hangingBaseline": -38.681610107421875,
+                            "alphabeticBaseline": 0.068389892578125,
+                            "ideographicBaseline": 13.5625,
+                            "ascent": -48.369110107421875,
+                            "descent": 13.5625,
+                            "startIndex": 0,
+                            "endIndex": 6,
+                            "runs": [
+                              {
+                                "x": 1,
+                                "y": -38.4375,
+                                "width": 186.2454376220703,
+                                "height": 40,
+                                "family": "Inter Khmer",
+                                "ascent": -48.369110107421875,
+                                "descent": 13.5625,
+                                "capHeight": -36.29524612426758,
+                                "xHeight": -27.20433807373047,
+                                "underline": 8.590423583984375,
+                                "strikethrough": -16.302349090576172
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "Choose Language",
+                      "height": 61.931610107421875,
+                      "width": 441.48999977111816,
+                      "props": {
+                        "size": 50,
+                        "color": "black",
+                        "font": ["Inter Khmer"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "marginTop": 44,
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "marginTop": 44,
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 0,
+      "y": 519,
+      "width": 750,
+      "height": 63,
+      "position": {
+        "top": 519,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 44,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": ["សូមជ្រើសរើសភាសារបស់អ្នក"],
+      "props": {
+        "size": 40,
+        "color": "gray",
+        "font": ["Inter Khmer"],
+        "style": "normal",
+        "weight": 400,
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "center",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 750,
+              "height": 49.5452880859375,
+              "lines": [
+                {
+                  "baseline": 38.75,
+                  "height": 49.5452880859375,
+                  "width": 438.6600112915039,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 64.13999938964844,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 64.13999938964844,
+                        "actualBoundingBoxAscent": 25.75,
+                        "actualBoundingBoxDescent": 13.25,
+                        "fontBoundingBoxAscent": 38.75,
+                        "fontBoundingBoxDescent": 10.7952880859375,
+                        "emHeightAscent": 38.75,
+                        "emHeightDescent": 10.7952880859375,
+                        "hangingBaseline": 31,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -10.7952880859375,
+                        "lines": [
+                          {
+                            "x": 3,
+                            "y": -25.75,
+                            "width": 59.601593017578125,
+                            "height": 39,
+                            "baseline": 0.4547119140625,
+                            "hangingBaseline": -30.5452880859375,
+                            "alphabeticBaseline": 0.4547119140625,
+                            "ideographicBaseline": 11.25,
+                            "ascent": -38.2952880859375,
+                            "descent": 11.25,
+                            "startIndex": 0,
+                            "endIndex": 3,
+                            "runs": [
+                              {
+                                "x": 3,
+                                "y": -25.75,
+                                "width": 59.601593017578125,
+                                "height": 39,
+                                "family": "Inter Khmer",
+                                "ascent": -38.2952880859375,
+                                "descent": 11.25,
+                                "capHeight": -28.636198043823242,
+                                "xHeight": -21.36347007751465,
+                                "underline": 7.2723388671875,
+                                "strikethrough": -12.641879081726074
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "សូមជ្រើសរើសភាសារបស់អ្នក",
+                      "height": 49.5452880859375,
+                      "width": 438.6600112915039,
+                      "props": {
+                        "size": 40,
+                        "color": "gray",
+                        "font": ["Inter Khmer"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "marginTop": 14,
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "marginTop": 14,
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 0,
+      "y": 595,
+      "width": 750,
+      "height": 50,
+      "position": {
+        "top": 595,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 14,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "marginTop": 44,
+        "gap": 22
+      },
+      "children": [
+        {
+          "type": "row",
+          "props": {
+            "alignItems": "center",
+            "gap": 18,
+            "paddingTop": 18,
+            "paddingBottom": 18,
+            "paddingLeft": 22,
+            "paddingRight": 24,
+            "background": ["#eee"],
+            "marginTop": 0,
+            "marginBottom": 0,
+            "marginLeft": 44,
+            "marginRight": 44,
+            "cornerRadius": [20],
+            "cornerSmoothing": 0.7,
+            "borderColor": "orange",
+            "borderWidth": 0,
+            "flexDirection": "row"
+          },
+          "children": [
+            {
+              "type": "photo",
+              "props": {
+                "src": "./test/image/cambodia.svg",
+                "preserveAspectRatio": true,
+                "width": 64,
+                "height": 64,
+                "image": {}
+              },
+              "children": [],
+              "x": 66,
+              "y": 707,
+              "width": 64,
+              "height": 64,
+              "position": {
+                "top": 18,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["ភាសាខ្មែរ"],
+              "props": {
+                "size": 40,
+                "color": "black",
+                "font": ["Inter Khmer"],
+                "style": "normal",
+                "weight": 500,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 472,
+                      "height": 49.5452880859375,
+                      "lines": [
+                        {
+                          "baseline": 38.75,
+                          "height": 49.5452880859375,
+                          "width": 141.9600067138672,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 141.9600067138672,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 141.9600067138672,
+                                "actualBoundingBoxAscent": 37.75,
+                                "actualBoundingBoxDescent": 12.25,
+                                "fontBoundingBoxAscent": 38.75,
+                                "fontBoundingBoxDescent": 10.7952880859375,
+                                "emHeightAscent": 38.75,
+                                "emHeightDescent": 10.7952880859375,
+                                "hangingBaseline": 31,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -10.7952880859375,
+                                "lines": [
+                                  {
+                                    "x": -1,
+                                    "y": -37.75,
+                                    "width": 140.64178466796875,
+                                    "height": 50,
+                                    "baseline": 0.4547119140625,
+                                    "hangingBaseline": -30.5452880859375,
+                                    "alphabeticBaseline": 0.4547119140625,
+                                    "ideographicBaseline": 11.25,
+                                    "ascent": -38.2952880859375,
+                                    "descent": 11.25,
+                                    "startIndex": 0,
+                                    "endIndex": 9,
+                                    "runs": [
+                                      {
+                                        "x": -1,
+                                        "y": -37.75,
+                                        "width": 140.64178466796875,
+                                        "height": 50,
+                                        "family": "Inter Khmer",
+                                        "ascent": -38.2952880859375,
+                                        "descent": 11.25,
+                                        "capHeight": -28.636198043823242,
+                                        "xHeight": -21.36347007751465,
+                                        "underline": 7.2723388671875,
+                                        "strikethrough": -12.641879081726074
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "props": {
+                                "size": 40,
+                                "color": "black",
+                                "font": ["Inter Khmer"],
+                                "style": "normal",
+                                "weight": 500,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "flex": 1,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "ភាសាខ្មែរ",
+                              "width": 141.9600067138672,
+                              "height": 49.5452880859375
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "flex": 1,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 148,
+              "y": 714,
+              "width": 472,
+              "height": 50,
+              "position": {
+                "top": 25,
+                "bottom": 0,
+                "left": 104,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "photo",
+              "props": {
+                "src": "./test/image/check.svg",
+                "preserveAspectRatio": true,
+                "width": 44,
+                "fill": "blue",
+                "height": 44,
+                "image": {}
+              },
+              "children": [],
+              "x": 638,
+              "y": 717,
+              "width": 44,
+              "height": 44,
+              "position": {
+                "top": 28,
+                "bottom": 0,
+                "left": 594,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 44,
+          "y": 689,
+          "width": 662,
+          "height": 100,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 44,
+            "right": 44
+          },
+          "padding": {
+            "top": 18,
+            "left": 22,
+            "right": 24,
+            "bottom": 18
+          },
+          "margin": {
+            "top": 0,
+            "left": 44,
+            "right": 44,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "row",
+          "props": {
+            "alignItems": "center",
+            "gap": 18,
+            "paddingTop": 18,
+            "paddingBottom": 18,
+            "paddingLeft": 22,
+            "paddingRight": 24,
+            "background": ["#eee"],
+            "marginTop": 0,
+            "marginBottom": 0,
+            "marginLeft": 44,
+            "marginRight": 44,
+            "cornerRadius": [20],
+            "cornerSmoothing": 0.7,
+            "borderColor": "orange",
+            "borderWidth": 4,
+            "flexDirection": "row"
+          },
+          "children": [
+            {
+              "type": "photo",
+              "props": {
+                "src": "./test/image/english.svg",
+                "preserveAspectRatio": true,
+                "width": 64,
+                "height": 64,
+                "image": {}
+              },
+              "children": [],
+              "x": 70,
+              "y": 833,
+              "width": 64,
+              "height": 64,
+              "position": {
+                "top": 22,
+                "bottom": 0,
+                "left": 26,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["English"],
+              "props": {
+                "size": 40,
+                "color": "black",
+                "font": ["Inter Khmer"],
+                "style": "normal",
+                "weight": 500,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 464,
+                      "height": 49.5452880859375,
+                      "lines": [
+                        {
+                          "baseline": 38.75,
+                          "height": 49.5452880859375,
+                          "width": 138.10000610351562,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 138.10000610351562,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 138.10000610351562,
+                                "actualBoundingBoxAscent": 31.75,
+                                "actualBoundingBoxDescent": 10.25,
+                                "fontBoundingBoxAscent": 38.75,
+                                "fontBoundingBoxDescent": 10.7952880859375,
+                                "emHeightAscent": 38.75,
+                                "emHeightDescent": 10.7952880859375,
+                                "hangingBaseline": 31,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -10.7952880859375,
+                                "lines": [
+                                  {
+                                    "x": 2,
+                                    "y": -31.75,
+                                    "width": 135.02088928222656,
+                                    "height": 42,
+                                    "baseline": 0.4547119140625,
+                                    "hangingBaseline": -30.5452880859375,
+                                    "alphabeticBaseline": 0.4547119140625,
+                                    "ideographicBaseline": 11.25,
+                                    "ascent": -38.2952880859375,
+                                    "descent": 11.25,
+                                    "startIndex": 0,
+                                    "endIndex": 7,
+                                    "runs": [
+                                      {
+                                        "x": 2,
+                                        "y": -31.75,
+                                        "width": 135.02088928222656,
+                                        "height": 42,
+                                        "family": "Inter Khmer",
+                                        "ascent": -38.2952880859375,
+                                        "descent": 11.25,
+                                        "capHeight": -28.636198043823242,
+                                        "xHeight": -21.36347007751465,
+                                        "underline": 7.2723388671875,
+                                        "strikethrough": -12.641879081726074
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "props": {
+                                "size": 40,
+                                "color": "black",
+                                "font": ["Inter Khmer"],
+                                "style": "normal",
+                                "weight": 500,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "flex": 1,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "English",
+                              "width": 138.10000610351562,
+                              "height": 49.5452880859375
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "flex": 1,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 152,
+              "y": 840,
+              "width": 464,
+              "height": 50,
+              "position": {
+                "top": 29,
+                "bottom": 0,
+                "left": 108,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "photo",
+              "props": {
+                "src": "./test/image/check-orange.svg",
+                "preserveAspectRatio": true,
+                "width": 44,
+                "fill": "blue",
+                "height": 44,
+                "image": {}
+              },
+              "children": [],
+              "x": 634,
+              "y": 843,
+              "width": 44,
+              "height": 44,
+              "position": {
+                "top": 32,
+                "bottom": 0,
+                "left": 590,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 44,
+          "y": 811,
+          "width": 662,
+          "height": 108,
+          "position": {
+            "top": 122,
+            "bottom": 0,
+            "left": 44,
+            "right": 44
+          },
+          "padding": {
+            "top": 18,
+            "left": 22,
+            "right": 24,
+            "bottom": 18
+          },
+          "margin": {
+            "top": 0,
+            "left": 44,
+            "right": 44,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 0,
+      "y": 689,
+      "width": 750,
+      "height": 230,
+      "position": {
+        "top": 689,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 44,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "flex": 1
+      },
+      "children": [],
+      "x": 0,
+      "y": 919,
+      "width": 750,
+      "height": 231,
+      "position": {
+        "top": 919,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "column",
+      "props": {
+        "background": ["orange"],
+        "margin": 44,
+        "padding": 28,
+        "cornerRadius": [20],
+        "corner": "cut",
+        "shadows": [
+          {
+            "inset": false,
+            "offsetX": 6,
+            "offsetY": 6,
+            "blurRadius": 0,
+            "color": "black"
+          }
+        ]
+      },
+      "children": [
+        {
+          "type": "text",
+          "children": ["Get Started"],
+          "props": {
+            "size": 32,
+            "color": "black",
+            "font": ["Inter Khmer"],
+            "style": "normal",
+            "weight": "bold",
+            "letterSpacing": 0,
+            "nowrap": false,
+            "lineHeight": null,
+            "indentSize": 0,
+            "hangingIndentSize": 0,
+            "align": "center",
+            "strokeColor": "black",
+            "strokeWidth": 0,
+            "wordSpacing": 0,
+            "blocks": [
+              {
+                "paragraph": {
+                  "width": 606,
+                  "height": 39.63623046875,
+                  "lines": [
+                    {
+                      "baseline": 31,
+                      "height": 39.63623046875,
+                      "width": 180.89000129699707,
+                      "segments": [
+                        {
+                          "metrics": {
+                            "width": 55.88999938964844,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 55.88999938964844,
+                            "actualBoundingBoxAscent": 25,
+                            "actualBoundingBoxDescent": 2,
+                            "fontBoundingBoxAscent": 31,
+                            "fontBoundingBoxDescent": 8.63623046875,
+                            "emHeightAscent": 31,
+                            "emHeightDescent": 8.63623046875,
+                            "hangingBaseline": 24.80000114440918,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -8.63623046875,
+                            "lines": [
+                              {
+                                "x": 0,
+                                "y": -25,
+                                "width": 56.46922302246094,
+                                "height": 27,
+                                "baseline": 0.36376953125,
+                                "hangingBaseline": -24.43623161315918,
+                                "alphabeticBaseline": 0.36376953125,
+                                "ideographicBaseline": 9,
+                                "ascent": -30.63623046875,
+                                "descent": 9,
+                                "startIndex": 0,
+                                "endIndex": 3,
+                                "runs": [
+                                  {
+                                    "x": 0,
+                                    "y": -25,
+                                    "width": 56.46922302246094,
+                                    "height": 27,
+                                    "family": "Inter Khmer",
+                                    "ascent": -30.63623046875,
+                                    "descent": 9,
+                                    "capHeight": -22.908958435058594,
+                                    "xHeight": -17.090776443481445,
+                                    "underline": 5.81787109375,
+                                    "strikethrough": -10.113503456115723
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "text": "Get Started",
+                          "height": 39.63623046875,
+                          "width": 180.89000129699707,
+                          "props": {
+                            "size": 32,
+                            "color": "black",
+                            "font": ["Inter Khmer"],
+                            "style": "normal",
+                            "weight": "bold",
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineHeight": null,
+                            "indentSize": 0,
+                            "hangingIndentSize": 0,
+                            "align": "center",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          }
+                        }
+                      ],
+                      "spacesCount": 0
+                    }
+                  ],
+                  "offsetY": 0
+                }
+              }
+            ],
+            "offsetY": 0,
+            "underline": 0,
+            "underlineColor": null,
+            "overline": 0,
+            "overlineColor": null,
+            "lineThrough": 0,
+            "lineThroughColor": null,
+            "highlightColor": null,
+            "dropShadows": [],
+            "flexShrink": 1,
+            "boxSizing": "content-box"
+          },
+          "x": 72,
+          "y": 1222,
+          "width": 606,
+          "height": 40,
+          "position": {
+            "top": 28,
+            "bottom": 0,
+            "left": 28,
+            "right": 0
+          },
+          "padding": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 44,
+      "y": 1194,
+      "width": 662,
+      "height": 96,
+      "position": {
+        "top": 1194,
+        "bottom": 44,
+        "left": 44,
+        "right": 44
+      },
+      "padding": {
+        "top": 28,
+        "left": 28,
+        "right": 28,
+        "bottom": 28
+      },
+      "margin": {
+        "top": 44,
+        "left": 44,
+        "right": 44,
+        "bottom": 44
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 750,
+  "height": 1334,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}

@@ -1,0 +1,3218 @@
+{
+  "type": "column",
+  "props": {
+    "width": 1200,
+    "height": 800,
+    "background": ["#ffffff"]
+  },
+  "children": [
+    {
+      "type": "row",
+      "props": {
+        "padding": 24,
+        "justifyContent": "space-between",
+        "background": ["#f8fafc"],
+        "borderTopWidth": 0,
+        "borderBottomWidth": 1,
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderColor": "#e5e7eb",
+        "flexDirection": "row"
+      },
+      "children": [
+        {
+          "type": "text",
+          "children": ["Dashboard"],
+          "props": {
+            "size": 32,
+            "color": "#2563eb",
+            "font": ["sans-serif"],
+            "style": "normal",
+            "weight": "bold",
+            "letterSpacing": 0,
+            "nowrap": false,
+            "lineHeight": null,
+            "indentSize": 0,
+            "hangingIndentSize": 0,
+            "align": "left",
+            "strokeColor": "black",
+            "strokeWidth": 0,
+            "wordSpacing": 0,
+            "blocks": [
+              {
+                "paragraph": {
+                  "width": 171,
+                  "height": 43.7119140625,
+                  "lines": [
+                    {
+                      "baseline": 32,
+                      "height": 43.7119140625,
+                      "width": 170.3000030517578,
+                      "segments": [
+                        {
+                          "metrics": {
+                            "width": 170.3000030517578,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 170.3000030517578,
+                            "actualBoundingBoxAscent": 26,
+                            "actualBoundingBoxDescent": 2,
+                            "fontBoundingBoxAscent": 32,
+                            "fontBoundingBoxDescent": 11.7119140625,
+                            "emHeightAscent": 32,
+                            "emHeightDescent": 11.7119140625,
+                            "hangingBaseline": 25.600000381469727,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -11.7119140625,
+                            "lines": [
+                              {
+                                "x": 1,
+                                "y": -26,
+                                "width": 168.2480010986328,
+                                "height": 28,
+                                "baseline": 0.2880859375,
+                                "hangingBaseline": -25.311914443969727,
+                                "alphabeticBaseline": 0.2880859375,
+                                "ideographicBaseline": 12,
+                                "ascent": -31.7119140625,
+                                "descent": 12,
+                                "startIndex": 0,
+                                "endIndex": 9,
+                                "runs": [
+                                  {
+                                    "x": 1,
+                                    "y": -26,
+                                    "width": 168.2480010986328,
+                                    "height": 28,
+                                    "family": "Avenir Next",
+                                    "ascent": -31.7119140625,
+                                    "descent": 12,
+                                    "capHeight": -22.3679141998291,
+                                    "xHeight": -15.647913932800293,
+                                    "underline": 2.6880860328674316,
+                                    "strikethrough": -7.7119140625
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "props": {
+                            "size": 32,
+                            "color": "#2563eb",
+                            "font": ["sans-serif"],
+                            "style": "normal",
+                            "weight": "bold",
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineHeight": null,
+                            "indentSize": 0,
+                            "hangingIndentSize": 0,
+                            "align": "left",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          },
+                          "text": "Dashboard",
+                          "width": 170.3000030517578,
+                          "height": 43.7119140625
+                        }
+                      ],
+                      "spacesCount": 0
+                    }
+                  ],
+                  "offsetY": 0
+                }
+              }
+            ],
+            "offsetY": 0,
+            "underline": 0,
+            "underlineColor": null,
+            "overline": 0,
+            "overlineColor": null,
+            "lineThrough": 0,
+            "lineThroughColor": null,
+            "highlightColor": null,
+            "dropShadows": [],
+            "flexShrink": 1,
+            "boxSizing": "content-box"
+          },
+          "x": 24,
+          "y": 24,
+          "width": 171,
+          "height": 44,
+          "position": {
+            "top": 24,
+            "bottom": 0,
+            "left": 24,
+            "right": 0
+          },
+          "padding": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "text",
+          "children": ["Analytics Overview"],
+          "props": {
+            "size": 16,
+            "color": "#6b7280",
+            "font": ["sans-serif"],
+            "style": "normal",
+            "weight": 400,
+            "letterSpacing": 0,
+            "nowrap": false,
+            "lineHeight": null,
+            "indentSize": 0,
+            "hangingIndentSize": 0,
+            "align": "left",
+            "strokeColor": "black",
+            "strokeWidth": 0,
+            "wordSpacing": 0,
+            "blocks": [
+              {
+                "paragraph": {
+                  "width": 139,
+                  "height": 21.85595703125,
+                  "lines": [
+                    {
+                      "baseline": 16,
+                      "height": 21.85595703125,
+                      "width": 138.27999877929688,
+                      "segments": [
+                        {
+                          "metrics": {
+                            "width": 65.05999755859375,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 65.05999755859375,
+                            "actualBoundingBoxAscent": 14,
+                            "actualBoundingBoxDescent": 5,
+                            "fontBoundingBoxAscent": 16,
+                            "fontBoundingBoxDescent": 5.85595703125,
+                            "emHeightAscent": 16,
+                            "emHeightDescent": 5.85595703125,
+                            "hangingBaseline": 12.800000190734863,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -5.85595703125,
+                            "lines": [
+                              {
+                                "x": -1,
+                                "y": -14,
+                                "width": 66.95201110839844,
+                                "height": 19,
+                                "baseline": 0.14404296875,
+                                "hangingBaseline": -12.655957221984863,
+                                "alphabeticBaseline": 0.14404296875,
+                                "ideographicBaseline": 6,
+                                "ascent": -15.85595703125,
+                                "descent": 6,
+                                "startIndex": 0,
+                                "endIndex": 9,
+                                "runs": [
+                                  {
+                                    "x": -1,
+                                    "y": -14,
+                                    "width": 66.95201110839844,
+                                    "height": 19,
+                                    "family": "Avenir Next",
+                                    "ascent": -15.85595703125,
+                                    "descent": 6,
+                                    "capHeight": -11.18395709991455,
+                                    "xHeight": -7.34395694732666,
+                                    "underline": 1.3440430164337158,
+                                    "strikethrough": -3.85595703125
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "text": "Analytics Overview",
+                          "height": 21.85595703125,
+                          "width": 138.27999877929688,
+                          "props": {
+                            "size": 16,
+                            "color": "#6b7280",
+                            "font": ["sans-serif"],
+                            "style": "normal",
+                            "weight": 400,
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineHeight": null,
+                            "indentSize": 0,
+                            "hangingIndentSize": 0,
+                            "align": "left",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [
+                              {
+                                "paragraph": {
+                                  "width": 138.27999877929688,
+                                  "height": 21.85595703125,
+                                  "lines": [
+                                    {
+                                      "baseline": 16,
+                                      "height": 21.85595703125,
+                                      "width": 138.27999877929688,
+                                      "segments": [
+                                        {
+                                          "metrics": {
+                                            "width": 65.05999755859375,
+                                            "actualBoundingBoxLeft": 0,
+                                            "actualBoundingBoxRight": 65.05999755859375,
+                                            "actualBoundingBoxAscent": 14,
+                                            "actualBoundingBoxDescent": 5,
+                                            "fontBoundingBoxAscent": 16,
+                                            "fontBoundingBoxDescent": 5.85595703125,
+                                            "emHeightAscent": 16,
+                                            "emHeightDescent": 5.85595703125,
+                                            "hangingBaseline": 12.800000190734863,
+                                            "alphabeticBaseline": 0,
+                                            "ideographicBaseline": -5.85595703125,
+                                            "lines": [
+                                              {
+                                                "x": -1,
+                                                "y": -14,
+                                                "width": 66.95201110839844,
+                                                "height": 19,
+                                                "baseline": 0.14404296875,
+                                                "hangingBaseline": -12.655957221984863,
+                                                "alphabeticBaseline": 0.14404296875,
+                                                "ideographicBaseline": 6,
+                                                "ascent": -15.85595703125,
+                                                "descent": 6,
+                                                "startIndex": 0,
+                                                "endIndex": 9,
+                                                "runs": [
+                                                  {
+                                                    "x": -1,
+                                                    "y": -14,
+                                                    "width": 66.95201110839844,
+                                                    "height": 19,
+                                                    "family": "Avenir Next",
+                                                    "ascent": -15.85595703125,
+                                                    "descent": 6,
+                                                    "capHeight": -11.18395709991455,
+                                                    "xHeight": -7.34395694732666,
+                                                    "underline": 1.3440430164337158,
+                                                    "strikethrough": -3.85595703125
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          "text": "Analytics Overview",
+                                          "height": 21.85595703125,
+                                          "width": 138.27999877929688,
+                                          "props": {
+                                            "size": 16,
+                                            "color": "#6b7280",
+                                            "font": ["sans-serif"],
+                                            "style": "normal",
+                                            "weight": 400,
+                                            "letterSpacing": 0,
+                                            "nowrap": false,
+                                            "lineHeight": null,
+                                            "indentSize": 0,
+                                            "hangingIndentSize": 0,
+                                            "align": "left",
+                                            "strokeColor": "black",
+                                            "strokeWidth": 0,
+                                            "wordSpacing": 0,
+                                            "blocks": [],
+                                            "offsetY": 0,
+                                            "underline": 0,
+                                            "underlineColor": null,
+                                            "overline": 0,
+                                            "overlineColor": null,
+                                            "lineThrough": 0,
+                                            "lineThroughColor": null,
+                                            "highlightColor": null,
+                                            "dropShadows": [],
+                                            "flexShrink": 1,
+                                            "boxSizing": "content-box"
+                                          }
+                                        }
+                                      ],
+                                      "spacesCount": 0
+                                    }
+                                  ],
+                                  "offsetY": 0
+                                }
+                              }
+                            ],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          }
+                        }
+                      ],
+                      "spacesCount": 0
+                    }
+                  ],
+                  "offsetY": 0
+                }
+              }
+            ],
+            "offsetY": 0,
+            "underline": 0,
+            "underlineColor": null,
+            "overline": 0,
+            "overlineColor": null,
+            "lineThrough": 0,
+            "lineThroughColor": null,
+            "highlightColor": null,
+            "dropShadows": [],
+            "flexShrink": 1,
+            "boxSizing": "content-box"
+          },
+          "x": 1037,
+          "y": 24,
+          "width": 139,
+          "height": 44,
+          "position": {
+            "top": 24,
+            "bottom": 0,
+            "left": 1037,
+            "right": 0
+          },
+          "padding": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 0,
+      "y": 0,
+      "width": 1200,
+      "height": 93,
+      "position": {
+        "top": 0,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 24,
+        "left": 24,
+        "right": 24,
+        "bottom": 24
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "flex": 1,
+        "flexDirection": "row"
+      },
+      "children": [
+        {
+          "type": "column",
+          "props": {
+            "width": 200,
+            "padding": 24,
+            "background": ["#f9fafb"],
+            "borderTopWidth": 0,
+            "borderBottomWidth": 0,
+            "borderLeftWidth": 0,
+            "borderRightWidth": 1,
+            "borderColor": "#e5e7eb"
+          },
+          "children": [
+            {
+              "type": "text",
+              "children": ["Navigation"],
+              "props": {
+                "size": 18,
+                "color": "#374151",
+                "font": ["sans-serif"],
+                "style": "normal",
+                "weight": "600",
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 151,
+                      "height": 24.58795166015625,
+                      "lines": [
+                        {
+                          "baseline": 18,
+                          "height": 24.58795166015625,
+                          "width": 91.48999786376953,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 91.48999786376953,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 91.48999786376953,
+                                "actualBoundingBoxAscent": 14,
+                                "actualBoundingBoxDescent": 6,
+                                "fontBoundingBoxAscent": 18,
+                                "fontBoundingBoxDescent": 6.58795166015625,
+                                "emHeightAscent": 18,
+                                "emHeightDescent": 6.58795166015625,
+                                "hangingBaseline": 14.40000057220459,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.58795166015625,
+                                "lines": [
+                                  {
+                                    "x": 0,
+                                    "y": -14,
+                                    "width": 92.01799011230469,
+                                    "height": 20,
+                                    "baseline": 0.41204833984375,
+                                    "hangingBaseline": -13.98795223236084,
+                                    "alphabeticBaseline": 0.41204833984375,
+                                    "ideographicBaseline": 7,
+                                    "ascent": -17.58795166015625,
+                                    "descent": 7,
+                                    "startIndex": 0,
+                                    "endIndex": 10,
+                                    "runs": [
+                                      {
+                                        "x": 0,
+                                        "y": -14,
+                                        "width": 92.01799011230469,
+                                        "height": 20,
+                                        "family": "Avenir Next",
+                                        "ascent": -17.58795166015625,
+                                        "descent": 7,
+                                        "capHeight": -12.331952095031738,
+                                        "xHeight": -8.55195140838623,
+                                        "underline": 1.762048363685608,
+                                        "strikethrough": -4.08795166015625
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "props": {
+                                "size": 18,
+                                "color": "#374151",
+                                "font": ["sans-serif"],
+                                "style": "normal",
+                                "weight": "600",
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "Navigation",
+                              "width": 91.48999786376953,
+                              "height": 24.58795166015625
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 24,
+              "y": 117,
+              "width": 151,
+              "height": 26,
+              "position": {
+                "top": 24,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["• Dashboard"],
+              "props": {
+                "size": 14,
+                "color": "#6b7280",
+                "font": ["sans-serif"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 151,
+                      "height": 19.12396240234375,
+                      "lines": [
+                        {
+                          "baseline": 14,
+                          "height": 19.12396240234375,
+                          "width": 81.61000061035156,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 7,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 7,
+                                "actualBoundingBoxAscent": 9,
+                                "actualBoundingBoxDescent": -1,
+                                "fontBoundingBoxAscent": 14,
+                                "fontBoundingBoxDescent": 5.12396240234375,
+                                "emHeightAscent": 14,
+                                "emHeightDescent": 5.12396240234375,
+                                "hangingBaseline": 11.199999809265137,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.12396240234375,
+                                "lines": [
+                                  {
+                                    "x": 0,
+                                    "y": -9,
+                                    "width": 7,
+                                    "height": 8,
+                                    "baseline": -0.12396240234375,
+                                    "hangingBaseline": -11.323962211608887,
+                                    "alphabeticBaseline": -0.12396240234375,
+                                    "ideographicBaseline": 5,
+                                    "ascent": -14.12396240234375,
+                                    "descent": 5,
+                                    "startIndex": 0,
+                                    "endIndex": 1,
+                                    "runs": [
+                                      {
+                                        "x": 0,
+                                        "y": -9,
+                                        "width": 7,
+                                        "height": 8,
+                                        "family": "Avenir Next",
+                                        "ascent": -14.12396240234375,
+                                        "descent": 5,
+                                        "capHeight": -10.035962104797363,
+                                        "xHeight": -6.675962448120117,
+                                        "underline": 0.9260375499725342,
+                                        "strikethrough": -3.62396240234375
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "text": "• Dashboard",
+                              "height": 19.12396240234375,
+                              "width": 81.61000061035156,
+                              "props": {
+                                "size": 14,
+                                "color": "#6b7280",
+                                "font": ["sans-serif"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "paddingTop": 8,
+                                "paddingBottom": 8,
+                                "paddingLeft": 0,
+                                "paddingRight": 0,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 0,
+                "paddingRight": 0,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 24,
+              "y": 141,
+              "width": 151,
+              "height": 36,
+              "position": {
+                "top": 48,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 8,
+                "left": 0,
+                "right": 0,
+                "bottom": 8
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["• Analytics"],
+              "props": {
+                "size": 14,
+                "color": "#2563eb",
+                "font": ["sans-serif"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 151,
+                      "height": 19.12396240234375,
+                      "lines": [
+                        {
+                          "baseline": 14,
+                          "height": 19.12396240234375,
+                          "width": 67.41999816894531,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 7,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 7,
+                                "actualBoundingBoxAscent": 9,
+                                "actualBoundingBoxDescent": -1,
+                                "fontBoundingBoxAscent": 14,
+                                "fontBoundingBoxDescent": 5.12396240234375,
+                                "emHeightAscent": 14,
+                                "emHeightDescent": 5.12396240234375,
+                                "hangingBaseline": 11.199999809265137,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.12396240234375,
+                                "lines": [
+                                  {
+                                    "x": 0,
+                                    "y": -9,
+                                    "width": 7,
+                                    "height": 8,
+                                    "baseline": -0.12396240234375,
+                                    "hangingBaseline": -11.323962211608887,
+                                    "alphabeticBaseline": -0.12396240234375,
+                                    "ideographicBaseline": 5,
+                                    "ascent": -14.12396240234375,
+                                    "descent": 5,
+                                    "startIndex": 0,
+                                    "endIndex": 1,
+                                    "runs": [
+                                      {
+                                        "x": 0,
+                                        "y": -9,
+                                        "width": 7,
+                                        "height": 8,
+                                        "family": "Avenir Next",
+                                        "ascent": -14.12396240234375,
+                                        "descent": 5,
+                                        "capHeight": -10.035962104797363,
+                                        "xHeight": -6.675962448120117,
+                                        "underline": 0.9260375499725342,
+                                        "strikethrough": -3.62396240234375
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "text": "• Analytics",
+                              "height": 19.12396240234375,
+                              "width": 67.41999816894531,
+                              "props": {
+                                "size": 14,
+                                "color": "#2563eb",
+                                "font": ["sans-serif"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "paddingTop": 8,
+                                "paddingBottom": 8,
+                                "paddingLeft": 0,
+                                "paddingRight": 0,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 0,
+                "paddingRight": 0,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 24,
+              "y": 176,
+              "width": 151,
+              "height": 36,
+              "position": {
+                "top": 83,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 8,
+                "left": 0,
+                "right": 0,
+                "bottom": 8
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["• Reports"],
+              "props": {
+                "size": 14,
+                "color": "#6b7280",
+                "font": ["sans-serif"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 151,
+                      "height": 19.12396240234375,
+                      "lines": [
+                        {
+                          "baseline": 14,
+                          "height": 19.12396240234375,
+                          "width": 59.70000076293945,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 7,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 7,
+                                "actualBoundingBoxAscent": 9,
+                                "actualBoundingBoxDescent": -1,
+                                "fontBoundingBoxAscent": 14,
+                                "fontBoundingBoxDescent": 5.12396240234375,
+                                "emHeightAscent": 14,
+                                "emHeightDescent": 5.12396240234375,
+                                "hangingBaseline": 11.199999809265137,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.12396240234375,
+                                "lines": [
+                                  {
+                                    "x": 0,
+                                    "y": -9,
+                                    "width": 7,
+                                    "height": 8,
+                                    "baseline": -0.12396240234375,
+                                    "hangingBaseline": -11.323962211608887,
+                                    "alphabeticBaseline": -0.12396240234375,
+                                    "ideographicBaseline": 5,
+                                    "ascent": -14.12396240234375,
+                                    "descent": 5,
+                                    "startIndex": 0,
+                                    "endIndex": 1,
+                                    "runs": [
+                                      {
+                                        "x": 0,
+                                        "y": -9,
+                                        "width": 7,
+                                        "height": 8,
+                                        "family": "Avenir Next",
+                                        "ascent": -14.12396240234375,
+                                        "descent": 5,
+                                        "capHeight": -10.035962104797363,
+                                        "xHeight": -6.675962448120117,
+                                        "underline": 0.9260375499725342,
+                                        "strikethrough": -3.62396240234375
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "text": "• Reports",
+                              "height": 19.12396240234375,
+                              "width": 59.70000076293945,
+                              "props": {
+                                "size": 14,
+                                "color": "#6b7280",
+                                "font": ["sans-serif"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "paddingTop": 8,
+                                "paddingBottom": 8,
+                                "paddingLeft": 0,
+                                "paddingRight": 0,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 0,
+                "paddingRight": 0,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 24,
+              "y": 211,
+              "width": 151,
+              "height": 36,
+              "position": {
+                "top": 118,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 8,
+                "left": 0,
+                "right": 0,
+                "bottom": 8
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["• Settings"],
+              "props": {
+                "size": 14,
+                "color": "#6b7280",
+                "font": ["sans-serif"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 151,
+                      "height": 19.12396240234375,
+                      "lines": [
+                        {
+                          "baseline": 14,
+                          "height": 19.12396240234375,
+                          "width": 61.810001373291016,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 7,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 7,
+                                "actualBoundingBoxAscent": 9,
+                                "actualBoundingBoxDescent": -1,
+                                "fontBoundingBoxAscent": 14,
+                                "fontBoundingBoxDescent": 5.12396240234375,
+                                "emHeightAscent": 14,
+                                "emHeightDescent": 5.12396240234375,
+                                "hangingBaseline": 11.199999809265137,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.12396240234375,
+                                "lines": [
+                                  {
+                                    "x": 0,
+                                    "y": -9,
+                                    "width": 7,
+                                    "height": 8,
+                                    "baseline": -0.12396240234375,
+                                    "hangingBaseline": -11.323962211608887,
+                                    "alphabeticBaseline": -0.12396240234375,
+                                    "ideographicBaseline": 5,
+                                    "ascent": -14.12396240234375,
+                                    "descent": 5,
+                                    "startIndex": 0,
+                                    "endIndex": 1,
+                                    "runs": [
+                                      {
+                                        "x": 0,
+                                        "y": -9,
+                                        "width": 7,
+                                        "height": 8,
+                                        "family": "Avenir Next",
+                                        "ascent": -14.12396240234375,
+                                        "descent": 5,
+                                        "capHeight": -10.035962104797363,
+                                        "xHeight": -6.675962448120117,
+                                        "underline": 0.9260375499725342,
+                                        "strikethrough": -3.62396240234375
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "text": "• Settings",
+                              "height": 19.12396240234375,
+                              "width": 61.810001373291016,
+                              "props": {
+                                "size": 14,
+                                "color": "#6b7280",
+                                "font": ["sans-serif"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "paddingTop": 8,
+                                "paddingBottom": 8,
+                                "paddingLeft": 0,
+                                "paddingRight": 0,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "paddingTop": 8,
+                "paddingBottom": 8,
+                "paddingLeft": 0,
+                "paddingRight": 0,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 24,
+              "y": 246,
+              "width": 151,
+              "height": 36,
+              "position": {
+                "top": 153,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 8,
+                "left": 0,
+                "right": 0,
+                "bottom": 8
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 0,
+          "y": 93,
+          "width": 200,
+          "height": 658,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          },
+          "padding": {
+            "top": 24,
+            "left": 24,
+            "right": 24,
+            "bottom": 24
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "column",
+          "props": {
+            "padding": 24,
+            "gap": 24,
+            "flex": 1
+          },
+          "children": [
+            {
+              "type": "row",
+              "props": {
+                "gap": 16,
+                "flexDirection": "row"
+              },
+              "children": [
+                {
+                  "type": "column",
+                  "props": {
+                    "padding": 20,
+                    "background": ["white"],
+                    "cornerRadius": [8],
+                    "borderWidth": 1,
+                    "borderColor": "#e5e7eb",
+                    "flex": 1
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "children": ["Users"],
+                      "props": {
+                        "size": 14,
+                        "color": "#6b7280",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 265,
+                              "height": 19.12396240234375,
+                              "lines": [
+                                {
+                                  "baseline": 14,
+                                  "height": 19.12396240234375,
+                                  "width": 35.41999816894531,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 35.41999816894531,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 35.41999816894531,
+                                        "actualBoundingBoxAscent": 11,
+                                        "actualBoundingBoxDescent": 2,
+                                        "fontBoundingBoxAscent": 14,
+                                        "fontBoundingBoxDescent": 5.12396240234375,
+                                        "emHeightAscent": 14,
+                                        "emHeightDescent": 5.12396240234375,
+                                        "hangingBaseline": 11.199999809265137,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -5.12396240234375,
+                                        "lines": [
+                                          {
+                                            "x": 0,
+                                            "y": -11,
+                                            "width": 36.20399475097656,
+                                            "height": 13,
+                                            "baseline": -0.12396240234375,
+                                            "hangingBaseline": -11.323962211608887,
+                                            "alphabeticBaseline": -0.12396240234375,
+                                            "ideographicBaseline": 5,
+                                            "ascent": -14.12396240234375,
+                                            "descent": 5,
+                                            "startIndex": 0,
+                                            "endIndex": 5,
+                                            "runs": [
+                                              {
+                                                "x": 0,
+                                                "y": -11,
+                                                "width": 36.20399475097656,
+                                                "height": 13,
+                                                "family": "Avenir Next",
+                                                "ascent": -14.12396240234375,
+                                                "descent": 5,
+                                                "capHeight": -10.035962104797363,
+                                                "xHeight": -6.675962448120117,
+                                                "underline": 0.9260375499725342,
+                                                "strikethrough": -3.62396240234375
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "props": {
+                                        "size": 14,
+                                        "color": "#6b7280",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": 400,
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      },
+                                      "text": "Users",
+                                      "width": 35.41999816894531,
+                                      "height": 19.12396240234375
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 245,
+                      "y": 138,
+                      "width": 265,
+                      "height": 20,
+                      "position": {
+                        "top": 21,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "children": ["1,234"],
+                      "props": {
+                        "size": 28,
+                        "color": "#111827",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 265,
+                              "height": 38.2479248046875,
+                              "lines": [
+                                {
+                                  "baseline": 28,
+                                  "height": 38.2479248046875,
+                                  "width": 80.75,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 80.75,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 80.75,
+                                        "actualBoundingBoxAscent": 22,
+                                        "actualBoundingBoxDescent": 5,
+                                        "fontBoundingBoxAscent": 28,
+                                        "fontBoundingBoxDescent": 10.2479248046875,
+                                        "emHeightAscent": 28,
+                                        "emHeightDescent": 10.2479248046875,
+                                        "hangingBaseline": 22.399999618530273,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -10.2479248046875,
+                                        "lines": [
+                                          {
+                                            "x": 0,
+                                            "y": -22,
+                                            "width": 81.66398620605469,
+                                            "height": 27,
+                                            "baseline": -0.2479248046875,
+                                            "hangingBaseline": -22.647924423217773,
+                                            "alphabeticBaseline": -0.2479248046875,
+                                            "ideographicBaseline": 10,
+                                            "ascent": -28.2479248046875,
+                                            "descent": 10,
+                                            "startIndex": 0,
+                                            "endIndex": 5,
+                                            "runs": [
+                                              {
+                                                "x": 0,
+                                                "y": -22,
+                                                "width": 81.66398620605469,
+                                                "height": 27,
+                                                "family": "Avenir Next",
+                                                "ascent": -28.2479248046875,
+                                                "descent": 10,
+                                                "capHeight": -20.071924209594727,
+                                                "xHeight": -14.191925048828125,
+                                                "underline": 1.8520750999450684,
+                                                "strikethrough": -7.2479248046875
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "props": {
+                                        "size": 28,
+                                        "color": "#111827",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": "bold",
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      },
+                                      "text": "1,234",
+                                      "width": 80.75,
+                                      "height": 38.2479248046875
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 245,
+                      "y": 157,
+                      "width": 265,
+                      "height": 40,
+                      "position": {
+                        "top": 40,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "children": ["+12%"],
+                      "props": {
+                        "size": 12,
+                        "color": "#10b981",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 265,
+                              "height": 16.3919677734375,
+                              "lines": [
+                                {
+                                  "baseline": 12,
+                                  "height": 16.3919677734375,
+                                  "width": 31.90999984741211,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 7.989999771118164,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 7.989999771118164,
+                                        "actualBoundingBoxAscent": 8,
+                                        "actualBoundingBoxDescent": 1,
+                                        "fontBoundingBoxAscent": 12,
+                                        "fontBoundingBoxDescent": 4.3919677734375,
+                                        "emHeightAscent": 12,
+                                        "emHeightDescent": 4.3919677734375,
+                                        "hangingBaseline": 9.600000381469727,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -4.3919677734375,
+                                        "lines": [
+                                          {
+                                            "x": -1,
+                                            "y": -8,
+                                            "width": 10,
+                                            "height": 9,
+                                            "baseline": -0.3919677734375,
+                                            "hangingBaseline": -9.991968154907227,
+                                            "alphabeticBaseline": -0.3919677734375,
+                                            "ideographicBaseline": 4,
+                                            "ascent": -12.3919677734375,
+                                            "descent": 4,
+                                            "startIndex": 0,
+                                            "endIndex": 1,
+                                            "runs": [
+                                              {
+                                                "x": -1,
+                                                "y": -8,
+                                                "width": 10,
+                                                "height": 9,
+                                                "family": "Avenir Next",
+                                                "ascent": -12.3919677734375,
+                                                "descent": 4,
+                                                "capHeight": -8.887968063354492,
+                                                "xHeight": -6.007967948913574,
+                                                "underline": 0.5080322027206421,
+                                                "strikethrough": -3.3919677734375
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "text": "+12%",
+                                      "height": 16.3919677734375,
+                                      "width": 31.90999984741211,
+                                      "props": {
+                                        "size": 12,
+                                        "color": "#10b981",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": 400,
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      }
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 245,
+                      "y": 195,
+                      "width": 265,
+                      "height": 17,
+                      "position": {
+                        "top": 78,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    }
+                  ],
+                  "x": 224,
+                  "y": 117,
+                  "width": 307,
+                  "height": 115,
+                  "position": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                  },
+                  "padding": {
+                    "top": 20,
+                    "left": 20,
+                    "right": 20,
+                    "bottom": 20
+                  },
+                  "margin": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  }
+                },
+                {
+                  "type": "column",
+                  "props": {
+                    "padding": 20,
+                    "background": ["white"],
+                    "cornerRadius": [8],
+                    "borderWidth": 1,
+                    "borderColor": "#e5e7eb",
+                    "flex": 1
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "children": ["Revenue"],
+                      "props": {
+                        "size": 14,
+                        "color": "#6b7280",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 266,
+                              "height": 19.12396240234375,
+                              "lines": [
+                                {
+                                  "baseline": 14,
+                                  "height": 19.12396240234375,
+                                  "width": 55.34000015258789,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 55.34000015258789,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 55.34000015258789,
+                                        "actualBoundingBoxAscent": 11,
+                                        "actualBoundingBoxDescent": 2,
+                                        "fontBoundingBoxAscent": 14,
+                                        "fontBoundingBoxDescent": 5.12396240234375,
+                                        "emHeightAscent": 14,
+                                        "emHeightDescent": 5.12396240234375,
+                                        "hangingBaseline": 11.199999809265137,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -5.12396240234375,
+                                        "lines": [
+                                          {
+                                            "x": 0,
+                                            "y": -11,
+                                            "width": 56.33399963378906,
+                                            "height": 13,
+                                            "baseline": -0.12396240234375,
+                                            "hangingBaseline": -11.323962211608887,
+                                            "alphabeticBaseline": -0.12396240234375,
+                                            "ideographicBaseline": 5,
+                                            "ascent": -14.12396240234375,
+                                            "descent": 5,
+                                            "startIndex": 0,
+                                            "endIndex": 7,
+                                            "runs": [
+                                              {
+                                                "x": 0,
+                                                "y": -11,
+                                                "width": 56.33399963378906,
+                                                "height": 13,
+                                                "family": "Avenir Next",
+                                                "ascent": -14.12396240234375,
+                                                "descent": 5,
+                                                "capHeight": -10.035962104797363,
+                                                "xHeight": -6.675962448120117,
+                                                "underline": 0.9260375499725342,
+                                                "strikethrough": -3.62396240234375
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "props": {
+                                        "size": 14,
+                                        "color": "#6b7280",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": 400,
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      },
+                                      "text": "Revenue",
+                                      "width": 55.34000015258789,
+                                      "height": 19.12396240234375
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 568,
+                      "y": 138,
+                      "width": 266,
+                      "height": 20,
+                      "position": {
+                        "top": 21,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "children": ["$45,678"],
+                      "props": {
+                        "size": 28,
+                        "color": "#111827",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 266,
+                              "height": 38.2479248046875,
+                              "lines": [
+                                {
+                                  "baseline": 28,
+                                  "height": 38.2479248046875,
+                                  "width": 116.92999649047852,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 18.09000015258789,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 18.09000015258789,
+                                        "actualBoundingBoxAscent": 24,
+                                        "actualBoundingBoxDescent": 4,
+                                        "fontBoundingBoxAscent": 28,
+                                        "fontBoundingBoxDescent": 10.2479248046875,
+                                        "emHeightAscent": 28,
+                                        "emHeightDescent": 10.2479248046875,
+                                        "hangingBaseline": 22.399999618530273,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -10.2479248046875,
+                                        "lines": [
+                                          {
+                                            "x": -1,
+                                            "y": -24,
+                                            "width": 19,
+                                            "height": 28,
+                                            "baseline": -0.2479248046875,
+                                            "hangingBaseline": -22.647924423217773,
+                                            "alphabeticBaseline": -0.2479248046875,
+                                            "ideographicBaseline": 10,
+                                            "ascent": -28.2479248046875,
+                                            "descent": 10,
+                                            "startIndex": 0,
+                                            "endIndex": 1,
+                                            "runs": [
+                                              {
+                                                "x": -1,
+                                                "y": -24,
+                                                "width": 19,
+                                                "height": 28,
+                                                "family": "Avenir Next",
+                                                "ascent": -28.2479248046875,
+                                                "descent": 10,
+                                                "capHeight": -20.071924209594727,
+                                                "xHeight": -14.191925048828125,
+                                                "underline": 1.8520750999450684,
+                                                "strikethrough": -7.2479248046875
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "text": "$45,678",
+                                      "height": 38.2479248046875,
+                                      "width": 116.92999649047852,
+                                      "props": {
+                                        "size": 28,
+                                        "color": "#111827",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": "bold",
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      }
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 568,
+                      "y": 157,
+                      "width": 266,
+                      "height": 40,
+                      "position": {
+                        "top": 40,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "children": ["+8%"],
+                      "props": {
+                        "size": 12,
+                        "color": "#10b981",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 266,
+                              "height": 16.3919677734375,
+                              "lines": [
+                                {
+                                  "baseline": 12,
+                                  "height": 16.3919677734375,
+                                  "width": 24.949999809265137,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 7.989999771118164,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 7.989999771118164,
+                                        "actualBoundingBoxAscent": 8,
+                                        "actualBoundingBoxDescent": 1,
+                                        "fontBoundingBoxAscent": 12,
+                                        "fontBoundingBoxDescent": 4.3919677734375,
+                                        "emHeightAscent": 12,
+                                        "emHeightDescent": 4.3919677734375,
+                                        "hangingBaseline": 9.600000381469727,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -4.3919677734375,
+                                        "lines": [
+                                          {
+                                            "x": -1,
+                                            "y": -8,
+                                            "width": 10,
+                                            "height": 9,
+                                            "baseline": -0.3919677734375,
+                                            "hangingBaseline": -9.991968154907227,
+                                            "alphabeticBaseline": -0.3919677734375,
+                                            "ideographicBaseline": 4,
+                                            "ascent": -12.3919677734375,
+                                            "descent": 4,
+                                            "startIndex": 0,
+                                            "endIndex": 1,
+                                            "runs": [
+                                              {
+                                                "x": -1,
+                                                "y": -8,
+                                                "width": 10,
+                                                "height": 9,
+                                                "family": "Avenir Next",
+                                                "ascent": -12.3919677734375,
+                                                "descent": 4,
+                                                "capHeight": -8.887968063354492,
+                                                "xHeight": -6.007967948913574,
+                                                "underline": 0.5080322027206421,
+                                                "strikethrough": -3.3919677734375
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "text": "+8%",
+                                      "height": 16.3919677734375,
+                                      "width": 24.949999809265137,
+                                      "props": {
+                                        "size": 12,
+                                        "color": "#10b981",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": 400,
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      }
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 568,
+                      "y": 195,
+                      "width": 266,
+                      "height": 17,
+                      "position": {
+                        "top": 78,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    }
+                  ],
+                  "x": 547,
+                  "y": 117,
+                  "width": 306,
+                  "height": 115,
+                  "position": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 323,
+                    "right": 0
+                  },
+                  "padding": {
+                    "top": 20,
+                    "left": 20,
+                    "right": 20,
+                    "bottom": 20
+                  },
+                  "margin": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  }
+                },
+                {
+                  "type": "column",
+                  "props": {
+                    "padding": 20,
+                    "background": ["white"],
+                    "cornerRadius": [8],
+                    "borderWidth": 1,
+                    "borderColor": "#e5e7eb",
+                    "flex": 1
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "children": ["Orders"],
+                      "props": {
+                        "size": 14,
+                        "color": "#6b7280",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 265,
+                              "height": 19.12396240234375,
+                              "lines": [
+                                {
+                                  "baseline": 14,
+                                  "height": 19.12396240234375,
+                                  "width": 44.869998931884766,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 44.869998931884766,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 44.869998931884766,
+                                        "actualBoundingBoxAscent": 12,
+                                        "actualBoundingBoxDescent": 2,
+                                        "fontBoundingBoxAscent": 14,
+                                        "fontBoundingBoxDescent": 5.12396240234375,
+                                        "emHeightAscent": 14,
+                                        "emHeightDescent": 5.12396240234375,
+                                        "hangingBaseline": 11.199999809265137,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -5.12396240234375,
+                                        "lines": [
+                                          {
+                                            "x": -1,
+                                            "y": -12,
+                                            "width": 46.65397644042969,
+                                            "height": 14,
+                                            "baseline": -0.12396240234375,
+                                            "hangingBaseline": -11.323962211608887,
+                                            "alphabeticBaseline": -0.12396240234375,
+                                            "ideographicBaseline": 5,
+                                            "ascent": -14.12396240234375,
+                                            "descent": 5,
+                                            "startIndex": 0,
+                                            "endIndex": 6,
+                                            "runs": [
+                                              {
+                                                "x": -1,
+                                                "y": -12,
+                                                "width": 46.65397644042969,
+                                                "height": 14,
+                                                "family": "Avenir Next",
+                                                "ascent": -14.12396240234375,
+                                                "descent": 5,
+                                                "capHeight": -10.035962104797363,
+                                                "xHeight": -6.675962448120117,
+                                                "underline": 0.9260375499725342,
+                                                "strikethrough": -3.62396240234375
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "props": {
+                                        "size": 14,
+                                        "color": "#6b7280",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": 400,
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      },
+                                      "text": "Orders",
+                                      "width": 44.869998931884766,
+                                      "height": 19.12396240234375
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 890,
+                      "y": 138,
+                      "width": 265,
+                      "height": 20,
+                      "position": {
+                        "top": 21,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "children": ["567"],
+                      "props": {
+                        "size": 28,
+                        "color": "#111827",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 265,
+                              "height": 38.2479248046875,
+                              "lines": [
+                                {
+                                  "baseline": 28,
+                                  "height": 38.2479248046875,
+                                  "width": 54.2599983215332,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 54.2599983215332,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 54.2599983215332,
+                                        "actualBoundingBoxAscent": 21,
+                                        "actualBoundingBoxDescent": 2,
+                                        "fontBoundingBoxAscent": 28,
+                                        "fontBoundingBoxDescent": 10.2479248046875,
+                                        "emHeightAscent": 28,
+                                        "emHeightDescent": 10.2479248046875,
+                                        "hangingBaseline": 22.399999618530273,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -10.2479248046875,
+                                        "lines": [
+                                          {
+                                            "x": 0,
+                                            "y": -21,
+                                            "width": 54.175994873046875,
+                                            "height": 23,
+                                            "baseline": -0.2479248046875,
+                                            "hangingBaseline": -22.647924423217773,
+                                            "alphabeticBaseline": -0.2479248046875,
+                                            "ideographicBaseline": 10,
+                                            "ascent": -28.2479248046875,
+                                            "descent": 10,
+                                            "startIndex": 0,
+                                            "endIndex": 3,
+                                            "runs": [
+                                              {
+                                                "x": 0,
+                                                "y": -21,
+                                                "width": 54.175994873046875,
+                                                "height": 23,
+                                                "family": "Avenir Next",
+                                                "ascent": -28.2479248046875,
+                                                "descent": 10,
+                                                "capHeight": -20.071924209594727,
+                                                "xHeight": -14.191925048828125,
+                                                "underline": 1.8520750999450684,
+                                                "strikethrough": -7.2479248046875
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "props": {
+                                        "size": 28,
+                                        "color": "#111827",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": "bold",
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      },
+                                      "text": "567",
+                                      "width": 54.2599983215332,
+                                      "height": 38.2479248046875
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 890,
+                      "y": 157,
+                      "width": 265,
+                      "height": 40,
+                      "position": {
+                        "top": 40,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "children": ["-3%"],
+                      "props": {
+                        "size": 12,
+                        "color": "#ef4444",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [
+                          {
+                            "paragraph": {
+                              "width": 265,
+                              "height": 16.3919677734375,
+                              "lines": [
+                                {
+                                  "baseline": 12,
+                                  "height": 16.3919677734375,
+                                  "width": 20.799999952316284,
+                                  "segments": [
+                                    {
+                                      "metrics": {
+                                        "width": 3.8399999141693115,
+                                        "actualBoundingBoxLeft": 0,
+                                        "actualBoundingBoxRight": 3.8399999141693115,
+                                        "actualBoundingBoxAscent": 5,
+                                        "actualBoundingBoxDescent": -1,
+                                        "fontBoundingBoxAscent": 12,
+                                        "fontBoundingBoxDescent": 4.3919677734375,
+                                        "emHeightAscent": 12,
+                                        "emHeightDescent": 4.3919677734375,
+                                        "hangingBaseline": 9.600000381469727,
+                                        "alphabeticBaseline": 0,
+                                        "ideographicBaseline": -4.3919677734375,
+                                        "lines": [
+                                          {
+                                            "x": -1,
+                                            "y": -5,
+                                            "width": 6,
+                                            "height": 4,
+                                            "baseline": -0.3919677734375,
+                                            "hangingBaseline": -9.991968154907227,
+                                            "alphabeticBaseline": -0.3919677734375,
+                                            "ideographicBaseline": 4,
+                                            "ascent": -12.3919677734375,
+                                            "descent": 4,
+                                            "startIndex": 0,
+                                            "endIndex": 1,
+                                            "runs": [
+                                              {
+                                                "x": -1,
+                                                "y": -5,
+                                                "width": 6,
+                                                "height": 4,
+                                                "family": "Avenir Next",
+                                                "ascent": -12.3919677734375,
+                                                "descent": 4,
+                                                "capHeight": -8.887968063354492,
+                                                "xHeight": -6.007967948913574,
+                                                "underline": 0.5080322027206421,
+                                                "strikethrough": -3.3919677734375
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      "text": "-3%",
+                                      "height": 16.3919677734375,
+                                      "width": 20.799999952316284,
+                                      "props": {
+                                        "size": 12,
+                                        "color": "#ef4444",
+                                        "font": ["sans-serif"],
+                                        "style": "normal",
+                                        "weight": 400,
+                                        "letterSpacing": 0,
+                                        "nowrap": false,
+                                        "lineHeight": null,
+                                        "indentSize": 0,
+                                        "hangingIndentSize": 0,
+                                        "align": "left",
+                                        "strokeColor": "black",
+                                        "strokeWidth": 0,
+                                        "wordSpacing": 0,
+                                        "blocks": [],
+                                        "offsetY": 0,
+                                        "underline": 0,
+                                        "underlineColor": null,
+                                        "overline": 0,
+                                        "overlineColor": null,
+                                        "lineThrough": 0,
+                                        "lineThroughColor": null,
+                                        "highlightColor": null,
+                                        "dropShadows": [],
+                                        "flexShrink": 1,
+                                        "boxSizing": "content-box"
+                                      }
+                                    }
+                                  ],
+                                  "spacesCount": 0
+                                }
+                              ],
+                              "offsetY": 0
+                            }
+                          }
+                        ],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "x": 890,
+                      "y": 195,
+                      "width": 265,
+                      "height": 17,
+                      "position": {
+                        "top": 78,
+                        "bottom": 0,
+                        "left": 21,
+                        "right": 0
+                      },
+                      "padding": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      },
+                      "margin": {
+                        "top": 0,
+                        "left": 0,
+                        "right": 0,
+                        "bottom": 0
+                      }
+                    }
+                  ],
+                  "x": 869,
+                  "y": 117,
+                  "width": 307,
+                  "height": 115,
+                  "position": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 645,
+                    "right": 0
+                  },
+                  "padding": {
+                    "top": 20,
+                    "left": 20,
+                    "right": 20,
+                    "bottom": 20
+                  },
+                  "margin": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  }
+                }
+              ],
+              "x": 224,
+              "y": 117,
+              "width": 952,
+              "height": 115,
+              "position": {
+                "top": 24,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "column",
+              "props": {
+                "padding": 24,
+                "background": ["white"],
+                "cornerRadius": [8],
+                "borderWidth": 1,
+                "borderColor": "#e5e7eb"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "children": ["Sales Chart"],
+                  "props": {
+                    "size": 20,
+                    "color": "#374151",
+                    "font": ["sans-serif"],
+                    "style": "normal",
+                    "weight": "600",
+                    "letterSpacing": 0,
+                    "nowrap": false,
+                    "lineHeight": null,
+                    "indentSize": 0,
+                    "hangingIndentSize": 0,
+                    "align": "left",
+                    "strokeColor": "black",
+                    "strokeWidth": 0,
+                    "wordSpacing": 0,
+                    "blocks": [
+                      {
+                        "paragraph": {
+                          "width": 902,
+                          "height": 27.3199462890625,
+                          "lines": [
+                            {
+                              "baseline": 20,
+                              "height": 27.3199462890625,
+                              "width": 103.63999938964844,
+                              "segments": [
+                                {
+                                  "metrics": {
+                                    "width": 48.20000076293945,
+                                    "actualBoundingBoxLeft": 0,
+                                    "actualBoundingBoxRight": 48.20000076293945,
+                                    "actualBoundingBoxAscent": 17,
+                                    "actualBoundingBoxDescent": 2,
+                                    "fontBoundingBoxAscent": 20,
+                                    "fontBoundingBoxDescent": 7.3199462890625,
+                                    "emHeightAscent": 20,
+                                    "emHeightDescent": 7.3199462890625,
+                                    "hangingBaseline": 16,
+                                    "alphabeticBaseline": 0,
+                                    "ideographicBaseline": -7.3199462890625,
+                                    "lines": [
+                                      {
+                                        "x": -1,
+                                        "y": -17,
+                                        "width": 50.31999206542969,
+                                        "height": 19,
+                                        "baseline": -0.3199462890625,
+                                        "hangingBaseline": -16.3199462890625,
+                                        "alphabeticBaseline": -0.3199462890625,
+                                        "ideographicBaseline": 7,
+                                        "ascent": -20.3199462890625,
+                                        "descent": 7,
+                                        "startIndex": 0,
+                                        "endIndex": 5,
+                                        "runs": [
+                                          {
+                                            "x": -1,
+                                            "y": -17,
+                                            "width": 50.31999206542969,
+                                            "height": 19,
+                                            "family": "Avenir Next",
+                                            "ascent": -20.3199462890625,
+                                            "descent": 7,
+                                            "capHeight": -14.47994613647461,
+                                            "xHeight": -10.279946327209473,
+                                            "underline": 1.1800537109375,
+                                            "strikethrough": -5.3199462890625
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "text": "Sales Chart",
+                                  "height": 27.3199462890625,
+                                  "width": 103.63999938964844,
+                                  "props": {
+                                    "size": 20,
+                                    "color": "#374151",
+                                    "font": ["sans-serif"],
+                                    "style": "normal",
+                                    "weight": "600",
+                                    "letterSpacing": 0,
+                                    "nowrap": false,
+                                    "lineHeight": null,
+                                    "indentSize": 0,
+                                    "hangingIndentSize": 0,
+                                    "align": "left",
+                                    "strokeColor": "black",
+                                    "strokeWidth": 0,
+                                    "wordSpacing": 0,
+                                    "blocks": [],
+                                    "offsetY": 0,
+                                    "underline": 0,
+                                    "underlineColor": null,
+                                    "overline": 0,
+                                    "overlineColor": null,
+                                    "lineThrough": 0,
+                                    "lineThroughColor": null,
+                                    "highlightColor": null,
+                                    "dropShadows": [],
+                                    "flexShrink": 1,
+                                    "boxSizing": "content-box"
+                                  }
+                                }
+                              ],
+                              "spacesCount": 0
+                            }
+                          ],
+                          "offsetY": 0
+                        }
+                      }
+                    ],
+                    "offsetY": 0,
+                    "underline": 0,
+                    "underlineColor": null,
+                    "overline": 0,
+                    "overlineColor": null,
+                    "lineThrough": 0,
+                    "lineThroughColor": null,
+                    "highlightColor": null,
+                    "dropShadows": [],
+                    "flexShrink": 1,
+                    "boxSizing": "content-box"
+                  },
+                  "x": 249,
+                  "y": 282,
+                  "width": 902,
+                  "height": 28,
+                  "position": {
+                    "top": 25,
+                    "bottom": 0,
+                    "left": 25,
+                    "right": 0
+                  },
+                  "padding": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  },
+                  "margin": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  }
+                },
+                {
+                  "type": "column",
+                  "props": {
+                    "height": 200,
+                    "background": ["#f3f4f6"],
+                    "cornerRadius": [4],
+                    "borderTopWidth": 2,
+                    "borderBottomWidth": 2,
+                    "borderLeftWidth": 2,
+                    "borderRightWidth": 2,
+                    "borderColor": "#d1d5db"
+                  },
+                  "children": [],
+                  "x": 249,
+                  "y": 309,
+                  "width": 902,
+                  "height": 200,
+                  "position": {
+                    "top": 52,
+                    "bottom": 0,
+                    "left": 25,
+                    "right": 0
+                  },
+                  "padding": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  },
+                  "margin": {
+                    "top": 0,
+                    "left": 0,
+                    "right": 0,
+                    "bottom": 0
+                  }
+                }
+              ],
+              "x": 224,
+              "y": 257,
+              "width": 952,
+              "height": 278,
+              "position": {
+                "top": 164,
+                "bottom": 0,
+                "left": 24,
+                "right": 0
+              },
+              "padding": {
+                "top": 24,
+                "left": 24,
+                "right": 24,
+                "bottom": 24
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 200,
+          "y": 93,
+          "width": 1000,
+          "height": 658,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 200,
+            "right": 0
+          },
+          "padding": {
+            "top": 24,
+            "left": 24,
+            "right": 24,
+            "bottom": 24
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 0,
+      "y": 93,
+      "width": 1200,
+      "height": 658,
+      "position": {
+        "top": 93,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": ["© 2024 Dashboard. All rights reserved."],
+      "props": {
+        "size": 12,
+        "color": "#9ca3af",
+        "font": ["sans-serif"],
+        "style": "normal",
+        "weight": 400,
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "left",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 1168,
+              "height": 16.3919677734375,
+              "lines": [
+                {
+                  "baseline": 12,
+                  "height": 16.3919677734375,
+                  "width": 212.95000171661377,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 9.600000381469727,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 9.600000381469727,
+                        "actualBoundingBoxAscent": 10,
+                        "actualBoundingBoxDescent": 2,
+                        "fontBoundingBoxAscent": 12,
+                        "fontBoundingBoxDescent": 4.3919677734375,
+                        "emHeightAscent": 12,
+                        "emHeightDescent": 4.3919677734375,
+                        "hangingBaseline": 9.600000381469727,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -4.3919677734375,
+                        "lines": [
+                          {
+                            "x": -1,
+                            "y": -10,
+                            "width": 12,
+                            "height": 12,
+                            "baseline": -0.3919677734375,
+                            "hangingBaseline": -9.991968154907227,
+                            "alphabeticBaseline": -0.3919677734375,
+                            "ideographicBaseline": 4,
+                            "ascent": -12.3919677734375,
+                            "descent": 4,
+                            "startIndex": 0,
+                            "endIndex": 1,
+                            "runs": [
+                              {
+                                "x": -1,
+                                "y": -10,
+                                "width": 12,
+                                "height": 12,
+                                "family": "Avenir Next",
+                                "ascent": -12.3919677734375,
+                                "descent": 4,
+                                "capHeight": -8.887968063354492,
+                                "xHeight": -6.007967948913574,
+                                "underline": 0.5080322027206421,
+                                "strikethrough": -3.3919677734375
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "text": "© 2024 Dashboard. All rights reserved.",
+                      "height": 16.3919677734375,
+                      "width": 212.95000171661377,
+                      "props": {
+                        "size": 12,
+                        "color": "#9ca3af",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "padding": 16,
+                        "background": ["#f8fafc"],
+                        "borderTopWidth": 1,
+                        "borderBottomWidth": 0,
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderColor": "#e5e7eb",
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "padding": 16,
+        "background": ["#f8fafc"],
+        "borderTopWidth": 1,
+        "borderBottomWidth": 0,
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderColor": "#e5e7eb",
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 0,
+      "y": 750,
+      "width": 1200,
+      "height": 50,
+      "position": {
+        "top": 750,
+        "bottom": 0,
+        "left": 0,
+        "right": 0
+      },
+      "padding": {
+        "top": 16,
+        "left": 16,
+        "right": 16,
+        "bottom": 16
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 1200,
+  "height": 800,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}

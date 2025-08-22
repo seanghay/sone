@@ -1,8 +1,5 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { Canvas } from "skia-canvas";
-import { Column, render, renderer, Span, Text } from "../../src/node.ts";
+import { Column, Span, Text } from "../../src/node.ts";
+import { writeCanvasToFile } from "./utils.ts";
 
 const root = Column(
   //
@@ -44,12 +41,4 @@ const root = Column(
   .padding(44)
   .gap(44);
 
-console.time("render");
-const canvas = await render<Canvas>(root, renderer);
-console.timeEnd("render");
-
-const file = path.parse(fileURLToPath(import.meta.url));
-await fs.writeFile(
-  path.join(file.dir, `${file.name}.jpg`),
-  await canvas.toBuffer("jpg", { quality: 1 }),
-);
+await writeCanvasToFile(root, import.meta.url);

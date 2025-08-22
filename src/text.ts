@@ -551,7 +551,6 @@ export function createParagraph(
             props: prev.props,
           } satisfies SoneParagraphLineSegment;
         }, collection[0]);
-
         segments.push(out);
       }
 

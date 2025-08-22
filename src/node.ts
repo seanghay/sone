@@ -7,6 +7,7 @@ import type { SoneNode } from "./core.ts";
 import {
   DEFAULT_TEXT_PROPS,
   render,
+  renderWithMetadata,
   type SoneRenderConfig,
   type SoneRenderer,
 } from "./renderer.ts";
@@ -105,20 +106,23 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
      * @param quality - JPEG quality from 0.0 to 1.0 (default: 1.0)
      * @returns Promise<Buffer> - JPEG image buffer
      */
-    jpg: async (quality = 1.0) => (await build()).toBuffer("jpg", { quality }),
+    jpg: async (quality = 1.0, options?: ExportOptions) =>
+      (await build()).toBuffer("jpg", { quality, ...options }),
 
     /**
      * Export as PNG image
      * @returns Promise<Buffer> - PNG image buffer
      */
-    png: async () => (await build()).toBuffer("png"),
+    png: async (options?: ExportOptions) =>
+      (await build()).toBuffer("png", options),
 
     /**
      * Export as SVG vector graphic
      * @param outline - Whether to include outline information (default: true)
      * @returns Promise<Buffer> - SVG image buffer
      */
-    svg: async (outline = true) => (await build()).toBuffer("svg", { outline }),
+    svg: async (options?: ExportOptions) =>
+      (await build()).toBuffer("svg", options),
 
     /**
      * Export as PDF document
@@ -140,13 +144,16 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
      * Export as raw buffer data
      * @returns Promise<Buffer> - Raw image data buffer
      */
-    raw: async () => (await build()).toBuffer("raw"),
+    raw: async (options?: ExportOptions) =>
+      (await build()).toBuffer("raw", options),
 
     /**
      * Get the rendered Canvas object directly
      * @returns Promise<Canvas> - The rendered Canvas instance
      */
     canvas: async () => build(),
+    canvasWithMetadata: async () =>
+      renderWithMetadata<Canvas>(node, renderer, config),
   };
 }
 

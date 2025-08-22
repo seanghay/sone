@@ -522,6 +522,4 @@ const resume = Column(
   .borderWidth(1)
   .rounded(8);
 
-console.log(JSON.stringify(resume, null, 2));
-
 await writeCanvasToFile(resume, import.meta.url);

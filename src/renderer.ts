@@ -4,6 +4,7 @@ import pick from "object.pick";
 import pMemoize from "p-memoize";
 import getBounds from "svg-path-bounds";
 import {
+  Edge,
   loadYoga,
   type MeasureFunction,
   MeasureMode,
@@ -26,6 +27,7 @@ import {
   type TextNode,
 } from "./core.ts";
 import { createGradientFillStyleList, isColor } from "./gradient.ts";
+import { SoneMetadata } from "./metadata.ts";
 import { drawBorder } from "./op.ts";
 import { drawPhoto } from "./photo.ts";
 import { createSmoothRoundRect, parseRadius } from "./rect.ts";
@@ -474,7 +476,7 @@ export function createLayoutNode(
       const blocks = createParagraph(
         children,
         width,
-        props,
+        klona(props),
         renderer.measureText,
         renderer.breakIterator,
       );
@@ -581,18 +583,11 @@ export interface SoneRenderConfig {
   cache?: Map<string | Uint8Array, SoneImage>;
 }
 
-/**
- * Main rendering function - compiles, layouts, and draws to canvas
- * @param node - root node to render
- * @param renderer - platform-specific renderer
- * @param config - rendering configuration
- * @returns rendered canvas
- */
-export async function render<T = HTMLCanvasElement>(
+export async function calculateLayout(
   node: SoneNode,
   renderer: SoneRenderer,
   config?: SoneRenderConfig,
-): Promise<T> {
+) {
   // create yoga
   const Yoga = await _yoga;
 
@@ -610,8 +605,6 @@ export async function render<T = HTMLCanvasElement>(
       }
     }
   }
-
-  // TODO: load the font to find the baseline height, underline position
 
   const cache =
     config == null || config.cache == null
@@ -637,7 +630,42 @@ export async function render<T = HTMLCanvasElement>(
 
   // layout
   layout.calculateLayout(config?.width, config?.height);
+  return { layout, compiledNode };
+}
 
+/**
+ * Main rendering function - compiles, layouts, and draws to canvas
+ * @param node - root node to render
+ * @param renderer - platform-specific renderer
+ * @param config - rendering configuration
+ */
+export async function renderWithMetadata<T = HTMLCanvasElement>(
+  node: SoneNode,
+  renderer: SoneRenderer,
+  config?: SoneRenderConfig,
+) {
+  const { compiledNode, layout } = await calculateLayout(
+    node,
+    renderer,
+    config,
+  );
+  const canvas = drawOnCanvas(
+    compiledNode,
+    renderer,
+    layout,
+    config,
+  ) as unknown as T;
+
+  const metadata = createMetadata(compiledNode, layout);
+  return { canvas, metadata };
+}
+
+function drawOnCanvas(
+  compiledNode: SoneNode,
+  renderer: SoneRenderer,
+  layout: Node,
+  config?: SoneRenderConfig,
+) {
   // render
   const canvas = renderer.createCanvas(
     layout.getComputedWidth(),
@@ -653,6 +681,7 @@ export async function render<T = HTMLCanvasElement>(
 
   function draw(node: SoneNode, layout: Node, x: number, y: number) {
     if (node == null) return;
+
     try {
       ctx.save();
 
@@ -709,13 +738,116 @@ export async function render<T = HTMLCanvasElement>(
 
   // draw
   draw(compiledNode, layout, 0, 0);
-  // free layout
+  return canvas;
+}
+
+function createMetadata(compiledNode: SoneNode, layout: Node) {
+  // draw metadata
+  function drawWithMeta(
+    node: SoneNode,
+    layout: Node,
+    x: number,
+    y: number,
+  ): SoneMetadata | undefined {
+    if (node == null) return;
+    if (node.type === "text-default") return;
+
+    const props = node.props;
+    const type = node.type;
+
+    const extra = {
+      x,
+      y,
+      width: layout.getComputedWidth(),
+      height: layout.getComputedHeight(),
+      position: {
+        top: layout.getComputedTop(),
+        bottom: layout.getComputedBottom(),
+        left: layout.getComputedLeft(),
+        right: layout.getComputedRight(),
+      },
+      padding: {
+        top: layout.getComputedPadding(Edge.Top),
+        left: layout.getComputedPadding(Edge.Left),
+        right: layout.getComputedPadding(Edge.Right),
+        bottom: layout.getComputedPadding(Edge.Bottom),
+      },
+      margin: {
+        top: layout.getComputedMargin(Edge.Top),
+        left: layout.getComputedMargin(Edge.Left),
+        right: layout.getComputedMargin(Edge.Right),
+        bottom: layout.getComputedMargin(Edge.Bottom),
+      },
+    };
+
+    if (type === "text") {
+      return {
+        type,
+        children: node.children,
+        props: node.props,
+        ...extra,
+      };
+    }
+
+    const children: SoneMetadata[] = [];
+
+    if (
+      type === "column" ||
+      type === "row" ||
+      type === "table" ||
+      type === "table-row" ||
+      type === "table-cell"
+    ) {
+      for (let i = 0; i < node.children.length; i++) {
+        const childRoot = layout.getChild(i);
+        const child = node.children[i];
+        if (child == null) continue;
+        const output = drawWithMeta(
+          child,
+          childRoot,
+          x + childRoot.getComputedLeft(),
+          y + childRoot.getComputedTop(),
+        );
+        if (output == null) continue;
+        children.push(output);
+      }
+    }
+
+    return {
+      type,
+      props,
+      children,
+      ...extra,
+    };
+  }
+
+  return drawWithMeta(compiledNode, layout, 0, 0);
+}
+
+/**
+ * Main rendering function - compiles, layouts, and draws to canvas
+ * @param node - root node to render
+ * @param renderer - platform-specific renderer
+ * @param config - rendering configuration
+ * @returns rendered canvas
+ */
+export async function render<T = HTMLCanvasElement>(
+  node: SoneNode,
+  renderer: SoneRenderer,
+  config?: SoneRenderConfig,
+): Promise<T> {
+  const { layout, compiledNode } = await calculateLayout(
+    node,
+    renderer,
+    config,
+  );
+  const canvas = drawOnCanvas(compiledNode, renderer, layout, config);
   layout.freeRecursive();
   return canvas as unknown as T;
 }
 
 /**
- * Draw background, shadows, and borders for layout nodes
+ * Draw background, 2shadows, and borders for layout nodes
  * @param renderer - platform renderer
  * @param ctx - canvas rendering context
  * @param node - node to draw
