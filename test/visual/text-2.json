@@ -2891,7 +2891,7 @@
                 {
                   "baseline": 68.848388671875,
                   "height": 104.00537109375,
-                  "width": 1374.8899898529053,
+                  "width": 1374.889986038208,
                   "segments": [
                     {
                       "metrics": {
@@ -2941,7 +2941,7 @@
                       },
                       "text": "បំពេញទស្សនកិច្ចនៅព្រំដែនកម្ពុជា-ថៃ។",
                       "height": 104.00537109375,
-                      "width": 972.809986114502,
+                      "width": 972.8099822998047,
                       "props": {
                         "size": 69,
                         "color": "#333",
@@ -4817,13 +4817,13 @@
                 {
                   "baseline": 68.848388671875,
                   "height": 104.00537109375,
-                  "width": 309.9600067138672,
+                  "width": 309.9599914550781,
                   "segments": [
                     {
                       "metrics": {
-                        "width": 267.8500061035156,
+                        "width": 309.9599914550781,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 267.8500061035156,
+                        "actualBoundingBoxRight": 309.9599914550781,
                         "actualBoundingBoxAscent": 66.848388671875,
                         "actualBoundingBoxDescent": 23.151611328125,
                         "fontBoundingBoxAscent": 68.848388671875,
@@ -4837,7 +4837,7 @@
                           {
                             "x": 2,
                             "y": -66.848388671875,
-                            "width": 263.994140625,
+                            "width": 302.8466796875,
                             "height": 90,
                             "baseline": -0.00537109375,
                             "hangingBaseline": -55.084083557128906,
@@ -4846,12 +4846,12 @@
                             "ascent": -68.853759765625,
                             "descent": 35.151611328125,
                             "startIndex": 0,
-                            "endIndex": 9,
+                            "endIndex": 10,
                             "runs": [
                               {
                                 "x": 2,
                                 "y": -66.848388671875,
-                                "width": 263.994140625,
+                                "width": 302.8466796875,
                                 "height": 90,
                                 "family": "Hanuman",
                                 "ascent": -67.38818359375,
@@ -4865,9 +4865,6 @@
                           }
                         ]
                       },
-                      "text": "ឆ្នាំ២០២៥។",
-                      "height": 104.00537109375,
-                      "width": 309.9600067138672,
                       "props": {
                         "size": 69,
                         "color": "#333",
@@ -4899,7 +4896,10 @@
                         "borderWidth": 2,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
-                      }
+                      },
+                      "text": "ឆ្នាំ២០២៥។",
+                      "width": 309.9599914550781,
+                      "height": 104.00537109375
                     }
                   ],
                   "spacesCount": 0
@@ -7176,7 +7176,7 @@
                 {
                   "baseline": 44.901123046875,
                   "height": 67.82958984375,
-                  "width": 1500.2000160217285,
+                  "width": 1500.1900119781494,
                   "segments": [
                     {
                       "metrics": {
@@ -7748,7 +7748,7 @@
                       },
                       "text": "ទៅបំពេញទស្សនកិច្ចនៅព្រំដែនកម្ពុជា-ថៃ។",
                       "height": 67.82958984375,
-                      "width": 690.0400123596191,
+                      "width": 690.03000831604,
                       "props": {
                         "size": 45,
                         "color": "blue",
@@ -8505,7 +8505,7 @@
                 {
                   "baseline": 44.901123046875,
                   "height": 67.82958984375,
-                  "width": 1484.0999946594238,
+                  "width": 1484.0999965667725,
                   "segments": [
                     {
                       "metrics": {
@@ -9379,9 +9379,9 @@
                     },
                     {
                       "metrics": {
-                        "width": 174.67999267578125,
+                        "width": 202.14999389648438,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 174.67999267578125,
+                        "actualBoundingBoxRight": 202.14999389648438,
                         "actualBoundingBoxAscent": 43.901123046875,
                         "actualBoundingBoxDescent": 16.098876953125,
                         "fontBoundingBoxAscent": 44.901123046875,
@@ -9395,7 +9395,7 @@
                           {
                             "x": 1,
                             "y": -43.901123046875,
-                            "width": 172.822265625,
+                            "width": 198.6826171875,
                             "height": 60,
                             "baseline": 0.17041015625,
                             "hangingBaseline": -35.75048828125,
@@ -9404,12 +9404,12 @@
                             "ascent": -44.730712890625,
                             "descent": 23.098876953125,
                             "startIndex": 0,
-                            "endIndex": 9,
+                            "endIndex": 10,
                             "runs": [
                               {
                                 "x": 1,
                                 "y": -43.901123046875,
-                                "width": 172.822265625,
+                                "width": 198.6826171875,
                                 "height": 60,
                                 "family": "Hanuman",
                                 "ascent": -43.77490234375,
@@ -9423,9 +9423,6 @@
                           }
                         ]
                       },
-                      "text": "ឆ្នាំ២០២៥។",
-                      "height": 67.82958984375,
-                      "width": 202.14999198913574,
                       "props": {
                         "size": 45,
                         "color": "blue",
@@ -9462,7 +9459,10 @@
                         "paddingRight": 44,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
-                      }
+                      },
+                      "text": "ឆ្នាំ២០២៥។",
+                      "width": 202.14999389648438,
+                      "height": 67.82958984375
                     }
                   ],
                   "spacesCount": 0

@@ -130,6 +130,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "borderWidth": 2,
                         "borderColor": "red",
                         "flexShrink": 1,
@@ -227,6 +228,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "borderWidth": 2,
                         "borderColor": "red",
                         "flexShrink": 1,
@@ -324,6 +326,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "borderWidth": 2,
                         "borderColor": "red",
                         "flexShrink": 1,
@@ -421,6 +424,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "borderWidth": 2,
                         "borderColor": "red",
                         "flexShrink": 1,
@@ -673,6 +677,7 @@
         "lineThroughColor": null,
         "highlightColor": null,
         "dropShadows": [],
+        "autofit": false,
         "borderWidth": 2,
         "borderColor": "red",
         "flexShrink": 1,
@@ -724,10 +729,10 @@
             "dropShadows": []
           }
         },
-        " ប្រធានព្រឹទ្ធសភា និងជាប្រធានគណបក្សប្រជាជនកម្ពុជាបានសម្រេចឲ្យអភិបាលខេត្តកណ្តាលបញ្ចប់មុខតំណែង អ្នកនាង ធី សុវណ្ណថាពីអភិបាលរងក្រុងអរិយក្សត្រ និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋទាំងអស់ ។",
+        " ប្រធានព្រឹទ្ធសភា និងជាប្រធានគណបក្សប្រជាជនកម្ពុជាបានសម្រេចឲ្យអភិបាលខេត្តកណ្តាលបញ្ចប់មុខតំណែង អ្នកនាង ធី សុវណ្ណថាពីអភិបាលរងក្រុងអរិយក្សត្រ និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋទាំងអស់។",
         {
           "type": "span",
-          "children": "\nសម្តេចតេជោ បានសរសេរលើបណ្តាញសង្គម នៅមុននេះ ដែលមានខ្លឹមយ៉ាងដូច្នេះថា ៖ យើងគ្មានពេលអប់រំមន្ត្រីដែលគ្មានវិន័យ ក្នុងពេលដែលកិច្ចការជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ ។",
+          "children": "\nសម្តេចតេជោ បានសរសេរលើបណ្តាញសង្គម នៅមុននេះ ដែលមានខ្លឹមយ៉ាងដូច្នេះថា ៖ យើងគ្មានពេលអប់រំមន្ត្រីដែលគ្មានវិន័យ ក្នុងពេលដែលកិច្ចការជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ។",
           "props": {
             "size": 44,
             "color": "red",
@@ -769,7 +774,7 @@
                 {
                   "baseline": 59.873730468750004,
                   "height": 89.02480468750001,
-                  "width": 956.8699998855591,
+                  "width": 956.8700037002563,
                   "segments": [
                     {
                       "metrics": {
@@ -819,7 +824,7 @@
                       },
                       "text": "រាជធានីភ្នំពេញ៖ ",
                       "height": 66.322265625,
-                      "width": 266.91999912261963,
+                      "width": 266.9200029373169,
                       "props": {
                         "size": 44,
                         "color": "black",
@@ -845,6 +850,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "maxWidth": 1000,
                         "padding": 44,
                         "borderWidth": 2,
@@ -992,6 +998,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "maxWidth": 1000,
                         "padding": 44,
                         "borderWidth": 2,
@@ -1082,6 +1089,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "maxWidth": 1000,
                         "padding": 44,
                         "borderWidth": 2,
@@ -1172,6 +1180,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "maxWidth": 1000,
                         "padding": 44,
                         "borderWidth": 2,
@@ -1262,6 +1271,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "maxWidth": 1000,
                         "padding": 44,
                         "borderWidth": 2,
@@ -1276,13 +1286,13 @@
                 {
                   "baseline": 54.35546875000001,
                   "height": 82.71484375,
-                  "width": 179.69999408721924,
+                  "width": 166.5,
                   "segments": [
                     {
                       "metrics": {
-                        "width": 139.64999389648438,
+                        "width": 166.5,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 139.64999389648438,
+                        "actualBoundingBoxRight": 166.5,
                         "actualBoundingBoxAscent": 42.9033203125,
                         "actualBoundingBoxDescent": 1.0966796875,
                         "fontBoundingBoxAscent": 43.9033203125,
@@ -1296,7 +1306,7 @@
                           {
                             "x": 3,
                             "y": -42.9033203125,
-                            "width": 135.75390625,
+                            "width": 160.6484375,
                             "height": 44,
                             "baseline": -0.322265625,
                             "hangingBaseline": -35.444923400878906,
@@ -1305,12 +1315,12 @@
                             "ascent": -44.2255859375,
                             "descent": 22.0966796875,
                             "startIndex": 0,
-                            "endIndex": 7,
+                            "endIndex": 8,
                             "runs": [
                               {
                                 "x": 3,
                                 "y": -42.9033203125,
-                                "width": 135.75390625,
+                                "width": 160.6484375,
                                 "height": 44,
                                 "family": "Hanuman",
                                 "ascent": -43.291015625,
@@ -1324,9 +1334,6 @@
                           }
                         ]
                       },
-                      "text": "ទាំងអស់ ។",
-                      "height": 66.322265625,
-                      "width": 179.69999408721924,
                       "props": {
                         "size": 44,
                         "color": "black",
@@ -1352,13 +1359,17 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "maxWidth": 1000,
                         "padding": 44,
                         "borderWidth": 2,
                         "borderColor": "black",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
-                      }
+                      },
+                      "text": "ទាំងអស់។",
+                      "width": 166.5,
+                      "height": 66.322265625
                     },
                     {
                       "metrics": {
@@ -1483,7 +1494,7 @@
                 {
                   "baseline": 54.35546875000001,
                   "height": 82.71484375,
-                  "width": 951.1200008392334,
+                  "width": 951.120002746582,
                   "segments": [
                     {
                       "metrics": {
@@ -1533,7 +1544,7 @@
                       },
                       "text": "នៅមុននេះ ដែលមានខ្លឹមយ៉ាងដូច្នេះថា ៖ យើងគ្មាន",
                       "height": 75.1953125,
-                      "width": 951.1200008392334,
+                      "width": 951.120002746582,
                       "props": {
                         "size": 44,
                         "color": "red",
@@ -1629,7 +1640,7 @@
                 {
                   "baseline": 54.35546875000001,
                   "height": 82.71484375,
-                  "width": 905.7000160217285,
+                  "width": 894.27001953125,
                   "segments": [
                     {
                       "metrics": {
@@ -1677,9 +1688,9 @@
                           }
                         ]
                       },
-                      "text": "ជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ ។",
+                      "text": "ជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ។",
                       "height": 75.1953125,
-                      "width": 905.7000160217285,
+                      "width": 894.27001953125,
                       "props": {
                         "size": 44,
                         "color": "red",
@@ -1713,6 +1724,7 @@
         "lineThroughColor": null,
         "highlightColor": null,
         "dropShadows": [],
+        "autofit": false,
         "maxWidth": 1000,
         "padding": 44,
         "borderWidth": 2,

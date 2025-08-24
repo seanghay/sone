@@ -4,6 +4,7 @@
 import { Buffer } from "node:buffer";
 import skia, { Canvas, type ExportOptions, FontLibrary } from "skia-canvas";
 import type { SoneNode } from "./core.ts";
+import { defaultLineBreakerIterator } from "./linebreak.ts";
 import {
   DEFAULT_TEXT_PROPS,
   render,
@@ -14,15 +15,13 @@ import {
 import { applySpanProps } from "./utils.ts";
 
 export * from "./core.ts";
+export * from "./linebreak.ts";
 export * from "./qrcode.ts";
 export * from "./renderer.ts";
 export { applySpanProps, fontBuilder } from "./utils.ts";
 
 /** Temporary canvas for text measurement */
 const dummyCanvas = new skia.Canvas(1, 1);
-
-/** Cached text segmenter for word breaking */
-let segmenter: Intl.Segmenter | null = null;
 
 /**
  * Node.js renderer implementation using skia-canvas
@@ -40,19 +39,7 @@ export const renderer: SoneRenderer = {
   /** Path2D constructor for SVG path rendering */
   Path2D: skia.Path2D as typeof Path2D,
   /** Generate word break positions using Intl.Segmenter */
-  *breakIterator(text) {
-    if (segmenter == null) {
-      segmenter = new Intl.Segmenter(undefined, {
-        granularity: "word",
-      });
-    }
-
-    for (const segment of segmenter.segment(text)) {
-      // Skip Khmer subscript characters
-      if (segment.segment.endsWith("\u17d2")) continue;
-      yield segment.index;
-    }
-  },
+  breakIterator: defaultLineBreakerIterator,
   /** Create skia-canvas instance */
   createCanvas(width, height) {
     return new skia.Canvas(width, height) as unknown as HTMLCanvasElement;

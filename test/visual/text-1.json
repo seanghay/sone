@@ -217,6 +217,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "background": ["white"],
                         "alignSelf": "center",
                         "flexShrink": 1,
@@ -305,6 +306,7 @@
         "lineThroughColor": null,
         "highlightColor": null,
         "dropShadows": [],
+        "autofit": false,
         "background": ["white"],
         "alignSelf": "center",
         "flexShrink": 1,
@@ -465,6 +467,7 @@
                             "color": "black"
                           }
                         ],
+                        "autofit": false,
                         "background": ["seagreen"],
                         "alignSelf": "flex-end",
                         "borderColor": "beige",
@@ -524,6 +527,7 @@
             "color": "black"
           }
         ],
+        "autofit": false,
         "background": ["seagreen"],
         "alignSelf": "flex-end",
         "borderColor": "beige",
@@ -652,7 +656,7 @@
                     {
                       "baseline": 41.812646484375,
                       "height": 62.17021484375,
-                      "width": 634.3499898910522,
+                      "width": 634.3399906158447,
                       "segments": [
                         {
                           "metrics": {
@@ -729,233 +733,9 @@
                         },
                         {
                           "metrics": {
-                            "width": 8.479999542236328,
+                            "width": 20.829999923706055,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 8.479999542236328,
-                            "actualBoundingBoxAscent": 0,
-                            "actualBoundingBoxDescent": 0,
-                            "fontBoundingBoxAscent": 31,
-                            "fontBoundingBoxDescent": 8.63623046875,
-                            "emHeightAscent": 31,
-                            "emHeightDescent": 8.63623046875,
-                            "hangingBaseline": 24.80000114440918,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -8.63623046875,
-                            "lines": [
-                              {
-                                "x": 0,
-                                "y": 0,
-                                "width": 0,
-                                "height": 0,
-                                "baseline": 0.36376953125,
-                                "hangingBaseline": -24.43623161315918,
-                                "alphabeticBaseline": 0.36376953125,
-                                "ideographicBaseline": 9,
-                                "ascent": -30.63623046875,
-                                "descent": 9,
-                                "startIndex": 0,
-                                "endIndex": 1,
-                                "runs": [
-                                  {
-                                    "x": 0,
-                                    "y": 0,
-                                    "width": 0,
-                                    "height": 0,
-                                    "family": "Inter Khmer",
-                                    "ascent": -30.63623046875,
-                                    "descent": 9,
-                                    "capHeight": -22.908958435058594,
-                                    "xHeight": -17.090776443481445,
-                                    "underline": 5.81787109375,
-                                    "strikethrough": -10.113503456115723
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          "props": {
-                            "size": 32,
-                            "color": "white",
-                            "font": ["Inter Khmer"],
-                            "style": "normal",
-                            "weight": 500,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineHeight": 1.3,
-                            "indentSize": 64,
-                            "hangingIndentSize": 0,
-                            "align": "justify",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 0,
-                                "color": "black"
-                              }
-                            ],
-                            "tag": "block",
-                            "maxWidth": 700,
-                            "background": [
-                              "saddlebrown",
-                              {
-                                "type": "linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-225"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "hex",
-                                    "value": "231557",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "0"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "44107A",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "29"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FF1361",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "67"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FFF800",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "100"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-115"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "115"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            "alignSelf": "flex-start",
-                            "cornerRadius": [44],
-                            "cornerSmoothing": 0.7,
-                            "paddingTop": 60,
-                            "paddingBottom": 60,
-                            "paddingLeft": 24,
-                            "paddingRight": 24,
-                            "borderColor": "white",
-                            "borderWidth": 8,
-                            "shadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 10,
-                                "color": "rgba(0,0,0,.6)"
-                              }
-                            ],
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": " ",
-                          "width": 8.479999542236328,
-                          "height": 39.63623046875
-                        },
-                        {
-                          "metrics": {
-                            "width": 12.359999656677246,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 12.359999656677246,
+                            "actualBoundingBoxRight": 20.829999923706055,
                             "actualBoundingBoxAscent": 20,
                             "actualBoundingBoxDescent": 1,
                             "fontBoundingBoxAscent": 31,
@@ -967,7 +747,7 @@
                             "ideographicBaseline": -8.63623046875,
                             "lines": [
                               {
-                                "x": -1,
+                                "x": 7.4780120849609375,
                                 "y": -20,
                                 "width": 14,
                                 "height": 21,
@@ -978,10 +758,10 @@
                                 "ascent": -30.63623046875,
                                 "descent": 9,
                                 "startIndex": 0,
-                                "endIndex": 1,
+                                "endIndex": 2,
                                 "runs": [
                                   {
-                                    "x": -1,
+                                    "x": 7.4780120849609375,
                                     "y": -20,
                                     "width": 14,
                                     "height": 21,
@@ -1030,6 +810,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -1171,8 +952,8 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "text": "៖",
-                          "width": 12.359999656677246,
+                          "text": " ៖",
+                          "width": 20.829999923706055,
                           "height": 39.63623046875
                         },
                         {
@@ -1254,6 +1035,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -1481,6 +1263,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -1702,6 +1485,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -1926,6 +1710,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -2161,6 +1946,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -2382,6 +2168,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -2609,6 +2396,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -2830,6 +2618,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -3057,6 +2846,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -3289,6 +3079,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -3510,6 +3301,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -3737,6 +3529,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -3966,6 +3759,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -4190,6 +3984,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -4414,6 +4209,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -4638,6 +4434,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -4865,6 +4662,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -5086,6 +4884,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -5313,6 +5112,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -5534,6 +5334,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -5761,6 +5562,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -5982,6 +5784,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -6209,6 +6012,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -6438,6 +6242,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -6662,6 +6467,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -6886,6 +6692,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -7110,6 +6917,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -7337,6 +7145,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -7558,6 +7367,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -7785,6 +7595,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -8006,6 +7817,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -8230,6 +8042,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -8381,7 +8194,7 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 203.55999946594238,
+                      "width": 203.5500030517578,
                       "segments": [
                         {
                           "metrics": {
@@ -8431,7 +8244,7 @@
                           },
                           "text": "ធម្មនុញ្ញអាស៊ាន។",
                           "height": 39.63623046875,
-                          "width": 203.55999946594238,
+                          "width": 203.5500030517578,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -8465,6 +8278,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -8622,7 +8436,7 @@
                     {
                       "baseline": 41.812646484375,
                       "height": 62.17021484375,
-                      "width": 634.3499898910522,
+                      "width": 634.3399906158447,
                       "segments": [
                         {
                           "metrics": {
@@ -8673,6 +8487,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -8893,233 +8708,9 @@
                         },
                         {
                           "metrics": {
-                            "width": 8.479999542236328,
+                            "width": 20.829999923706055,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 8.479999542236328,
-                            "actualBoundingBoxAscent": 0,
-                            "actualBoundingBoxDescent": 0,
-                            "fontBoundingBoxAscent": 31,
-                            "fontBoundingBoxDescent": 8.63623046875,
-                            "emHeightAscent": 31,
-                            "emHeightDescent": 8.63623046875,
-                            "hangingBaseline": 24.80000114440918,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -8.63623046875,
-                            "lines": [
-                              {
-                                "x": 0,
-                                "y": 0,
-                                "width": 0,
-                                "height": 0,
-                                "baseline": 0.36376953125,
-                                "hangingBaseline": -24.43623161315918,
-                                "alphabeticBaseline": 0.36376953125,
-                                "ideographicBaseline": 9,
-                                "ascent": -30.63623046875,
-                                "descent": 9,
-                                "startIndex": 0,
-                                "endIndex": 1,
-                                "runs": [
-                                  {
-                                    "x": 0,
-                                    "y": 0,
-                                    "width": 0,
-                                    "height": 0,
-                                    "family": "Inter Khmer",
-                                    "ascent": -30.63623046875,
-                                    "descent": 9,
-                                    "capHeight": -22.908958435058594,
-                                    "xHeight": -17.090776443481445,
-                                    "underline": 5.81787109375,
-                                    "strikethrough": -10.113503456115723
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          "props": {
-                            "size": 32,
-                            "color": "white",
-                            "font": ["Inter Khmer"],
-                            "style": "normal",
-                            "weight": 500,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineHeight": 1.3,
-                            "indentSize": 64,
-                            "hangingIndentSize": 0,
-                            "align": "justify",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 0,
-                                "color": "black"
-                              }
-                            ],
-                            "tag": "block",
-                            "maxWidth": 700,
-                            "background": [
-                              "saddlebrown",
-                              {
-                                "type": "linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-225"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "hex",
-                                    "value": "231557",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "0"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "44107A",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "29"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FF1361",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "67"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FFF800",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "100"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-115"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "115"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            "alignSelf": "flex-start",
-                            "cornerRadius": [44],
-                            "cornerSmoothing": 0.7,
-                            "paddingTop": 60,
-                            "paddingBottom": 60,
-                            "paddingLeft": 24,
-                            "paddingRight": 24,
-                            "borderColor": "white",
-                            "borderWidth": 8,
-                            "shadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 10,
-                                "color": "rgba(0,0,0,.6)"
-                              }
-                            ],
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": " ",
-                          "width": 8.479999542236328,
-                          "height": 39.63623046875
-                        },
-                        {
-                          "metrics": {
-                            "width": 12.359999656677246,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 12.359999656677246,
+                            "actualBoundingBoxRight": 20.829999923706055,
                             "actualBoundingBoxAscent": 20,
                             "actualBoundingBoxDescent": 1,
                             "fontBoundingBoxAscent": 31,
@@ -9131,7 +8722,7 @@
                             "ideographicBaseline": -8.63623046875,
                             "lines": [
                               {
-                                "x": -1,
+                                "x": 7.4780120849609375,
                                 "y": -20,
                                 "width": 14,
                                 "height": 21,
@@ -9142,10 +8733,10 @@
                                 "ascent": -30.63623046875,
                                 "descent": 9,
                                 "startIndex": 0,
-                                "endIndex": 1,
+                                "endIndex": 2,
                                 "runs": [
                                   {
-                                    "x": -1,
+                                    "x": 7.4780120849609375,
                                     "y": -20,
                                     "width": 14,
                                     "height": 21,
@@ -9194,6 +8785,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -9335,8 +8927,8 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "text": "៖",
-                          "width": 12.359999656677246,
+                          "text": " ៖",
+                          "width": 20.829999923706055,
                           "height": 39.63623046875
                         },
                         {
@@ -9418,6 +9010,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -9645,6 +9238,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -9866,6 +9460,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -10090,6 +9685,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -10325,6 +9921,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -10546,6 +10143,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -10773,6 +10371,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -10994,6 +10593,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -11221,6 +10821,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -11453,6 +11054,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -11674,6 +11276,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -11901,6 +11504,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -12130,6 +11734,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -12354,6 +11959,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -12578,6 +12184,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -12802,6 +12409,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -13029,6 +12637,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -13250,6 +12859,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -13477,6 +13087,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -13698,6 +13309,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -13925,6 +13537,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -14146,6 +13759,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -14373,6 +13987,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -14602,6 +14217,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -14826,6 +14442,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -15050,6 +14667,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -15274,6 +14892,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -15501,6 +15120,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -15722,6 +15342,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -15949,6 +15570,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -16170,6 +15792,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -16394,6 +16017,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -16545,7 +16169,7 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 203.55999946594238,
+                      "width": 203.5500030517578,
                       "segments": [
                         {
                           "metrics": {
@@ -16595,7 +16219,7 @@
                           },
                           "text": "ធម្មនុញ្ញអាស៊ាន។",
                           "height": 39.63623046875,
-                          "width": 203.55999946594238,
+                          "width": 203.5500030517578,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -16629,6 +16253,7 @@
                                 "color": "black"
                               }
                             ],
+                            "autofit": false,
                             "tag": "block",
                             "maxWidth": 700,
                             "background": [
@@ -16796,6 +16421,7 @@
                 "color": "black"
               }
             ],
+            "autofit": false,
             "tag": "block",
             "maxWidth": 700,
             "background": [
@@ -17065,6 +16691,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17175,6 +16802,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17285,6 +16913,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17395,6 +17024,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17505,6 +17135,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17615,6 +17246,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17649,7 +17281,7 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 472.22000789642334,
+                      "width": 472.2200040817261,
                       "segments": [
                         {
                           "metrics": {
@@ -17699,7 +17331,7 @@
                           },
                           "text": "new line). This is handy when",
                           "height": 39.63623046875,
-                          "width": 450.22000789642334,
+                          "width": 450.2200040817261,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -17725,6 +17357,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17835,6 +17468,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17945,6 +17579,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "maxWidth": 600,
                             "background": [
                               "black",
@@ -17990,6 +17625,7 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
             "maxWidth": 600,
             "background": [
               "black",
@@ -18172,6 +17808,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "background": ["violet"],
                             "padding": 20,
                             "alignSelf": "flex-start",
@@ -18196,6 +17833,7 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
             "background": ["violet"],
             "padding": 20,
             "alignSelf": "flex-start",
@@ -18394,6 +18032,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "background": ["sandybrown"],
                             "padding": 10,
                             "flexShrink": 1,
@@ -18417,6 +18056,7 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
             "background": ["sandybrown"],
             "padding": 10,
             "flexShrink": 1,
@@ -18684,6 +18324,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -18844,7 +18485,7 @@
                 {
                   "baseline": 60.02921142578125,
                   "height": 73.7415771484375,
-                  "width": 658.3100023269653,
+                  "width": 658.3000030517578,
                   "segments": [
                     {
                       "metrics": {
@@ -18913,9 +18554,9 @@
                     },
                     {
                       "metrics": {
-                        "width": 8.300000190734863,
+                        "width": 31.780000686645508,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 8.300000190734863,
+                        "actualBoundingBoxRight": 31.780000686645508,
                         "actualBoundingBoxAscent": 19.656005859375,
                         "actualBoundingBoxDescent": 5.343994140625,
                         "fontBoundingBoxAscent": 25.656005859375,
@@ -18929,7 +18570,7 @@
                           {
                             "x": 0,
                             "y": -19.656005859375,
-                            "width": 9,
+                            "width": 31.488204956054688,
                             "height": 25,
                             "baseline": 0.31201171875,
                             "hangingBaseline": -20.212793350219727,
@@ -18938,12 +18579,12 @@
                             "ascent": -25.343994140625,
                             "descent": 7.343994140625,
                             "startIndex": 0,
-                            "endIndex": 1,
+                            "endIndex": 3,
                             "runs": [
                               {
                                 "x": 0,
                                 "y": -19.656005859375,
-                                "width": 9,
+                                "width": 31.488204956054688,
                                 "height": 25,
                                 "family": "Noto Serif Khmer",
                                 "ascent": -25.343994140625,
@@ -18957,9 +18598,6 @@
                           }
                         ]
                       },
-                      "text": "(ក)",
-                      "height": 32.68798828125,
-                      "width": 31.789999961853027,
                       "props": {
                         "size": 24,
                         "color": "red",
@@ -18975,7 +18613,10 @@
                         "lineThrough": 0,
                         "dropShadows": [],
                         "offsetY": -10
-                      }
+                      },
+                      "text": "(ក)",
+                      "width": 31.780000686645508,
+                      "height": 32.68798828125
                     },
                     {
                       "metrics": {
@@ -19051,6 +18692,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19147,6 +18789,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19300,6 +18943,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19396,6 +19040,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19492,6 +19137,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19588,6 +19234,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19738,6 +19385,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "borderColor": "rgba(0,0,0,.2)",
                         "borderWidth": 2,
@@ -19772,6 +19420,7 @@
         "lineThroughColor": null,
         "highlightColor": null,
         "dropShadows": [],
+        "autofit": false,
         "alignSelf": "center",
         "borderColor": "rgba(0,0,0,.2)",
         "borderWidth": 2,

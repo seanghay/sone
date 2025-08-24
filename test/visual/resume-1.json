@@ -200,6 +200,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 8,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -222,6 +223,7 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
             "marginBottom": 8,
             "flexShrink": 1,
             "boxSizing": "content-box"
@@ -352,6 +354,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 20,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -374,6 +377,7 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
             "marginBottom": 20,
             "flexShrink": 1,
             "boxSizing": "content-box"
@@ -514,6 +518,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -535,6 +540,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -661,6 +667,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "marginTop": 0,
                                 "marginBottom": 0,
                                 "marginLeft": 8,
@@ -689,6 +696,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "marginTop": 0,
                 "marginBottom": 0,
                 "marginLeft": 8,
@@ -746,7 +754,7 @@
                         {
                           "baseline": 17.5,
                           "height": 22.96875,
-                          "width": 126.21000051498413,
+                          "width": 126.21000146865845,
                           "segments": [
                             {
                               "metrics": {
@@ -796,7 +804,7 @@
                               },
                               "text": "📱 (855) 123-4567",
                               "height": 22.96875,
-                              "width": 126.21000051498413,
+                              "width": 126.21000146865845,
                               "props": {
                                 "size": 14,
                                 "color": "#7f8c8d",
@@ -822,6 +830,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -843,6 +852,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -969,6 +979,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "marginTop": 0,
                                 "marginBottom": 0,
                                 "marginLeft": 8,
@@ -997,6 +1008,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "marginTop": 0,
                 "marginBottom": 0,
                 "marginLeft": 8,
@@ -1130,6 +1142,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -1151,6 +1164,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -1277,6 +1291,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "marginTop": 0,
                                 "marginBottom": 0,
                                 "marginLeft": 8,
@@ -1305,6 +1320,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "marginTop": 0,
                 "marginBottom": 0,
                 "marginLeft": 8,
@@ -1438,6 +1454,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -1459,6 +1476,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -1653,6 +1671,7 @@
                                     "lineThroughColor": null,
                                     "highlightColor": null,
                                     "dropShadows": [],
+                                    "autofit": false,
                                     "marginBottom": 4,
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
@@ -1675,6 +1694,7 @@
                     "lineThroughColor": null,
                     "highlightColor": null,
                     "dropShadows": [],
+                    "autofit": false,
                     "marginBottom": 4,
                     "flexShrink": 1,
                     "boxSizing": "content-box"
@@ -1964,6 +1984,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -2039,6 +2060,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -2120,6 +2142,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -2195,6 +2218,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -2338,6 +2362,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -2419,6 +2444,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -2494,6 +2520,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -2767,6 +2794,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -2848,6 +2876,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -2858,7 +2887,7 @@
                         {
                           "baseline": 23.25,
                           "height": 29.7271728515625,
-                          "width": 786.0299959182739,
+                          "width": 786.0399951934814,
                           "segments": [
                             {
                               "metrics": {
@@ -2934,6 +2963,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -3009,6 +3039,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3087,6 +3118,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3165,6 +3197,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3243,6 +3276,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3321,6 +3355,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3376,7 +3411,7 @@
                               },
                               "text": "និងការដឹកនាំក្រុម។",
                               "height": 18.579483032226562,
-                              "width": 103.63999843597412,
+                              "width": 103.64999771118164,
                               "props": {
                                 "size": 15,
                                 "color": "#34495e",
@@ -3402,6 +3437,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -3477,6 +3513,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3558,6 +3595,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -3568,7 +3606,7 @@
                         {
                           "baseline": 23.25,
                           "height": 29.7271728515625,
-                          "width": 693.3299860954285,
+                          "width": 693.3299851417542,
                           "segments": [
                             {
                               "metrics": {
@@ -3641,6 +3679,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3719,6 +3758,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3774,7 +3814,7 @@
                               },
                               "text": "និងកែលម្អបទពិសោធន៍អ្នកប្រើប្រាស់។",
                               "height": 18.579483032226562,
-                              "width": 208.66999435424805,
+                              "width": 208.66999340057373,
                               "props": {
                                 "size": 15,
                                 "color": "#34495e",
@@ -3800,6 +3840,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -3875,6 +3916,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3956,6 +3998,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               }
@@ -4031,6 +4074,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -4247,6 +4291,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -4325,6 +4370,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -4403,6 +4449,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -4676,6 +4723,7 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -4700,6 +4748,7 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -4863,6 +4912,7 @@
                                     "lineThroughColor": null,
                                     "highlightColor": null,
                                     "dropShadows": [],
+                                    "autofit": false,
                                     "marginBottom": 4,
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
@@ -4885,6 +4935,7 @@
                     "lineThroughColor": null,
                     "highlightColor": null,
                     "dropShadows": [],
+                    "autofit": false,
                     "marginBottom": 4,
                     "flexShrink": 1,
                     "boxSizing": "content-box"
@@ -5103,6 +5154,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 8,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -5125,6 +5177,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 8,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -5259,6 +5312,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -5281,6 +5335,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -5411,6 +5466,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -5433,6 +5489,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -5563,6 +5620,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -5585,6 +5643,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -5715,6 +5774,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -5736,6 +5796,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -5919,6 +5980,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 8,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -5941,6 +6003,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 8,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -6075,6 +6138,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -6097,6 +6161,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -6227,6 +6292,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -6249,6 +6315,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -6379,6 +6446,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -6401,6 +6469,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -6531,6 +6600,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -6552,6 +6622,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -6735,6 +6806,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 8,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -6757,6 +6829,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 8,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -6891,6 +6964,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -6913,6 +6987,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -7043,6 +7118,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -7065,6 +7141,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -7195,6 +7272,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "marginBottom": 4,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
@@ -7217,6 +7295,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "marginBottom": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -7347,6 +7426,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -7368,6 +7448,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7603,6 +7684,7 @@
                                     "lineThroughColor": null,
                                     "highlightColor": null,
                                     "dropShadows": [],
+                                    "autofit": false,
                                     "marginBottom": 4,
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
@@ -7625,6 +7707,7 @@
                     "lineThroughColor": null,
                     "highlightColor": null,
                     "dropShadows": [],
+                    "autofit": false,
                     "marginBottom": 4,
                     "flexShrink": 1,
                     "boxSizing": "content-box"
@@ -7850,6 +7933,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -7871,6 +7955,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8000,6 +8085,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -8021,6 +8107,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8174,6 +8261,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -8195,6 +8283,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -8354,6 +8443,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -8376,6 +8466,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -8508,6 +8599,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -8530,6 +8622,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -8662,6 +8755,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -8684,6 +8778,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -8816,6 +8911,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -8837,6 +8933,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -9034,6 +9131,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -9055,6 +9153,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -9184,6 +9283,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -9205,6 +9305,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -9358,6 +9459,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -9379,6 +9481,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -9538,6 +9641,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -9560,6 +9664,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -9692,6 +9797,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -9714,6 +9820,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -9846,6 +9953,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -9868,6 +9976,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -10000,6 +10109,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -10021,6 +10131,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -10216,6 +10327,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -10237,6 +10349,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -10366,6 +10479,7 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -10387,6 +10501,7 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -10540,6 +10655,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -10561,6 +10677,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -10720,6 +10837,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -10742,6 +10860,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -10874,6 +10993,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -10896,6 +11016,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -11028,6 +11149,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -11049,6 +11171,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -11266,6 +11389,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -11291,6 +11415,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -11502,6 +11627,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -11524,6 +11650,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -11654,6 +11781,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -11676,6 +11804,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -11806,6 +11935,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -11827,6 +11957,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -11984,6 +12115,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -12006,6 +12138,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -12136,6 +12269,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -12158,6 +12292,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -12288,6 +12423,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -12309,6 +12445,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -12498,6 +12635,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -12520,6 +12658,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -12729,6 +12868,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -12751,6 +12891,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -12805,7 +12946,7 @@
                                 {
                                   "baseline": 12.59375,
                                   "height": 16.102218627929688,
-                                  "width": 224.660001039505,
+                                  "width": 224.6500027179718,
                                   "segments": [
                                     {
                                       "metrics": {
@@ -12855,7 +12996,7 @@
                                       },
                                       "text": "• វិណ្ណបត្រអ្នកគ្រប់គ្រង់ Kubernetes (CKA)",
                                       "height": 16.102218627929688,
-                                      "width": 224.660001039505,
+                                      "width": 224.6500027179718,
                                       "props": {
                                         "size": 13,
                                         "color": "#34495e",
@@ -12881,6 +13022,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -12903,6 +13045,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -13033,6 +13176,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 6,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -13055,6 +13199,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 6,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -13109,7 +13254,7 @@
                                 {
                                   "baseline": 12.59375,
                                   "height": 16.102218627929688,
-                                  "width": 184.3900008201599,
+                                  "width": 184.39000272750854,
                                   "segments": [
                                     {
                                       "metrics": {
@@ -13159,7 +13304,7 @@
                                       },
                                       "text": "• វិណ្ណបត្រ Scrum Master (SMC)",
                                       "height": 16.102218627929688,
-                                      "width": 184.3900008201599,
+                                      "width": 184.39000272750854,
                                       "props": {
                                         "size": 13,
                                         "color": "#34495e",
@@ -13185,6 +13330,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -13206,6 +13352,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -13417,6 +13564,7 @@
                                     "lineThroughColor": null,
                                     "highlightColor": null,
                                     "dropShadows": [],
+                                    "autofit": false,
                                     "marginBottom": 4,
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
@@ -13439,6 +13587,7 @@
                     "lineThroughColor": null,
                     "highlightColor": null,
                     "dropShadows": [],
+                    "autofit": false,
                     "marginBottom": 4,
                     "flexShrink": 1,
                     "boxSizing": "content-box"
@@ -13655,6 +13804,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "alignSelf": "center",
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -13680,6 +13830,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -13840,6 +13991,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -13862,6 +14014,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -13994,6 +14147,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -14015,6 +14169,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -14203,6 +14358,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "alignSelf": "center",
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -14228,6 +14384,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -14388,6 +14545,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -14410,6 +14568,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -14542,6 +14701,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -14563,6 +14723,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -14750,6 +14911,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "alignSelf": "center",
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -14775,6 +14937,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "alignSelf": "center",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -14935,6 +15098,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "marginBottom": 4,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
@@ -14957,6 +15121,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "marginBottom": 4,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -15089,6 +15254,7 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       }
@@ -15110,6 +15276,7 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
