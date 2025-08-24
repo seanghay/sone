@@ -1,0 +1,60 @@
+---
+title: Getting Started
+description: Learn how to use Sone - A declarative Canvas layout engine for JavaScript
+---
+
+# Sone Documentation
+
+**Sone** is a declarative Canvas layout engine for JavaScript with advanced rich text support. It allows you to create beautiful layouts and export them as images, PDFs, or SVG files.
+
+## Key Features
+
+- **Declarative API** - Build layouts with a React-like component syntax
+- **Flex Layout** - Powered by Yoga Layout for consistent flexbox behavior
+- **Rich Text** - Advanced typography with multilingual support
+- **Multiple Formats** - Export as JPG, PNG, SVG, PDF, or WebP
+- **Cross-Platform** - Works in Node.js and browsers
+- **Advanced Graphics** - Support for gradients, shadows, paths, and custom shapes
+
+## Installation
+
+```bash
+npm install sone
+```
+
+**Note**: This project uses `skia-canvas` for Node.js. If you encounter installation issues, please follow the [skia-canvas installation guide](https://github.com/samizdatco/skia-canvas).
+
+## Quick Start
+
+Here's a simple example to get you started:
+
+```javascript
+import { Column, Text, sone } from "sone";
+
+function SimpleDocument() {
+  return Column(
+    Text("Hello, World!")
+      .size(32)
+      .color("blue")
+      .weight("bold")
+  )
+    .padding(40)
+    .bg("white");
+}
+
+// Export as JPEG
+const buffer = await sone(SimpleDocument()).jpg();
+
+// Save to file
+import fs from "node:fs/promises";
+await fs.writeFile("hello.jpg", buffer);
+```
+
+## Next Steps
+
+<Cards>
+  <Card title="Core Concepts" href="/docs/concepts" description="Learn about components, layouts, and styling" />
+  <Card title="Text & Typography" href="/docs/text" description="Master rich text formatting and multilingual support" />
+  <Card title="Layout System" href="/docs/layout" description="Understanding flexbox layouts and positioning" />
+  <Card title="Visual Styling" href="/docs/styling" description="Colors, gradients, shadows, and effects" />
+</Cards>

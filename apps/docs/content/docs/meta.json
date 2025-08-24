@@ -1,0 +1,16 @@
+{
+  "title": "Documentation",
+  "pages": [
+    "index",
+    "test",
+    "concepts",
+    "text",
+    "layout",
+    "styling",
+    "images",
+    "tables",
+    "examples",
+    "api",
+    "migration"
+  ]
+}

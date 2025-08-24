@@ -11,6 +11,7 @@ export function* defaultLineBreakerIterator(
       granularity: "word",
     });
   }
+
   for (const segment of segmenter.segment(text)) {
     // Skip Khmer subscript characters
     if (segment.segment.endsWith("\u17d2")) continue;

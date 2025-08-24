@@ -1,0 +1,463 @@
+---
+title: Migration Guide
+description: Upgrading to newer versions of Sone and migration tips
+---
+
+# Migration Guide
+
+This guide helps you migrate between different versions of Sone and provides tips for common migration scenarios.
+
+## Version 1.0.x
+
+### New Features in 1.0.x
+
+- **Text Auto-fit**: Automatic text scaling to fit available space
+- **Improved Line Breaking**: Better support for Khmer and other complex scripts
+- **Enhanced Gradients**: More robust gradient parsing and rendering
+- **Squircle Support**: iOS-style corner smoothing
+- **QR Code Generation**: Built-in QR code support
+
+### Breaking Changes
+
+None - Version 1.0.x is fully backward compatible.
+
+### Recommended Updates
+
+While not required, consider updating your code to use new features:
+
+#### Text Auto-fit
+```javascript
+// Old approach - manual sizing
+Text("Long text content").size(calculateOptimalSize(text, container))
+
+// New approach - automatic fitting
+Text("Long text content").autofit(true).maxWidth(300)
+```
+
+#### Corner Smoothing
+```javascript
+// Old approach - basic rounded corners
+Column(content).rounded(15)
+
+// New approach - smooth iOS-style corners
+Column(content).rounded(15).cornerSmoothing(0.6)
+```
+
+## Migrating from Similar Libraries
+
+### From React/JSX
+
+If you're coming from React, the component syntax will feel familiar:
+
+```javascript
+// React JSX
+function MyComponent() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', padding: 20 }}>
+      <h1 style={{ fontSize: 24, fontWeight: 'bold' }}>Hello</h1>
+      <p style={{ fontSize: 16 }}>World</p>
+    </div>
+  );
+}
+
+// Sone equivalent
+function MyComponent() {
+  return Column(
+    Text("Hello").size(24).weight("bold"),
+    Text("World").size(16)
+  ).padding(20);
+}
+```
+
+### From Canvas APIs
+
+If you're migrating from direct Canvas API usage:
+
+```javascript
+// Canvas API
+const canvas = createCanvas(400, 300);
+const ctx = canvas.getContext('2d');
+ctx.fillStyle = 'white';
+ctx.fillRect(0, 0, 400, 300);
+ctx.fillStyle = 'black';
+ctx.font = '24px Arial';
+ctx.fillText('Hello World', 50, 100);
+
+// Sone equivalent
+const document = Column(
+  Text("Hello World").size(24).font("Arial")
+).size(400, 300).bg("white").padding(50);
+
+const buffer = await sone(document).jpg();
+```
+
+### From CSS
+
+Sone's layout system maps closely to CSS Flexbox:
+
+```css
+/* CSS */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(45deg, blue, red);
+  border-radius: 10px;
+}
+
+.text {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+```
+
+```javascript
+// Sone equivalent
+Column(
+  Text("Content")
+    .size(18)
+    .weight("bold")
+    .color("white")
+    .dropShadow("1px 1px 2px rgba(0,0,0,0.5)")
+)
+.justifyContent("center")
+.alignItems("center")
+.padding(20)
+.bg("linear-gradient(45deg, blue, red)")
+.rounded(10)
+```
+
+## Common Migration Patterns
+
+### Responsive Design
+
+```javascript
+// Old: Fixed sizes
+function Card(content) {
+  return Column(content).width(300).height(200);
+}
+
+// New: Flexible sizing
+function Card(content) {
+  return Column(content)
+    .minWidth(250)
+    .maxWidth(400)
+    .padding(20)
+    .flex(1);  // Grows with container
+}
+```
+
+### Typography Hierarchy
+
+```javascript
+// Old: Scattered font definitions
+Text("Title").size(24).weight("bold").font("Arial");
+Text("Body").size(16).font("Arial");
+Text("Caption").size(12).color("gray").font("Arial");
+
+// New: Using TextDefault for consistency
+function Typography(title, body, caption) {
+  return TextDefault(
+    Text(title).size(24).weight("bold"),
+    Text(body).size(16),
+    Text(caption).size(12).color("gray")
+  ).font("Arial", "sans-serif");
+}
+```
+
+### Image Handling
+
+```javascript
+// Old: Basic image placement
+Photo("image.jpg").size(200, 150);
+
+// New: Responsive image with proper scaling
+Photo("image.jpg")
+  .maxWidth(400)
+  .preserveAspectRatio(true)
+  .scaleType("cover")
+  .rounded(8);
+```
+
+### Color Management
+
+```javascript
+// Old: Hardcoded colors
+Text("Error").color("#ff0000");
+Text("Success").color("#00ff00");
+
+// New: Color system
+const colors = {
+  error: "#dc2626",
+  success: "#059669",
+  primary: "#2563eb"
+};
+
+Text("Error").color(colors.error);
+Text("Success").color(colors.success);
+```
+
+## Platform Migration
+
+### Node.js to Browser
+
+When moving from Node.js to browser environment:
+
+```javascript
+// Node.js
+import { sone } from "sone";
+const buffer = await sone(document).jpg();
+
+// Browser (requires custom renderer)
+import { render, browserRenderer } from "./browser-renderer";
+const canvas = await render(document, browserRenderer);
+```
+
+### Server-Side to Client-Side Rendering
+
+```javascript
+// Server-side generation
+app.get('/certificate/:id', async (req, res) => {
+  const cert = await generateCertificate(req.params.id);
+  const buffer = await sone(cert).pdf();
+  res.contentType('application/pdf');
+  res.send(buffer);
+});
+
+// Client-side preview (using canvas)
+async function previewCertificate(data) {
+  const cert = generateCertificate(data);
+  const canvas = await render(cert, browserRenderer);
+  document.body.appendChild(canvas);
+}
+```
+
+## Performance Migration
+
+### Optimizing Large Documents
+
+```javascript
+// Old: Single large component
+function LargeReport(data) {
+  return Column(
+    ...data.sections.map(section =>
+      Column(
+        Text(section.title).size(20),
+        ...section.items.map(item => Text(item))
+      )
+    )
+  );
+}
+
+// New: Paginated approach
+function OptimizedReport(data, page = 0, itemsPerPage = 50) {
+  const startIndex = page * itemsPerPage;
+  const pageItems = data.sections.slice(startIndex, startIndex + itemsPerPage);
+  
+  return Column(
+    ...pageItems.map(section =>
+      Column(
+        Text(section.title).size(20),
+        ...section.items.map(item => Text(item))
+      )
+    )
+  );
+}
+```
+
+### Font Loading Optimization
+
+```javascript
+// Old: Loading fonts on demand
+async function generateDocument(data) {
+  await Font.load("CustomFont", "./fonts/custom.ttf");
+  return Text("Content").font("CustomFont");
+}
+
+// New: Pre-loading fonts
+const fontPromises = [
+  Font.load("CustomFont", "./fonts/custom.ttf"),
+  Font.load("BoldFont", "./fonts/bold.ttf")
+];
+
+await Promise.all(fontPromises);
+
+function generateDocument(data) {
+  // Fonts already loaded
+  return Text("Content").font("CustomFont");
+}
+```
+
+## Configuration Migration
+
+### Environment-Specific Configs
+
+```javascript
+// development.config.js
+export const config = {
+  fonts: {
+    basePath: "./assets/fonts/"
+  },
+  debug: {
+    layout: true,
+    text: true
+  }
+};
+
+// production.config.js
+export const config = {
+  fonts: {
+    basePath: "/static/fonts/"
+  },
+  debug: {
+    layout: false,
+    text: false
+  }
+};
+
+// Usage
+const document = generateDocument(data);
+const result = await sone(document, config).jpg();
+```
+
+### Build System Integration
+
+```javascript
+// webpack.config.js
+module.exports = {
+  externals: {
+    'skia-canvas': 'commonjs skia-canvas'
+  },
+  resolve: {
+    alias: {
+      'sone': process.env.NODE_ENV === 'production' 
+        ? 'sone/dist/node.js'
+        : 'sone/src/node.ts'
+    }
+  }
+};
+```
+
+## Testing Migration
+
+### Unit Test Updates
+
+```javascript
+// Old: Testing with mock canvas
+describe('Document Generation', () => {
+  it('should render text', () => {
+    const mockCanvas = createMockCanvas();
+    const result = render(Text("Hello"), mockRenderer);
+    expect(result).toMatchSnapshot();
+  });
+});
+
+// New: Using Sone's built-in testing utilities
+describe('Document Generation', () => {
+  it('should render text', async () => {
+    const result = await sone(Text("Hello")).png();
+    expect(result).toMatchImageSnapshot();
+  });
+});
+```
+
+### Visual Regression Testing
+
+```javascript
+// Set up visual testing
+async function visualTest(component, name) {
+  const buffer = await sone(component).png();
+  await expect(buffer).toMatchVisualSnapshot(name);
+}
+
+// Test usage
+test('Certificate layout', async () => {
+  const cert = generateCertificate(testData);
+  await visualTest(cert, 'certificate-basic');
+});
+```
+
+## Troubleshooting Common Issues
+
+### Font Loading Issues
+
+```javascript
+// Problem: Font not found error
+Text("Content").font("NonExistentFont");
+
+// Solution: Check font availability and provide fallbacks
+if (!Font.has("CustomFont")) {
+  await Font.load("CustomFont", "./fonts/custom.ttf");
+}
+
+Text("Content").font("CustomFont", "Arial", "sans-serif");
+```
+
+### Memory Issues with Large Documents
+
+```javascript
+// Problem: Memory leaks with repeated rendering
+for (let i = 0; i < 1000; i++) {
+  const doc = generateDocument(data[i]);
+  await sone(doc).jpg();  // Memory builds up
+}
+
+// Solution: Process in batches
+async function processBatch(items, batchSize = 10) {
+  for (let i = 0; i < items.length; i += batchSize) {
+    const batch = items.slice(i, i + batchSize);
+    await Promise.all(
+      batch.map(async (item) => {
+        const doc = generateDocument(item);
+        const result = await sone(doc).jpg();
+        return saveResult(result, item.id);
+      })
+    );
+    // Allow garbage collection between batches
+    global.gc && global.gc();
+  }
+}
+```
+
+### Layout Calculation Issues
+
+```javascript
+// Problem: Unexpected layout behavior
+Column(
+  Text("Long text that might wrap"),
+  Photo("image.jpg")
+).width(200);  // Layout might not be as expected
+
+// Solution: Be explicit about sizing and constraints
+Column(
+  Text("Long text that might wrap")
+    .maxWidth(200)
+    .wrap(true),
+  Photo("image.jpg")
+    .maxWidth(200)
+    .preserveAspectRatio(true)
+    .scaleType("contain")
+).width(200);
+```
+
+## Best Practices for Migration
+
+1. **Start Small**: Migrate one component at a time
+2. **Test Thoroughly**: Use visual regression testing
+3. **Performance Monitor**: Watch memory usage and render times
+4. **Font Management**: Centralize font loading
+5. **Error Handling**: Implement robust error handling for font and image loading
+6. **Documentation**: Keep examples up to date with your migration
+
+## Getting Help
+
+If you encounter issues during migration:
+
+1. Check the [GitHub Issues](https://github.com/seanghay/sone/issues)
+2. Review the test files for examples
+3. Join the community discussions
+4. Create a minimal reproduction case for bugs
