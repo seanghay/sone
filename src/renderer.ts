@@ -27,7 +27,7 @@ import {
   type TextNode,
 } from "./core.ts";
 import { createGradientFillStyleList, isColor } from "./gradient.ts";
-import { SoneMetadata } from "./metadata.ts";
+import type { SoneMetadata } from "./metadata.ts";
 import { drawBorder } from "./op.ts";
 import { drawPhoto } from "./photo.ts";
 import { createSmoothRoundRect, parseRadius } from "./rect.ts";

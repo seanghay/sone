@@ -7,7 +7,7 @@ import {
   FlexDirection,
   Gutter,
   Justify,
-  Node,
+  type Node,
   Overflow,
   PositionType,
   Wrap,
