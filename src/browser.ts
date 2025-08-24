@@ -8,4 +8,4 @@
 export * from "./core.ts";
 export * from "./qrcode.ts";
 export * from "./renderer.ts";
-export * from "./utils.ts";
+export { applySpanProps, fontBuilder } from "./utils.ts";
