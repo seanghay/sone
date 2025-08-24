@@ -414,6 +414,8 @@ export interface TextProps extends SpanProps, LayoutProps {
   /** text alignment */
   align?: "left" | "right" | "center" | "justify";
 
+  autofit?: boolean;
+
   /** resolved paragraph (internal) */
   blocks?: SoneParagraphBlock[];
 }
@@ -484,6 +486,7 @@ export interface TextPropsBuilder<T>
   align(value: Required<TextProps["align"]>): T;
   indent(value: Required<TextProps["indentSize"]>): T;
   hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T;
+  autofit(value?: Required<TextProps["autofit"]>): T;
 }
 
 /**
@@ -1030,6 +1033,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.nowrap = true;
       return this as unknown as T;
     },
+    autofit(value) {
+      props.autofit = value ?? true;
+      return this as unknown as T;
+    },
     wrap(value?: boolean): T {
       props.nowrap = !value;
       return this as unknown as T;
@@ -1092,6 +1099,7 @@ function textDefaultPropsBuilder<T>(
       props.indentSize = value;
       return this as unknown as T;
     },
+
     props,
   };
 }

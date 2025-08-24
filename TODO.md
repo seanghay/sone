@@ -33,3 +33,4 @@
 - [ ] JSX
 - [x] Annotations API
 - [ ] Pattern
+- [x] Text Auto Fit

@@ -35,7 +35,15 @@ import { applyPropsToYogaNode } from "./serde.ts";
 import { type CssShadowProperties, parseShadow } from "./shadow.ts";
 import { createParagraph, drawTextNode } from "./text.ts";
 
+/**
+ * Some version of Node.js don't support top-level await,
+ * therefore we have to instantiate it first and await it later when use it.
+ */
 const _yoga = loadYoga();
+
+export async function getYogaLayout() {
+  return _yoga;
+}
 
 /**
  * Default text styling properties used as fallbacks
@@ -65,6 +73,7 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   lineThroughColor: null,
   highlightColor: null,
   dropShadows: [],
+  autofit: false,
 };
 
 function filterNullishValues<T>(value: T) {
@@ -471,20 +480,45 @@ export function createLayoutNode(
   }
 
   if (node.type === "text") {
-    const measureFunc: MeasureFunction = (width, widthMode) => {
+    const measureFunc: MeasureFunction = (width, widthMode, h, hMode) => {
       const { props, children } = node;
-      const blocks = createParagraph(
+      let blockWidth = 0;
+      let blockHeight = 0;
+
+      const baseProps = klona(props);
+
+      // Helper function to measure blocks and return dimensions
+      const measureBlocks = (fontSize: number) => {
+        const testProps = { ...baseProps, size: fontSize };
+        const blocks = createParagraph(
+          children,
+          width,
+          testProps,
+          renderer.measureText,
+          renderer.breakIterator,
+        );
+
+        let maxWidth = 0;
+        let totalHeight = 0;
+
+        for (const { paragraph } of blocks) {
+          if (paragraph.width > maxWidth) {
+            maxWidth = paragraph.width;
+          }
+          totalHeight += paragraph.height;
+        }
+
+        return { blocks, width: maxWidth, height: totalHeight };
+      };
+
+      // Initial measurement
+      let blocks = createParagraph(
         children,
         width,
-        klona(props),
+        baseProps,
         renderer.measureText,
         renderer.breakIterator,
       );
-
-      node.props.blocks = blocks;
-
-      let blockWidth = 0;
-      let blockHeight = 0;
 
       for (const { paragraph } of blocks) {
         if (paragraph.width > blockWidth) {
@@ -493,10 +527,56 @@ export function createLayoutNode(
         blockHeight += paragraph.height;
       }
 
+      if (props.autofit && !Number.isNaN(h) && hMode === MeasureMode.Exactly) {
+        // Binary search for optimal font size
+        let minSize = 1;
+        let maxSize = 200; // Reasonable upper bound for font size
+        let optimalSize = baseProps.size || 12;
+
+        // Quick check if current size already fits
+        const currentMeasurement = measureBlocks(optimalSize);
+        if (currentMeasurement.height <= h) {
+          // Current size fits, try to find a larger size
+          while (maxSize - minSize > 1) {
+            const midSize = Math.floor((minSize + maxSize) / 2);
+            const measurement = measureBlocks(midSize);
+
+            if (measurement.height <= h) {
+              minSize = midSize;
+              optimalSize = midSize;
+            } else {
+              maxSize = midSize;
+            }
+          }
+        } else {
+          // Current size doesn't fit, need to find smaller size
+          maxSize = optimalSize;
+          while (maxSize - minSize > 1) {
+            const midSize = Math.floor((minSize + maxSize) / 2);
+            const measurement = measureBlocks(midSize);
+
+            if (measurement.height <= h) {
+              minSize = midSize;
+              optimalSize = midSize;
+            } else {
+              maxSize = midSize;
+            }
+          }
+        }
+
+        // Final measurement with optimal size
+        const finalMeasurement = measureBlocks(optimalSize);
+        blocks = finalMeasurement.blocks;
+        blockWidth = finalMeasurement.width;
+        blockHeight = finalMeasurement.height;
+        baseProps.size = optimalSize;
+      }
+
       if (widthMode === MeasureMode.AtMost) {
         blockWidth = Math.min(width, blockWidth);
       }
 
+      node.props.blocks = blocks;
       return { width: blockWidth, height: blockHeight };
     };
 
@@ -589,7 +669,7 @@ export async function calculateLayout(
   config?: SoneRenderConfig,
 ) {
   // create yoga
-  const Yoga = await _yoga;
+  const Yoga = await getYogaLayout();
 
   // compile the node
   const fonts = findFonts(node);
