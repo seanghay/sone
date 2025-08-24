@@ -680,6 +680,9 @@ export async function calculateLayout(
       if (font === "serif") continue;
       if (font === "sans-serif") continue;
       if (font === "monospace") continue;
+      if (font === "cursive") continue;
+      if (font === "fantasy") continue;
+      if (font === "system-ui") continue;
       if (!renderer.hasFont(font)) {
         console.warn(`${JSON.stringify(font)} font has not been registered!`);
       }

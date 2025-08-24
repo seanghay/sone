@@ -16,6 +16,7 @@ import { applySpanProps } from "./utils.ts";
 export * from "./core.ts";
 export * from "./qrcode.ts";
 export * from "./renderer.ts";
+export * from "./utils.ts";
 
 /** Temporary canvas for text measurement */
 const dummyCanvas = new skia.Canvas(1, 1);
