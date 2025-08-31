@@ -6,7 +6,6 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     width={Math.round(71 / 4)}
     height={Math.round(83 / 4)}
     viewBox="0 0 71 83"
-    fill="none"
     {...props}
   >
     <path

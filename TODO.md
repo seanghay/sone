@@ -34,3 +34,4 @@
 - [x] Annotations API
 - [ ] Pattern
 - [x] Text Auto Fit
+- [ ] Variable Widths Line Break

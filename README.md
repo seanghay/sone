@@ -102,6 +102,8 @@ export default nextConfig;
 - https://mrandri19.github.io/2019/07/24/modern-text-rendering-linux-overview.html
 - https://www.khmerload.com/article/208169
 - [Tep Sovichet](https://github.com/sovichet)
+- https://github.com/tdewolff/canvas
+- https://github.com/bramstein/typeset
 
 
 ### Use case
