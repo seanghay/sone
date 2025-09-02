@@ -19,11 +19,33 @@ const sampleImageFile = fileURLToPath(
   new URL("./image/kouprey.jpg", import.meta.url),
 );
 
+let id = 0;
+
 const defaultContext: SoneCompileContext = {
   defaultTextProps: renderer.getDefaultTextProps(),
   loadImage: renderer.loadImage,
   breakIterator: renderer.breakIterator,
+  createId: () => id++,
 };
+
+test("compile get ids", async () => {
+  let currentId = 0;
+  const node = await compile(
+    Column(Column(Column()), Column(Column()), Column(Column())),
+    {
+      defaultTextProps: renderer.getDefaultTextProps(),
+      loadImage: renderer.loadImage,
+      breakIterator: renderer.breakIterator,
+      createId: () => currentId++,
+    },
+  );
+
+  expect(node!.id).toBe(0);
+  // @ts-expect-error
+  expect(node!.children[0]!.id).toBe(1);
+  // @ts-expect-error
+  expect(node!.children[1]!.id).toBe(3);
+});
 
 test("compile undefined component", async () => {
   const node = await compile(null, defaultContext);

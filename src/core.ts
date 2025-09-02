@@ -348,6 +348,7 @@ export interface PhotoPropsBuilder<T>
  * Image display node
  */
 export interface PhotoNode extends PhotoPropsBuilder<PhotoNode> {
+  id: number;
   type: "photo";
 }
 
@@ -493,6 +494,7 @@ export interface TextPropsBuilder<T>
  * Text block containing styled spans and plain strings
  */
 export interface TextNode extends TextPropsBuilder<TextNode> {
+  id: number;
   type: "text";
   /** mixed content */
   children: Array<string | SpanNode>;
@@ -523,6 +525,7 @@ export interface TextDefaultNode
  * Horizontal layout container (flexDirection: row)
  */
 export interface RowNode extends LayoutPropsBuilder<RowNode> {
+  id: number;
   type: "row";
   children: SoneNode[];
 }
@@ -531,6 +534,7 @@ export interface RowNode extends LayoutPropsBuilder<RowNode> {
  * Vertical layout container (flexDirection: column)
  */
 export interface ColumnNode extends LayoutPropsBuilder<ColumnNode> {
+  id: number;
   type: "column";
   children: SoneNode[];
 }
@@ -1126,6 +1130,7 @@ export function Text(
   ...children: Array<SpanNode | string | undefined | null>
 ): TextNode {
   return {
+    id: -1,
     type: "text",
     children: children.filter((c) => c != null),
     ...textPropsBuilder(),
@@ -1139,6 +1144,7 @@ export function Text(
  */
 export function Column(...children: SoneNode[]): ColumnNode {
   return {
+    id: -1,
     type: "column",
     children,
     ...layoutPropsBuilder(),
@@ -1152,6 +1158,7 @@ export function Column(...children: SoneNode[]): ColumnNode {
  */
 export function Row(...children: SoneNode[]): RowNode {
   return {
+    id: -1,
     type: "row",
     children,
     ...layoutPropsBuilder(),
@@ -1167,6 +1174,7 @@ export function Photo(src: string | Uint8Array): PhotoNode {
   const props: PhotoProps = { src };
 
   return {
+    id: -1,
     type: "photo",
     ...layoutPropsBuilder(props),
     scaleType(value, alignment) {
@@ -1251,6 +1259,7 @@ export interface PathPropsBuilder<T> extends LayoutPropsBuilder<T, PathProps> {
  * SVG path drawing node
  */
 export interface PathNode extends PathPropsBuilder<PathNode> {
+  id: number;
   type: "path";
 }
 
@@ -1313,6 +1322,7 @@ export function pathPropsBuilder<T>(props: PathProps): PathPropsBuilder<T> {
 export function Path(d: string): PathNode {
   const props: PathProps = { d };
   return {
+    id: -1,
     type: "path",
     ...pathPropsBuilder(props),
     props,
@@ -1330,6 +1340,7 @@ export interface TablePropsBuilder<T>
 }
 
 export interface TableNode extends TablePropsBuilder<TableNode> {
+  id: number;
   type: "table";
   children: Array<TableRowNode | undefined | null>;
 }
@@ -1340,6 +1351,7 @@ export interface TableRowPropsBuilder<T>
   extends LayoutPropsBuilder<T, TableRowProps> {}
 
 export interface TableRowNode extends TableRowPropsBuilder<TableRowNode> {
+  id: number;
   type: "table-row";
   children: Array<TextDefaultNode | TableCellNode | null | undefined>;
 }
@@ -1347,6 +1359,7 @@ export interface TableRowNode extends TableRowPropsBuilder<TableRowNode> {
 export function Table(...children: TableRowNode[]): TableNode {
   const props: TableProps = {};
   return {
+    id: -1,
     type: "table",
     children,
     ...layoutPropsBuilder(props),
@@ -1363,6 +1376,7 @@ export function TableRow(
   const props: TableRowProps = {};
 
   return {
+    id: -1,
     type: "table-row",
     children,
     ...layoutPropsBuilder(props),
@@ -1381,6 +1395,7 @@ export interface TableCellPropsBuilder<T>
 }
 
 export interface TableCellNode extends TableCellPropsBuilder<TableCellNode> {
+  id: number;
   type: "table-cell";
   children: SoneNode[];
 }
@@ -1389,6 +1404,7 @@ export function TableCell(...children: SoneNode[]): TableCellNode {
   const props: TableCellProps = {};
 
   return {
+    id: -1,
     type: "table-cell",
     children,
     ...layoutPropsBuilder(props),

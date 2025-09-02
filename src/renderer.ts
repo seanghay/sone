@@ -134,6 +134,7 @@ export interface SoneCompileContext {
   loadImage: SoneRenderer["loadImage"];
   /** Text breaking function */
   breakIterator: SoneRenderer["breakIterator"];
+  createId: () => number;
 }
 
 function configurePhotoProps(
@@ -166,11 +167,13 @@ function configurePhotoProps(
  */
 export async function compile<T extends SoneNode>(
   node: T,
-  { defaultTextProps, loadImage, breakIterator }: SoneCompileContext,
+  { defaultTextProps, loadImage, breakIterator, createId }: SoneCompileContext,
 ): Promise<T | undefined> {
   if (node == null) return;
 
   if (node.type !== "text-default") {
+    node.id = createId();
+
     // transform regular box shadow
     if (node.props.shadows != null && Array.isArray(node.props.shadows)) {
       const items: CssShadowProperties[] = [];
@@ -368,6 +371,7 @@ export async function compile<T extends SoneNode>(
             defaultTextProps: clonedTextProps,
             loadImage,
             breakIterator,
+            createId,
           }),
         );
       }
@@ -380,6 +384,7 @@ export async function compile<T extends SoneNode>(
         defaultTextProps,
         loadImage,
         breakIterator,
+        createId,
       }),
     );
   }
@@ -708,10 +713,14 @@ export async function calculateLayout(
       ? new Map<string | Uint8Array, SoneImage>()
       : config.cache;
 
+  let currentId = 0;
+  const createId = () => currentId++;
+
   const compiledNode = await compile(klona(node), {
     defaultTextProps: renderer.getDefaultTextProps(),
     loadImage: pMemoize(renderer.loadImage, { cache }),
     breakIterator: renderer.breakIterator,
+    createId,
   });
 
   // purge local cache

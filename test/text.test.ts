@@ -30,6 +30,7 @@ test("create paragraph without max width", async () => {
     defaultTextProps: renderer.getDefaultTextProps(),
     breakIterator: renderer.breakIterator,
     loadImage: renderer.loadImage,
+    createId: () => 0,
   };
 
   const compiledNode = await compile(node, context);
@@ -199,6 +200,7 @@ test("createParagraph with constrained width", async () => {
     defaultTextProps: renderer.getDefaultTextProps(),
     breakIterator: renderer.breakIterator,
     loadImage: renderer.loadImage,
+    createId: () => 0,
   };
 
   const compiledNode = await compile(node, context);
@@ -226,6 +228,7 @@ test("createParagraph with different measure modes", async () => {
     defaultTextProps: renderer.getDefaultTextProps(),
     breakIterator: renderer.breakIterator,
     loadImage: renderer.loadImage,
+    createId: () => 0,
   };
 
   const compiledNode = await compile(node, context);
