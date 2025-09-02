@@ -20,7 +20,7 @@
 - [x] Image Scale Alignment
 - [ ] Side Borders
 - [ ] Table Column Span, Row Span
-- [ ] Improve Line Breaking Algorithm
+- [x] Improve Line Breaking Algorithm
 - [ ] Polygon Shape
 - [ ] SVG Color Fill
 - [ ] Mask

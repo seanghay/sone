@@ -464,7 +464,14 @@ export function findFonts(node: SoneNode): Set<FontValue> | undefined {
  */
 export function createLayoutNode(
   node: SoneNode,
-  renderer: SoneRenderer,
+  renderer: Pick<
+    SoneRenderer,
+    | "hasFont"
+    | "breakIterator"
+    | "getDefaultTextProps"
+    | "loadImage"
+    | "measureText"
+  >,
   Yoga: YogaLayout,
 ): Node | undefined {
   if (node == null) return;
@@ -665,7 +672,14 @@ export interface SoneRenderConfig {
 
 export async function calculateLayout(
   node: SoneNode,
-  renderer: SoneRenderer,
+  renderer: Pick<
+    SoneRenderer,
+    | "hasFont"
+    | "breakIterator"
+    | "getDefaultTextProps"
+    | "loadImage"
+    | "measureText"
+  >,
   config?: SoneRenderConfig,
 ) {
   // create yoga
@@ -732,29 +746,26 @@ export async function renderWithMetadata<T = HTMLCanvasElement>(
     renderer,
     config,
   );
-  const canvas = drawOnCanvas(
-    compiledNode,
-    renderer,
-    layout,
-    config,
-  ) as unknown as T;
 
-  const metadata = createMetadata(compiledNode, layout);
-  return { canvas, metadata };
-}
-
-function drawOnCanvas(
-  compiledNode: SoneNode,
-  renderer: SoneRenderer,
-  layout: Node,
-  config?: SoneRenderConfig,
-) {
   // render
   const canvas = renderer.createCanvas(
     layout.getComputedWidth(),
     layout.getComputedHeight(),
   );
 
+  drawOnCanvas(canvas, compiledNode, renderer, layout, config) as unknown as T;
+
+  const metadata = createMetadata(compiledNode, layout);
+  return { canvas, metadata };
+}
+
+export function drawOnCanvas(
+  canvas: HTMLCanvasElement,
+  compiledNode: SoneNode,
+  renderer: SoneRenderer,
+  layout: Node,
+  config?: SoneRenderConfig,
+) {
   const ctx = canvas.getContext("2d")!;
 
   if (config?.background) {
@@ -821,10 +832,9 @@ function drawOnCanvas(
 
   // draw
   draw(compiledNode, layout, 0, 0);
-  return canvas;
 }
 
-function createMetadata(compiledNode: SoneNode, layout: Node) {
+export function createMetadata(compiledNode: SoneNode, layout: Node) {
   // draw metadata
   function drawWithMeta(
     node: SoneNode,
@@ -924,7 +934,11 @@ export async function render<T = HTMLCanvasElement>(
     renderer,
     config,
   );
-  const canvas = drawOnCanvas(compiledNode, renderer, layout, config);
+  const canvas = renderer.createCanvas(
+    layout.getComputedWidth(),
+    layout.getComputedHeight(),
+  );
+  drawOnCanvas(canvas, compiledNode, renderer, layout, config);
   layout.freeRecursive();
   return canvas as unknown as T;
 }
@@ -1031,7 +1045,7 @@ export function drawLayoutNode(
   return roundedRectPath;
 }
 
-function makeTransforms(
+export function makeTransforms(
   ctx: CanvasRenderingContext2D,
   node: SoneNode,
   layout: Node,
@@ -1074,7 +1088,7 @@ function makeTransforms(
   }
 }
 
-function drawDebugBBox(
+export function drawDebugBBox(
   renderer: SoneRenderer,
   ctx: CanvasRenderingContext2D,
   node: SoneNode,
@@ -1117,7 +1131,7 @@ function drawDebugBBox(
   ctx.restore();
 }
 
-function drawPathNode(
+export function drawPathNode(
   renderer: SoneRenderer,
   ctx: CanvasRenderingContext2D,
   node: PathNode,
@@ -1194,7 +1208,8 @@ function drawPathNode(
 
   ctx.restore();
 }
-function drawTableNode(
+
+export function drawTableNode(
   _renderer: SoneRenderer,
   ctx: CanvasRenderingContext2D,
   node: TableNode,
