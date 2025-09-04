@@ -172,7 +172,9 @@ export async function compile<T extends SoneNode>(
   if (node == null) return;
 
   if (node.type !== "text-default") {
-    node.id = createId();
+    if (node.id === -1) {
+      node.id = createId();
+    }
 
     // transform regular box shadow
     if (node.props.shadows != null && Array.isArray(node.props.shadows)) {
