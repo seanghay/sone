@@ -19,7 +19,8 @@
 
 ---
 
-<img width=512 height=512 src="https://github.com/user-attachments/assets/c1830b67-b208-4acb-b4f7-8f2fe35a0237" alt="">
+<img width=720 height=720 src="https://github.com/user-attachments/assets/9a5bce63-33ca-4086-873a-a552b147f99a" alt="">
+
 
 ### Overview
 
