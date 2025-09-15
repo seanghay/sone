@@ -19,6 +19,8 @@
 
 ---
 
+<img width=512 height=512 src="https://github.com/user-attachments/assets/c1830b67-b208-4acb-b4f7-8f2fe35a0237" alt="">
+
 ### Overview
 
 - This project uses `skia-canvas` if you encounter an installation issue, please follow [the skia-canvas instruction](https://github.com/samizdatco/skia-canvas)
