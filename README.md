@@ -14,6 +14,7 @@
 - Composable
 - QR Code
 - Output as SVG, PDF, Image
+- Fully Typed
 - Metadata API (Text Recognition Dataset Generation)
 - All features from [skia-canvas](https://skia-canvas.org/)
 
