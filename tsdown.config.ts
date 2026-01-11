@@ -1,11 +1,11 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsdown";
 
 export default defineConfig({
   entry: ["src/node.ts", "src/browser.ts"],
-  splitting: false,
   sourcemap: false,
   clean: true,
-  minify: true,
+  minify: false,
   dts: true,
   format: ["esm", "cjs"],
+  target: false,
 });

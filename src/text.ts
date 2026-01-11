@@ -6,12 +6,20 @@ import { createGradientFillStyleList } from "./gradient.ts";
 import type { SoneRenderer } from "./renderer.ts";
 import { applySpanProps, indicesOf, isWhitespace } from "./utils.ts";
 
+export interface SoneParagraphLineRun {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 export interface SoneParagraphLineSegment {
   metrics: TextMetrics;
   props: SpanProps;
   text: string;
   width: number;
   height: number;
+  run?: SoneParagraphLineRun;
 }
 
 export interface SoneParagraphLine {
@@ -561,6 +569,108 @@ export function createParagraph(
   }
 
   return items;
+}
+
+export function createTextRuns(
+  node: TextNode,
+  layout: Node,
+  x: number,
+  y: number,
+) {
+  const { props } = node;
+  const { blocks } = props;
+  if (blocks == null) return;
+
+  const spaceX =
+    layout.getComputedBorder(Edge.Left) +
+    layout.getComputedBorder(Edge.Right) +
+    layout.getComputedPadding(Edge.Left) +
+    layout.getComputedPadding(Edge.Right);
+
+  let paragraphOffsetY = 0;
+
+  for (const { paragraph } of blocks) {
+    paragraph.width =
+      Math.max(layout.getComputedWidth(), paragraph.width) - spaceX;
+
+    const paddingLeft =
+      props.boxSizing === "content-box"
+        ? layout.getComputedPadding(Edge.Left)
+        : 0;
+
+    const paddingTop =
+      props.boxSizing === "content-box"
+        ? layout.getComputedPadding(Edge.Top)
+        : 0;
+
+    const borderLeft = layout.getComputedBorder(Edge.Left);
+    const borderTop = layout.getComputedBorder(Edge.Top);
+
+    const left = paddingLeft + borderLeft;
+    const top = paddingTop + borderTop;
+    const align = props.align;
+
+    let offsetY = paragraph.offsetY + paragraphOffsetY;
+    paragraphOffsetY += paragraph.height;
+
+    for (let i = 0; i < paragraph.lines.length; i++) {
+      const line = paragraph.lines[i];
+      const trailingWidth = paragraph.width - line.width;
+      const addedSpaceWidth =
+        align === "justify" && trailingWidth > 0 && line.spacesCount > 0
+          ? trailingWidth / line.spacesCount
+          : 0;
+
+      let offsetX = 0;
+
+      switch (align) {
+        case "center":
+          offsetX = (paragraph.width - line.width) / 2;
+          break;
+        case "right":
+          offsetX = paragraph.width - line.width;
+          break;
+        case "left":
+        case "justify":
+          if (i === 0 && props.indentSize != null) {
+            offsetX += props.indentSize;
+          }
+          if (i > 0 && props.hangingIndentSize != null) {
+            offsetX += props.hangingIndentSize;
+          }
+          break;
+      }
+
+      for (let s = 0; s < line.segments.length; s++) {
+        const segment = line.segments[s];
+        const spanOffsetY = segment.props.offsetY ?? 0;
+        let segmentWidth = segment.width;
+
+        if (align === "justify") {
+          // FIXME: Should flag this in compute layout func
+          if (/[ ]/.test(segment.text)) {
+            segmentWidth += addedSpaceWidth;
+          }
+        }
+
+        const textX = x + left + offsetX;
+        const textY = y + line.baseline + top + offsetY + spanOffsetY;
+        const actualTextY =
+          textY - segment.height + segment.metrics.fontBoundingBoxDescent;
+
+        segment.run = {
+          x: textX,
+          y: actualTextY,
+          width: segmentWidth,
+          height: segment.height,
+        };
+
+        offsetX += segmentWidth;
+      }
+
+      offsetY += line.height;
+    }
+  }
 }
 
 export function drawTextNode(

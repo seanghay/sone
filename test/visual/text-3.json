@@ -69,38 +69,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 3,
-                            "y": -46.4140625,
-                            "width": 27,
-                            "height": 47,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 2,
-                            "runs": [
-                              {
-                                "x": 3,
-                                "y": -46.4140625,
-                                "width": 27,
-                                "height": 47,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "ធី សុវណ្ណថា",
                       "height": 75.1953125,
@@ -135,6 +104,12 @@
                         "borderColor": "red",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 638.560001373291,
+                        "y": 46,
+                        "width": 227.87999725341797,
+                        "height": 75.1953125
                       }
                     }
                   ],
@@ -167,38 +142,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 1,
-                            "y": -36.4140625,
-                            "width": 63.951171875,
-                            "height": 53,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 5,
-                            "runs": [
-                              {
-                                "x": 1,
-                                "y": -36.4140625,
-                                "width": 63.951171875,
-                                "height": 53,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "ត្រូវបញ្ជប់តួនាទីពី",
                       "height": 75.1953125,
@@ -233,6 +177,12 @@
                         "borderColor": "red",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 585.9999980926514,
+                        "y": 121.1953125,
+                        "width": 333.00000381469727,
+                        "height": 75.1953125
                       }
                     }
                   ],
@@ -265,38 +215,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 1,
-                            "y": -44.4140625,
-                            "width": 210.154296875,
-                            "height": 50,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 8,
-                            "runs": [
-                              {
-                                "x": 1,
-                                "y": -44.4140625,
-                                "width": 210.154296875,
-                                "height": 50,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "អភិបាលរងក្រុងអរិយក្សត្រ",
                       "height": 75.1953125,
@@ -331,6 +250,12 @@
                         "borderColor": "red",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 502.7449951171875,
+                        "y": 196.390625,
+                        "width": 499.510009765625,
+                        "height": 75.1953125
                       }
                     }
                   ],
@@ -363,38 +288,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 5,
-                            "y": -44.4140625,
-                            "width": 56.30078125,
-                            "height": 45,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 3,
-                            "runs": [
-                              {
-                                "x": 5,
-                                "y": -44.4140625,
-                                "width": 56.30078125,
-                                "height": 45,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋទាំងអស់ ",
                       "height": 75.1953125,
@@ -429,6 +323,12 @@
                         "borderColor": "red",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 46.4250054359436,
+                        "y": 276.6025390625,
+                        "width": 777.3299903869629,
+                        "height": 75.1953125
                       }
                     },
                     {
@@ -444,38 +344,7 @@
                         "emHeightDescent": 10.119140625,
                         "hangingBaseline": 43.544532775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -26.5009765625,
-                        "lines": [
-                          {
-                            "x": -1,
-                            "y": -33.880859375,
-                            "width": 83.34765625,
-                            "height": 36,
-                            "baseline": 0,
-                            "hangingBaseline": -43.544532775878906,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": 26.5009765625,
-                            "ascent": -33.880859375,
-                            "descent": 10.119140625,
-                            "startIndex": 0,
-                            "endIndex": 3,
-                            "runs": [
-                              {
-                                "x": -1,
-                                "y": -33.880859375,
-                                "width": 83.34765625,
-                                "height": 36,
-                                "family": "Helvetica",
-                                "ascent": -33.880859375,
-                                "descent": 10.119140625,
-                                "capHeight": -31.560546875,
-                                "xHeight": -23.009765625,
-                                "underline": 3.330078125,
-                                "strikethrough": -11
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -26.5009765625
                       },
                       "text": "JBC ចាត់ទុកការរាយបន្លាលួស",
                       "height": 80.931640625,
@@ -494,6 +363,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 823.7549958229065,
+                        "y": 255.2041015625,
+                        "width": 634.8199987411499,
+                        "height": 80.931640625
                       }
                     }
                   ],
@@ -526,38 +401,7 @@
                         "emHeightDescent": 26.5009765625,
                         "hangingBaseline": 43.544532775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -26.5009765625,
-                        "lines": [
-                          {
-                            "x": 2,
-                            "y": -52.4306640625,
-                            "width": 104.0078125,
-                            "height": 53,
-                            "baseline": 0.068359375,
-                            "hangingBaseline": -43.476173400878906,
-                            "alphabeticBaseline": 0.068359375,
-                            "ideographicBaseline": 26.5693359375,
-                            "ascent": -54.3623046875,
-                            "descent": 26.5693359375,
-                            "startIndex": 0,
-                            "endIndex": 4,
-                            "runs": [
-                              {
-                                "x": 2,
-                                "y": -52.4306640625,
-                                "width": 104.0078125,
-                                "height": 53,
-                                "family": "Moul",
-                                "ascent": -53.642578125,
-                                "descent": 25.849609375,
-                                "capHeight": -47.669921875,
-                                "xHeight": -35.724609375,
-                                "underline": 4.73046875,
-                                "strikethrough": -11.318359375
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -26.5009765625
                       },
                       "text": "របស់យោធាថៃ",
                       "height": 80.931640625,
@@ -576,6 +420,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 595.4450016021729,
+                        "y": 352.517578125,
+                        "width": 314.1099967956543,
+                        "height": 80.931640625
                       }
                     }
                   ],
@@ -608,38 +458,7 @@
                         "emHeightDescent": 26.5009765625,
                         "hangingBaseline": 43.544532775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -26.5009765625,
-                        "lines": [
-                          {
-                            "x": 2,
-                            "y": -55.4306640625,
-                            "width": 37,
-                            "height": 56,
-                            "baseline": 0.068359375,
-                            "hangingBaseline": -43.476173400878906,
-                            "alphabeticBaseline": 0.068359375,
-                            "ideographicBaseline": 26.5693359375,
-                            "ascent": -54.3623046875,
-                            "descent": 26.5693359375,
-                            "startIndex": 0,
-                            "endIndex": 2,
-                            "runs": [
-                              {
-                                "x": 2,
-                                "y": -55.4306640625,
-                                "width": 37,
-                                "height": 56,
-                                "family": "Moul",
-                                "ascent": -53.642578125,
-                                "descent": 25.849609375,
-                                "capHeight": -47.669921875,
-                                "xHeight": -35.724609375,
-                                "underline": 4.73046875,
-                                "strikethrough": -11.318359375
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -26.5009765625
                       },
                       "text": "គឺល្មើសច្បាប់អន្តរជាតិ និងរំលោភ MOU ឆ្នាំ២០០០",
                       "height": 80.931640625,
@@ -658,6 +477,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 238.97500371932983,
+                        "y": 433.44921875,
+                        "width": 1027.0499925613403,
+                        "height": 80.931640625
                       }
                     }
                   ],
@@ -789,38 +614,7 @@
                         "emHeightDescent": 22.4189453125,
                         "hangingBaseline": 35.122657775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -22.4189453125,
-                        "lines": [
-                          {
-                            "x": 0,
-                            "y": -42.9033203125,
-                            "width": 121.25,
-                            "height": 44,
-                            "baseline": -0.322265625,
-                            "hangingBaseline": -35.444923400878906,
-                            "alphabeticBaseline": -0.322265625,
-                            "ideographicBaseline": 22.0966796875,
-                            "ascent": -44.2255859375,
-                            "descent": 22.0966796875,
-                            "startIndex": 0,
-                            "endIndex": 7,
-                            "runs": [
-                              {
-                                "x": 0,
-                                "y": -42.9033203125,
-                                "width": 121.25,
-                                "height": 44,
-                                "family": "Hanuman",
-                                "ascent": -43.291015625,
-                                "descent": 21.162109375,
-                                "capHeight": -32.548828125,
-                                "xHeight": -24.814453125,
-                                "underline": 2.986328125,
-                                "strikethrough": -11.322265625
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -22.4189453125
                       },
                       "text": "រាជធានីភ្នំពេញ៖ ",
                       "height": 66.322265625,
@@ -857,6 +651,12 @@
                         "borderColor": "black",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 162,
+                        "y": 620.57392578125,
+                        "width": 266.9200029373169,
+                        "height": 66.322265625
                       }
                     },
                     {
@@ -872,38 +672,7 @@
                         "emHeightDescent": 26.5009765625,
                         "hangingBaseline": 43.544532775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -26.5009765625,
-                        "lines": [
-                          {
-                            "x": 2,
-                            "y": -34.4306640625,
-                            "width": 144.06640625,
-                            "height": 51,
-                            "baseline": 0.068359375,
-                            "hangingBaseline": -43.476173400878906,
-                            "alphabeticBaseline": 0.068359375,
-                            "ideographicBaseline": 26.5693359375,
-                            "ascent": -54.3623046875,
-                            "descent": 26.5693359375,
-                            "startIndex": 0,
-                            "endIndex": 6,
-                            "runs": [
-                              {
-                                "x": 2,
-                                "y": -34.4306640625,
-                                "width": 144.06640625,
-                                "height": 51,
-                                "family": "Moul",
-                                "ascent": -53.642578125,
-                                "descent": 25.849609375,
-                                "capHeight": -47.669921875,
-                                "xHeight": -35.724609375,
-                                "underline": 4.73046875,
-                                "strikethrough": -11.318359375
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -26.5009765625
                       },
                       "text": "សម្ដេចតេជោហ៊ុន សែន",
                       "height": 80.931640625,
@@ -922,6 +691,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 428.9200029373169,
+                        "y": 610.04658203125,
+                        "width": 494.5500020980835,
+                        "height": 80.931640625
                       }
                     },
                     {
@@ -937,38 +712,7 @@
                         "emHeightDescent": 22.4189453125,
                         "hangingBaseline": 35.122657775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -22.4189453125,
-                        "lines": [
-                          {
-                            "x": 0,
-                            "y": 0,
-                            "width": 0,
-                            "height": 0,
-                            "baseline": -0.322265625,
-                            "hangingBaseline": -35.444923400878906,
-                            "alphabeticBaseline": -0.322265625,
-                            "ideographicBaseline": 22.0966796875,
-                            "ascent": -44.2255859375,
-                            "descent": 22.0966796875,
-                            "startIndex": 0,
-                            "endIndex": 1,
-                            "runs": [
-                              {
-                                "x": 0,
-                                "y": 0,
-                                "width": 0,
-                                "height": 0,
-                                "family": "Hanuman",
-                                "ascent": -43.291015625,
-                                "descent": 21.162109375,
-                                "capHeight": -32.548828125,
-                                "xHeight": -24.814453125,
-                                "underline": 2.986328125,
-                                "strikethrough": -11.322265625
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -22.4189453125
                       },
                       "text": " ប្រធាន",
                       "height": 66.322265625,
@@ -1005,6 +749,12 @@
                         "borderColor": "black",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 923.4700050354004,
+                        "y": 620.57392578125,
+                        "width": 123.39999866485596,
+                        "height": 66.322265625
                       }
                     }
                   ],
@@ -1028,38 +778,7 @@
                         "emHeightDescent": 22.4189453125,
                         "hangingBaseline": 35.122657775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -22.4189453125,
-                        "lines": [
-                          {
-                            "x": 0,
-                            "y": -43.9033203125,
-                            "width": 149.21484375,
-                            "height": 59,
-                            "baseline": -0.322265625,
-                            "hangingBaseline": -35.444923400878906,
-                            "alphabeticBaseline": -0.322265625,
-                            "ideographicBaseline": 22.0966796875,
-                            "ascent": -44.2255859375,
-                            "descent": 22.0966796875,
-                            "startIndex": 0,
-                            "endIndex": 10,
-                            "runs": [
-                              {
-                                "x": 0,
-                                "y": -43.9033203125,
-                                "width": 149.21484375,
-                                "height": 59,
-                                "family": "Hanuman",
-                                "ascent": -43.291015625,
-                                "descent": 21.162109375,
-                                "capHeight": -32.548828125,
-                                "xHeight": -24.814453125,
-                                "underline": 2.986328125,
-                                "strikethrough": -11.322265625
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -22.4189453125
                       },
                       "text": "ព្រឹទ្ធសភា និងជាប្រធានគណបក្សប្រជាជនកម្ពុជាបានសម្រេចឲ្យ",
                       "height": 66.322265625,
@@ -1096,6 +815,12 @@
                         "borderColor": "black",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 90,
+                        "y": 698.01865234375,
+                        "width": 992.0099840164185,
+                        "height": 66.322265625
                       }
                     }
                   ],
@@ -1119,38 +844,7 @@
                         "emHeightDescent": 22.4189453125,
                         "hangingBaseline": 35.122657775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -22.4189453125,
-                        "lines": [
-                          {
-                            "x": 0,
-                            "y": -42.9033203125,
-                            "width": 206.0390625,
-                            "height": 58,
-                            "baseline": -0.322265625,
-                            "hangingBaseline": -35.444923400878906,
-                            "alphabeticBaseline": -0.322265625,
-                            "ideographicBaseline": 22.0966796875,
-                            "ascent": -44.2255859375,
-                            "descent": 22.0966796875,
-                            "startIndex": 0,
-                            "endIndex": 11,
-                            "runs": [
-                              {
-                                "x": 0,
-                                "y": -42.9033203125,
-                                "width": 206.0390625,
-                                "height": 58,
-                                "family": "Hanuman",
-                                "ascent": -43.291015625,
-                                "descent": 21.162109375,
-                                "capHeight": -32.548828125,
-                                "xHeight": -24.814453125,
-                                "underline": 2.986328125,
-                                "strikethrough": -11.322265625
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -22.4189453125
                       },
                       "text": "អភិបាលខេត្តកណ្តាលបញ្ចប់មុខតំណែង អ្នកនាង ធី សុវណ្ណថា",
                       "height": 66.322265625,
@@ -1187,6 +881,12 @@
                         "borderColor": "black",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 90,
+                        "y": 770.97314453125,
+                        "width": 964.2499990463257,
+                        "height": 66.322265625
                       }
                     }
                   ],
@@ -1210,38 +910,7 @@
                         "emHeightDescent": 22.4189453125,
                         "hangingBaseline": 35.122657775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -22.4189453125,
-                        "lines": [
-                          {
-                            "x": 2.9296875,
-                            "y": -42.9033203125,
-                            "width": 52,
-                            "height": 44,
-                            "baseline": -0.322265625,
-                            "hangingBaseline": -35.444923400878906,
-                            "alphabeticBaseline": -0.322265625,
-                            "ideographicBaseline": 22.0966796875,
-                            "ascent": -44.2255859375,
-                            "descent": 22.0966796875,
-                            "startIndex": 0,
-                            "endIndex": 3,
-                            "runs": [
-                              {
-                                "x": 2.9296875,
-                                "y": -42.9033203125,
-                                "width": 52,
-                                "height": 44,
-                                "family": "Hanuman",
-                                "ascent": -43.291015625,
-                                "descent": 21.162109375,
-                                "capHeight": -32.548828125,
-                                "xHeight": -24.814453125,
-                                "underline": 2.986328125,
-                                "strikethrough": -11.322265625
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -22.4189453125
                       },
                       "text": "ពីអភិបាលរងក្រុងអរិយក្សត្រ និងបណ្តេញចេញពីក្របខ័ណ្ឌរដ្ឋ",
                       "height": 66.322265625,
@@ -1278,6 +947,12 @@
                         "borderColor": "black",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 90,
+                        "y": 843.9276367187499,
+                        "width": 944.9700136184692,
+                        "height": 66.322265625
                       }
                     }
                   ],
@@ -1301,38 +976,7 @@
                         "emHeightDescent": 22.4189453125,
                         "hangingBaseline": 35.122657775878906,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -22.4189453125,
-                        "lines": [
-                          {
-                            "x": 3,
-                            "y": -42.9033203125,
-                            "width": 160.6484375,
-                            "height": 44,
-                            "baseline": -0.322265625,
-                            "hangingBaseline": -35.444923400878906,
-                            "alphabeticBaseline": -0.322265625,
-                            "ideographicBaseline": 22.0966796875,
-                            "ascent": -44.2255859375,
-                            "descent": 22.0966796875,
-                            "startIndex": 0,
-                            "endIndex": 8,
-                            "runs": [
-                              {
-                                "x": 3,
-                                "y": -42.9033203125,
-                                "width": 160.6484375,
-                                "height": 44,
-                                "family": "Hanuman",
-                                "ascent": -43.291015625,
-                                "descent": 21.162109375,
-                                "capHeight": -32.548828125,
-                                "xHeight": -24.814453125,
-                                "underline": 2.986328125,
-                                "strikethrough": -11.322265625
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -22.4189453125
                       },
                       "props": {
                         "size": 44,
@@ -1369,7 +1013,13 @@
                       },
                       "text": "ទាំងអស់។",
                       "width": 166.5,
-                      "height": 66.322265625
+                      "height": 66.322265625,
+                      "run": {
+                        "x": 90,
+                        "y": 922.9439453125001,
+                        "width": 166.5,
+                        "height": 66.322265625
+                      }
                     },
                     {
                       "metrics": {
@@ -1384,8 +1034,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": []
+                        "ideographicBaseline": -25.78125
                       },
                       "props": {
                         "size": 44,
@@ -1404,7 +1053,13 @@
                       },
                       "text": "",
                       "width": 0,
-                      "height": 75.1953125
+                      "height": 75.1953125,
+                      "run": {
+                        "x": 256.5,
+                        "y": 917.4332031250001,
+                        "width": 0,
+                        "height": 75.1953125
+                      }
                     }
                   ],
                   "spacesCount": 0
@@ -1436,38 +1091,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 5,
-                            "y": -32.4140625,
-                            "width": 124.90234375,
-                            "height": 50,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 6,
-                            "runs": [
-                              {
-                                "x": 5,
-                                "y": -32.4140625,
-                                "width": 124.90234375,
-                                "height": 50,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "សម្តេចតេជោ បានសរសេរលើបណ្តាញសង្គម",
                       "height": 75.1953125,
@@ -1486,6 +1110,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 162,
+                        "y": 1000.3628906250001,
+                        "width": 843.9300079345703,
+                        "height": 75.1953125
                       }
                     }
                   ],
@@ -1509,38 +1139,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 5,
-                            "y": -41.4140625,
-                            "width": 122.90234375,
-                            "height": 59,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 5,
-                            "runs": [
-                              {
-                                "x": 5,
-                                "y": -41.4140625,
-                                "width": 122.90234375,
-                                "height": 59,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "នៅមុននេះ ដែលមានខ្លឹមយ៉ាងដូច្នេះថា ៖ យើងគ្មាន",
                       "height": 75.1953125,
@@ -1559,6 +1158,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 90,
+                        "y": 1083.077734375,
+                        "width": 951.120002746582,
+                        "height": 75.1953125
                       }
                     }
                   ],
@@ -1582,38 +1187,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 5,
-                            "y": -32.4140625,
-                            "width": 93.951171875,
-                            "height": 33,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 3,
-                            "runs": [
-                              {
-                                "x": 5,
-                                "y": -32.4140625,
-                                "width": 93.951171875,
-                                "height": 33,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "ពេលអប់រំមន្ត្រីដែលគ្មានវិន័យ ក្នុងពេលដែលកិច្ចការ",
                       "height": 75.1953125,
@@ -1632,6 +1206,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 90,
+                        "y": 1165.792578125,
+                        "width": 960.4800033569336,
+                        "height": 75.1953125
                       }
                     }
                   ],
@@ -1655,38 +1235,7 @@
                         "emHeightDescent": 25.78125,
                         "hangingBaseline": 39.53125,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -25.78125,
-                        "lines": [
-                          {
-                            "x": 3,
-                            "y": -44.4140625,
-                            "width": 76.951171875,
-                            "height": 45,
-                            "baseline": -0.1953125,
-                            "hangingBaseline": -39.7265625,
-                            "alphabeticBaseline": -0.1953125,
-                            "ideographicBaseline": 25.5859375,
-                            "ascent": -49.609375,
-                            "descent": 25.5859375,
-                            "startIndex": 0,
-                            "endIndex": 4,
-                            "runs": [
-                              {
-                                "x": 3,
-                                "y": -44.4140625,
-                                "width": 76.951171875,
-                                "height": 45,
-                                "family": "Khmer",
-                                "ascent": -49.609375,
-                                "descent": 25.5859375,
-                                "capHeight": -31.60546875,
-                                "xHeight": -23.78515625,
-                                "underline": 3.11328125,
-                                "strikethrough": -10.89453125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -25.78125
                       },
                       "text": "ជាតិកំពុងទាមទារយើងដោះស្រាយនោះឡើយ។",
                       "height": 75.1953125,
@@ -1705,6 +1254,12 @@
                         "overline": 0,
                         "lineThrough": 0,
                         "dropShadows": []
+                      },
+                      "run": {
+                        "x": 90,
+                        "y": 1248.507421875,
+                        "width": 894.27001953125,
+                        "height": 75.1953125
                       }
                     }
                   ],

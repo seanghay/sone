@@ -33,7 +33,7 @@ import { drawPhoto } from "./photo.ts";
 import { createSmoothRoundRect, parseRadius } from "./rect.ts";
 import { applyPropsToYogaNode } from "./serde.ts";
 import { type CssShadowProperties, parseShadow } from "./shadow.ts";
-import { createParagraph, drawTextNode } from "./text.ts";
+import { createParagraph, createTextRuns, drawTextNode } from "./text.ts";
 
 /**
  * Some version of Node.js don't support top-level await,
@@ -767,6 +767,7 @@ export async function renderWithMetadata<T = HTMLCanvasElement>(
   drawOnCanvas(canvas, compiledNode, renderer, layout, config) as unknown as T;
 
   const metadata = createMetadata(compiledNode, layout);
+
   return { canvas, metadata };
 }
 
@@ -885,10 +886,24 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
     };
 
     if (type === "text") {
+      createTextRuns(node, layout, x, y);
+      const props = klona(node.props);
+      if (props.blocks != null) {
+        for (const block of props.blocks) {
+          for (const line of block.paragraph.lines) {
+            for (const segment of line.segments) {
+              if ("lines" in segment.metrics) {
+                delete segment.metrics.lines;
+              }
+            }
+          }
+        }
+      }
+
       return {
         type,
         children: node.children,
-        props: node.props,
+        props,
         ...extra,
       };
     }

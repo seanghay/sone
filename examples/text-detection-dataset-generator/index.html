@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas DPR Playground</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="playground"></canvas>
+
+    <script>
+        const canvas = document.getElementById('playground');
+        const ctx = canvas.getContext('2d');
+
+        /**
+         * Core DPR Scaling Logic
+         */
+        function resize() {
+            // Get the pixel ratio (usually 2.0 on Retina/High-res screens)
+            const dpr = window.devicePixelRatio || 1;
+            
+            // Get the dimensions of the window
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // Scale the drawing surface (the internal resolution)
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            // Scale the element size (the CSS size)
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+
+            // Normalize the coordinate system
+            // This ensures ctx.fillRect(0,0,10,10) is always 10px regardless of DPR
+            ctx.scale(dpr, dpr);
+            
+            render();
+        }
+
+        /**
+         * Drawing Logic
+         */
+        function render() {
+            
+            ctx.fillStyle = "#eee";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "44px Content";
+            ctx.textWrap = true;
+
+            const text = "ស្រុកខ្មែរ ក្នុងប៊ី Hello, gyF";
+            const metrics = ctx.measureText(text);
+            console.log(metrics);
+
+            const y = 100;
+
+            ctx.fillStyle = "rgba(0,255,0,.1)";
+            const w = metrics.width;
+            const height = metrics.hangingBaseline;
+
+            ctx.fillRect(0, y, metrics.width, height);
+
+            ctx.fillStyle = "#000";
+            ctx.fillText(text, 0, y + metrics.hangingBaseline);
+            ctx.textBaseline = "";
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "red";
+            ctx.beginPath();
+            ctx.moveTo(0, height + y);
+            ctx.lineTo(w, height + y);
+            ctx.stroke();
+
+            ctx.strokeStyle = "green";
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(w, y);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "blue";
+            ctx.moveTo(0, y + metrics.fontBoundingBoxDescent + height);
+            ctx.lineTo(w, y + metrics.fontBoundingBoxDescent + height);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "magenta";
+            ctx.moveTo(0, y - metrics.ideographicBaseline + height);
+            ctx.lineTo(w, y - metrics.ideographicBaseline + height);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "orange";
+            ctx.moveTo(0, y - metrics.fontBoundingBoxAscent + height);
+            ctx.lineTo(w, y - metrics.fontBoundingBoxAscent + height);
+            ctx.stroke();
+            
+        }
+
+        // Listen for window resize to keep canvas sharp and full-screen
+        window.addEventListener('resize', resize);
+
+        // Initial call
+        resize();
+    </script>
+</body>
+</html>
