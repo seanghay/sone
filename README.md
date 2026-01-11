@@ -109,10 +109,13 @@ export default nextConfig;
 - https://github.com/tdewolff/canvas
 - https://github.com/bramstein/typeset
 
-
 ### Use case
 
 - KhmerCoders Preview (https://github.com/KhmerCoders/khmercoders-preview)
+
+### Similar Project
+
+- [kane50613/takumi](https://github.com/kane50613/takumi) Takumi makes dynamic image rendering simple.
 
 ### License
 
