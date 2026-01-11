@@ -21,9 +21,9 @@
     "text-rendering"
   ],
   "sideEffects": false,
-  "main": "dist/node.js",
+  "main": "dist/node.mjs",
   "module": "dist/node.mjs",
-  "types": "dist/node.d.ts",
+  "types": "dist/node.d.mts",
   "files": [
     "dist"
   ],
