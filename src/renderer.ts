@@ -13,6 +13,7 @@ import {
 } from "yoga-layout/load";
 import {
   type ColorValue,
+  Column,
   type ColumnNode,
   type DefaultTextProps,
   type FontValue,
@@ -24,6 +25,7 @@ import {
   type TableCellNode,
   type TableNode,
   type TableRowNode,
+  Text,
   type TextNode,
 } from "./core.ts";
 import { createGradientFillStyleList, isColor } from "./gradient.ts";
@@ -80,6 +82,29 @@ function filterNullishValues<T>(value: T) {
   return Object.fromEntries(
     Object.entries(value as unknown as object).filter(([_, v]) => v != null),
   );
+}
+
+function resolveMarker(
+  listStyle: string | undefined,
+  index: number,
+  startIndex: number,
+): string {
+  switch (listStyle ?? "disc") {
+    case "disc":
+      return "•";
+    case "circle":
+      return "◦";
+    case "square":
+      return "▪";
+    case "decimal":
+      return `${startIndex + index}.`;
+    case "dash":
+      return "–";
+    case "none":
+      return "";
+    default:
+      return listStyle!;
+  }
 }
 
 /**
@@ -335,6 +360,41 @@ export async function compile<T extends SoneNode>(
     if (node.props.flexDirection == null) {
       node.props.flexDirection = "row";
     }
+  }
+
+  if (node.type === "list") {
+    if (node.props.flexDirection == null) {
+      node.props.flexDirection = "column";
+    }
+
+    const { listStyle, startIndex = 1, markerGap = 8 } = node.props;
+    let itemIndex = 0;
+
+    for (const child of node.children) {
+      if (child == null) continue;
+
+      const markerStr = resolveMarker(listStyle, itemIndex++, startIndex);
+      const markerNode = Text(markerStr);
+      markerNode.props.nowrap = true;
+      if (node.props.markerColor != null)
+        markerNode.props.color = node.props.markerColor;
+      if (node.props.markerSize != null)
+        markerNode.props.size = node.props.markerSize;
+      if (node.props.markerFont != null)
+        markerNode.props.font = node.props.markerFont;
+      if (node.props.markerWeight != null)
+        markerNode.props.weight = node.props.markerWeight;
+      if (node.props.markerStyle != null)
+        markerNode.props.style = node.props.markerStyle;
+
+      const contentCol = Column(...child.children).flex(1);
+      child.children = [markerNode, contentCol];
+
+      if (child.props.flexDirection == null) child.props.flexDirection = "row";
+      if (child.props.gap == null) child.props.gap = markerGap;
+      if (child.props.alignItems == null) child.props.alignItems = "flex-start";
+    }
+    // fall through to generic children compilation loop
   }
 
   if (node.type !== "text-default" && node.props.background != null) {
