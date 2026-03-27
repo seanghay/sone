@@ -26,7 +26,6 @@ const root = Column(
     ),
   )
     .listStyle("disc")
-    .markerColor("gray")
     .markerGap(8)
     .gap(4)
     .marginBottom(16),
@@ -38,19 +37,6 @@ const root = Column(
     .color("gray"),
   List(ListItem(Text("Alpha")), ListItem(Text("Beta")), ListItem(Text("Gamma")))
     .listStyle("circle")
-    .markerColor("steelblue")
-    .markerGap(8)
-    .gap(4)
-    .marginBottom(16),
-
-  // Square list
-  Text("Unordered — square")
-    .size(14)
-    .weight("bold")
-    .color("gray"),
-  List(ListItem(Text("One")), ListItem(Text("Two")), ListItem(Text("Three")))
-    .listStyle("square")
-    .markerColor("tomato")
     .markerGap(8)
     .gap(4)
     .marginBottom(16),
@@ -67,14 +53,12 @@ const root = Column(
   )
     .listStyle("decimal")
     .startIndex(1)
-    .markerColor("darkslategray")
-    .markerWeight("bold")
     .markerGap(10)
     .gap(6)
     .marginBottom(16),
 
-  // Custom marker
-  Text("Custom marker — →")
+  // Span marker — full styling via Span()
+  Text('Span marker — Span("+")')
     .size(14)
     .weight("bold")
     .color("gray"),
@@ -83,9 +67,7 @@ const root = Column(
     ListItem(Text("Fill in the form")),
     ListItem(Text("Submit and wait")),
   )
-    .listStyle("→")
-    .markerColor("mediumseagreen")
-    .markerSize(16)
+    .listStyle(Span("+").color("mediumseagreen").weight("bold").size(16))
     .markerGap(12)
     .gap(6)
     .marginBottom(16),
@@ -100,7 +82,6 @@ const root = Column(
       Text("Parent item one"),
       List(ListItem(Text("Child A")), ListItem(Text("Child B")))
         .listStyle("circle")
-        .markerColor("gray")
         .markerGap(6)
         .gap(2)
         .marginTop(4),
@@ -108,7 +89,6 @@ const root = Column(
     ListItem(Text("Parent item two")),
   )
     .listStyle("disc")
-    .markerColor("black")
     .markerGap(8)
     .gap(6),
 )

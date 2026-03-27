@@ -17,10 +17,13 @@ import {
   type ColumnNode,
   type DefaultTextProps,
   type FontValue,
+  type ListItemNode,
+  type ListNode,
   type PathNode,
   type PhotoNode,
   type RowNode,
   type SoneNode,
+  type SpanNode,
   type SpanProps,
   type TableCellNode,
   type TableNode,
@@ -368,24 +371,26 @@ export async function compile<T extends SoneNode>(
     }
 
     const { listStyle, startIndex = 1, markerGap = 8 } = node.props;
+    const isSpanMarker =
+      listStyle != null &&
+      typeof listStyle === "object" &&
+      (listStyle as SpanNode).type === "span";
     let itemIndex = 0;
 
     for (const child of node.children) {
       if (child == null) continue;
 
-      const markerStr = resolveMarker(listStyle, itemIndex++, startIndex);
-      const markerNode = Text(markerStr);
+      const markerNode = isSpanMarker
+        ? Text(klona(listStyle as SpanNode))
+        : Text(
+            resolveMarker(
+              listStyle as string | undefined,
+              itemIndex,
+              startIndex,
+            ),
+          );
       markerNode.props.nowrap = true;
-      if (node.props.markerColor != null)
-        markerNode.props.color = node.props.markerColor;
-      if (node.props.markerSize != null)
-        markerNode.props.size = node.props.markerSize;
-      if (node.props.markerFont != null)
-        markerNode.props.font = node.props.markerFont;
-      if (node.props.markerWeight != null)
-        markerNode.props.weight = node.props.markerWeight;
-      if (node.props.markerStyle != null)
-        markerNode.props.style = node.props.markerStyle;
+      itemIndex++;
 
       const contentCol = Column(...child.children).flex(1);
       child.children = [markerNode, contentCol];
@@ -1048,7 +1053,9 @@ export function drawLayoutNode(
     | PathNode
     | TableNode
     | TableRowNode
-    | TableCellNode,
+    | TableCellNode
+    | ListNode
+    | ListItemNode,
   layout: Node,
   x: number,
   y: number,

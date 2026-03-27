@@ -1426,7 +1426,7 @@ export function TableCell(...children: SoneNode[]): TableCellNode {
  * List marker and container customization properties
  */
 export interface ListProps extends LayoutProps {
-  /** Bullet/numbering style: "disc" (•), "circle" (◦), "square" (▪), "decimal", "none", or custom string */
+  /** Bullet/numbering style: "disc" (•), "circle" (◦), "square" (▪), "dash" (–), "decimal", "none", custom string, or a SpanNode for full styling */
   listStyle?:
     | "disc"
     | "circle"
@@ -1434,37 +1434,17 @@ export interface ListProps extends LayoutProps {
     | "decimal"
     | "dash"
     | "none"
-    | (string & {});
-  /** Color of the marker character */
-  markerColor?: ColorValue;
-  /** Font size of the marker */
-  markerSize?: number;
+    | (string & {})
+    | SpanNode;
   /** Gap between marker and item content (default: 8) */
   markerGap?: number;
-  /** Font family for the marker */
-  markerFont?: FontValue[];
-  /** Font weight for the marker */
-  markerWeight?:
-    | "normal"
-    | "bold"
-    | "lighter"
-    | "bolder"
-    | (string & {})
-    | number;
-  /** Font style for the marker */
-  markerStyle?: "normal" | "italic" | "oblique";
   /** Starting number for decimal lists — named startIndex because "start" is taken by LayoutProps (CSS inset-inline-start) */
   startIndex?: number;
 }
 
 export interface ListPropsBuilder<T> extends LayoutPropsBuilder<T, ListProps> {
   listStyle(value: Required<ListProps["listStyle"]>): T;
-  markerColor(value: Required<ListProps["markerColor"]>): T;
-  markerSize(value: Required<ListProps["markerSize"]>): T;
   markerGap(value: Required<ListProps["markerGap"]>): T;
-  markerFont(...values: FontValue[]): T;
-  markerWeight(value: Required<ListProps["markerWeight"]>): T;
-  markerStyle(value: Required<ListProps["markerStyle"]>): T;
   startIndex(value: Required<ListProps["startIndex"]>): T;
 }
 
@@ -1494,28 +1474,8 @@ function listPropsBuilder<T>(props: ListProps = {}): ListPropsBuilder<T> {
       props.listStyle = value;
       return this as unknown as T;
     },
-    markerColor(value) {
-      props.markerColor = value;
-      return this as unknown as T;
-    },
-    markerSize(value) {
-      props.markerSize = value;
-      return this as unknown as T;
-    },
     markerGap(value) {
       props.markerGap = value;
-      return this as unknown as T;
-    },
-    markerFont(...values) {
-      props.markerFont = values;
-      return this as unknown as T;
-    },
-    markerWeight(value) {
-      props.markerWeight = value;
-      return this as unknown as T;
-    },
-    markerStyle(value) {
-      props.markerStyle = value;
       return this as unknown as T;
     },
     startIndex(value) {
@@ -1532,7 +1492,7 @@ function listPropsBuilder<T>(props: ListProps = {}): ListPropsBuilder<T> {
  * List(
  *   ListItem(Text("First")),
  *   ListItem(Text("Second")),
- * ).listStyle("disc").markerColor("gray").markerGap(10).gap(6)
+ * ).listStyle("disc").markerGap(10).gap(6)
  */
 export function List(
   ...children: Array<ListItemNode | null | undefined>

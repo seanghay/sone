@@ -266,7 +266,6 @@
       "type": "list",
       "props": {
         "listStyle": "disc",
-        "markerColor": "gray",
         "markerGap": 8,
         "gap": 4,
         "marginBottom": 16,
@@ -427,7 +426,6 @@
       "type": "list",
       "props": {
         "listStyle": "circle",
-        "markerColor": "steelblue",
         "markerGap": 8,
         "gap": 4,
         "marginBottom": 16,
@@ -440,167 +438,6 @@
       "height": 53,
       "position": {
         "top": 233,
-        "bottom": 16,
-        "left": 32,
-        "right": 0
-      },
-      "padding": {
-        "top": 0,
-        "left": 0,
-        "right": 0,
-        "bottom": 0
-      },
-      "margin": {
-        "top": 0,
-        "left": 0,
-        "right": 0,
-        "bottom": 16
-      }
-    },
-    {
-      "type": "text",
-      "children": ["Unordered — square"],
-      "props": {
-        "size": 14,
-        "color": "gray",
-        "font": ["sans-serif"],
-        "style": "normal",
-        "weight": "bold",
-        "letterSpacing": 0,
-        "nowrap": false,
-        "lineHeight": null,
-        "indentSize": 0,
-        "hangingIndentSize": 0,
-        "align": "left",
-        "strokeColor": "black",
-        "strokeWidth": 0,
-        "wordSpacing": 0,
-        "blocks": [
-          {
-            "paragraph": {
-              "width": 416,
-              "height": 19.12396240234375,
-              "lines": [
-                {
-                  "baseline": 14,
-                  "height": 19.12396240234375,
-                  "width": 134.85999870300293,
-                  "segments": [
-                    {
-                      "metrics": {
-                        "width": 73.5,
-                        "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 73.5,
-                        "actualBoundingBoxAscent": 12,
-                        "actualBoundingBoxDescent": 2,
-                        "fontBoundingBoxAscent": 14,
-                        "fontBoundingBoxDescent": 5.12396240234375,
-                        "emHeightAscent": 14,
-                        "emHeightDescent": 5.12396240234375,
-                        "hangingBaseline": 11.199999809265137,
-                        "alphabeticBaseline": 0,
-                        "ideographicBaseline": -5.12396240234375
-                      },
-                      "text": "Unordered — square",
-                      "height": 19.12396240234375,
-                      "width": 134.85999870300293,
-                      "props": {
-                        "size": 14,
-                        "color": "gray",
-                        "font": ["sans-serif"],
-                        "style": "normal",
-                        "weight": "bold",
-                        "letterSpacing": 0,
-                        "nowrap": false,
-                        "lineHeight": null,
-                        "indentSize": 0,
-                        "hangingIndentSize": 0,
-                        "align": "left",
-                        "strokeColor": "black",
-                        "strokeWidth": 0,
-                        "wordSpacing": 0,
-                        "blocks": [],
-                        "offsetY": 0,
-                        "underline": 0,
-                        "underlineColor": null,
-                        "overline": 0,
-                        "overlineColor": null,
-                        "lineThrough": 0,
-                        "lineThroughColor": null,
-                        "highlightColor": null,
-                        "dropShadows": [],
-                        "autofit": false,
-                        "flexShrink": 1,
-                        "boxSizing": "content-box"
-                      },
-                      "run": {
-                        "x": 32,
-                        "y": 302,
-                        "width": 134.85999870300293,
-                        "height": 19.12396240234375
-                      }
-                    }
-                  ],
-                  "spacesCount": 0
-                }
-              ],
-              "offsetY": 0
-            }
-          }
-        ],
-        "offsetY": 0,
-        "underline": 0,
-        "underlineColor": null,
-        "overline": 0,
-        "overlineColor": null,
-        "lineThrough": 0,
-        "lineThroughColor": null,
-        "highlightColor": null,
-        "dropShadows": [],
-        "autofit": false,
-        "flexShrink": 1,
-        "boxSizing": "content-box"
-      },
-      "x": 32,
-      "y": 302,
-      "width": 416,
-      "height": 20,
-      "position": {
-        "top": 302,
-        "bottom": 0,
-        "left": 32,
-        "right": 0
-      },
-      "padding": {
-        "top": 0,
-        "left": 0,
-        "right": 0,
-        "bottom": 0
-      },
-      "margin": {
-        "top": 0,
-        "left": 0,
-        "right": 0,
-        "bottom": 0
-      }
-    },
-    {
-      "type": "list",
-      "props": {
-        "listStyle": "square",
-        "markerColor": "tomato",
-        "markerGap": 8,
-        "gap": 4,
-        "marginBottom": 16,
-        "flexDirection": "column"
-      },
-      "children": [],
-      "x": 32,
-      "y": 321,
-      "width": 416,
-      "height": 62,
-      "position": {
-        "top": 321,
         "bottom": 16,
         "left": 32,
         "right": 0
@@ -696,7 +533,7 @@
                       },
                       "run": {
                         "x": 32,
-                        "y": 399,
+                        "y": 302,
                         "width": 126.78000068664551,
                         "height": 19.12396240234375
                       }
@@ -723,11 +560,11 @@
         "boxSizing": "content-box"
       },
       "x": 32,
-      "y": 399,
+      "y": 302,
       "width": 416,
       "height": 20,
       "position": {
-        "top": 399,
+        "top": 302,
         "bottom": 0,
         "left": 32,
         "right": 0
@@ -750,8 +587,6 @@
       "props": {
         "listStyle": "decimal",
         "startIndex": 1,
-        "markerColor": "darkslategray",
-        "markerWeight": "bold",
         "markerGap": 10,
         "gap": 6,
         "marginBottom": 16,
@@ -759,11 +594,11 @@
       },
       "children": [],
       "x": 32,
-      "y": 419,
+      "y": 321,
       "width": 416,
       "height": 57,
       "position": {
-        "top": 419,
+        "top": 321,
         "bottom": 16,
         "left": 32,
         "right": 0
@@ -783,7 +618,7 @@
     },
     {
       "type": "text",
-      "children": ["Custom marker — →"],
+      "children": ["Span marker — Span(\"+\")"],
       "props": {
         "size": 14,
         "color": "gray",
@@ -808,15 +643,15 @@
                 {
                   "baseline": 14,
                   "height": 19.12396240234375,
-                  "width": 133.20999717712402,
+                  "width": 168.14999961853027,
                   "segments": [
                     {
                       "metrics": {
-                        "width": 51.939998626708984,
+                        "width": 34.02000045776367,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 51.939998626708984,
+                        "actualBoundingBoxRight": 34.02000045776367,
                         "actualBoundingBoxAscent": 12,
-                        "actualBoundingBoxDescent": 2,
+                        "actualBoundingBoxDescent": 5,
                         "fontBoundingBoxAscent": 14,
                         "fontBoundingBoxDescent": 5.12396240234375,
                         "emHeightAscent": 14,
@@ -825,9 +660,9 @@
                         "alphabeticBaseline": 0,
                         "ideographicBaseline": -5.12396240234375
                       },
-                      "text": "Custom marker — →",
+                      "text": "Span marker — Span(\"+\")",
                       "height": 19.12396240234375,
-                      "width": 133.20999717712402,
+                      "width": 168.14999961853027,
                       "props": {
                         "size": 14,
                         "color": "gray",
@@ -859,8 +694,8 @@
                       },
                       "run": {
                         "x": 32,
-                        "y": 491,
-                        "width": 133.20999717712402,
+                        "y": 394,
+                        "width": 168.14999961853027,
                         "height": 19.12396240234375
                       }
                     }
@@ -886,11 +721,11 @@
         "boxSizing": "content-box"
       },
       "x": 32,
-      "y": 491,
+      "y": 394,
       "width": 416,
       "height": 20,
       "position": {
-        "top": 491,
+        "top": 394,
         "bottom": 0,
         "left": 32,
         "right": 0
@@ -911,9 +746,15 @@
     {
       "type": "list",
       "props": {
-        "listStyle": "→",
-        "markerColor": "mediumseagreen",
-        "markerSize": 16,
+        "listStyle": {
+          "type": "span",
+          "children": "+",
+          "props": {
+            "color": "mediumseagreen",
+            "weight": "bold",
+            "size": 16
+          }
+        },
         "markerGap": 12,
         "gap": 6,
         "marginBottom": 16,
@@ -921,11 +762,11 @@
       },
       "children": [],
       "x": 32,
-      "y": 511,
+      "y": 413,
       "width": 416,
-      "height": 68,
+      "height": 78,
       "position": {
-        "top": 511,
+        "top": 413,
         "bottom": 16,
         "left": 32,
         "right": 0
@@ -1021,7 +862,7 @@
                       },
                       "run": {
                         "x": 32,
-                        "y": 595,
+                        "y": 507,
                         "width": 72.40999794006348,
                         "height": 19.12396240234375
                       }
@@ -1048,11 +889,11 @@
         "boxSizing": "content-box"
       },
       "x": 32,
-      "y": 595,
+      "y": 507,
       "width": 416,
       "height": 20,
       "position": {
-        "top": 595,
+        "top": 507,
         "bottom": 0,
         "left": 32,
         "right": 0
@@ -1074,18 +915,17 @@
       "type": "list",
       "props": {
         "listStyle": "disc",
-        "markerColor": "black",
         "markerGap": 8,
         "gap": 6,
         "flexDirection": "column"
       },
       "children": [],
       "x": 32,
-      "y": 614,
+      "y": 526,
       "width": 416,
-      "height": 73,
+      "height": 72,
       "position": {
-        "top": 614,
+        "top": 526,
         "bottom": 0,
         "left": 32,
         "right": 0
@@ -1107,7 +947,7 @@
   "x": 0,
   "y": 0,
   "width": 480,
-  "height": 719,
+  "height": 630,
   "position": {
     "top": 0,
     "bottom": 0,
