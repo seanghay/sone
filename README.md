@@ -21,28 +21,6 @@
 
 ---
 
-### Philosophy
-
-Sone is built around one idea: **describe what you want, not how to draw it**.
-
-Most canvas libraries are imperative — you call `fillRect`, `drawText`, `moveTo` in the right order and hope the math works out. Sone flips this. You compose a tree of nodes (`Column`, `Row`, `Text`, `Photo`) and Sone handles layout, line breaking, page splitting, and rendering automatically.
-
-A few guiding principles:
-
-**Flexbox for layout.** Sone uses [yoga-layout](https://yogalayout.dev/) — the same engine behind React Native. If you know CSS flexbox, you already know how to lay out in Sone. No coordinate math, no manual positioning.
-
-**Rich text as a first-class citizen.** Text is not just a string painted at a point. Sone supports mixed-style spans, justification, tab stops, line height, decorations, drop shadows, and per-glyph gradients — all within a single `Text()` node.
-
-**Pages are just layout.** Multi-page PDFs are not a special mode. `pageHeight` slices the same layout tree into pages. Headers and footers are ordinary nodes. Page breaks are just a prop. The mental model stays the same whether you're rendering one image or a hundred-page document.
-
-**No side effects.** Nodes are plain data. The same tree can be measured, split, and rendered multiple times. There is no mutable canvas state to reason about.
-
-**Platform-agnostic core.** The rendering engine is separated from the canvas backend via the `SoneRenderer` interface. The default backend uses `skia-canvas` in Node.js, but the same core works in the browser with a custom renderer.
-
-**Performance.** Sone does not spin up a browser or a headless Chromium instance. Rendering is done directly via [skia-canvas](https://skia-canvas.org/) — a native Node.js binding to Google's Skia graphics library. No Puppeteer, no CDP, no process overhead. A typical image renders in single-digit milliseconds and a multi-page PDF in tens of milliseconds, even for complex layouts with rich text and images.
-
----
-
 <img width=720 height=720 src="https://github.com/user-attachments/assets/9a5bce63-33ca-4086-873a-a552b147f99a" alt="">
 
 
@@ -187,6 +165,28 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 
 ```
+
+---
+
+### Philosophy
+
+Sone is built around one idea: **describe what you want, not how to draw it**.
+
+Most canvas libraries are imperative — you call `fillRect`, `drawText`, `moveTo` in the right order and hope the math works out. Sone flips this. You compose a tree of nodes (`Column`, `Row`, `Text`, `Photo`) and Sone handles layout, line breaking, page splitting, and rendering automatically.
+
+A few guiding principles:
+
+**Flexbox for layout.** Sone uses [yoga-layout](https://yogalayout.dev/) — the same engine behind React Native. If you know CSS flexbox, you already know how to lay out in Sone. No coordinate math, no manual positioning.
+
+**Rich text as a first-class citizen.** Text is not just a string painted at a point. Sone supports mixed-style spans, justification, tab stops, line height, decorations, drop shadows, and per-glyph gradients — all within a single `Text()` node.
+
+**Pages are just layout.** Multi-page PDFs are not a special mode. `pageHeight` slices the same layout tree into pages. Headers and footers are ordinary nodes. Page breaks are just a prop. The mental model stays the same whether you're rendering one image or a hundred-page document.
+
+**No side effects.** Nodes are plain data. The same tree can be measured, split, and rendered multiple times. There is no mutable canvas state to reason about.
+
+**Platform-agnostic core.** The rendering engine is separated from the canvas backend via the `SoneRenderer` interface. The default backend uses `skia-canvas` in Node.js, but the same core works in the browser with a custom renderer.
+
+**Performance.** Sone does not spin up a browser or a headless Chromium instance. Rendering is done directly via [skia-canvas](https://skia-canvas.org/) — a native Node.js binding to Google's Skia graphics library. No Puppeteer, no CDP, no process overhead. A typical image renders in single-digit milliseconds and a multi-page PDF in tens of milliseconds, even for complex layouts with rich text and images.
 
 ---
 
