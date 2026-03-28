@@ -166,6 +166,247 @@ export default nextConfig;
 
 ```
 
+---
+
+### API Reference
+
+#### `sone(node, config?)`
+
+The main render function. Returns an object with export methods.
+
+```typescript
+sone(node: SoneNode, config?: SoneRenderConfig)
+  .pdf()           // → Promise<Buffer>
+  .png()           // → Promise<Buffer>
+  .jpg(quality?)   // → Promise<Buffer>  quality: 0.0–1.0
+  .svg()           // → Promise<Buffer>
+  .webp()          // → Promise<Buffer>
+  .raw()           // → Promise<Buffer>
+  .canvas()        // → Promise<Canvas>
+  .pages()         // → Promise<Canvas[]>  one per page
+```
+
+**SoneRenderConfig**
+
+| Option | Type | Description |
+|---|---|---|
+| `width` | `number` | Exact canvas width. When set, margins inset content within it. |
+| `height` | `number` | Canvas height (auto-sized if omitted). |
+| `background` | `string` | Canvas background color. |
+| `pageHeight` | `number` | Enables multi-page output. Each page is this many pixels tall. |
+| `header` | `SoneNode \| (info) => SoneNode` | Repeating header on every page. |
+| `footer` | `SoneNode \| (info) => SoneNode` | Repeating footer on every page. |
+| `margin` | `number \| { top, right, bottom, left }` | Page margins in pixels. |
+| `lastPageHeight` | `"uniform" \| "content"` | `"content"` trims the last page to its actual height. Default `"uniform"`. |
+| `cache` | `Map` | Image cache for repeated renders. |
+
+**SonePageInfo** — passed to dynamic `header`/`footer` functions:
+
+```typescript
+{ pageNumber: number, totalPages: number }
+```
+
+---
+
+#### `Column(...children)`  /  `Row(...children)`
+
+Flex layout containers. `Column` stacks children vertically, `Row` horizontally.
+
+**Layout methods** — available on all node types:
+
+| Method | Description |
+|---|---|
+| `width(v)` / `height(v)` | Fixed dimensions. |
+| `minWidth(v)` / `maxWidth(v)` | Size constraints. |
+| `flex(v)` | `flex-grow` shorthand. |
+| `grow(v)` / `shrink(v)` | `flex-grow` / `flex-shrink`. |
+| `basis(v)` | `flex-basis`. |
+| `wrap(v)` | `flexWrap`: `"wrap"`, `"nowrap"`, `"wrap-reverse"`. |
+| `gap(v)` / `rowGap(v)` / `columnGap(v)` | Spacing between children. |
+| `padding(…v)` | CSS shorthand: 1–4 values. |
+| `margin(…v)` | CSS shorthand: 1–4 values. |
+| `alignItems(v)` | `"flex-start"` `"flex-end"` `"center"` `"stretch"` `"baseline"`. |
+| `alignSelf(v)` | Self alignment override. |
+| `alignContent(v)` | Multi-line alignment. |
+| `justifyContent(v)` | `"flex-start"` `"flex-end"` `"center"` `"space-between"` `"space-around"` `"space-evenly"`. |
+| `direction(v)` | `"row"` `"column"` `"row-reverse"` `"column-reverse"`. |
+| `position(v)` | `"relative"` `"absolute"`. |
+| `top(v)` / `right(v)` / `bottom(v)` / `left(v)` | Offset for absolute positioning. |
+| `overflow(v)` | `"visible"` `"hidden"`. |
+| `display(v)` | `"flex"` `"none"` `"contents"`. |
+| `bg(v)` | Background color or gradient string. |
+| `borderWidth(…v)` | CSS shorthand: 1–4 values (top, right, bottom, left). |
+| `borderColor(v)` | Border color. |
+| `rounded(…v)` | Border radius (CSS shorthand). |
+| `borderSmoothing(v)` | Squircle smoothing (0.0–1.0). |
+| `shadow(…v)` | CSS `box-shadow` string(s). |
+| `opacity(v)` | 0.0–1.0. |
+| `blur(v)` | Blur filter in pixels. |
+| `rotate(v)` | Rotation in degrees. |
+| `scale(v)` | Uniform scale, or `scale(x, y)`. |
+| `translateX(v)` / `translateY(v)` | Transform offset. |
+| `pageBreak(v)` | `"before"` `"after"` `"avoid"`. |
+
+---
+
+#### `Text(...children)`
+
+A block of text. Children can be plain strings or `Span` nodes.
+
+```javascript
+Text("Hello ", Span("world").color("blue").weight("bold")).size(16)
+```
+
+**Text-specific methods** (in addition to layout methods):
+
+| Method | Description |
+|---|---|
+| `size(v)` | Font size in pixels. |
+| `color(v)` | Text color or gradient. |
+| `weight(v)` | Font weight: `"normal"` `"bold"` or a number. |
+| `font(v)` | Font family name(s). |
+| `style(v)` | `"normal"` `"italic"` `"oblique"`. |
+| `lineHeight(v)` | Line height multiplier (e.g. `1.5`). |
+| `align(v)` | `"left"` `"right"` `"center"` `"justify"`. |
+| `letterSpacing(v)` | Letter spacing in pixels. |
+| `wordSpacing(v)` | Word spacing in pixels. |
+| `indent(v)` | First-line indent in pixels. |
+| `tabStops(...v)` | Tab stop x-positions in pixels. Use `\t` in content to snap. |
+| `orientation(v)` | Rotation: `0` `90` `180` `270`. Layout footprint swaps at 90°/270°. |
+| `underline(v?)` | Underline thickness. |
+| `lineThrough(v?)` | Strikethrough thickness. |
+| `overline(v?)` | Overline thickness. |
+| `highlight(v)` | Background highlight color. |
+| `strokeColor(v)` / `strokeWidth(v)` | Text outline. |
+| `dropShadow(v)` | CSS text-shadow string. |
+| `nowrap()` | Disable text wrapping. |
+
+---
+
+#### `Span(text)`
+
+An inline styled segment within `Text`. Takes a single string.
+
+```javascript
+Span("highlighted").color("orange").weight("bold").size(14)
+```
+
+Supports all text styling methods: `color`, `size`, `weight`, `font`, `style`, `letterSpacing`, `wordSpacing`, `underline`, `lineThrough`, `overline`, `highlight`, `strokeColor`, `strokeWidth`, `dropShadow`, `offsetY`.
+
+---
+
+#### `List(...items)`
+
+A vertical list container.
+
+| Method | Description |
+|---|---|
+| `listStyle(v)` | `"disc"` `"circle"` `"square"` `"decimal"` `"dash"` `"none"`, or a `Span` node for a custom marker. |
+| `markerGap(v)` | Gap between marker and item content. Default `8`. |
+| `startIndex(v)` | Starting number for numeric lists. |
+
+Plus all layout methods.
+
+#### `ListItem(...children)`
+
+A single item in a `List`. Accepts any `SoneNode` children. Supports all layout methods.
+
+```javascript
+List(
+  ListItem(Text("First item").size(12)).alignItems("center"),
+  ListItem(
+    Text("Nested").size(12).weight("bold"),
+    List(
+      ListItem(Text("Child item").size(11)),
+    ).listStyle(Span("·").color("gray")).markerGap(6),
+  ),
+).listStyle("disc").gap(8)
+```
+
+---
+
+#### `Photo(src)`
+
+Displays an image. Accepts a file path, URL, or `Uint8Array`.
+
+| Method | Description |
+|---|---|
+| `scaleType(v, align?)` | `"cover"` `"contain"` `"fill"`. Optional alignment: `"start"` `"center"` `"end"`. |
+| `flipHorizontal(v?)` | Mirror horizontally. |
+| `flipVertical(v?)` | Mirror vertically. |
+
+Plus all layout methods (`width`, `height`, `rounded`, etc.).
+
+---
+
+#### `Path(d)`
+
+Draws an SVG path string.
+
+| Method | Description |
+|---|---|
+| `fill(v)` | Fill color. |
+| `fillRule(v)` | `"evenodd"` or `"nonzero"`. |
+| `stroke(v)` | Stroke color. |
+| `strokeWidth(v)` | Stroke width. |
+| `strokeLineCap(v)` | `"butt"` `"round"` `"square"`. |
+| `strokeLineJoin(v)` | `"bevel"` `"miter"` `"round"`. |
+| `strokeDashArray(...v)` | Dash pattern, e.g. `strokeDashArray(5, 5)`. |
+| `strokeDashOffset(v)` | Dash offset. |
+| `scalePath(v)` | Scale the path geometry. |
+
+Plus all layout methods.
+
+---
+
+#### `Table(...rows)` / `TableRow(...cells)` / `TableCell(...children)`
+
+Table layout nodes.
+
+```javascript
+Table(
+  TableRow(
+    TableCell(Text("Name").weight("bold")),
+    TableCell(Text("Score").weight("bold")),
+  ),
+  TableRow(
+    TableCell(Text("Alice")),
+    TableCell(Text("98")),
+  ),
+).spacing(4)
+```
+
+- **`Table`**: `.spacing(v)` — cell spacing.
+- **`TableCell`**: `.colspan(v)` / `.rowspan(v)` — spanning.
+- All three support layout methods.
+
+---
+
+#### `PageBreak()`
+
+Inserts an explicit page break. Only has an effect when `pageHeight` is set.
+
+```javascript
+Column(
+  SectionOne,
+  PageBreak(),
+  SectionTwo,
+)
+```
+
+---
+
+#### `Font`
+
+```javascript
+await Font.load("MyFont", "/path/to/font.ttf")
+await Font.load("MyFont", ["/path/to/bold.ttf"], { weight: "bold" })
+Font.has("MyFont")   // → boolean
+await Font.unload("MyFont")
+```
+
+---
+
 ### Acknowledgements
 
 - Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
