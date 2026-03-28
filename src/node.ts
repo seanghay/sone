@@ -127,10 +127,10 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
         for (let i = 1; i < pageCanvases.length; i++) {
           const pc = pageCanvases[i] as unknown as Canvas;
           const pageCtx = root.newPage(pc.width, pc.height);
-          const img = await skia.loadImage(
-            Buffer.from(await pc.toBuffer("png")),
-          );
-          pageCtx.drawImage(img as unknown as HTMLImageElement, 0, 0);
+          // drawCanvas is a skia-canvas extension that composites natively
+          // without rasterising to a bitmap first, preserving vector quality.
+          // biome-ignore lint/suspicious/noExplicitAny: skia-canvas extension
+          (pageCtx as any).drawCanvas(pc, 0, 0);
         }
         return root.toBuffer("pdf", options);
       }

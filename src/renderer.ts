@@ -736,6 +736,20 @@ export function createLayoutNode(
   return yogaNode;
 }
 
+/** Per-page information passed to dynamic header/footer functions. */
+export interface SonePageInfo {
+  /** 1-based page number */
+  pageNumber: number;
+  /** Total number of pages in the document */
+  totalPages: number;
+}
+
+/**
+ * A header or footer value: either a static node (same on every page) or a
+ * function that receives page info and returns a node (rendered per-page).
+ */
+export type SoneHeaderFooter = SoneNode | ((info: SonePageInfo) => SoneNode);
+
 /**
  * Configuration for rendering
  */
@@ -750,10 +764,31 @@ export interface SoneRenderConfig {
   cache?: Map<string | Uint8Array, SoneImage>;
   /** When set, enables pagination — each page is this many pixels tall */
   pageHeight?: number;
-  /** Node rendered at the top of every page. Width matches main content automatically. */
-  header?: SoneNode;
-  /** Node rendered at the bottom of every page. Width matches main content automatically. */
-  footer?: SoneNode;
+  /**
+   * Node (or function returning a node) rendered at the top of every page.
+   * When a function, it receives `{ pageNumber, totalPages }` per page.
+   */
+  header?: SoneHeaderFooter;
+  /**
+   * Node (or function returning a node) rendered at the bottom of every page.
+   * When a function, it receives `{ pageNumber, totalPages }` per page.
+   */
+  footer?: SoneHeaderFooter;
+  /**
+   * Page margins (pixels). A single number applies to all sides; an object
+   * sets each side individually. Left/right expand the canvas; top/bottom
+   * add space between the header/footer bands and the content area.
+   */
+  margin?:
+    | number
+    | { top?: number; right?: number; bottom?: number; left?: number };
+  /**
+   * Controls the height of the last page.
+   * - `"uniform"` (default) — every page canvas is the same height; the last
+   *   page has whitespace below the content.
+   * - `"content"` — the last page canvas is only as tall as its content.
+   */
+  lastPageHeight?: "uniform" | "content";
 }
 
 export async function calculateLayout(
@@ -858,6 +893,7 @@ export function drawOnCanvas(
   config?: SoneRenderConfig,
   offsetY?: number,
   clipRegion?: { top: number; height: number },
+  offsetX?: number,
 ) {
   const ctx = canvas.getContext("2d")!;
 
@@ -866,7 +902,7 @@ export function drawOnCanvas(
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  if (offsetY != null || clipRegion != null) {
+  if (offsetY != null || clipRegion != null || offsetX != null) {
     ctx.save();
     ctx.beginPath();
     ctx.rect(
@@ -876,7 +912,9 @@ export function drawOnCanvas(
       clipRegion?.height ?? canvas.height,
     );
     ctx.clip();
-    if (offsetY) ctx.translate(0, offsetY);
+    const tx = offsetX ?? 0;
+    const ty = offsetY ?? 0;
+    if (tx !== 0 || ty !== 0) ctx.translate(tx, ty);
   }
 
   function draw(node: SoneNode, layout: Node, x: number, y: number) {
@@ -939,7 +977,7 @@ export function drawOnCanvas(
   // draw
   draw(compiledNode, layout, 0, 0);
 
-  if (offsetY != null || clipRegion != null) {
+  if (offsetY != null || clipRegion != null || offsetX != null) {
     ctx.restore();
   }
 }
@@ -1002,7 +1040,59 @@ function computePageBreaks(
         childProps?.pageBreak === "avoid" || LEAF_TYPES.has(child.type);
       const childHeight = childAbsBottom - childAbsTop;
 
-      if (isAtomic) {
+      if (child.type === "text") {
+        // Text paragraphs: split at line boundaries so no line is clipped in
+        // half. Walk each line; when a line would cross the page boundary,
+        // break immediately before it.
+        const textBlocks = (child as TextNode).props?.blocks;
+        if (textBlocks && textBlocks.length > 0) {
+          const insetTop =
+            childLayout.getComputedPadding(Edge.Top) +
+            childLayout.getComputedBorder(Edge.Top);
+          let paragraphLocalY = 0;
+          for (const { paragraph } of textBlocks) {
+            // paragraph.offsetY is the lineHeight centering adjustment
+            let lineLocalY = paragraphLocalY + paragraph.offsetY;
+            for (const line of paragraph.lines) {
+              const lineAbsBottom =
+                childAbsTop + insetTop + lineLocalY + line.height;
+              if (lineAbsBottom > state.currentPageEnd) {
+                // Floor to integer so page canvas dimensions are whole pixels
+                const lineAbsTop = Math.floor(
+                  childAbsTop + insetTop + lineLocalY,
+                );
+                const lastBreak = state.breaks[state.breaks.length - 1] ?? 0;
+                if (lineAbsTop > lastBreak) {
+                  state.breaks.push(lineAbsTop);
+                  state.currentPageEnd = lineAbsTop + pageHeight;
+                }
+                // Advance past lines that are taller than one page
+                while (lineAbsBottom > state.currentPageEnd) {
+                  state.breaks.push(state.currentPageEnd);
+                  state.currentPageEnd += pageHeight;
+                }
+              }
+              lineLocalY += line.height;
+            }
+            paragraphLocalY += paragraph.height;
+          }
+        } else {
+          // No blocks yet (shouldn't happen after layout) — fall back to atomic
+          if (childAbsTop < state.currentPageEnd && childHeight <= pageHeight) {
+            state.breaks.push(state.currentPageEnd);
+            state.currentPageEnd += pageHeight;
+          } else {
+            while (childAbsTop >= state.currentPageEnd) {
+              state.breaks.push(state.currentPageEnd);
+              state.currentPageEnd += pageHeight;
+            }
+          }
+          while (childAbsBottom > state.currentPageEnd) {
+            state.breaks.push(state.currentPageEnd);
+            state.currentPageEnd += pageHeight;
+          }
+        }
+      } else if (isAtomic) {
         if (childAbsTop < state.currentPageEnd) {
           // Straddles: break before if it fits on a fresh page
           if (childHeight <= pageHeight) {
@@ -1034,8 +1124,29 @@ function computePageBreaks(
   }
 
   walk(rootLayout, rootNode, 0);
-  // Deduplicate (explicit breaks can coincide with natural breaks)
-  return [...new Set(state.breaks)];
+  // Sort, deduplicate, and collapse breaks that are within 4 px of each other.
+  // This prevents hairline pages caused by a text-line break landing just
+  // before an explicit PageBreak() node (which sits a few gap-pixels later).
+  const sorted = [...new Set(state.breaks)].sort((a, b) => a - b);
+  const collapsed: number[] = [];
+  for (const b of sorted) {
+    if (collapsed.length === 0 || b - collapsed[collapsed.length - 1] > 20) {
+      collapsed.push(b);
+    }
+  }
+  return collapsed;
+}
+
+function parseMargin(margin: SoneRenderConfig["margin"]) {
+  if (margin == null) return { top: 0, right: 0, bottom: 0, left: 0 };
+  if (typeof margin === "number")
+    return { top: margin, right: margin, bottom: margin, left: margin };
+  return {
+    top: margin.top ?? 0,
+    right: margin.right ?? 0,
+    bottom: margin.bottom ?? 0,
+    left: margin.left ?? 0,
+  };
 }
 
 export async function renderPages(
@@ -1053,38 +1164,69 @@ export async function renderPages(
   const totalHeight = layout.getComputedHeight();
   const pageHeight = config?.pageHeight ?? totalHeight;
 
-  // ── 2. Layout header/footer at the same width ─────────────────────────────
-  // Pass width=totalWidth and clear header/footer to avoid infinite recursion
+  // ── 2. Resolve margins ────────────────────────────────────────────────────
+  const mg = parseMargin(config?.margin);
+  // Canvas is wider than content by left+right margins
+  const canvasWidth = totalWidth + mg.left + mg.right;
+
+  // ── 3. Layout header/footer at full canvas width ──────────────────────────
+  // Clear header/footer in hfConfig to prevent infinite recursion.
   const hfConfig: SoneRenderConfig = {
     ...config,
-    width: totalWidth,
+    width: canvasWidth,
     height: undefined,
     header: undefined,
     footer: undefined,
+    margin: undefined,
   };
 
+  // Resolve a header/footer value to a SoneNode, calling the function if needed.
+  function resolveHF(hf: SoneHeaderFooter, info: SonePageInfo): SoneNode {
+    return typeof hf === "function" ? hf(info) : hf;
+  }
+  // Placeholder used for the height-probe pass (function-based header/footer).
+  const PROBE: SonePageInfo = { pageNumber: 1, totalPages: 1 };
+
+  // Measure header height. For function-based headers, probe with PROBE then
+  // free the layout — actual per-page layouts are computed inside the loop.
   let headerH = 0;
   let headerLayout: Node | undefined;
   let headerCompiled: SoneNode | undefined;
   if (config?.header != null) {
-    const r = await calculateLayout(config.header, renderer, hfConfig);
+    const r = await calculateLayout(
+      resolveHF(config.header, PROBE),
+      renderer,
+      hfConfig,
+    );
     headerH = r.layout.getComputedHeight();
-    headerLayout = r.layout;
-    headerCompiled = r.compiledNode;
+    if (typeof config.header !== "function") {
+      headerLayout = r.layout;
+      headerCompiled = r.compiledNode;
+    } else {
+      r.layout.freeRecursive();
+    }
   }
 
   let footerH = 0;
   let footerLayout: Node | undefined;
   let footerCompiled: SoneNode | undefined;
   if (config?.footer != null) {
-    const r = await calculateLayout(config.footer, renderer, hfConfig);
+    const r = await calculateLayout(
+      resolveHF(config.footer, PROBE),
+      renderer,
+      hfConfig,
+    );
     footerH = r.layout.getComputedHeight();
-    footerLayout = r.layout;
-    footerCompiled = r.compiledNode;
+    if (typeof config.footer !== "function") {
+      footerLayout = r.layout;
+      footerCompiled = r.compiledNode;
+    } else {
+      r.layout.freeRecursive();
+    }
   }
 
-  // ── 3. Page breaks use content-area height (excluding header + footer) ────
-  const contentPageHeight = pageHeight - headerH - footerH;
+  // ── 4. Page breaks use content-area height (excluding header/footer/margins)
+  const contentPageHeight = pageHeight - headerH - footerH - mg.top - mg.bottom;
   if (contentPageHeight <= 0) {
     layout.freeRecursive();
     headerLayout?.freeRecursive();
@@ -1094,54 +1236,91 @@ export async function renderPages(
 
   const pageBreaks = computePageBreaks(layout, compiledNode, contentPageHeight);
   const pageStarts = [0, ...pageBreaks];
+  const totalPages = pageStarts.length;
 
   const canvases: HTMLCanvasElement[] = [];
-  const hasOverlay = headerH > 0 || footerH > 0;
+  const hasClip = headerH > 0 || footerH > 0 || mg.top > 0 || mg.bottom > 0;
 
-  for (let i = 0; i < pageStarts.length; i++) {
+  for (let i = 0; i < totalPages; i++) {
+    const info: SonePageInfo = { pageNumber: i + 1, totalPages };
     const contentStart = pageStarts[i];
     const nextStart = pageStarts[i + 1] ?? totalHeight;
-    const contentH = nextStart - contentStart;
-    const canvasHeight = headerH + contentH + footerH;
+    const actualContentH = nextStart - contentStart;
+    const isLastPage = i === totalPages - 1;
+    const contentH =
+      isLastPage && config?.lastPageHeight === "content"
+        ? actualContentH
+        : contentPageHeight;
+    const canvasHeight = headerH + mg.top + contentH + mg.bottom + footerH;
 
-    const canvas = renderer.createCanvas(totalWidth, canvasHeight);
+    const canvas = renderer.createCanvas(canvasWidth, canvasHeight);
 
-    // Draw content band: shift down by headerH, scroll up by contentStart
+    // Draw content band: shift right by marginLeft, down by headerH+marginTop,
+    // scroll up by contentStart
     drawOnCanvas(
       canvas,
       compiledNode,
       renderer,
       layout,
       config,
-      headerH - contentStart,
-      hasOverlay ? { top: headerH, height: contentH } : undefined,
+      headerH + mg.top - contentStart,
+      hasClip ? { top: headerH + mg.top, height: actualContentH } : undefined,
+      mg.left,
     );
 
-    // Draw header at top (no background repaint)
-    if (headerCompiled != null && headerLayout != null) {
+    // Resolve per-page header layout (or reuse static layout)
+    let hLayout = headerLayout;
+    let hCompiled = headerCompiled;
+    if (config?.header != null && typeof config.header === "function") {
+      const r = await calculateLayout(
+        resolveHF(config.header, info),
+        renderer,
+        hfConfig,
+      );
+      hLayout = r.layout;
+      hCompiled = r.compiledNode;
+    }
+
+    // Draw header at top spanning full canvas width (no background repaint)
+    if (hCompiled != null && hLayout != null) {
       drawOnCanvas(
         canvas,
-        headerCompiled,
+        hCompiled,
         renderer,
-        headerLayout,
+        hLayout,
         { ...config, background: undefined },
         0,
         { top: 0, height: headerH },
       );
     }
+    if (typeof config?.header === "function") hLayout?.freeRecursive();
 
-    // Draw footer at bottom: translate footer layout (y=0) down to its band
-    if (footerCompiled != null && footerLayout != null) {
+    // Resolve per-page footer layout (or reuse static layout)
+    let fLayout = footerLayout;
+    let fCompiled = footerCompiled;
+    if (config?.footer != null && typeof config.footer === "function") {
+      const r = await calculateLayout(
+        resolveHF(config.footer, info),
+        renderer,
+        hfConfig,
+      );
+      fLayout = r.layout;
+      fCompiled = r.compiledNode;
+    }
+
+    // Draw footer at bottom spanning full canvas width
+    if (fCompiled != null && fLayout != null) {
       drawOnCanvas(
         canvas,
-        footerCompiled,
+        fCompiled,
         renderer,
-        footerLayout,
+        fLayout,
         { ...config, background: undefined },
-        headerH + contentH,
-        { top: headerH + contentH, height: footerH },
+        headerH + mg.top + contentH + mg.bottom,
+        { top: headerH + mg.top + contentH + mg.bottom, height: footerH },
       );
     }
+    if (typeof config?.footer === "function") fLayout?.freeRecursive();
 
     canvases.push(canvas);
   }

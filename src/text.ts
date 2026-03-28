@@ -185,13 +185,6 @@ export function createMultilineParagraph(
         };
 
         lines.push(currentLine);
-
-        // Trim leading whitespace for new line
-        const trimmedText = text.trimStart();
-        if (trimmedText !== text) {
-          pushSegments(currentLine, trimmedText, props, baseProps.tabStops);
-          continue;
-        }
       }
 
       pushSegments(currentLine, text, props, baseProps.tabStops);
@@ -223,33 +216,6 @@ export function createMultilineParagraph(
         currentLine.width + segmentWidth > maxWidth &&
         currentLine.segments.length > 0
       ) {
-        // Trim trailing whitespace from last segment of current line
-        if (currentLine.segments.length > 0) {
-          const lastSegment =
-            currentLine.segments[currentLine.segments.length - 1];
-
-          const trimmedText = lastSegment.text.trimEnd();
-          if (trimmedText !== lastSegment.text && trimmedText.length > 0) {
-            const trimmedMetrics = measureText(trimmedText, lastSegment.props);
-            const trimmedWidth = trimmedMetrics.width;
-            const trimmedHeight =
-              trimmedMetrics.fontBoundingBoxAscent +
-              trimmedMetrics.fontBoundingBoxDescent;
-
-            // Update last segment with trimmed text
-            lastSegment.text = trimmedText;
-            lastSegment.metrics = trimmedMetrics;
-            lastSegment.width = trimmedWidth;
-            lastSegment.height = trimmedHeight;
-
-            // Recalculate line width
-            currentLine.width = currentLine.segments.reduce(
-              (sum, seg) => sum + seg.width,
-              0,
-            );
-          }
-        }
-
         // Start new line
         currentLine = {
           baseline: 0,
@@ -260,18 +226,6 @@ export function createMultilineParagraph(
         };
 
         lines.push(currentLine);
-
-        // Trim leading whitespace for new line
-        const trimmedText = segmentText.trimStart();
-        if (trimmedText !== segmentText) {
-          if (trimmedText.length === 0) {
-            lastBreakpoint = breakpoint;
-            continue;
-          }
-          pushSegments(currentLine, trimmedText, props, baseProps.tabStops);
-          lastBreakpoint = breakpoint;
-          continue;
-        }
       }
 
       pushSegments(currentLine, segmentText, props, baseProps.tabStops);
@@ -294,32 +248,6 @@ export function createMultilineParagraph(
         currentLine.width + segmentWidth > maxWidth &&
         currentLine.segments.length > 0
       ) {
-        // Trim trailing whitespace from last segment of current line
-        if (currentLine.segments.length > 0) {
-          const lastSegment =
-            currentLine.segments[currentLine.segments.length - 1];
-          const trimmedText = lastSegment.text.trimEnd();
-          if (trimmedText !== lastSegment.text && trimmedText.length > 0) {
-            const trimmedMetrics = measureText(trimmedText, lastSegment.props);
-            const trimmedWidth = trimmedMetrics.width;
-            const trimmedHeight =
-              trimmedMetrics.fontBoundingBoxAscent +
-              trimmedMetrics.fontBoundingBoxDescent;
-
-            // Update last segment with trimmed text
-            lastSegment.text = trimmedText;
-            lastSegment.metrics = trimmedMetrics;
-            lastSegment.width = trimmedWidth;
-            lastSegment.height = trimmedHeight;
-
-            // Recalculate line width
-            currentLine.width = currentLine.segments.reduce(
-              (sum, seg) => sum + seg.width,
-              0,
-            );
-          }
-        }
-
         // Start new line
         currentLine = {
           baseline: 0,
@@ -330,37 +258,10 @@ export function createMultilineParagraph(
         };
 
         lines.push(currentLine);
-
-        // Trim leading whitespace for new line
-        const trimmedText = remainingText.trimStart();
-        if (trimmedText !== remainingText) {
-          if (trimmedText.length === 0) {
-            continue;
-          }
-          pushSegments(currentLine, trimmedText, props, baseProps.tabStops);
-          continue;
-        }
       }
 
       pushSegments(currentLine, remainingText, props, baseProps.tabStops);
     }
-  }
-
-  // filter out the leading and trailing white spaces
-  for (const line of lines) {
-    const segments: SoneParagraphLineSegment[] = [];
-    for (let i = 0; i < line.segments.length; i++) {
-      const segment = line.segments[i];
-      const isSpace = isWhitespace(segment.text);
-      if (isSpace) {
-        if (i === line.segments.length - 1 || i === 0) {
-          line.width -= segment.width;
-          continue;
-        }
-      }
-      segments.push(segment);
-    }
-    line.segments = segments;
   }
 
   let linePosition = 0;
