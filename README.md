@@ -170,13 +170,13 @@ export default nextConfig;
 
 ### Philosophy
 
-Sone is built around one idea: **describe what you want, not how to draw it**.
+Inspired by Flutter and SwiftUI, Sone lets you focus on **designing** instead of calculating positions manually.
 
-Most canvas libraries are imperative — you call `fillRect`, `drawText`, `moveTo` in the right order and hope the math works out. Sone flips this. You compose a tree of nodes (`Column`, `Row`, `Text`, `Photo`) and Sone handles layout, line breaking, page splitting, and rendering automatically.
+You describe your layout as a tree of composable nodes — `Column`, `Row`, `Text`, `Photo` — and Sone figures out where everything goes. No coordinate math, no measuring text by hand, no fighting with canvas state.
 
-A few guiding principles:
+Built for real-world document generation: **invoices, letters, open graph images, reports, resumes**, and anything else that needs to look good and be produced at scale.
 
-**Flexbox for layout.** Sone uses [yoga-layout](https://yogalayout.dev/) — the same engine behind React Native. If you know CSS flexbox, you already know how to lay out in Sone. No coordinate math, no manual positioning.
+**Flexbox for layout.** Sone uses [yoga-layout](https://yogalayout.dev/) — the same engine behind React Native. If you know CSS flexbox, you already know how to lay out in Sone.
 
 **Rich text as a first-class citizen.** Text is not just a string painted at a point. Sone supports mixed-style spans, justification, tab stops, line height, decorations, drop shadows, and per-glyph gradients — all within a single `Text()` node.
 
