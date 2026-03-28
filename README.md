@@ -170,23 +170,19 @@ export default nextConfig;
 
 ### Philosophy
 
-Inspired by Flutter and SwiftUI, Sone lets you focus on **designing** instead of calculating positions manually.
+Inspired by Flutter and SwiftUI, Sone lets you focus on **designing** instead of calculating positions manually. Describe your layout as a tree of composable nodes — `Column`, `Row`, `Text`, `Photo` — and Sone figures out where everything goes.
 
-You describe your layout as a tree of composable nodes — `Column`, `Row`, `Text`, `Photo` — and Sone figures out where everything goes. No coordinate math, no measuring text by hand, no fighting with canvas state.
+Built for real-world document generation: **invoices, letters, open graph images, reports, resumes**, and anything that needs to look good at scale.
 
-Built for real-world document generation: **invoices, letters, open graph images, reports, resumes**, and anything else that needs to look good and be produced at scale.
+**Just JavaScript, no preprocessors.** Sone does not use JSX or HTML. JSX requires a build step and transpiler config. HTML requires a full CSS parser — and any missing feature becomes a confusing gap for users. Sone's API is plain function calls that work anywhere JavaScript runs, with no setup beyond `npm install`.
 
-**Flexbox for layout.** Sone uses [yoga-layout](https://yogalayout.dev/) — the same engine behind React Native. If you know CSS flexbox, you already know how to lay out in Sone.
+**Flexbox for layout.** Powered by [yoga-layout](https://yogalayout.dev/) — the same engine behind React Native. If you know CSS flexbox, you already know Sone's layout model.
 
-**Rich text as a first-class citizen.** Text is not just a string painted at a point. Sone supports mixed-style spans, justification, tab stops, line height, decorations, drop shadows, and per-glyph gradients — all within a single `Text()` node.
+**Rich text as a first-class citizen.** Mixed-style spans, justification, tab stops, decorations, drop shadows, and per-glyph gradients — all within a single `Text()` node.
 
-**Pages are just layout.** Multi-page PDFs are not a special mode. `pageHeight` slices the same layout tree into pages. Headers and footers are ordinary nodes. Page breaks are just a prop. The mental model stays the same whether you're rendering one image or a hundred-page document.
+**Pages are just layout.** `pageHeight` slices the same node tree into pages. Headers, footers, and page breaks are ordinary nodes. No special mode, no different API.
 
-**No side effects.** Nodes are plain data. The same tree can be measured, split, and rendered multiple times. There is no mutable canvas state to reason about.
-
-**Platform-agnostic core.** The rendering engine is separated from the canvas backend via the `SoneRenderer` interface. The default backend uses `skia-canvas` in Node.js, but the same core works in the browser with a custom renderer.
-
-**Performance.** Sone does not spin up a browser or a headless Chromium instance. Rendering is done directly via [skia-canvas](https://skia-canvas.org/) — a native Node.js binding to Google's Skia graphics library. No Puppeteer, no CDP, no process overhead. A typical image renders in single-digit milliseconds and a multi-page PDF in tens of milliseconds, even for complex layouts with rich text and images.
+**Performance.** No browser, no Puppeteer, no CDP. Rendering goes directly through [skia-canvas](https://skia-canvas.org/) — a native Skia binding for Node.js. Images render in single-digit milliseconds, multi-page PDFs in tens of milliseconds.
 
 ---
 
