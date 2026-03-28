@@ -566,12 +566,16 @@ export function createLayoutNode(
 
       const baseProps = klona(props);
 
+      const isRotated = props.orientation === 90 || props.orientation === 270;
+      // For 90°/270°, use the height constraint as the text wrapping width
+      const textWrapWidth = isRotated ? h : width;
+
       // Helper function to measure blocks and return dimensions
       const measureBlocks = (fontSize: number) => {
         const testProps = { ...baseProps, size: fontSize };
         const blocks = createParagraph(
           children,
-          width,
+          textWrapWidth,
           testProps,
           renderer.measureText,
           renderer.breakIterator,
@@ -593,7 +597,7 @@ export function createLayoutNode(
       // Initial measurement
       let blocks = createParagraph(
         children,
-        width,
+        textWrapWidth,
         baseProps,
         renderer.measureText,
         renderer.breakIterator,
@@ -656,6 +660,10 @@ export function createLayoutNode(
       }
 
       node.props.blocks = blocks;
+      // For 90°/270°, swap width/height so Yoga assigns the rotated layout footprint
+      if (isRotated) {
+        return { width: blockHeight, height: blockWidth };
+      }
       return { width: blockWidth, height: blockHeight };
     };
 

@@ -419,6 +419,9 @@ export interface TextProps extends SpanProps, LayoutProps {
 
   autofit?: boolean;
 
+  /** text orientation in degrees — affects layout dimensions */
+  orientation?: 0 | 90 | 180 | 270;
+
   /** resolved paragraph (internal) */
   blocks?: SoneParagraphBlock[];
 }
@@ -491,6 +494,7 @@ export interface TextPropsBuilder<T>
   hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T;
   tabStops(...values: number[]): T;
   autofit(value?: Required<TextProps["autofit"]>): T;
+  orientation(value: 0 | 90 | 180 | 270): T;
 }
 
 /**
@@ -1068,6 +1072,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     tabStops(...values: number[]): T {
       props.tabStops = values;
+      return this as unknown as T;
+    },
+    orientation(value: 0 | 90 | 180 | 270): T {
+      props.orientation = value;
       return this as unknown as T;
     },
     props,

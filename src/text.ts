@@ -676,30 +676,83 @@ export function drawTextNode(
   const { blocks } = props;
   if (blocks == null) return;
 
+  const orientation = props.orientation ?? 0;
+
+  if (orientation !== 0) {
+    ctx.save();
+    const w = layout.getComputedWidth();
+    const h = layout.getComputedHeight();
+    switch (orientation) {
+      case 90:
+        ctx.translate(x + w, y);
+        ctx.rotate(Math.PI / 2);
+        break;
+      case 180:
+        ctx.translate(x + w, y + h);
+        ctx.rotate(Math.PI);
+        break;
+      case 270:
+        ctx.translate(x, y + h);
+        ctx.rotate(-Math.PI / 2);
+        break;
+    }
+    x = 0;
+    y = 0;
+  }
+
+  // For 90°/270°, remap padding/border edges to match the local drawing frame.
+  //   90°  CW:  local +x→screen down,  local +y→screen left
+  //             local x-start = screen top  (Edge.Top)
+  //             local y-start = screen right (Edge.Right)
+  //   270° CCW: local +x→screen up,   local +y→screen right
+  //             local x-start = screen bottom (Edge.Bottom)
+  //             local y-start = screen left   (Edge.Left)
+  const edgeLocalLeft =
+    orientation === 90
+      ? Edge.Top
+      : orientation === 270
+        ? Edge.Bottom
+        : Edge.Left;
+  const edgeLocalRight =
+    orientation === 90
+      ? Edge.Bottom
+      : orientation === 270
+        ? Edge.Top
+        : Edge.Right;
+  const edgeLocalTop =
+    orientation === 90
+      ? Edge.Right
+      : orientation === 270
+        ? Edge.Left
+        : Edge.Top;
+
   const spaceX =
-    layout.getComputedBorder(Edge.Left) +
-    layout.getComputedBorder(Edge.Right) +
-    layout.getComputedPadding(Edge.Left) +
-    layout.getComputedPadding(Edge.Right);
+    layout.getComputedBorder(edgeLocalLeft) +
+    layout.getComputedBorder(edgeLocalRight) +
+    layout.getComputedPadding(edgeLocalLeft) +
+    layout.getComputedPadding(edgeLocalRight);
 
   let paragraphOffsetY = 0;
 
   for (const { paragraph } of blocks) {
-    paragraph.width =
-      Math.max(layout.getComputedWidth(), paragraph.width) - spaceX;
+    const containerWidth =
+      orientation === 90 || orientation === 270
+        ? layout.getComputedHeight()
+        : layout.getComputedWidth();
+    paragraph.width = Math.max(containerWidth, paragraph.width) - spaceX;
 
     const paddingLeft =
       props.boxSizing === "content-box"
-        ? layout.getComputedPadding(Edge.Left)
+        ? layout.getComputedPadding(edgeLocalLeft)
         : 0;
 
     const paddingTop =
       props.boxSizing === "content-box"
-        ? layout.getComputedPadding(Edge.Top)
+        ? layout.getComputedPadding(edgeLocalTop)
         : 0;
 
-    const borderLeft = layout.getComputedBorder(Edge.Left);
-    const borderTop = layout.getComputedBorder(Edge.Top);
+    const borderLeft = layout.getComputedBorder(edgeLocalLeft);
+    const borderTop = layout.getComputedBorder(edgeLocalTop);
 
     const left = paddingLeft + borderLeft;
     const top = paddingTop + borderTop;
@@ -899,5 +952,9 @@ export function drawTextNode(
 
       offsetY += line.height;
     }
+  }
+
+  if (orientation !== 0) {
+    ctx.restore();
   }
 }
