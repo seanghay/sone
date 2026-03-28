@@ -6,6 +6,32 @@ import { createGradientFillStyleList } from "./gradient.ts";
 import type { SoneRenderer } from "./renderer.ts";
 import { applySpanProps, indicesOf, isWhitespace } from "./utils.ts";
 
+function nextTabStop(tabStops: number[], currentX: number): number {
+  for (const stop of tabStops) {
+    if (stop > currentX) return stop;
+  }
+  return currentX + 40;
+}
+
+function measureTabExpandedWidth(
+  text: string,
+  props: SpanProps,
+  tabStops: number[] | undefined,
+  currentX: number,
+  measureText: SoneRenderer["measureText"],
+): number {
+  if (!tabStops?.length || !text.includes("\t")) {
+    return measureText(text, props).width;
+  }
+  const parts = text.split("\t");
+  let x = currentX;
+  for (let i = 0; i < parts.length; i++) {
+    if (parts[i].length > 0) x += measureText(parts[i], props).width;
+    if (i < parts.length - 1) x = nextTabStop(tabStops, x);
+  }
+  return x - currentX;
+}
+
 export interface SoneParagraphLineRun {
   x: number;
   y: number;
@@ -20,6 +46,8 @@ export interface SoneParagraphLineSegment {
   width: number;
   height: number;
   run?: SoneParagraphLineRun;
+  /** true for synthetic tab-stop segments — must not be merged with adjacent segments */
+  isTab?: boolean;
 }
 
 export interface SoneParagraphLine {
@@ -53,6 +81,67 @@ export function createMultilineParagraph(
       ? 1.0
       : baseProps.lineHeight;
 
+  function pushSegments(
+    line: SoneParagraphLine,
+    text: string,
+    segProps: SpanProps,
+    tabStops: number[] | undefined,
+  ): void {
+    if (!tabStops?.length || !text.includes("\t")) {
+      const m = measureText(text, segProps);
+      const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+      line.segments.push({
+        metrics: m,
+        props: segProps,
+        text,
+        width: m.width,
+        height: h,
+      });
+      line.width += m.width;
+      line.height = Math.max(line.height, h);
+      line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
+      return;
+    }
+
+    const parts = text.split("\t");
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i];
+      if (part.length > 0) {
+        const m = measureText(part, segProps);
+        const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+        line.segments.push({
+          metrics: m,
+          props: segProps,
+          text: part,
+          width: m.width,
+          height: h,
+        });
+        line.width += m.width;
+        line.height = Math.max(line.height, h);
+        line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
+      }
+      if (i < parts.length - 1) {
+        const tabWidth = Math.max(
+          nextTabStop(tabStops, line.width) - line.width,
+          4,
+        );
+        const m = measureText(" ", segProps);
+        const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+        line.segments.push({
+          metrics: m,
+          props: segProps,
+          text: "",
+          width: tabWidth,
+          height: h,
+          isTab: true,
+        });
+        line.width += tabWidth;
+        line.height = Math.max(line.height, h);
+        line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
+      }
+    }
+  }
+
   const lines: SoneParagraphLine[] = [];
 
   let currentLine: SoneParagraphLine = {
@@ -73,10 +162,13 @@ export function createMultilineParagraph(
 
     // If no breakpoints, treat entire text as one segment
     if (spanBreakpoints.length === 0) {
-      const metrics = measureText(text, props);
-      let segmentWidth = metrics.width;
-      let segmentHeight =
-        metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+      const segmentWidth = measureTabExpandedWidth(
+        text,
+        props,
+        baseProps.tabStops,
+        currentLine.width,
+        measureText,
+      );
 
       // Check if we need to wrap to new line
       if (
@@ -97,49 +189,12 @@ export function createMultilineParagraph(
         // Trim leading whitespace for new line
         const trimmedText = text.trimStart();
         if (trimmedText !== text) {
-          const trimmedMetrics = measureText(trimmedText, props);
-          segmentWidth = trimmedMetrics.width;
-          segmentHeight =
-            trimmedMetrics.fontBoundingBoxAscent +
-            trimmedMetrics.fontBoundingBoxDescent;
-
-          // Add trimmed segment to current line
-          const segment: SoneParagraphLineSegment = {
-            metrics: trimmedMetrics,
-            props,
-            text: trimmedText,
-            width: segmentWidth,
-            height: segmentHeight,
-          };
-
-          currentLine.segments.push(segment);
-          currentLine.width += segmentWidth;
-          currentLine.height = Math.max(currentLine.height, segmentHeight);
-          currentLine.baseline = Math.max(
-            currentLine.baseline,
-            trimmedMetrics.fontBoundingBoxAscent,
-          );
+          pushSegments(currentLine, trimmedText, props, baseProps.tabStops);
           continue;
         }
       }
 
-      // Add segment to current line
-      const segment: SoneParagraphLineSegment = {
-        metrics,
-        props,
-        text,
-        width: segmentWidth,
-        height: segmentHeight,
-      };
-
-      currentLine.segments.push(segment);
-      currentLine.width += segmentWidth;
-      currentLine.height = Math.max(currentLine.height, segmentHeight);
-      currentLine.baseline = Math.max(
-        currentLine.baseline,
-        metrics.fontBoundingBoxAscent,
-      );
-
+      pushSegments(currentLine, text, props, baseProps.tabStops);
       continue;
     }
 
@@ -155,10 +210,13 @@ export function createMultilineParagraph(
         continue;
       }
 
-      const metrics = measureText(segmentText, props);
-      const segmentWidth = metrics.width;
-      const segmentHeight =
-        metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+      const segmentWidth = measureTabExpandedWidth(
+        segmentText,
+        props,
+        baseProps.tabStops,
+        currentLine.width,
+        measureText,
+      );
 
       // Check if we need to wrap to new line
       if (
@@ -210,61 +268,26 @@ export function createMultilineParagraph(
             lastBreakpoint = breakpoint;
             continue;
           }
-          const trimmedMetrics = measureText(trimmedText, props);
-          const trimmedWidth = trimmedMetrics.width;
-          const trimmedHeight =
-            trimmedMetrics.fontBoundingBoxAscent +
-            trimmedMetrics.fontBoundingBoxDescent;
-
-          // Add trimmed segment to current line
-          const segment: SoneParagraphLineSegment = {
-            metrics: trimmedMetrics,
-            props,
-            text: trimmedText,
-            width: trimmedWidth,
-            height: trimmedHeight,
-          };
-
-          currentLine.segments.push(segment);
-          currentLine.width += trimmedWidth;
-          currentLine.height = Math.max(currentLine.height, trimmedHeight);
-          currentLine.baseline = Math.max(
-            currentLine.baseline,
-            trimmedMetrics.fontBoundingBoxAscent,
-          );
-
+          pushSegments(currentLine, trimmedText, props, baseProps.tabStops);
           lastBreakpoint = breakpoint;
           continue;
         }
       }
 
-      // Add segment to current line
-      const segment: SoneParagraphLineSegment = {
-        metrics,
-        props,
-        text: segmentText,
-        width: segmentWidth,
-        height: segmentHeight,
-      };
-
-      currentLine.segments.push(segment);
-      currentLine.width += segmentWidth;
-      currentLine.height = Math.max(currentLine.height, segmentHeight);
-      currentLine.baseline = Math.max(
-        currentLine.baseline,
-        metrics.fontBoundingBoxAscent,
-      );
-
+      pushSegments(currentLine, segmentText, props, baseProps.tabStops);
       lastBreakpoint = breakpoint;
     }
 
     // Handle remaining text after last breakpoint
     if (lastBreakpoint < text.length) {
       const remainingText = text.substring(lastBreakpoint);
-      const metrics = measureText(remainingText, props);
-      const segmentWidth = metrics.width;
-      const segmentHeight =
-        metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+      const segmentWidth = measureTabExpandedWidth(
+        remainingText,
+        props,
+        baseProps.tabStops,
+        currentLine.width,
+        measureText,
+      );
 
       // Check if we need to wrap to new line
       if (
@@ -314,48 +337,12 @@ export function createMultilineParagraph(
           if (trimmedText.length === 0) {
             continue;
           }
-          const trimmedMetrics = measureText(trimmedText, props);
-          const trimmedWidth = trimmedMetrics.width;
-          const trimmedHeight =
-            trimmedMetrics.fontBoundingBoxAscent +
-            trimmedMetrics.fontBoundingBoxDescent;
-
-          // Add trimmed segment to current line
-          const segment: SoneParagraphLineSegment = {
-            metrics: trimmedMetrics,
-            props,
-            text: trimmedText,
-            width: trimmedWidth,
-            height: trimmedHeight,
-          };
-
-          currentLine.segments.push(segment);
-          currentLine.width += trimmedWidth;
-          currentLine.height = Math.max(currentLine.height, trimmedHeight);
-          currentLine.baseline = Math.max(
-            currentLine.baseline,
-            trimmedMetrics.fontBoundingBoxAscent,
-          );
+          pushSegments(currentLine, trimmedText, props, baseProps.tabStops);
           continue;
         }
       }
 
-      // Add segment to current line
-      const segment: SoneParagraphLineSegment = {
-        metrics,
-        props,
-        text: remainingText,
-        width: segmentWidth,
-        height: segmentHeight,
-      };
-
-      currentLine.segments.push(segment);
-      currentLine.width += segmentWidth;
-      currentLine.height = Math.max(currentLine.height, segmentHeight);
-      currentLine.baseline = Math.max(
-        currentLine.baseline,
-        metrics.fontBoundingBoxAscent,
-      );
+      pushSegments(currentLine, remainingText, props, baseProps.tabStops);
     }
   }
 
@@ -531,7 +518,11 @@ export function createParagraph(
             }
           }
 
-          if (!dequal(tail.props, segment.props)) {
+          if (
+            !dequal(tail.props, segment.props) ||
+            tail.isTab ||
+            segment.isTab
+          ) {
             mergedSegments.push([segment]);
             continue;
           }

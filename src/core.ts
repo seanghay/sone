@@ -412,6 +412,8 @@ export interface TextProps extends SpanProps, LayoutProps {
   indentSize?: number;
   /** subsequent lines indent */
   hangingIndentSize?: number;
+  /** tab stop positions in pixels, relative to the text content left edge */
+  tabStops?: number[];
   /** text alignment */
   align?: "left" | "right" | "center" | "justify";
 
@@ -487,6 +489,7 @@ export interface TextPropsBuilder<T>
   align(value: Required<TextProps["align"]>): T;
   indent(value: Required<TextProps["indentSize"]>): T;
   hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T;
+  tabStops(...values: number[]): T;
   autofit(value?: Required<TextProps["autofit"]>): T;
 }
 
@@ -1061,6 +1064,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T {
       props.hangingIndentSize = value;
+      return this as unknown as T;
+    },
+    tabStops(...values: number[]): T {
+      props.tabStops = values;
       return this as unknown as T;
     },
     props,
