@@ -129,7 +129,7 @@ List(
   ListItem(Text("npm install sone").size(12)),
   ListItem(Text("Compose your node tree").size(12)),
   ListItem(Text("sone(root).pdf()").size(12)),
-).listStyle(Span("").color("black").weight("bold")).startIndex(1).gap(8)
+).listStyle(Span("{}.").color("black").weight("bold")).startIndex(1).gap(8)
 ```
 
 **Font Registration**

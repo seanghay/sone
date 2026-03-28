@@ -582,7 +582,7 @@ const listsDemo = card(
           .font("GeistMono"),
       ).alignItems("center"),
     )
-      .listStyle(Span("").color(INK).weight("bold"))
+      .listStyle(Span("{}.").color(INK).weight("bold"))
       .startIndex(1)
       .markerGap(12)
       .gap(10),
