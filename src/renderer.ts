@@ -748,6 +748,8 @@ export interface SoneRenderConfig {
   background?: ColorValue;
   /** image cache for performance */
   cache?: Map<string | Uint8Array, SoneImage>;
+  /** When set, enables pagination — each page is this many pixels tall */
+  pageHeight?: number;
 }
 
 export async function calculateLayout(
@@ -850,12 +852,21 @@ export function drawOnCanvas(
   renderer: SoneRenderer,
   layout: Node,
   config?: SoneRenderConfig,
+  offsetY?: number,
 ) {
   const ctx = canvas.getContext("2d")!;
 
   if (config?.background) {
     ctx.fillStyle = config.background;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  if (offsetY) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.clip();
+    ctx.translate(0, offsetY);
   }
 
   function draw(node: SoneNode, layout: Node, x: number, y: number) {
@@ -917,6 +928,137 @@ export function drawOnCanvas(
 
   // draw
   draw(compiledNode, layout, 0, 0);
+
+  if (offsetY) {
+    ctx.restore();
+  }
+}
+
+// ── Leaf node types that are treated as indivisible for page breaking ─────────
+const LEAF_TYPES = new Set(["text", "photo", "path"]);
+
+function computePageBreaks(
+  rootLayout: Node,
+  rootNode: SoneNode,
+  pageHeight: number,
+): number[] {
+  const state = { currentPageEnd: pageHeight, breaks: [] as number[] };
+
+  function walk(yogaNode: Node, node: SoneNode, absY: number) {
+    if (node == null || typeof node === "string") return;
+    if (!("children" in node) || node.children == null) return;
+
+    for (let i = 0; i < node.children.length; i++) {
+      const child = node.children[i];
+      if (child == null || typeof child === "string") continue;
+      if (!("props" in child)) continue;
+
+      const childLayout = yogaNode.getChild(i);
+      const childAbsTop = absY + childLayout.getComputedTop();
+      const childAbsBottom = childAbsTop + childLayout.getComputedHeight();
+      const childProps = child.props as { pageBreak?: string } | undefined;
+
+      // Explicit break before: end the current page at childAbsTop
+      if (childProps?.pageBreak === "before" && childAbsTop > 0) {
+        // Advance natural page boundaries to cover content up to childAbsTop
+        while (state.currentPageEnd < childAbsTop) {
+          state.breaks.push(state.currentPageEnd);
+          state.currentPageEnd += pageHeight;
+        }
+        // Break right before this child if it falls in the middle of a page
+        if (childAbsTop < state.currentPageEnd) {
+          const lastBreak = state.breaks[state.breaks.length - 1] ?? 0;
+          if (childAbsTop > lastBreak) {
+            state.breaks.push(childAbsTop);
+            state.currentPageEnd = childAbsTop + pageHeight;
+          }
+        }
+      }
+
+      // Fits on current page
+      if (childAbsBottom <= state.currentPageEnd) {
+        if (childProps?.pageBreak === "after") {
+          const lastBreak = state.breaks[state.breaks.length - 1] ?? 0;
+          if (childAbsBottom > lastBreak) {
+            state.breaks.push(childAbsBottom);
+            state.currentPageEnd = childAbsBottom + pageHeight;
+          }
+        }
+        continue;
+      }
+
+      // Straddles or is beyond the current page boundary
+      const isAtomic =
+        childProps?.pageBreak === "avoid" || LEAF_TYPES.has(child.type);
+      const childHeight = childAbsBottom - childAbsTop;
+
+      if (isAtomic) {
+        if (childAbsTop < state.currentPageEnd) {
+          // Straddles: break before if it fits on a fresh page
+          if (childHeight <= pageHeight) {
+            state.breaks.push(state.currentPageEnd);
+            state.currentPageEnd += pageHeight;
+          }
+        } else {
+          // Entirely on a future page: advance to it
+          while (childAbsTop >= state.currentPageEnd) {
+            state.breaks.push(state.currentPageEnd);
+            state.currentPageEnd += pageHeight;
+          }
+        }
+        // Advance past any additional pages this child spans
+        while (childAbsBottom > state.currentPageEnd) {
+          state.breaks.push(state.currentPageEnd);
+          state.currentPageEnd += pageHeight;
+        }
+      } else {
+        // Has children: recurse to find finer break points
+        walk(childLayout, child, childAbsTop);
+      }
+
+      if (childProps?.pageBreak === "after") {
+        state.breaks.push(state.currentPageEnd);
+        state.currentPageEnd += pageHeight;
+      }
+    }
+  }
+
+  walk(rootLayout, rootNode, 0);
+  // Deduplicate (explicit breaks can coincide with natural breaks)
+  return [...new Set(state.breaks)];
+}
+
+export async function renderPages(
+  node: SoneNode,
+  renderer: SoneRenderer,
+  config?: SoneRenderConfig,
+): Promise<HTMLCanvasElement[]> {
+  const { layout, compiledNode } = await calculateLayout(
+    node,
+    renderer,
+    config,
+  );
+  const totalWidth = layout.getComputedWidth();
+  const totalHeight = layout.getComputedHeight();
+  const pageHeight = config?.pageHeight ?? totalHeight;
+
+  const pageBreaks = computePageBreaks(layout, compiledNode, pageHeight);
+  const pageStarts = [0, ...pageBreaks];
+
+  const canvases: HTMLCanvasElement[] = [];
+
+  for (let i = 0; i < pageStarts.length; i++) {
+    const pageStart = pageStarts[i];
+    const nextStart = pageStarts[i + 1] ?? totalHeight;
+    const thisPageHeight = nextStart - pageStart;
+
+    const canvas = renderer.createCanvas(totalWidth, thisPageHeight);
+    drawOnCanvas(canvas, compiledNode, renderer, layout, config, -pageStart);
+    canvases.push(canvas);
+  }
+
+  layout.freeRecursive();
+  return canvases;
 }
 
 export function createMetadata(compiledNode: SoneNode, layout: Node) {

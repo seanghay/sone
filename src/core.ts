@@ -99,6 +99,8 @@ export interface LayoutProps {
   minHeight?: number | `${number}%`;
   minWidth?: number | `${number}%`;
   overflow?: "visible" | "hidden" | "scroll";
+  /** Page breaking hint — only meaningful when pageHeight is set in render config */
+  pageBreak?: "before" | "after" | "avoid";
   padding?: number | `${number}%`;
   paddingBottom?: number | `${number}%`;
   paddingEnd?: number | `${number}%`;
@@ -253,6 +255,7 @@ interface LayoutPropsBuilder<T, P = LayoutProps> {
   position(value: Required<LayoutProps["position"]>): T;
   inset(value: Required<LayoutProps["inset"]>): T;
   overflow(value: Required<LayoutProps["overflow"]>): T;
+  pageBreak(value: Required<LayoutProps["pageBreak"]>): T;
 
   /** CSS-like transforms */
   translateX(value: number): T;
@@ -864,6 +867,10 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
     },
     overflow(value: Required<LayoutProps["overflow"]>): T {
       props.overflow = value;
+      return this as unknown as T;
+    },
+    pageBreak(value: Required<LayoutProps["pageBreak"]>): T {
+      props.pageBreak = value;
       return this as unknown as T;
     },
     rotate(value: number): T {

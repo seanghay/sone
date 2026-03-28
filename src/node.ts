@@ -8,6 +8,7 @@ import { defaultLineBreakerIterator } from "./linebreak.ts";
 import {
   DEFAULT_TEXT_PROPS,
   render,
+  renderPages,
   renderWithMetadata,
   type SoneRenderConfig,
   type SoneRenderer,
@@ -113,12 +114,28 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
       (await build()).toBuffer("svg", options),
 
     /**
-     * Export as PDF document
+     * Export as PDF document. When pageHeight is set in config, produces a
+     * multi-page PDF with one page per canvas returned by renderPages().
      * @param options - Optional PDF export settings
      * @returns Promise<Buffer> - PDF document buffer
      */
-    pdf: async (options?: ExportOptions) =>
-      (await build()).toBuffer("pdf", options),
+    pdf: async (options?: ExportOptions) => {
+      if (config?.pageHeight) {
+        const pageCanvases = await renderPages(node, renderer, config);
+        if (pageCanvases.length === 0) return Buffer.alloc(0);
+        const root = pageCanvases[0] as unknown as Canvas;
+        for (let i = 1; i < pageCanvases.length; i++) {
+          const pc = pageCanvases[i] as unknown as Canvas;
+          const pageCtx = root.newPage(pc.width, pc.height);
+          const img = await skia.loadImage(
+            Buffer.from(await pc.toBuffer("png")),
+          );
+          pageCtx.drawImage(img as unknown as HTMLImageElement, 0, 0);
+        }
+        return root.toBuffer("pdf", options);
+      }
+      return (await build()).toBuffer("pdf", options);
+    },
 
     /**
      * Export as WebP image
@@ -142,6 +159,15 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
     canvas: async () => build(),
     canvasWithMetadata: async () =>
       renderWithMetadata<Canvas>(node, renderer, config),
+
+    /**
+     * Render into one Canvas per page using the pageHeight from config.
+     * @returns Promise<Canvas[]> - One Canvas per page
+     */
+    pages: async (): Promise<Canvas[]> => {
+      const htmlCanvases = await renderPages(node, renderer, config);
+      return htmlCanvases as unknown as Canvas[];
+    },
   };
 }
 
