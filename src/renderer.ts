@@ -1154,22 +1154,33 @@ export async function renderPages(
   renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ): Promise<HTMLCanvasElement[]> {
-  // ── 1. Layout main content first (to get totalWidth) ─────────────────────
+  // ── 1. Resolve margins first so content layout can use the correct width ──
+  const mg = parseMargin(config?.margin);
+
+  // When config.width is provided it is treated as the exact canvas width;
+  // left/right margins inset the content within that width rather than
+  // expanding the canvas.  Without config.width the legacy behaviour is
+  // preserved: canvas = content + margins.
+  const contentLayoutConfig =
+    config?.width != null
+      ? { ...config, width: config.width - mg.left - mg.right }
+      : config;
+
+  // ── 2. Layout main content ────────────────────────────────────────────────
   const { layout, compiledNode } = await calculateLayout(
     node,
     renderer,
-    config,
+    contentLayoutConfig,
   );
   const totalWidth = layout.getComputedWidth();
   const totalHeight = layout.getComputedHeight();
   const pageHeight = config?.pageHeight ?? totalHeight;
 
-  // ── 2. Resolve margins ────────────────────────────────────────────────────
-  const mg = parseMargin(config?.margin);
-  // Canvas is wider than content by left+right margins
-  const canvasWidth = totalWidth + mg.left + mg.right;
+  // ── 3. Resolve canvas width ───────────────────────────────────────────────
+  const canvasWidth =
+    config?.width != null ? config.width : totalWidth + mg.left + mg.right;
 
-  // ── 3. Layout header/footer at full canvas width ──────────────────────────
+  // ── 4. Layout header/footer at full canvas width ──────────────────────────
   // Clear header/footer in hfConfig to prevent infinite recursion.
   const hfConfig: SoneRenderConfig = {
     ...config,

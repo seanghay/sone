@@ -6,7 +6,6 @@ import {
   Font,
   List,
   ListItem,
-  PageBreak,
   Photo,
   Row,
   Span,
@@ -24,21 +23,27 @@ await Font.load("GeistMono", [relative("../font/GeistMono-Bold.ttf")], {
 });
 
 // ── Page geometry ──────────────────────────────────────────────────────────────
-const PAGE_H = 1056; // Letter @ 96 dpi (8.5 × 11 in)
-const CONTENT_W = 680;
+const PAGE_W = 816; // Letter @ 96 dpi (8.5 in × 96)
+const PAGE_H = 1056; // Letter @ 96 dpi (11 in × 96)
+const CONTENT_W = PAGE_W; // full letter width — sections use internal padding
+const HEADER_H = 34; // padding(6,20) + photo height 21 + border
+const FOOTER_H = 27; // padding(6,20) + text ~14 + border
+const BAND_GAP = 16; // margin top/bottom between header/footer and content
+const COVER_H = PAGE_H - HEADER_H - FOOTER_H - BAND_GAP * 2;
 
 // ── Palette — monochrome ───────────────────────────────────────────────────────
 const W = "#ffffff";
 const INK = "#0a0a0a";
-const SUB = "#525252";
-const DIM = "#a3a3a3";
+const SUB = "#404040";
+const DIM = "#737373";
 const RULE = "#e5e5e5";
 const MUTED_BG = "#f7f7f7";
 
 // ── Primitives ─────────────────────────────────────────────────────────────────
 const rule = () => Row().height(1).bg(RULE).alignSelf("stretch");
 
-const label = (t: string) => Text(t).size(9).weight("bold").color(DIM);
+const label = (t: string) =>
+  Text(t).size(9).weight("bold").color(DIM).font("GeistMono");
 
 const sectionHead = (num: string, title: string, subtitle?: string) =>
   Column(
@@ -60,28 +65,26 @@ const card = (...children: Parameters<typeof Column>) =>
     .borderColor(RULE);
 
 const mono = (t: string) => Text(t).size(10).color(INK).font("GeistMono");
+const code = (t: string) => Span(t).font("GeistMono").color(INK);
 
 // ── PAGE 1 — Cover ─────────────────────────────────────────────────────────────
 const cover = Column(
   Column(
-    label("FEATURE SHOWCASE").color("rgba(255,255,255,0.35)"),
+    label("FEATURE SHOWCASE"),
     Row(
       Photo(relative("../../test/image/sone.svg"))
         .width(60)
         .height(70)
         .shrink(0),
-      Text("Sone").size(80).weight("bold").color(W).lineHeight(1),
+      Text("Sone").size(80).weight("bold").color(INK).lineHeight(1),
     )
       .gap(20)
       .alignItems("center")
       .marginTop(16),
-    Text("Canvas Layout Engine")
-      .size(20)
-      .color("rgba(255,255,255,0.4)")
-      .marginTop(8),
+    Text("Canvas Layout Engine").size(20).color(SUB).marginTop(8),
     Text("Declarative. Multi-page. Node.js & browser.")
       .size(13)
-      .color("rgba(255,255,255,0.3)")
+      .color(DIM)
       .lineHeight(1.6)
       .marginTop(16),
   )
@@ -89,7 +92,7 @@ const cover = Column(
     .gap(0),
 
   Column(
-    Row(label("TOPICS").color("rgba(255,255,255,0.3)")),
+    Row(label("TOPICS")),
     Row(
       ...[
         "Page Layout",
@@ -98,7 +101,7 @@ const cover = Column(
         "Text Orientation",
         "Lists",
         "Borders",
-      ].map((t) => Text(t).size(11).color("rgba(255,255,255,0.55)").flex(1)),
+      ].map((t) => Text(t).size(11).color(SUB).flex(1)),
     )
       .gap(20)
       .wrap("wrap")
@@ -108,13 +111,10 @@ const cover = Column(
     .gap(0)
     .marginTop("auto"),
 
-  Row(Text("March 2026").size(10).color("rgba(255,255,255,0.2)")).padding(
-    24,
-    52,
-  ),
+  Row(Text("March 2026").size(10).color(DIM)).padding(24, 52),
 )
-  .bg(INK)
-  .height(PAGE_H)
+  .bg("linear-gradient(160deg, #f0f0f0 0%, #ffffff 60%)")
+  .height(COVER_H)
   .gap(0)
   .pageBreak("avoid");
 
@@ -136,7 +136,10 @@ const pageLayoutSection = Column(
         .color(INK)
         .marginTop(6),
       Text(
-        "computePageBreaks() walks the Yoga layout tree to find clean split points at block boundaries. Leaf nodes and avoid-marked elements are kept atomic — no mid-element cuts.",
+        code("computePageBreaks()"),
+        " walks the Yoga layout tree to find clean split points at block boundaries. Leaf nodes and ",
+        code("avoid"),
+        "-marked elements are kept atomic — no mid-element cuts.",
       )
         .size(11)
         .color(SUB)
@@ -147,7 +150,9 @@ const pageLayoutSection = Column(
       label("PAGEBREAK() NODE"),
       Text("Explicit breaks").size(13).weight("bold").color(INK).marginTop(4),
       Text(
-        'A zero-height Column with pageBreak("before") that forces a new page at any position in the layout tree. Use wherever a hard break is needed.',
+        "A zero-height Column with ",
+        code('pageBreak("before")'),
+        " that forces a new page at any position in the layout tree. Use wherever a hard break is needed.",
       )
         .size(11)
         .color(SUB)
@@ -164,7 +169,11 @@ const pageLayoutSection = Column(
       label("HEADER & FOOTER"),
       Text("Repeating bands").size(13).weight("bold").color(INK).marginTop(4),
       Text(
-        "Pass a static SoneNode or a function (info: SonePageInfo) => SoneNode. Each band is clipped to its own vertical slice and composited onto every page canvas.",
+        "Pass a static ",
+        code("SoneNode"),
+        " or a function ",
+        code("(info: SonePageInfo) => SoneNode"),
+        ". Each band is clipped to its own vertical slice and composited onto every page canvas.",
       )
         .size(11)
         .color(SUB)
@@ -175,7 +184,10 @@ const pageLayoutSection = Column(
       label("MARGINS"),
       Text("Per-side control").size(13).weight("bold").color(INK).marginTop(4),
       Text(
-        "margin accepts a uniform number or an object { top, right, bottom, left }. Left and right expand the canvas; top and bottom inset the content band.",
+        code("margin"),
+        " accepts a uniform number or an object ",
+        code("{ top, right, bottom, left }"),
+        ". Left and right expand the canvas; top and bottom inset the content band.",
       )
         .size(11)
         .color(SUB)
@@ -264,8 +276,10 @@ const tabDemo = card(
     .color(INK)
     .marginTop(6),
   Text(
-    "\\t characters snap to predefined x positions via .tabStops(). " +
-      "Useful for financial statements, receipts, and aligned data.",
+    code("\\t"),
+    " characters snap to predefined x positions via ",
+    code(".tabStops()"),
+    ". Useful for financial statements, receipts, and aligned data.",
   )
     .size(11)
     .color(SUB)
@@ -406,15 +420,70 @@ const whitespaceDemo = card(
     .borderColor(RULE),
 );
 
+const khmerDemo = card(
+  label("CUSTOM FONT — KHMER"),
+  Text("ភាសាខ្មែរ")
+    .size(13)
+    .weight("bold")
+    .color(INK)
+    .marginTop(6)
+    .font("Inter Khmer"),
+  Text(
+    "Sone supports custom font loading via ",
+    code("Font.load()"),
+    ". Any language or script can be rendered by registering the appropriate typeface.",
+  )
+    .size(11)
+    .color(SUB)
+    .lineHeight(1.6)
+    .marginTop(6),
+  Row(
+    Column(
+      label("HEADLINE").marginBottom(8),
+      Text("ប្រព័ន្ធរចនា Canvas")
+        .size(20)
+        .weight("bold")
+        .color(INK)
+        .font("Inter Khmer")
+        .lineHeight(1.4),
+      Text("Canvas Layout Engine").size(11).color(DIM).marginTop(4),
+    )
+      .flex(1)
+      .padding(14)
+      .bg(MUTED_BG),
+    Column(
+      label("BODY").marginBottom(8),
+      Text(
+        "សូននៅជាម៉ាស៊ីនរចនាប្លង់ Canvas សម្រាប់ Node.js និង Browser " +
+          "ដែលអនុញ្ញាតឱ្យបង្កើត PDF ច្រើនទំព័រ។",
+      )
+        .size(11)
+        .color(SUB)
+        .font("Inter Khmer")
+        .lineHeight(1.8),
+    )
+      .flex(1)
+      .padding(14)
+      .bg(MUTED_BG)
+      .borderWidth(0, 0, 0, 1)
+      .borderColor(RULE),
+  )
+    .gap(0)
+    .marginTop(12)
+    .borderWidth(1)
+    .borderColor(RULE),
+);
+
 const typographySection = Column(
   sectionHead(
     "02 — TYPOGRAPHY",
     "Text Layout Features",
-    "Tab stops, text orientation, and whitespace preservation.",
+    "Tab stops, text orientation, whitespace preservation, and custom fonts.",
   ),
   tabDemo,
   orientationDemo,
   whitespaceDemo,
+  khmerDemo,
 )
   .bg(W)
   .padding(32, 40)
@@ -425,7 +494,10 @@ const listsDemo = card(
   label("LIST STYLE"),
   Text("SpanNode markers").size(13).weight("bold").color(INK).marginTop(6),
   Text(
-    "listStyle() now accepts a Span(...) node for full typographic control over the marker — color, weight, size, and font.",
+    code("listStyle()"),
+    " now accepts a ",
+    code("Span(...)"),
+    " node for full typographic control over the marker — color, weight, size, and font.",
   )
     .size(11)
     .color(SUB)
@@ -438,16 +510,16 @@ const listsDemo = card(
       List(
         ListItem(
           Text("Automatic page breaking").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
         ListItem(
           Text("Dynamic header & footer").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
         ListItem(
           Text("Per-page SonePageInfo").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
         ListItem(
           Text("lastPageHeight option").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
       )
         .listStyle("disc")
         .markerGap(10)
@@ -462,16 +534,16 @@ const listsDemo = card(
       List(
         ListItem(
           Text("Tab stops alignment").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
         ListItem(
           Text("Text orientation 90°/270°").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
         ListItem(
           Text("Whitespace preservation").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
         ListItem(
           Text("Span-styled markers").size(11).color(SUB).lineHeight(1.5),
-        ),
+        ).alignItems("center"),
       )
         .listStyle(Span("→").color(INK).weight("bold"))
         .markerGap(10)
@@ -491,22 +563,24 @@ const listsDemo = card(
   Column(
     label("NUMBERED WITH SPAN").marginBottom(10),
     List(
-      ListItem(Text("npm install sone").size(10).color(SUB).font("GeistMono")),
+      ListItem(
+        Text("npm install sone").size(10).color(SUB).font("GeistMono"),
+      ).alignItems("center"),
       ListItem(
         Text("import { Column, Row, Text, sone } from 'sone'")
           .size(10)
           .color(SUB)
           .font("GeistMono"),
-      ),
+      ).alignItems("center"),
       ListItem(
         Text("Compose your node tree declaratively").size(11).color(SUB),
-      ),
+      ).alignItems("center"),
       ListItem(
         Text("sone(root, { pageHeight }).pdf()")
           .size(10)
           .color(SUB)
           .font("GeistMono"),
-      ),
+      ).alignItems("center"),
     )
       .listStyle(Span("").color(INK).weight("bold"))
       .startIndex(1)
@@ -526,23 +600,23 @@ const listsDemo = card(
         Text("Page Layout").size(11).color(INK).weight("bold"),
         List(
           ListItem(
-            Text("pageHeight — enables multi-page output")
+            Text(code("pageHeight"), " — enables multi-page output")
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
           ListItem(
-            Text("header / footer — repeating bands")
+            Text(code("header"), " / ", code("footer"), " — repeating bands")
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
           ListItem(
-            Text("PageBreak() — explicit page break node")
+            Text(code("PageBreak()"), " — explicit page break node")
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
         )
           .listStyle(Span("·").color(DIM))
           .markerGap(8)
@@ -553,17 +627,17 @@ const listsDemo = card(
         Text("Typography").size(11).color(INK).weight("bold"),
         List(
           ListItem(
-            Text("tabStops() — column alignment via \\t")
+            Text(code("tabStops()"), " — column alignment via ", code("\\t"))
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
           ListItem(
-            Text("orientation() — 0 / 90 / 180 / 270°")
+            Text(code("orientation()"), " — 0 / 90 / 180 / 270°")
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
         )
           .listStyle(Span("·").color(DIM))
           .markerGap(8)
@@ -574,17 +648,17 @@ const listsDemo = card(
         Text("Lists & Borders").size(11).color(INK).weight("bold"),
         List(
           ListItem(
-            Text("listStyle(Span(...)) — full marker styling")
+            Text(code("listStyle(Span(...))"), " — full marker styling")
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
           ListItem(
-            Text("borderWidth(top, right, bottom, left)")
+            Text(code("borderWidth(top, right, bottom, left)"))
               .size(11)
               .color(SUB)
               .lineHeight(1.5),
-          ),
+          ).alignItems("center"),
         )
           .listStyle(Span("·").color(DIM))
           .markerGap(8)
@@ -611,7 +685,8 @@ const bordersDemo = card(
     .color(INK)
     .marginTop(6),
   Text(
-    "borderWidth(top, right, bottom, left) now correctly applies each side independently. Previously, only uniform borders were rendered.",
+    code("borderWidth(top, right, bottom, left)"),
+    " now correctly applies each side independently. Previously, only uniform borders were rendered.",
   )
     .size(11)
     .color(SUB)
@@ -669,42 +744,51 @@ const summarySection = Column(
     {
       category: "Page Layout",
       items: [
-        "pageHeight in SoneRenderConfig — enables multi-page output",
-        'pageBreak prop: "before" | "after" | "avoid"',
-        "PageBreak() — explicit break node",
-        "header / footer — static node or (SonePageInfo) => SoneNode",
-        "margin — number or { top, right, bottom, left }",
-        'lastPageHeight: "uniform" | "content"',
-        "pdf() uses drawCanvas — no rasterisation artefacts",
+        ["pageHeight", " in SoneRenderConfig — enables multi-page output"],
+        ["pageBreak", ' prop: "before" | "after" | "avoid"'],
+        ["PageBreak()", " — explicit break node"],
+        ["header / footer", " — static node or (SonePageInfo) => SoneNode"],
+        ["margin", " — number or { top, right, bottom, left }"],
+        ["lastPageHeight", ': "uniform" | "content"'],
+        ["pdf()", " uses drawCanvas — no rasterisation artefacts"],
       ],
     },
     {
       category: "Typography",
       items: [
-        ".tabStops(...values) — \\t snaps to x positions",
-        ".orientation(0 | 90 | 180 | 270) — layout-aware rotation",
-        "Yoga footprint swaps at 90°/270° for natural element flow",
-        "Whitespace preserved at line-wrap boundaries",
+        [".tabStops(...values)", " — \\t snaps to x positions"],
+        [".orientation(0 | 90 | 180 | 270)", " — layout-aware rotation"],
+        ["Yoga footprint swaps at 90°/270° for natural element flow"],
+        ["Whitespace preserved at line-wrap boundaries"],
       ],
     },
     {
       category: "Lists",
       items: [
-        "listStyle(Span(...)) — full marker typography control",
-        "Removed: markerColor, markerSize, markerFont, markerWeight, markerStyle",
-        "Retained: markerGap, startIndex",
+        ["listStyle(Span(...))", " — full marker typography control"],
+        [
+          "Removed: markerColor, markerSize, markerFont, markerWeight, markerStyle",
+        ],
+        ["Retained: markerGap, startIndex"],
       ],
     },
     {
       category: "Borders",
-      items: ["borderWidth(top, right, bottom, left) — truly per-side"],
+      items: [["borderWidth(top, right, bottom, left)", " — truly per-side"]],
     },
   ].map(({ category, items }) =>
     Column(
       Text(category).size(13).weight("bold").color(INK),
       List(
-        ...items.map((item) =>
-          ListItem(Text(item).size(11).color(SUB).lineHeight(1.55)),
+        ...items.map((parts) =>
+          ListItem(
+            Text(
+              ...parts.map((p, i) => (i === 0 ? code(p) : Span(p).color(SUB))),
+            )
+              .size(11)
+              .color(SUB)
+              .lineHeight(1.55),
+          ).alignItems("center"),
         ),
       )
         .listStyle(Span("·").color(DIM).weight("bold"))
@@ -764,11 +848,8 @@ const pageFooter = ({ pageNumber, totalPages }: SonePageInfo) =>
 const root = Column(
   cover,
   pageLayoutSection,
-  PageBreak(),
   typographySection,
-  PageBreak(),
   listsSection,
-  PageBreak(),
   summarySection,
 )
   .width(CONTENT_W)
@@ -780,6 +861,8 @@ const pdfBuf = await sone(root, {
   header: pageHeader,
   footer: pageFooter,
   lastPageHeight: "content",
+  width: PAGE_W,
+  margin: { top: BAND_GAP, bottom: BAND_GAP },
 }).pdf();
 
 const outPath = path.join(dir, "feature-showcase.pdf");
