@@ -750,6 +750,10 @@ export interface SoneRenderConfig {
   cache?: Map<string | Uint8Array, SoneImage>;
   /** When set, enables pagination — each page is this many pixels tall */
   pageHeight?: number;
+  /** Node rendered at the top of every page. Width matches main content automatically. */
+  header?: SoneNode;
+  /** Node rendered at the bottom of every page. Width matches main content automatically. */
+  footer?: SoneNode;
 }
 
 export async function calculateLayout(
@@ -853,6 +857,7 @@ export function drawOnCanvas(
   layout: Node,
   config?: SoneRenderConfig,
   offsetY?: number,
+  clipRegion?: { top: number; height: number },
 ) {
   const ctx = canvas.getContext("2d")!;
 
@@ -861,12 +866,17 @@ export function drawOnCanvas(
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  if (offsetY) {
+  if (offsetY != null || clipRegion != null) {
     ctx.save();
     ctx.beginPath();
-    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.rect(
+      0,
+      clipRegion?.top ?? 0,
+      canvas.width,
+      clipRegion?.height ?? canvas.height,
+    );
     ctx.clip();
-    ctx.translate(0, offsetY);
+    if (offsetY) ctx.translate(0, offsetY);
   }
 
   function draw(node: SoneNode, layout: Node, x: number, y: number) {
@@ -929,7 +939,7 @@ export function drawOnCanvas(
   // draw
   draw(compiledNode, layout, 0, 0);
 
-  if (offsetY) {
+  if (offsetY != null || clipRegion != null) {
     ctx.restore();
   }
 }
@@ -1033,6 +1043,7 @@ export async function renderPages(
   renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ): Promise<HTMLCanvasElement[]> {
+  // ── 1. Layout main content first (to get totalWidth) ─────────────────────
   const { layout, compiledNode } = await calculateLayout(
     node,
     renderer,
@@ -1042,22 +1053,102 @@ export async function renderPages(
   const totalHeight = layout.getComputedHeight();
   const pageHeight = config?.pageHeight ?? totalHeight;
 
-  const pageBreaks = computePageBreaks(layout, compiledNode, pageHeight);
+  // ── 2. Layout header/footer at the same width ─────────────────────────────
+  // Pass width=totalWidth and clear header/footer to avoid infinite recursion
+  const hfConfig: SoneRenderConfig = {
+    ...config,
+    width: totalWidth,
+    height: undefined,
+    header: undefined,
+    footer: undefined,
+  };
+
+  let headerH = 0;
+  let headerLayout: Node | undefined;
+  let headerCompiled: SoneNode | undefined;
+  if (config?.header != null) {
+    const r = await calculateLayout(config.header, renderer, hfConfig);
+    headerH = r.layout.getComputedHeight();
+    headerLayout = r.layout;
+    headerCompiled = r.compiledNode;
+  }
+
+  let footerH = 0;
+  let footerLayout: Node | undefined;
+  let footerCompiled: SoneNode | undefined;
+  if (config?.footer != null) {
+    const r = await calculateLayout(config.footer, renderer, hfConfig);
+    footerH = r.layout.getComputedHeight();
+    footerLayout = r.layout;
+    footerCompiled = r.compiledNode;
+  }
+
+  // ── 3. Page breaks use content-area height (excluding header + footer) ────
+  const contentPageHeight = pageHeight - headerH - footerH;
+  if (contentPageHeight <= 0) {
+    layout.freeRecursive();
+    headerLayout?.freeRecursive();
+    footerLayout?.freeRecursive();
+    return [];
+  }
+
+  const pageBreaks = computePageBreaks(layout, compiledNode, contentPageHeight);
   const pageStarts = [0, ...pageBreaks];
 
   const canvases: HTMLCanvasElement[] = [];
+  const hasOverlay = headerH > 0 || footerH > 0;
 
   for (let i = 0; i < pageStarts.length; i++) {
-    const pageStart = pageStarts[i];
+    const contentStart = pageStarts[i];
     const nextStart = pageStarts[i + 1] ?? totalHeight;
-    const thisPageHeight = nextStart - pageStart;
+    const contentH = nextStart - contentStart;
+    const canvasHeight = headerH + contentH + footerH;
 
-    const canvas = renderer.createCanvas(totalWidth, thisPageHeight);
-    drawOnCanvas(canvas, compiledNode, renderer, layout, config, -pageStart);
+    const canvas = renderer.createCanvas(totalWidth, canvasHeight);
+
+    // Draw content band: shift down by headerH, scroll up by contentStart
+    drawOnCanvas(
+      canvas,
+      compiledNode,
+      renderer,
+      layout,
+      config,
+      headerH - contentStart,
+      hasOverlay ? { top: headerH, height: contentH } : undefined,
+    );
+
+    // Draw header at top (no background repaint)
+    if (headerCompiled != null && headerLayout != null) {
+      drawOnCanvas(
+        canvas,
+        headerCompiled,
+        renderer,
+        headerLayout,
+        { ...config, background: undefined },
+        0,
+        { top: 0, height: headerH },
+      );
+    }
+
+    // Draw footer at bottom: translate footer layout (y=0) down to its band
+    if (footerCompiled != null && footerLayout != null) {
+      drawOnCanvas(
+        canvas,
+        footerCompiled,
+        renderer,
+        footerLayout,
+        { ...config, background: undefined },
+        headerH + contentH,
+        { top: headerH + contentH, height: footerH },
+      );
+    }
+
     canvases.push(canvas);
   }
 
   layout.freeRecursive();
+  headerLayout?.freeRecursive();
+  footerLayout?.freeRecursive();
   return canvases;
 }
 

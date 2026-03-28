@@ -1176,6 +1176,20 @@ export function Column(...children: SoneNode[]): ColumnNode {
 }
 
 /**
+ * Inserts an explicit page break at this position in the layout.
+ * Only takes effect when rendering with a pageHeight config.
+ * @example
+ *   Column(
+ *     Text("Page 1 content"),
+ *     PageBreak(),
+ *     Text("Page 2 content"),
+ *   )
+ */
+export function PageBreak(): ColumnNode {
+  return Column().height(0).pageBreak("before");
+}
+
+/**
  * Creates a horizontal layout container
  * @param children - child nodes to layout horizontally
  * @example Row(Text("Left"), Text("Right")).gap(10)
