@@ -7,13 +7,14 @@
 
 - Declarative API
 - Flex Layout
-- Squircle
-- Text Justification
+- Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
+- Rich Text — spans, justification, tab stops, text orientation (0°/90°/180°/270°)
+- Custom list markers via `Span` nodes
+- Per-side borders — `borderWidth(top, right, bottom, left)`
+- Squircle, QR Code, Photo
 - Table
-- Rich Text Rendering
-- Composable
-- QR Code
-- Output as SVG, PDF, Image
+- Custom font loading — any language or script
+- Output as SVG, PDF, PNG, JPG, WebP
 - Fully Typed
 - Metadata API (Text Recognition Dataset Generation)
 - All features from [skia-canvas](https://skia-canvas.org/)
@@ -54,7 +55,82 @@ import fs from "node:fs/promises";
 await fs.writeFile("image.jpg", buffer);
 ```
 
-More examples can be found at [test/visual](test/visual) directory
+More examples can be found at [test/visual](test/visual) directory.
+
+**Multi-Page PDF**
+
+Pass `pageHeight` to enable automatic page breaking. Headers and footers repeat on every page; use a function to access per-page info.
+
+```javascript
+import { Column, Row, Text, Span, sone } from "sone";
+
+const header = Row(Text("My Report").size(10)).padding(8, 16);
+
+const footer = ({ pageNumber, totalPages }) =>
+  Row(Text(Span(`${pageNumber}`).weight("bold"), ` / ${totalPages}`).size(10))
+    .padding(8, 16)
+    .justifyContent("flex-end");
+
+const content = Column(
+  Text("Section 1").size(24).weight("bold"),
+  Text("Lorem ipsum...").size(12).lineHeight(1.6),
+  // PageBreak() forces a new page at any point
+).gap(12);
+
+const pdf = await sone(content, {
+  pageHeight: 1056,          // Letter height @ 96 dpi
+  header,
+  footer,
+  margin: { top: 16, bottom: 16 },
+  lastPageHeight: "content", // trim last page to actual content
+}).pdf();
+```
+
+**Tab Stops**
+
+Align columns without a Table node using `\t` and `.tabStops()`.
+
+```javascript
+Text("Name\tAmount\tDate")
+  .tabStops(200, 320)
+  .font("GeistMono")
+  .size(12)
+```
+
+**Text Orientation**
+
+Rotate text 0°/90°/180°/270°. At 90° and 270° the layout footprint swaps width and height so surrounding elements flow naturally.
+
+```javascript
+Text("Rotated").size(16).orientation(90)
+```
+
+**Lists**
+
+Use built-in markers or pass a `Span` for full typographic control. Supports nested lists.
+
+```javascript
+import { List, ListItem, Span, Text } from "sone";
+
+// Built-in disc marker
+List(
+  ListItem(Text("Automatic page breaking").size(12)),
+  ListItem(Text("Repeating headers & footers").size(12)),
+).listStyle("disc").markerGap(10).gap(8)
+
+// Custom Span marker
+List(
+  ListItem(Text("Tab stops").size(12)),
+  ListItem(Text("Text orientation").size(12)),
+).listStyle(Span("→").color("black").weight("bold")).markerGap(10).gap(8)
+
+// Numbered list (startIndex sets the starting number)
+List(
+  ListItem(Text("npm install sone").size(12)),
+  ListItem(Text("Compose your node tree").size(12)),
+  ListItem(Text("sone(root).pdf()").size(12)),
+).listStyle(Span("").color("black").weight("bold")).startIndex(1).gap(8)
+```
 
 **Font Registration**
 

@@ -18,7 +18,7 @@
 - [x] Merge Same Spans (Optimization)
 - [x] Octagon
 - [x] Image Scale Alignment
-- [ ] Side Borders
+- [x] Side Borders
 - [ ] Table Column Span, Row Span
 - [x] Improve Line Breaking Algorithm
 - [ ] Polygon Shape
