@@ -39,6 +39,8 @@ A few guiding principles:
 
 **Platform-agnostic core.** The rendering engine is separated from the canvas backend via the `SoneRenderer` interface. The default backend uses `skia-canvas` in Node.js, but the same core works in the browser with a custom renderer.
 
+**Performance.** Sone does not spin up a browser or a headless Chromium instance. Rendering is done directly via [skia-canvas](https://skia-canvas.org/) — a native Node.js binding to Google's Skia graphics library. No Puppeteer, no CDP, no process overhead. A typical image renders in single-digit milliseconds and a multi-page PDF in tens of milliseconds, even for complex layouts with rich text and images.
+
 ---
 
 <img width=720 height=720 src="https://github.com/user-attachments/assets/9a5bce63-33ca-4086-873a-a552b147f99a" alt="">
