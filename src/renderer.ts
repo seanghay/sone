@@ -64,6 +64,7 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   weight: 400,
   letterSpacing: 0,
   nowrap: false,
+  lineBreak: "greedy",
   lineHeight: Number.NaN,
   indentSize: 0,
   hangingIndentSize: 0,

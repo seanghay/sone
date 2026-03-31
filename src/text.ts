@@ -74,253 +74,145 @@ export interface SoneParagraphBlock {
   paragraph: SoneParagraph;
 }
 
-export function createMultilineParagraph(
-  spans: Array<string | SpanNode>,
-  breakpoints: number[][],
-  maxWidth: number,
-  baseProps: TextProps,
-  measureText: SoneRenderer["measureText"],
-): SoneParagraph {
-  const shouldWrap = baseProps.nowrap !== true;
-  const lineMultiplier =
-    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight)
-      ? 1.0
-      : baseProps.lineHeight;
+interface ParagraphChunk {
+  props: SpanProps;
+  text: string;
+  width: number;
+}
 
-  function pushSegments(
-    line: SoneParagraphLine,
-    text: string,
-    segProps: SpanProps,
-    tabStops: number[] | undefined,
-  ): void {
-    if (!tabStops?.length || !text.includes("\t")) {
-      const m = measureText(text, segProps);
+function createEmptyLine(width = 0): SoneParagraphLine {
+  return {
+    baseline: 0,
+    height: 0,
+    width,
+    segments: [],
+    spacesCount: 0,
+  };
+}
+
+function pushSegments(
+  line: SoneParagraphLine,
+  text: string,
+  segProps: SpanProps,
+  tabStops: number[] | undefined,
+  measureText: SoneRenderer["measureText"],
+): void {
+  if (!tabStops?.length || !text.includes("\t")) {
+    const m = measureText(text, segProps);
+    const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+    line.segments.push({
+      metrics: m,
+      props: segProps,
+      text,
+      width: m.width,
+      height: h,
+    });
+    line.width += m.width;
+    line.height = Math.max(line.height, h);
+    line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
+    return;
+  }
+
+  const parts = text.split("\t");
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i];
+    if (part.length > 0) {
+      const m = measureText(part, segProps);
       const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
       line.segments.push({
         metrics: m,
         props: segProps,
-        text,
+        text: part,
         width: m.width,
         height: h,
       });
       line.width += m.width;
       line.height = Math.max(line.height, h);
       line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
-      return;
     }
-
-    const parts = text.split("\t");
-    for (let i = 0; i < parts.length; i++) {
-      const part = parts[i];
-      if (part.length > 0) {
-        const m = measureText(part, segProps);
-        const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
-        line.segments.push({
-          metrics: m,
-          props: segProps,
-          text: part,
-          width: m.width,
-          height: h,
-        });
-        line.width += m.width;
-        line.height = Math.max(line.height, h);
-        line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
-      }
-      if (i < parts.length - 1) {
-        const tabWidth = Math.max(
-          nextTabStop(tabStops, line.width) - line.width,
-          4,
-        );
-        const m = measureText(" ", segProps);
-        const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
-        line.segments.push({
-          metrics: m,
-          props: segProps,
-          text: "",
-          width: tabWidth,
-          height: h,
-          isTab: true,
-        });
-        line.width += tabWidth;
-        line.height = Math.max(line.height, h);
-        line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
-      }
-    }
-  }
-
-  function recomputeLineMetrics(line: SoneParagraphLine) {
-    line.height = 0;
-    line.baseline = 0;
-    for (const segment of line.segments) {
-      line.height = Math.max(line.height, segment.height);
-      line.baseline = Math.max(
-        line.baseline,
-        segment.metrics.fontBoundingBoxAscent,
+    if (i < parts.length - 1) {
+      const tabWidth = Math.max(
+        nextTabStop(tabStops, line.width) - line.width,
+        4,
       );
+      const m = measureText(" ", segProps);
+      const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+      line.segments.push({
+        metrics: m,
+        props: segProps,
+        text: "",
+        width: tabWidth,
+        height: h,
+        isTab: true,
+      });
+      line.width += tabWidth;
+      line.height = Math.max(line.height, h);
+      line.baseline = Math.max(line.baseline, m.fontBoundingBoxAscent);
     }
   }
+}
 
-  function trimTrailingWhitespace(line: SoneParagraphLine) {
-    while (line.segments.length > 0) {
-      const tail = line.segments[line.segments.length - 1];
-
-      if (tail.isTab) {
-        line.width -= tail.width;
-        line.segments.pop();
-        continue;
-      }
-
-      const trimmedText = tail.text.replace(/[ \t]+$/u, "");
-      if (trimmedText === tail.text) break;
-
-      if (trimmedText.length === 0) {
-        line.width -= tail.width;
-        line.segments.pop();
-        continue;
-      }
-
-      const metrics = measureText(trimmedText, tail.props);
-      const height =
-        metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
-      line.width -= tail.width - metrics.width;
-      tail.text = trimmedText;
-      tail.metrics = metrics;
-      tail.width = metrics.width;
-      tail.height = height;
-      break;
-    }
-
-    recomputeLineMetrics(line);
+function recomputeLineMetrics(line: SoneParagraphLine) {
+  line.height = 0;
+  line.baseline = 0;
+  for (const segment of line.segments) {
+    line.height = Math.max(line.height, segment.height);
+    line.baseline = Math.max(
+      line.baseline,
+      segment.metrics.fontBoundingBoxAscent,
+    );
   }
+}
 
-  const lines: SoneParagraphLine[] = [];
+function trimTrailingWhitespace(
+  line: SoneParagraphLine,
+  measureText: SoneRenderer["measureText"],
+) {
+  while (line.segments.length > 0) {
+    const tail = line.segments[line.segments.length - 1];
 
-  let currentLine: SoneParagraphLine = {
-    baseline: 0,
-    height: 0,
-    width: baseProps.indentSize ?? 0,
-    segments: [],
-    spacesCount: 0,
-  };
-
-  lines.push(currentLine);
-
-  for (let spanIndex = 0; spanIndex < spans.length; spanIndex++) {
-    const span = spans[spanIndex];
-    const props = typeof span === "string" ? baseProps : span.props;
-    const text = typeof span === "string" ? span : span.children;
-    const spanBreakpoints = breakpoints[spanIndex] || [];
-
-    // If no breakpoints, treat entire text as one segment
-    if (spanBreakpoints.length === 0) {
-      const segmentWidth = measureTabExpandedWidth(
-        text,
-        props,
-        baseProps.tabStops,
-        currentLine.width,
-        measureText,
-      );
-
-      // Check if we need to wrap to new line
-      if (
-        shouldWrap &&
-        currentLine.width + segmentWidth > maxWidth &&
-        currentLine.segments.length > 0
-      ) {
-        // Start new line
-        currentLine = {
-          baseline: 0,
-          height: 0,
-          width: 0,
-          segments: [],
-          spacesCount: 0,
-        };
-
-        lines.push(currentLine);
-      }
-
-      pushSegments(currentLine, text, props, baseProps.tabStops);
+    if (tail.isTab) {
+      line.width -= tail.width;
+      line.segments.pop();
       continue;
     }
 
-    // Handle text with breakpoints
-    let lastBreakpoint = 0;
+    const trimmedText = tail.text.replace(/[ \t]+$/u, "");
+    if (trimmedText === tail.text) break;
 
-    for (let bpIndex = 0; bpIndex < spanBreakpoints.length; bpIndex++) {
-      const breakpoint = spanBreakpoints[bpIndex];
-      const segmentText = text.substring(lastBreakpoint, breakpoint);
-
-      if (segmentText.length === 0) {
-        lastBreakpoint = breakpoint;
-        continue;
-      }
-
-      const segmentWidth = measureTabExpandedWidth(
-        segmentText,
-        props,
-        baseProps.tabStops,
-        currentLine.width,
-        measureText,
-      );
-
-      // Check if we need to wrap to new line
-      if (
-        shouldWrap &&
-        currentLine.width + segmentWidth > maxWidth &&
-        currentLine.segments.length > 0
-      ) {
-        // Start new line
-        currentLine = {
-          baseline: 0,
-          height: 0,
-          width: baseProps.hangingIndentSize ?? 0,
-          segments: [],
-          spacesCount: 0,
-        };
-
-        lines.push(currentLine);
-      }
-
-      pushSegments(currentLine, segmentText, props, baseProps.tabStops);
-      lastBreakpoint = breakpoint;
+    if (trimmedText.length === 0) {
+      line.width -= tail.width;
+      line.segments.pop();
+      continue;
     }
 
-    // Handle remaining text after last breakpoint
-    if (lastBreakpoint < text.length) {
-      const remainingText = text.substring(lastBreakpoint);
-      const segmentWidth = measureTabExpandedWidth(
-        remainingText,
-        props,
-        baseProps.tabStops,
-        currentLine.width,
-        measureText,
-      );
-
-      // Check if we need to wrap to new line
-      if (
-        shouldWrap &&
-        currentLine.width + segmentWidth > maxWidth &&
-        currentLine.segments.length > 0
-      ) {
-        // Start new line
-        currentLine = {
-          baseline: 0,
-          height: 0,
-          width: 0,
-          segments: [],
-          spacesCount: 0,
-        };
-
-        lines.push(currentLine);
-      }
-
-      pushSegments(currentLine, remainingText, props, baseProps.tabStops);
-    }
+    const metrics = measureText(trimmedText, tail.props);
+    const height =
+      metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+    line.width -= tail.width - metrics.width;
+    tail.text = trimmedText;
+    tail.metrics = metrics;
+    tail.width = metrics.width;
+    tail.height = height;
+    break;
   }
+
+  recomputeLineMetrics(line);
+}
+
+function finalizeParagraph(
+  lines: SoneParagraphLine[],
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+): SoneParagraph {
+  const lineMultiplier =
+    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight)
+      ? 1.0
+      : baseProps.lineHeight;
 
   let linePosition = 0;
   for (const line of lines) {
-    trimTrailingWhitespace(line);
+    trimTrailingWhitespace(line, measureText);
     line.baseline *= lineMultiplier;
     line.height *= lineMultiplier;
 
@@ -346,7 +238,6 @@ export function createMultilineParagraph(
     linePosition++;
   }
 
-  // Calculate final paragraph dimensions
   let totalHeight = 0;
   let maxLineWidth = 0;
 
@@ -355,8 +246,6 @@ export function createMultilineParagraph(
     maxLineWidth = Math.max(maxLineWidth, line.width);
   }
 
-  // For some reasons, when line height is set,
-  // the text doesn't align center vertically.
   let offsetY = 0;
   if (
     lines.length > 0 &&
@@ -381,6 +270,318 @@ export function createMultilineParagraph(
     lines,
     offsetY,
   };
+}
+
+function createParagraphChunks(
+  spans: Array<string | SpanNode>,
+  breakpoints: number[][],
+  measureText: SoneRenderer["measureText"],
+  baseProps: TextProps,
+) {
+  const chunks: ParagraphChunk[] = [];
+
+  for (let spanIndex = 0; spanIndex < spans.length; spanIndex++) {
+    const span = spans[spanIndex];
+    const props = typeof span === "string" ? baseProps : span.props;
+    const text = typeof span === "string" ? span : span.children;
+
+    if (text.includes("\t")) return null;
+
+    const spanBreakpoints = breakpoints[spanIndex] || [];
+
+    if (spanBreakpoints.length === 0) {
+      chunks.push({
+        props,
+        text,
+        width: measureText(text, props).width,
+      });
+      continue;
+    }
+
+    let lastBreakpoint = 0;
+
+    for (const breakpoint of spanBreakpoints) {
+      const segmentText = text.substring(lastBreakpoint, breakpoint);
+      if (segmentText.length === 0) {
+        lastBreakpoint = breakpoint;
+        continue;
+      }
+
+      chunks.push({
+        props,
+        text: segmentText,
+        width: measureText(segmentText, props).width,
+      });
+      lastBreakpoint = breakpoint;
+    }
+
+    if (lastBreakpoint < text.length) {
+      const remainingText = text.substring(lastBreakpoint);
+      chunks.push({
+        props,
+        text: remainingText,
+        width: measureText(remainingText, props).width,
+      });
+    }
+  }
+
+  return chunks;
+}
+
+function createGreedyMultilineParagraph(
+  spans: Array<string | SpanNode>,
+  breakpoints: number[][],
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+): SoneParagraph {
+  const shouldWrap = baseProps.nowrap !== true;
+  const lines: SoneParagraphLine[] = [];
+
+  let currentLine = createEmptyLine(baseProps.indentSize ?? 0);
+  lines.push(currentLine);
+
+  for (let spanIndex = 0; spanIndex < spans.length; spanIndex++) {
+    const span = spans[spanIndex];
+    const props = typeof span === "string" ? baseProps : span.props;
+    const text = typeof span === "string" ? span : span.children;
+    const spanBreakpoints = breakpoints[spanIndex] || [];
+
+    if (spanBreakpoints.length === 0) {
+      const segmentWidth = measureTabExpandedWidth(
+        text,
+        props,
+        baseProps.tabStops,
+        currentLine.width,
+        measureText,
+      );
+
+      if (
+        shouldWrap &&
+        currentLine.width + segmentWidth > maxWidth &&
+        currentLine.segments.length > 0
+      ) {
+        currentLine = createEmptyLine();
+        lines.push(currentLine);
+      }
+
+      pushSegments(currentLine, text, props, baseProps.tabStops, measureText);
+      continue;
+    }
+
+    let lastBreakpoint = 0;
+
+    for (const breakpoint of spanBreakpoints) {
+      const segmentText = text.substring(lastBreakpoint, breakpoint);
+
+      if (segmentText.length === 0) {
+        lastBreakpoint = breakpoint;
+        continue;
+      }
+
+      const segmentWidth = measureTabExpandedWidth(
+        segmentText,
+        props,
+        baseProps.tabStops,
+        currentLine.width,
+        measureText,
+      );
+
+      if (
+        shouldWrap &&
+        currentLine.width + segmentWidth > maxWidth &&
+        currentLine.segments.length > 0
+      ) {
+        currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
+        lines.push(currentLine);
+      }
+
+      pushSegments(
+        currentLine,
+        segmentText,
+        props,
+        baseProps.tabStops,
+        measureText,
+      );
+      lastBreakpoint = breakpoint;
+    }
+
+    if (lastBreakpoint < text.length) {
+      const remainingText = text.substring(lastBreakpoint);
+      const segmentWidth = measureTabExpandedWidth(
+        remainingText,
+        props,
+        baseProps.tabStops,
+        currentLine.width,
+        measureText,
+      );
+
+      if (
+        shouldWrap &&
+        currentLine.width + segmentWidth > maxWidth &&
+        currentLine.segments.length > 0
+      ) {
+        currentLine = createEmptyLine();
+        lines.push(currentLine);
+      }
+
+      pushSegments(
+        currentLine,
+        remainingText,
+        props,
+        baseProps.tabStops,
+        measureText,
+      );
+    }
+  }
+
+  return finalizeParagraph(lines, baseProps, measureText);
+}
+
+function createKnuthPlassMultilineParagraph(
+  spans: Array<string | SpanNode>,
+  breakpoints: number[][],
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+) {
+  if (baseProps.nowrap === true || !Number.isFinite(maxWidth)) return null;
+
+  const paragraphChunks = createParagraphChunks(
+    spans,
+    breakpoints,
+    measureText,
+    baseProps,
+  );
+  if (paragraphChunks == null || paragraphChunks.length === 0) return null;
+  const chunks = paragraphChunks;
+
+  const prefixWidths = [0];
+  const trimmedWidths = chunks.map((chunk) => {
+    const trimmedText = chunk.text.replace(/[ \t]+$/u, "");
+    if (trimmedText.length === 0) return 0;
+    if (trimmedText === chunk.text) return chunk.width;
+    return measureText(trimmedText, chunk.props).width;
+  });
+
+  for (const chunk of chunks) {
+    prefixWidths.push(prefixWidths[prefixWidths.length - 1] + chunk.width);
+  }
+
+  function measureLineWidth(start: number, end: number) {
+    const indentWidth =
+      start === 0
+        ? (baseProps.indentSize ?? 0)
+        : (baseProps.hangingIndentSize ?? 0);
+
+    let effectiveEnd = end;
+    while (
+      effectiveEnd > start &&
+      isWhitespace(chunks[effectiveEnd - 1].text.replace(/\t+/gu, " "))
+    ) {
+      effectiveEnd--;
+    }
+
+    if (effectiveEnd === start) return indentWidth;
+
+    let width = prefixWidths[effectiveEnd] - prefixWidths[start];
+    width -= chunks[effectiveEnd - 1].width - trimmedWidths[effectiveEnd - 1];
+    return indentWidth + width;
+  }
+
+  const costs = Array<number>(chunks.length + 1).fill(Number.POSITIVE_INFINITY);
+  const previous = Array<number>(chunks.length + 1).fill(-1);
+  costs[0] = 0;
+
+  for (let start = 0; start < chunks.length; start++) {
+    if (!Number.isFinite(costs[start])) continue;
+
+    for (let end = start + 1; end <= chunks.length; end++) {
+      if (end < chunks.length && isWhitespace(chunks[end].text)) continue;
+
+      const lineWidth = measureLineWidth(start, end);
+      if (lineWidth > maxWidth) break;
+
+      const isLastLine = end === chunks.length;
+      const slack = Math.max(0, maxWidth - lineWidth);
+      const ratio = slack / Math.max(maxWidth, 1);
+      const badness = isLastLine ? 0 : (ratio * 100) ** 3 + 1;
+      const nextCost = costs[start] + badness;
+
+      if (nextCost < costs[end]) {
+        costs[end] = nextCost;
+        previous[end] = start;
+      }
+    }
+  }
+
+  if (
+    !Number.isFinite(costs[chunks.length]) ||
+    previous[chunks.length] === -1
+  ) {
+    return null;
+  }
+
+  const ranges: Array<[number, number]> = [];
+  let end = chunks.length;
+
+  while (end > 0) {
+    const start = previous[end];
+    if (start < 0) return null;
+    ranges.push([start, end]);
+    end = start;
+  }
+
+  ranges.reverse();
+
+  const lines = ranges.map(([start, end], index) => {
+    const line = createEmptyLine(
+      index === 0
+        ? (baseProps.indentSize ?? 0)
+        : (baseProps.hangingIndentSize ?? 0),
+    );
+
+    for (let i = start; i < end; i++) {
+      const chunk = chunks[i];
+      pushSegments(line, chunk.text, chunk.props, undefined, measureText);
+    }
+
+    return line;
+  });
+
+  return finalizeParagraph(lines, baseProps, measureText);
+}
+
+export function createMultilineParagraph(
+  spans: Array<string | SpanNode>,
+  breakpoints: number[][],
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+): SoneParagraph {
+  if (
+    baseProps.lineBreak === "knuth-plass" &&
+    baseProps.nowrap !== true &&
+    Number.isFinite(maxWidth)
+  ) {
+    const paragraph = createKnuthPlassMultilineParagraph(
+      spans,
+      breakpoints,
+      maxWidth,
+      baseProps,
+      measureText,
+    );
+
+    if (paragraph != null) return paragraph;
+  }
+
+  return createGreedyMultilineParagraph(
+    spans,
+    breakpoints,
+    maxWidth,
+    baseProps,
+    measureText,
+  );
 }
 
 export function createBlocks(

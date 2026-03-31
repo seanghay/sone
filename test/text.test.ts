@@ -58,6 +58,14 @@ function getTextParagraphs(metadata: SoneMetadata) {
   return props.blocks;
 }
 
+function getLineTexts(paragraph: {
+  lines: Array<{ segments: Array<{ text: string }> }>;
+}) {
+  return paragraph.lines.map((line) =>
+    line.segments.map((segment) => segment.text).join(""),
+  );
+}
+
 test("create paragraph without max width", async () => {
   const node = Text(
     "លោកសាស្ត្រាចារ្យ ឈាង រ៉ា រដ្ឋមន្ត្រីក្រសួងសុខាភិបាល បានប្រកាសថា ក្រុមគ្រូពេទ្យកម្ពុជាគឺជាលោកសាស្ត្រាចារ្យ",
@@ -249,6 +257,83 @@ test("createParagraph honors nowrap under constrained width", () => {
   expect(blocks[0].paragraph.width).toBeGreaterThan(80);
 });
 
+test("createParagraph defaults to greedy line breaking", () => {
+  const text =
+    "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor";
+
+  const implicitGreedy = createParagraph(
+    [text],
+    300,
+    textProps({ size: 20 }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const explicitGreedy = createParagraph(
+    [text],
+    300,
+    textProps({ size: 20, lineBreak: "greedy" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(implicitGreedy)).toEqual(getLineTexts(explicitGreedy));
+});
+
+test("createParagraph supports Knuth-Plass line breaking", () => {
+  const text =
+    "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor";
+
+  const greedy = createParagraph(
+    [text],
+    300,
+    textProps({ size: 20, lineBreak: "greedy" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const knuthPlass = createParagraph(
+    [text],
+    300,
+    textProps({ size: 20, lineBreak: "knuth-plass" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(greedy)).toEqual([
+    "lorem ipsum dolor sit",
+    "amet consectetur",
+    "adipiscing elit sed do",
+    "eiusmod tempor",
+  ]);
+  expect(getLineTexts(knuthPlass)).toEqual([
+    "lorem ipsum dolor",
+    "sit amet consectetur",
+    "adipiscing elit sed do",
+    "eiusmod tempor",
+  ]);
+});
+
+test("createParagraph with Knuth-Plass preserves styled spans across lines", () => {
+  const paragraph = createParagraph(
+    [
+      "lorem ",
+      Span("ipsum dolor ").color("red"),
+      "sit amet consectetur adipiscing",
+    ],
+    220,
+    textProps({ lineBreak: "knuth-plass", size: 18 }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual([
+    "lorem ipsum dolor",
+    "sit amet consectetur",
+    "adipiscing",
+  ]);
+  expect(paragraph.lines[0].segments[1].text).toBe("ipsum dolor");
+  expect(paragraph.lines[0].segments[1].props.color).toBe("red");
+});
+
 test("createParagraph expands tab stops into synthetic segments", () => {
   const baseProps = textProps({ tabStops: [140, 260] });
   const blocks = createParagraph(
@@ -268,6 +353,30 @@ test("createParagraph expands tab stops into synthetic segments", () => {
   expect(segments[3].isTab).toBe(true);
   expect(segments[1].width).toBeCloseTo(140 - labelWidth, 3);
   expect(segments[3].width).toBeCloseTo(260 - 140 - valueWidth, 3);
+});
+
+test("createParagraph with Knuth-Plass falls back to greedy for tab stops", () => {
+  const greedy = createParagraph(
+    ["Label\tValue\tTail"],
+    Number.POSITIVE_INFINITY,
+    textProps({ lineBreak: "greedy", tabStops: [140, 260] }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const knuthPlass = createParagraph(
+    ["Label\tValue\tTail"],
+    Number.POSITIVE_INFINITY,
+    textProps({ lineBreak: "knuth-plass", tabStops: [140, 260] }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(knuthPlass)).toEqual(getLineTexts(greedy));
+  expect(
+    knuthPlass.lines
+      .flatMap((line) => line.segments)
+      .some((segment) => segment.isTab),
+  ).toBe(true);
 });
 
 test("renderWithMetadata distributes justify spacing on non-final lines only", async () => {
@@ -449,4 +558,24 @@ test("justified wrapped lines trim trailing whitespace before layout", async () 
 
   expect(firstLine.segments.length).toBeGreaterThan(0);
   expect(tail.text.endsWith(" ")).toBe(false);
+});
+
+test("renderWithMetadata keeps Knuth-Plass output in compiled text props", async () => {
+  const text =
+    "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor";
+  const { metadata } = await renderWithMetadata(
+    Text(text).font("GeistMono").size(20).width(300).lineBreak("knuth-plass"),
+    renderer,
+  );
+
+  const paragraph = getTextParagraphs(metadata as SoneMetadata)[0].paragraph;
+  expect(((metadata as SoneMetadata).props as TextProps).lineBreak).toBe(
+    "knuth-plass",
+  );
+  expect(getLineTexts(paragraph)).toEqual([
+    "lorem ipsum dolor",
+    "sit amet consectetur",
+    "adipiscing elit sed do",
+    "eiusmod tempor",
+  ]);
 });

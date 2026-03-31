@@ -423,6 +423,8 @@ export interface SpanProps {
 export interface TextProps extends SpanProps, LayoutProps {
   /** prevent text wrapping */
   nowrap?: boolean;
+  /** line breaking algorithm used for wrapped text */
+  lineBreak?: "greedy" | "knuth-plass";
   /** line height multiplier @example 1.5 = 150% */
   lineHeight?: number;
   /** first line indent in pixels */
@@ -505,6 +507,7 @@ export interface TextPropsBuilder<T>
     Omit<SpanPropsBuilder<T>, "props"> {
   nowrap(): T;
   wrap(value?: boolean): T;
+  lineBreak(value: Required<TextProps["lineBreak"]>): T;
   lineHeight(value: Required<TextProps["lineHeight"]>): T;
   align(value: Required<TextProps["align"]>): T;
   indent(value: Required<TextProps["indentSize"]>): T;
@@ -531,6 +534,7 @@ export interface TextDefaultPropsBuilder<T>
   props: TextDefaultProps;
   nowrap(): T;
   wrap(value?: boolean): T;
+  lineBreak(value: Required<TextProps["lineBreak"]>): T;
   lineHeight(value: Required<TextProps["lineHeight"]>): T;
   align(value: Required<TextProps["align"]>): T;
   indent(value: Required<TextProps["indentSize"]>): T;
@@ -1112,6 +1116,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.nowrap = !value;
       return this as unknown as T;
     },
+    lineBreak(value: Required<TextProps["lineBreak"]>): T {
+      props.lineBreak = value;
+      return this as unknown as T;
+    },
     lineHeight(value: Required<TextProps["lineHeight"]>): T {
       props.lineHeight = value;
       return this as unknown as T;
@@ -1164,6 +1172,10 @@ function textDefaultPropsBuilder<T>(
     },
     wrap(value?: boolean): T {
       props.nowrap = !value;
+      return this as unknown as T;
+    },
+    lineBreak(value: Required<TextProps["lineBreak"]>): T {
+      props.lineBreak = value;
       return this as unknown as T;
     },
     lineHeight(value: Required<TextProps["lineHeight"]>): T {
