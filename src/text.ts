@@ -81,6 +81,7 @@ export function createMultilineParagraph(
   baseProps: TextProps,
   measureText: SoneRenderer["measureText"],
 ): SoneParagraph {
+  const shouldWrap = baseProps.nowrap !== true;
   const lineMultiplier =
     baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight)
       ? 1.0
@@ -222,6 +223,7 @@ export function createMultilineParagraph(
 
       // Check if we need to wrap to new line
       if (
+        shouldWrap &&
         currentLine.width + segmentWidth > maxWidth &&
         currentLine.segments.length > 0
       ) {
@@ -263,6 +265,7 @@ export function createMultilineParagraph(
 
       // Check if we need to wrap to new line
       if (
+        shouldWrap &&
         currentLine.width + segmentWidth > maxWidth &&
         currentLine.segments.length > 0
       ) {
@@ -295,6 +298,7 @@ export function createMultilineParagraph(
 
       // Check if we need to wrap to new line
       if (
+        shouldWrap &&
         currentLine.width + segmentWidth > maxWidth &&
         currentLine.segments.length > 0
       ) {
@@ -440,8 +444,10 @@ export function createParagraph(
   const items: SoneParagraphBlock[] = [];
 
   for (let b = 0; b < blocks.length; b++) {
-    const breakpoints = blockBreakpoints[b];
     const spans = blocks[b];
+    const breakpoints = baseProps.nowrap
+      ? spans.map(() => [])
+      : blockBreakpoints[b];
     const paragraph = createMultilineParagraph(
       spans,
       breakpoints,

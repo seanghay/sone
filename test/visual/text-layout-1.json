@@ -1,0 +1,3140 @@
+{
+  "type": "column",
+  "props": {
+    "gap": 24,
+    "padding": 40,
+    "background": ["#f5eee6"]
+  },
+  "children": [
+    {
+      "type": "text",
+      "children": ["Text layout regression board"],
+      "props": {
+        "size": 30,
+        "color": "#2f241f",
+        "font": ["GeistMono"],
+        "style": "normal",
+        "weight": "bold",
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "left",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 826,
+              "height": 39.000091552734375,
+              "lines": [
+                {
+                  "baseline": 30.150146484375,
+                  "height": 39.000091552734375,
+                  "width": 504,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 72,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 72,
+                        "actualBoundingBoxAscent": 23.150146484375,
+                        "actualBoundingBoxDescent": 1.849853515625,
+                        "fontBoundingBoxAscent": 30.150146484375,
+                        "fontBoundingBoxDescent": 8.849945068359375,
+                        "emHeightAscent": 30.150146484375,
+                        "emHeightDescent": 8.849945068359375,
+                        "hangingBaseline": 24.1201171875,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -8.849945068359375
+                      },
+                      "text": "Text layout regression board",
+                      "height": 39.000091552734375,
+                      "width": 504,
+                      "props": {
+                        "size": 30,
+                        "color": "#2f241f",
+                        "font": ["GeistMono"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 40,
+                        "y": 40,
+                        "width": 504,
+                        "height": 39.000091552734375
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 40,
+      "y": 40,
+      "width": 826,
+      "height": 39,
+      "position": {
+        "top": 40,
+        "bottom": 0,
+        "left": 40,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": [
+        "Focused visual checks for alignment, justification, first-line indent, hanging indent, explicit line breaks, and nowrap."
+      ],
+      "props": {
+        "size": 16,
+        "color": "#6d4c41",
+        "font": ["GeistMono"],
+        "style": "normal",
+        "weight": 400,
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineHeight": 1.4,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "left",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 826,
+              "height": 58.240136718749994,
+              "lines": [
+                {
+                  "baseline": 22.512109374999998,
+                  "height": 29.120068359374997,
+                  "width": 825.5999984741211,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 67.19999694824219,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 67.19999694824219,
+                        "actualBoundingBoxAscent": 13.080078125,
+                        "actualBoundingBoxDescent": 1.919921875,
+                        "fontBoundingBoxAscent": 16.080078125,
+                        "fontBoundingBoxDescent": 4.719970703125,
+                        "emHeightAscent": 16.080078125,
+                        "emHeightDescent": 4.719970703125,
+                        "hangingBaseline": 12.864062309265137,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -4.719970703125
+                      },
+                      "text": "Focused visual checks for alignment, justification, first-line indent, hanging indent,",
+                      "height": 20.800048828125,
+                      "width": 825.5999984741211,
+                      "props": {
+                        "size": 16,
+                        "color": "#6d4c41",
+                        "font": ["GeistMono"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.4,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
+                        "maxWidth": 900,
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 40,
+                        "y": 107.16000976562499,
+                        "width": 825.5999984741211,
+                        "height": 20.800048828125
+                      }
+                    }
+                  ],
+                  "spacesCount": 9
+                },
+                {
+                  "baseline": 22.512109374999998,
+                  "height": 29.120068359374997,
+                  "width": 316.8000030517578,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 76.80000305175781,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 76.80000305175781,
+                        "actualBoundingBoxAscent": 13.080078125,
+                        "actualBoundingBoxDescent": 3.919921875,
+                        "fontBoundingBoxAscent": 16.080078125,
+                        "fontBoundingBoxDescent": 4.719970703125,
+                        "emHeightAscent": 16.080078125,
+                        "emHeightDescent": 4.719970703125,
+                        "hangingBaseline": 12.864062309265137,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -4.719970703125
+                      },
+                      "text": "explicit line breaks, and nowrap.",
+                      "height": 20.800048828125,
+                      "width": 316.8000030517578,
+                      "props": {
+                        "size": 16,
+                        "color": "#6d4c41",
+                        "font": ["GeistMono"],
+                        "style": "normal",
+                        "weight": 400,
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineHeight": 1.4,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
+                        "maxWidth": 900,
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 40,
+                        "y": 136.280078125,
+                        "width": 316.8000030517578,
+                        "height": 20.800048828125
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": -2.2720214843749993
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
+        "maxWidth": 900,
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 40,
+      "y": 103,
+      "width": 826,
+      "height": 59,
+      "position": {
+        "top": 103,
+        "bottom": 0,
+        "left": 40,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "gap": 24,
+        "flexDirection": "row"
+      },
+      "children": [
+        {
+          "type": "column",
+          "props": {
+            "gap": 12,
+            "width": 340,
+            "padding": 20,
+            "background": ["white"],
+            "borderColor": "#d7c4b6",
+            "borderWidth": 2,
+            "cornerRadius": [24],
+            "tag": "left-indent"
+          },
+          "children": [
+            {
+              "type": "text",
+              "children": ["left-indent"],
+              "props": {
+                "size": 18,
+                "color": "#6d4c41",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": "bold",
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 296,
+                      "height": 23.400054931640625,
+                      "lines": [
+                        {
+                          "baseline": 18.090087890625,
+                          "height": 23.400054931640625,
+                          "width": 118.80000400543213,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 43.20000076293945,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 43.20000076293945,
+                                "actualBoundingBoxAscent": 14.090087890625,
+                                "actualBoundingBoxDescent": 1.909912109375,
+                                "fontBoundingBoxAscent": 18.090087890625,
+                                "fontBoundingBoxDescent": 5.309967041015625,
+                                "emHeightAscent": 18.090087890625,
+                                "emHeightDescent": 5.309967041015625,
+                                "hangingBaseline": 14.472070693969727,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.309967041015625
+                              },
+                              "text": "left-indent",
+                              "height": 23.400054931640625,
+                              "width": 118.80000400543213,
+                              "props": {
+                                "size": 18,
+                                "color": "#6d4c41",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": "bold",
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "tag": "left-indent-title",
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 62,
+                                "y": 207,
+                                "width": 118.80000400543213,
+                                "height": 23.400054931640625
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "tag": "left-indent-title",
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 62,
+              "y": 207,
+              "width": 296,
+              "height": 24,
+              "position": {
+                "top": 22,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": [
+                "AAAA aaaa AAAA aaaa AAAA aaaa AAAA aaaa AAAA aaaa AAAA aaaa."
+              ],
+              "props": {
+                "size": 22,
+                "color": "#201a17",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": 1.35,
+                "indentSize": 28,
+                "hangingIndentSize": 52,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 300,
+                      "height": 154.44036254882815,
+                      "lines": [
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 278.7999963760376,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "text": "AAAA aaaa AAAA aaaa",
+                              "height": 28.600067138671875,
+                              "width": 250.7999963760376,
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 28,
+                                "hangingIndentSize": 52,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 90,
+                                "y": 247.00501174926757,
+                                "width": 250.7999963760376,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 3
+                        },
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 236.7999973297119,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "text": "AAAA aaaa AAAA",
+                              "height": 28.600067138671875,
+                              "width": 184.7999973297119,
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 28,
+                                "hangingIndentSize": 52,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 114,
+                                "y": 285.61510238647463,
+                                "width": 184.7999973297119,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 2
+                        },
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 236.7999973297119,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "text": "aaaa AAAA aaaa",
+                              "height": 28.600067138671875,
+                              "width": 184.7999973297119,
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 28,
+                                "hangingIndentSize": 52,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 114,
+                                "y": 324.22519302368164,
+                                "width": 184.7999973297119,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 2
+                        },
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 183.99999809265137,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "text": "AAAA aaaa.",
+                              "height": 28.600067138671875,
+                              "width": 131.99999809265137,
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 28,
+                                "hangingIndentSize": 52,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 114,
+                                "y": 362.8352836608887,
+                                "width": 131.99999809265137,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": -2.7335258483886724
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "width": 300,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 62,
+              "y": 242,
+              "width": 300,
+              "height": 156,
+              "position": {
+                "top": 57,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 40,
+          "y": 185,
+          "width": 340,
+          "height": 234,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          },
+          "padding": {
+            "top": 20,
+            "left": 20,
+            "right": 20,
+            "bottom": 20
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "column",
+          "props": {
+            "gap": 12,
+            "width": 340,
+            "padding": 20,
+            "background": ["white"],
+            "borderColor": "#d7c4b6",
+            "borderWidth": 2,
+            "cornerRadius": [24],
+            "tag": "justify"
+          },
+          "children": [
+            {
+              "type": "text",
+              "children": ["justify"],
+              "props": {
+                "size": 18,
+                "color": "#6d4c41",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": "bold",
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 296,
+                      "height": 23.400054931640625,
+                      "lines": [
+                        {
+                          "baseline": 18.090087890625,
+                          "height": 23.400054931640625,
+                          "width": 75.5999984741211,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 75.5999984741211,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 75.5999984741211,
+                                "actualBoundingBoxAscent": 14.090087890625,
+                                "actualBoundingBoxDescent": 3.909912109375,
+                                "fontBoundingBoxAscent": 18.090087890625,
+                                "fontBoundingBoxDescent": 5.309967041015625,
+                                "emHeightAscent": 18.090087890625,
+                                "emHeightDescent": 5.309967041015625,
+                                "hangingBaseline": 14.472070693969727,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.309967041015625
+                              },
+                              "props": {
+                                "size": 18,
+                                "color": "#6d4c41",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": "bold",
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "tag": "justify-title",
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "justify",
+                              "width": 75.5999984741211,
+                              "height": 23.400054931640625,
+                              "run": {
+                                "x": 426,
+                                "y": 207,
+                                "width": 75.5999984741211,
+                                "height": 23.400054931640625
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "tag": "justify-title",
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 426,
+              "y": 207,
+              "width": 296,
+              "height": 24,
+              "position": {
+                "top": 22,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": [
+                "AAAA aaaa AAAA aaaa AAAA aaaa AAAA aaaa AAAA aaaa AAAA aaaa."
+              ],
+              "props": {
+                "size": 22,
+                "color": "#201a17",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": 1.35,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "justify",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 300,
+                      "height": 115.83027191162111,
+                      "lines": [
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 250.7999963760376,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "AAAA",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 426,
+                                "y": 247.00501174926757,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 478.79999923706055,
+                                "y": 247.00501174926757,
+                                "width": 29.600001017252605,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "aaaa",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 508.40000025431317,
+                                "y": 247.00501174926757,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 561.1999994913738,
+                                "y": 247.00501174926757,
+                                "width": 29.600001017252605,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "AAAA",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 590.8000005086263,
+                                "y": 247.00501174926757,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 643.5999997456869,
+                                "y": 247.00501174926757,
+                                "width": 29.600001017252605,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "aaaa",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 673.2000007629395,
+                                "y": 247.00501174926757,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 3
+                        },
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 250.7999963760376,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "AAAA",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 426,
+                                "y": 285.61510238647463,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 478.79999923706055,
+                                "y": 285.61510238647463,
+                                "width": 29.600001017252605,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "aaaa",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 508.40000025431317,
+                                "y": 285.61510238647463,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 561.1999994913738,
+                                "y": 285.61510238647463,
+                                "width": 29.600001017252605,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "AAAA",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 590.8000005086263,
+                                "y": 285.61510238647463,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 643.5999997456869,
+                                "y": 285.61510238647463,
+                                "width": 29.600001017252605,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "aaaa",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 673.2000007629395,
+                                "y": 285.61510238647463,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 3
+                        },
+                        {
+                          "baseline": 29.84864501953125,
+                          "height": 38.61009063720704,
+                          "width": 263.99999618530273,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "AAAA",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 426,
+                                "y": 324.22519302368164,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 478.79999923706055,
+                                "y": 324.22519302368164,
+                                "width": 13.199999809265137,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "aaaa",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 491.9999990463257,
+                                "y": 324.22519302368164,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 544.7999982833862,
+                                "y": 324.22519302368164,
+                                "width": 13.199999809265137,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 17.110107421875,
+                                "actualBoundingBoxDescent": 0.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "AAAA",
+                              "width": 52.79999923706055,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 557.9999980926514,
+                                "y": 324.22519302368164,
+                                "width": 52.79999923706055,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 13.199999809265137,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 13.199999809265137,
+                                "actualBoundingBoxAscent": 0,
+                                "actualBoundingBoxDescent": 0,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": " ",
+                              "width": 13.199999809265137,
+                              "height": 28.600067138671875,
+                              "run": {
+                                "x": 610.7999973297119,
+                                "y": 324.22519302368164,
+                                "width": 13.199999809265137,
+                                "height": 28.600067138671875
+                              }
+                            },
+                            {
+                              "metrics": {
+                                "width": 52.79999923706055,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 52.79999923706055,
+                                "actualBoundingBoxAscent": 13.110107421875,
+                                "actualBoundingBoxDescent": 1.889892578125,
+                                "fontBoundingBoxAscent": 22.110107421875,
+                                "fontBoundingBoxDescent": 6.489959716796875,
+                                "emHeightAscent": 22.110107421875,
+                                "emHeightDescent": 6.489959716796875,
+                                "hangingBaseline": 17.688085556030273,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -6.489959716796875
+                              },
+                              "text": "aaaa.",
+                              "height": 28.600067138671875,
+                              "width": 65.99999904632568,
+                              "props": {
+                                "size": 22,
+                                "color": "#201a17",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.35,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "justify",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 623.999997138977,
+                                "y": 324.22519302368164,
+                                "width": 65.99999904632568,
+                                "height": 28.600067138671875
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": -2.7335258483886724
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "width": 300,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 426,
+              "y": 242,
+              "width": 300,
+              "height": 117,
+              "position": {
+                "top": 57,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 404,
+          "y": 185,
+          "width": 340,
+          "height": 234,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 364,
+            "right": 0
+          },
+          "padding": {
+            "top": 20,
+            "left": 20,
+            "right": 20,
+            "bottom": 20
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 40,
+      "y": 185,
+      "width": 826,
+      "height": 234,
+      "position": {
+        "top": 185,
+        "bottom": 0,
+        "left": 40,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "row",
+      "props": {
+        "gap": 24,
+        "flexDirection": "row"
+      },
+      "children": [
+        {
+          "type": "column",
+          "props": {
+            "gap": 12,
+            "width": 340,
+            "padding": 20,
+            "background": ["white"],
+            "borderColor": "#d7c4b6",
+            "borderWidth": 2,
+            "cornerRadius": [24],
+            "tag": "center-breaks"
+          },
+          "children": [
+            {
+              "type": "text",
+              "children": ["center-breaks"],
+              "props": {
+                "size": 18,
+                "color": "#6d4c41",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": "bold",
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 296,
+                      "height": 23.400054931640625,
+                      "lines": [
+                        {
+                          "baseline": 18.090087890625,
+                          "height": 23.400054931640625,
+                          "width": 140.4000062942505,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 64.80000305175781,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 64.80000305175781,
+                                "actualBoundingBoxAscent": 13.090087890625,
+                                "actualBoundingBoxDescent": 1.909912109375,
+                                "fontBoundingBoxAscent": 18.090087890625,
+                                "fontBoundingBoxDescent": 5.309967041015625,
+                                "emHeightAscent": 18.090087890625,
+                                "emHeightDescent": 5.309967041015625,
+                                "hangingBaseline": 14.472070693969727,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.309967041015625
+                              },
+                              "text": "center-breaks",
+                              "height": 23.400054931640625,
+                              "width": 140.4000062942505,
+                              "props": {
+                                "size": 18,
+                                "color": "#6d4c41",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": "bold",
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "tag": "center-breaks-title",
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 62,
+                                "y": 465,
+                                "width": 140.4000062942505,
+                                "height": 23.400054931640625
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "tag": "center-breaks-title",
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 62,
+              "y": 465,
+              "width": 296,
+              "height": 24,
+              "position": {
+                "top": 22,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["Line one\nLine two\nLine three"],
+              "props": {
+                "size": 24,
+                "color": "#1f3c88",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": 1.4,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "center",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 300,
+                      "height": 43.680102539062496,
+                      "lines": [
+                        {
+                          "baseline": 33.7681640625,
+                          "height": 43.680102539062496,
+                          "width": 115.19999885559082,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 57.599998474121094,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 57.599998474121094,
+                                "actualBoundingBoxAscent": 19.1201171875,
+                                "actualBoundingBoxDescent": 1.8798828125,
+                                "fontBoundingBoxAscent": 24.1201171875,
+                                "fontBoundingBoxDescent": 7.0799560546875,
+                                "emHeightAscent": 24.1201171875,
+                                "emHeightDescent": 7.0799560546875,
+                                "hangingBaseline": 19.29609489440918,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -7.0799560546875
+                              },
+                              "text": "Line one",
+                              "height": 31.2000732421875,
+                              "width": 115.19999885559082,
+                              "props": {
+                                "size": 24,
+                                "color": "#1f3c88",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.4,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "center",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 154.4000005722046,
+                                "y": 506.2400146484375,
+                                "width": 115.19999885559082,
+                                "height": 31.2000732421875
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": -3.4080322265624994
+                    }
+                  },
+                  {
+                    "paragraph": {
+                      "width": 300,
+                      "height": 43.680102539062496,
+                      "lines": [
+                        {
+                          "baseline": 33.7681640625,
+                          "height": 43.680102539062496,
+                          "width": 115.19999885559082,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 57.599998474121094,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 57.599998474121094,
+                                "actualBoundingBoxAscent": 19.1201171875,
+                                "actualBoundingBoxDescent": 1.8798828125,
+                                "fontBoundingBoxAscent": 24.1201171875,
+                                "fontBoundingBoxDescent": 7.0799560546875,
+                                "emHeightAscent": 24.1201171875,
+                                "emHeightDescent": 7.0799560546875,
+                                "hangingBaseline": 19.29609489440918,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -7.0799560546875
+                              },
+                              "text": "Line two",
+                              "height": 31.2000732421875,
+                              "width": 115.19999885559082,
+                              "props": {
+                                "size": 24,
+                                "color": "#1f3c88",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.4,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "center",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 154.4000005722046,
+                                "y": 549.9201171875,
+                                "width": 115.19999885559082,
+                                "height": 31.2000732421875
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": -3.4080322265624994
+                    }
+                  },
+                  {
+                    "paragraph": {
+                      "width": 300,
+                      "height": 43.680102539062496,
+                      "lines": [
+                        {
+                          "baseline": 33.7681640625,
+                          "height": 43.680102539062496,
+                          "width": 143.99999809265137,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 57.599998474121094,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 57.599998474121094,
+                                "actualBoundingBoxAscent": 19.1201171875,
+                                "actualBoundingBoxDescent": 1.8798828125,
+                                "fontBoundingBoxAscent": 24.1201171875,
+                                "fontBoundingBoxDescent": 7.0799560546875,
+                                "emHeightAscent": 24.1201171875,
+                                "emHeightDescent": 7.0799560546875,
+                                "hangingBaseline": 19.29609489440918,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -7.0799560546875
+                              },
+                              "text": "Line three",
+                              "height": 31.2000732421875,
+                              "width": 143.99999809265137,
+                              "props": {
+                                "size": 24,
+                                "color": "#1f3c88",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": 1.4,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "center",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 140.00000095367432,
+                                "y": 593.6002197265625,
+                                "width": 143.99999809265137,
+                                "height": 31.2000732421875
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": -3.4080322265624994
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "width": 300,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 62,
+              "y": 500,
+              "width": 300,
+              "height": 132,
+              "position": {
+                "top": 57,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 40,
+          "y": 443,
+          "width": 340,
+          "height": 211,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          },
+          "padding": {
+            "top": 20,
+            "left": 20,
+            "right": 20,
+            "bottom": 20
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "column",
+          "props": {
+            "gap": 12,
+            "width": 340,
+            "padding": 20,
+            "background": ["white"],
+            "borderColor": "#d7c4b6",
+            "borderWidth": 2,
+            "cornerRadius": [24],
+            "tag": "nowrap"
+          },
+          "children": [
+            {
+              "type": "text",
+              "children": ["nowrap"],
+              "props": {
+                "size": 18,
+                "color": "#6d4c41",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": "bold",
+                "letterSpacing": 0,
+                "nowrap": false,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 296,
+                      "height": 23.400054931640625,
+                      "lines": [
+                        {
+                          "baseline": 18.090087890625,
+                          "height": 23.400054931640625,
+                          "width": 64.80000305175781,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 64.80000305175781,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 64.80000305175781,
+                                "actualBoundingBoxAscent": 11.090087890625,
+                                "actualBoundingBoxDescent": 3.909912109375,
+                                "fontBoundingBoxAscent": 18.090087890625,
+                                "fontBoundingBoxDescent": 5.309967041015625,
+                                "emHeightAscent": 18.090087890625,
+                                "emHeightDescent": 5.309967041015625,
+                                "hangingBaseline": 14.472070693969727,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -5.309967041015625
+                              },
+                              "props": {
+                                "size": 18,
+                                "color": "#6d4c41",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": "bold",
+                                "letterSpacing": 0,
+                                "nowrap": false,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "tag": "nowrap-title",
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "nowrap",
+                              "width": 64.80000305175781,
+                              "height": 23.400054931640625,
+                              "run": {
+                                "x": 426,
+                                "y": 465,
+                                "width": 64.80000305175781,
+                                "height": 23.400054931640625
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "tag": "nowrap-title",
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 426,
+              "y": 465,
+              "width": 296,
+              "height": 24,
+              "position": {
+                "top": 22,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            },
+            {
+              "type": "text",
+              "children": ["NOWRAP NOWRAP NOWRAP NOWRAP"],
+              "props": {
+                "size": 24,
+                "color": "#8a2d3b",
+                "font": ["GeistMono"],
+                "style": "normal",
+                "weight": 400,
+                "letterSpacing": 0,
+                "nowrap": true,
+                "lineHeight": null,
+                "indentSize": 0,
+                "hangingIndentSize": 0,
+                "align": "left",
+                "strokeColor": "black",
+                "strokeWidth": 0,
+                "wordSpacing": 0,
+                "blocks": [
+                  {
+                    "paragraph": {
+                      "width": 388.79998779296875,
+                      "height": 31.2000732421875,
+                      "lines": [
+                        {
+                          "baseline": 24.1201171875,
+                          "height": 31.2000732421875,
+                          "width": 388.79998779296875,
+                          "segments": [
+                            {
+                              "metrics": {
+                                "width": 388.79998779296875,
+                                "actualBoundingBoxLeft": 0,
+                                "actualBoundingBoxRight": 388.79998779296875,
+                                "actualBoundingBoxAscent": 19.1201171875,
+                                "actualBoundingBoxDescent": 1.8798828125,
+                                "fontBoundingBoxAscent": 24.1201171875,
+                                "fontBoundingBoxDescent": 7.0799560546875,
+                                "emHeightAscent": 24.1201171875,
+                                "emHeightDescent": 7.0799560546875,
+                                "hangingBaseline": 19.29609489440918,
+                                "alphabeticBaseline": 0,
+                                "ideographicBaseline": -7.0799560546875
+                              },
+                              "props": {
+                                "size": 24,
+                                "color": "#8a2d3b",
+                                "font": ["GeistMono"],
+                                "style": "normal",
+                                "weight": 400,
+                                "letterSpacing": 0,
+                                "nowrap": true,
+                                "lineHeight": null,
+                                "indentSize": 0,
+                                "hangingIndentSize": 0,
+                                "align": "left",
+                                "strokeColor": "black",
+                                "strokeWidth": 0,
+                                "wordSpacing": 0,
+                                "blocks": [],
+                                "offsetY": 0,
+                                "underline": 0,
+                                "underlineColor": null,
+                                "overline": 0,
+                                "overlineColor": null,
+                                "lineThrough": 0,
+                                "lineThroughColor": null,
+                                "highlightColor": null,
+                                "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
+                                "width": 300,
+                                "flexShrink": 1,
+                                "boxSizing": "content-box"
+                              },
+                              "text": "NOWRAP NOWRAP NOWRAP NOWRAP",
+                              "width": 388.79998779296875,
+                              "height": 31.2000732421875,
+                              "run": {
+                                "x": 426,
+                                "y": 500,
+                                "width": 388.79998779296875,
+                                "height": 31.2000732421875
+                              }
+                            }
+                          ],
+                          "spacesCount": 0
+                        }
+                      ],
+                      "offsetY": 0
+                    }
+                  }
+                ],
+                "offsetY": 0,
+                "underline": 0,
+                "underlineColor": null,
+                "overline": 0,
+                "overlineColor": null,
+                "lineThrough": 0,
+                "lineThroughColor": null,
+                "highlightColor": null,
+                "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
+                "width": 300,
+                "flexShrink": 1,
+                "boxSizing": "content-box"
+              },
+              "x": 426,
+              "y": 500,
+              "width": 300,
+              "height": 32,
+              "position": {
+                "top": 57,
+                "bottom": 0,
+                "left": 22,
+                "right": 0
+              },
+              "padding": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              },
+              "margin": {
+                "top": 0,
+                "left": 0,
+                "right": 0,
+                "bottom": 0
+              }
+            }
+          ],
+          "x": 404,
+          "y": 443,
+          "width": 340,
+          "height": 211,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 364,
+            "right": 0
+          },
+          "padding": {
+            "top": 20,
+            "left": 20,
+            "right": 20,
+            "bottom": 20
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 40,
+      "y": 443,
+      "width": 826,
+      "height": 211,
+      "position": {
+        "top": 443,
+        "bottom": 0,
+        "left": 40,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 906,
+  "height": 694,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 40,
+    "left": 40,
+    "right": 40,
+    "bottom": 40
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}
