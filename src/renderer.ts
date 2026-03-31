@@ -79,6 +79,8 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   highlightColor: null,
   dropShadows: [],
   autofit: false,
+  tabStops: [],
+  orientation: 0,
 };
 
 function filterNullishValues<T>(value: T) {
@@ -1007,7 +1009,8 @@ function computePageBreaks(
 
     for (let i = 0; i < node.children.length; i++) {
       const child = node.children[i];
-      if (child == null || typeof child === "string") continue;
+      if (child == null || typeof child === "string" || child.type === "span")
+        continue;
       if (!("props" in child)) continue;
 
       const childLayout = yogaNode.getChild(i);
