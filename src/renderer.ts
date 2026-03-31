@@ -17,6 +17,9 @@ import {
   type ColumnNode,
   type DefaultTextProps,
   type FontValue,
+  type GridNode,
+  type GridTrack,
+  type LayoutProps,
   type ListItemNode,
   type ListNode,
   type PathNode,
@@ -83,10 +86,653 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   orientation: 0,
 };
 
+type GridTrackKind = "fixed" | "auto" | "fr";
+
+interface NormalizedGridTrack {
+  kind: GridTrackKind;
+  value: number;
+}
+
+interface GridPlacement {
+  node: Exclude<SoneNode, null | undefined>;
+  columnStart: number;
+  columnSpan: number;
+  rowStart: number;
+  rowSpan: number;
+}
+
+interface GridResolvedChild {
+  node: Exclude<SoneNode, null | undefined>;
+  layout: Node;
+  x: number;
+  y: number;
+}
+
+interface GridResolvedLayout {
+  width: number;
+  height: number;
+  columnWidths: number[];
+  rowHeights: number[];
+  children: GridResolvedChild[];
+}
+
+interface NodeChildLayout {
+  child: Exclude<SoneNode, null | undefined>;
+  layout: Node;
+  offsetX: number;
+  offsetY: number;
+}
+
+const gridLayoutCache = new WeakMap<GridNode, GridResolvedLayout>();
+
 function filterNullishValues<T>(value: T) {
   return Object.fromEntries(
     Object.entries(value as unknown as object).filter(([_, v]) => v != null),
   );
+}
+
+function normalizeGridTrack(track: GridTrack): NormalizedGridTrack {
+  if (typeof track === "number") {
+    return { kind: "fixed", value: track };
+  }
+
+  if (track === "auto") {
+    return { kind: "auto", value: 0 };
+  }
+
+  if (/^\d*\.?\d+fr$/.test(track)) {
+    return { kind: "fr", value: Number.parseFloat(track) };
+  }
+
+  throw new Error(`Invalid grid track: ${JSON.stringify(track)}`);
+}
+
+function normalizeGridTracks(
+  tracks: GridTrack[] | undefined,
+  fallback: GridTrack[],
+): NormalizedGridTrack[] {
+  const values = tracks != null && tracks.length > 0 ? tracks : fallback;
+  return values.map((value) => normalizeGridTrack(value));
+}
+
+function hasDefiniteConstraint(size: number, mode: MeasureMode) {
+  return mode !== MeasureMode.Undefined && !Number.isNaN(size);
+}
+
+function sumTrackSpan(
+  sizes: number[],
+  start: number,
+  span: number,
+  gap: number,
+) {
+  let total = 0;
+  for (let i = 0; i < span; i++) {
+    total += sizes[start + i] ?? 0;
+  }
+  if (span > 1) total += gap * (span - 1);
+  return total;
+}
+
+function buildTrackOffsets(sizes: number[], gap: number) {
+  const offsets: number[] = [];
+  let cursor = 0;
+  for (let i = 0; i < sizes.length; i++) {
+    offsets.push(cursor);
+    cursor += sizes[i] + gap;
+  }
+  return offsets;
+}
+
+function expandTracks(
+  tracks: NormalizedGridTrack[],
+  count: number,
+  autoTracks: NormalizedGridTrack[],
+) {
+  const source =
+    autoTracks.length > 0 ? autoTracks : [normalizeGridTrack("auto")];
+  while (tracks.length < count) {
+    tracks.push(source[tracks.length % source.length] ?? source[0]);
+  }
+}
+
+function createMeasuredChildLayout(
+  child: Exclude<SoneNode, null | undefined>,
+  renderer: Pick<
+    SoneRenderer,
+    | "hasFont"
+    | "breakIterator"
+    | "getDefaultTextProps"
+    | "loadImage"
+    | "measureText"
+  >,
+  Yoga: YogaLayout,
+  {
+    ownerWidth,
+    ownerHeight,
+    stretchWidth = false,
+    stretchHeight = false,
+  }: {
+    ownerWidth?: number;
+    ownerHeight?: number;
+    stretchWidth?: boolean;
+    stretchHeight?: boolean;
+  } = {},
+) {
+  const childLayout = createLayoutNode(child, renderer, Yoga);
+  if (childLayout == null) return;
+
+  if (
+    stretchWidth &&
+    ownerWidth != null &&
+    child.type !== "text-default" &&
+    child.props.width == null
+  ) {
+    childLayout.setWidth(ownerWidth);
+  }
+
+  if (
+    stretchHeight &&
+    ownerHeight != null &&
+    child.type !== "text-default" &&
+    child.props.height == null
+  ) {
+    childLayout.setHeight(ownerHeight);
+  }
+
+  childLayout.calculateLayout(ownerWidth, ownerHeight);
+  return childLayout;
+}
+
+function measureChildSize(
+  child: Exclude<SoneNode, null | undefined>,
+  renderer: Pick<
+    SoneRenderer,
+    | "hasFont"
+    | "breakIterator"
+    | "getDefaultTextProps"
+    | "loadImage"
+    | "measureText"
+  >,
+  Yoga: YogaLayout,
+  options?: {
+    ownerWidth?: number;
+    ownerHeight?: number;
+    stretchWidth?: boolean;
+    stretchHeight?: boolean;
+  },
+) {
+  const layout = createMeasuredChildLayout(child, renderer, Yoga, options);
+  if (layout == null) return { width: 0, height: 0 };
+
+  const result = {
+    width: layout.getComputedWidth(),
+    height: layout.getComputedHeight(),
+  };
+  layout.freeRecursive();
+  return result;
+}
+
+function freeGridLayouts(node: SoneNode | string | SpanNode) {
+  if (node == null || typeof node === "string" || node.type === "span") return;
+  if (node.type === "text-default") return;
+
+  if (node.type === "grid") {
+    const cached = gridLayoutCache.get(node);
+    if (cached != null) {
+      for (const child of node.children) {
+        freeGridLayouts(child);
+      }
+      for (const child of cached.children) {
+        child.layout.freeRecursive();
+      }
+      gridLayoutCache.delete(node);
+    }
+  }
+
+  if ("children" in node && Array.isArray(node.children)) {
+    for (const child of node.children) {
+      freeGridLayouts(child);
+    }
+  }
+}
+
+function getNodeChildren(node: SoneNode, layout: Node): NodeChildLayout[] {
+  if (node == null || node.type === "text-default") return [];
+
+  if (node.type === "grid") {
+    const resolved = gridLayoutCache.get(node);
+    if (resolved == null) return [];
+    return resolved.children.map((child) => ({
+      child: child.node,
+      layout: child.layout,
+      offsetX: child.x,
+      offsetY: child.y,
+    }));
+  }
+
+  if (!("children" in node) || !Array.isArray(node.children)) return [];
+
+  const children: NodeChildLayout[] = [];
+  for (let i = 0; i < node.children.length; i++) {
+    const child = node.children[i];
+    if (child == null || typeof child === "string" || child.type === "span")
+      continue;
+    children.push({
+      child: child as Exclude<SoneNode, null | undefined>,
+      layout: layout.getChild(i),
+      offsetX: layout.getChild(i).getComputedLeft(),
+      offsetY: layout.getChild(i).getComputedTop(),
+    });
+  }
+  return children;
+}
+
+function resolveGridPlacement(
+  node: GridNode,
+  columnTracks: NormalizedGridTrack[],
+  rowTracks: NormalizedGridTrack[],
+  autoColumns: NormalizedGridTrack[],
+  autoRows: NormalizedGridTrack[],
+) {
+  const occupied: boolean[][] = [];
+  const placements: GridPlacement[] = [];
+
+  const ensureRows = (count: number) => {
+    while (occupied.length < count) {
+      occupied.push(Array(columnTracks.length).fill(false));
+    }
+  };
+
+  const ensureColumns = (count: number) => {
+    if (columnTracks.length >= count) return;
+    expandTracks(columnTracks, count, autoColumns);
+    for (const row of occupied) {
+      while (row.length < columnTracks.length) row.push(false);
+    }
+  };
+
+  const canPlace = (
+    rowStart: number,
+    columnStart: number,
+    rowSpan: number,
+    columnSpan: number,
+  ) => {
+    ensureRows(rowStart + rowSpan);
+    ensureColumns(columnStart + columnSpan);
+    for (let row = rowStart; row < rowStart + rowSpan; row++) {
+      for (
+        let column = columnStart;
+        column < columnStart + columnSpan;
+        column++
+      ) {
+        if (occupied[row][column]) return false;
+      }
+    }
+    return true;
+  };
+
+  const occupy = (
+    rowStart: number,
+    columnStart: number,
+    rowSpan: number,
+    columnSpan: number,
+  ) => {
+    ensureRows(rowStart + rowSpan);
+    ensureColumns(columnStart + columnSpan);
+    expandTracks(rowTracks, rowStart + rowSpan, autoRows);
+    for (let row = rowStart; row < rowStart + rowSpan; row++) {
+      for (
+        let column = columnStart;
+        column < columnStart + columnSpan;
+        column++
+      ) {
+        occupied[row][column] = true;
+      }
+    }
+  };
+
+  for (const child of node.children) {
+    if (child == null) continue;
+    if (child.type === "text-default") continue;
+    const gridChild = child as Exclude<SoneNode, null | undefined>;
+
+    const props = gridChild.props as LayoutProps;
+    const columnStartProp = props.gridColumnStart;
+    const rowStartProp = props.gridRowStart;
+    const columnSpan = props.gridColumnSpan ?? 1;
+    const rowSpan = props.gridRowSpan ?? 1;
+
+    if (
+      columnSpan < 1 ||
+      rowSpan < 1 ||
+      (columnStartProp != null && columnStartProp < 1) ||
+      (rowStartProp != null && rowStartProp < 1)
+    ) {
+      throw new Error("Grid placement values must be greater than 0.");
+    }
+
+    if (columnStartProp != null) {
+      ensureColumns(columnStartProp - 1 + columnSpan);
+    }
+
+    if (rowStartProp != null) {
+      expandTracks(rowTracks, rowStartProp - 1 + rowSpan, autoRows);
+    }
+
+    let rowIndex = rowStartProp != null ? rowStartProp - 1 : 0;
+    let columnIndex = columnStartProp != null ? columnStartProp - 1 : 0;
+
+    if (rowStartProp != null && columnStartProp != null) {
+      if (!canPlace(rowIndex, columnIndex, rowSpan, columnSpan)) {
+        throw new Error("Grid items cannot overlap.");
+      }
+    } else if (rowStartProp != null) {
+      while (!canPlace(rowIndex, columnIndex, rowSpan, columnSpan)) {
+        columnIndex++;
+      }
+    } else if (columnStartProp != null) {
+      while (!canPlace(rowIndex, columnIndex, rowSpan, columnSpan)) {
+        rowIndex++;
+      }
+    } else {
+      while (true) {
+        let placed = false;
+        for (let column = 0; column < columnTracks.length; column++) {
+          if (!canPlace(rowIndex, column, rowSpan, columnSpan)) continue;
+          columnIndex = column;
+          placed = true;
+          break;
+        }
+        if (placed) break;
+        rowIndex++;
+      }
+    }
+
+    occupy(rowIndex, columnIndex, rowSpan, columnSpan);
+    placements.push({
+      node: gridChild,
+      columnStart: columnIndex,
+      columnSpan,
+      rowStart: rowIndex,
+      rowSpan,
+    });
+  }
+
+  return placements;
+}
+
+function distributeGridDeficit(
+  sizes: number[],
+  tracks: NormalizedGridTrack[],
+  start: number,
+  span: number,
+  deficit: number,
+) {
+  if (deficit <= 0) return;
+
+  const adjustable: number[] = [];
+  for (let i = 0; i < span; i++) {
+    if (tracks[start + i]?.kind !== "fixed") {
+      adjustable.push(start + i);
+    }
+  }
+
+  if (adjustable.length === 0) return;
+  const share = deficit / adjustable.length;
+  for (const index of adjustable) {
+    sizes[index] += share;
+  }
+}
+
+function resolveGridLayout(
+  node: GridNode,
+  renderer: Pick<
+    SoneRenderer,
+    | "hasFont"
+    | "breakIterator"
+    | "getDefaultTextProps"
+    | "loadImage"
+    | "measureText"
+  >,
+  Yoga: YogaLayout,
+  width: number,
+  widthMode: MeasureMode,
+  height: number,
+  heightMode: MeasureMode,
+) {
+  const columnGap = node.props.columnGap ?? node.props.gap ?? 0;
+  const rowGap = node.props.rowGap ?? node.props.gap ?? 0;
+  const columnTracks = normalizeGridTracks(node.props.columns, ["auto"]);
+  const rowTracks = normalizeGridTracks(node.props.rows, []);
+  const autoColumns = normalizeGridTracks(node.props.autoColumns, ["auto"]);
+  const autoRows = normalizeGridTracks(node.props.autoRows, ["auto"]);
+
+  freeGridLayouts(node);
+
+  const placements = resolveGridPlacement(
+    node,
+    columnTracks,
+    rowTracks,
+    autoColumns,
+    autoRows,
+  );
+
+  const columnWidths = columnTracks.map((track) =>
+    track.kind === "fixed" ? track.value : 0,
+  );
+  const rowHeights = rowTracks.map((track) =>
+    track.kind === "fixed" ? track.value : 0,
+  );
+
+  const widthIsDefinite = hasDefiniteConstraint(width, widthMode);
+  const heightIsDefinite = hasDefiniteConstraint(height, heightMode);
+
+  for (const placement of placements) {
+    if (placement.columnSpan !== 1) continue;
+    const track = columnTracks[placement.columnStart];
+    if (track?.kind === "fixed") continue;
+    const measurement = measureChildSize(placement.node, renderer, Yoga);
+    columnWidths[placement.columnStart] = Math.max(
+      columnWidths[placement.columnStart] ?? 0,
+      measurement.width,
+    );
+  }
+
+  const fixedAndAutoWidth = columnWidths.reduce((sum, value, index) => {
+    if (columnTracks[index]?.kind === "fr") return sum;
+    return sum + value;
+  }, 0);
+  const totalFrWidth = columnTracks.reduce((sum, track) => {
+    if (track.kind !== "fr") return sum;
+    return sum + track.value;
+  }, 0);
+
+  if (widthIsDefinite && totalFrWidth > 0) {
+    const remaining =
+      width -
+      fixedAndAutoWidth -
+      columnGap * Math.max(0, columnWidths.length - 1);
+    const frUnit = Math.max(0, remaining) / totalFrWidth;
+    for (let i = 0; i < columnTracks.length; i++) {
+      if (columnTracks[i].kind === "fr") {
+        columnWidths[i] = frUnit * columnTracks[i].value;
+      }
+    }
+  } else {
+    for (let i = 0; i < columnTracks.length; i++) {
+      if (columnTracks[i].kind !== "fr") continue;
+      const trackWidth = placements
+        .filter(
+          (placement) =>
+            placement.columnSpan === 1 && placement.columnStart === i,
+        )
+        .reduce((max, placement) => {
+          const measurement = measureChildSize(placement.node, renderer, Yoga);
+          return Math.max(max, measurement.width);
+        }, 0);
+      columnWidths[i] = Math.max(columnWidths[i] ?? 0, trackWidth);
+    }
+  }
+
+  for (const placement of placements) {
+    if (placement.columnSpan <= 1) continue;
+    const measurement = measureChildSize(placement.node, renderer, Yoga);
+    const current = sumTrackSpan(
+      columnWidths,
+      placement.columnStart,
+      placement.columnSpan,
+      columnGap,
+    );
+    distributeGridDeficit(
+      columnWidths,
+      columnTracks,
+      placement.columnStart,
+      placement.columnSpan,
+      measurement.width - current,
+    );
+  }
+
+  for (const placement of placements) {
+    if (placement.rowSpan !== 1) continue;
+    const track = rowTracks[placement.rowStart];
+    if (track?.kind === "fixed") continue;
+    const availableWidth = sumTrackSpan(
+      columnWidths,
+      placement.columnStart,
+      placement.columnSpan,
+      columnGap,
+    );
+    const measurement = measureChildSize(placement.node, renderer, Yoga, {
+      ownerWidth: availableWidth,
+      stretchWidth: true,
+    });
+    rowHeights[placement.rowStart] = Math.max(
+      rowHeights[placement.rowStart] ?? 0,
+      measurement.height,
+    );
+  }
+
+  const fixedAndAutoHeight = rowHeights.reduce((sum, value, index) => {
+    if (rowTracks[index]?.kind === "fr") return sum;
+    return sum + value;
+  }, 0);
+  const totalFrHeight = rowTracks.reduce((sum, track) => {
+    if (track.kind !== "fr") return sum;
+    return sum + track.value;
+  }, 0);
+
+  if (heightIsDefinite && totalFrHeight > 0) {
+    const remaining =
+      height - fixedAndAutoHeight - rowGap * Math.max(0, rowHeights.length - 1);
+    const frUnit = Math.max(0, remaining) / totalFrHeight;
+    for (let i = 0; i < rowTracks.length; i++) {
+      if (rowTracks[i].kind === "fr") {
+        rowHeights[i] = frUnit * rowTracks[i].value;
+      }
+    }
+  } else {
+    for (let i = 0; i < rowTracks.length; i++) {
+      if (rowTracks[i].kind !== "fr") continue;
+      rowHeights[i] = Math.max(rowHeights[i] ?? 0, 0);
+    }
+  }
+
+  for (const placement of placements) {
+    if (placement.rowSpan <= 1) continue;
+    const availableWidth = sumTrackSpan(
+      columnWidths,
+      placement.columnStart,
+      placement.columnSpan,
+      columnGap,
+    );
+    const measurement = measureChildSize(placement.node, renderer, Yoga, {
+      ownerWidth: availableWidth,
+      stretchWidth: true,
+    });
+    const current = sumTrackSpan(
+      rowHeights,
+      placement.rowStart,
+      placement.rowSpan,
+      rowGap,
+    );
+    distributeGridDeficit(
+      rowHeights,
+      rowTracks,
+      placement.rowStart,
+      placement.rowSpan,
+      measurement.height - current,
+    );
+  }
+
+  const measuredWidth =
+    columnWidths.reduce((sum, value) => sum + value, 0) +
+    columnGap * Math.max(0, columnWidths.length - 1);
+  const measuredHeight =
+    rowHeights.reduce((sum, value) => sum + value, 0) +
+    rowGap * Math.max(0, rowHeights.length - 1);
+
+  const resolvedWidth =
+    widthMode === MeasureMode.Exactly
+      ? width
+      : widthMode === MeasureMode.AtMost
+        ? Math.min(width, measuredWidth)
+        : measuredWidth;
+  const resolvedHeight =
+    heightMode === MeasureMode.Exactly
+      ? height
+      : heightMode === MeasureMode.AtMost
+        ? Math.min(height, measuredHeight)
+        : measuredHeight;
+
+  const columnOffsets = buildTrackOffsets(columnWidths, columnGap);
+  const rowOffsets = buildTrackOffsets(rowHeights, rowGap);
+  const children: GridResolvedChild[] = [];
+
+  for (const placement of placements) {
+    const childWidth = sumTrackSpan(
+      columnWidths,
+      placement.columnStart,
+      placement.columnSpan,
+      columnGap,
+    );
+    const childHeight = sumTrackSpan(
+      rowHeights,
+      placement.rowStart,
+      placement.rowSpan,
+      rowGap,
+    );
+    const childLayout = createMeasuredChildLayout(
+      placement.node,
+      renderer,
+      Yoga,
+      {
+        ownerWidth: childWidth,
+        ownerHeight: childHeight,
+        stretchWidth: true,
+        stretchHeight: true,
+      },
+    );
+
+    if (childLayout == null) continue;
+
+    children.push({
+      node: placement.node,
+      layout: childLayout,
+      x: columnOffsets[placement.columnStart] ?? 0,
+      y: rowOffsets[placement.rowStart] ?? 0,
+    });
+  }
+
+  const resolved = {
+    width: resolvedWidth,
+    height: resolvedHeight,
+    columnWidths,
+    rowHeights,
+    children,
+  };
+
+  gridLayoutCache.set(node, resolved);
+  return resolved;
 }
 
 function resolveMarker(
@@ -701,6 +1347,24 @@ export function createLayoutNode(
     return yogaNode;
   }
 
+  if (node.type === "grid") {
+    const measureFunc: MeasureFunction = (w, wMode, h, hMode) => {
+      const resolved = resolveGridLayout(
+        node,
+        renderer,
+        Yoga,
+        w,
+        wMode,
+        h,
+        hMode,
+      );
+      return { width: resolved.width, height: resolved.height };
+    };
+
+    yogaNode.setMeasureFunc(measureFunc);
+    return yogaNode;
+  }
+
   for (const child of node.children) {
     if (child == null) continue;
     const childNode = createLayoutNode(child, renderer, Yoga);
@@ -892,6 +1556,8 @@ export async function renderWithMetadata<T = HTMLCanvasElement>(
   drawOnCanvas(canvas, compiledNode, renderer, layout, config) as unknown as T;
 
   const metadata = createMetadata(compiledNode, layout);
+  layout.freeRecursive();
+  freeGridLayouts(compiledNode);
 
   return { canvas, metadata };
 }
@@ -960,15 +1626,8 @@ export function drawOnCanvas(
 
       drawLayoutNode(renderer, ctx, node, layout, x, y);
 
-      for (let i = 0; i < node.children.length; i++) {
-        const childRoot = layout.getChild(i);
-        const child = node.children[i];
-        draw(
-          child,
-          childRoot,
-          x + childRoot.getComputedLeft(),
-          y + childRoot.getComputedTop(),
-        );
+      for (const child of getNodeChildren(node, layout)) {
+        draw(child.child, child.layout, x + child.offsetX, y + child.offsetY);
       }
 
       // draw over the children
@@ -1007,14 +1666,11 @@ function computePageBreaks(
     if (node == null || typeof node === "string") return;
     if (!("children" in node) || node.children == null) return;
 
-    for (let i = 0; i < node.children.length; i++) {
-      const child = node.children[i];
-      if (child == null || typeof child === "string" || child.type === "span")
-        continue;
-      if (!("props" in child)) continue;
+    for (const childEntry of getNodeChildren(node, yogaNode)) {
+      const child = childEntry.child;
 
-      const childLayout = yogaNode.getChild(i);
-      const childAbsTop = absY + childLayout.getComputedTop();
+      const childLayout = childEntry.layout;
+      const childAbsTop = absY + childEntry.offsetY;
       const childAbsBottom = childAbsTop + childLayout.getComputedHeight();
       const childProps = child.props as { pageBreak?: string } | undefined;
 
@@ -1351,6 +2007,7 @@ export async function renderPages(
   layout.freeRecursive();
   headerLayout?.freeRecursive();
   footerLayout?.freeRecursive();
+  freeGridLayouts(compiledNode);
   return canvases;
 }
 
@@ -1420,20 +2077,18 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
 
     if (
       type === "column" ||
+      type === "grid" ||
       type === "row" ||
       type === "table" ||
       type === "table-row" ||
       type === "table-cell"
     ) {
-      for (let i = 0; i < node.children.length; i++) {
-        const childRoot = layout.getChild(i);
-        const child = node.children[i];
-        if (child == null) continue;
+      for (const child of getNodeChildren(node, layout)) {
         const output = drawWithMeta(
-          child,
-          childRoot,
-          x + childRoot.getComputedLeft(),
-          y + childRoot.getComputedTop(),
+          child.child,
+          child.layout,
+          x + child.offsetX,
+          y + child.offsetY,
         );
         if (output == null) continue;
         children.push(output);
@@ -1474,6 +2129,7 @@ export async function render<T = HTMLCanvasElement>(
   );
   drawOnCanvas(canvas, compiledNode, renderer, layout, config);
   layout.freeRecursive();
+  freeGridLayouts(compiledNode);
   return canvas as unknown as T;
 }
 
@@ -1491,6 +2147,7 @@ export function drawLayoutNode(
   ctx: CanvasRenderingContext2D,
   node:
     | ColumnNode
+    | GridNode
     | RowNode
     | TextNode
     | PathNode

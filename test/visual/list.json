@@ -79,6 +79,8 @@
                         "highlightColor": null,
                         "dropShadows": [],
                         "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "marginBottom": 16,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
@@ -108,6 +110,8 @@
         "highlightColor": null,
         "dropShadows": [],
         "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "marginBottom": 16,
         "flexShrink": 1,
         "boxSizing": "content-box"
@@ -208,6 +212,8 @@
                         "highlightColor": null,
                         "dropShadows": [],
                         "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -236,6 +242,8 @@
         "highlightColor": null,
         "dropShadows": [],
         "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
@@ -368,6 +376,8 @@
                         "highlightColor": null,
                         "dropShadows": [],
                         "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -396,6 +406,8 @@
         "highlightColor": null,
         "dropShadows": [],
         "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
@@ -528,6 +540,8 @@
                         "highlightColor": null,
                         "dropShadows": [],
                         "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -556,6 +570,8 @@
         "highlightColor": null,
         "dropShadows": [],
         "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
@@ -689,6 +705,8 @@
                         "highlightColor": null,
                         "dropShadows": [],
                         "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -717,6 +735,8 @@
         "highlightColor": null,
         "dropShadows": [],
         "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
@@ -857,6 +877,8 @@
                         "highlightColor": null,
                         "dropShadows": [],
                         "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -885,6 +907,8 @@
         "highlightColor": null,
         "dropShadows": [],
         "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "flexShrink": 1,
         "boxSizing": "content-box"
       },

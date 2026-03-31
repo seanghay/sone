@@ -1,4 +1,5 @@
 import type {
+  GridProps,
   LayoutProps,
   PathProps,
   PhotoProps,
@@ -20,6 +21,7 @@ export interface SoneMetadata {
   type: string;
   props:
     | LayoutProps
+    | GridProps
     | PhotoProps
     | TextProps
     | PathProps

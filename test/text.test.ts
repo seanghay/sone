@@ -4,6 +4,7 @@ import type { TextProps } from "../src/core.ts";
 import {
   compile,
   renderer,
+  renderWithMetadata,
   SoneCompileContext,
   Span,
   Text,
@@ -255,4 +256,88 @@ test("createParagraph with different measure modes", async () => {
 
   expect(undefinedMode.lines).toHaveLength(1); // No wrapping
   expect(constrainedMode.width).toBeLessThanOrEqual(200); // At most the specified width
+});
+
+test("createParagraph expands tab stops into explicit spacing", async () => {
+  const withTabs = Text("Name\tAmount").font("monospace").tabStops(120);
+  const withoutTabs = Text("Name Amount").font("monospace");
+
+  const context: SoneCompileContext = {
+    defaultTextProps: renderer.getDefaultTextProps(),
+    breakIterator: renderer.breakIterator,
+    loadImage: renderer.loadImage,
+    createId: () => 0,
+  };
+
+  const [compiledWithTabs, compiledWithoutTabs] = await Promise.all([
+    compile(withTabs, context),
+    compile(withoutTabs, context),
+  ]);
+
+  const withTabsParagraph = createParagraph(
+    compiledWithTabs!.children,
+    Number.POSITIVE_INFINITY,
+    compiledWithTabs!.props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  const withoutTabsParagraph = createParagraph(
+    compiledWithoutTabs!.children,
+    Number.POSITIVE_INFINITY,
+    compiledWithoutTabs!.props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(withTabsParagraph.width).toBeGreaterThan(withoutTabsParagraph.width);
+  expect(
+    withTabsParagraph.lines[0].segments.some((segment) => segment.isTab),
+  ).toBe(true);
+});
+
+test("text orientation swaps the layout footprint at 90 degrees", async () => {
+  const normal = await renderWithMetadata(Text("Rotate me").size(24), renderer);
+  const rotated = await renderWithMetadata(
+    Text("Rotate me").size(24).orientation(90),
+    renderer,
+  );
+
+  expect(Math.round(rotated.metadata.width)).toBe(
+    Math.round(normal.metadata.height),
+  );
+  expect(Math.round(rotated.metadata.height)).toBe(
+    Math.round(normal.metadata.width),
+  );
+});
+
+test("justified text distributes extra width across every space", async () => {
+  const { metadata } = await renderWithMetadata(
+    Text("Alpha  Beta   Gamma Delta").size(20).align("justify").width(140),
+    renderer,
+  );
+
+  const blocks = metadata.props.blocks!;
+  const line = blocks[0].paragraph.lines[0];
+  const runWidth = line.segments.reduce(
+    (sum, segment) => sum + (segment.run?.width ?? 0),
+    0,
+  );
+
+  expect(blocks[0].paragraph.lines.length).toBeGreaterThan(1);
+  expect(line.spacesCount).toBeGreaterThan(0);
+  expect(Math.round(runWidth)).toBe(Math.round(blocks[0].paragraph.width));
+});
+
+test("justified wrapped lines trim trailing whitespace before layout", async () => {
+  const { metadata } = await renderWithMetadata(
+    Text("Alpha Beta Gamma Delta").size(20).align("justify").width(120),
+    renderer,
+  );
+
+  const firstLine = metadata.props.blocks![0].paragraph.lines[0];
+  const tail = firstLine.segments[firstLine.segments.length - 1];
+
+  expect(firstLine.segments.length).toBeGreaterThan(0);
+  expect(tail.text.endsWith(" ")).toBe(false);
 });

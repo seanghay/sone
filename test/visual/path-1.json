@@ -85,38 +85,7 @@
                         "emHeightDescent": 23.423828125,
                         "hangingBaseline": 51.20000076293945,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -23.423828125,
-                        "lines": [
-                          {
-                            "x": 3,
-                            "y": -50,
-                            "width": 131.34400939941406,
-                            "height": 52,
-                            "baseline": -0.423828125,
-                            "hangingBaseline": -51.62382888793945,
-                            "alphabeticBaseline": -0.423828125,
-                            "ideographicBaseline": 23,
-                            "ascent": -64.423828125,
-                            "descent": 23,
-                            "startIndex": 0,
-                            "endIndex": 4,
-                            "runs": [
-                              {
-                                "x": 3,
-                                "y": -50,
-                                "width": 131.34400939941406,
-                                "height": 52,
-                                "family": "Avenir Next",
-                                "ascent": -64.423828125,
-                                "descent": 23,
-                                "capHeight": -45.7358283996582,
-                                "xHeight": -32.29582977294922,
-                                "underline": 4.376172065734863,
-                                "strikethrough": -16.423828125
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -23.423828125
                       },
                       "props": {
                         "size": 64,
@@ -143,6 +112,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "position": "absolute",
                         "alignSelf": "center",
                         "flexShrink": 1,
@@ -150,7 +122,13 @@
                       },
                       "text": "Path",
                       "width": 136.8300018310547,
-                      "height": 87.423828125
+                      "height": 87.423828125,
+                      "run": {
+                        "x": 117,
+                        "y": 141,
+                        "width": 136.8300018310547,
+                        "height": 87.423828125
+                      }
                     }
                   ],
                   "spacesCount": 0
@@ -169,6 +147,9 @@
         "lineThroughColor": null,
         "highlightColor": null,
         "dropShadows": [],
+        "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "position": "absolute",
         "alignSelf": "center",
         "flexShrink": 1,

@@ -49,6 +49,8 @@ export type JustifyContent =
   | "space-around"
   | "space-evenly";
 
+export type GridTrack = number | "auto" | `${number}fr`;
+
 /**
  * Core layout properties - mirrors CSS Flexbox/Grid with additional visual styling
  */
@@ -131,6 +133,10 @@ export interface LayoutProps {
   opacity?: number;
   shadows?: Array<CssShadowProperties | string>;
   filters?: string[];
+  gridColumnStart?: number;
+  gridColumnSpan?: number;
+  gridRowStart?: number;
+  gridRowSpan?: number;
 }
 
 /**
@@ -226,6 +232,14 @@ interface LayoutPropsBuilder<T, P = LayoutProps> {
   shrink(value: Required<LayoutProps["flexShrink"]>): T;
   wrap(value: Required<LayoutProps["flexWrap"]>): T;
   justifyContent(value: Required<LayoutProps["justifyContent"]>): T;
+  gridColumn(
+    start: Required<LayoutProps["gridColumnStart"]>,
+    span?: Required<LayoutProps["gridColumnSpan"]>,
+  ): T;
+  gridRow(
+    start: Required<LayoutProps["gridRowStart"]>,
+    span?: Required<LayoutProps["gridRowSpan"]>,
+  ): T;
 
   // position
   left(value: Required<LayoutProps["left"]>): T;
@@ -549,12 +563,33 @@ export interface ColumnNode extends LayoutPropsBuilder<ColumnNode> {
   children: SoneNode[];
 }
 
+export interface GridProps extends LayoutProps {
+  columns?: GridTrack[];
+  rows?: GridTrack[];
+  autoRows?: GridTrack[];
+  autoColumns?: GridTrack[];
+}
+
+export interface GridPropsBuilder<T> extends LayoutPropsBuilder<T, GridProps> {
+  columns(...values: GridTrack[]): T;
+  rows(...values: GridTrack[]): T;
+  autoRows(...values: GridTrack[]): T;
+  autoColumns(...values: GridTrack[]): T;
+}
+
+export interface GridNode extends GridPropsBuilder<GridNode> {
+  id: number;
+  type: "grid";
+  children: SoneNode[];
+}
+
 /**
  * Union of all possible Sone node types
  */
 export type SoneNode =
   | ColumnNode
   | RowNode
+  | GridNode
   | TextNode
   | TextDefaultNode
   | PhotoNode
@@ -802,6 +837,22 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
     },
     justifyContent(value: Required<LayoutProps["justifyContent"]>): T {
       props.justifyContent = value;
+      return this as unknown as T;
+    },
+    gridColumn(
+      start: Required<LayoutProps["gridColumnStart"]>,
+      span: Required<LayoutProps["gridColumnSpan"]> = 1,
+    ): T {
+      props.gridColumnStart = start;
+      props.gridColumnSpan = span;
+      return this as unknown as T;
+    },
+    gridRow(
+      start: Required<LayoutProps["gridRowStart"]>,
+      span: Required<LayoutProps["gridRowSpan"]> = 1,
+    ): T {
+      props.gridRowStart = start;
+      props.gridRowSpan = span;
       return this as unknown as T;
     },
     left(value: Required<LayoutProps["left"]>): T {
@@ -1200,6 +1251,37 @@ export function Row(...children: SoneNode[]): RowNode {
     type: "row",
     children,
     ...layoutPropsBuilder(),
+  };
+}
+
+/**
+ * Creates a grid layout container with row-major auto placement.
+ * @param children - child nodes placed into the grid
+ * @example Grid(Text("A"), Text("B")).columns("1fr", "1fr").columnGap(10)
+ */
+export function Grid(...children: SoneNode[]): GridNode {
+  const props: GridProps = {};
+  return {
+    id: -1,
+    type: "grid",
+    children,
+    ...layoutPropsBuilder(props),
+    columns(...values) {
+      props.columns = values;
+      return this;
+    },
+    rows(...values) {
+      props.rows = values;
+      return this;
+    },
+    autoRows(...values) {
+      props.autoRows = values;
+      return this;
+    },
+    autoColumns(...values) {
+      props.autoColumns = values;
+      return this;
+    },
   };
 }
 

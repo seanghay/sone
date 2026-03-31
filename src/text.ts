@@ -6,6 +6,11 @@ import { createGradientFillStyleList } from "./gradient.ts";
 import type { SoneRenderer } from "./renderer.ts";
 import { applySpanProps, indicesOf, isWhitespace } from "./utils.ts";
 
+function countSpaces(value: string): number {
+  const matches = value.match(/ /g);
+  return matches == null ? 0 : matches.length;
+}
+
 function nextTabStop(tabStops: number[], currentX: number): number {
   for (const stop of tabStops) {
     if (stop > currentX) return stop;
@@ -142,6 +147,51 @@ export function createMultilineParagraph(
     }
   }
 
+  function recomputeLineMetrics(line: SoneParagraphLine) {
+    line.height = 0;
+    line.baseline = 0;
+    for (const segment of line.segments) {
+      line.height = Math.max(line.height, segment.height);
+      line.baseline = Math.max(
+        line.baseline,
+        segment.metrics.fontBoundingBoxAscent,
+      );
+    }
+  }
+
+  function trimTrailingWhitespace(line: SoneParagraphLine) {
+    while (line.segments.length > 0) {
+      const tail = line.segments[line.segments.length - 1];
+
+      if (tail.isTab) {
+        line.width -= tail.width;
+        line.segments.pop();
+        continue;
+      }
+
+      const trimmedText = tail.text.replace(/[ \t]+$/u, "");
+      if (trimmedText === tail.text) break;
+
+      if (trimmedText.length === 0) {
+        line.width -= tail.width;
+        line.segments.pop();
+        continue;
+      }
+
+      const metrics = measureText(trimmedText, tail.props);
+      const height =
+        metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+      line.width -= tail.width - metrics.width;
+      tail.text = trimmedText;
+      tail.metrics = metrics;
+      tail.width = metrics.width;
+      tail.height = height;
+      break;
+    }
+
+    recomputeLineMetrics(line);
+  }
+
   const lines: SoneParagraphLine[] = [];
 
   let currentLine: SoneParagraphLine = {
@@ -266,6 +316,7 @@ export function createMultilineParagraph(
 
   let linePosition = 0;
   for (const line of lines) {
+    trimTrailingWhitespace(line);
     line.baseline *= lineMultiplier;
     line.height *= lineMultiplier;
 
@@ -284,10 +335,7 @@ export function createMultilineParagraph(
 
     if (linePosition < lines.length - 1) {
       for (const segment of line.segments) {
-        const m = segment.text.match(/[ ]/);
-        if (m) {
-          line.spacesCount += m.length;
-        }
+        line.spacesCount += countSpaces(segment.text);
       }
     }
 
@@ -537,12 +585,10 @@ export function createTextRuns(
         const segment = line.segments[s];
         const spanOffsetY = segment.props.offsetY ?? 0;
         let segmentWidth = segment.width;
+        const segmentSpaces = countSpaces(segment.text);
 
-        if (align === "justify") {
-          // FIXME: Should flag this in compute layout func
-          if (/[ ]/.test(segment.text)) {
-            segmentWidth += addedSpaceWidth;
-          }
+        if (align === "justify" && segmentSpaces > 0) {
+          segmentWidth += addedSpaceWidth * segmentSpaces;
         }
 
         const textX = x + left + offsetX;
@@ -702,12 +748,10 @@ export function drawTextNode(
         const spanOffsetY = segment.props.offsetY ?? 0;
 
         let segmentWidth = segment.width;
+        const segmentSpaces = countSpaces(segment.text);
 
-        if (align === "justify") {
-          // FIXME: Should flag this in compute layout func
-          if (/[ ]/.test(segment.text)) {
-            segmentWidth += addedSpaceWidth;
-          }
+        if (align === "justify" && segmentSpaces > 0) {
+          segmentWidth += addedSpaceWidth * segmentSpaces;
         }
 
         const textX = x + left + offsetX;
@@ -762,6 +806,9 @@ export function drawTextNode(
 
         // draw segment
         applySpanProps(ctx, segment.props);
+        if (align === "justify" && segmentSpaces > 0) {
+          ctx.wordSpacing = `${(segment.props.wordSpacing ?? 0) + addedSpaceWidth}px`;
+        }
 
         if (segment.props.dropShadows) {
           for (const shadowProperties of segment.props.dropShadows) {

@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { SoneNode, sone } from "../../src/node.ts";
+import type { SoneNode } from "../../src/node.ts";
+import { sone } from "../../src/node.ts";
 
 export const relative = (p: string) =>
   fileURLToPath(new URL(p, import.meta.url));

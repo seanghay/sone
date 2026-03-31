@@ -62,38 +62,7 @@
                             "emHeightDescent": 11.7119140625,
                             "hangingBaseline": 25.600000381469727,
                             "alphabeticBaseline": 0,
-                            "ideographicBaseline": -11.7119140625,
-                            "lines": [
-                              {
-                                "x": 1,
-                                "y": -26,
-                                "width": 168.2480010986328,
-                                "height": 28,
-                                "baseline": 0.2880859375,
-                                "hangingBaseline": -25.311914443969727,
-                                "alphabeticBaseline": 0.2880859375,
-                                "ideographicBaseline": 12,
-                                "ascent": -31.7119140625,
-                                "descent": 12,
-                                "startIndex": 0,
-                                "endIndex": 9,
-                                "runs": [
-                                  {
-                                    "x": 1,
-                                    "y": -26,
-                                    "width": 168.2480010986328,
-                                    "height": 28,
-                                    "family": "Avenir Next",
-                                    "ascent": -31.7119140625,
-                                    "descent": 12,
-                                    "capHeight": -22.3679141998291,
-                                    "xHeight": -15.647913932800293,
-                                    "underline": 2.6880860328674316,
-                                    "strikethrough": -7.7119140625
-                                  }
-                                ]
-                              }
-                            ]
+                            "ideographicBaseline": -11.7119140625
                           },
                           "props": {
                             "size": 32,
@@ -120,12 +89,21 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "text": "Dashboard",
                           "width": 170.3000030517578,
-                          "height": 43.7119140625
+                          "height": 43.7119140625,
+                          "run": {
+                            "x": 24,
+                            "y": 24,
+                            "width": 170.3000030517578,
+                            "height": 43.7119140625
+                          }
                         }
                       ],
                       "spacesCount": 0
@@ -144,6 +122,9 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -212,38 +193,7 @@
                             "emHeightDescent": 5.85595703125,
                             "hangingBaseline": 12.800000190734863,
                             "alphabeticBaseline": 0,
-                            "ideographicBaseline": -5.85595703125,
-                            "lines": [
-                              {
-                                "x": -1,
-                                "y": -14,
-                                "width": 66.95201110839844,
-                                "height": 19,
-                                "baseline": 0.14404296875,
-                                "hangingBaseline": -12.655957221984863,
-                                "alphabeticBaseline": 0.14404296875,
-                                "ideographicBaseline": 6,
-                                "ascent": -15.85595703125,
-                                "descent": 6,
-                                "startIndex": 0,
-                                "endIndex": 9,
-                                "runs": [
-                                  {
-                                    "x": -1,
-                                    "y": -14,
-                                    "width": 66.95201110839844,
-                                    "height": 19,
-                                    "family": "Avenir Next",
-                                    "ascent": -15.85595703125,
-                                    "descent": 6,
-                                    "capHeight": -11.18395709991455,
-                                    "xHeight": -7.34395694732666,
-                                    "underline": 1.3440430164337158,
-                                    "strikethrough": -3.85595703125
-                                  }
-                                ]
-                              }
-                            ]
+                            "ideographicBaseline": -5.85595703125
                           },
                           "text": "Analytics Overview",
                           "height": 21.85595703125,
@@ -348,6 +298,9 @@
                                             "lineThroughColor": null,
                                             "highlightColor": null,
                                             "dropShadows": [],
+                                            "autofit": false,
+                                            "tabStops": [],
+                                            "orientation": 0,
                                             "flexShrink": 1,
                                             "boxSizing": "content-box"
                                           }
@@ -369,8 +322,17 @@
                             "lineThroughColor": null,
                             "highlightColor": null,
                             "dropShadows": [],
+                            "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
+                          },
+                          "run": {
+                            "x": 1037,
+                            "y": 24,
+                            "width": 138.27999877929688,
+                            "height": 21.85595703125
                           }
                         }
                       ],
@@ -390,6 +352,9 @@
             "lineThroughColor": null,
             "highlightColor": null,
             "dropShadows": [],
+            "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -502,38 +467,7 @@
                                 "emHeightDescent": 6.58795166015625,
                                 "hangingBaseline": 14.40000057220459,
                                 "alphabeticBaseline": 0,
-                                "ideographicBaseline": -6.58795166015625,
-                                "lines": [
-                                  {
-                                    "x": 0,
-                                    "y": -14,
-                                    "width": 92.01799011230469,
-                                    "height": 20,
-                                    "baseline": 0.41204833984375,
-                                    "hangingBaseline": -13.98795223236084,
-                                    "alphabeticBaseline": 0.41204833984375,
-                                    "ideographicBaseline": 7,
-                                    "ascent": -17.58795166015625,
-                                    "descent": 7,
-                                    "startIndex": 0,
-                                    "endIndex": 10,
-                                    "runs": [
-                                      {
-                                        "x": 0,
-                                        "y": -14,
-                                        "width": 92.01799011230469,
-                                        "height": 20,
-                                        "family": "Avenir Next",
-                                        "ascent": -17.58795166015625,
-                                        "descent": 7,
-                                        "capHeight": -12.331952095031738,
-                                        "xHeight": -8.55195140838623,
-                                        "underline": 1.762048363685608,
-                                        "strikethrough": -4.08795166015625
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "ideographicBaseline": -6.58795166015625
                               },
                               "props": {
                                 "size": 18,
@@ -560,12 +494,21 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
                               "text": "Navigation",
                               "width": 91.48999786376953,
-                              "height": 24.58795166015625
+                              "height": 24.58795166015625,
+                              "run": {
+                                "x": 24,
+                                "y": 117,
+                                "width": 91.48999786376953,
+                                "height": 24.58795166015625
+                              }
                             }
                           ],
                           "spacesCount": 0
@@ -584,6 +527,9 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -652,38 +598,7 @@
                                 "emHeightDescent": 5.12396240234375,
                                 "hangingBaseline": 11.199999809265137,
                                 "alphabeticBaseline": 0,
-                                "ideographicBaseline": -5.12396240234375,
-                                "lines": [
-                                  {
-                                    "x": 0,
-                                    "y": -9,
-                                    "width": 7,
-                                    "height": 8,
-                                    "baseline": -0.12396240234375,
-                                    "hangingBaseline": -11.323962211608887,
-                                    "alphabeticBaseline": -0.12396240234375,
-                                    "ideographicBaseline": 5,
-                                    "ascent": -14.12396240234375,
-                                    "descent": 5,
-                                    "startIndex": 0,
-                                    "endIndex": 1,
-                                    "runs": [
-                                      {
-                                        "x": 0,
-                                        "y": -9,
-                                        "width": 7,
-                                        "height": 8,
-                                        "family": "Avenir Next",
-                                        "ascent": -14.12396240234375,
-                                        "descent": 5,
-                                        "capHeight": -10.035962104797363,
-                                        "xHeight": -6.675962448120117,
-                                        "underline": 0.9260375499725342,
-                                        "strikethrough": -3.62396240234375
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "ideographicBaseline": -5.12396240234375
                               },
                               "text": "• Dashboard",
                               "height": 19.12396240234375,
@@ -713,12 +628,21 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
                                 "paddingTop": 8,
                                 "paddingBottom": 8,
                                 "paddingLeft": 0,
                                 "paddingRight": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 24,
+                                "y": 149,
+                                "width": 81.61000061035156,
+                                "height": 19.12396240234375
                               }
                             }
                           ],
@@ -738,6 +662,9 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
                 "paddingTop": 8,
                 "paddingBottom": 8,
                 "paddingLeft": 0,
@@ -810,38 +737,7 @@
                                 "emHeightDescent": 5.12396240234375,
                                 "hangingBaseline": 11.199999809265137,
                                 "alphabeticBaseline": 0,
-                                "ideographicBaseline": -5.12396240234375,
-                                "lines": [
-                                  {
-                                    "x": 0,
-                                    "y": -9,
-                                    "width": 7,
-                                    "height": 8,
-                                    "baseline": -0.12396240234375,
-                                    "hangingBaseline": -11.323962211608887,
-                                    "alphabeticBaseline": -0.12396240234375,
-                                    "ideographicBaseline": 5,
-                                    "ascent": -14.12396240234375,
-                                    "descent": 5,
-                                    "startIndex": 0,
-                                    "endIndex": 1,
-                                    "runs": [
-                                      {
-                                        "x": 0,
-                                        "y": -9,
-                                        "width": 7,
-                                        "height": 8,
-                                        "family": "Avenir Next",
-                                        "ascent": -14.12396240234375,
-                                        "descent": 5,
-                                        "capHeight": -10.035962104797363,
-                                        "xHeight": -6.675962448120117,
-                                        "underline": 0.9260375499725342,
-                                        "strikethrough": -3.62396240234375
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "ideographicBaseline": -5.12396240234375
                               },
                               "text": "• Analytics",
                               "height": 19.12396240234375,
@@ -871,12 +767,21 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
                                 "paddingTop": 8,
                                 "paddingBottom": 8,
                                 "paddingLeft": 0,
                                 "paddingRight": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 24,
+                                "y": 184,
+                                "width": 67.41999816894531,
+                                "height": 19.12396240234375
                               }
                             }
                           ],
@@ -896,6 +801,9 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
                 "paddingTop": 8,
                 "paddingBottom": 8,
                 "paddingLeft": 0,
@@ -968,38 +876,7 @@
                                 "emHeightDescent": 5.12396240234375,
                                 "hangingBaseline": 11.199999809265137,
                                 "alphabeticBaseline": 0,
-                                "ideographicBaseline": -5.12396240234375,
-                                "lines": [
-                                  {
-                                    "x": 0,
-                                    "y": -9,
-                                    "width": 7,
-                                    "height": 8,
-                                    "baseline": -0.12396240234375,
-                                    "hangingBaseline": -11.323962211608887,
-                                    "alphabeticBaseline": -0.12396240234375,
-                                    "ideographicBaseline": 5,
-                                    "ascent": -14.12396240234375,
-                                    "descent": 5,
-                                    "startIndex": 0,
-                                    "endIndex": 1,
-                                    "runs": [
-                                      {
-                                        "x": 0,
-                                        "y": -9,
-                                        "width": 7,
-                                        "height": 8,
-                                        "family": "Avenir Next",
-                                        "ascent": -14.12396240234375,
-                                        "descent": 5,
-                                        "capHeight": -10.035962104797363,
-                                        "xHeight": -6.675962448120117,
-                                        "underline": 0.9260375499725342,
-                                        "strikethrough": -3.62396240234375
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "ideographicBaseline": -5.12396240234375
                               },
                               "text": "• Reports",
                               "height": 19.12396240234375,
@@ -1029,12 +906,21 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
                                 "paddingTop": 8,
                                 "paddingBottom": 8,
                                 "paddingLeft": 0,
                                 "paddingRight": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 24,
+                                "y": 219,
+                                "width": 59.70000076293945,
+                                "height": 19.12396240234375
                               }
                             }
                           ],
@@ -1054,6 +940,9 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
                 "paddingTop": 8,
                 "paddingBottom": 8,
                 "paddingLeft": 0,
@@ -1126,38 +1015,7 @@
                                 "emHeightDescent": 5.12396240234375,
                                 "hangingBaseline": 11.199999809265137,
                                 "alphabeticBaseline": 0,
-                                "ideographicBaseline": -5.12396240234375,
-                                "lines": [
-                                  {
-                                    "x": 0,
-                                    "y": -9,
-                                    "width": 7,
-                                    "height": 8,
-                                    "baseline": -0.12396240234375,
-                                    "hangingBaseline": -11.323962211608887,
-                                    "alphabeticBaseline": -0.12396240234375,
-                                    "ideographicBaseline": 5,
-                                    "ascent": -14.12396240234375,
-                                    "descent": 5,
-                                    "startIndex": 0,
-                                    "endIndex": 1,
-                                    "runs": [
-                                      {
-                                        "x": 0,
-                                        "y": -9,
-                                        "width": 7,
-                                        "height": 8,
-                                        "family": "Avenir Next",
-                                        "ascent": -14.12396240234375,
-                                        "descent": 5,
-                                        "capHeight": -10.035962104797363,
-                                        "xHeight": -6.675962448120117,
-                                        "underline": 0.9260375499725342,
-                                        "strikethrough": -3.62396240234375
-                                      }
-                                    ]
-                                  }
-                                ]
+                                "ideographicBaseline": -5.12396240234375
                               },
                               "text": "• Settings",
                               "height": 19.12396240234375,
@@ -1187,12 +1045,21 @@
                                 "lineThroughColor": null,
                                 "highlightColor": null,
                                 "dropShadows": [],
+                                "autofit": false,
+                                "tabStops": [],
+                                "orientation": 0,
                                 "paddingTop": 8,
                                 "paddingBottom": 8,
                                 "paddingLeft": 0,
                                 "paddingRight": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
+                              },
+                              "run": {
+                                "x": 24,
+                                "y": 254,
+                                "width": 61.810001373291016,
+                                "height": 19.12396240234375
                               }
                             }
                           ],
@@ -1212,6 +1079,9 @@
                 "lineThroughColor": null,
                 "highlightColor": null,
                 "dropShadows": [],
+                "autofit": false,
+                "tabStops": [],
+                "orientation": 0,
                 "paddingTop": 8,
                 "paddingBottom": 8,
                 "paddingLeft": 0,
@@ -1334,38 +1204,7 @@
                                         "emHeightDescent": 5.12396240234375,
                                         "hangingBaseline": 11.199999809265137,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -5.12396240234375,
-                                        "lines": [
-                                          {
-                                            "x": 0,
-                                            "y": -11,
-                                            "width": 36.20399475097656,
-                                            "height": 13,
-                                            "baseline": -0.12396240234375,
-                                            "hangingBaseline": -11.323962211608887,
-                                            "alphabeticBaseline": -0.12396240234375,
-                                            "ideographicBaseline": 5,
-                                            "ascent": -14.12396240234375,
-                                            "descent": 5,
-                                            "startIndex": 0,
-                                            "endIndex": 5,
-                                            "runs": [
-                                              {
-                                                "x": 0,
-                                                "y": -11,
-                                                "width": 36.20399475097656,
-                                                "height": 13,
-                                                "family": "Avenir Next",
-                                                "ascent": -14.12396240234375,
-                                                "descent": 5,
-                                                "capHeight": -10.035962104797363,
-                                                "xHeight": -6.675962448120117,
-                                                "underline": 0.9260375499725342,
-                                                "strikethrough": -3.62396240234375
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -5.12396240234375
                                       },
                                       "props": {
                                         "size": 14,
@@ -1392,12 +1231,21 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
                                       "text": "Users",
                                       "width": 35.41999816894531,
-                                      "height": 19.12396240234375
+                                      "height": 19.12396240234375,
+                                      "run": {
+                                        "x": 245,
+                                        "y": 138,
+                                        "width": 35.41999816894531,
+                                        "height": 19.12396240234375
+                                      }
                                     }
                                   ],
                                   "spacesCount": 0
@@ -1416,6 +1264,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -1484,38 +1335,7 @@
                                         "emHeightDescent": 10.2479248046875,
                                         "hangingBaseline": 22.399999618530273,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -10.2479248046875,
-                                        "lines": [
-                                          {
-                                            "x": 0,
-                                            "y": -22,
-                                            "width": 81.66398620605469,
-                                            "height": 27,
-                                            "baseline": -0.2479248046875,
-                                            "hangingBaseline": -22.647924423217773,
-                                            "alphabeticBaseline": -0.2479248046875,
-                                            "ideographicBaseline": 10,
-                                            "ascent": -28.2479248046875,
-                                            "descent": 10,
-                                            "startIndex": 0,
-                                            "endIndex": 5,
-                                            "runs": [
-                                              {
-                                                "x": 0,
-                                                "y": -22,
-                                                "width": 81.66398620605469,
-                                                "height": 27,
-                                                "family": "Avenir Next",
-                                                "ascent": -28.2479248046875,
-                                                "descent": 10,
-                                                "capHeight": -20.071924209594727,
-                                                "xHeight": -14.191925048828125,
-                                                "underline": 1.8520750999450684,
-                                                "strikethrough": -7.2479248046875
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -10.2479248046875
                                       },
                                       "props": {
                                         "size": 28,
@@ -1542,12 +1362,21 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
                                       "text": "1,234",
                                       "width": 80.75,
-                                      "height": 38.2479248046875
+                                      "height": 38.2479248046875,
+                                      "run": {
+                                        "x": 245,
+                                        "y": 157,
+                                        "width": 80.75,
+                                        "height": 38.2479248046875
+                                      }
                                     }
                                   ],
                                   "spacesCount": 0
@@ -1566,6 +1395,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -1634,38 +1466,7 @@
                                         "emHeightDescent": 4.3919677734375,
                                         "hangingBaseline": 9.600000381469727,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -4.3919677734375,
-                                        "lines": [
-                                          {
-                                            "x": -1,
-                                            "y": -8,
-                                            "width": 10,
-                                            "height": 9,
-                                            "baseline": -0.3919677734375,
-                                            "hangingBaseline": -9.991968154907227,
-                                            "alphabeticBaseline": -0.3919677734375,
-                                            "ideographicBaseline": 4,
-                                            "ascent": -12.3919677734375,
-                                            "descent": 4,
-                                            "startIndex": 0,
-                                            "endIndex": 1,
-                                            "runs": [
-                                              {
-                                                "x": -1,
-                                                "y": -8,
-                                                "width": 10,
-                                                "height": 9,
-                                                "family": "Avenir Next",
-                                                "ascent": -12.3919677734375,
-                                                "descent": 4,
-                                                "capHeight": -8.887968063354492,
-                                                "xHeight": -6.007967948913574,
-                                                "underline": 0.5080322027206421,
-                                                "strikethrough": -3.3919677734375
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -4.3919677734375
                                       },
                                       "text": "+12%",
                                       "height": 16.3919677734375,
@@ -1695,8 +1496,17 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
+                                      },
+                                      "run": {
+                                        "x": 245,
+                                        "y": 195,
+                                        "width": 31.90999984741211,
+                                        "height": 16.3919677734375
                                       }
                                     }
                                   ],
@@ -1716,6 +1526,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -1819,38 +1632,7 @@
                                         "emHeightDescent": 5.12396240234375,
                                         "hangingBaseline": 11.199999809265137,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -5.12396240234375,
-                                        "lines": [
-                                          {
-                                            "x": 0,
-                                            "y": -11,
-                                            "width": 56.33399963378906,
-                                            "height": 13,
-                                            "baseline": -0.12396240234375,
-                                            "hangingBaseline": -11.323962211608887,
-                                            "alphabeticBaseline": -0.12396240234375,
-                                            "ideographicBaseline": 5,
-                                            "ascent": -14.12396240234375,
-                                            "descent": 5,
-                                            "startIndex": 0,
-                                            "endIndex": 7,
-                                            "runs": [
-                                              {
-                                                "x": 0,
-                                                "y": -11,
-                                                "width": 56.33399963378906,
-                                                "height": 13,
-                                                "family": "Avenir Next",
-                                                "ascent": -14.12396240234375,
-                                                "descent": 5,
-                                                "capHeight": -10.035962104797363,
-                                                "xHeight": -6.675962448120117,
-                                                "underline": 0.9260375499725342,
-                                                "strikethrough": -3.62396240234375
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -5.12396240234375
                                       },
                                       "props": {
                                         "size": 14,
@@ -1877,12 +1659,21 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
                                       "text": "Revenue",
                                       "width": 55.34000015258789,
-                                      "height": 19.12396240234375
+                                      "height": 19.12396240234375,
+                                      "run": {
+                                        "x": 568,
+                                        "y": 138,
+                                        "width": 55.34000015258789,
+                                        "height": 19.12396240234375
+                                      }
                                     }
                                   ],
                                   "spacesCount": 0
@@ -1901,6 +1692,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -1969,38 +1763,7 @@
                                         "emHeightDescent": 10.2479248046875,
                                         "hangingBaseline": 22.399999618530273,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -10.2479248046875,
-                                        "lines": [
-                                          {
-                                            "x": -1,
-                                            "y": -24,
-                                            "width": 19,
-                                            "height": 28,
-                                            "baseline": -0.2479248046875,
-                                            "hangingBaseline": -22.647924423217773,
-                                            "alphabeticBaseline": -0.2479248046875,
-                                            "ideographicBaseline": 10,
-                                            "ascent": -28.2479248046875,
-                                            "descent": 10,
-                                            "startIndex": 0,
-                                            "endIndex": 1,
-                                            "runs": [
-                                              {
-                                                "x": -1,
-                                                "y": -24,
-                                                "width": 19,
-                                                "height": 28,
-                                                "family": "Avenir Next",
-                                                "ascent": -28.2479248046875,
-                                                "descent": 10,
-                                                "capHeight": -20.071924209594727,
-                                                "xHeight": -14.191925048828125,
-                                                "underline": 1.8520750999450684,
-                                                "strikethrough": -7.2479248046875
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -10.2479248046875
                                       },
                                       "text": "$45,678",
                                       "height": 38.2479248046875,
@@ -2030,8 +1793,17 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
+                                      },
+                                      "run": {
+                                        "x": 568,
+                                        "y": 157,
+                                        "width": 116.92999649047852,
+                                        "height": 38.2479248046875
                                       }
                                     }
                                   ],
@@ -2051,6 +1823,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -2119,38 +1894,7 @@
                                         "emHeightDescent": 4.3919677734375,
                                         "hangingBaseline": 9.600000381469727,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -4.3919677734375,
-                                        "lines": [
-                                          {
-                                            "x": -1,
-                                            "y": -8,
-                                            "width": 10,
-                                            "height": 9,
-                                            "baseline": -0.3919677734375,
-                                            "hangingBaseline": -9.991968154907227,
-                                            "alphabeticBaseline": -0.3919677734375,
-                                            "ideographicBaseline": 4,
-                                            "ascent": -12.3919677734375,
-                                            "descent": 4,
-                                            "startIndex": 0,
-                                            "endIndex": 1,
-                                            "runs": [
-                                              {
-                                                "x": -1,
-                                                "y": -8,
-                                                "width": 10,
-                                                "height": 9,
-                                                "family": "Avenir Next",
-                                                "ascent": -12.3919677734375,
-                                                "descent": 4,
-                                                "capHeight": -8.887968063354492,
-                                                "xHeight": -6.007967948913574,
-                                                "underline": 0.5080322027206421,
-                                                "strikethrough": -3.3919677734375
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -4.3919677734375
                                       },
                                       "text": "+8%",
                                       "height": 16.3919677734375,
@@ -2180,8 +1924,17 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
+                                      },
+                                      "run": {
+                                        "x": 568,
+                                        "y": 195,
+                                        "width": 24.949999809265137,
+                                        "height": 16.3919677734375
                                       }
                                     }
                                   ],
@@ -2201,6 +1954,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -2304,38 +2060,7 @@
                                         "emHeightDescent": 5.12396240234375,
                                         "hangingBaseline": 11.199999809265137,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -5.12396240234375,
-                                        "lines": [
-                                          {
-                                            "x": -1,
-                                            "y": -12,
-                                            "width": 46.65397644042969,
-                                            "height": 14,
-                                            "baseline": -0.12396240234375,
-                                            "hangingBaseline": -11.323962211608887,
-                                            "alphabeticBaseline": -0.12396240234375,
-                                            "ideographicBaseline": 5,
-                                            "ascent": -14.12396240234375,
-                                            "descent": 5,
-                                            "startIndex": 0,
-                                            "endIndex": 6,
-                                            "runs": [
-                                              {
-                                                "x": -1,
-                                                "y": -12,
-                                                "width": 46.65397644042969,
-                                                "height": 14,
-                                                "family": "Avenir Next",
-                                                "ascent": -14.12396240234375,
-                                                "descent": 5,
-                                                "capHeight": -10.035962104797363,
-                                                "xHeight": -6.675962448120117,
-                                                "underline": 0.9260375499725342,
-                                                "strikethrough": -3.62396240234375
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -5.12396240234375
                                       },
                                       "props": {
                                         "size": 14,
@@ -2362,12 +2087,21 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
                                       "text": "Orders",
                                       "width": 44.869998931884766,
-                                      "height": 19.12396240234375
+                                      "height": 19.12396240234375,
+                                      "run": {
+                                        "x": 890,
+                                        "y": 138,
+                                        "width": 44.869998931884766,
+                                        "height": 19.12396240234375
+                                      }
                                     }
                                   ],
                                   "spacesCount": 0
@@ -2386,6 +2120,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -2454,38 +2191,7 @@
                                         "emHeightDescent": 10.2479248046875,
                                         "hangingBaseline": 22.399999618530273,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -10.2479248046875,
-                                        "lines": [
-                                          {
-                                            "x": 0,
-                                            "y": -21,
-                                            "width": 54.175994873046875,
-                                            "height": 23,
-                                            "baseline": -0.2479248046875,
-                                            "hangingBaseline": -22.647924423217773,
-                                            "alphabeticBaseline": -0.2479248046875,
-                                            "ideographicBaseline": 10,
-                                            "ascent": -28.2479248046875,
-                                            "descent": 10,
-                                            "startIndex": 0,
-                                            "endIndex": 3,
-                                            "runs": [
-                                              {
-                                                "x": 0,
-                                                "y": -21,
-                                                "width": 54.175994873046875,
-                                                "height": 23,
-                                                "family": "Avenir Next",
-                                                "ascent": -28.2479248046875,
-                                                "descent": 10,
-                                                "capHeight": -20.071924209594727,
-                                                "xHeight": -14.191925048828125,
-                                                "underline": 1.8520750999450684,
-                                                "strikethrough": -7.2479248046875
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -10.2479248046875
                                       },
                                       "props": {
                                         "size": 28,
@@ -2512,12 +2218,21 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
                                       "text": "567",
                                       "width": 54.2599983215332,
-                                      "height": 38.2479248046875
+                                      "height": 38.2479248046875,
+                                      "run": {
+                                        "x": 890,
+                                        "y": 157,
+                                        "width": 54.2599983215332,
+                                        "height": 38.2479248046875
+                                      }
                                     }
                                   ],
                                   "spacesCount": 0
@@ -2536,6 +2251,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -2604,38 +2322,7 @@
                                         "emHeightDescent": 4.3919677734375,
                                         "hangingBaseline": 9.600000381469727,
                                         "alphabeticBaseline": 0,
-                                        "ideographicBaseline": -4.3919677734375,
-                                        "lines": [
-                                          {
-                                            "x": -1,
-                                            "y": -5,
-                                            "width": 6,
-                                            "height": 4,
-                                            "baseline": -0.3919677734375,
-                                            "hangingBaseline": -9.991968154907227,
-                                            "alphabeticBaseline": -0.3919677734375,
-                                            "ideographicBaseline": 4,
-                                            "ascent": -12.3919677734375,
-                                            "descent": 4,
-                                            "startIndex": 0,
-                                            "endIndex": 1,
-                                            "runs": [
-                                              {
-                                                "x": -1,
-                                                "y": -5,
-                                                "width": 6,
-                                                "height": 4,
-                                                "family": "Avenir Next",
-                                                "ascent": -12.3919677734375,
-                                                "descent": 4,
-                                                "capHeight": -8.887968063354492,
-                                                "xHeight": -6.007967948913574,
-                                                "underline": 0.5080322027206421,
-                                                "strikethrough": -3.3919677734375
-                                              }
-                                            ]
-                                          }
-                                        ]
+                                        "ideographicBaseline": -4.3919677734375
                                       },
                                       "text": "-3%",
                                       "height": 16.3919677734375,
@@ -2665,8 +2352,17 @@
                                         "lineThroughColor": null,
                                         "highlightColor": null,
                                         "dropShadows": [],
+                                        "autofit": false,
+                                        "tabStops": [],
+                                        "orientation": 0,
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
+                                      },
+                                      "run": {
+                                        "x": 890,
+                                        "y": 195,
+                                        "width": 20.799999952316284,
+                                        "height": 16.3919677734375
                                       }
                                     }
                                   ],
@@ -2686,6 +2382,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
@@ -2812,38 +2511,7 @@
                                     "emHeightDescent": 7.3199462890625,
                                     "hangingBaseline": 16,
                                     "alphabeticBaseline": 0,
-                                    "ideographicBaseline": -7.3199462890625,
-                                    "lines": [
-                                      {
-                                        "x": -1,
-                                        "y": -17,
-                                        "width": 50.31999206542969,
-                                        "height": 19,
-                                        "baseline": -0.3199462890625,
-                                        "hangingBaseline": -16.3199462890625,
-                                        "alphabeticBaseline": -0.3199462890625,
-                                        "ideographicBaseline": 7,
-                                        "ascent": -20.3199462890625,
-                                        "descent": 7,
-                                        "startIndex": 0,
-                                        "endIndex": 5,
-                                        "runs": [
-                                          {
-                                            "x": -1,
-                                            "y": -17,
-                                            "width": 50.31999206542969,
-                                            "height": 19,
-                                            "family": "Avenir Next",
-                                            "ascent": -20.3199462890625,
-                                            "descent": 7,
-                                            "capHeight": -14.47994613647461,
-                                            "xHeight": -10.279946327209473,
-                                            "underline": 1.1800537109375,
-                                            "strikethrough": -5.3199462890625
-                                          }
-                                        ]
-                                      }
-                                    ]
+                                    "ideographicBaseline": -7.3199462890625
                                   },
                                   "text": "Sales Chart",
                                   "height": 27.3199462890625,
@@ -2873,8 +2541,17 @@
                                     "lineThroughColor": null,
                                     "highlightColor": null,
                                     "dropShadows": [],
+                                    "autofit": false,
+                                    "tabStops": [],
+                                    "orientation": 0,
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
+                                  },
+                                  "run": {
+                                    "x": 249,
+                                    "y": 282,
+                                    "width": 103.63999938964844,
+                                    "height": 27.3199462890625
                                   }
                                 }
                               ],
@@ -2894,6 +2571,9 @@
                     "lineThroughColor": null,
                     "highlightColor": null,
                     "dropShadows": [],
+                    "autofit": false,
+                    "tabStops": [],
+                    "orientation": 0,
                     "flexShrink": 1,
                     "boxSizing": "content-box"
                   },
@@ -3070,38 +2750,7 @@
                         "emHeightDescent": 4.3919677734375,
                         "hangingBaseline": 9.600000381469727,
                         "alphabeticBaseline": 0,
-                        "ideographicBaseline": -4.3919677734375,
-                        "lines": [
-                          {
-                            "x": -1,
-                            "y": -10,
-                            "width": 12,
-                            "height": 12,
-                            "baseline": -0.3919677734375,
-                            "hangingBaseline": -9.991968154907227,
-                            "alphabeticBaseline": -0.3919677734375,
-                            "ideographicBaseline": 4,
-                            "ascent": -12.3919677734375,
-                            "descent": 4,
-                            "startIndex": 0,
-                            "endIndex": 1,
-                            "runs": [
-                              {
-                                "x": -1,
-                                "y": -10,
-                                "width": 12,
-                                "height": 12,
-                                "family": "Avenir Next",
-                                "ascent": -12.3919677734375,
-                                "descent": 4,
-                                "capHeight": -8.887968063354492,
-                                "xHeight": -6.007967948913574,
-                                "underline": 0.5080322027206421,
-                                "strikethrough": -3.3919677734375
-                              }
-                            ]
-                          }
-                        ]
+                        "ideographicBaseline": -4.3919677734375
                       },
                       "text": "© 2024 Dashboard. All rights reserved.",
                       "height": 16.3919677734375,
@@ -3131,6 +2780,9 @@
                         "lineThroughColor": null,
                         "highlightColor": null,
                         "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
                         "padding": 16,
                         "background": ["#f8fafc"],
                         "borderTopWidth": 1,
@@ -3140,6 +2792,12 @@
                         "borderColor": "#e5e7eb",
                         "flexShrink": 1,
                         "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 16,
+                        "y": 767,
+                        "width": 212.95000171661377,
+                        "height": 16.3919677734375
                       }
                     }
                   ],
@@ -3159,6 +2817,9 @@
         "lineThroughColor": null,
         "highlightColor": null,
         "dropShadows": [],
+        "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
         "padding": 16,
         "background": ["#f8fafc"],
         "borderTopWidth": 1,

@@ -100,6 +100,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -128,6 +130,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -229,6 +233,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 4,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -258,6 +264,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 4,
             "flexShrink": 1,
             "boxSizing": "content-box"
@@ -358,6 +366,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 2,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -387,6 +397,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 2,
             "flexShrink": 1,
             "boxSizing": "content-box"
@@ -519,6 +531,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -574,6 +587,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -633,6 +647,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -685,6 +700,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -744,6 +760,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -796,6 +813,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -852,6 +870,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -915,6 +934,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -947,6 +967,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -1110,6 +1131,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 10,
                             "marginBottom": 2,
                             "flexShrink": 1,
@@ -1143,6 +1166,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 10,
             "marginBottom": 2,
             "flexShrink": 1,
@@ -1224,15 +1249,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 51.599998474121094,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 51.599998474121094,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -1241,9 +1266,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Software subscriptions",
+                          "text": "  Software subscriptions",
                           "height": 17.757965087890625,
-                          "width": 133.54999542236328,
+                          "width": 140.04999542236328,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -1271,13 +1296,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 218,
-                            "width": 133.54999542236328,
+                            "width": 140.04999542236328,
                             "height": 17.757965087890625
                           }
                         },
@@ -1323,6 +1349,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1331,7 +1358,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 166.54999542236328,
+                            "x": 173.04999542236328,
                             "y": 218,
                             "width": 199.95000457763672,
                             "height": 17.757965087890625
@@ -1379,6 +1406,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1386,7 +1414,7 @@
                           "width": 41.08000183105469,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 218,
                             "width": 41.08000183105469,
                             "height": 17.757965087890625
@@ -1434,6 +1462,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1442,7 +1471,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.5800018310547,
+                            "x": 414.0800018310547,
                             "y": 218,
                             "width": 78.91999816894531,
                             "height": 17.757965087890625
@@ -1490,6 +1519,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1497,7 +1527,7 @@
                           "width": 48.619998931884766,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 218,
                             "width": 48.619998931884766,
                             "height": 17.757965087890625
@@ -1545,6 +1575,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1553,7 +1584,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 535.1199989318848,
+                            "x": 541.6199989318848,
                             "y": 218,
                             "width": 51.380001068115234,
                             "height": 17.757965087890625
@@ -1593,7 +1624,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 218,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -1618,6 +1649,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -1697,15 +1729,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 71.08000183105469,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 71.08000183105469,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -1714,9 +1746,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Professional services",
+                          "text": "  Professional services",
                           "height": 17.757965087890625,
-                          "width": 121.52000045776367,
+                          "width": 128.02000045776367,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -1744,13 +1776,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 239,
-                            "width": 121.52000045776367,
+                            "width": 128.02000045776367,
                             "height": 17.757965087890625
                           }
                         },
@@ -1796,6 +1829,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1804,7 +1838,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 154.52000045776367,
+                            "x": 161.02000045776367,
                             "y": 239,
                             "width": 211.97999954223633,
                             "height": 17.757965087890625
@@ -1852,6 +1886,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1859,7 +1894,7 @@
                           "width": 41.08000183105469,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 239,
                             "width": 41.08000183105469,
                             "height": 17.757965087890625
@@ -1907,6 +1942,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -1915,7 +1951,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.5800018310547,
+                            "x": 414.0800018310547,
                             "y": 239,
                             "width": 78.91999816894531,
                             "height": 17.757965087890625
@@ -1966,11 +2002,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 239,
                             "width": 44.33000183105469,
                             "height": 17.757965087890625
@@ -2018,6 +2055,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2026,7 +2064,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 530.8300018310547,
+                            "x": 537.3300018310547,
                             "y": 239,
                             "width": 55.66999816894531,
                             "height": 17.757965087890625
@@ -2066,7 +2104,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 239,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -2091,6 +2129,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -2170,15 +2209,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 594.6999988555908,
+                      "width": 601.1999988555908,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 57.529998779296875,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 57.529998779296875,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -2187,9 +2226,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Hardware & other",
+                          "text": "  Hardware & other",
                           "height": 17.757965087890625,
-                          "width": 104.93999862670898,
+                          "width": 111.43999862670898,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -2217,13 +2256,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 259,
-                            "width": 104.93999862670898,
+                            "width": 111.43999862670898,
                             "height": 17.757965087890625
                           }
                         },
@@ -2269,6 +2309,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2277,7 +2318,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 137.93999862670898,
+                            "x": 144.43999862670898,
                             "y": 259,
                             "width": 228.56000137329102,
                             "height": 17.757965087890625
@@ -2328,11 +2369,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 259,
                             "width": 36.790000915527344,
                             "height": 17.757965087890625
@@ -2380,6 +2422,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2388,7 +2431,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.29000091552734,
+                            "x": 409.79000091552734,
                             "y": 259,
                             "width": 83.20999908447266,
                             "height": 17.757965087890625
@@ -2439,11 +2482,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 259,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -2491,6 +2535,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2499,7 +2544,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 259,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -2539,7 +2584,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 259,
                             "width": 41.19999885559082,
                             "height": 17.757965087890625
@@ -2564,6 +2609,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -2643,15 +2689,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 602.2399997711182,
+                      "width": 608.7399997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 40.290000915527344,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 40.290000915527344,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -2660,9 +2706,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Contra revenue / refunds",
+                          "text": "  Contra revenue / refunds",
                           "height": 17.757965087890625,
-                          "width": 147.93000268936157,
+                          "width": 154.43000268936157,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -2690,13 +2736,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 280,
-                            "width": 147.93000268936157,
+                            "width": 154.43000268936157,
                             "height": 17.757965087890625
                           }
                         },
@@ -2742,6 +2789,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2750,7 +2798,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 180.93000268936157,
+                            "x": 187.43000268936157,
                             "y": 280,
                             "width": 185.56999731063843,
                             "height": 17.757965087890625
@@ -2798,6 +2846,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2805,7 +2854,7 @@
                           "width": 41.34000015258789,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 280,
                             "width": 41.34000015258789,
                             "height": 17.757965087890625
@@ -2853,6 +2902,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2861,7 +2911,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.8400001525879,
+                            "x": 414.3400001525879,
                             "y": 280,
                             "width": 78.65999984741211,
                             "height": 17.757965087890625
@@ -2909,6 +2959,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2916,7 +2967,7 @@
                           "width": 41.34000015258789,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 280,
                             "width": 41.34000015258789,
                             "height": 17.757965087890625
@@ -2964,6 +3015,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -2972,7 +3024,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 527.8400001525879,
+                            "x": 534.3400001525879,
                             "y": 280,
                             "width": 58.65999984741211,
                             "height": 17.757965087890625
@@ -3012,7 +3064,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 280,
                             "width": 48.739999771118164,
                             "height": 17.757965087890625
@@ -3037,6 +3089,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -3201,6 +3254,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3253,6 +3307,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3309,6 +3364,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3364,6 +3420,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3420,6 +3477,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3475,6 +3533,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -3548,6 +3607,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -3671,6 +3731,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 10,
                             "marginBottom": 2,
                             "flexShrink": 1,
@@ -3701,6 +3763,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 10,
             "marginBottom": 2,
             "flexShrink": 1,
@@ -3782,15 +3846,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 36.40999984741211,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 36.40999984741211,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -3799,9 +3863,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Cloud infrastructure",
+                          "text": "  Cloud infrastructure",
                           "height": 17.757965087890625,
-                          "width": 117.95000076293945,
+                          "width": 124.45000076293945,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -3829,13 +3893,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 358,
-                            "width": 117.95000076293945,
+                            "width": 124.45000076293945,
                             "height": 17.757965087890625
                           }
                         },
@@ -3881,6 +3946,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -3889,7 +3955,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 150.95000076293945,
+                            "x": 157.45000076293945,
                             "y": 358,
                             "width": 215.54999923706055,
                             "height": 17.757965087890625
@@ -3937,6 +4003,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -3944,7 +4011,7 @@
                           "width": 41.08000183105469,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 358,
                             "width": 41.08000183105469,
                             "height": 17.757965087890625
@@ -3992,6 +4059,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4000,7 +4068,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.5800018310547,
+                            "x": 414.0800018310547,
                             "y": 358,
                             "width": 78.91999816894531,
                             "height": 17.757965087890625
@@ -4051,11 +4119,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 358,
                             "width": 44.33000183105469,
                             "height": 17.757965087890625
@@ -4103,6 +4172,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4111,7 +4181,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 530.8300018310547,
+                            "x": 537.3300018310547,
                             "y": 358,
                             "width": 55.66999816894531,
                             "height": 17.757965087890625
@@ -4151,7 +4221,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 358,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -4176,6 +4246,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -4255,15 +4326,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 594.6999988555908,
+                      "width": 601.1999988555908,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 47.97999954223633,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 47.97999954223633,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 5,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -4272,9 +4343,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Support & operations",
+                          "text": "  Support & operations",
                           "height": 17.757965087890625,
-                          "width": 127.23999977111816,
+                          "width": 133.73999977111816,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -4302,13 +4373,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 379,
-                            "width": 127.23999977111816,
+                            "width": 133.73999977111816,
                             "height": 17.757965087890625
                           }
                         },
@@ -4354,6 +4426,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4362,7 +4435,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 160.23999977111816,
+                            "x": 166.73999977111816,
                             "y": 379,
                             "width": 206.26000022888184,
                             "height": 17.757965087890625
@@ -4413,11 +4486,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 379,
                             "width": 36.790000915527344,
                             "height": 17.757965087890625
@@ -4465,6 +4539,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4473,7 +4548,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.29000091552734,
+                            "x": 409.79000091552734,
                             "y": 379,
                             "width": 83.20999908447266,
                             "height": 17.757965087890625
@@ -4524,11 +4599,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 379,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -4576,6 +4652,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4584,7 +4661,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 379,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -4624,7 +4701,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 379,
                             "width": 41.19999885559082,
                             "height": 17.757965087890625
@@ -4649,6 +4726,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -4728,15 +4806,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 30.729999542236328,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 30.729999542236328,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -4745,9 +4823,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Third-party licenses",
+                          "text": "  Third-party licenses",
                           "height": 17.757965087890625,
-                          "width": 115.32999992370605,
+                          "width": 121.82999992370605,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -4775,13 +4853,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 400,
-                            "width": 115.32999992370605,
+                            "width": 121.82999992370605,
                             "height": 17.757965087890625
                           }
                         },
@@ -4827,6 +4906,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4835,7 +4915,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 148.32999992370605,
+                            "x": 154.82999992370605,
                             "y": 400,
                             "width": 218.17000007629395,
                             "height": 17.757965087890625
@@ -4886,11 +4966,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 400,
                             "width": 36.790000915527344,
                             "height": 17.757965087890625
@@ -4938,6 +5019,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -4946,7 +5028,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.29000091552734,
+                            "x": 409.79000091552734,
                             "y": 400,
                             "width": 83.20999908447266,
                             "height": 17.757965087890625
@@ -4997,11 +5079,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 400,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -5049,6 +5132,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -5057,7 +5141,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 400,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -5097,7 +5181,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 400,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -5122,6 +5206,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -5286,6 +5371,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5338,6 +5424,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5394,6 +5481,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5449,6 +5537,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5505,6 +5594,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5560,6 +5650,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5633,6 +5724,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -5851,6 +5943,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5903,6 +5996,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -5962,6 +6056,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -6014,6 +6109,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -6073,6 +6169,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -6125,6 +6222,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -6198,6 +6296,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -6353,6 +6452,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 10,
                             "marginBottom": 2,
                             "flexShrink": 1,
@@ -6383,6 +6484,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 10,
             "marginBottom": 2,
             "flexShrink": 1,
@@ -6464,15 +6567,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 30.760000228881836,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 30.760000228881836,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -6481,9 +6584,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Sales & marketing",
+                          "text": "  Sales & marketing",
                           "height": 17.757965087890625,
-                          "width": 106.47999954223633,
+                          "width": 112.97999954223633,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -6511,13 +6614,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 518,
-                            "width": 106.47999954223633,
+                            "width": 112.97999954223633,
                             "height": 17.757965087890625
                           }
                         },
@@ -6563,6 +6667,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -6571,7 +6676,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 139.47999954223633,
+                            "x": 145.97999954223633,
                             "y": 518,
                             "width": 227.02000045776367,
                             "height": 17.757965087890625
@@ -6619,6 +6724,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -6626,7 +6732,7 @@
                           "width": 41.08000183105469,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 518,
                             "width": 41.08000183105469,
                             "height": 17.757965087890625
@@ -6674,6 +6780,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -6682,7 +6789,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.5800018310547,
+                            "x": 414.0800018310547,
                             "y": 518,
                             "width": 78.91999816894531,
                             "height": 17.757965087890625
@@ -6733,11 +6840,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 518,
                             "width": 44.33000183105469,
                             "height": 17.757965087890625
@@ -6785,6 +6893,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -6793,7 +6902,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 530.8300018310547,
+                            "x": 537.3300018310547,
                             "y": 518,
                             "width": 55.66999816894531,
                             "height": 17.757965087890625
@@ -6833,7 +6942,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 518,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -6858,6 +6967,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -6937,15 +7047,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 53.65999984741211,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 53.65999984741211,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -6954,9 +7064,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Research & development",
+                          "text": "  Research & development",
                           "height": 17.757965087890625,
-                          "width": 148.86999702453613,
+                          "width": 155.36999702453613,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -6984,13 +7094,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 539,
-                            "width": 148.86999702453613,
+                            "width": 155.36999702453613,
                             "height": 17.757965087890625
                           }
                         },
@@ -7036,6 +7147,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7044,7 +7156,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 181.86999702453613,
+                            "x": 188.36999702453613,
                             "y": 539,
                             "width": 184.63000297546387,
                             "height": 17.757965087890625
@@ -7092,6 +7204,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7099,7 +7212,7 @@
                           "width": 41.08000183105469,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 539,
                             "width": 41.08000183105469,
                             "height": 17.757965087890625
@@ -7147,6 +7260,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7155,7 +7269,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.5800018310547,
+                            "x": 414.0800018310547,
                             "y": 539,
                             "width": 78.91999816894531,
                             "height": 17.757965087890625
@@ -7206,11 +7320,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 539,
                             "width": 44.33000183105469,
                             "height": 17.757965087890625
@@ -7258,6 +7373,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7266,7 +7382,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 530.8300018310547,
+                            "x": 537.3300018310547,
                             "y": 539,
                             "width": 55.66999816894531,
                             "height": 17.757965087890625
@@ -7306,7 +7422,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 539,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -7331,6 +7447,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -7410,15 +7527,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 594.6999988555908,
+                      "width": 601.1999988555908,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 47.290000915527344,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 47.290000915527344,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -7427,9 +7544,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "General & administrative",
+                          "text": "  General & administrative",
                           "height": 17.757965087890625,
-                          "width": 146.0699977874756,
+                          "width": 152.5699977874756,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -7457,13 +7574,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 560,
-                            "width": 146.0699977874756,
+                            "width": 152.5699977874756,
                             "height": 17.757965087890625
                           }
                         },
@@ -7509,6 +7627,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7517,7 +7636,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 179.0699977874756,
+                            "x": 185.5699977874756,
                             "y": 560,
                             "width": 187.4300022125244,
                             "height": 17.757965087890625
@@ -7568,11 +7687,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 560,
                             "width": 36.790000915527344,
                             "height": 17.757965087890625
@@ -7620,6 +7740,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7628,7 +7749,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.29000091552734,
+                            "x": 409.79000091552734,
                             "y": 560,
                             "width": 83.20999908447266,
                             "height": 17.757965087890625
@@ -7679,11 +7800,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 560,
                             "width": 44.33000183105469,
                             "height": 17.757965087890625
@@ -7731,6 +7853,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7739,7 +7862,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 530.8300018310547,
+                            "x": 537.3300018310547,
                             "y": 560,
                             "width": 55.66999816894531,
                             "height": 17.757965087890625
@@ -7779,7 +7902,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 560,
                             "width": 41.19999885559082,
                             "height": 17.757965087890625
@@ -7804,6 +7927,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -7883,15 +8007,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 583.8399996757507,
+                      "width": 590.3399996757507,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 79.06999969482422,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 79.06999969482422,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 5,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -7900,9 +8024,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Restructuring charges",
+                          "text": "  Restructuring charges",
                           "height": 17.757965087890625,
-                          "width": 129.20999908447266,
+                          "width": 135.70999908447266,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -7930,13 +8054,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 581,
-                            "width": 129.20999908447266,
+                            "width": 135.70999908447266,
                             "height": 17.757965087890625
                           }
                         },
@@ -7982,6 +8107,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -7990,7 +8116,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 162.20999908447266,
+                            "x": 168.70999908447266,
                             "y": 581,
                             "width": 204.29000091552734,
                             "height": 17.757965087890625
@@ -8041,11 +8167,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 581,
                             "width": 20.800000190734863,
                             "height": 17.757965087890625
@@ -8093,6 +8220,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8101,7 +8229,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 387.30000019073486,
+                            "x": 393.80000019073486,
                             "y": 581,
                             "width": 99.19999980926514,
                             "height": 17.757965087890625
@@ -8152,11 +8280,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 581,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -8204,6 +8333,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8212,7 +8342,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 581,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -8252,7 +8382,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 581,
                             "width": 30.339999675750732,
                             "height": 17.757965087890625
@@ -8277,6 +8407,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -8356,15 +8487,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 32.45000076293945,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 32.45000076293945,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -8373,9 +8504,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Stock-based compensation",
+                          "text": "  Stock-based compensation",
                           "height": 17.757965087890625,
-                          "width": 161.19000244140625,
+                          "width": 167.69000244140625,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -8403,13 +8534,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 601,
-                            "width": 161.19000244140625,
+                            "width": 167.69000244140625,
                             "height": 17.757965087890625
                           }
                         },
@@ -8455,6 +8587,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8463,7 +8596,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 194.19000244140625,
+                            "x": 200.69000244140625,
                             "y": 601,
                             "width": 172.30999755859375,
                             "height": 17.757965087890625
@@ -8514,11 +8647,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 601,
                             "width": 36.790000915527344,
                             "height": 17.757965087890625
@@ -8566,6 +8700,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8574,7 +8709,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.29000091552734,
+                            "x": 409.79000091552734,
                             "y": 601,
                             "width": 83.20999908447266,
                             "height": 17.757965087890625
@@ -8625,11 +8760,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 601,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -8677,6 +8813,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -8685,7 +8822,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 601,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -8725,7 +8862,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 601,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -8750,6 +8887,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -8914,6 +9052,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -8966,6 +9105,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9022,6 +9162,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9077,6 +9218,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9136,6 +9278,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9188,6 +9331,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9261,6 +9405,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -9479,6 +9624,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9531,6 +9677,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9587,6 +9734,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9642,6 +9790,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9701,6 +9850,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9753,6 +9903,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -9826,6 +9977,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -9961,15 +10113,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 9.84000015258789,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 9.84000015258789,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 1,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -9978,9 +10130,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "D&A add-back",
+                          "text": "  D&A add-back",
                           "height": 17.757965087890625,
-                          "width": 87.35000038146973,
+                          "width": 93.85000038146973,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -10008,13 +10160,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 689,
-                            "width": 87.35000038146973,
+                            "width": 93.85000038146973,
                             "height": 17.757965087890625
                           }
                         },
@@ -10060,6 +10213,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -10068,7 +10222,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 120.35000038146973,
+                            "x": 126.85000038146973,
                             "y": 689,
                             "width": 246.14999961853027,
                             "height": 17.757965087890625
@@ -10119,11 +10273,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 689,
                             "width": 36.790000915527344,
                             "height": 17.757965087890625
@@ -10171,6 +10326,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -10179,7 +10335,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.29000091552734,
+                            "x": 409.79000091552734,
                             "y": 689,
                             "width": 83.20999908447266,
                             "height": 17.757965087890625
@@ -10230,11 +10386,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 689,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -10282,6 +10439,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -10290,7 +10448,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 689,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -10330,7 +10488,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 689,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -10355,6 +10513,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -10516,6 +10675,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -10571,6 +10731,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -10627,6 +10788,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -10682,6 +10844,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -10741,6 +10904,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -10793,6 +10957,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -10866,6 +11031,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -10989,6 +11155,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 10,
                             "marginBottom": 2,
                             "flexShrink": 1,
@@ -11019,6 +11187,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 10,
             "marginBottom": 2,
             "flexShrink": 1,
@@ -11100,15 +11270,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 44.27000045776367,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 44.27000045776367,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -11117,9 +11287,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Interest income",
+                          "text": "  Interest income",
                           "height": 17.757965087890625,
-                          "width": 91.68000030517578,
+                          "width": 98.18000030517578,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -11147,13 +11317,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 766,
-                            "width": 91.68000030517578,
+                            "width": 98.18000030517578,
                             "height": 17.757965087890625
                           }
                         },
@@ -11199,6 +11370,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11207,7 +11379,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 124.68000030517578,
+                            "x": 131.18000030517578,
                             "y": 766,
                             "width": 241.81999969482422,
                             "height": 17.757965087890625
@@ -11258,11 +11430,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 766,
                             "width": 32.3700008392334,
                             "height": 17.757965087890625
@@ -11310,6 +11483,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11318,7 +11492,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 398.8700008392334,
+                            "x": 405.3700008392334,
                             "y": 766,
                             "width": 87.6299991607666,
                             "height": 17.757965087890625
@@ -11369,11 +11543,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 766,
                             "width": 40.040000915527344,
                             "height": 17.757965087890625
@@ -11421,6 +11596,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11429,7 +11605,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.5400009155273,
+                            "x": 533.0400009155273,
                             "y": 766,
                             "width": 59.959999084472656,
                             "height": 17.757965087890625
@@ -11469,7 +11645,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 766,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -11494,6 +11670,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -11573,15 +11750,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 594.6999988555908,
+                      "width": 601.1999988555908,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 44.27000045776367,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 44.27000045776367,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -11590,9 +11767,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Interest expense",
+                          "text": "  Interest expense",
                           "height": 17.757965087890625,
-                          "width": 97.61999893188477,
+                          "width": 104.11999893188477,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -11620,13 +11797,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 787,
-                            "width": 97.61999893188477,
+                            "width": 104.11999893188477,
                             "height": 17.757965087890625
                           }
                         },
@@ -11672,6 +11850,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11680,7 +11859,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 130.61999893188477,
+                            "x": 137.11999893188477,
                             "y": 787,
                             "width": 235.88000106811523,
                             "height": 17.757965087890625
@@ -11728,6 +11907,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11735,7 +11915,7 @@
                           "width": 41.34000015258789,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 787,
                             "width": 41.34000015258789,
                             "height": 17.757965087890625
@@ -11783,6 +11963,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11791,7 +11972,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.8400001525879,
+                            "x": 414.3400001525879,
                             "y": 787,
                             "width": 78.65999984741211,
                             "height": 17.757965087890625
@@ -11839,6 +12020,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11846,7 +12028,7 @@
                           "width": 41.34000015258789,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 787,
                             "width": 41.34000015258789,
                             "height": 17.757965087890625
@@ -11894,6 +12076,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -11902,7 +12085,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 527.8400001525879,
+                            "x": 534.3400001525879,
                             "y": 787,
                             "width": 58.65999984741211,
                             "height": 17.757965087890625
@@ -11942,7 +12125,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 787,
                             "width": 41.19999885559082,
                             "height": 17.757965087890625
@@ -11967,6 +12150,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -12046,15 +12230,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 577.3399996757507,
+                      "width": 583.8399996757507,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 15.739999771118164,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 15.739999771118164,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 1,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -12063,9 +12247,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "FX gain / (loss)",
+                          "text": "  FX gain / (loss)",
                           "height": 17.757965087890625,
-                          "width": 86.81999826431274,
+                          "width": 93.31999826431274,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -12093,13 +12277,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 808,
-                            "width": 86.81999826431274,
+                            "width": 93.31999826431274,
                             "height": 17.757965087890625
                           }
                         },
@@ -12145,6 +12330,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -12153,7 +12339,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 119.81999826431274,
+                            "x": 126.31999826431274,
                             "y": 808,
                             "width": 246.68000173568726,
                             "height": 17.757965087890625
@@ -12204,11 +12390,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 808,
                             "width": 36.920000076293945,
                             "height": 17.757965087890625
@@ -12256,6 +12443,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -12264,7 +12452,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 403.42000007629395,
+                            "x": 409.92000007629395,
                             "y": 808,
                             "width": 83.07999992370605,
                             "height": 17.757965087890625
@@ -12315,11 +12503,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 808,
                             "width": 35.6200008392334,
                             "height": 17.757965087890625
@@ -12367,6 +12556,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -12375,7 +12565,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 522.1200008392334,
+                            "x": 528.6200008392334,
                             "y": 808,
                             "width": 64.3799991607666,
                             "height": 17.757965087890625
@@ -12415,7 +12605,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 808,
                             "width": 23.839999675750732,
                             "height": 17.757965087890625
@@ -12440,6 +12630,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -12519,15 +12710,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 34.869998931884766,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 34.869998931884766,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -12536,9 +12727,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Other income",
+                          "text": "  Other income",
                           "height": 17.757965087890625,
-                          "width": 82.27999877929688,
+                          "width": 88.77999877929688,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -12566,13 +12757,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 829,
-                            "width": 82.27999877929688,
+                            "width": 88.77999877929688,
                             "height": 17.757965087890625
                           }
                         },
@@ -12618,6 +12810,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -12626,7 +12819,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 115.27999877929688,
+                            "x": 121.77999877929688,
                             "y": 829,
                             "width": 251.22000122070312,
                             "height": 17.757965087890625
@@ -12677,11 +12870,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 829,
                             "width": 32.3700008392334,
                             "height": 17.757965087890625
@@ -12729,6 +12923,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -12737,7 +12932,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 398.8700008392334,
+                            "x": 405.3700008392334,
                             "y": 829,
                             "width": 87.6299991607666,
                             "height": 17.757965087890625
@@ -12788,11 +12983,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 829,
                             "width": 35.6200008392334,
                             "height": 17.757965087890625
@@ -12840,6 +13036,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -12848,7 +13045,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 522.1200008392334,
+                            "x": 528.6200008392334,
                             "y": 829,
                             "width": 64.3799991607666,
                             "height": 17.757965087890625
@@ -12888,7 +13085,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 829,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -12913,6 +13110,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -13107,6 +13305,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -13159,6 +13358,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -13215,6 +13415,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -13270,6 +13471,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -13329,6 +13531,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -13381,6 +13584,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -13454,6 +13658,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -13589,15 +13794,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 44.290000915527344,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 44.290000915527344,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -13606,9 +13811,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Income tax provision",
+                          "text": "  Income tax provision",
                           "height": 17.757965087890625,
-                          "width": 122.90999984741211,
+                          "width": 129.4099998474121,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -13636,13 +13841,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 890,
-                            "width": 122.90999984741211,
+                            "width": 129.4099998474121,
                             "height": 17.757965087890625
                           }
                         },
@@ -13688,6 +13894,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -13696,7 +13903,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 155.9099998474121,
+                            "x": 162.4099998474121,
                             "y": 890,
                             "width": 210.5900001525879,
                             "height": 17.757965087890625
@@ -13744,6 +13951,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -13751,7 +13959,7 @@
                           "width": 41.34000015258789,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 890,
                             "width": 41.34000015258789,
                             "height": 17.757965087890625
@@ -13799,6 +14007,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -13807,7 +14016,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 407.8400001525879,
+                            "x": 414.3400001525879,
                             "y": 890,
                             "width": 78.65999984741211,
                             "height": 17.757965087890625
@@ -13855,6 +14064,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -13862,7 +14072,7 @@
                           "width": 41.34000015258789,
                           "height": 17.757965087890625,
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 890,
                             "width": 41.34000015258789,
                             "height": 17.757965087890625
@@ -13910,6 +14120,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -13918,7 +14129,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 527.8400001525879,
+                            "x": 534.3400001525879,
                             "y": 890,
                             "width": 58.65999984741211,
                             "height": 17.757965087890625
@@ -13958,7 +14169,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 890,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -13983,6 +14194,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -14177,6 +14389,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -14229,6 +14442,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -14285,6 +14499,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -14340,6 +14555,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -14399,6 +14615,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -14451,6 +14668,7 @@
                                 "dropShadows": [],
                                 "autofit": false,
                                 "tabStops": [340, 460, 560],
+                                "orientation": 0,
                                 "flexShrink": 1,
                                 "boxSizing": "content-box"
                               },
@@ -14524,6 +14742,7 @@
                 "dropShadows": [],
                 "autofit": false,
                 "tabStops": [340, 460, 560],
+                "orientation": 0,
                 "flexShrink": 1,
                 "boxSizing": "content-box"
               },
@@ -14709,6 +14928,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "marginTop": 10,
                             "marginBottom": 2,
                             "flexShrink": 1,
@@ -14739,6 +14960,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "marginTop": 10,
             "marginBottom": 2,
             "flexShrink": 1,
@@ -14820,15 +15043,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 30.729999542236328,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 30.729999542236328,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -14837,9 +15060,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Basic EPS",
+                          "text": "  Basic EPS",
                           "height": 17.757965087890625,
-                          "width": 56.54999923706055,
+                          "width": 63.04999923706055,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -14867,13 +15090,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 992,
-                            "width": 56.54999923706055,
+                            "width": 63.04999923706055,
                             "height": 17.757965087890625
                           }
                         },
@@ -14919,6 +15143,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -14927,7 +15152,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 89.54999923706055,
+                            "x": 96.04999923706055,
                             "y": 992,
                             "width": 276.95000076293945,
                             "height": 17.757965087890625
@@ -14978,11 +15203,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 992,
                             "width": 40.03999996185303,
                             "height": 17.757965087890625
@@ -15030,6 +15256,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15038,7 +15265,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 406.539999961853,
+                            "x": 413.039999961853,
                             "y": 992,
                             "width": 79.96000003814697,
                             "height": 17.757965087890625
@@ -15089,11 +15316,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 992,
                             "width": 40.03999996185303,
                             "height": 17.757965087890625
@@ -15141,6 +15369,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15149,7 +15378,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.539999961853,
+                            "x": 533.039999961853,
                             "y": 992,
                             "width": 59.96000003814697,
                             "height": 17.757965087890625
@@ -15189,7 +15418,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 992,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -15214,6 +15443,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -15293,15 +15523,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 598.9899997711182,
+                      "width": 605.4899997711182,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 43.7599983215332,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 43.7599983215332,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -15310,9 +15540,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Diluted EPS",
+                          "text": "  Diluted EPS",
                           "height": 17.757965087890625,
-                          "width": 69.57999801635742,
+                          "width": 76.07999801635742,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -15340,13 +15570,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 1013,
-                            "width": 69.57999801635742,
+                            "width": 76.07999801635742,
                             "height": 17.757965087890625
                           }
                         },
@@ -15392,6 +15623,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15400,7 +15632,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 102.57999801635742,
+                            "x": 109.07999801635742,
                             "y": 1013,
                             "width": 263.9200019836426,
                             "height": 17.757965087890625
@@ -15451,11 +15683,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 1013,
                             "width": 40.03999996185303,
                             "height": 17.757965087890625
@@ -15503,6 +15736,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15511,7 +15745,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 406.539999961853,
+                            "x": 413.039999961853,
                             "y": 1013,
                             "width": 79.96000003814697,
                             "height": 17.757965087890625
@@ -15562,11 +15796,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 1013,
                             "width": 40.03999996185303,
                             "height": 17.757965087890625
@@ -15614,6 +15849,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15622,7 +15858,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 526.539999961853,
+                            "x": 533.039999961853,
                             "y": 1013,
                             "width": 59.96000003814697,
                             "height": 17.757965087890625
@@ -15662,7 +15898,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 1013,
                             "width": 45.489999771118164,
                             "height": 17.757965087890625
@@ -15687,6 +15923,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -15766,15 +16003,15 @@
                     {
                       "baseline": 13,
                       "height": 17.757965087890625,
-                      "width": 591.4499988555908,
+                      "width": 597.9499988555908,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 58.4900016784668,
+                            "width": 6.5,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 58.4900016784668,
-                            "actualBoundingBoxAscent": 11,
-                            "actualBoundingBoxDescent": 5,
+                            "actualBoundingBoxRight": 6.5,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
                             "fontBoundingBoxAscent": 13,
                             "fontBoundingBoxDescent": 4.757965087890625,
                             "emHeightAscent": 13,
@@ -15783,9 +16020,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -4.757965087890625
                           },
-                          "text": "Weighted avg shares (M)",
+                          "text": "  Weighted avg shares (M)",
                           "height": 17.757965087890625,
-                          "width": 147.01000213623047,
+                          "width": 153.51000213623047,
                           "props": {
                             "size": 13,
                             "color": "#334155",
@@ -15813,13 +16050,14 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
                             "x": 33,
                             "y": 1034,
-                            "width": 147.01000213623047,
+                            "width": 153.51000213623047,
                             "height": 17.757965087890625
                           }
                         },
@@ -15865,6 +16103,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15873,7 +16112,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 180.01000213623047,
+                            "x": 186.51000213623047,
                             "y": 1034,
                             "width": 186.48999786376953,
                             "height": 17.757965087890625
@@ -15924,11 +16163,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 366.5,
+                            "x": 373,
                             "y": 1034,
                             "width": 32.5,
                             "height": 17.757965087890625
@@ -15976,6 +16216,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -15984,7 +16225,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 399,
+                            "x": 405.5,
                             "y": 1034,
                             "width": 87.5,
                             "height": 17.757965087890625
@@ -16035,11 +16276,12 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 486.5,
+                            "x": 493,
                             "y": 1034,
                             "width": 32.5,
                             "height": 17.757965087890625
@@ -16087,6 +16329,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [340, 460, 560],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16095,7 +16338,7 @@
                           "height": 17.757965087890625,
                           "isTab": true,
                           "run": {
-                            "x": 519,
+                            "x": 525.5,
                             "y": 1034,
                             "width": 67.5,
                             "height": 17.757965087890625
@@ -16135,7 +16378,7 @@
                             "dropShadows": []
                           },
                           "run": {
-                            "x": 586.5,
+                            "x": 593,
                             "y": 1034,
                             "width": 37.94999885559082,
                             "height": 17.757965087890625
@@ -16160,6 +16403,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [340, 460, 560],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -16294,6 +16538,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16322,6 +16568,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -16451,6 +16699,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16506,6 +16755,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16565,6 +16815,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16617,6 +16868,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16676,6 +16928,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16728,6 +16981,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16784,6 +17038,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -16816,6 +17071,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -16977,6 +17233,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17029,6 +17286,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17088,6 +17346,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17140,6 +17399,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17199,6 +17459,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17251,6 +17512,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17324,6 +17586,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -17450,6 +17713,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17502,6 +17766,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17561,6 +17826,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17613,6 +17879,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17672,6 +17939,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17724,6 +17992,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17797,6 +18066,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -17923,6 +18193,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -17975,6 +18246,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18034,6 +18306,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18086,6 +18359,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18145,6 +18419,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18197,6 +18472,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18270,6 +18546,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -18396,6 +18673,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18448,6 +18726,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18507,6 +18786,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18559,6 +18839,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18618,6 +18899,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18670,6 +18952,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18743,6 +19026,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -18869,6 +19153,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18921,6 +19206,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -18980,6 +19266,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19032,6 +19319,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19091,6 +19379,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19143,6 +19432,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19216,6 +19506,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -19342,6 +19633,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19394,6 +19686,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19453,6 +19746,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19505,6 +19799,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19564,6 +19859,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19616,6 +19912,7 @@
                             "dropShadows": [],
                             "autofit": false,
                             "tabStops": [280, 380, 480],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19689,6 +19986,7 @@
             "dropShadows": [],
             "autofit": false,
             "tabStops": [280, 380, 480],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -19825,6 +20123,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
@@ -19853,6 +20153,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
@@ -19952,6 +20254,8 @@
                             "highlightColor": null,
                             "dropShadows": [],
                             "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
                             "alignSelf": "flex-end",
                             "flexShrink": 1,
                             "boxSizing": "content-box"
@@ -19981,6 +20285,8 @@
             "highlightColor": null,
             "dropShadows": [],
             "autofit": false,
+            "tabStops": [],
+            "orientation": 0,
             "alignSelf": "flex-end",
             "flexShrink": 1,
             "boxSizing": "content-box"
