@@ -1393,7 +1393,12 @@ export function createLayoutNode(
         blockHeight += paragraph.height;
       }
 
-      if (props.autofit && !Number.isNaN(h) && hMode === MeasureMode.Exactly) {
+      if (
+        props.autofit &&
+        !props.nowrap &&
+        !Number.isNaN(h) &&
+        hMode === MeasureMode.Exactly
+      ) {
         // Binary search for optimal font size
         let minSize = 1;
         let maxSize = 200; // Reasonable upper bound for font size
@@ -1438,11 +1443,53 @@ export function createLayoutNode(
         baseProps.size = optimalSize;
       }
 
+      if (
+        props.autofit &&
+        props.nowrap &&
+        hasDefiniteConstraint(width, widthMode)
+      ) {
+        // Width-based autofit for single-line text: binary search for the
+        // largest font size where the text still fits within the width.
+        let minSize = 1;
+        let maxSize = 200;
+        let optimalSize = baseProps.size || 12;
+
+        if (measureBlocks(optimalSize).width <= width) {
+          while (maxSize - minSize > 1) {
+            const midSize = Math.floor((minSize + maxSize) / 2);
+            if (measureBlocks(midSize).width <= width) {
+              minSize = midSize;
+              optimalSize = midSize;
+            } else {
+              maxSize = midSize;
+            }
+          }
+        } else {
+          maxSize = optimalSize;
+          while (maxSize - minSize > 1) {
+            const midSize = Math.floor((minSize + maxSize) / 2);
+            if (measureBlocks(midSize).width <= width) {
+              minSize = midSize;
+              optimalSize = midSize;
+            } else {
+              maxSize = midSize;
+            }
+          }
+        }
+
+        const finalMeasurement = measureBlocks(optimalSize);
+        blocks = finalMeasurement.blocks;
+        blockWidth = finalMeasurement.width;
+        blockHeight = finalMeasurement.height;
+        baseProps.size = optimalSize;
+      }
+
       if (widthMode === MeasureMode.AtMost) {
         blockWidth = Math.min(width, blockWidth);
       }
 
       node.props.blocks = blocks;
+      node.props.size = baseProps.size;
       // For 90°/270°, swap width/height so Yoga assigns the rotated layout footprint
       if (isRotated) {
         return { width: blockHeight, height: blockWidth };

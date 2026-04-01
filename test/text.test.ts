@@ -358,6 +358,65 @@ test("createParagraph honors nowrap under constrained width", () => {
   expect(blocks[0].paragraph.width).toBeGreaterThan(80);
 });
 
+test("nowrap + autofit shrinks font to fit within width", async () => {
+  const containerWidth = 120;
+  const { metadata } = await renderWithMetadata(
+    Text("AAAA AAAA AAAA AAAA")
+      .font("GeistMono")
+      .size(20)
+      .width(containerWidth)
+      .nowrap()
+      .autofit(),
+    renderer,
+  );
+
+  const blocks = getTextParagraphs(metadata as SoneMetadata);
+  const paragraph = blocks[0].paragraph;
+  const resolvedSize = (metadata as SoneMetadata).props as TextProps;
+
+  expect(paragraph.lines).toHaveLength(1);
+  expect(paragraph.width).toBeLessThanOrEqual(containerWidth);
+  expect(resolvedSize.size).toBeLessThan(20);
+});
+
+test("nowrap + autofit grows font to fill a wide container", async () => {
+  const containerWidth = 800;
+  const { metadata } = await renderWithMetadata(
+    Text("Hello")
+      .font("GeistMono")
+      .size(20)
+      .width(containerWidth)
+      .nowrap()
+      .autofit(),
+    renderer,
+  );
+
+  const blocks = getTextParagraphs(metadata as SoneMetadata);
+  const paragraph = blocks[0].paragraph;
+  const resolvedSize = (metadata as SoneMetadata).props as TextProps;
+
+  expect(paragraph.lines).toHaveLength(1);
+  expect(paragraph.width).toBeLessThanOrEqual(containerWidth);
+  expect(resolvedSize.size).toBeGreaterThan(20);
+});
+
+test("nowrap + autofit always produces a single line", async () => {
+  const containerWidth = 300;
+  const { metadata } = await renderWithMetadata(
+    Text("The quick brown fox jumps over the lazy dog")
+      .font("GeistMono")
+      .size(20)
+      .width(containerWidth)
+      .nowrap()
+      .autofit(),
+    renderer,
+  );
+
+  const blocks = getTextParagraphs(metadata as SoneMetadata);
+  expect(blocks[0].paragraph.lines).toHaveLength(1);
+  expect(blocks[0].paragraph.width).toBeLessThanOrEqual(containerWidth);
+});
+
 test("createParagraph defaults to greedy line breaking", () => {
   const text =
     "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor";

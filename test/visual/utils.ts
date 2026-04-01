@@ -9,16 +9,11 @@ export const relative = (p: string) =>
 
 export async function writeCanvasToFile(root: SoneNode, url: string) {
   const file = path.parse(fileURLToPath(url));
-  const { canvas, metadata } = await sone(root).canvasWithMetadata();
+  const { canvas } = await sone(root).canvasWithMetadata();
 
   await fs.writeFile(
     path.join(file.dir, `${file.name}.jpg`),
     // @ts-expect-error
     await canvas.toBuffer("jpg", { density: 1 }),
-  );
-
-  await fs.writeFile(
-    path.join(file.dir, `${file.name}.json`),
-    JSON.stringify(metadata, null, 2),
   );
 }
