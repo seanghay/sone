@@ -113,7 +113,7 @@
                         "offsetY": -20
                       },
                       "run": {
-                        "x": 47,
+                        "x": 41,
                         "y": 92.4693603515625,
                         "width": 290.6800003051758,
                         "height": 80.931640625
@@ -172,7 +172,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 337.6800003051758,
+                        "x": 331.6800003051758,
                         "y": 60,
                         "width": 580.7499961853027,
                         "height": 136.199951171875
@@ -212,7 +212,7 @@
                         "dropShadows": []
                       },
                       "run": {
-                        "x": 918.4299964904785,
+                        "x": 912.4299964904785,
                         "y": 60,
                         "width": 528.7499961853027,
                         "height": 136.199951171875
@@ -243,14 +243,14 @@
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
-      "x": 47,
+      "x": 41,
       "y": 40,
       "width": 1401,
       "height": 157,
       "position": {
         "top": 40,
         "bottom": 0,
-        "left": 47,
+        "left": 41,
         "right": 0
       },
       "padding": {
@@ -288,7 +288,7 @@
         "blocks": [
           {
             "paragraph": {
-              "width": 266,
+              "width": 267,
               "height": 123.86322021484375,
               "lines": [
                 {
@@ -385,7 +385,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 1128,
+                        "x": 1115,
                         "y": 264,
                         "width": 265.1600036621094,
                         "height": 123.86322021484375
@@ -452,14 +452,14 @@
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
-      "x": 1066,
+      "x": 1053,
       "y": 216,
-      "width": 390,
+      "width": 391,
       "height": 221,
       "position": {
         "top": 216,
         "bottom": 0,
-        "left": 1066,
+        "left": 1053,
         "right": 0
       },
       "padding": {
@@ -563,7 +563,7 @@
             "blocks": [
               {
                 "paragraph": {
-                  "width": 663,
+                  "width": 651,
                   "height": 319.805712890625,
                   "lines": [
                     {
@@ -821,7 +821,7 @@
                           "run": {
                             "x": 348.9699935913086,
                             "y": 551.4580810546876,
-                            "width": 30.383336385091148,
+                            "width": 26.383336385091145,
                             "height": 39.63623046875
                           }
                         },
@@ -1025,9 +1025,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 379.3533299763997,
+                            "x": 375.3533299763997,
                             "y": 551.4580810546876,
-                            "width": 18.03333600362142,
+                            "width": 14.033336003621418,
                             "height": 39.63623046875
                           }
                         },
@@ -1231,7 +1231,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 397.3866659800211,
+                            "x": 389.3866659800211,
                             "y": 551.4580810546876,
                             "width": 288.98999786376953,
                             "height": 39.63623046875
@@ -1437,9 +1437,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 686.3766638437907,
+                            "x": 678.3766638437907,
                             "y": 551.4580810546876,
-                            "width": 18.03333600362142,
+                            "width": 14.033336003621418,
                             "height": 39.63623046875
                           }
                         },
@@ -1643,7 +1643,7 @@
                           "width": 50.59000015258789,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 704.4099998474121,
+                            "x": 692.4099998474121,
                             "y": 551.4580810546876,
                             "width": 50.59000015258789,
                             "height": 39.63623046875
@@ -1655,7 +1655,7 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 643.9099884033203,
+                      "width": 562.5399856567383,
                       "segments": [
                         {
                           "metrics": {
@@ -2065,7 +2065,7 @@
                           "run": {
                             "x": 256.3499946594238,
                             "y": 612.1156494140624,
-                            "width": 18.025005340576172,
+                            "width": 52.71000671386719,
                             "height": 39.63623046875
                           }
                         },
@@ -2269,7 +2269,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 274.375,
+                            "x": 309.060001373291,
                             "y": 612.1156494140624,
                             "width": 154.79999542236328,
                             "height": 39.63623046875
@@ -2475,9 +2475,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 429.1749954223633,
+                            "x": 463.8599967956543,
                             "y": 612.1156494140624,
-                            "width": 18.025005340576172,
+                            "width": 52.71000671386719,
                             "height": 39.63623046875
                           }
                         },
@@ -2496,9 +2496,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "សព្វាវុធធុនធ្ងន់គ្រប់ប្រភេទ",
+                          "text": "សព្វាវុធធុនធ្ងន់គ្រប់",
                           "height": 39.63623046875,
-                          "width": 307.79999923706055,
+                          "width": 226.42999649047852,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -2681,9 +2681,9 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 447.20000076293945,
+                            "x": 516.5700035095215,
                             "y": 612.1156494140624,
-                            "width": 307.79999923706055,
+                            "width": 226.42999649047852,
                             "height": 39.63623046875
                           }
                         }
@@ -2693,15 +2693,15 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 662.9499893188477,
+                      "width": 610.8099937438965,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 62.9900016784668,
+                            "width": 144.36000061035156,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 62.9900016784668,
+                            "actualBoundingBoxRight": 144.36000061035156,
                             "actualBoundingBoxAscent": 31,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxDescent": 10,
                             "fontBoundingBoxAscent": 31,
                             "fontBoundingBoxDescent": 8.63623046875,
                             "emHeightAscent": 31,
@@ -2710,9 +2710,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "របស់ប្រទេសថៃ",
+                          "text": "ប្រភេទរបស់ប្រទេសថៃ",
                           "height": 39.63623046875,
-                          "width": 185.36999893188477,
+                          "width": 266.73999786376953,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -2897,7 +2897,7 @@
                           "run": {
                             "x": 92,
                             "y": 663.6427490234374,
-                            "width": 185.36999893188477,
+                            "width": 266.73999786376953,
                             "height": 39.63623046875
                           }
                         },
@@ -3101,9 +3101,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 277.36999893188477,
+                            "x": 358.73999786376953,
                             "y": 663.6427490234374,
-                            "width": 8.530010223388672,
+                            "width": 48.670005798339844,
                             "height": 39.63623046875
                           }
                         },
@@ -3122,9 +3122,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "និងការដាក់ពង្រាយទាហានដ៏ច្រើនលើស",
+                          "text": "និងការដាក់ពង្រាយទាហានដ៏",
                           "height": 39.63623046875,
-                          "width": 469.09999084472656,
+                          "width": 335.5899963378906,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -3307,9 +3307,9 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 285.90000915527344,
+                            "x": 407.4100036621094,
                             "y": 663.6427490234374,
-                            "width": 469.09999084472656,
+                            "width": 335.5899963378906,
                             "height": 39.63623046875
                           }
                         }
@@ -3319,14 +3319,14 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 656.3799896240234,
+                      "width": 636.929988861084,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 51.529998779296875,
+                            "width": 133.50999450683594,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 51.529998779296875,
-                            "actualBoundingBoxAscent": 21,
+                            "actualBoundingBoxRight": 133.50999450683594,
+                            "actualBoundingBoxAscent": 32,
                             "actualBoundingBoxDescent": 10,
                             "fontBoundingBoxAscent": 31,
                             "fontBoundingBoxDescent": 8.63623046875,
@@ -3336,6 +3336,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
+                          "text": "ច្រើនលើសលុប",
+                          "height": 39.63623046875,
+                          "width": 185.0399932861328,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -3517,13 +3520,10 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "text": "លុប",
-                          "width": 51.529998779296875,
-                          "height": 39.63623046875,
                           "run": {
                             "x": 92,
                             "y": 715.1698486328124,
-                            "width": 51.529998779296875,
+                            "width": 185.0399932861328,
                             "height": 39.63623046875
                           }
                         },
@@ -3727,9 +3727,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 143.52999877929688,
+                            "x": 277.0399932861328,
                             "y": 715.1698486328124,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -3933,7 +3933,7 @@
                           "width": 61.599998474121094,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 153.33400039672853,
+                            "x": 289.03749561309814,
                             "y": 715.1698486328124,
                             "width": 61.599998474121094,
                             "height": 39.63623046875
@@ -4139,9 +4139,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 214.93399887084962,
+                            "x": 350.63749408721924,
                             "y": 715.1698486328124,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -4345,7 +4345,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 224.73800048828124,
+                            "x": 362.63499641418457,
                             "y": 715.1698486328124,
                             "width": 130.7599983215332,
                             "height": 39.63623046875
@@ -4551,9 +4551,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 355.4979988098145,
+                            "x": 493.3949947357178,
                             "y": 715.1698486328124,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -4757,7 +4757,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 365.3020004272461,
+                            "x": 505.3924970626831,
                             "y": 715.1698486328124,
                             "width": 132.31000137329102,
                             "height": 39.63623046875
@@ -4963,9 +4963,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 497.61200180053714,
+                            "x": 637.7024984359741,
                             "y": 715.1698486328124,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -5169,223 +5169,25 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 507.4160034179688,
+                            "x": 649.7000007629395,
                             "y": 715.1698486328124,
                             "width": 93.29999923706055,
                             "height": 39.63623046875
                           }
-                        },
+                        }
+                      ],
+                      "spacesCount": 4
+                    },
+                    {
+                      "baseline": 40.300000000000004,
+                      "height": 51.527099609375,
+                      "width": 650.4500007629395,
+                      "segments": [
                         {
                           "metrics": {
-                            "width": 8.479999542236328,
+                            "width": 91.93000030517578,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 8.479999542236328,
-                            "actualBoundingBoxAscent": 0,
-                            "actualBoundingBoxDescent": 0,
-                            "fontBoundingBoxAscent": 31,
-                            "fontBoundingBoxDescent": 8.63623046875,
-                            "emHeightAscent": 31,
-                            "emHeightDescent": 8.63623046875,
-                            "hangingBaseline": 24.80000114440918,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -8.63623046875
-                          },
-                          "props": {
-                            "size": 32,
-                            "color": "white",
-                            "font": ["Inter Khmer"],
-                            "style": "normal",
-                            "weight": 500,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineBreak": "greedy",
-                            "lineHeight": 1.3,
-                            "indentSize": 64,
-                            "hangingIndentSize": 0,
-                            "align": "justify",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 0,
-                                "color": "black"
-                              }
-                            ],
-                            "autofit": false,
-                            "tabStops": [],
-                            "orientation": 0,
-                            "tag": "block",
-                            "maxWidth": 700,
-                            "background": [
-                              "saddlebrown",
-                              {
-                                "type": "linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-225",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "hex",
-                                    "value": "231557",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "0"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "44107A",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "29"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FF1361",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "67"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FFF800",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "100"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            "alignSelf": "flex-start",
-                            "cornerRadius": [44],
-                            "cornerSmoothing": 0.7,
-                            "paddingTop": 60,
-                            "paddingBottom": 60,
-                            "paddingLeft": 24,
-                            "paddingRight": 24,
-                            "borderColor": "white",
-                            "borderWidth": 8,
-                            "shadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 10,
-                                "color": "rgba(0,0,0,.6)"
-                              }
-                            ],
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": " ",
-                          "width": 8.479999542236328,
-                          "height": 39.63623046875,
-                          "run": {
-                            "x": 600.7160026550293,
-                            "y": 715.1698486328124,
-                            "width": 9.804001617431641,
-                            "height": 39.63623046875
-                          }
-                        },
-                        {
-                          "metrics": {
-                            "width": 83.44999694824219,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 83.44999694824219,
+                            "actualBoundingBoxRight": 91.93000030517578,
                             "actualBoundingBoxAscent": 31,
                             "actualBoundingBoxDescent": 2,
                             "fontBoundingBoxAscent": 31,
@@ -5396,9 +5198,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "រំលោភយ៉ាង",
+                          "text": " រំលោភយ៉ាងច្បាស់",
                           "height": 39.63623046875,
-                          "width": 144.47999572753906,
+                          "width": 224.55999755859375,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -5580,224 +5382,10 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "run": {
-                            "x": 610.5200042724609,
-                            "y": 715.1698486328124,
-                            "width": 144.47999572753906,
-                            "height": 39.63623046875
-                          }
-                        }
-                      ],
-                      "spacesCount": 5
-                    },
-                    {
-                      "baseline": 40.300000000000004,
-                      "height": 51.527099609375,
-                      "width": 618.4200019836426,
-                      "segments": [
-                        {
-                          "metrics": {
-                            "width": 71.5999984741211,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 71.5999984741211,
-                            "actualBoundingBoxAscent": 31,
-                            "actualBoundingBoxDescent": 10,
-                            "fontBoundingBoxAscent": 31,
-                            "fontBoundingBoxDescent": 8.63623046875,
-                            "emHeightAscent": 31,
-                            "emHeightDescent": 8.63623046875,
-                            "hangingBaseline": 24.80000114440918,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -8.63623046875
-                          },
-                          "props": {
-                            "size": 32,
-                            "color": "white",
-                            "font": ["Inter Khmer"],
-                            "style": "normal",
-                            "weight": 500,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineBreak": "greedy",
-                            "lineHeight": 1.3,
-                            "indentSize": 64,
-                            "hangingIndentSize": 0,
-                            "align": "justify",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 0,
-                                "color": "black"
-                              }
-                            ],
-                            "autofit": false,
-                            "tabStops": [],
-                            "orientation": 0,
-                            "tag": "block",
-                            "maxWidth": 700,
-                            "background": [
-                              "saddlebrown",
-                              {
-                                "type": "linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-225",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "hex",
-                                    "value": "231557",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "0"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "44107A",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "29"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FF1361",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "67"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FFF800",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "100"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            "alignSelf": "flex-start",
-                            "cornerRadius": [44],
-                            "cornerSmoothing": 0.7,
-                            "paddingTop": 60,
-                            "paddingBottom": 60,
-                            "paddingLeft": 24,
-                            "paddingRight": 24,
-                            "borderColor": "white",
-                            "borderWidth": 8,
-                            "shadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 10,
-                                "color": "rgba(0,0,0,.6)"
-                              }
-                            ],
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": "ច្បាស់",
-                          "width": 71.5999984741211,
-                          "height": 39.63623046875,
                           "run": {
                             "x": 92,
                             "y": 766.6969482421874,
-                            "width": 71.5999984741211,
+                            "width": 224.6974973678589,
                             "height": 39.63623046875
                           }
                         },
@@ -6001,9 +5589,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 163.5999984741211,
+                            "x": 316.6974973678589,
                             "y": 766.6969482421874,
-                            "width": 19.624999046325684,
+                            "width": 8.617499351501465,
                             "height": 39.63623046875
                           }
                         },
@@ -6207,7 +5795,7 @@
                           "width": 89.87999725341797,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 183.22499752044678,
+                            "x": 325.31499671936035,
                             "y": 766.6969482421874,
                             "width": 89.87999725341797,
                             "height": 39.63623046875
@@ -6413,9 +6001,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 273.10499477386475,
+                            "x": 415.1949939727783,
                             "y": 766.6969482421874,
-                            "width": 19.624999046325684,
+                            "width": 8.617499351501465,
                             "height": 39.63623046875
                           }
                         },
@@ -6619,7 +6207,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 292.72999382019043,
+                            "x": 423.8124933242798,
                             "y": 766.6969482421874,
                             "width": 248.64000701904297,
                             "height": 39.63623046875
@@ -6825,9 +6413,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 541.3700008392334,
+                            "x": 672.4525003433228,
                             "y": 766.6969482421874,
-                            "width": 19.624999046325684,
+                            "width": 8.617499351501465,
                             "height": 39.63623046875
                           }
                         },
@@ -6846,9 +6434,6 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "សហប្រជា",
-                          "height": 39.63623046875,
-                          "width": 123.13000106811523,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -7030,10 +6615,227 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
+                          "text": "សហ",
+                          "width": 61.93000030517578,
+                          "height": 39.63623046875,
                           "run": {
-                            "x": 560.9949998855591,
+                            "x": 681.0699996948242,
                             "y": 766.6969482421874,
-                            "width": 123.13000106811523,
+                            "width": 61.93000030517578,
+                            "height": 39.63623046875
+                          }
+                        }
+                      ],
+                      "spacesCount": 4
+                    },
+                    {
+                      "baseline": 40.300000000000004,
+                      "height": 51.527099609375,
+                      "width": 332.9600028991699,
+                      "segments": [
+                        {
+                          "metrics": {
+                            "width": 61.20000076293945,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 61.20000076293945,
+                            "actualBoundingBoxAscent": 23,
+                            "actualBoundingBoxDescent": 10,
+                            "fontBoundingBoxAscent": 31,
+                            "fontBoundingBoxDescent": 8.63623046875,
+                            "emHeightAscent": 31,
+                            "emHeightDescent": 8.63623046875,
+                            "hangingBaseline": 24.80000114440918,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -8.63623046875
+                          },
+                          "props": {
+                            "size": 32,
+                            "color": "white",
+                            "font": ["Inter Khmer"],
+                            "style": "normal",
+                            "weight": 500,
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineBreak": "greedy",
+                            "lineHeight": 1.3,
+                            "indentSize": 64,
+                            "hangingIndentSize": 0,
+                            "align": "justify",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 0,
+                                "color": "black"
+                              }
+                            ],
+                            "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
+                            "tag": "block",
+                            "maxWidth": 700,
+                            "background": [
+                              "saddlebrown",
+                              {
+                                "type": "linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-225",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "hex",
+                                    "value": "231557",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "0"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "44107A",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "29"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FF1361",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "67"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FFF800",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "100"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "alignSelf": "flex-start",
+                            "cornerRadius": [44],
+                            "cornerSmoothing": 0.7,
+                            "paddingTop": 60,
+                            "paddingBottom": 60,
+                            "paddingLeft": 24,
+                            "paddingRight": 24,
+                            "borderColor": "white",
+                            "borderWidth": 8,
+                            "shadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 10,
+                                "color": "rgba(0,0,0,.6)"
+                              }
+                            ],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          },
+                          "text": "ប្រជា",
+                          "width": 61.20000076293945,
+                          "height": 39.63623046875,
+                          "run": {
+                            "x": 92,
+                            "y": 818.2240478515624,
+                            "width": 61.20000076293945,
                             "height": 39.63623046875
                           }
                         },
@@ -7237,9 +7039,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 684.1250009536743,
-                            "y": 766.6969482421874,
-                            "width": 19.624999046325684,
+                            "x": 153.20000076293945,
+                            "y": 818.2240478515624,
+                            "width": 8.479999542236328,
                             "height": 39.63623046875
                           }
                         },
@@ -7443,20 +7245,218 @@
                           "width": 51.25,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 703.75,
-                            "y": 766.6969482421874,
+                            "x": 161.68000030517578,
+                            "y": 818.2240478515624,
                             "width": 51.25,
                             "height": 39.63623046875
                           }
-                        }
-                      ],
-                      "spacesCount": 4
-                    },
-                    {
-                      "baseline": 40.300000000000004,
-                      "height": 51.527099609375,
-                      "width": 203.5500030517578,
-                      "segments": [
+                        },
+                        {
+                          "metrics": {
+                            "width": 8.479999542236328,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 8.479999542236328,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
+                            "fontBoundingBoxAscent": 31,
+                            "fontBoundingBoxDescent": 8.63623046875,
+                            "emHeightAscent": 31,
+                            "emHeightDescent": 8.63623046875,
+                            "hangingBaseline": 24.80000114440918,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -8.63623046875
+                          },
+                          "props": {
+                            "size": 32,
+                            "color": "white",
+                            "font": ["Inter Khmer"],
+                            "style": "normal",
+                            "weight": 500,
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineBreak": "greedy",
+                            "lineHeight": 1.3,
+                            "indentSize": 64,
+                            "hangingIndentSize": 0,
+                            "align": "justify",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 0,
+                                "color": "black"
+                              }
+                            ],
+                            "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
+                            "tag": "block",
+                            "maxWidth": 700,
+                            "background": [
+                              "saddlebrown",
+                              {
+                                "type": "linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-225",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "hex",
+                                    "value": "231557",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "0"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "44107A",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "29"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FF1361",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "67"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FFF800",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "100"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "alignSelf": "flex-start",
+                            "cornerRadius": [44],
+                            "cornerSmoothing": 0.7,
+                            "paddingTop": 60,
+                            "paddingBottom": 60,
+                            "paddingLeft": 24,
+                            "paddingRight": 24,
+                            "borderColor": "white",
+                            "borderWidth": 8,
+                            "shadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 10,
+                                "color": "rgba(0,0,0,.6)"
+                              }
+                            ],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          },
+                          "text": " ",
+                          "width": 8.479999542236328,
+                          "height": 39.63623046875,
+                          "run": {
+                            "x": 212.93000030517578,
+                            "y": 818.2240478515624,
+                            "width": 8.479999542236328,
+                            "height": 39.63623046875
+                          }
+                        },
                         {
                           "metrics": {
                             "width": 92.19000244140625,
@@ -7657,7 +7657,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 92,
+                            "x": 221.4099998474121,
                             "y": 818.2240478515624,
                             "width": 203.5500030517578,
                             "height": 39.63623046875
@@ -7672,7 +7672,7 @@
               },
               {
                 "paragraph": {
-                  "width": 663,
+                  "width": 651,
                   "height": 319.805712890625,
                   "lines": [
                     {
@@ -8136,7 +8136,7 @@
                           "run": {
                             "x": 348.9699935913086,
                             "y": 871.2637939453125,
-                            "width": 30.383336385091148,
+                            "width": 26.383336385091145,
                             "height": 39.63623046875
                           }
                         },
@@ -8340,9 +8340,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 379.3533299763997,
+                            "x": 375.3533299763997,
                             "y": 871.2637939453125,
-                            "width": 18.03333600362142,
+                            "width": 14.033336003621418,
                             "height": 39.63623046875
                           }
                         },
@@ -8546,7 +8546,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 397.3866659800211,
+                            "x": 389.3866659800211,
                             "y": 871.2637939453125,
                             "width": 288.98999786376953,
                             "height": 39.63623046875
@@ -8752,9 +8752,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 686.3766638437907,
+                            "x": 678.3766638437907,
                             "y": 871.2637939453125,
-                            "width": 18.03333600362142,
+                            "width": 14.033336003621418,
                             "height": 39.63623046875
                           }
                         },
@@ -8958,7 +8958,7 @@
                           "width": 50.59000015258789,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 704.4099998474121,
+                            "x": 692.4099998474121,
                             "y": 871.2637939453125,
                             "width": 50.59000015258789,
                             "height": 39.63623046875
@@ -8970,7 +8970,7 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 643.9099884033203,
+                      "width": 562.5399856567383,
                       "segments": [
                         {
                           "metrics": {
@@ -9380,7 +9380,7 @@
                           "run": {
                             "x": 256.3499946594238,
                             "y": 931.9213623046874,
-                            "width": 18.025005340576172,
+                            "width": 52.71000671386719,
                             "height": 39.63623046875
                           }
                         },
@@ -9584,7 +9584,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 274.375,
+                            "x": 309.060001373291,
                             "y": 931.9213623046874,
                             "width": 154.79999542236328,
                             "height": 39.63623046875
@@ -9790,9 +9790,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 429.1749954223633,
+                            "x": 463.8599967956543,
                             "y": 931.9213623046874,
-                            "width": 18.025005340576172,
+                            "width": 52.71000671386719,
                             "height": 39.63623046875
                           }
                         },
@@ -9811,9 +9811,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "សព្វាវុធធុនធ្ងន់គ្រប់ប្រភេទ",
+                          "text": "សព្វាវុធធុនធ្ងន់គ្រប់",
                           "height": 39.63623046875,
-                          "width": 307.79999923706055,
+                          "width": 226.42999649047852,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -9996,9 +9996,9 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 447.20000076293945,
+                            "x": 516.5700035095215,
                             "y": 931.9213623046874,
-                            "width": 307.79999923706055,
+                            "width": 226.42999649047852,
                             "height": 39.63623046875
                           }
                         }
@@ -10008,15 +10008,15 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 662.9499893188477,
+                      "width": 610.8099937438965,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 62.9900016784668,
+                            "width": 144.36000061035156,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 62.9900016784668,
+                            "actualBoundingBoxRight": 144.36000061035156,
                             "actualBoundingBoxAscent": 31,
-                            "actualBoundingBoxDescent": 2,
+                            "actualBoundingBoxDescent": 10,
                             "fontBoundingBoxAscent": 31,
                             "fontBoundingBoxDescent": 8.63623046875,
                             "emHeightAscent": 31,
@@ -10025,9 +10025,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "របស់ប្រទេសថៃ",
+                          "text": "ប្រភេទរបស់ប្រទេសថៃ",
                           "height": 39.63623046875,
-                          "width": 185.36999893188477,
+                          "width": 266.73999786376953,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -10212,7 +10212,7 @@
                           "run": {
                             "x": 92,
                             "y": 983.4484619140624,
-                            "width": 185.36999893188477,
+                            "width": 266.73999786376953,
                             "height": 39.63623046875
                           }
                         },
@@ -10416,9 +10416,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 277.36999893188477,
+                            "x": 358.73999786376953,
                             "y": 983.4484619140624,
-                            "width": 8.530010223388672,
+                            "width": 48.670005798339844,
                             "height": 39.63623046875
                           }
                         },
@@ -10437,9 +10437,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "និងការដាក់ពង្រាយទាហានដ៏ច្រើនលើស",
+                          "text": "និងការដាក់ពង្រាយទាហានដ៏",
                           "height": 39.63623046875,
-                          "width": 469.09999084472656,
+                          "width": 335.5899963378906,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -10622,9 +10622,9 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 285.90000915527344,
+                            "x": 407.4100036621094,
                             "y": 983.4484619140624,
-                            "width": 469.09999084472656,
+                            "width": 335.5899963378906,
                             "height": 39.63623046875
                           }
                         }
@@ -10634,14 +10634,14 @@
                     {
                       "baseline": 40.300000000000004,
                       "height": 51.527099609375,
-                      "width": 656.3799896240234,
+                      "width": 636.929988861084,
                       "segments": [
                         {
                           "metrics": {
-                            "width": 51.529998779296875,
+                            "width": 133.50999450683594,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 51.529998779296875,
-                            "actualBoundingBoxAscent": 21,
+                            "actualBoundingBoxRight": 133.50999450683594,
+                            "actualBoundingBoxAscent": 32,
                             "actualBoundingBoxDescent": 10,
                             "fontBoundingBoxAscent": 31,
                             "fontBoundingBoxDescent": 8.63623046875,
@@ -10651,6 +10651,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
+                          "text": "ច្រើនលើសលុប",
+                          "height": 39.63623046875,
+                          "width": 185.0399932861328,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -10832,13 +10835,10 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "text": "លុប",
-                          "width": 51.529998779296875,
-                          "height": 39.63623046875,
                           "run": {
                             "x": 92,
                             "y": 1034.9755615234374,
-                            "width": 51.529998779296875,
+                            "width": 185.0399932861328,
                             "height": 39.63623046875
                           }
                         },
@@ -11042,9 +11042,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 143.52999877929688,
+                            "x": 277.0399932861328,
                             "y": 1034.9755615234374,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -11248,7 +11248,7 @@
                           "width": 61.599998474121094,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 153.33400039672853,
+                            "x": 289.03749561309814,
                             "y": 1034.9755615234374,
                             "width": 61.599998474121094,
                             "height": 39.63623046875
@@ -11454,9 +11454,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 214.93399887084962,
+                            "x": 350.63749408721924,
                             "y": 1034.9755615234374,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -11660,7 +11660,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 224.73800048828124,
+                            "x": 362.63499641418457,
                             "y": 1034.9755615234374,
                             "width": 130.7599983215332,
                             "height": 39.63623046875
@@ -11866,9 +11866,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 355.4979988098145,
+                            "x": 493.3949947357178,
                             "y": 1034.9755615234374,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -12072,7 +12072,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 365.3020004272461,
+                            "x": 505.3924970626831,
                             "y": 1034.9755615234374,
                             "width": 132.31000137329102,
                             "height": 39.63623046875
@@ -12278,9 +12278,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 497.61200180053714,
+                            "x": 637.7024984359741,
                             "y": 1034.9755615234374,
-                            "width": 9.804001617431641,
+                            "width": 11.997502326965332,
                             "height": 39.63623046875
                           }
                         },
@@ -12484,223 +12484,25 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 507.4160034179688,
+                            "x": 649.7000007629395,
                             "y": 1034.9755615234374,
                             "width": 93.29999923706055,
                             "height": 39.63623046875
                           }
-                        },
+                        }
+                      ],
+                      "spacesCount": 4
+                    },
+                    {
+                      "baseline": 40.300000000000004,
+                      "height": 51.527099609375,
+                      "width": 650.4500007629395,
+                      "segments": [
                         {
                           "metrics": {
-                            "width": 8.479999542236328,
+                            "width": 91.93000030517578,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 8.479999542236328,
-                            "actualBoundingBoxAscent": 0,
-                            "actualBoundingBoxDescent": 0,
-                            "fontBoundingBoxAscent": 31,
-                            "fontBoundingBoxDescent": 8.63623046875,
-                            "emHeightAscent": 31,
-                            "emHeightDescent": 8.63623046875,
-                            "hangingBaseline": 24.80000114440918,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -8.63623046875
-                          },
-                          "props": {
-                            "size": 32,
-                            "color": "white",
-                            "font": ["Inter Khmer"],
-                            "style": "normal",
-                            "weight": 500,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineBreak": "greedy",
-                            "lineHeight": 1.3,
-                            "indentSize": 64,
-                            "hangingIndentSize": 0,
-                            "align": "justify",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 0,
-                                "color": "black"
-                              }
-                            ],
-                            "autofit": false,
-                            "tabStops": [],
-                            "orientation": 0,
-                            "tag": "block",
-                            "maxWidth": 700,
-                            "background": [
-                              "saddlebrown",
-                              {
-                                "type": "linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-225",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "hex",
-                                    "value": "231557",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "0"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "44107A",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "29"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FF1361",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "67"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FFF800",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "100"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            "alignSelf": "flex-start",
-                            "cornerRadius": [44],
-                            "cornerSmoothing": 0.7,
-                            "paddingTop": 60,
-                            "paddingBottom": 60,
-                            "paddingLeft": 24,
-                            "paddingRight": 24,
-                            "borderColor": "white",
-                            "borderWidth": 8,
-                            "shadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 10,
-                                "color": "rgba(0,0,0,.6)"
-                              }
-                            ],
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": " ",
-                          "width": 8.479999542236328,
-                          "height": 39.63623046875,
-                          "run": {
-                            "x": 600.7160026550293,
-                            "y": 1034.9755615234374,
-                            "width": 9.804001617431641,
-                            "height": 39.63623046875
-                          }
-                        },
-                        {
-                          "metrics": {
-                            "width": 83.44999694824219,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 83.44999694824219,
+                            "actualBoundingBoxRight": 91.93000030517578,
                             "actualBoundingBoxAscent": 31,
                             "actualBoundingBoxDescent": 2,
                             "fontBoundingBoxAscent": 31,
@@ -12711,9 +12513,9 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "រំលោភយ៉ាង",
+                          "text": " រំលោភយ៉ាងច្បាស់",
                           "height": 39.63623046875,
-                          "width": 144.47999572753906,
+                          "width": 224.55999755859375,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -12895,224 +12697,10 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "run": {
-                            "x": 610.5200042724609,
-                            "y": 1034.9755615234374,
-                            "width": 144.47999572753906,
-                            "height": 39.63623046875
-                          }
-                        }
-                      ],
-                      "spacesCount": 5
-                    },
-                    {
-                      "baseline": 40.300000000000004,
-                      "height": 51.527099609375,
-                      "width": 618.4200019836426,
-                      "segments": [
-                        {
-                          "metrics": {
-                            "width": 71.5999984741211,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 71.5999984741211,
-                            "actualBoundingBoxAscent": 31,
-                            "actualBoundingBoxDescent": 10,
-                            "fontBoundingBoxAscent": 31,
-                            "fontBoundingBoxDescent": 8.63623046875,
-                            "emHeightAscent": 31,
-                            "emHeightDescent": 8.63623046875,
-                            "hangingBaseline": 24.80000114440918,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -8.63623046875
-                          },
-                          "props": {
-                            "size": 32,
-                            "color": "white",
-                            "font": ["Inter Khmer"],
-                            "style": "normal",
-                            "weight": 500,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineBreak": "greedy",
-                            "lineHeight": 1.3,
-                            "indentSize": 64,
-                            "hangingIndentSize": 0,
-                            "align": "justify",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 0,
-                                "color": "black"
-                              }
-                            ],
-                            "autofit": false,
-                            "tabStops": [],
-                            "orientation": 0,
-                            "tag": "block",
-                            "maxWidth": 700,
-                            "background": [
-                              "saddlebrown",
-                              {
-                                "type": "linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-225",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "hex",
-                                    "value": "231557",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "0"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "44107A",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "29"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FF1361",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "67"
-                                    }
-                                  },
-                                  {
-                                    "type": "hex",
-                                    "value": "FFF800",
-                                    "length": {
-                                      "type": "%",
-                                      "value": "100"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "-115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "repeating-linear-gradient",
-                                "orientation": {
-                                  "type": "angular",
-                                  "value": "115",
-                                  "unit": "deg"
-                                },
-                                "colorStops": [
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent"
-                                  },
-                                  {
-                                    "type": "literal",
-                                    "value": "transparent",
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "20"
-                                    }
-                                  },
-                                  {
-                                    "type": "rgba",
-                                    "value": ["255", "255", "255", "0.1"],
-                                    "length": {
-                                      "type": "px",
-                                      "value": "40"
-                                    }
-                                  }
-                                ]
-                              }
-                            ],
-                            "alignSelf": "flex-start",
-                            "cornerRadius": [44],
-                            "cornerSmoothing": 0.7,
-                            "paddingTop": 60,
-                            "paddingBottom": 60,
-                            "paddingLeft": 24,
-                            "paddingRight": 24,
-                            "borderColor": "white",
-                            "borderWidth": 8,
-                            "shadows": [
-                              {
-                                "inset": false,
-                                "offsetX": 4,
-                                "offsetY": 4,
-                                "blurRadius": 10,
-                                "color": "rgba(0,0,0,.6)"
-                              }
-                            ],
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": "ច្បាស់",
-                          "width": 71.5999984741211,
-                          "height": 39.63623046875,
                           "run": {
                             "x": 92,
                             "y": 1086.5026611328124,
-                            "width": 71.5999984741211,
+                            "width": 224.6974973678589,
                             "height": 39.63623046875
                           }
                         },
@@ -13316,9 +12904,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 163.5999984741211,
+                            "x": 316.6974973678589,
                             "y": 1086.5026611328124,
-                            "width": 19.624999046325684,
+                            "width": 8.617499351501465,
                             "height": 39.63623046875
                           }
                         },
@@ -13522,7 +13110,7 @@
                           "width": 89.87999725341797,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 183.22499752044678,
+                            "x": 325.31499671936035,
                             "y": 1086.5026611328124,
                             "width": 89.87999725341797,
                             "height": 39.63623046875
@@ -13728,9 +13316,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 273.10499477386475,
+                            "x": 415.1949939727783,
                             "y": 1086.5026611328124,
-                            "width": 19.624999046325684,
+                            "width": 8.617499351501465,
                             "height": 39.63623046875
                           }
                         },
@@ -13934,7 +13522,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 292.72999382019043,
+                            "x": 423.8124933242798,
                             "y": 1086.5026611328124,
                             "width": 248.64000701904297,
                             "height": 39.63623046875
@@ -14140,9 +13728,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 541.3700008392334,
+                            "x": 672.4525003433228,
                             "y": 1086.5026611328124,
-                            "width": 19.624999046325684,
+                            "width": 8.617499351501465,
                             "height": 39.63623046875
                           }
                         },
@@ -14161,9 +13749,6 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -8.63623046875
                           },
-                          "text": "សហប្រជា",
-                          "height": 39.63623046875,
-                          "width": 123.13000106811523,
                           "props": {
                             "size": 32,
                             "color": "white",
@@ -14345,10 +13930,227 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
+                          "text": "សហ",
+                          "width": 61.93000030517578,
+                          "height": 39.63623046875,
                           "run": {
-                            "x": 560.9949998855591,
+                            "x": 681.0699996948242,
                             "y": 1086.5026611328124,
-                            "width": 123.13000106811523,
+                            "width": 61.93000030517578,
+                            "height": 39.63623046875
+                          }
+                        }
+                      ],
+                      "spacesCount": 4
+                    },
+                    {
+                      "baseline": 40.300000000000004,
+                      "height": 51.527099609375,
+                      "width": 332.9600028991699,
+                      "segments": [
+                        {
+                          "metrics": {
+                            "width": 61.20000076293945,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 61.20000076293945,
+                            "actualBoundingBoxAscent": 23,
+                            "actualBoundingBoxDescent": 10,
+                            "fontBoundingBoxAscent": 31,
+                            "fontBoundingBoxDescent": 8.63623046875,
+                            "emHeightAscent": 31,
+                            "emHeightDescent": 8.63623046875,
+                            "hangingBaseline": 24.80000114440918,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -8.63623046875
+                          },
+                          "props": {
+                            "size": 32,
+                            "color": "white",
+                            "font": ["Inter Khmer"],
+                            "style": "normal",
+                            "weight": 500,
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineBreak": "greedy",
+                            "lineHeight": 1.3,
+                            "indentSize": 64,
+                            "hangingIndentSize": 0,
+                            "align": "justify",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 0,
+                                "color": "black"
+                              }
+                            ],
+                            "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
+                            "tag": "block",
+                            "maxWidth": 700,
+                            "background": [
+                              "saddlebrown",
+                              {
+                                "type": "linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-225",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "hex",
+                                    "value": "231557",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "0"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "44107A",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "29"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FF1361",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "67"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FFF800",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "100"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "alignSelf": "flex-start",
+                            "cornerRadius": [44],
+                            "cornerSmoothing": 0.7,
+                            "paddingTop": 60,
+                            "paddingBottom": 60,
+                            "paddingLeft": 24,
+                            "paddingRight": 24,
+                            "borderColor": "white",
+                            "borderWidth": 8,
+                            "shadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 10,
+                                "color": "rgba(0,0,0,.6)"
+                              }
+                            ],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          },
+                          "text": "ប្រជា",
+                          "width": 61.20000076293945,
+                          "height": 39.63623046875,
+                          "run": {
+                            "x": 92,
+                            "y": 1138.0297607421874,
+                            "width": 61.20000076293945,
                             "height": 39.63623046875
                           }
                         },
@@ -14552,9 +14354,9 @@
                           "width": 8.479999542236328,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 684.1250009536743,
-                            "y": 1086.5026611328124,
-                            "width": 19.624999046325684,
+                            "x": 153.20000076293945,
+                            "y": 1138.0297607421874,
+                            "width": 8.479999542236328,
                             "height": 39.63623046875
                           }
                         },
@@ -14758,20 +14560,218 @@
                           "width": 51.25,
                           "height": 39.63623046875,
                           "run": {
-                            "x": 703.75,
-                            "y": 1086.5026611328124,
+                            "x": 161.68000030517578,
+                            "y": 1138.0297607421874,
                             "width": 51.25,
                             "height": 39.63623046875
                           }
-                        }
-                      ],
-                      "spacesCount": 4
-                    },
-                    {
-                      "baseline": 40.300000000000004,
-                      "height": 51.527099609375,
-                      "width": 203.5500030517578,
-                      "segments": [
+                        },
+                        {
+                          "metrics": {
+                            "width": 8.479999542236328,
+                            "actualBoundingBoxLeft": 0,
+                            "actualBoundingBoxRight": 8.479999542236328,
+                            "actualBoundingBoxAscent": 0,
+                            "actualBoundingBoxDescent": 0,
+                            "fontBoundingBoxAscent": 31,
+                            "fontBoundingBoxDescent": 8.63623046875,
+                            "emHeightAscent": 31,
+                            "emHeightDescent": 8.63623046875,
+                            "hangingBaseline": 24.80000114440918,
+                            "alphabeticBaseline": 0,
+                            "ideographicBaseline": -8.63623046875
+                          },
+                          "props": {
+                            "size": 32,
+                            "color": "white",
+                            "font": ["Inter Khmer"],
+                            "style": "normal",
+                            "weight": 500,
+                            "letterSpacing": 0,
+                            "nowrap": false,
+                            "lineBreak": "greedy",
+                            "lineHeight": 1.3,
+                            "indentSize": 64,
+                            "hangingIndentSize": 0,
+                            "align": "justify",
+                            "strokeColor": "black",
+                            "strokeWidth": 0,
+                            "wordSpacing": 0,
+                            "blocks": [],
+                            "offsetY": 0,
+                            "underline": 0,
+                            "underlineColor": null,
+                            "overline": 0,
+                            "overlineColor": null,
+                            "lineThrough": 0,
+                            "lineThroughColor": null,
+                            "highlightColor": null,
+                            "dropShadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 0,
+                                "color": "black"
+                              }
+                            ],
+                            "autofit": false,
+                            "tabStops": [],
+                            "orientation": 0,
+                            "tag": "block",
+                            "maxWidth": 700,
+                            "background": [
+                              "saddlebrown",
+                              {
+                                "type": "linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-225",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "hex",
+                                    "value": "231557",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "0"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "44107A",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "29"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FF1361",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "67"
+                                    }
+                                  },
+                                  {
+                                    "type": "hex",
+                                    "value": "FFF800",
+                                    "length": {
+                                      "type": "%",
+                                      "value": "100"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "-115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "repeating-linear-gradient",
+                                "orientation": {
+                                  "type": "angular",
+                                  "value": "115",
+                                  "unit": "deg"
+                                },
+                                "colorStops": [
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent"
+                                  },
+                                  {
+                                    "type": "literal",
+                                    "value": "transparent",
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "20"
+                                    }
+                                  },
+                                  {
+                                    "type": "rgba",
+                                    "value": ["255", "255", "255", "0.1"],
+                                    "length": {
+                                      "type": "px",
+                                      "value": "40"
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "alignSelf": "flex-start",
+                            "cornerRadius": [44],
+                            "cornerSmoothing": 0.7,
+                            "paddingTop": 60,
+                            "paddingBottom": 60,
+                            "paddingLeft": 24,
+                            "paddingRight": 24,
+                            "borderColor": "white",
+                            "borderWidth": 8,
+                            "shadows": [
+                              {
+                                "inset": false,
+                                "offsetX": 4,
+                                "offsetY": 4,
+                                "blurRadius": 10,
+                                "color": "rgba(0,0,0,.6)"
+                              }
+                            ],
+                            "flexShrink": 1,
+                            "boxSizing": "content-box"
+                          },
+                          "text": " ",
+                          "width": 8.479999542236328,
+                          "height": 39.63623046875,
+                          "run": {
+                            "x": 212.93000030517578,
+                            "y": 1138.0297607421874,
+                            "width": 8.479999542236328,
+                            "height": 39.63623046875
+                          }
+                        },
                         {
                           "metrics": {
                             "width": 92.19000244140625,
@@ -14972,7 +14972,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 92,
+                            "x": 221.4099998474121,
                             "y": 1138.0297607421874,
                             "width": 203.5500030517578,
                             "height": 39.63623046875
@@ -15152,7 +15152,7 @@
           },
           "x": 60,
           "y": 476,
-          "width": 727,
+          "width": 715,
           "height": 776,
           "position": {
             "top": 20,
@@ -15278,7 +15278,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 828,
+                            "x": 816,
                             "y": 503.9454345703125,
                             "width": 584.5599956512451,
                             "height": 39.63623046875
@@ -15365,7 +15365,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 555.4725341796875,
                             "width": 541.4300003051758,
                             "height": 39.63623046875
@@ -15452,7 +15452,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 606.9996337890625,
                             "width": 523.5700035095215,
                             "height": 39.63623046875
@@ -15539,7 +15539,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 658.5267333984375,
                             "width": 557.4599981307983,
                             "height": 39.63623046875
@@ -15626,7 +15626,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 710.0538330078125,
                             "width": 542.1500034332275,
                             "height": 39.63623046875
@@ -15713,7 +15713,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 761.5809326171875,
                             "width": 531.4299907684326,
                             "height": 39.63623046875
@@ -15800,7 +15800,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 813.1080322265625,
                             "width": 450.2200040817261,
                             "height": 39.63623046875
@@ -15887,7 +15887,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 864.6351318359375,
                             "width": 437.4700012207031,
                             "height": 39.63623046875
@@ -15974,7 +15974,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 850,
+                            "x": 838,
                             "y": 916.1622314453125,
                             "width": 161.3899965286255,
                             "height": 39.63623046875
@@ -16025,14 +16025,14 @@
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
-          "x": 806,
+          "x": 794,
           "y": 476,
           "width": 630,
           "height": 508,
           "position": {
             "top": 20,
             "bottom": 0,
-            "left": 766,
+            "left": 754,
             "right": 0
           },
           "padding": {
@@ -16051,7 +16051,7 @@
       ],
       "x": 40,
       "y": 456,
-      "width": 1416,
+      "width": 1403,
       "height": 816,
       "position": {
         "top": 456,
@@ -16228,7 +16228,7 @@
           "children": [],
           "x": 583,
           "y": 1312,
-          "width": 238,
+          "width": 225,
           "height": 185,
           "position": {
             "top": 20,
@@ -16370,7 +16370,7 @@
                             "boxSizing": "content-box"
                           },
                           "run": {
-                            "x": 830,
+                            "x": 818,
                             "y": 1322,
                             "width": 594.5800018310547,
                             "height": 165.5419921875
@@ -16401,14 +16401,14 @@
             "flexShrink": 1,
             "boxSizing": "content-box"
           },
-          "x": 820,
+          "x": 808,
           "y": 1312,
           "width": 616,
           "height": 187,
           "position": {
             "top": 20,
             "bottom": 0,
-            "left": 780,
+            "left": 768,
             "right": 0
           },
           "padding": {
@@ -16427,7 +16427,7 @@
       ],
       "x": 40,
       "y": 1292,
-      "width": 1416,
+      "width": 1403,
       "height": 225,
       "position": {
         "top": 1292,
@@ -16651,7 +16651,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 353,
+                        "x": 347,
                         "y": 1571.0568552017212,
                         "width": 200.62000179290771,
                         "height": 49.031982421875
@@ -16701,7 +16701,7 @@
                         "highlightColor": "yellow"
                       },
                       "run": {
-                        "x": 553.6200017929077,
+                        "x": 547.6200017929077,
                         "y": 1550.3547973632812,
                         "width": 133.59999656677246,
                         "height": 49.031982421875
@@ -16741,7 +16741,7 @@
                         "dropShadows": []
                       },
                       "run": {
-                        "x": 687.2199983596802,
+                        "x": 681.2199983596802,
                         "y": 1570.3547973632812,
                         "width": 403.0500011444092,
                         "height": 49.031982421875
@@ -16789,7 +16789,7 @@
                         "dropShadows": []
                       },
                       "run": {
-                        "x": 353,
+                        "x": 347,
                         "y": 1644.0963745117188,
                         "width": 434.5900049209595,
                         "height": 49.031982421875
@@ -16830,7 +16830,7 @@
                       "width": 31.780000686645508,
                       "height": 32.68798828125,
                       "run": {
-                        "x": 787.5900049209595,
+                        "x": 781.5900049209595,
                         "y": 1646.9243774414062,
                         "width": 31.780000686645508,
                         "height": 32.68798828125
@@ -16897,7 +16897,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 819.370005607605,
+                        "x": 813.370005607605,
                         "y": 1644.0963745117188,
                         "width": 191.92999744415283,
                         "height": 49.031982421875
@@ -16909,7 +16909,7 @@
                 {
                   "baseline": 50.02921142578125,
                   "height": 63.7415771484375,
-                  "width": 749.7699975967407,
+                  "width": 749.7799959182739,
                   "segments": [
                     {
                       "metrics": {
@@ -16972,7 +16972,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 353,
+                        "x": 347,
                         "y": 1707.8379516601562,
                         "width": 259.3600072860718,
                         "height": 49.031982421875
@@ -16995,7 +16995,7 @@
                       },
                       "text": "ការផលិតនឹងពិបាករក្សាម៉ូតូ ",
                       "height": 44.14453125,
-                      "width": 325.64999198913574,
+                      "width": 325.65999031066895,
                       "props": {
                         "size": 24,
                         "color": "brown",
@@ -17012,9 +17012,9 @@
                         "dropShadows": []
                       },
                       "run": {
-                        "x": 612.3600072860718,
+                        "x": 606.3600072860718,
                         "y": 1716.6325073242188,
-                        "width": 325.64999198913574,
+                        "width": 325.65999031066895,
                         "height": 44.14453125
                       }
                     },
@@ -17079,7 +17079,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 938.0099992752075,
+                        "x": 932.0199975967407,
                         "y": 1707.8379516601562,
                         "width": 164.7599983215332,
                         "height": 49.031982421875
@@ -17154,7 +17154,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 353,
+                        "x": 347,
                         "y": 1771.5795288085938,
                         "width": 787.7399921417236,
                         "height": 49.031982421875
@@ -17229,7 +17229,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 353,
+                        "x": 347,
                         "y": 1835.3211059570312,
                         "width": 726.5800008773804,
                         "height": 49.031982421875
@@ -17304,7 +17304,7 @@
                         "boxSizing": "content-box"
                       },
                       "run": {
-                        "x": 353,
+                        "x": 347,
                         "y": 1906.9279052734373,
                         "width": 250.0500020980835,
                         "height": 49.031982421875
@@ -17344,7 +17344,7 @@
                       "width": 130.0800018310547,
                       "height": 66.216796875,
                       "run": {
-                        "x": 603.0500020980835,
+                        "x": 597.0500020980835,
                         "y": 1900.8777343749998,
                         "width": 130.0800018310547,
                         "height": 66.216796875
@@ -17411,7 +17411,7 @@
                       "width": 27.030000686645508,
                       "height": 49.031982421875,
                       "run": {
-                        "x": 733.1300039291382,
+                        "x": 727.1300039291382,
                         "y": 1906.9279052734373,
                         "width": 27.030000686645508,
                         "height": 49.031982421875
@@ -17450,14 +17450,14 @@
         "flexShrink": 1,
         "boxSizing": "content-box"
       },
-      "x": 333,
+      "x": 327,
       "y": 1537,
       "width": 829,
       "height": 448,
       "position": {
         "top": 1537,
         "bottom": 0,
-        "left": 333,
+        "left": 327,
         "right": 0
       },
       "padding": {
@@ -17476,7 +17476,7 @@
   ],
   "x": 0,
   "y": 0,
-  "width": 1496,
+  "width": 1483,
   "height": 2024,
   "position": {
     "top": 0,

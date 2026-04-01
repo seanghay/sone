@@ -1772,15 +1772,15 @@
                                 {
                                   "baseline": 28,
                                   "height": 38.2479248046875,
-                                  "width": 116.92999649047852,
+                                  "width": 116.93000030517578,
                                   "segments": [
                                     {
                                       "metrics": {
-                                        "width": 18.09000015258789,
+                                        "width": 116.93000030517578,
                                         "actualBoundingBoxLeft": 0,
-                                        "actualBoundingBoxRight": 18.09000015258789,
+                                        "actualBoundingBoxRight": 116.93000030517578,
                                         "actualBoundingBoxAscent": 24,
-                                        "actualBoundingBoxDescent": 4,
+                                        "actualBoundingBoxDescent": 5,
                                         "fontBoundingBoxAscent": 28,
                                         "fontBoundingBoxDescent": 10.2479248046875,
                                         "emHeightAscent": 28,
@@ -1789,9 +1789,6 @@
                                         "alphabeticBaseline": 0,
                                         "ideographicBaseline": -10.2479248046875
                                       },
-                                      "text": "$45,678",
-                                      "height": 38.2479248046875,
-                                      "width": 116.92999649047852,
                                       "props": {
                                         "size": 28,
                                         "color": "#111827",
@@ -1824,10 +1821,13 @@
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
+                                      "text": "$45,678",
+                                      "width": 116.93000030517578,
+                                      "height": 38.2479248046875,
                                       "run": {
                                         "x": 568,
                                         "y": 157,
-                                        "width": 116.92999649047852,
+                                        "width": 116.93000030517578,
                                         "height": 38.2479248046875
                                       }
                                     }
@@ -1905,7 +1905,7 @@
                                 {
                                   "baseline": 12,
                                   "height": 16.3919677734375,
-                                  "width": 24.949999809265137,
+                                  "width": 24.94999885559082,
                                   "segments": [
                                     {
                                       "metrics": {
@@ -1924,7 +1924,7 @@
                                       },
                                       "text": "+8%",
                                       "height": 16.3919677734375,
-                                      "width": 24.949999809265137,
+                                      "width": 24.94999885559082,
                                       "props": {
                                         "size": 12,
                                         "color": "#10b981",
@@ -1960,7 +1960,7 @@
                                       "run": {
                                         "x": 568,
                                         "y": 195,
-                                        "width": 24.949999809265137,
+                                        "width": 24.94999885559082,
                                         "height": 16.3919677734375
                                       }
                                     }
@@ -2339,7 +2339,7 @@
                                 {
                                   "baseline": 12,
                                   "height": 16.3919677734375,
-                                  "width": 20.799999952316284,
+                                  "width": 20.799998998641968,
                                   "segments": [
                                     {
                                       "metrics": {
@@ -2358,7 +2358,7 @@
                                       },
                                       "text": "-3%",
                                       "height": 16.3919677734375,
-                                      "width": 20.799999952316284,
+                                      "width": 20.799998998641968,
                                       "props": {
                                         "size": 12,
                                         "color": "#ef4444",
@@ -2394,7 +2394,7 @@
                                       "run": {
                                         "x": 890,
                                         "y": 195,
-                                        "width": 20.799999952316284,
+                                        "width": 20.799998998641968,
                                         "height": 16.3919677734375
                                       }
                                     }

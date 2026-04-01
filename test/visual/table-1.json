@@ -2085,15 +2085,15 @@
                             {
                               "baseline": 27.70625,
                               "height": 35.42488098144531,
-                              "width": 265.6500029563904,
+                              "width": 265.65000677108765,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 56.22999954223633,
+                                    "width": 147.41000366210938,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 56.22999954223633,
+                                    "actualBoundingBoxRight": 147.41000366210938,
                                     "actualBoundingBoxAscent": 22.3125,
-                                    "actualBoundingBoxDescent": 0.6875,
+                                    "actualBoundingBoxDescent": 7.6875,
                                     "fontBoundingBoxAscent": 21.3125,
                                     "fontBoundingBoxDescent": 5.937408447265625,
                                     "emHeightAscent": 21.3125,
@@ -2104,7 +2104,7 @@
                                   },
                                   "text": "កំណត់រចនាសម្ព័ន្ធ automated",
                                   "height": 27.249908447265625,
-                                  "width": 265.6500029563904,
+                                  "width": 265.65000677108765,
                                   "props": {
                                     "size": 22,
                                     "color": "black",
@@ -2124,21 +2124,21 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 265.6500029563904,
+                                          "width": 265.65000677108765,
                                           "height": 106.27464294433594,
                                           "lines": [
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 265.6500029563904,
+                                              "width": 265.65000677108765,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 56.22999954223633,
+                                                    "width": 147.41000366210938,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 56.22999954223633,
+                                                    "actualBoundingBoxRight": 147.41000366210938,
                                                     "actualBoundingBoxAscent": 22.3125,
-                                                    "actualBoundingBoxDescent": 0.6875,
+                                                    "actualBoundingBoxDescent": 7.6875,
                                                     "fontBoundingBoxAscent": 21.3125,
                                                     "fontBoundingBoxDescent": 5.937408447265625,
                                                     "emHeightAscent": 21.3125,
@@ -2150,8 +2150,8 @@
                                                       {
                                                         "x": 1,
                                                         "y": -22.3125,
-                                                        "width": 54.103973388671875,
-                                                        "height": 23,
+                                                        "width": 145.7102813720703,
+                                                        "height": 30,
                                                         "baseline": -0.249908447265625,
                                                         "hangingBaseline": -17.299909591674805,
                                                         "alphabeticBaseline": -0.249908447265625,
@@ -2159,13 +2159,13 @@
                                                         "ascent": -21.562408447265625,
                                                         "descent": 5.6875,
                                                         "startIndex": 0,
-                                                        "endIndex": 5,
+                                                        "endIndex": 17,
                                                         "runs": [
                                                           {
                                                             "x": 1,
                                                             "y": -22.3125,
-                                                            "width": 54.103973388671875,
-                                                            "height": 23,
+                                                            "width": 145.7102813720703,
+                                                            "height": 30,
                                                             "family": "Inter Khmer",
                                                             "ascent": -21.562408447265625,
                                                             "descent": 5.6875,
@@ -2180,7 +2180,7 @@
                                                   },
                                                   "text": "កំណត់រចនាសម្ព័ន្ធ automated",
                                                   "height": 27.249908447265625,
-                                                  "width": 265.6500029563904,
+                                                  "width": 265.65000677108765,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -2424,7 +2424,7 @@
                                   "run": {
                                     "x": 982,
                                     "y": 238.08748626708984,
-                                    "width": 265.6500029563904,
+                                    "width": 265.65000677108765,
                                     "height": 27.249908447265625
                                   }
                                 }
@@ -2473,21 +2473,21 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 265.6500029563904,
+                                          "width": 265.65000677108765,
                                           "height": 106.27464294433594,
                                           "lines": [
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 265.6500029563904,
+                                              "width": 265.65000677108765,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 56.22999954223633,
+                                                    "width": 147.41000366210938,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 56.22999954223633,
+                                                    "actualBoundingBoxRight": 147.41000366210938,
                                                     "actualBoundingBoxAscent": 22.3125,
-                                                    "actualBoundingBoxDescent": 0.6875,
+                                                    "actualBoundingBoxDescent": 7.6875,
                                                     "fontBoundingBoxAscent": 21.3125,
                                                     "fontBoundingBoxDescent": 5.937408447265625,
                                                     "emHeightAscent": 21.3125,
@@ -2499,8 +2499,8 @@
                                                       {
                                                         "x": 1,
                                                         "y": -22.3125,
-                                                        "width": 54.103973388671875,
-                                                        "height": 23,
+                                                        "width": 145.7102813720703,
+                                                        "height": 30,
                                                         "baseline": -0.249908447265625,
                                                         "hangingBaseline": -17.299909591674805,
                                                         "alphabeticBaseline": -0.249908447265625,
@@ -2508,13 +2508,13 @@
                                                         "ascent": -21.562408447265625,
                                                         "descent": 5.6875,
                                                         "startIndex": 0,
-                                                        "endIndex": 5,
+                                                        "endIndex": 17,
                                                         "runs": [
                                                           {
                                                             "x": 1,
                                                             "y": -22.3125,
-                                                            "width": 54.103973388671875,
-                                                            "height": 23,
+                                                            "width": 145.7102813720703,
+                                                            "height": 30,
                                                             "family": "Inter Khmer",
                                                             "ascent": -21.562408447265625,
                                                             "descent": 5.6875,
@@ -2529,7 +2529,7 @@
                                                   },
                                                   "text": "កំណត់រចនាសម្ព័ន្ធ automated",
                                                   "height": 27.249908447265625,
-                                                  "width": 265.6500029563904,
+                                                  "width": 265.65000677108765,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -2819,21 +2819,21 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 265.6500029563904,
+                                          "width": 265.65000677108765,
                                           "height": 106.27464294433594,
                                           "lines": [
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 265.6500029563904,
+                                              "width": 265.65000677108765,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 56.22999954223633,
+                                                    "width": 147.41000366210938,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 56.22999954223633,
+                                                    "actualBoundingBoxRight": 147.41000366210938,
                                                     "actualBoundingBoxAscent": 22.3125,
-                                                    "actualBoundingBoxDescent": 0.6875,
+                                                    "actualBoundingBoxDescent": 7.6875,
                                                     "fontBoundingBoxAscent": 21.3125,
                                                     "fontBoundingBoxDescent": 5.937408447265625,
                                                     "emHeightAscent": 21.3125,
@@ -2845,8 +2845,8 @@
                                                       {
                                                         "x": 1,
                                                         "y": -22.3125,
-                                                        "width": 54.103973388671875,
-                                                        "height": 23,
+                                                        "width": 145.7102813720703,
+                                                        "height": 30,
                                                         "baseline": -0.249908447265625,
                                                         "hangingBaseline": -17.299909591674805,
                                                         "alphabeticBaseline": -0.249908447265625,
@@ -2854,13 +2854,13 @@
                                                         "ascent": -21.562408447265625,
                                                         "descent": 5.6875,
                                                         "startIndex": 0,
-                                                        "endIndex": 5,
+                                                        "endIndex": 17,
                                                         "runs": [
                                                           {
                                                             "x": 1,
                                                             "y": -22.3125,
-                                                            "width": 54.103973388671875,
-                                                            "height": 23,
+                                                            "width": 145.7102813720703,
+                                                            "height": 30,
                                                             "family": "Inter Khmer",
                                                             "ascent": -21.562408447265625,
                                                             "descent": 5.6875,
@@ -2875,7 +2875,7 @@
                                                   },
                                                   "text": "កំណត់រចនាសម្ព័ន្ធ automated",
                                                   "height": 27.249908447265625,
-                                                  "width": 265.6500029563904,
+                                                  "width": 265.65000677108765,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -10083,15 +10083,15 @@
                             {
                               "baseline": 27.70625,
                               "height": 35.42488098144531,
-                              "width": 155.41999578475952,
+                              "width": 149.22999572753906,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.190000057220459,
+                                    "width": 149.22999572753906,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.190000057220459,
-                                    "actualBoundingBoxAscent": 0,
-                                    "actualBoundingBoxDescent": 0,
+                                    "actualBoundingBoxRight": 149.22999572753906,
+                                    "actualBoundingBoxAscent": 18.3125,
+                                    "actualBoundingBoxDescent": 1.6875,
                                     "fontBoundingBoxAscent": 21.3125,
                                     "fontBoundingBoxDescent": 5.937408447265625,
                                     "emHeightAscent": 21.3125,
@@ -10100,9 +10100,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -5.937408447265625
                                   },
-                                  "text": " authentication",
-                                  "height": 27.249908447265625,
-                                  "width": 155.41999578475952,
                                   "props": {
                                     "size": 22,
                                     "color": "black",
@@ -10136,10 +10133,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "authentication",
+                                  "width": 149.22999572753906,
+                                  "height": 27.249908447265625,
                                   "run": {
                                     "x": 982,
                                     "y": 819.5123672485352,
-                                    "width": 155.41999578475952,
+                                    "width": 149.22999572753906,
                                     "height": 27.249908447265625
                                   }
                                 }
@@ -10980,7 +10980,7 @@
                             {
                               "baseline": 27.70625,
                               "height": 35.42488098144531,
-                              "width": 282.6599950790405,
+                              "width": 241.03999614715576,
                               "segments": [
                                 {
                                   "metrics": {
@@ -10997,9 +10997,9 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -5.937408447265625
                                   },
-                                  "text": "ធានាថា website ដំណើរការយ៉ាង",
+                                  "text": "ធានាថា website ដំណើរការ",
                                   "height": 27.249908447265625,
-                                  "width": 282.6599950790405,
+                                  "width": 241.03999614715576,
                                   "props": {
                                     "size": 22,
                                     "color": "black",
@@ -11019,13 +11019,13 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 282.6599950790405,
+                                          "width": 286.62000274658203,
                                           "height": 70.84976196289062,
                                           "lines": [
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 282.6599950790405,
+                                              "width": 241.03999614715576,
                                               "segments": [
                                                 {
                                                   "metrics": {
@@ -11073,9 +11073,9 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "ធានាថា website ដំណើរការយ៉ាង",
+                                                  "text": "ធានាថា website ដំណើរការ",
                                                   "height": 27.249908447265625,
-                                                  "width": 282.6599950790405,
+                                                  "width": 241.03999614715576,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -11116,14 +11116,14 @@
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 245,
+                                              "width": 286.62000274658203,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 42.599998474121094,
+                                                    "width": 84.22000122070312,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 42.599998474121094,
-                                                    "actualBoundingBoxAscent": 15.3125,
+                                                    "actualBoundingBoxRight": 84.22000122070312,
+                                                    "actualBoundingBoxAscent": 22.3125,
                                                     "actualBoundingBoxDescent": 7.6875,
                                                     "fontBoundingBoxAscent": 21.3125,
                                                     "fontBoundingBoxDescent": 5.937408447265625,
@@ -11134,10 +11134,10 @@
                                                     "ideographicBaseline": -5.937408447265625,
                                                     "lines": [
                                                       {
-                                                        "x": 0,
-                                                        "y": -15.3125,
-                                                        "width": 41.90049743652344,
-                                                        "height": 23,
+                                                        "x": 1,
+                                                        "y": -22.3125,
+                                                        "width": 82.51911926269531,
+                                                        "height": 30,
                                                         "baseline": -0.249908447265625,
                                                         "hangingBaseline": -17.299909591674805,
                                                         "alphabeticBaseline": -0.249908447265625,
@@ -11145,13 +11145,13 @@
                                                         "ascent": -21.562408447265625,
                                                         "descent": 5.6875,
                                                         "startIndex": 0,
-                                                        "endIndex": 4,
+                                                        "endIndex": 8,
                                                         "runs": [
                                                           {
-                                                            "x": 0,
-                                                            "y": -15.3125,
-                                                            "width": 41.90049743652344,
-                                                            "height": 23,
+                                                            "x": 1,
+                                                            "y": -22.3125,
+                                                            "width": 82.51911926269531,
+                                                            "height": 30,
                                                             "family": "Inter Khmer",
                                                             "ascent": -21.562408447265625,
                                                             "descent": 5.6875,
@@ -11164,9 +11164,9 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "រលូននៅលើគ្រប់ទំហំឧបករណ៍",
+                                                  "text": "យ៉ាងរលូននៅលើគ្រប់ទំហំឧបករណ៍",
                                                   "height": 27.249908447265625,
-                                                  "width": 245,
+                                                  "width": 286.62000274658203,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -11228,7 +11228,7 @@
                                   "run": {
                                     "x": 982,
                                     "y": 879.0874862670898,
-                                    "width": 282.6599950790405,
+                                    "width": 241.03999614715576,
                                     "height": 27.249908447265625
                                   }
                                 }
@@ -11238,14 +11238,14 @@
                             {
                               "baseline": 27.70625,
                               "height": 35.42488098144531,
-                              "width": 245,
+                              "width": 286.62000274658203,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 42.599998474121094,
+                                    "width": 84.22000122070312,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 42.599998474121094,
-                                    "actualBoundingBoxAscent": 15.3125,
+                                    "actualBoundingBoxRight": 84.22000122070312,
+                                    "actualBoundingBoxAscent": 22.3125,
                                     "actualBoundingBoxDescent": 7.6875,
                                     "fontBoundingBoxAscent": 21.3125,
                                     "fontBoundingBoxDescent": 5.937408447265625,
@@ -11255,9 +11255,9 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -5.937408447265625
                                   },
-                                  "text": "រលូននៅលើគ្រប់ទំហំឧបករណ៍",
+                                  "text": "យ៉ាងរលូននៅលើគ្រប់ទំហំឧបករណ៍",
                                   "height": 27.249908447265625,
-                                  "width": 245,
+                                  "width": 286.62000274658203,
                                   "props": {
                                     "size": 22,
                                     "color": "black",
@@ -11277,13 +11277,13 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 282.6599950790405,
+                                          "width": 286.62000274658203,
                                           "height": 70.84976196289062,
                                           "lines": [
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 282.6599950790405,
+                                              "width": 241.03999614715576,
                                               "segments": [
                                                 {
                                                   "metrics": {
@@ -11331,9 +11331,9 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "ធានាថា website ដំណើរការយ៉ាង",
+                                                  "text": "ធានាថា website ដំណើរការ",
                                                   "height": 27.249908447265625,
-                                                  "width": 282.6599950790405,
+                                                  "width": 241.03999614715576,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -11374,14 +11374,14 @@
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 245,
+                                              "width": 286.62000274658203,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 42.599998474121094,
+                                                    "width": 84.22000122070312,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 42.599998474121094,
-                                                    "actualBoundingBoxAscent": 15.3125,
+                                                    "actualBoundingBoxRight": 84.22000122070312,
+                                                    "actualBoundingBoxAscent": 22.3125,
                                                     "actualBoundingBoxDescent": 7.6875,
                                                     "fontBoundingBoxAscent": 21.3125,
                                                     "fontBoundingBoxDescent": 5.937408447265625,
@@ -11392,10 +11392,10 @@
                                                     "ideographicBaseline": -5.937408447265625,
                                                     "lines": [
                                                       {
-                                                        "x": 0,
-                                                        "y": -15.3125,
-                                                        "width": 41.90049743652344,
-                                                        "height": 23,
+                                                        "x": 1,
+                                                        "y": -22.3125,
+                                                        "width": 82.51911926269531,
+                                                        "height": 30,
                                                         "baseline": -0.249908447265625,
                                                         "hangingBaseline": -17.299909591674805,
                                                         "alphabeticBaseline": -0.249908447265625,
@@ -11403,13 +11403,13 @@
                                                         "ascent": -21.562408447265625,
                                                         "descent": 5.6875,
                                                         "startIndex": 0,
-                                                        "endIndex": 4,
+                                                        "endIndex": 8,
                                                         "runs": [
                                                           {
-                                                            "x": 0,
-                                                            "y": -15.3125,
-                                                            "width": 41.90049743652344,
-                                                            "height": 23,
+                                                            "x": 1,
+                                                            "y": -22.3125,
+                                                            "width": 82.51911926269531,
+                                                            "height": 30,
                                                             "family": "Inter Khmer",
                                                             "ascent": -21.562408447265625,
                                                             "descent": 5.6875,
@@ -11422,9 +11422,9 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "រលូននៅលើគ្រប់ទំហំឧបករណ៍",
+                                                  "text": "យ៉ាងរលូននៅលើគ្រប់ទំហំឧបករណ៍",
                                                   "height": 27.249908447265625,
-                                                  "width": 245,
+                                                  "width": 286.62000274658203,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -11486,7 +11486,7 @@
                                   "run": {
                                     "x": 982,
                                     "y": 914.5123672485352,
-                                    "width": 245,
+                                    "width": 286.62000274658203,
                                     "height": 27.249908447265625
                                   }
                                 }
@@ -13814,7 +13814,7 @@
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 238.9099998474121,
+                                              "width": 238.92000198364258,
                                               "segments": [
                                                 {
                                                   "metrics": {
@@ -13864,7 +13864,7 @@
                                                   },
                                                   "text": "ការវាយតម្លៃភាពងាយរងគ្រោះ",
                                                   "height": 27.249908447265625,
-                                                  "width": 238.9099998474121,
+                                                  "width": 238.92000198364258,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -13936,7 +13936,7 @@
                             {
                               "baseline": 27.70625,
                               "height": 35.42488098144531,
-                              "width": 238.9099998474121,
+                              "width": 238.92000198364258,
                               "segments": [
                                 {
                                   "metrics": {
@@ -13955,7 +13955,7 @@
                                   },
                                   "text": "ការវាយតម្លៃភាពងាយរងគ្រោះ",
                                   "height": 27.249908447265625,
-                                  "width": 238.9099998474121,
+                                  "width": 238.92000198364258,
                                   "props": {
                                     "size": 22,
                                     "color": "black",
@@ -14072,7 +14072,7 @@
                                             {
                                               "baseline": 27.70625,
                                               "height": 35.42488098144531,
-                                              "width": 238.9099998474121,
+                                              "width": 238.92000198364258,
                                               "segments": [
                                                 {
                                                   "metrics": {
@@ -14122,7 +14122,7 @@
                                                   },
                                                   "text": "ការវាយតម្លៃភាពងាយរងគ្រោះ",
                                                   "height": 27.249908447265625,
-                                                  "width": 238.9099998474121,
+                                                  "width": 238.92000198364258,
                                                   "props": {
                                                     "size": 22,
                                                     "color": "black",
@@ -14184,7 +14184,7 @@
                                   "run": {
                                     "x": 982,
                                     "y": 1104.5123672485352,
-                                    "width": 238.9099998474121,
+                                    "width": 238.92000198364258,
                                     "height": 27.249908447265625
                                   }
                                 }

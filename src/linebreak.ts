@@ -1,7 +1,7 @@
 let segmenter: Intl.Segmenter | null = null;
 
-const END_SYM = "។៕)]?!»៖";
-const START_SYM = "([«";
+const END_SYM = "។៕)]?!»៖$រៗ%";
+const START_SYM = "([«$";
 
 export function* defaultLineBreakerIterator(
   text: string,

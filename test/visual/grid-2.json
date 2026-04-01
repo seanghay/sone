@@ -16696,13 +16696,13 @@
                                 {
                                   "baseline": 28,
                                   "height": 38.2479248046875,
-                                  "width": 106.26000022888184,
+                                  "width": 106.26000213623047,
                                   "segments": [
                                     {
                                       "metrics": {
-                                        "width": 80.75,
+                                        "width": 106.26000213623047,
                                         "actualBoundingBoxLeft": 0,
-                                        "actualBoundingBoxRight": 80.75,
+                                        "actualBoundingBoxRight": 106.26000213623047,
                                         "actualBoundingBoxAscent": 22,
                                         "actualBoundingBoxDescent": 2,
                                         "fontBoundingBoxAscent": 28,
@@ -16713,9 +16713,6 @@
                                         "alphabeticBaseline": 0,
                                         "ideographicBaseline": -10.2479248046875
                                       },
-                                      "text": "99.98%",
-                                      "height": 38.2479248046875,
-                                      "width": 106.26000022888184,
                                       "props": {
                                         "size": 28,
                                         "color": "#431407",
@@ -16737,19 +16734,19 @@
                                         "blocks": [
                                           {
                                             "paragraph": {
-                                              "width": 106.26000022888184,
+                                              "width": 106.26000213623047,
                                               "height": 38.2479248046875,
                                               "lines": [
                                                 {
                                                   "baseline": 28,
                                                   "height": 38.2479248046875,
-                                                  "width": 106.26000022888184,
+                                                  "width": 106.26000213623047,
                                                   "segments": [
                                                     {
                                                       "metrics": {
-                                                        "width": 80.75,
+                                                        "width": 106.26000213623047,
                                                         "actualBoundingBoxLeft": 0,
-                                                        "actualBoundingBoxRight": 80.75,
+                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                         "actualBoundingBoxAscent": 22,
                                                         "actualBoundingBoxDescent": 2,
                                                         "fontBoundingBoxAscent": 28,
@@ -16763,7 +16760,7 @@
                                                           {
                                                             "x": 0,
                                                             "y": -22,
-                                                            "width": 80.66398620605469,
+                                                            "width": 106.75198364257812,
                                                             "height": 24,
                                                             "baseline": -0.2479248046875,
                                                             "hangingBaseline": -22.647924423217773,
@@ -16772,12 +16769,12 @@
                                                             "ascent": -28.2479248046875,
                                                             "descent": 10,
                                                             "startIndex": 0,
-                                                            "endIndex": 5,
+                                                            "endIndex": 6,
                                                             "runs": [
                                                               {
                                                                 "x": 0,
                                                                 "y": -22,
-                                                                "width": 80.66398620605469,
+                                                                "width": 106.75198364257812,
                                                                 "height": 24,
                                                                 "family": "Avenir Next",
                                                                 "ascent": -28.2479248046875,
@@ -16791,9 +16788,6 @@
                                                           }
                                                         ]
                                                       },
-                                                      "text": "99.98%",
-                                                      "height": 38.2479248046875,
-                                                      "width": 106.26000022888184,
                                                       "props": {
                                                         "size": 28,
                                                         "color": "#431407",
@@ -16815,19 +16809,19 @@
                                                         "blocks": [
                                                           {
                                                             "paragraph": {
-                                                              "width": 106.26000022888184,
+                                                              "width": 106.26000213623047,
                                                               "height": 38.2479248046875,
                                                               "lines": [
                                                                 {
                                                                   "baseline": 28,
                                                                   "height": 38.2479248046875,
-                                                                  "width": 106.26000022888184,
+                                                                  "width": 106.26000213623047,
                                                                   "segments": [
                                                                     {
                                                                       "metrics": {
-                                                                        "width": 80.75,
+                                                                        "width": 106.26000213623047,
                                                                         "actualBoundingBoxLeft": 0,
-                                                                        "actualBoundingBoxRight": 80.75,
+                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                         "actualBoundingBoxAscent": 22,
                                                                         "actualBoundingBoxDescent": 2,
                                                                         "fontBoundingBoxAscent": 28,
@@ -16841,7 +16835,7 @@
                                                                           {
                                                                             "x": 0,
                                                                             "y": -22,
-                                                                            "width": 80.66398620605469,
+                                                                            "width": 106.75198364257812,
                                                                             "height": 24,
                                                                             "baseline": -0.2479248046875,
                                                                             "hangingBaseline": -22.647924423217773,
@@ -16850,12 +16844,12 @@
                                                                             "ascent": -28.2479248046875,
                                                                             "descent": 10,
                                                                             "startIndex": 0,
-                                                                            "endIndex": 5,
+                                                                            "endIndex": 6,
                                                                             "runs": [
                                                                               {
                                                                                 "x": 0,
                                                                                 "y": -22,
-                                                                                "width": 80.66398620605469,
+                                                                                "width": 106.75198364257812,
                                                                                 "height": 24,
                                                                                 "family": "Avenir Next",
                                                                                 "ascent": -28.2479248046875,
@@ -16869,9 +16863,6 @@
                                                                           }
                                                                         ]
                                                                       },
-                                                                      "text": "99.98%",
-                                                                      "height": 38.2479248046875,
-                                                                      "width": 106.26000022888184,
                                                                       "props": {
                                                                         "size": 28,
                                                                         "color": "#431407",
@@ -16893,19 +16884,19 @@
                                                                         "blocks": [
                                                                           {
                                                                             "paragraph": {
-                                                                              "width": 106.26000022888184,
+                                                                              "width": 106.26000213623047,
                                                                               "height": 38.2479248046875,
                                                                               "lines": [
                                                                                 {
                                                                                   "baseline": 28,
                                                                                   "height": 38.2479248046875,
-                                                                                  "width": 106.26000022888184,
+                                                                                  "width": 106.26000213623047,
                                                                                   "segments": [
                                                                                     {
                                                                                       "metrics": {
-                                                                                        "width": 80.75,
+                                                                                        "width": 106.26000213623047,
                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                         "actualBoundingBoxAscent": 22,
                                                                                         "actualBoundingBoxDescent": 2,
                                                                                         "fontBoundingBoxAscent": 28,
@@ -16919,7 +16910,7 @@
                                                                                           {
                                                                                             "x": 0,
                                                                                             "y": -22,
-                                                                                            "width": 80.66398620605469,
+                                                                                            "width": 106.75198364257812,
                                                                                             "height": 24,
                                                                                             "baseline": -0.2479248046875,
                                                                                             "hangingBaseline": -22.647924423217773,
@@ -16928,12 +16919,12 @@
                                                                                             "ascent": -28.2479248046875,
                                                                                             "descent": 10,
                                                                                             "startIndex": 0,
-                                                                                            "endIndex": 5,
+                                                                                            "endIndex": 6,
                                                                                             "runs": [
                                                                                               {
                                                                                                 "x": 0,
                                                                                                 "y": -22,
-                                                                                                "width": 80.66398620605469,
+                                                                                                "width": 106.75198364257812,
                                                                                                 "height": 24,
                                                                                                 "family": "Avenir Next",
                                                                                                 "ascent": -28.2479248046875,
@@ -16947,9 +16938,6 @@
                                                                                           }
                                                                                         ]
                                                                                       },
-                                                                                      "text": "99.98%",
-                                                                                      "height": 38.2479248046875,
-                                                                                      "width": 106.26000022888184,
                                                                                       "props": {
                                                                                         "size": 28,
                                                                                         "color": "#431407",
@@ -16971,19 +16959,19 @@
                                                                                         "blocks": [
                                                                                           {
                                                                                             "paragraph": {
-                                                                                              "width": 106.26000022888184,
+                                                                                              "width": 106.26000213623047,
                                                                                               "height": 38.2479248046875,
                                                                                               "lines": [
                                                                                                 {
                                                                                                   "baseline": 28,
                                                                                                   "height": 38.2479248046875,
-                                                                                                  "width": 106.26000022888184,
+                                                                                                  "width": 106.26000213623047,
                                                                                                   "segments": [
                                                                                                     {
                                                                                                       "metrics": {
-                                                                                                        "width": 80.75,
+                                                                                                        "width": 106.26000213623047,
                                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                                         "actualBoundingBoxAscent": 22,
                                                                                                         "actualBoundingBoxDescent": 2,
                                                                                                         "fontBoundingBoxAscent": 28,
@@ -16997,7 +16985,7 @@
                                                                                                           {
                                                                                                             "x": 0,
                                                                                                             "y": -22,
-                                                                                                            "width": 80.66398620605469,
+                                                                                                            "width": 106.75198364257812,
                                                                                                             "height": 24,
                                                                                                             "baseline": -0.2479248046875,
                                                                                                             "hangingBaseline": -22.647924423217773,
@@ -17006,12 +16994,12 @@
                                                                                                             "ascent": -28.2479248046875,
                                                                                                             "descent": 10,
                                                                                                             "startIndex": 0,
-                                                                                                            "endIndex": 5,
+                                                                                                            "endIndex": 6,
                                                                                                             "runs": [
                                                                                                               {
                                                                                                                 "x": 0,
                                                                                                                 "y": -22,
-                                                                                                                "width": 80.66398620605469,
+                                                                                                                "width": 106.75198364257812,
                                                                                                                 "height": 24,
                                                                                                                 "family": "Avenir Next",
                                                                                                                 "ascent": -28.2479248046875,
@@ -17025,9 +17013,6 @@
                                                                                                           }
                                                                                                         ]
                                                                                                       },
-                                                                                                      "text": "99.98%",
-                                                                                                      "height": 38.2479248046875,
-                                                                                                      "width": 106.26000022888184,
                                                                                                       "props": {
                                                                                                         "size": 28,
                                                                                                         "color": "#431407",
@@ -17049,19 +17034,19 @@
                                                                                                         "blocks": [
                                                                                                           {
                                                                                                             "paragraph": {
-                                                                                                              "width": 106.26000022888184,
+                                                                                                              "width": 106.26000213623047,
                                                                                                               "height": 38.2479248046875,
                                                                                                               "lines": [
                                                                                                                 {
                                                                                                                   "baseline": 28,
                                                                                                                   "height": 38.2479248046875,
-                                                                                                                  "width": 106.26000022888184,
+                                                                                                                  "width": 106.26000213623047,
                                                                                                                   "segments": [
                                                                                                                     {
                                                                                                                       "metrics": {
-                                                                                                                        "width": 80.75,
+                                                                                                                        "width": 106.26000213623047,
                                                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                                                         "actualBoundingBoxAscent": 22,
                                                                                                                         "actualBoundingBoxDescent": 2,
                                                                                                                         "fontBoundingBoxAscent": 28,
@@ -17075,7 +17060,7 @@
                                                                                                                           {
                                                                                                                             "x": 0,
                                                                                                                             "y": -22,
-                                                                                                                            "width": 80.66398620605469,
+                                                                                                                            "width": 106.75198364257812,
                                                                                                                             "height": 24,
                                                                                                                             "baseline": -0.2479248046875,
                                                                                                                             "hangingBaseline": -22.647924423217773,
@@ -17084,12 +17069,12 @@
                                                                                                                             "ascent": -28.2479248046875,
                                                                                                                             "descent": 10,
                                                                                                                             "startIndex": 0,
-                                                                                                                            "endIndex": 5,
+                                                                                                                            "endIndex": 6,
                                                                                                                             "runs": [
                                                                                                                               {
                                                                                                                                 "x": 0,
                                                                                                                                 "y": -22,
-                                                                                                                                "width": 80.66398620605469,
+                                                                                                                                "width": 106.75198364257812,
                                                                                                                                 "height": 24,
                                                                                                                                 "family": "Avenir Next",
                                                                                                                                 "ascent": -28.2479248046875,
@@ -17103,9 +17088,6 @@
                                                                                                                           }
                                                                                                                         ]
                                                                                                                       },
-                                                                                                                      "text": "99.98%",
-                                                                                                                      "height": 38.2479248046875,
-                                                                                                                      "width": 106.26000022888184,
                                                                                                                       "props": {
                                                                                                                         "size": 28,
                                                                                                                         "color": "#431407",
@@ -17127,19 +17109,19 @@
                                                                                                                         "blocks": [
                                                                                                                           {
                                                                                                                             "paragraph": {
-                                                                                                                              "width": 106.26000022888184,
+                                                                                                                              "width": 106.26000213623047,
                                                                                                                               "height": 38.2479248046875,
                                                                                                                               "lines": [
                                                                                                                                 {
                                                                                                                                   "baseline": 28,
                                                                                                                                   "height": 38.2479248046875,
-                                                                                                                                  "width": 106.26000022888184,
+                                                                                                                                  "width": 106.26000213623047,
                                                                                                                                   "segments": [
                                                                                                                                     {
                                                                                                                                       "metrics": {
-                                                                                                                                        "width": 80.75,
+                                                                                                                                        "width": 106.26000213623047,
                                                                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                                                                         "actualBoundingBoxAscent": 22,
                                                                                                                                         "actualBoundingBoxDescent": 2,
                                                                                                                                         "fontBoundingBoxAscent": 28,
@@ -17153,7 +17135,7 @@
                                                                                                                                           {
                                                                                                                                             "x": 0,
                                                                                                                                             "y": -22,
-                                                                                                                                            "width": 80.66398620605469,
+                                                                                                                                            "width": 106.75198364257812,
                                                                                                                                             "height": 24,
                                                                                                                                             "baseline": -0.2479248046875,
                                                                                                                                             "hangingBaseline": -22.647924423217773,
@@ -17162,12 +17144,12 @@
                                                                                                                                             "ascent": -28.2479248046875,
                                                                                                                                             "descent": 10,
                                                                                                                                             "startIndex": 0,
-                                                                                                                                            "endIndex": 5,
+                                                                                                                                            "endIndex": 6,
                                                                                                                                             "runs": [
                                                                                                                                               {
                                                                                                                                                 "x": 0,
                                                                                                                                                 "y": -22,
-                                                                                                                                                "width": 80.66398620605469,
+                                                                                                                                                "width": 106.75198364257812,
                                                                                                                                                 "height": 24,
                                                                                                                                                 "family": "Avenir Next",
                                                                                                                                                 "ascent": -28.2479248046875,
@@ -17181,9 +17163,6 @@
                                                                                                                                           }
                                                                                                                                         ]
                                                                                                                                       },
-                                                                                                                                      "text": "99.98%",
-                                                                                                                                      "height": 38.2479248046875,
-                                                                                                                                      "width": 106.26000022888184,
                                                                                                                                       "props": {
                                                                                                                                         "size": 28,
                                                                                                                                         "color": "#431407",
@@ -17205,19 +17184,19 @@
                                                                                                                                         "blocks": [
                                                                                                                                           {
                                                                                                                                             "paragraph": {
-                                                                                                                                              "width": 106.26000022888184,
+                                                                                                                                              "width": 106.26000213623047,
                                                                                                                                               "height": 38.2479248046875,
                                                                                                                                               "lines": [
                                                                                                                                                 {
                                                                                                                                                   "baseline": 28,
                                                                                                                                                   "height": 38.2479248046875,
-                                                                                                                                                  "width": 106.26000022888184,
+                                                                                                                                                  "width": 106.26000213623047,
                                                                                                                                                   "segments": [
                                                                                                                                                     {
                                                                                                                                                       "metrics": {
-                                                                                                                                                        "width": 80.75,
+                                                                                                                                                        "width": 106.26000213623047,
                                                                                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                                                                                         "actualBoundingBoxAscent": 22,
                                                                                                                                                         "actualBoundingBoxDescent": 2,
                                                                                                                                                         "fontBoundingBoxAscent": 28,
@@ -17231,7 +17210,7 @@
                                                                                                                                                           {
                                                                                                                                                             "x": 0,
                                                                                                                                                             "y": -22,
-                                                                                                                                                            "width": 80.66398620605469,
+                                                                                                                                                            "width": 106.75198364257812,
                                                                                                                                                             "height": 24,
                                                                                                                                                             "baseline": -0.2479248046875,
                                                                                                                                                             "hangingBaseline": -22.647924423217773,
@@ -17240,12 +17219,12 @@
                                                                                                                                                             "ascent": -28.2479248046875,
                                                                                                                                                             "descent": 10,
                                                                                                                                                             "startIndex": 0,
-                                                                                                                                                            "endIndex": 5,
+                                                                                                                                                            "endIndex": 6,
                                                                                                                                                             "runs": [
                                                                                                                                                               {
                                                                                                                                                                 "x": 0,
                                                                                                                                                                 "y": -22,
-                                                                                                                                                                "width": 80.66398620605469,
+                                                                                                                                                                "width": 106.75198364257812,
                                                                                                                                                                 "height": 24,
                                                                                                                                                                 "family": "Avenir Next",
                                                                                                                                                                 "ascent": -28.2479248046875,
@@ -17259,9 +17238,6 @@
                                                                                                                                                           }
                                                                                                                                                         ]
                                                                                                                                                       },
-                                                                                                                                                      "text": "99.98%",
-                                                                                                                                                      "height": 38.2479248046875,
-                                                                                                                                                      "width": 106.26000022888184,
                                                                                                                                                       "props": {
                                                                                                                                                         "size": 28,
                                                                                                                                                         "color": "#431407",
@@ -17283,19 +17259,19 @@
                                                                                                                                                         "blocks": [
                                                                                                                                                           {
                                                                                                                                                             "paragraph": {
-                                                                                                                                                              "width": 106.26000022888184,
+                                                                                                                                                              "width": 106.26000213623047,
                                                                                                                                                               "height": 38.2479248046875,
                                                                                                                                                               "lines": [
                                                                                                                                                                 {
                                                                                                                                                                   "baseline": 28,
                                                                                                                                                                   "height": 38.2479248046875,
-                                                                                                                                                                  "width": 106.26000022888184,
+                                                                                                                                                                  "width": 106.26000213623047,
                                                                                                                                                                   "segments": [
                                                                                                                                                                     {
                                                                                                                                                                       "metrics": {
-                                                                                                                                                                        "width": 80.75,
+                                                                                                                                                                        "width": 106.26000213623047,
                                                                                                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                                                                                                         "actualBoundingBoxAscent": 22,
                                                                                                                                                                         "actualBoundingBoxDescent": 2,
                                                                                                                                                                         "fontBoundingBoxAscent": 28,
@@ -17309,7 +17285,7 @@
                                                                                                                                                                           {
                                                                                                                                                                             "x": 0,
                                                                                                                                                                             "y": -22,
-                                                                                                                                                                            "width": 80.66398620605469,
+                                                                                                                                                                            "width": 106.75198364257812,
                                                                                                                                                                             "height": 24,
                                                                                                                                                                             "baseline": -0.2479248046875,
                                                                                                                                                                             "hangingBaseline": -22.647924423217773,
@@ -17318,12 +17294,12 @@
                                                                                                                                                                             "ascent": -28.2479248046875,
                                                                                                                                                                             "descent": 10,
                                                                                                                                                                             "startIndex": 0,
-                                                                                                                                                                            "endIndex": 5,
+                                                                                                                                                                            "endIndex": 6,
                                                                                                                                                                             "runs": [
                                                                                                                                                                               {
                                                                                                                                                                                 "x": 0,
                                                                                                                                                                                 "y": -22,
-                                                                                                                                                                                "width": 80.66398620605469,
+                                                                                                                                                                                "width": 106.75198364257812,
                                                                                                                                                                                 "height": 24,
                                                                                                                                                                                 "family": "Avenir Next",
                                                                                                                                                                                 "ascent": -28.2479248046875,
@@ -17337,9 +17313,6 @@
                                                                                                                                                                           }
                                                                                                                                                                         ]
                                                                                                                                                                       },
-                                                                                                                                                                      "text": "99.98%",
-                                                                                                                                                                      "height": 38.2479248046875,
-                                                                                                                                                                      "width": 106.26000022888184,
                                                                                                                                                                       "props": {
                                                                                                                                                                         "size": 28,
                                                                                                                                                                         "color": "#431407",
@@ -17361,19 +17334,19 @@
                                                                                                                                                                         "blocks": [
                                                                                                                                                                           {
                                                                                                                                                                             "paragraph": {
-                                                                                                                                                                              "width": 106.26000022888184,
+                                                                                                                                                                              "width": 106.26000213623047,
                                                                                                                                                                               "height": 38.2479248046875,
                                                                                                                                                                               "lines": [
                                                                                                                                                                                 {
                                                                                                                                                                                   "baseline": 28,
                                                                                                                                                                                   "height": 38.2479248046875,
-                                                                                                                                                                                  "width": 106.26000022888184,
+                                                                                                                                                                                  "width": 106.26000213623047,
                                                                                                                                                                                   "segments": [
                                                                                                                                                                                     {
                                                                                                                                                                                       "metrics": {
-                                                                                                                                                                                        "width": 80.75,
+                                                                                                                                                                                        "width": 106.26000213623047,
                                                                                                                                                                                         "actualBoundingBoxLeft": 0,
-                                                                                                                                                                                        "actualBoundingBoxRight": 80.75,
+                                                                                                                                                                                        "actualBoundingBoxRight": 106.26000213623047,
                                                                                                                                                                                         "actualBoundingBoxAscent": 22,
                                                                                                                                                                                         "actualBoundingBoxDescent": 2,
                                                                                                                                                                                         "fontBoundingBoxAscent": 28,
@@ -17387,7 +17360,7 @@
                                                                                                                                                                                           {
                                                                                                                                                                                             "x": 0,
                                                                                                                                                                                             "y": -22,
-                                                                                                                                                                                            "width": 80.66398620605469,
+                                                                                                                                                                                            "width": 106.75198364257812,
                                                                                                                                                                                             "height": 24,
                                                                                                                                                                                             "baseline": -0.2479248046875,
                                                                                                                                                                                             "hangingBaseline": -22.647924423217773,
@@ -17396,12 +17369,12 @@
                                                                                                                                                                                             "ascent": -28.2479248046875,
                                                                                                                                                                                             "descent": 10,
                                                                                                                                                                                             "startIndex": 0,
-                                                                                                                                                                                            "endIndex": 5,
+                                                                                                                                                                                            "endIndex": 6,
                                                                                                                                                                                             "runs": [
                                                                                                                                                                                               {
                                                                                                                                                                                                 "x": 0,
                                                                                                                                                                                                 "y": -22,
-                                                                                                                                                                                                "width": 80.66398620605469,
+                                                                                                                                                                                                "width": 106.75198364257812,
                                                                                                                                                                                                 "height": 24,
                                                                                                                                                                                                 "family": "Avenir Next",
                                                                                                                                                                                                 "ascent": -28.2479248046875,
@@ -17415,9 +17388,6 @@
                                                                                                                                                                                           }
                                                                                                                                                                                         ]
                                                                                                                                                                                       },
-                                                                                                                                                                                      "text": "99.98%",
-                                                                                                                                                                                      "height": 38.2479248046875,
-                                                                                                                                                                                      "width": 106.26000022888184,
                                                                                                                                                                                       "props": {
                                                                                                                                                                                         "size": 28,
                                                                                                                                                                                         "color": "#431407",
@@ -17451,7 +17421,10 @@
                                                                                                                                                                                         "orientation": 0,
                                                                                                                                                                                         "flexShrink": 1,
                                                                                                                                                                                         "boxSizing": "content-box"
-                                                                                                                                                                                      }
+                                                                                                                                                                                      },
+                                                                                                                                                                                      "text": "99.98%",
+                                                                                                                                                                                      "width": 106.26000213623047,
+                                                                                                                                                                                      "height": 38.2479248046875
                                                                                                                                                                                     }
                                                                                                                                                                                   ],
                                                                                                                                                                                   "spacesCount": 0
@@ -17475,7 +17448,10 @@
                                                                                                                                                                         "orientation": 0,
                                                                                                                                                                         "flexShrink": 1,
                                                                                                                                                                         "boxSizing": "content-box"
-                                                                                                                                                                      }
+                                                                                                                                                                      },
+                                                                                                                                                                      "text": "99.98%",
+                                                                                                                                                                      "width": 106.26000213623047,
+                                                                                                                                                                      "height": 38.2479248046875
                                                                                                                                                                     }
                                                                                                                                                                   ],
                                                                                                                                                                   "spacesCount": 0
@@ -17499,7 +17475,10 @@
                                                                                                                                                         "orientation": 0,
                                                                                                                                                         "flexShrink": 1,
                                                                                                                                                         "boxSizing": "content-box"
-                                                                                                                                                      }
+                                                                                                                                                      },
+                                                                                                                                                      "text": "99.98%",
+                                                                                                                                                      "width": 106.26000213623047,
+                                                                                                                                                      "height": 38.2479248046875
                                                                                                                                                     }
                                                                                                                                                   ],
                                                                                                                                                   "spacesCount": 0
@@ -17523,7 +17502,10 @@
                                                                                                                                         "orientation": 0,
                                                                                                                                         "flexShrink": 1,
                                                                                                                                         "boxSizing": "content-box"
-                                                                                                                                      }
+                                                                                                                                      },
+                                                                                                                                      "text": "99.98%",
+                                                                                                                                      "width": 106.26000213623047,
+                                                                                                                                      "height": 38.2479248046875
                                                                                                                                     }
                                                                                                                                   ],
                                                                                                                                   "spacesCount": 0
@@ -17547,7 +17529,10 @@
                                                                                                                         "orientation": 0,
                                                                                                                         "flexShrink": 1,
                                                                                                                         "boxSizing": "content-box"
-                                                                                                                      }
+                                                                                                                      },
+                                                                                                                      "text": "99.98%",
+                                                                                                                      "width": 106.26000213623047,
+                                                                                                                      "height": 38.2479248046875
                                                                                                                     }
                                                                                                                   ],
                                                                                                                   "spacesCount": 0
@@ -17571,7 +17556,10 @@
                                                                                                         "orientation": 0,
                                                                                                         "flexShrink": 1,
                                                                                                         "boxSizing": "content-box"
-                                                                                                      }
+                                                                                                      },
+                                                                                                      "text": "99.98%",
+                                                                                                      "width": 106.26000213623047,
+                                                                                                      "height": 38.2479248046875
                                                                                                     }
                                                                                                   ],
                                                                                                   "spacesCount": 0
@@ -17595,7 +17583,10 @@
                                                                                         "orientation": 0,
                                                                                         "flexShrink": 1,
                                                                                         "boxSizing": "content-box"
-                                                                                      }
+                                                                                      },
+                                                                                      "text": "99.98%",
+                                                                                      "width": 106.26000213623047,
+                                                                                      "height": 38.2479248046875
                                                                                     }
                                                                                   ],
                                                                                   "spacesCount": 0
@@ -17619,7 +17610,10 @@
                                                                         "orientation": 0,
                                                                         "flexShrink": 1,
                                                                         "boxSizing": "content-box"
-                                                                      }
+                                                                      },
+                                                                      "text": "99.98%",
+                                                                      "width": 106.26000213623047,
+                                                                      "height": 38.2479248046875
                                                                     }
                                                                   ],
                                                                   "spacesCount": 0
@@ -17643,7 +17637,10 @@
                                                         "orientation": 0,
                                                         "flexShrink": 1,
                                                         "boxSizing": "content-box"
-                                                      }
+                                                      },
+                                                      "text": "99.98%",
+                                                      "width": 106.26000213623047,
+                                                      "height": 38.2479248046875
                                                     }
                                                   ],
                                                   "spacesCount": 0
@@ -17668,10 +17665,13 @@
                                         "flexShrink": 1,
                                         "boxSizing": "content-box"
                                       },
+                                      "text": "99.98%",
+                                      "width": 106.26000213623047,
+                                      "height": 38.2479248046875,
                                       "run": {
                                         "x": 667,
                                         "y": 369,
-                                        "width": 106.26000022888184,
+                                        "width": 106.26000213623047,
                                         "height": 38.2479248046875
                                       }
                                     }

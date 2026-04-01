@@ -235,15 +235,15 @@
                 {
                   "baseline": 22.512109374999998,
                   "height": 29.120068359374997,
-                  "width": 403.20000076293945,
+                  "width": 393.6000003814697,
                   "segments": [
                     {
                       "metrics": {
-                        "width": 9.600000381469727,
+                        "width": 115.19999694824219,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 9.600000381469727,
-                        "actualBoundingBoxAscent": 0,
-                        "actualBoundingBoxDescent": 0,
+                        "actualBoundingBoxRight": 115.19999694824219,
+                        "actualBoundingBoxAscent": 13.080078125,
+                        "actualBoundingBoxDescent": 1.919921875,
                         "fontBoundingBoxAscent": 16.080078125,
                         "fontBoundingBoxDescent": 4.719970703125,
                         "emHeightAscent": 16.080078125,
@@ -252,9 +252,9 @@
                         "alphabeticBaseline": 0,
                         "ideographicBaseline": -4.719970703125
                       },
-                      "text": " continuation lines stay visually aligned.",
+                      "text": "continuation lines stay visually aligned.",
                       "height": 20.800048828125,
-                      "width": 403.20000076293945,
+                      "width": 393.6000003814697,
                       "props": {
                         "size": 16,
                         "color": "#6d4c41",
@@ -291,7 +291,7 @@
                       "run": {
                         "x": 40,
                         "y": 134.280078125,
-                        "width": 403.20000076293945,
+                        "width": 393.6000003814697,
                         "height": 20.800048828125
                       }
                     }
@@ -875,7 +875,7 @@
                     {
                       "baseline": 27.135131835937504,
                       "height": 35.10008239746094,
-                      "width": 666,
+                      "width": 614,
                       "segments": [
                         {
                           "metrics": {
@@ -1168,7 +1168,15 @@
                             "width": 24,
                             "height": 26.00006103515625
                           }
-                        },
+                        }
+                      ],
+                      "spacesCount": 2
+                    },
+                    {
+                      "baseline": 27.135131835937504,
+                      "height": 35.10008239746094,
+                      "width": 312,
+                      "segments": [
                         {
                           "metrics": {
                             "width": 12,
@@ -1218,21 +1226,21 @@
                             "boxSizing": "content-box"
                           },
                           "text": "",
-                          "width": 40,
+                          "width": 240,
                           "height": 26.00006103515625,
                           "isTab": true,
                           "run": {
-                            "x": 680,
-                            "y": 256.55001068115234,
-                            "width": 40,
+                            "x": 66,
+                            "y": 291.6500930786133,
+                            "width": 240,
                             "height": 26.00006103515625
                           }
                         },
                         {
                           "metrics": {
-                            "width": 12,
+                            "width": 72,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 12,
+                            "actualBoundingBoxRight": 72,
                             "actualBoundingBoxAscent": 17.10009765625,
                             "actualBoundingBoxDescent": 2.89990234375,
                             "fontBoundingBoxAscent": 20.10009765625,
@@ -1276,79 +1284,13 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "text": "$",
-                          "width": 12,
+                          "text": "$12.50",
+                          "width": 72,
                           "height": 26.00006103515625,
                           "run": {
-                            "x": 720,
-                            "y": 256.55001068115234,
-                            "width": 12,
-                            "height": 26.00006103515625
-                          }
-                        }
-                      ],
-                      "spacesCount": 2
-                    },
-                    {
-                      "baseline": 27.135131835937504,
-                      "height": 35.10008239746094,
-                      "width": 60,
-                      "segments": [
-                        {
-                          "metrics": {
-                            "width": 60,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 60,
-                            "actualBoundingBoxAscent": 16.10009765625,
-                            "actualBoundingBoxDescent": 1.89990234375,
-                            "fontBoundingBoxAscent": 20.10009765625,
-                            "fontBoundingBoxDescent": 5.89996337890625,
-                            "emHeightAscent": 20.10009765625,
-                            "emHeightDescent": 5.89996337890625,
-                            "hangingBaseline": 16.080078125,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -5.89996337890625
-                          },
-                          "props": {
-                            "size": 20,
-                            "color": "#1f1a17",
-                            "font": ["GeistMono"],
-                            "style": "normal",
-                            "weight": 400,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineBreak": "greedy",
-                            "lineHeight": 1.35,
-                            "indentSize": 0,
-                            "hangingIndentSize": 0,
-                            "align": "left",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [],
-                            "autofit": false,
-                            "tabStops": [240, 430, 590],
-                            "orientation": 0,
-                            "width": 700,
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": "12.50",
-                          "width": 60,
-                          "height": 26.00006103515625,
-                          "run": {
-                            "x": 66,
+                            "x": 306,
                             "y": 291.6500930786133,
-                            "width": 60,
+                            "width": 72,
                             "height": 26.00006103515625
                           }
                         }
@@ -1982,9 +1924,9 @@
                         },
                         {
                           "metrics": {
-                            "width": 12,
+                            "width": 72,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 12,
+                            "actualBoundingBoxRight": 72,
                             "actualBoundingBoxAscent": 17.10009765625,
                             "actualBoundingBoxDescent": 2.89990234375,
                             "fontBoundingBoxAscent": 20.10009765625,
@@ -1995,9 +1937,6 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -5.89996337890625
                           },
-                          "text": "$39.00",
-                          "height": 26.00006103515625,
-                          "width": 72,
                           "props": {
                             "size": 20,
                             "color": "#1f1a17",
@@ -2031,6 +1970,9 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
+                          "text": "$39.00",
+                          "width": 72,
+                          "height": 26.00006103515625,
                           "run": {
                             "x": 496,
                             "y": 441.85025787353516,
@@ -2113,7 +2055,7 @@
                     {
                       "baseline": 28.86300659179688,
                       "height": 36.77398681640625,
-                      "width": 664.3199987411499,
+                      "width": 612.8799991607666,
                       "segments": [
                         {
                           "metrics": {
@@ -2406,7 +2348,15 @@
                             "width": 22.8799991607666,
                             "height": 27.239990234375
                           }
-                        },
+                        }
+                      ],
+                      "spacesCount": 3
+                    },
+                    {
+                      "baseline": 28.86300659179688,
+                      "height": 36.77398681640625,
+                      "width": 313.98999786376953,
+                      "segments": [
                         {
                           "metrics": {
                             "width": 5.199999809265137,
@@ -2456,21 +2406,21 @@
                             "boxSizing": "content-box"
                           },
                           "text": "",
-                          "width": 40,
+                          "width": 240,
                           "height": 27.239990234375,
                           "isTab": true,
                           "run": {
-                            "x": 678.8799991607666,
-                            "y": 486.7669982910156,
-                            "width": 40,
+                            "x": 66,
+                            "y": 523.5409851074219,
+                            "width": 240,
                             "height": 27.239990234375
                           }
                         },
                         {
                           "metrics": {
-                            "width": 11.4399995803833,
+                            "width": 73.98999786376953,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 11.4399995803833,
+                            "actualBoundingBoxRight": 73.98999786376953,
                             "actualBoundingBoxAscent": 17.3800048828125,
                             "actualBoundingBoxDescent": 2.6199951171875,
                             "fontBoundingBoxAscent": 21.3800048828125,
@@ -2514,79 +2464,13 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
-                          "text": "$",
-                          "width": 11.4399995803833,
+                          "text": "$144.00",
+                          "width": 73.98999786376953,
                           "height": 27.239990234375,
                           "run": {
-                            "x": 718.8799991607666,
-                            "y": 486.7669982910156,
-                            "width": 11.4399995803833,
-                            "height": 27.239990234375
-                          }
-                        }
-                      ],
-                      "spacesCount": 3
-                    },
-                    {
-                      "baseline": 28.86300659179688,
-                      "height": 36.77398681640625,
-                      "width": 62.54999923706055,
-                      "segments": [
-                        {
-                          "metrics": {
-                            "width": 62.54999923706055,
-                            "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 62.54999923706055,
-                            "actualBoundingBoxAscent": 16.3800048828125,
-                            "actualBoundingBoxDescent": 1.6199951171875,
-                            "fontBoundingBoxAscent": 21.3800048828125,
-                            "fontBoundingBoxDescent": 5.8599853515625,
-                            "emHeightAscent": 21.3800048828125,
-                            "emHeightDescent": 5.8599853515625,
-                            "hangingBaseline": 17.10400390625,
-                            "alphabeticBaseline": 0,
-                            "ideographicBaseline": -5.8599853515625
-                          },
-                          "props": {
-                            "size": 20,
-                            "color": "#1f1a17",
-                            "font": ["NotoSansKhmer", "GeistMono"],
-                            "style": "normal",
-                            "weight": 400,
-                            "letterSpacing": 0,
-                            "nowrap": false,
-                            "lineBreak": "greedy",
-                            "lineHeight": 1.35,
-                            "indentSize": 0,
-                            "hangingIndentSize": 0,
-                            "align": "left",
-                            "strokeColor": "black",
-                            "strokeWidth": 0,
-                            "wordSpacing": 0,
-                            "blocks": [],
-                            "offsetY": 0,
-                            "underline": 0,
-                            "underlineColor": null,
-                            "overline": 0,
-                            "overlineColor": null,
-                            "lineThrough": 0,
-                            "lineThroughColor": null,
-                            "highlightColor": null,
-                            "dropShadows": [],
-                            "autofit": false,
-                            "tabStops": [240, 430, 590],
-                            "orientation": 0,
-                            "width": 700,
-                            "flexShrink": 1,
-                            "boxSizing": "content-box"
-                          },
-                          "text": "144.00",
-                          "width": 62.54999923706055,
-                          "height": 27.239990234375,
-                          "run": {
-                            "x": 66,
+                            "x": 306,
                             "y": 523.5409851074219,
-                            "width": 62.54999923706055,
+                            "width": 73.98999786376953,
                             "height": 27.239990234375
                           }
                         }
@@ -3020,11 +2904,11 @@
                         },
                         {
                           "metrics": {
-                            "width": 12,
+                            "width": 108,
                             "actualBoundingBoxLeft": 0,
-                            "actualBoundingBoxRight": 12,
+                            "actualBoundingBoxRight": 108,
                             "actualBoundingBoxAscent": 17.10009765625,
-                            "actualBoundingBoxDescent": 2.89990234375,
+                            "actualBoundingBoxDescent": 4.89990234375,
                             "fontBoundingBoxAscent": 20.10009765625,
                             "fontBoundingBoxDescent": 5.89996337890625,
                             "emHeightAscent": 20.10009765625,
@@ -3033,9 +2917,6 @@
                             "alphabeticBaseline": 0,
                             "ideographicBaseline": -5.89996337890625
                           },
-                          "text": "$4,096.00",
-                          "height": 26.00006103515625,
-                          "width": 108,
                           "props": {
                             "size": 20,
                             "color": "#1f1a17",
@@ -3069,6 +2950,9 @@
                             "flexShrink": 1,
                             "boxSizing": "content-box"
                           },
+                          "text": "$4,096.00",
+                          "width": 108,
+                          "height": 26.00006103515625,
                           "run": {
                             "x": 656,
                             "y": 570.5500106811523,

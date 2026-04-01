@@ -591,15 +591,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 41.13999843597412,
+                              "width": 41.13999938964844,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 41.13999938964844,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 41.13999938964844,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -608,9 +608,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$12,400",
-                                  "height": 15.025970458984375,
-                                  "width": 41.13999843597412,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -643,10 +640,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$12,400",
+                                  "width": 41.13999938964844,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 173,
                                     "y": 41,
-                                    "width": 41.13999843597412,
+                                    "width": 41.13999938964844,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -1053,15 +1053,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 41.13999843597412,
+                              "width": 41.13999938964844,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 41.13999938964844,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 41.13999938964844,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -1070,9 +1070,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$14,200",
-                                  "height": 15.025970458984375,
-                                  "width": 41.13999843597412,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -1105,10 +1102,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$14,200",
+                                  "width": 41.13999938964844,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 173,
                                     "y": 76,
-                                    "width": 41.13999843597412,
+                                    "width": 41.13999938964844,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -1783,15 +1783,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 41.13999843597412,
+                              "width": 41.13999938964844,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 41.13999938964844,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 41.13999938964844,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -1800,9 +1800,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$13,800",
-                                  "height": 15.025970458984375,
-                                  "width": 41.13999843597412,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -1835,10 +1832,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$13,800",
+                                  "width": 41.13999938964844,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 173,
                                     "y": 111,
-                                    "width": 41.13999843597412,
+                                    "width": 41.13999938964844,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -2245,15 +2245,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 41.13999843597412,
+                              "width": 41.13999938964844,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 41.13999938964844,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 41.13999938964844,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -2262,9 +2262,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$15,600",
-                                  "height": 15.025970458984375,
-                                  "width": 41.13999843597412,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -2297,10 +2294,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$15,600",
+                                  "width": 41.13999938964844,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 173,
                                     "y": 146,
-                                    "width": 41.13999843597412,
+                                    "width": 41.13999938964844,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -2975,15 +2975,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 41.13999843597412,
+                              "width": 41.13999938964844,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 41.13999938964844,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 41.13999938964844,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -2992,9 +2992,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$11,900",
-                                  "height": 15.025970458984375,
-                                  "width": 41.13999843597412,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -3027,10 +3024,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$11,900",
+                                  "width": 41.13999938964844,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 173,
                                     "y": 181,
-                                    "width": 41.13999843597412,
+                                    "width": 41.13999938964844,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -3437,15 +3437,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 41.13999843597412,
+                              "width": 41.13999938964844,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 41.13999938964844,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 41.13999938964844,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -3454,9 +3454,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$16,300",
-                                  "height": 15.025970458984375,
-                                  "width": 41.13999843597412,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -3489,10 +3486,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$16,300",
+                                  "width": 41.13999938964844,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 173,
                                     "y": 216,
-                                    "width": 41.13999843597412,
+                                    "width": 41.13999938964844,
                                     "height": 15.025970458984375
                                   }
                                 }

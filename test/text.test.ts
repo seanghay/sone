@@ -243,6 +243,29 @@ test("createParagraph with constrained width", async () => {
   expect(constrainedParagraph.width).toBeLessThanOrEqual(100);
 });
 
+test("createParagraph drops leading wrap whitespace on the next line", async () => {
+  const node = Text("Alpha Beta").font("GeistMono").size(20);
+  const compiledNode = await compile(node, createContext());
+
+  const paragraph = createParagraph(
+    compiledNode!.children,
+    71,
+    compiledNode!.props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual(["Alpha", "Beta"]);
+  expect(paragraph.lines[0].width).toBeCloseTo(
+    renderer.measureText("Alpha", compiledNode!.props).width,
+    3,
+  );
+  expect(paragraph.lines[1].width).toBeCloseTo(
+    renderer.measureText("Beta", compiledNode!.props).width,
+    3,
+  );
+});
+
 test("createParagraph honors nowrap under constrained width", () => {
   const blocks = createParagraph(
     ["AAAA AAAA AAAA AAAA"],

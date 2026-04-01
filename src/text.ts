@@ -394,6 +394,12 @@ function createGreedyMultilineParagraph(
       ) {
         currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
         lines.push(currentLine);
+
+        // Break whitespace should not become leading content on the next line.
+        if (isWhitespace(segmentText.replace(/\t+/gu, " "))) {
+          lastBreakpoint = breakpoint;
+          continue;
+        }
       }
 
       pushSegments(

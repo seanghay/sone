@@ -2150,13 +2150,13 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 25.519999504089355,
+                              "width": 25.520000457763672,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 25.520000457763672,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 25.520000457763672,
                                     "actualBoundingBoxAscent": 10,
                                     "actualBoundingBoxDescent": 2,
                                     "fontBoundingBoxAscent": 11,
@@ -2167,9 +2167,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$500",
-                                  "height": 15.025970458984375,
-                                  "width": 25.519999504089355,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -2189,19 +2186,19 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 25.519999504089355,
+                                          "width": 25.520000457763672,
                                           "height": 15.025970458984375,
                                           "lines": [
                                             {
                                               "baseline": 11,
                                               "height": 15.025970458984375,
-                                              "width": 25.519999504089355,
+                                              "width": 25.520000457763672,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 6.380000114440918,
+                                                    "width": 25.520000457763672,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 6.380000114440918,
+                                                    "actualBoundingBoxRight": 25.520000457763672,
                                                     "actualBoundingBoxAscent": 10,
                                                     "actualBoundingBoxDescent": 2,
                                                     "fontBoundingBoxAscent": 11,
@@ -2215,7 +2212,7 @@
                                                       {
                                                         "x": -1,
                                                         "y": -10,
-                                                        "width": 8,
+                                                        "width": 27.1400146484375,
                                                         "height": 12,
                                                         "baseline": -0.025970458984375,
                                                         "hangingBaseline": -8.825970649719238,
@@ -2224,12 +2221,12 @@
                                                         "ascent": -11.025970458984375,
                                                         "descent": 4,
                                                         "startIndex": 0,
-                                                        "endIndex": 1,
+                                                        "endIndex": 4,
                                                         "runs": [
                                                           {
                                                             "x": -1,
                                                             "y": -10,
-                                                            "width": 8,
+                                                            "width": 27.1400146484375,
                                                             "height": 12,
                                                             "family": "Avenir Next",
                                                             "ascent": -11.025970458984375,
@@ -2243,9 +2240,6 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "$500",
-                                                  "height": 15.025970458984375,
-                                                  "width": 25.519999504089355,
                                                   "props": {
                                                     "size": 11,
                                                     "color": "black",
@@ -2277,7 +2271,10 @@
                                                     "orientation": 0,
                                                     "flexShrink": 1,
                                                     "boxSizing": "content-box"
-                                                  }
+                                                  },
+                                                  "text": "$500",
+                                                  "width": 25.520000457763672,
+                                                  "height": 15.025970458984375
                                                 }
                                               ],
                                               "spacesCount": 0
@@ -2302,10 +2299,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$500",
+                                  "width": 25.520000457763672,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 295,
                                     "y": 111,
-                                    "width": 25.519999504089355,
+                                    "width": 25.520000457763672,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -2978,13 +2978,13 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 25.519999504089355,
+                              "width": 25.520000457763672,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 25.520000457763672,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 25.520000457763672,
                                     "actualBoundingBoxAscent": 10,
                                     "actualBoundingBoxDescent": 2,
                                     "fontBoundingBoxAscent": 11,
@@ -2995,9 +2995,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$750",
-                                  "height": 15.025970458984375,
-                                  "width": 25.519999504089355,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -3017,19 +3014,19 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 25.519999504089355,
+                                          "width": 25.520000457763672,
                                           "height": 15.025970458984375,
                                           "lines": [
                                             {
                                               "baseline": 11,
                                               "height": 15.025970458984375,
-                                              "width": 25.519999504089355,
+                                              "width": 25.520000457763672,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 6.380000114440918,
+                                                    "width": 25.520000457763672,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 6.380000114440918,
+                                                    "actualBoundingBoxRight": 25.520000457763672,
                                                     "actualBoundingBoxAscent": 10,
                                                     "actualBoundingBoxDescent": 2,
                                                     "fontBoundingBoxAscent": 11,
@@ -3043,7 +3040,7 @@
                                                       {
                                                         "x": -1,
                                                         "y": -10,
-                                                        "width": 8,
+                                                        "width": 27.1400146484375,
                                                         "height": 12,
                                                         "baseline": -0.025970458984375,
                                                         "hangingBaseline": -8.825970649719238,
@@ -3052,12 +3049,12 @@
                                                         "ascent": -11.025970458984375,
                                                         "descent": 4,
                                                         "startIndex": 0,
-                                                        "endIndex": 1,
+                                                        "endIndex": 4,
                                                         "runs": [
                                                           {
                                                             "x": -1,
                                                             "y": -10,
-                                                            "width": 8,
+                                                            "width": 27.1400146484375,
                                                             "height": 12,
                                                             "family": "Avenir Next",
                                                             "ascent": -11.025970458984375,
@@ -3071,9 +3068,6 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "$750",
-                                                  "height": 15.025970458984375,
-                                                  "width": 25.519999504089355,
                                                   "props": {
                                                     "size": 11,
                                                     "color": "black",
@@ -3105,7 +3099,10 @@
                                                     "orientation": 0,
                                                     "flexShrink": 1,
                                                     "boxSizing": "content-box"
-                                                  }
+                                                  },
+                                                  "text": "$750",
+                                                  "width": 25.520000457763672,
+                                                  "height": 15.025970458984375
                                                 }
                                               ],
                                               "spacesCount": 0
@@ -3130,10 +3127,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$750",
+                                  "width": 25.520000457763672,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 295,
                                     "y": 146,
-                                    "width": 25.519999504089355,
+                                    "width": 25.520000457763672,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -4074,15 +4074,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 34.75999927520752,
+                              "width": 34.7599983215332,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 34.7599983215332,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 34.7599983215332,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -4091,9 +4091,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$1,200",
-                                  "height": 15.025970458984375,
-                                  "width": 34.75999927520752,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -4113,21 +4110,21 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 34.75999927520752,
+                                          "width": 34.7599983215332,
                                           "height": 15.025970458984375,
                                           "lines": [
                                             {
                                               "baseline": 11,
                                               "height": 15.025970458984375,
-                                              "width": 34.75999927520752,
+                                              "width": 34.7599983215332,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 6.380000114440918,
+                                                    "width": 34.7599983215332,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 6.380000114440918,
+                                                    "actualBoundingBoxRight": 34.7599983215332,
                                                     "actualBoundingBoxAscent": 10,
-                                                    "actualBoundingBoxDescent": 2,
+                                                    "actualBoundingBoxDescent": 3,
                                                     "fontBoundingBoxAscent": 11,
                                                     "fontBoundingBoxDescent": 4.025970458984375,
                                                     "emHeightAscent": 11,
@@ -4139,8 +4136,8 @@
                                                       {
                                                         "x": -1,
                                                         "y": -10,
-                                                        "width": 8,
-                                                        "height": 12,
+                                                        "width": 36.38002014160156,
+                                                        "height": 13,
                                                         "baseline": -0.025970458984375,
                                                         "hangingBaseline": -8.825970649719238,
                                                         "alphabeticBaseline": -0.025970458984375,
@@ -4148,13 +4145,13 @@
                                                         "ascent": -11.025970458984375,
                                                         "descent": 4,
                                                         "startIndex": 0,
-                                                        "endIndex": 1,
+                                                        "endIndex": 6,
                                                         "runs": [
                                                           {
                                                             "x": -1,
                                                             "y": -10,
-                                                            "width": 8,
-                                                            "height": 12,
+                                                            "width": 36.38002014160156,
+                                                            "height": 13,
                                                             "family": "Avenir Next",
                                                             "ascent": -11.025970458984375,
                                                             "descent": 4,
@@ -4167,9 +4164,6 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "$1,200",
-                                                  "height": 15.025970458984375,
-                                                  "width": 34.75999927520752,
                                                   "props": {
                                                     "size": 11,
                                                     "color": "black",
@@ -4201,7 +4195,10 @@
                                                     "orientation": 0,
                                                     "flexShrink": 1,
                                                     "boxSizing": "content-box"
-                                                  }
+                                                  },
+                                                  "text": "$1,200",
+                                                  "width": 34.7599983215332,
+                                                  "height": 15.025970458984375
                                                 }
                                               ],
                                               "spacesCount": 0
@@ -4226,10 +4223,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$1,200",
+                                  "width": 34.7599983215332,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 295,
                                     "y": 181,
-                                    "width": 34.75999927520752,
+                                    "width": 34.7599983215332,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -4902,13 +4902,13 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 19.140000343322754,
+                              "width": 19.139999389648438,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 6.380000114440918,
+                                    "width": 19.139999389648438,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 6.380000114440918,
+                                    "actualBoundingBoxRight": 19.139999389648438,
                                     "actualBoundingBoxAscent": 10,
                                     "actualBoundingBoxDescent": 2,
                                     "fontBoundingBoxAscent": 11,
@@ -4919,9 +4919,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$45",
-                                  "height": 15.025970458984375,
-                                  "width": 19.140000343322754,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -4941,19 +4938,19 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 19.140000343322754,
+                                          "width": 19.139999389648438,
                                           "height": 15.025970458984375,
                                           "lines": [
                                             {
                                               "baseline": 11,
                                               "height": 15.025970458984375,
-                                              "width": 19.140000343322754,
+                                              "width": 19.139999389648438,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 6.380000114440918,
+                                                    "width": 19.139999389648438,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 6.380000114440918,
+                                                    "actualBoundingBoxRight": 19.139999389648438,
                                                     "actualBoundingBoxAscent": 10,
                                                     "actualBoundingBoxDescent": 2,
                                                     "fontBoundingBoxAscent": 11,
@@ -4967,7 +4964,7 @@
                                                       {
                                                         "x": -1,
                                                         "y": -10,
-                                                        "width": 8,
+                                                        "width": 20.760009765625,
                                                         "height": 12,
                                                         "baseline": -0.025970458984375,
                                                         "hangingBaseline": -8.825970649719238,
@@ -4976,12 +4973,12 @@
                                                         "ascent": -11.025970458984375,
                                                         "descent": 4,
                                                         "startIndex": 0,
-                                                        "endIndex": 1,
+                                                        "endIndex": 3,
                                                         "runs": [
                                                           {
                                                             "x": -1,
                                                             "y": -10,
-                                                            "width": 8,
+                                                            "width": 20.760009765625,
                                                             "height": 12,
                                                             "family": "Avenir Next",
                                                             "ascent": -11.025970458984375,
@@ -4995,9 +4992,6 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "$45",
-                                                  "height": 15.025970458984375,
-                                                  "width": 19.140000343322754,
                                                   "props": {
                                                     "size": 11,
                                                     "color": "black",
@@ -5029,7 +5023,10 @@
                                                     "orientation": 0,
                                                     "flexShrink": 1,
                                                     "boxSizing": "content-box"
-                                                  }
+                                                  },
+                                                  "text": "$45",
+                                                  "width": 19.139999389648438,
+                                                  "height": 15.025970458984375
                                                 }
                                               ],
                                               "spacesCount": 0
@@ -5054,10 +5051,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$45",
+                                  "width": 19.139999389648438,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 295,
                                     "y": 216,
-                                    "width": 19.140000343322754,
+                                    "width": 19.139999389648438,
                                     "height": 15.025970458984375
                                   }
                                 }
@@ -5467,15 +5467,15 @@
                             {
                               "baseline": 11,
                               "height": 15.025970458984375,
-                              "width": 38.8299994468689,
+                              "width": 38.83000183105469,
                               "segments": [
                                 {
                                   "metrics": {
-                                    "width": 7.110000133514404,
+                                    "width": 38.83000183105469,
                                     "actualBoundingBoxLeft": 0,
-                                    "actualBoundingBoxRight": 7.110000133514404,
+                                    "actualBoundingBoxRight": 38.83000183105469,
                                     "actualBoundingBoxAscent": 10,
-                                    "actualBoundingBoxDescent": 2,
+                                    "actualBoundingBoxDescent": 3,
                                     "fontBoundingBoxAscent": 11,
                                     "fontBoundingBoxDescent": 4.025970458984375,
                                     "emHeightAscent": 11,
@@ -5484,9 +5484,6 @@
                                     "alphabeticBaseline": 0,
                                     "ideographicBaseline": -4.025970458984375
                                   },
-                                  "text": "$3,290",
-                                  "height": 15.025970458984375,
-                                  "width": 38.8299994468689,
                                   "props": {
                                     "size": 11,
                                     "color": "black",
@@ -5506,21 +5503,21 @@
                                     "blocks": [
                                       {
                                         "paragraph": {
-                                          "width": 38.8299994468689,
+                                          "width": 38.83000183105469,
                                           "height": 15.025970458984375,
                                           "lines": [
                                             {
                                               "baseline": 11,
                                               "height": 15.025970458984375,
-                                              "width": 38.8299994468689,
+                                              "width": 38.83000183105469,
                                               "segments": [
                                                 {
                                                   "metrics": {
-                                                    "width": 7.110000133514404,
+                                                    "width": 38.83000183105469,
                                                     "actualBoundingBoxLeft": 0,
-                                                    "actualBoundingBoxRight": 7.110000133514404,
+                                                    "actualBoundingBoxRight": 38.83000183105469,
                                                     "actualBoundingBoxAscent": 10,
-                                                    "actualBoundingBoxDescent": 2,
+                                                    "actualBoundingBoxDescent": 3,
                                                     "fontBoundingBoxAscent": 11,
                                                     "fontBoundingBoxDescent": 4.025970458984375,
                                                     "emHeightAscent": 11,
@@ -5532,8 +5529,8 @@
                                                       {
                                                         "x": -1,
                                                         "y": -10,
-                                                        "width": 9,
-                                                        "height": 12,
+                                                        "width": 40.72401428222656,
+                                                        "height": 13,
                                                         "baseline": -0.025970458984375,
                                                         "hangingBaseline": -8.825970649719238,
                                                         "alphabeticBaseline": -0.025970458984375,
@@ -5541,13 +5538,13 @@
                                                         "ascent": -11.025970458984375,
                                                         "descent": 4,
                                                         "startIndex": 0,
-                                                        "endIndex": 1,
+                                                        "endIndex": 6,
                                                         "runs": [
                                                           {
                                                             "x": -1,
                                                             "y": -10,
-                                                            "width": 9,
-                                                            "height": 12,
+                                                            "width": 40.72401428222656,
+                                                            "height": 13,
                                                             "family": "Avenir Next",
                                                             "ascent": -11.025970458984375,
                                                             "descent": 4,
@@ -5560,9 +5557,6 @@
                                                       }
                                                     ]
                                                   },
-                                                  "text": "$3,290",
-                                                  "height": 15.025970458984375,
-                                                  "width": 38.8299994468689,
                                                   "props": {
                                                     "size": 11,
                                                     "color": "black",
@@ -5594,7 +5588,10 @@
                                                     "orientation": 0,
                                                     "flexShrink": 1,
                                                     "boxSizing": "content-box"
-                                                  }
+                                                  },
+                                                  "text": "$3,290",
+                                                  "width": 38.83000183105469,
+                                                  "height": 15.025970458984375
                                                 }
                                               ],
                                               "spacesCount": 0
@@ -5619,10 +5616,13 @@
                                     "flexShrink": 1,
                                     "boxSizing": "content-box"
                                   },
+                                  "text": "$3,290",
+                                  "width": 38.83000183105469,
+                                  "height": 15.025970458984375,
                                   "run": {
                                     "x": 295,
                                     "y": 251,
-                                    "width": 38.8299994468689,
+                                    "width": 38.83000183105469,
                                     "height": 15.025970458984375
                                   }
                                 }

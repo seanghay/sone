@@ -533,7 +533,7 @@
                 {
                   "baseline": 11,
                   "height": 15.025970458984375,
-                  "width": 314.7599992752075,
+                  "width": 314.7599983215332,
                   "segments": [
                     {
                       "metrics": {
@@ -767,9 +767,9 @@
                     },
                     {
                       "metrics": {
-                        "width": 6.380000114440918,
+                        "width": 34.7599983215332,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 6.380000114440918,
+                        "actualBoundingBoxRight": 34.7599983215332,
                         "actualBoundingBoxAscent": 10,
                         "actualBoundingBoxDescent": 2,
                         "fontBoundingBoxAscent": 11,
@@ -780,9 +780,6 @@
                         "alphabeticBaseline": 0,
                         "ideographicBaseline": -4.025970458984375
                       },
-                      "text": "$10.00",
-                      "height": 15.025970458984375,
-                      "width": 34.75999927520752,
                       "props": {
                         "size": 11,
                         "color": "black",
@@ -815,10 +812,13 @@
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
+                      "text": "$10.00",
+                      "width": 34.7599983215332,
+                      "height": 15.025970458984375,
                       "run": {
                         "x": 304,
                         "y": 91,
-                        "width": 34.75999927520752,
+                        "width": 34.7599983215332,
                         "height": 15.025970458984375
                       }
                     }
@@ -896,7 +896,7 @@
                 {
                   "baseline": 11,
                   "height": 15.025970458984375,
-                  "width": 308.3800001144409,
+                  "width": 308.3799991607666,
                   "segments": [
                     {
                       "metrics": {
@@ -1130,9 +1130,9 @@
                     },
                     {
                       "metrics": {
-                        "width": 6.380000114440918,
+                        "width": 28.3799991607666,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 6.380000114440918,
+                        "actualBoundingBoxRight": 28.3799991607666,
                         "actualBoundingBoxAscent": 10,
                         "actualBoundingBoxDescent": 2,
                         "fontBoundingBoxAscent": 11,
@@ -1143,9 +1143,6 @@
                         "alphabeticBaseline": 0,
                         "ideographicBaseline": -4.025970458984375
                       },
-                      "text": "$5.00",
-                      "height": 15.025970458984375,
-                      "width": 28.380000114440918,
                       "props": {
                         "size": 11,
                         "color": "black",
@@ -1178,10 +1175,13 @@
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
+                      "text": "$5.00",
+                      "width": 28.3799991607666,
+                      "height": 15.025970458984375,
                       "run": {
                         "x": 304,
                         "y": 110,
-                        "width": 28.380000114440918,
+                        "width": 28.3799991607666,
                         "height": 15.025970458984375
                       }
                     }
@@ -1259,7 +1259,7 @@
                 {
                   "baseline": 11,
                   "height": 15.025970458984375,
-                  "width": 314.7599992752075,
+                  "width": 314.7599983215332,
                   "segments": [
                     {
                       "metrics": {
@@ -1493,9 +1493,9 @@
                     },
                     {
                       "metrics": {
-                        "width": 6.380000114440918,
+                        "width": 34.7599983215332,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 6.380000114440918,
+                        "actualBoundingBoxRight": 34.7599983215332,
                         "actualBoundingBoxAscent": 10,
                         "actualBoundingBoxDescent": 2,
                         "fontBoundingBoxAscent": 11,
@@ -1506,9 +1506,6 @@
                         "alphabeticBaseline": 0,
                         "ideographicBaseline": -4.025970458984375
                       },
-                      "text": "$99.99",
-                      "height": 15.025970458984375,
-                      "width": 34.75999927520752,
                       "props": {
                         "size": 11,
                         "color": "black",
@@ -1541,10 +1538,13 @@
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
+                      "text": "$99.99",
+                      "width": 34.7599983215332,
+                      "height": 15.025970458984375,
                       "run": {
                         "x": 304,
                         "y": 129,
-                        "width": 34.75999927520752,
+                        "width": 34.7599983215332,
                         "height": 15.025970458984375
                       }
                     }
@@ -1622,7 +1622,7 @@
                 {
                   "baseline": 11,
                   "height": 15.025970458984375,
-                  "width": 325.9400019645691,
+                  "width": 325.939998626709,
                   "segments": [
                     {
                       "metrics": {
@@ -1799,9 +1799,9 @@
                     },
                     {
                       "metrics": {
-                        "width": 7.110000133514404,
+                        "width": 45.939998626708984,
                         "actualBoundingBoxLeft": 0,
-                        "actualBoundingBoxRight": 7.110000133514404,
+                        "actualBoundingBoxRight": 45.939998626708984,
                         "actualBoundingBoxAscent": 10,
                         "actualBoundingBoxDescent": 2,
                         "fontBoundingBoxAscent": 11,
@@ -1812,9 +1812,6 @@
                         "alphabeticBaseline": 0,
                         "ideographicBaseline": -4.025970458984375
                       },
-                      "text": "$134.99",
-                      "height": 15.025970458984375,
-                      "width": 45.94000196456909,
                       "props": {
                         "size": 11,
                         "color": "black",
@@ -1847,10 +1844,13 @@
                         "flexShrink": 1,
                         "boxSizing": "content-box"
                       },
+                      "text": "$134.99",
+                      "width": 45.939998626708984,
+                      "height": 15.025970458984375,
                       "run": {
                         "x": 304,
                         "y": 148,
-                        "width": 45.94000196456909,
+                        "width": 45.939998626708984,
                         "height": 15.025970458984375
                       }
                     }
