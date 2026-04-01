@@ -70,18 +70,24 @@ const executiveSummary = Column(
       "enterprise onboarding in EMEA and sustained organic growth in the SMB segment. " +
       "The platform processed 4.7 billion API calls during the quarter, maintaining " +
       "99.97% uptime against a 99.9% SLA target.",
-  ),
+  )
+    .align("justify")
+    .lineBreak("knuth-plass"),
   body(
     "The engineering team shipped 14 major releases and resolved 312 customer-reported " +
       "issues — a 23% improvement in resolution velocity compared to Q4 2024. Migration " +
       "to the new event-streaming architecture, completed in February, reduced median " +
       "API latency from 38 ms to 11 ms for read-heavy workloads.",
-  ),
+  )
+    .align("justify")
+    .lineBreak("knuth-plass"),
   body(
     "Revenue contribution grew to $9.4 M for the quarter, up 31% year-over-year. " +
       "Net Revenue Retention held at 118%, indicating strong expansion within the " +
       "existing customer base despite intensifying competition.",
-  ),
+  )
+    .align("justify")
+    .lineBreak("knuth-plass"),
 )
   .bg(W)
   .padding(36, 40)
