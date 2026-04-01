@@ -11,8 +11,8 @@
 - Declarative API
 - Flex Layout
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
-- Rich Text — spans, justification, tab stops, text orientation (0°/90°/180°/270°)
-- Custom list markers via `Span` nodes
+- Rich Text — spans, justification, tab stops, tab leaders, text orientation (0°/90°/180°/270°)
+- Custom list markers — static `Span`, dynamic arrow function `(index) => Span(...)`
 - Per-side borders — `borderWidth(top, right, bottom, left)`
 - Squircle, QR Code, Photo
 - Table
@@ -100,6 +100,22 @@ Text("Name\tAmount\tDate")
   .size(12)
 ```
 
+Add `.tabLeader(char)` to fill the tab gap with a repeated character — dot leader (`.`) is the classic MS Word table-of-contents style, but any character works.
+
+```javascript
+// Table of contents — dot leader
+Text("Introduction\t1")
+  .tabStops(360)
+  .tabLeader(".")
+  .size(13)
+
+// Financial report — dash leader
+Text("Revenue\t$1,200,000")
+  .tabStops(300)
+  .tabLeader("-")
+  .size(13)
+```
+
 **Text Orientation**
 
 Rotate text 0°/90°/180°/270°. At 90° and 270° the layout footprint swaps width and height so surrounding elements flow naturally.
@@ -133,6 +149,14 @@ List(
   ListItem(Text("Compose your node tree").size(12)),
   ListItem(Text("sone(root).pdf()").size(12)),
 ).listStyle(Span("{}.").color("black").weight("bold")).startIndex(1).gap(8)
+
+// Dynamic arrow function marker — index is 0-based, full Span styling available
+const labels = ["①", "②", "③"]
+List(
+  ListItem(Text("Install dependencies").size(12)),
+  ListItem(Text("Configure the environment").size(12)),
+  ListItem(Text("Run the build").size(12)),
+).listStyle((index) => Span(labels[index]).color("royalblue").weight("bold")).gap(8)
 ```
 
 **Font Registration**
@@ -293,6 +317,8 @@ Text("Hello ", Span("world").color("blue").weight("bold")).size(16)
 | `wordSpacing(v)` | Word spacing in pixels. |
 | `indent(v)` | First-line indent in pixels. |
 | `tabStops(...v)` | Tab stop x-positions in pixels. Use `\t` in content to snap. |
+| `tabLeader(v)` | Character to fill tab gaps (e.g. `"."` for dot leader, `"-"` for dash). |
+| `autofit(v?)` | Scale font size to fill available height. Combined with `nowrap()`, shrinks/grows to fill available width on a single line. |
 | `orientation(v)` | Rotation: `0` `90` `180` `270`. Layout footprint swaps at 90°/270°. |
 | `underline(v?)` | Underline thickness. |
 | `lineThrough(v?)` | Strikethrough thickness. |
@@ -322,7 +348,7 @@ A vertical list container.
 
 | Method | Description |
 |---|---|
-| `listStyle(v)` | `"disc"` `"circle"` `"square"` `"decimal"` `"dash"` `"none"`, or a `Span` node for a custom marker. |
+| `listStyle(v)` | `"disc"` `"circle"` `"square"` `"decimal"` `"dash"` `"none"`, a `Span` node, or `(index: number) => Span` for dynamic per-item markers (index is 0-based). |
 | `markerGap(v)` | Gap between marker and item content. Default `8`. |
 | `startIndex(v)` | Starting number for numeric lists. |
 
