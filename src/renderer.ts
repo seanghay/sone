@@ -65,7 +65,9 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   weight: 400,
   letterSpacing: 0,
   nowrap: false,
+  maxLines: Number.NaN,
   lineBreak: "greedy",
+  textOverflow: "clip",
   lineHeight: Number.NaN,
   indentSize: 0,
   hangingIndentSize: 0,
@@ -87,6 +89,7 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   tabStops: [],
   tabLeader: "",
   orientation: 0,
+  clipImage: undefined,
 };
 
 type GridTrackKind = "fixed" | "auto" | "fr";

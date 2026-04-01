@@ -427,8 +427,12 @@ export interface SpanProps {
 export interface TextProps extends SpanProps, LayoutProps {
   /** prevent text wrapping */
   nowrap?: boolean;
+  /** clamp visible lines before drawing */
+  maxLines?: number;
   /** line breaking algorithm used for wrapped text */
   lineBreak?: "greedy" | "knuth-plass";
+  /** overflow treatment for truncated text */
+  textOverflow?: "clip" | "ellipsis";
   /** line height multiplier @example 1.5 = 150% */
   lineHeight?: number;
   /** first line indent in pixels */
@@ -459,8 +463,9 @@ export type RequiredNonNullValues<T> = {
 };
 
 export type DefaultTextProps = RequiredNonNullValues<
-  Omit<TextProps, keyof LayoutProps>
->;
+  Omit<TextProps, keyof LayoutProps | "clipImage">
+> &
+  Pick<TextProps, "clipImage">;
 
 export interface SpanPropsBuilder<T> {
   props: SpanProps;
@@ -515,8 +520,10 @@ export interface TextPropsBuilder<T>
     >,
     Omit<SpanPropsBuilder<T>, "props"> {
   nowrap(): T;
+  maxLines(value: Required<TextProps["maxLines"]>): T;
   wrap(value?: boolean): T;
   lineBreak(value: Required<TextProps["lineBreak"]>): T;
+  textOverflow(value: Required<TextProps["textOverflow"]>): T;
   lineHeight(value: Required<TextProps["lineHeight"]>): T;
   align(value: Required<TextProps["align"]>): T;
   indent(value: Required<TextProps["indentSize"]>): T;
@@ -544,8 +551,10 @@ export interface TextDefaultPropsBuilder<T>
   extends Omit<SpanPropsBuilder<T>, "props"> {
   props: TextDefaultProps;
   nowrap(): T;
+  maxLines(value: Required<TextProps["maxLines"]>): T;
   wrap(value?: boolean): T;
   lineBreak(value: Required<TextProps["lineBreak"]>): T;
+  textOverflow(value: Required<TextProps["textOverflow"]>): T;
   lineHeight(value: Required<TextProps["lineHeight"]>): T;
   align(value: Required<TextProps["align"]>): T;
   indent(value: Required<TextProps["indentSize"]>): T;
@@ -1119,6 +1128,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.nowrap = true;
       return this as unknown as T;
     },
+    maxLines(value) {
+      props.maxLines = value;
+      return this as unknown as T;
+    },
     autofit(value) {
       props.autofit = value ?? true;
       return this as unknown as T;
@@ -1129,6 +1142,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     lineBreak(value: Required<TextProps["lineBreak"]>): T {
       props.lineBreak = value;
+      return this as unknown as T;
+    },
+    textOverflow(value: Required<TextProps["textOverflow"]>): T {
+      props.textOverflow = value;
       return this as unknown as T;
     },
     lineHeight(value: Required<TextProps["lineHeight"]>): T {
@@ -1189,12 +1206,20 @@ function textDefaultPropsBuilder<T>(
       props.nowrap = true;
       return this as unknown as T;
     },
+    maxLines(value) {
+      props.maxLines = value;
+      return this as unknown as T;
+    },
     wrap(value?: boolean): T {
       props.nowrap = !value;
       return this as unknown as T;
     },
     lineBreak(value: Required<TextProps["lineBreak"]>): T {
       props.lineBreak = value;
+      return this as unknown as T;
+    },
+    textOverflow(value: Required<TextProps["textOverflow"]>): T {
+      props.textOverflow = value;
       return this as unknown as T;
     },
     lineHeight(value: Required<TextProps["lineHeight"]>): T {

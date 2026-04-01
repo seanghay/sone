@@ -82,6 +82,9 @@ interface ParagraphChunk {
   width: number;
 }
 
+const ELLIPSIS = "…";
+let graphemeSegmenter: Intl.Segmenter | null = null;
+
 function createEmptyLine(width = 0): SoneParagraphLine {
   return {
     baseline: 0,
@@ -212,6 +215,282 @@ function trimTrailingWhitespace(
   }
 
   recomputeLineMetrics(line);
+}
+
+function createMeasuredSegment(
+  text: string,
+  props: SpanProps,
+  measureText: SoneRenderer["measureText"],
+): SoneParagraphLineSegment {
+  const metrics = measureText(text, props);
+  return {
+    metrics,
+    props,
+    text,
+    width: metrics.width,
+    height: metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent,
+  };
+}
+
+function segmentTextWidth(segments: SoneParagraphLineSegment[]) {
+  return segments.reduce((width, segment) => width + segment.width, 0);
+}
+
+function lineIndentWidth(index: number, baseProps: TextProps) {
+  return index === 0
+    ? (baseProps.indentSize ?? 0)
+    : (baseProps.hangingIndentSize ?? 0);
+}
+
+function recomputeFinalizedLine(
+  line: SoneParagraphLine,
+  index: number,
+  baseProps: TextProps,
+) {
+  const lineMultiplier =
+    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight)
+      ? 1.0
+      : baseProps.lineHeight;
+
+  let rawHeight = 0;
+  let rawBaseline = 0;
+  let lineOffsetMax = 0;
+  let lineOffsetMin = Number.POSITIVE_INFINITY;
+
+  for (const segment of line.segments) {
+    rawHeight = Math.max(rawHeight, segment.height);
+    rawBaseline = Math.max(rawBaseline, segment.metrics.fontBoundingBoxAscent);
+    const offset = segment.props.offsetY ?? 0;
+    if (offset > lineOffsetMax) lineOffsetMax = offset;
+    if (offset < lineOffsetMin) lineOffsetMin = offset;
+  }
+
+  if (lineOffsetMin === Number.POSITIVE_INFINITY) {
+    lineOffsetMin = 0;
+  }
+
+  line.width =
+    lineIndentWidth(index, baseProps) + segmentTextWidth(line.segments);
+  line.baseline = rawBaseline * lineMultiplier - lineOffsetMin;
+  line.height = rawHeight * lineMultiplier - lineOffsetMin + lineOffsetMax;
+}
+
+function recomputeParagraphMetrics(
+  paragraph: SoneParagraph,
+  baseProps: TextProps,
+) {
+  paragraph.width = 0;
+  paragraph.height = 0;
+
+  for (let i = 0; i < paragraph.lines.length; i++) {
+    const line = paragraph.lines[i];
+    line.spacesCount =
+      i < paragraph.lines.length - 1
+        ? line.segments.reduce(
+            (count, segment) => count + countSpaces(segment.text),
+            0,
+          )
+        : 0;
+    paragraph.width = Math.max(paragraph.width, line.width);
+    paragraph.height += line.height;
+  }
+
+  paragraph.offsetY = 0;
+  if (
+    paragraph.lines.length > 0 &&
+    baseProps.lineHeight != null &&
+    !Number.isNaN(baseProps.lineHeight)
+  ) {
+    const lh = Math.max(0, baseProps.lineHeight - 1);
+    for (const segment of paragraph.lines[0].segments) {
+      const m = segment.metrics;
+      const value =
+        -((m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2) * lh;
+
+      if (value < paragraph.offsetY) {
+        paragraph.offsetY = value;
+      }
+    }
+  }
+}
+
+function trimTrailingSegments(
+  segments: SoneParagraphLineSegment[],
+  measureText: SoneRenderer["measureText"],
+) {
+  while (segments.length > 0) {
+    const tail = segments[segments.length - 1];
+
+    if (tail.isTab) {
+      segments.pop();
+      continue;
+    }
+
+    const trimmedText = tail.text.replace(/[ \t]+$/u, "");
+    if (trimmedText === tail.text) break;
+
+    if (trimmedText.length === 0) {
+      segments.pop();
+      continue;
+    }
+
+    const measured = createMeasuredSegment(
+      trimmedText,
+      tail.props,
+      measureText,
+    );
+    tail.text = measured.text;
+    tail.metrics = measured.metrics;
+    tail.width = measured.width;
+    tail.height = measured.height;
+    break;
+  }
+}
+
+function getPrefixBoundaries(
+  text: string,
+  breakIterator: SoneRenderer["breakIterator"],
+) {
+  const boundaries = new Set<number>([0]);
+
+  for (const index of Array.from(breakIterator(text))) {
+    if (index > 0 && index < text.length) boundaries.add(index);
+  }
+
+  if (graphemeSegmenter == null) {
+    graphemeSegmenter = new Intl.Segmenter(undefined, {
+      granularity: "grapheme",
+    });
+  }
+
+  for (const segment of graphemeSegmenter.segment(text)) {
+    if (segment.index > 0 && segment.index < text.length) {
+      boundaries.add(segment.index);
+    }
+  }
+
+  return Array.from(boundaries).sort((a, b) => b - a);
+}
+
+function fitLineWithEllipsis(
+  line: SoneParagraphLine,
+  index: number,
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"],
+) {
+  const contentBudget = Math.max(
+    0,
+    maxWidth - lineIndentWidth(index, baseProps),
+  );
+  const working = line.segments.map((segment) => ({ ...segment }));
+  trimTrailingSegments(working, measureText);
+
+  const lastTextSegment =
+    [...working]
+      .reverse()
+      .find((segment) => !segment.isTab && segment.text.length > 0) ?? null;
+  const ellipsisProps = lastTextSegment?.props ?? baseProps;
+  const ellipsisSegment = createMeasuredSegment(
+    ELLIPSIS,
+    ellipsisProps,
+    measureText,
+  );
+
+  while (working.length > 0) {
+    trimTrailingSegments(working, measureText);
+    if (segmentTextWidth(working) + ellipsisSegment.width <= contentBudget) {
+      line.segments = [...working, ellipsisSegment];
+      recomputeFinalizedLine(line, index, baseProps);
+      return;
+    }
+
+    const tail = working[working.length - 1];
+    if (tail.isTab) {
+      working.pop();
+      continue;
+    }
+
+    const boundaries = getPrefixBoundaries(tail.text, breakIterator);
+    let shortened = false;
+
+    for (const boundary of boundaries) {
+      if (boundary >= tail.text.length) continue;
+      const nextText = tail.text.slice(0, boundary).replace(/[ \t]+$/u, "");
+      if (nextText === tail.text) continue;
+      if (nextText.length === 0) continue;
+
+      const measured = createMeasuredSegment(nextText, tail.props, measureText);
+      tail.text = measured.text;
+      tail.metrics = measured.metrics;
+      tail.width = measured.width;
+      tail.height = measured.height;
+      shortened = true;
+      break;
+    }
+
+    if (shortened) continue;
+    working.pop();
+  }
+
+  if (ellipsisSegment.width <= contentBudget) {
+    line.segments = [ellipsisSegment];
+  } else {
+    line.segments = [];
+  }
+
+  recomputeFinalizedLine(line, index, baseProps);
+}
+
+function applyTextOverflow(
+  paragraph: SoneParagraph,
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"],
+) {
+  const maxLines =
+    typeof baseProps.maxLines === "number" &&
+    Number.isFinite(baseProps.maxLines)
+      ? Math.max(0, Math.floor(baseProps.maxLines))
+      : null;
+
+  const hiddenLines = maxLines != null && paragraph.lines.length > maxLines;
+  if (hiddenLines) {
+    paragraph.lines = paragraph.lines.slice(0, maxLines);
+  }
+
+  if (paragraph.lines.length === 0) {
+    paragraph.width = 0;
+    paragraph.height = 0;
+    paragraph.offsetY = 0;
+    return;
+  }
+
+  const lastIndex = paragraph.lines.length - 1;
+  const lastLine = paragraph.lines[lastIndex];
+  const overflowsWidth =
+    baseProps.nowrap === true &&
+    Number.isFinite(maxWidth) &&
+    lastLine.width > maxWidth;
+
+  if (
+    Number.isFinite(maxWidth) &&
+    baseProps.textOverflow === "ellipsis" &&
+    (hiddenLines || overflowsWidth)
+  ) {
+    fitLineWithEllipsis(
+      lastLine,
+      lastIndex,
+      maxWidth,
+      baseProps,
+      measureText,
+      breakIterator,
+    );
+  }
+
+  recomputeParagraphMetrics(paragraph, baseProps);
 }
 
 function finalizeParagraph(
@@ -691,6 +970,13 @@ export function createParagraph(
       maxWidth,
       baseProps,
       measureText,
+    );
+    applyTextOverflow(
+      paragraph,
+      maxWidth,
+      baseProps,
+      measureText,
+      breakIterator,
     );
 
     for (const span of paragraph.lines) {

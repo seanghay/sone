@@ -66,6 +66,10 @@ function getLineTexts(paragraph: {
   );
 }
 
+function getLineText(line: { segments: Array<{ text: string }> }) {
+  return line.segments.map((segment) => segment.text).join("");
+}
+
 test("create paragraph without max width", async () => {
   const node = Text(
     "លោកសាស្ត្រាចារ្យ ឈាង រ៉ា រដ្ឋមន្ត្រីក្រសួងសុខាភិបាល បានប្រកាសថា ក្រុមគ្រូពេទ្យកម្ពុជាគឺជាលោកសាស្ត្រាចារ្យ",
@@ -358,6 +362,127 @@ test("createParagraph honors nowrap under constrained width", () => {
   expect(blocks[0].paragraph.width).toBeGreaterThan(80);
 });
 
+test("createParagraph adds ellipsis for nowrap overflow", () => {
+  const props = textProps({
+    nowrap: true,
+    textOverflow: "ellipsis",
+    font: ["GeistMono"],
+  });
+  const paragraph = createParagraph(
+    ["AAAA AAAA AAAA AAAA"],
+    80,
+    props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(paragraph.lines).toHaveLength(1);
+  expect(getLineText(paragraph.lines[0])).toContain("…");
+  expect(paragraph.width).toBeLessThanOrEqual(80);
+});
+
+test("createParagraph clamps wrapped text to maxLines with ellipsis", () => {
+  const props = textProps({
+    font: ["GeistMono"],
+    size: 20,
+    maxLines: 2,
+    textOverflow: "ellipsis",
+  });
+  const paragraph = createParagraph(
+    ["Alpha Beta Gamma Delta Epsilon Zeta Eta Theta"],
+    120,
+    props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(paragraph.lines).toHaveLength(2);
+  expect(getLineText(paragraph.lines[1]).endsWith("…")).toBe(true);
+  expect(paragraph.width).toBeLessThanOrEqual(120);
+});
+
+test("createParagraph does not add ellipsis when content fits", () => {
+  const paragraph = createParagraph(
+    ["Hello"],
+    200,
+    textProps({
+      font: ["GeistMono"],
+      nowrap: true,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineText(paragraph.lines[0])).toBe("Hello");
+});
+
+test("maxLines(1) matches nowrap ellipsis behavior", () => {
+  const text = "AAAA AAAA AAAA AAAA";
+  const nowrap = createParagraph(
+    [text],
+    80,
+    textProps({
+      font: ["GeistMono"],
+      nowrap: true,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const clamped = createParagraph(
+    [text],
+    80,
+    textProps({
+      font: ["GeistMono"],
+      maxLines: 1,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(clamped)).toEqual(getLineTexts(nowrap));
+});
+
+test("createParagraph preserves tail span styling on ellipsis", () => {
+  const paragraph = createParagraph(
+    ["Alpha ", Span("Beta Gamma Delta").color("red")],
+    120,
+    textProps({
+      font: ["GeistMono"],
+      size: 20,
+      maxLines: 1,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const tail =
+    paragraph.lines[0].segments[paragraph.lines[0].segments.length - 1];
+
+  expect(tail.text.endsWith("…")).toBe(true);
+  expect(tail.props.color).toBe("red");
+});
+
+test("createParagraph trims whitespace before inserting ellipsis", () => {
+  const paragraph = createParagraph(
+    ["Alpha Beta     Gamma Delta"],
+    120,
+    textProps({
+      font: ["GeistMono"],
+      size: 20,
+      maxLines: 1,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineText(paragraph.lines[0])).not.toContain(" …");
+  expect(getLineText(paragraph.lines[0]).endsWith("…")).toBe(true);
+});
+
 test("nowrap + autofit shrinks font to fit within width", async () => {
   const containerWidth = 120;
   const { metadata } = await renderWithMetadata(
@@ -569,6 +694,30 @@ test("renderWithMetadata distributes justify spacing on non-final lines only", a
   expect(lastRunWidth).toBeCloseTo(lastLine.width, 3);
 });
 
+test("renderWithMetadata keeps truncated final line out of justify expansion", async () => {
+  const { metadata } = await renderWithMetadata(
+    Text("Alpha Beta Gamma Delta Epsilon Zeta Eta Theta")
+      .font("GeistMono")
+      .size(20)
+      .width(120)
+      .align("justify")
+      .maxLines(2)
+      .textOverflow("ellipsis"),
+    renderer,
+  );
+
+  const paragraph = getTextParagraphs(metadata as SoneMetadata)[0].paragraph;
+  const lastLine = paragraph.lines[paragraph.lines.length - 1];
+  const lastRunWidth = lastLine.segments.reduce(
+    (width, segment) => width + (segment.run?.width ?? 0),
+    0,
+  );
+
+  expect(paragraph.lines).toHaveLength(2);
+  expect(getLineText(lastLine).endsWith("…")).toBe(true);
+  expect(lastRunWidth).toBeCloseTo(lastLine.width, 3);
+});
+
 test("renderWithMetadata applies first-line and hanging indents to text runs", async () => {
   const { metadata } = await renderWithMetadata(
     Text("aaaa aaaa aaaa aaaa aaaa")
@@ -738,6 +887,51 @@ test("renderWithMetadata keeps Knuth-Plass output in compiled text props", async
     "adipiscing elit sed do",
     "eiusmod tempor",
   ]);
+});
+
+test("createParagraph truncates Khmer text with ellipsis", () => {
+  const text =
+    "ក្រសួងការពារជាតិកម្ពុជា បានគូសបញ្ជាក់ថា ការប្រើប្រាស់សព្វាវុធធុនធ្ងន់គ្រប់ប្រភេទ និងការដាក់ពង្រាយទាហានយ៉ាងច្រើនលើសលុប";
+  const paragraph = createParagraph(
+    [text],
+    150,
+    textProps({
+      font: ["NotoSansKhmer"],
+      size: 18,
+      maxLines: 2,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const lastLineText = getLineText(paragraph.lines[paragraph.lines.length - 1]);
+
+  expect(paragraph.lines).toHaveLength(2);
+  expect(lastLineText.endsWith("…")).toBe(true);
+  expect(lastLineText.includes(" …")).toBe(false);
+  expect(paragraph.width).toBeLessThanOrEqual(150);
+});
+
+test("createParagraph truncates Thai text with ellipsis", () => {
+  const text =
+    "กระทรวงสาธารณสุขประกาศมาตรการใหม่เพื่อดูแลประชาชนและเพิ่มความปลอดภัยในการเดินทางช่วงเทศกาล";
+  const paragraph = createParagraph(
+    [text],
+    150,
+    textProps({
+      font: ["sans-serif"],
+      size: 18,
+      maxLines: 2,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const lastLineText = getLineText(paragraph.lines[paragraph.lines.length - 1]);
+
+  expect(paragraph.lines).toHaveLength(2);
+  expect(lastLineText.endsWith("…")).toBe(true);
+  expect(paragraph.width).toBeLessThanOrEqual(150);
 });
 
 test("tab leader segment stores pre-computed leader string", () => {
