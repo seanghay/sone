@@ -69,6 +69,107 @@ test("compile replaces placeholder markers in custom span lists", async () => {
   expect((marker.children[0] as SpanNode).children).toBe("6.");
 });
 
+test("colspan cell width spans multiple columns", async () => {
+  const { metadata } = await renderWithMetadata(
+    Table(
+      TableRow(
+        TableCell(Text("AB")).colspan(2).tag("span-cell"),
+        TableCell(Text("C")),
+      ),
+      TableRow(
+        TableCell(Text("A")).tag("cell-a"),
+        TableCell(Text("B")).tag("cell-b"),
+        TableCell(Text("C")),
+      ),
+    ),
+    renderer,
+  );
+
+  const spanCell = findByTag(metadata, "span-cell");
+  const cellA = findByTag(metadata, "cell-a");
+  const cellB = findByTag(metadata, "cell-b");
+  expect(spanCell.width).toBeGreaterThanOrEqual(cellA.width + cellB.width);
+});
+
+test("colspan=3 cell spans all three columns", async () => {
+  const { metadata } = await renderWithMetadata(
+    Table(
+      TableRow(TableCell(Text("Header")).colspan(3).tag("header")),
+      TableRow(
+        TableCell(Text("A")).tag("a"),
+        TableCell(Text("B")).tag("b"),
+        TableCell(Text("C")).tag("c"),
+      ),
+    ),
+    renderer,
+  );
+
+  const header = findByTag(metadata, "header");
+  const a = findByTag(metadata, "a");
+  const c = findByTag(metadata, "c");
+  // header should span from same x as "a" to at least the right edge of "c"
+  expect(header.width).toBeGreaterThanOrEqual(a.width + c.width);
+});
+
+test("rowspan cell height spans multiple rows", async () => {
+  const { metadata } = await renderWithMetadata(
+    Table(
+      TableRow(
+        TableCell(Text("Span")).rowspan(2).tag("span-cell"),
+        TableCell(Text("R0C1")).tag("r0c1"),
+      ),
+      TableRow(TableCell(Text("R1C1")).tag("r1c1")),
+    ),
+    renderer,
+  );
+
+  const spanCell = findByTag(metadata, "span-cell");
+  const r0c1 = findByTag(metadata, "r0c1");
+  const r1c1 = findByTag(metadata, "r1c1");
+  expect(spanCell.height).toBeGreaterThanOrEqual(r0c1.height + r1c1.height);
+});
+
+test("rowspan cell y position matches its host row", async () => {
+  const { metadata } = await renderWithMetadata(
+    Table(
+      TableRow(
+        TableCell(Text("Span")).rowspan(2).tag("span-cell"),
+        TableCell(Text("R0C1")).tag("r0c1"),
+      ),
+      TableRow(TableCell(Text("R1C1"))),
+    ),
+    renderer,
+  );
+
+  const spanCell = findByTag(metadata, "span-cell");
+  const r0c1 = findByTag(metadata, "r0c1");
+  // Both cells start in the same row, so same y
+  expect(spanCell.y).toBe(r0c1.y);
+});
+
+test("colspan and rowspan together", async () => {
+  const { metadata } = await renderWithMetadata(
+    Table(
+      TableRow(
+        TableCell(Text("Top-Left")).colspan(2).rowspan(2).tag("tl"),
+        TableCell(Text("Top-Right")),
+      ),
+      TableRow(TableCell(Text("Mid-Right"))),
+      TableRow(
+        TableCell(Text("Bot-Left")).tag("bl"),
+        TableCell(Text("Bot-Mid")),
+        TableCell(Text("Bot-Right")),
+      ),
+    ),
+    renderer,
+  );
+
+  const tl = findByTag(metadata, "tl");
+  const bl = findByTag(metadata, "bl");
+  expect(tl.width).toBeGreaterThan(bl.width);
+  expect(tl.height).toBeGreaterThan(0);
+});
+
 test("table spacing becomes cell padding metadata", async () => {
   const { metadata } = await renderWithMetadata(
     Table(

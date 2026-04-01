@@ -9,6 +9,7 @@ import {
   type MeasureFunction,
   MeasureMode,
   type Node,
+  PositionType,
   type Yoga as YogaLayout,
 } from "yoga-layout/load";
 import {
@@ -1185,6 +1186,120 @@ export function findFonts(node: SoneNode): Set<FontValue> | undefined {
   return fonts;
 }
 
+// ---------------------------------------------------------------------------
+// Table span helpers
+// ---------------------------------------------------------------------------
+
+interface RealCellEntry {
+  isPhantom: false;
+  node: TableCellNode;
+  domIndex: number;
+  colspan: number;
+  rowspan: number;
+}
+
+interface PhantomCellEntry {
+  isPhantom: true;
+  sourceRow: number;
+  sourceCol: number;
+}
+
+type CellGridEntry = RealCellEntry | PhantomCellEntry;
+
+interface TableLayoutInfo {
+  grid: CellGridEntry[][];
+  colWidths: number[];
+  rowHeights: number[];
+}
+
+const tableLayoutCache = new WeakMap<TableNode, TableLayoutInfo>();
+
+function buildCellGrid(tableNode: TableNode): {
+  grid: CellGridEntry[][];
+  numCols: number;
+} {
+  const numRows = tableNode.children.length;
+  const grid: CellGridEntry[][] = Array.from({ length: numRows }, () => []);
+  // occupied[r][c] = { sourceRow, sourceCol } when claimed by a span
+  const occupied: Array<
+    Array<{ sourceRow: number; sourceCol: number } | undefined>
+  > = Array.from({ length: numRows }, () => []);
+  let numCols = 0;
+
+  for (let r = 0; r < numRows; r++) {
+    const row = tableNode.children[r];
+    if (row == null) continue;
+
+    let domIndex = 0;
+    let c = 0;
+
+    while (domIndex < row.children.length || occupied[r]?.[c] != null) {
+      // Skip phantom positions claimed by earlier spans
+      if (occupied[r]?.[c] != null) {
+        const src = occupied[r][c]!;
+        grid[r][c] = {
+          isPhantom: true,
+          sourceRow: src.sourceRow,
+          sourceCol: src.sourceCol,
+        };
+        c++;
+        continue;
+      }
+
+      if (domIndex >= row.children.length) break;
+
+      const child = row.children[domIndex];
+      domIndex++;
+
+      if (child == null || child.type === "text-default") {
+        // text-default nodes are not real cells — skip without advancing c
+        continue;
+      }
+
+      const cell = child as TableCellNode;
+      const cs = cell.props.colspan ?? 1;
+      const rs = cell.props.rowspan ?? 1;
+
+      grid[r][c] = {
+        isPhantom: false,
+        node: cell,
+        domIndex: domIndex - 1,
+        colspan: cs,
+        rowspan: rs,
+      };
+
+      // Mark all positions claimed by this span
+      for (let rs2 = 0; rs2 < rs; rs2++) {
+        const rr = r + rs2;
+        if (rr >= numRows) continue;
+        occupied[rr] = occupied[rr] ?? [];
+        for (let cs2 = 0; cs2 < cs; cs2++) {
+          if (rs2 === 0 && cs2 === 0) continue; // skip the origin cell itself
+          occupied[rr][c + cs2] = { sourceRow: r, sourceCol: c };
+        }
+      }
+
+      numCols = Math.max(numCols, c + cs);
+      c += cs;
+    }
+
+    // Collect any remaining phantom entries to the right
+    for (let cc = c; occupied[r]?.[cc] != null; cc++) {
+      const src = occupied[r][cc]!;
+      grid[r][cc] = {
+        isPhantom: true,
+        sourceRow: src.sourceRow,
+        sourceCol: src.sourceCol,
+      };
+      numCols = Math.max(numCols, cc + 1);
+    }
+  }
+
+  return { grid, numCols };
+}
+
+// ---------------------------------------------------------------------------
+
 /**
  * Create Yoga layout tree from compiled node tree
  * Requires: resolved assets, font info, and line breaking data
@@ -1374,39 +1489,155 @@ export function createLayoutNode(
   }
 
   if (node.type === "table") {
-    const widths: number[] = [];
+    const { grid, numCols } = buildCellGrid(node);
+    const colWidths = new Array<number>(numCols).fill(0);
+    const rowHeights: number[] = [];
+    const numRows = node.children.length;
 
-    for (let r = 0; r < yogaNode.getChildCount(); r++) {
-      let maxHeight = 0;
-
-      // measure
-      for (let c = 0; c < yogaNode.getChild(r).getChildCount(); c++) {
-        if (widths.length - 1 < c) widths.push(0);
-        const columnNode = yogaNode.getChild(r).getChild(c);
-
-        // TODO: respect the min width min width
-        columnNode.calculateLayout(undefined, undefined);
-
-        const w = columnNode.getComputedWidth();
-        const h = columnNode.getComputedHeight();
-
-        if (maxHeight < h) maxHeight = h;
-        if (widths[c] < w) widths[c] = w;
+    // Pass 1: measure cells to establish natural column widths and row heights.
+    // - Single-column cells define column widths.
+    // - Rowspan>1 cells are excluded from row height (they'll be positioned absolutely).
+    for (let r = 0; r < numRows; r++) {
+      if (node.children[r] == null) {
+        rowHeights[r] = 0;
+        continue;
       }
+      let maxH = 0;
+      const rowGrid = grid[r] ?? [];
 
-      for (let c = 0; c < yogaNode.getChild(r).getChildCount(); c++) {
-        const columnNode = yogaNode.getChild(r).getChild(c);
-        columnNode.setMinHeight(maxHeight);
+      for (let c = 0; c < rowGrid.length; c++) {
+        const entry = rowGrid[c];
+        if (entry == null || entry.isPhantom) continue;
+
+        const yogaCell = yogaNode.getChild(r).getChild(entry.domIndex);
+        yogaCell.calculateLayout(undefined, undefined);
+        const w = yogaCell.getComputedWidth();
+        const h = yogaCell.getComputedHeight();
+
+        if (entry.colspan === 1 && w > colWidths[c]) colWidths[c] = w;
+        if (entry.rowspan === 1 && h > maxH) maxH = h;
+      }
+      rowHeights[r] = maxH;
+    }
+
+    // Pass 1b: ensure colspan cells fit within their allocated column widths.
+    for (let r = 0; r < numRows; r++) {
+      const rowGrid = grid[r] ?? [];
+      for (let c = 0; c < rowGrid.length; c++) {
+        const entry = rowGrid[c];
+        if (entry == null || entry.isPhantom || entry.colspan <= 1) continue;
+
+        const yogaCell = yogaNode.getChild(r).getChild(entry.domIndex);
+        yogaCell.calculateLayout(undefined, undefined);
+        const w = yogaCell.getComputedWidth();
+        const allocatedW = colWidths
+          .slice(c, c + entry.colspan)
+          .reduce((a, b) => a + b, 0);
+
+        if (w > allocatedW) {
+          const excess = (w - allocatedW) / entry.colspan;
+          for (let ci = c; ci < c + entry.colspan; ci++) {
+            colWidths[ci] += excess;
+          }
+        }
       }
     }
 
-    // update widths
-    for (let r = 0; r < yogaNode.getChildCount(); r++) {
-      for (let c = 0; c < yogaNode.getChild(r).getChildCount(); c++) {
-        const columnNode = yogaNode.getChild(r).getChild(c);
-        columnNode.setMinWidth(widths[c]);
+    // Pass 2: set minWidths and apply margin-left offsets for missing flex space.
+    //
+    // Rowspan cells are positioned absolutely (Pass 4), so they vacate their flex space.
+    // Cells in the same row after them (and cells in subsequent rows occupying their columns)
+    // need a left-margin offset to land at the correct x position.
+    //
+    // We accumulate the "missing" width as we scan each row left-to-right and inject it as
+    // margin-left on the next real flex cell.  No phantom Yoga nodes are needed, keeping
+    // the DOM-to-Yoga child index mapping intact for getNodeChildren.
+    for (let r = 0; r < numRows; r++) {
+      if (node.children[r] == null) continue;
+      const rowGrid = grid[r] ?? [];
+      let accumulated = 0;
+
+      for (let c = 0; c < rowGrid.length; c++) {
+        const entry = rowGrid[c];
+        if (entry == null) continue;
+
+        if (entry.isPhantom) {
+          if (entry.sourceRow !== r) {
+            // Column is occupied by a rowspan cell from an earlier row.
+            // There is no flex item here; add the column width to the offset.
+            accumulated += colWidths[c];
+          }
+          // Colspan-only phantoms (sourceRow === r) are "inside" the spanning cell's
+          // minWidth allocation and don't need separate handling.
+          continue;
+        }
+
+        // Real cell: compensate for any accumulated missing flex space.
+        if (accumulated > 0) {
+          const existingMargin = entry.node.props.marginLeft ?? 0;
+          yogaNode
+            .getChild(r)
+            .getChild(entry.domIndex)
+            .setMargin(Edge.Left, existingMargin + accumulated);
+          accumulated = 0;
+        }
+
+        const spanW =
+          entry.colspan === 1
+            ? colWidths[c]
+            : colWidths.slice(c, c + entry.colspan).reduce((a, b) => a + b, 0);
+        yogaNode.getChild(r).getChild(entry.domIndex).setMinWidth(spanW);
+
+        if (entry.rowspan > 1) {
+          // This cell will become absolute (Pass 4), vacating its flex space.
+          // Subsequent flex items in the same row need to skip this width.
+          accumulated += spanW;
+        }
       }
     }
+
+    // Pass 3: set minHeights for non-spanning cells (equalize row heights).
+    for (let r = 0; r < numRows; r++) {
+      if (node.children[r] == null) continue;
+      const rowGrid = grid[r] ?? [];
+
+      for (let c = 0; c < rowGrid.length; c++) {
+        const entry = rowGrid[c];
+        if (entry == null || entry.isPhantom || entry.rowspan > 1) continue;
+        yogaNode
+          .getChild(r)
+          .getChild(entry.domIndex)
+          .setMinHeight(rowHeights[r]);
+      }
+    }
+
+    // Pass 4: configure rowspan cells as absolutely-positioned overlays.
+    // This prevents them from inflating their host row's flex height.
+    for (let r = 0; r < numRows; r++) {
+      const rowGrid = grid[r] ?? [];
+      for (let c = 0; c < rowGrid.length; c++) {
+        const entry = rowGrid[c];
+        if (entry == null || entry.isPhantom || entry.rowspan <= 1) continue;
+
+        const yogaCell = yogaNode.getChild(r).getChild(entry.domIndex);
+        yogaCell.setPositionType(PositionType.Absolute);
+
+        const offsetX = colWidths.slice(0, c).reduce((a, b) => a + b, 0);
+        const spanW = colWidths
+          .slice(c, c + entry.colspan)
+          .reduce((a, b) => a + b, 0);
+        const spanH = rowHeights
+          .slice(r, r + entry.rowspan)
+          .reduce((a, b) => a + b, 0);
+
+        yogaCell.setPosition(Edge.Left, offsetX);
+        yogaCell.setPosition(Edge.Top, 0);
+        yogaCell.setWidth(spanW);
+        yogaCell.setHeight(spanH);
+      }
+    }
+
+    tableLayoutCache.set(node, { grid, colWidths, rowHeights });
   }
 
   return yogaNode;
@@ -2423,39 +2654,125 @@ export function drawTableNode(
     borderWidth = node.props.borderWidth;
   }
 
-  let offsetY = 0;
-  let maxColumnIndex = -1;
-
   ctx.beginPath();
-  for (let r = 0; r < layout.getChildCount(); r++) {
-    const child = layout.getChild(r);
-    if (
-      maxColumnIndex === -1 ||
-      child.getChildCount() > layout.getChild(maxColumnIndex).getChildCount()
-    ) {
-      maxColumnIndex = r;
+
+  const info = tableLayoutCache.get(node);
+
+  if (info == null) {
+    // Fallback for tables with no spans (legacy path)
+    let offsetY = 0;
+    let maxColumnIndex = -1;
+
+    for (let r = 0; r < layout.getChildCount(); r++) {
+      const child = layout.getChild(r);
+      if (
+        maxColumnIndex === -1 ||
+        child.getChildCount() > layout.getChild(maxColumnIndex).getChildCount()
+      ) {
+        maxColumnIndex = r;
+      }
+
+      if (r === layout.getChildCount() - 1) continue;
+      ctx.moveTo(x, y + child.getComputedHeight() + offsetY + borderWidth);
+      ctx.lineTo(
+        x + layout.getComputedWidth(),
+        y + child.getComputedHeight() + offsetY + borderWidth,
+      );
+      offsetY += child.getComputedHeight();
     }
 
-    if (r === layout.getChildCount() - 1) continue;
-    ctx.moveTo(x, y + child.getComputedHeight() + offsetY + borderWidth);
-    ctx.lineTo(
-      x + layout.getComputedWidth(),
-      y + child.getComputedHeight() + offsetY + borderWidth,
-    );
+    if (maxColumnIndex !== -1) {
+      const maxColChild = layout.getChild(maxColumnIndex);
+      let offsetX = 0;
+      for (let c = 0; c < maxColChild.getChildCount(); c++) {
+        const child = maxColChild.getChild(c);
+        if (c > 0) {
+          ctx.moveTo(x + offsetX + borderWidth, y);
+          ctx.lineTo(x + offsetX + borderWidth, y + layout.getComputedHeight());
+        }
+        offsetX += child.getComputedWidth();
+      }
+    }
 
-    offsetY += child.getComputedHeight();
+    ctx.stroke();
+    ctx.restore();
+    return;
   }
 
-  if (maxColumnIndex !== -1) {
-    const maxColChild = layout.getChild(maxColumnIndex);
-    let offsetX = 0;
-    for (let c = 0; c < maxColChild.getChildCount(); c++) {
-      const child = maxColChild.getChild(c);
-      if (c > 0) {
-        ctx.moveTo(x + offsetX + borderWidth, y);
-        ctx.lineTo(x + offsetX + borderWidth, y + layout.getComputedHeight());
+  const { grid, colWidths, rowHeights } = info;
+  const numRows = rowHeights.length;
+  const numCols = colWidths.length;
+
+  // Helper: does a rowspan cell starting at (r0, c0) span across row boundary r→r+1?
+  function rowBoundarySpanned(boundary: number, col: number): boolean {
+    for (let r = 0; r <= boundary; r++) {
+      const entry = grid[r]?.[col];
+      if (entry == null || entry.isPhantom) continue;
+      if (entry.rowspan > 1 && r + entry.rowspan - 1 > boundary) return true;
+    }
+    return false;
+  }
+
+  // Helper: does a colspan cell starting at (r, c0) span across col boundary c→c+1?
+  function colBoundarySpanned(row: number, boundary: number): boolean {
+    for (let c = 0; c <= boundary; c++) {
+      const entry = grid[row]?.[c];
+      if (entry == null || entry.isPhantom) continue;
+      if (entry.colspan > 1 && c + entry.colspan - 1 > boundary) return true;
+    }
+    return false;
+  }
+
+  // Draw horizontal separators (between rows r and r+1), skipping segments
+  // where a rowspan cell spans that boundary.
+  let offsetY = 0;
+  for (let r = 0; r < numRows - 1; r++) {
+    const lineY = y + offsetY + rowHeights[r] + borderWidth;
+    let colOffsetX = 0;
+    let segStart: number | null = null;
+
+    for (let c = 0; c < numCols; c++) {
+      const spanned = rowBoundarySpanned(r, c);
+      if (!spanned && segStart === null) {
+        segStart = colOffsetX;
+      } else if (spanned && segStart !== null) {
+        ctx.moveTo(x + segStart, lineY);
+        ctx.lineTo(x + colOffsetX, lineY);
+        segStart = null;
       }
-      offsetX += child.getComputedWidth();
+      colOffsetX += colWidths[c];
+    }
+    if (segStart !== null) {
+      ctx.moveTo(x + segStart, lineY);
+      ctx.lineTo(x + colOffsetX, lineY);
+    }
+
+    offsetY += rowHeights[r];
+  }
+
+  // Draw vertical separators (between cols c and c+1), skipping segments
+  // where a colspan cell spans that boundary.
+  let colOffsetX = 0;
+  for (let c = 0; c < numCols - 1; c++) {
+    colOffsetX += colWidths[c];
+    const lineX = x + colOffsetX + borderWidth;
+    let rowOffsetY = 0;
+    let segStart: number | null = null;
+
+    for (let r = 0; r < numRows; r++) {
+      const spanned = colBoundarySpanned(r, c);
+      if (!spanned && segStart === null) {
+        segStart = rowOffsetY;
+      } else if (spanned && segStart !== null) {
+        ctx.moveTo(lineX, y + segStart);
+        ctx.lineTo(lineX, y + rowOffsetY);
+        segStart = null;
+      }
+      rowOffsetY += rowHeights[r];
+    }
+    if (segStart !== null) {
+      ctx.moveTo(lineX, y + segStart);
+      ctx.lineTo(lineX, y + rowOffsetY);
     }
   }
 

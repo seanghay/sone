@@ -19,7 +19,7 @@
 - [x] Octagon
 - [x] Image Scale Alignment
 - [x] Side Borders
-- [ ] Table Column Span, Row Span
+- [x] Table Column Span, Row Span
 - [x] Improve Line Breaking Algorithm
 - [ ] Polygon Shape
 - [ ] SVG Color Fill
