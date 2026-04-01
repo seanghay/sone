@@ -12,8 +12,7 @@
 - Flex Layout
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
 - Rich Text — spans, justification, tab stops, tab leaders, text orientation (0°/90°/180°/270°)
-- Custom list markers — static `Span`, dynamic arrow function `(index) => Span(...)`
-- Per-side borders — `borderWidth(top, right, bottom, left)`
+- Lists
 - Squircle, QR Code, Photo
 - Table
 - Custom font loading — any language or script
