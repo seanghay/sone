@@ -739,3 +739,87 @@ test("renderWithMetadata keeps Knuth-Plass output in compiled text props", async
     "eiusmod tempor",
   ]);
 });
+
+test("tab leader segment stores pre-computed leader string", () => {
+  const baseProps = textProps({ tabStops: [200], tabLeader: "." });
+  const blocks = createParagraph(
+    ["Title\tPage"],
+    Number.POSITIVE_INFINITY,
+    baseProps,
+    renderer.measureText,
+    renderer.breakIterator,
+  );
+
+  const segments = blocks[0].paragraph.lines[0].segments;
+  // [Title, <tab>, Page]
+  const tabSeg = segments[1];
+  expect(tabSeg.isTab).toBe(true);
+  expect(typeof tabSeg.tabLeader).toBe("string");
+  expect(tabSeg.tabLeader!.length).toBeGreaterThan(0);
+  // every character in the leader must be the dot character
+  expect([...tabSeg.tabLeader!].every((c) => c === ".")).toBe(true);
+});
+
+test("tab leader string fits within tab width", () => {
+  const baseProps = textProps({ tabStops: [200], tabLeader: "." });
+  const blocks = createParagraph(
+    ["Title\tPage"],
+    Number.POSITIVE_INFINITY,
+    baseProps,
+    renderer.measureText,
+    renderer.breakIterator,
+  );
+
+  const tabSeg = blocks[0].paragraph.lines[0].segments[1];
+  const dotWidth = renderer.measureText(".", baseProps).width;
+  const leaderWidth = dotWidth * tabSeg.tabLeader!.length;
+  expect(leaderWidth).toBeLessThanOrEqual(tabSeg.width + 0.01);
+});
+
+test("tab segment has no leader when tabLeader is not set", () => {
+  const baseProps = textProps({ tabStops: [200] });
+  const blocks = createParagraph(
+    ["Title\tPage"],
+    Number.POSITIVE_INFINITY,
+    baseProps,
+    renderer.measureText,
+    renderer.breakIterator,
+  );
+
+  const tabSeg = blocks[0].paragraph.lines[0].segments[1];
+  expect(tabSeg.isTab).toBe(true);
+  expect(tabSeg.tabLeader).toBeUndefined();
+});
+
+test("tab leader works with dash character", () => {
+  const baseProps = textProps({ tabStops: [200], tabLeader: "-" });
+  const blocks = createParagraph(
+    ["Label\tValue"],
+    Number.POSITIVE_INFINITY,
+    baseProps,
+    renderer.measureText,
+    renderer.breakIterator,
+  );
+
+  const tabSeg = blocks[0].paragraph.lines[0].segments[1];
+  expect(tabSeg.isTab).toBe(true);
+  expect([...tabSeg.tabLeader!].every((c) => c === "-")).toBe(true);
+});
+
+test("multiple tab stops each get their own leader", () => {
+  const baseProps = textProps({ tabStops: [150, 300], tabLeader: "." });
+  const blocks = createParagraph(
+    ["A\tB\tC"],
+    Number.POSITIVE_INFINITY,
+    baseProps,
+    renderer.measureText,
+    renderer.breakIterator,
+  );
+
+  const segments = blocks[0].paragraph.lines[0].segments;
+  // [A, <tab1>, B, <tab2>, C]
+  expect(segments[1].isTab).toBe(true);
+  expect(segments[3].isTab).toBe(true);
+  expect(typeof segments[1].tabLeader).toBe("string");
+  expect(typeof segments[3].tabLeader).toBe("string");
+});

@@ -85,6 +85,7 @@ export const DEFAULT_TEXT_PROPS: DefaultTextProps = {
   dropShadows: [],
   autofit: false,
   tabStops: [],
+  tabLeader: "",
   orientation: 0,
 };
 

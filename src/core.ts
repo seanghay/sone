@@ -437,6 +437,8 @@ export interface TextProps extends SpanProps, LayoutProps {
   hangingIndentSize?: number;
   /** tab stop positions in pixels, relative to the text content left edge */
   tabStops?: number[];
+  /** character used to fill tab stop gaps, e.g. "." for dot leader (MS Word style) */
+  tabLeader?: string;
   /** text alignment */
   align?: "left" | "right" | "center" | "justify";
 
@@ -520,6 +522,7 @@ export interface TextPropsBuilder<T>
   indent(value: Required<TextProps["indentSize"]>): T;
   hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T;
   tabStops(...values: number[]): T;
+  tabLeader(char: Required<TextProps["tabLeader"]>): T;
   autofit(value?: Required<TextProps["autofit"]>): T;
   orientation(value: 0 | 90 | 180 | 270): T;
   clipImage(value: PhotoNode): T;
@@ -1146,6 +1149,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     tabStops(...values: number[]): T {
       props.tabStops = values;
+      return this as unknown as T;
+    },
+    tabLeader(char: Required<TextProps["tabLeader"]>): T {
+      props.tabLeader = char;
       return this as unknown as T;
     },
     orientation(value: 0 | 90 | 180 | 270): T {

@@ -53,6 +53,8 @@ export interface SoneParagraphLineSegment {
   run?: SoneParagraphLineRun;
   /** true for synthetic tab-stop segments — must not be merged with adjacent segments */
   isTab?: boolean;
+  /** pre-computed leader string to render inside this tab gap (e.g. "..........") */
+  tabLeader?: string;
 }
 
 export interface SoneParagraphLine {
@@ -95,6 +97,7 @@ function pushSegments(
   text: string,
   segProps: SpanProps,
   tabStops: number[] | undefined,
+  tabLeader: string | undefined,
   measureText: SoneRenderer["measureText"],
 ): void {
   if (!tabStops?.length || !text.includes("\t")) {
@@ -137,6 +140,16 @@ function pushSegments(
       );
       const m = measureText(" ", segProps);
       const h = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+
+      let leaderStr: string | undefined;
+      if (tabLeader) {
+        const charWidth = measureText(tabLeader, segProps).width;
+        if (charWidth > 0) {
+          const count = Math.floor(tabWidth / charWidth);
+          if (count > 0) leaderStr = tabLeader.repeat(count);
+        }
+      }
+
       line.segments.push({
         metrics: m,
         props: segProps,
@@ -144,6 +157,7 @@ function pushSegments(
         width: tabWidth,
         height: h,
         isTab: true,
+        tabLeader: leaderStr,
       });
       line.width += tabWidth;
       line.height = Math.max(line.height, h);
@@ -365,7 +379,14 @@ function createGreedyMultilineParagraph(
         lines.push(currentLine);
       }
 
-      pushSegments(currentLine, text, props, baseProps.tabStops, measureText);
+      pushSegments(
+        currentLine,
+        text,
+        props,
+        baseProps.tabStops,
+        baseProps.tabLeader,
+        measureText,
+      );
       continue;
     }
 
@@ -407,6 +428,7 @@ function createGreedyMultilineParagraph(
         segmentText,
         props,
         baseProps.tabStops,
+        baseProps.tabLeader,
         measureText,
       );
       lastBreakpoint = breakpoint;
@@ -436,6 +458,7 @@ function createGreedyMultilineParagraph(
         remainingText,
         props,
         baseProps.tabStops,
+        baseProps.tabLeader,
         measureText,
       );
     }
@@ -549,7 +572,14 @@ function createKnuthPlassMultilineParagraph(
 
     for (let i = start; i < end; i++) {
       const chunk = chunks[i];
-      pushSegments(line, chunk.text, chunk.props, undefined, measureText);
+      pushSegments(
+        line,
+        chunk.text,
+        chunk.props,
+        undefined,
+        undefined,
+        measureText,
+      );
     }
 
     return line;
@@ -959,6 +989,7 @@ export function drawTextNode(
       for (let s = 0; s < line.segments.length; s++) {
         const segment = line.segments[s];
         const spanOffsetY = segment.props.offsetY ?? 0;
+        const renderText = segment.tabLeader ?? segment.text;
 
         let segmentWidth = segment.width;
         const segmentSpaces = countSpaces(segment.text);
@@ -1034,7 +1065,7 @@ export function drawTextNode(
               ctx.shadowColor = shadowProperties.color;
               ctx.fillStyle = shadowProperties.color;
             }
-            ctx.fillText(segment.text, textX, textY);
+            ctx.fillText(renderText, textX, textY);
             ctx.restore();
           }
         }
@@ -1049,7 +1080,7 @@ export function drawTextNode(
           ctx.lineJoin = "round";
           ctx.miterLimit = 2;
           ctx.lineWidth = segment.props.strokeWidth;
-          ctx.strokeText(segment.text, textX, textY);
+          ctx.strokeText(renderText, textX, textY);
         }
 
         if (
@@ -1069,7 +1100,7 @@ export function drawTextNode(
           }
         }
 
-        ctx.fillText(segment.text, textX, textY);
+        ctx.fillText(renderText, textX, textY);
         ctx.restore();
 
         // draw line-through
