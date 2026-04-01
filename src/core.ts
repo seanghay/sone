@@ -1572,7 +1572,7 @@ export function TableCell(...children: SoneNode[]): TableCellNode {
  * List marker and container customization properties
  */
 export interface ListProps extends LayoutProps {
-  /** Bullet/numbering style: "disc" (•), "circle" (◦), "square" (▪), "dash" (–), "decimal", "none", custom string, or a SpanNode for full styling */
+  /** Bullet/numbering style: "disc" (•), "circle" (◦), "square" (▪), "dash" (–), "decimal", "none", custom string, a SpanNode for full styling, or an arrow function `(index: number) => SpanNode` for dynamic per-item markers (index is 0-based) */
   listStyle?:
     | "disc"
     | "circle"
@@ -1581,7 +1581,8 @@ export interface ListProps extends LayoutProps {
     | "dash"
     | "none"
     | (string & {})
-    | SpanNode;
+    | SpanNode
+    | ((index: number) => SpanNode);
   /** Gap between marker and item content (default: 8) */
   markerGap?: number;
   /** Starting number for decimal lists — named startIndex because "start" is taken by LayoutProps (CSS inset-inline-start) */

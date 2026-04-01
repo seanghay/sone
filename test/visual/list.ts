@@ -1,4 +1,11 @@
-import { Column, List, ListItem, Span, Text } from "../../src/node.ts";
+import {
+  Column,
+  List,
+  ListItem,
+  Span,
+  Text,
+  TextDefault,
+} from "../../src/node.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const root = Column(
@@ -71,6 +78,65 @@ const root = Column(
     .markerGap(12)
     .gap(6)
     .marginBottom(16),
+
+  // Arrow function marker — dynamic per-item spans
+  Text("Arrow function marker — dynamic labels")
+    .size(14)
+    .weight("bold")
+    .color("gray"),
+  List(
+    ListItem(Text("Install dependencies")),
+    ListItem(Text("Configure the environment")),
+    ListItem(Text("Run the build step")),
+    ListItem(Text("Deploy to production")),
+  )
+    .listStyle((index) => {
+      const labels = ["a.", "b.", "c.", "d."];
+      return Span(labels[index] ?? `${index + 1}.`).color("royalblue");
+    })
+    .markerGap(10)
+    .gap(6)
+    .marginBottom(16),
+
+  // Arrow function marker — pulling values from an array
+  Text("Arrow function marker — array values")
+    .size(14)
+    .weight("bold")
+    .color("gray"),
+  List(
+    ListItem(Text("First priority task")),
+    ListItem(Text("Second priority task")),
+    ListItem(Text("Third priority task")),
+  )
+    .listStyle((index) => {
+      const colors = ["#e53e3e", "#dd6b20", "#38a169"];
+      return Span(`${index + 1}.`)
+        .color(colors[index] ?? "black")
+        .weight("bold");
+    })
+    .markerGap(8)
+    .gap(6)
+    .marginBottom(16),
+
+  // Arrow function marker — inherits from TextDefault
+  Text("Arrow function marker — TextDefault inheritance")
+    .size(14)
+    .weight("bold")
+    .color("gray"),
+  TextDefault(
+    List(
+      ListItem(Text("First step")),
+      ListItem(Text("Second step")),
+      ListItem(Text("Third step")),
+    )
+      .listStyle((index) => Span(`${index + 1}.`))
+      .markerGap(8)
+      .gap(6)
+      .marginBottom(16),
+  )
+    .size(16)
+    .color("slateblue")
+    .weight("bold"),
 
   // Nested list
   Text("Nested list")

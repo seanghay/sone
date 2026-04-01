@@ -14,6 +14,6 @@ export async function writeCanvasToFile(root: SoneNode, url: string) {
   await fs.writeFile(
     path.join(file.dir, `${file.name}.jpg`),
     // @ts-expect-error
-    await canvas.toBuffer("jpg", { density: 1 }),
+    await canvas.toBuffer("jpg", { density: 2 }),
   );
 }

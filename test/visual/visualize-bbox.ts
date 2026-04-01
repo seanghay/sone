@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { Canvas, loadImage } from "skia-canvas";
 import type { TextProps } from "../../src/core";
 import type { SoneMetadata } from "../../src/metadata";
@@ -11,16 +11,16 @@ function randomColor(): string {
 }
 
 const image = await loadImage("test/visual/text-2.jpg");
-const metadata: SoneMetadata = JSON.parse(
-  await readFile("test/visual/text-2.json", "utf8"),
-);
+// const metadata: SoneMetadata = JSON.parse(
+//   await readFile("test/visual/text-2.json", "utf8"),
+// );
 
 const canvas = new Canvas(image.width, image.height);
 
 const ctx = canvas.getContext("2d");
 ctx.drawImage(image, 0, 0);
 
-function draw(item: SoneMetadata, depth: number) {
+function _draw(item: SoneMetadata, depth: number) {
   const color = randomColor();
 
   if (item.type === "photo") {
@@ -59,12 +59,12 @@ function draw(item: SoneMetadata, depth: number) {
       if (typeof child === "string") continue;
       if (child.type === "span") continue;
 
-      draw(child as SoneMetadata, depth + 1);
+      _draw(child as SoneMetadata, depth + 1);
     }
   }
 }
 
-draw(metadata, 0);
+// draw(metadata, 0);
 
 await writeFile(
   "test/visual/text-2-annotations.png",

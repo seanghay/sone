@@ -1031,7 +1031,9 @@ export async function compile<T extends SoneNode>(
     }
 
     const { listStyle, startIndex = 1, markerGap = 8 } = node.props;
+    const isFnMarker = typeof listStyle === "function";
     const isSpanMarker =
+      !isFnMarker &&
       listStyle != null &&
       typeof listStyle === "object" &&
       (listStyle as SpanNode).type === "span";
@@ -1040,24 +1042,26 @@ export async function compile<T extends SoneNode>(
     for (const child of node.children) {
       if (child == null) continue;
 
-      const markerNode = isSpanMarker
-        ? (() => {
-            const cloned = klona(listStyle as SpanNode);
-            if (cloned.children.includes("{}")) {
-              cloned.children = cloned.children.replace(
-                "{}",
-                `${startIndex + itemIndex}`,
-              );
-            }
-            return Text(cloned);
-          })()
-        : Text(
-            resolveMarker(
-              listStyle as string | undefined,
-              itemIndex,
-              startIndex,
-            ),
-          );
+      const markerNode = isFnMarker
+        ? Text((listStyle as (index: number) => SpanNode)(itemIndex))
+        : isSpanMarker
+          ? (() => {
+              const cloned = klona(listStyle as SpanNode);
+              if (cloned.children.includes("{}")) {
+                cloned.children = cloned.children.replace(
+                  "{}",
+                  `${startIndex + itemIndex}`,
+                );
+              }
+              return Text(cloned);
+            })()
+          : Text(
+              resolveMarker(
+                listStyle as string | undefined,
+                itemIndex,
+                startIndex,
+              ),
+            );
       markerNode.props.nowrap = true;
       itemIndex++;
 

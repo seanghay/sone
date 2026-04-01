@@ -2,6 +2,7 @@ import { expect, test } from "vitest";
 import type { SoneMetadata } from "../src/metadata.ts";
 import type { SoneCompileContext, SpanNode, TextNode } from "../src/node.ts";
 import {
+  Column,
   compile,
   List,
   ListItem,
@@ -12,6 +13,7 @@ import {
   TableCell,
   TableRow,
   Text,
+  TextDefault,
 } from "../src/node.ts";
 
 const defaultContext: SoneCompileContext = {
@@ -67,6 +69,87 @@ test("compile replaces placeholder markers in custom span lists", async () => {
   const secondItem = node!.children[1]!;
   const marker = secondItem.children[0] as TextNode;
   expect((marker.children[0] as SpanNode).children).toBe("6.");
+});
+
+test("compile uses arrow function listStyle for dynamic markers", async () => {
+  const labels = ["alpha", "beta", "gamma"];
+  const node = await compile(
+    List(
+      ListItem(Text("First")),
+      ListItem(Text("Second")),
+      ListItem(Text("Third")),
+    ).listStyle((index) => Span(`${labels[index]}.`)),
+    defaultContext,
+  );
+
+  for (let i = 0; i < 3; i++) {
+    const item = node!.children[i]!;
+    const marker = item.children[0] as TextNode;
+    expect((marker.children[0] as SpanNode).children).toBe(`${labels[i]}.`);
+  }
+});
+
+test("arrow function listStyle receives 0-based index", async () => {
+  const received: number[] = [];
+  await compile(
+    List(
+      ListItem(Text("A")),
+      ListItem(Text("B")),
+      ListItem(Text("C")),
+    ).listStyle((index) => {
+      received.push(index);
+      return Span(`${index}.`);
+    }),
+    defaultContext,
+  );
+
+  expect(received).toEqual([0, 1, 2]);
+});
+
+test("compile applies styled span from arrow function listStyle", async () => {
+  const node = await compile(
+    List(ListItem(Text("X")), ListItem(Text("Y"))).listStyle((index) =>
+      Span(`${index + 1})`)
+        .weight("bold")
+        .color("red"),
+    ),
+    defaultContext,
+  );
+
+  const item = node!.children[0]!;
+  const marker = item.children[0] as TextNode;
+  const span = marker.children[0] as SpanNode;
+  expect(span.children).toBe("1)");
+  expect(span.props.weight).toBe("bold");
+  expect(span.props.color).toBe("red");
+});
+
+test("arrow function listStyle span inherits TextDefault props", async () => {
+  const node = await compile(
+    Column(
+      TextDefault(
+        List(ListItem(Text("Item")), ListItem(Text("Item 2"))).listStyle(
+          (index) => Span(`${index + 1}.`),
+        ),
+      )
+        .size(24)
+        .color("navy"),
+    ),
+    defaultContext,
+  );
+
+  // Column -> List -> ListItem -> marker TextNode -> SpanNode
+  const list = node!.children[0] as ReturnType<typeof List>;
+  const item = list.children[0]!;
+  const marker = item.children[0] as TextNode;
+  const span = marker.children[0] as SpanNode;
+
+  // marker text node should have TextDefault's size and color
+  expect(marker.props.size).toBe(24);
+  expect(marker.props.color).toBe("navy");
+  // span inherits from the marker text node
+  expect(span.props.size).toBe(24);
+  expect(span.props.color).toBe("navy");
 });
 
 test("colspan cell width spans multiple columns", async () => {
