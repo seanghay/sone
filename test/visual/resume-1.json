@@ -17,7 +17,8 @@
             "type": "linear-gradient",
             "orientation": {
               "type": "angular",
-              "value": "135"
+              "value": "135",
+              "unit": "deg"
             },
             "colorStops": [
               {
@@ -1541,7 +1542,8 @@
                         "type": "linear-gradient",
                         "orientation": {
                           "type": "angular",
-                          "value": "90"
+                          "value": "90",
+                          "unit": "deg"
                         },
                         "colorStops": [
                           {
@@ -3925,7 +3927,8 @@
                         "type": "linear-gradient",
                         "orientation": {
                           "type": "angular",
-                          "value": "90"
+                          "value": "90",
+                          "unit": "deg"
                         },
                         "colorStops": [
                           {
@@ -6393,7 +6396,8 @@
                         "type": "linear-gradient",
                         "orientation": {
                           "type": "angular",
-                          "value": "90"
+                          "value": "90",
+                          "unit": "deg"
                         },
                         "colorStops": [
                           {
@@ -9702,7 +9706,8 @@
                             "type": "linear-gradient",
                             "orientation": {
                               "type": "angular",
-                              "value": "90"
+                              "value": "90",
+                              "unit": "deg"
                             },
                             "colorStops": [
                               {
@@ -10812,7 +10817,8 @@
                             "type": "linear-gradient",
                             "orientation": {
                               "type": "angular",
-                              "value": "90"
+                              "value": "90",
+                              "unit": "deg"
                             },
                             "colorStops": [
                               {
@@ -11646,7 +11652,8 @@
                         "type": "linear-gradient",
                         "orientation": {
                           "type": "angular",
-                          "value": "90"
+                          "value": "90",
+                          "unit": "deg"
                         },
                         "colorStops": [
                           {

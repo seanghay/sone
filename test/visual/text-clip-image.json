@@ -1,0 +1,343 @@
+{
+  "type": "column",
+  "props": {
+    "background": ["#2d3436"],
+    "padding": 40,
+    "gap": 30,
+    "width": 600
+  },
+  "children": [
+    {
+      "type": "text",
+      "children": ["SONE"],
+      "props": {
+        "size": 90,
+        "color": "black",
+        "font": ["sans-serif"],
+        "style": "normal",
+        "weight": "bold",
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineBreak": "greedy",
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "left",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 520,
+              "height": 122.93975830078125,
+              "lines": [
+                {
+                  "baseline": 90,
+                  "height": 122.93975830078125,
+                  "width": 255.50999450683594,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 255.50999450683594,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 255.50999450683594,
+                        "actualBoundingBoxAscent": 67,
+                        "actualBoundingBoxDescent": 3,
+                        "fontBoundingBoxAscent": 90,
+                        "fontBoundingBoxDescent": 32.93975830078125,
+                        "emHeightAscent": 90,
+                        "emHeightDescent": 32.93975830078125,
+                        "hangingBaseline": 72,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -32.93975830078125
+                      },
+                      "props": {
+                        "size": 90,
+                        "color": "black",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineBreak": "greedy",
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "left",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
+                        "clipImage": {
+                          "id": 2,
+                          "type": "photo",
+                          "props": {
+                            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+                            "scaleType": "cover",
+                            "width": 473,
+                            "height": 283,
+                            "image": {}
+                          }
+                        },
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "text": "SONE",
+                      "width": 255.50999450683594,
+                      "height": 122.93975830078125,
+                      "run": {
+                        "x": 40,
+                        "y": 40,
+                        "width": 255.50999450683594,
+                        "height": 122.93975830078125
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
+        "clipImage": {
+          "id": 2,
+          "type": "photo",
+          "props": {
+            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+            "scaleType": "cover",
+            "width": 473,
+            "height": 283,
+            "image": {}
+          }
+        },
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 40,
+      "y": 40,
+      "width": 520,
+      "height": 123,
+      "position": {
+        "top": 40,
+        "bottom": 0,
+        "left": 40,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    {
+      "type": "text",
+      "children": ["HELLO WORLD"],
+      "props": {
+        "size": 60,
+        "color": "black",
+        "font": ["sans-serif"],
+        "style": "normal",
+        "weight": "bold",
+        "letterSpacing": 0,
+        "nowrap": false,
+        "lineBreak": "greedy",
+        "lineHeight": null,
+        "indentSize": 0,
+        "hangingIndentSize": 0,
+        "align": "center",
+        "strokeColor": "black",
+        "strokeWidth": 0,
+        "wordSpacing": 0,
+        "blocks": [
+          {
+            "paragraph": {
+              "width": 520,
+              "height": 81.9598388671875,
+              "lines": [
+                {
+                  "baseline": 60,
+                  "height": 81.9598388671875,
+                  "width": 439.25999450683594,
+                  "segments": [
+                    {
+                      "metrics": {
+                        "width": 194.63999938964844,
+                        "actualBoundingBoxLeft": 0,
+                        "actualBoundingBoxRight": 194.63999938964844,
+                        "actualBoundingBoxAscent": 45,
+                        "actualBoundingBoxDescent": 3,
+                        "fontBoundingBoxAscent": 60,
+                        "fontBoundingBoxDescent": 21.9598388671875,
+                        "emHeightAscent": 60,
+                        "emHeightDescent": 21.9598388671875,
+                        "hangingBaseline": 48,
+                        "alphabeticBaseline": 0,
+                        "ideographicBaseline": -21.9598388671875
+                      },
+                      "text": "HELLO WORLD",
+                      "height": 81.9598388671875,
+                      "width": 439.25999450683594,
+                      "props": {
+                        "size": 60,
+                        "color": "black",
+                        "font": ["sans-serif"],
+                        "style": "normal",
+                        "weight": "bold",
+                        "letterSpacing": 0,
+                        "nowrap": false,
+                        "lineBreak": "greedy",
+                        "lineHeight": null,
+                        "indentSize": 0,
+                        "hangingIndentSize": 0,
+                        "align": "center",
+                        "strokeColor": "black",
+                        "strokeWidth": 0,
+                        "wordSpacing": 0,
+                        "blocks": [],
+                        "offsetY": 0,
+                        "underline": 0,
+                        "underlineColor": null,
+                        "overline": 0,
+                        "overlineColor": null,
+                        "lineThrough": 0,
+                        "lineThroughColor": null,
+                        "highlightColor": null,
+                        "dropShadows": [],
+                        "autofit": false,
+                        "tabStops": [],
+                        "orientation": 0,
+                        "clipImage": {
+                          "id": 4,
+                          "type": "photo",
+                          "props": {
+                            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+                            "scaleType": "cover",
+                            "width": 473,
+                            "height": 283,
+                            "image": {}
+                          }
+                        },
+                        "flexShrink": 1,
+                        "boxSizing": "content-box"
+                      },
+                      "run": {
+                        "x": 80.37000274658203,
+                        "y": 192,
+                        "width": 439.25999450683594,
+                        "height": 81.9598388671875
+                      }
+                    }
+                  ],
+                  "spacesCount": 0
+                }
+              ],
+              "offsetY": 0
+            }
+          }
+        ],
+        "offsetY": 0,
+        "underline": 0,
+        "underlineColor": null,
+        "overline": 0,
+        "overlineColor": null,
+        "lineThrough": 0,
+        "lineThroughColor": null,
+        "highlightColor": null,
+        "dropShadows": [],
+        "autofit": false,
+        "tabStops": [],
+        "orientation": 0,
+        "clipImage": {
+          "id": 4,
+          "type": "photo",
+          "props": {
+            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+            "scaleType": "cover",
+            "width": 473,
+            "height": 283,
+            "image": {}
+          }
+        },
+        "flexShrink": 1,
+        "boxSizing": "content-box"
+      },
+      "x": 40,
+      "y": 192,
+      "width": 520,
+      "height": 83,
+      "position": {
+        "top": 192,
+        "bottom": 0,
+        "left": 40,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 600,
+  "height": 315,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 40,
+    "left": 40,
+    "right": 40,
+    "bottom": 40
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}

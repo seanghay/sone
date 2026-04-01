@@ -679,7 +679,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -720,7 +721,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -757,7 +759,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -882,7 +885,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -923,7 +927,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -960,7 +965,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1088,7 +1094,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1129,7 +1136,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1166,7 +1174,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1288,7 +1297,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1329,7 +1339,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1366,7 +1377,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1491,7 +1503,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1532,7 +1545,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1569,7 +1583,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1705,7 +1720,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1746,7 +1762,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1783,7 +1800,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1905,7 +1923,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1946,7 +1965,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -1983,7 +2003,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2111,7 +2132,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2152,7 +2174,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2189,7 +2212,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2311,7 +2335,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2352,7 +2377,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2389,7 +2415,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2517,7 +2544,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2558,7 +2586,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2595,7 +2624,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2728,7 +2758,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2769,7 +2800,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2806,7 +2838,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2928,7 +2961,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -2969,7 +3003,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3006,7 +3041,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3134,7 +3170,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3175,7 +3212,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3212,7 +3250,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3342,7 +3381,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3383,7 +3423,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3420,7 +3461,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3545,7 +3587,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3586,7 +3629,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3623,7 +3667,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3748,7 +3793,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3789,7 +3835,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3826,7 +3873,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3951,7 +3999,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -3992,7 +4041,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4029,7 +4079,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4157,7 +4208,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4198,7 +4250,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4235,7 +4288,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4357,7 +4411,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4398,7 +4453,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4435,7 +4491,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4563,7 +4620,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4604,7 +4662,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4641,7 +4700,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4763,7 +4823,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4804,7 +4865,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4841,7 +4903,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -4969,7 +5032,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5010,7 +5074,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5047,7 +5112,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5169,7 +5235,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5210,7 +5277,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5247,7 +5315,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5375,7 +5444,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5416,7 +5486,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5453,7 +5524,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5583,7 +5655,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5624,7 +5697,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5661,7 +5735,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5786,7 +5861,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5827,7 +5903,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5864,7 +5941,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -5989,7 +6067,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6030,7 +6109,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6067,7 +6147,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6192,7 +6273,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6233,7 +6315,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6270,7 +6353,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6398,7 +6482,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6439,7 +6524,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6476,7 +6562,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6598,7 +6685,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6639,7 +6727,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6676,7 +6765,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6804,7 +6894,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6845,7 +6936,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -6882,7 +6974,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7004,7 +7097,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7045,7 +7139,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7082,7 +7177,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7207,7 +7303,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7248,7 +7345,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7285,7 +7383,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7421,7 +7520,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7462,7 +7562,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7499,7 +7600,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7638,7 +7740,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7679,7 +7782,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7716,7 +7820,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7889,7 +7994,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7930,7 +8036,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -7967,7 +8074,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8092,7 +8200,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8133,7 +8242,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8170,7 +8280,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8298,7 +8409,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8339,7 +8451,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8376,7 +8489,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8498,7 +8612,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8539,7 +8654,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8576,7 +8692,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8701,7 +8818,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8742,7 +8860,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8779,7 +8898,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8915,7 +9035,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8956,7 +9077,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -8993,7 +9115,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9115,7 +9238,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9156,7 +9280,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9193,7 +9318,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9321,7 +9447,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9362,7 +9489,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9399,7 +9527,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9521,7 +9650,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9562,7 +9692,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9599,7 +9730,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9727,7 +9859,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9768,7 +9901,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9805,7 +9939,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9938,7 +10073,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -9979,7 +10115,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10016,7 +10153,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10138,7 +10276,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10179,7 +10318,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10216,7 +10356,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10344,7 +10485,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10385,7 +10527,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10422,7 +10565,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10552,7 +10696,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10593,7 +10738,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10630,7 +10776,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10755,7 +10902,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10796,7 +10944,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10833,7 +10982,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10958,7 +11108,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -10999,7 +11150,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11036,7 +11188,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11161,7 +11314,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11202,7 +11356,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11239,7 +11394,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11367,7 +11523,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11408,7 +11565,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11445,7 +11603,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11567,7 +11726,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11608,7 +11768,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11645,7 +11806,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11773,7 +11935,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11814,7 +11977,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11851,7 +12015,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -11973,7 +12138,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12014,7 +12180,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12051,7 +12218,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12179,7 +12347,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12220,7 +12389,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12257,7 +12427,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12379,7 +12550,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12420,7 +12592,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12457,7 +12630,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12585,7 +12759,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12626,7 +12801,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12663,7 +12839,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12793,7 +12970,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12834,7 +13012,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12871,7 +13050,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -12996,7 +13176,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13037,7 +13218,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13074,7 +13256,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13199,7 +13382,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13240,7 +13424,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13277,7 +13462,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13402,7 +13588,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13443,7 +13630,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13480,7 +13668,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13608,7 +13797,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13649,7 +13839,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13686,7 +13877,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13808,7 +14000,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13849,7 +14042,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -13886,7 +14080,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14014,7 +14209,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14055,7 +14251,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14092,7 +14289,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14214,7 +14412,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14255,7 +14454,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14292,7 +14492,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14417,7 +14618,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14458,7 +14660,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14495,7 +14698,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14631,7 +14835,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-225"
+                                  "value": "-225",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14672,7 +14877,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "-115"
+                                  "value": "-115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14709,7 +14915,8 @@
                                 "type": "repeating-linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "115"
+                                  "value": "115",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {
@@ -14807,7 +15014,8 @@
                 "type": "linear-gradient",
                 "orientation": {
                   "type": "angular",
-                  "value": "-225"
+                  "value": "-225",
+                  "unit": "deg"
                 },
                 "colorStops": [
                   {
@@ -14848,7 +15056,8 @@
                 "type": "repeating-linear-gradient",
                 "orientation": {
                   "type": "angular",
-                  "value": "-115"
+                  "value": "-115",
+                  "unit": "deg"
                 },
                 "colorStops": [
                   {
@@ -14885,7 +15094,8 @@
                 "type": "repeating-linear-gradient",
                 "orientation": {
                   "type": "angular",
-                  "value": "115"
+                  "value": "115",
+                  "unit": "deg"
                 },
                 "colorStops": [
                   {
@@ -16049,7 +16259,8 @@
                 "type": "linear-gradient",
                 "orientation": {
                   "type": "angular",
-                  "value": "45"
+                  "value": "45",
+                  "unit": "deg"
                 },
                 "colorStops": [
                   {
@@ -16112,7 +16323,8 @@
                                 "type": "linear-gradient",
                                 "orientation": {
                                   "type": "angular",
-                                  "value": "45"
+                                  "value": "45",
+                                  "unit": "deg"
                                 },
                                 "colorStops": [
                                   {

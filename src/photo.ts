@@ -66,20 +66,37 @@ export function drawPhoto(
 
   ctx.save();
 
-  // create rounded path
-  const roundedRectPath = createSmoothRoundRect(
-    renderer,
-    containerWidth,
-    containerHeight,
-    parseRadius(
-      props.cornerRadius ?? [0],
-      Math.min(containerWidth, containerHeight),
-    ),
-    props.cornerSmoothing,
-  );
+  // create clip path — custom SVG path or default rounded rect
+  const clipShape =
+    props.clipPath != null
+      ? new renderer.Path2D(props.clipPath)
+      : createSmoothRoundRect(
+          renderer,
+          containerWidth,
+          containerHeight,
+          parseRadius(
+            props.cornerRadius ?? [0],
+            Math.min(containerWidth, containerHeight),
+          ),
+          props.cornerSmoothing,
+        );
+
+  const roundedRectPath =
+    props.clipPath != null
+      ? createSmoothRoundRect(
+          renderer,
+          containerWidth,
+          containerHeight,
+          parseRadius(
+            props.cornerRadius ?? [0],
+            Math.min(containerWidth, containerHeight),
+          ),
+          props.cornerSmoothing,
+        )
+      : clipShape;
 
   ctx.translate(x, y);
-  ctx.clip(roundedRectPath);
+  ctx.clip(clipShape);
   ctx.translate(-x, -y);
 
   // render layout props

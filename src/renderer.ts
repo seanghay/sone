@@ -998,6 +998,16 @@ export async function compile<T extends SoneNode>(
       return item;
     });
 
+    // compile clip image if present
+    if (node.props.clipImage != null) {
+      node.props.clipImage = (await compile(node.props.clipImage, {
+        defaultTextProps,
+        loadImage,
+        breakIterator,
+        createId,
+      })) as PhotoNode;
+    }
+
     return node;
   }
 
@@ -1841,7 +1851,35 @@ export function drawOnCanvas(
       // draw text
       if (node.type === "text") {
         drawLayoutNode(renderer, ctx, node, layout, x, y);
-        drawTextNode(renderer, ctx, node, layout, x, y);
+
+        if (node.props.clipImage?.props?.image != null) {
+          const w = Math.ceil(layout.getComputedWidth());
+          const h = Math.ceil(layout.getComputedHeight());
+          const dpr = renderer.dpr ?? 1;
+          const offCanvas = renderer.createCanvas(
+            Math.ceil(w * dpr),
+            Math.ceil(h * dpr),
+            1,
+          );
+          const offCtx = offCanvas.getContext("2d") as CanvasRenderingContext2D;
+          offCtx.scale(dpr, dpr);
+
+          // Draw text onto offscreen (without clipImage to avoid recursion)
+          const savedClipImage = node.props.clipImage;
+          node.props.clipImage = undefined;
+          drawTextNode(renderer, offCtx, node, layout, 0, 0);
+          node.props.clipImage = savedClipImage;
+
+          // Composite image over text shape
+          offCtx.globalCompositeOperation = "source-atop";
+          drawPhoto(renderer, offCtx, node.props.clipImage, layout, 0, 0);
+          offCtx.globalCompositeOperation = "source-over";
+
+          // Blit result to main canvas
+          ctx.drawImage(offCanvas as unknown as HTMLImageElement, x, y, w, h);
+        } else {
+          drawTextNode(renderer, ctx, node, layout, x, y);
+        }
         return;
       }
 
@@ -2583,7 +2621,24 @@ export function drawPathNode(
   }
 
   if (props.fill != null) {
-    ctx.fillStyle = props.fill;
+    if (isColor(props.fill)) {
+      ctx.fillStyle = props.fill;
+    } else {
+      // Gradient fill — compute dimensions from path bounds after transforms
+      const [left, top, right, bottom] = props.bounds ?? [0, 0, 100, 100];
+      const scale = props.scalePath ?? 1;
+      const w = (right - left) * scale;
+      const h = (bottom - top) * scale;
+      const fills = createGradientFillStyleList(
+        ctx,
+        parse(props.fill),
+        0,
+        0,
+        w,
+        h,
+      );
+      if (fills.length > 0) ctx.fillStyle = fills[0];
+    }
 
     if (props.fillOpacity != null) {
       const currentAlpha = ctx.globalAlpha;

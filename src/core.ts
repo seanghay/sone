@@ -341,6 +341,9 @@ export interface PhotoProps extends LayoutProps {
 
   /** resolved image (set during compilation) */
   image?: HTMLImageElement;
+
+  /** SVG path string to clip the image (path coords relative to photo top-left) */
+  clipPath?: string;
 }
 
 export interface PhotoPropsBuilder<T>
@@ -359,6 +362,7 @@ export interface PhotoPropsBuilder<T>
   flipHorizontal(value?: Required<PhotoProps["flipHorizontal"]>): T;
   flipVertical(value?: Required<PhotoProps["flipVertical"]>): T;
   fill(value: Required<PhotoProps["fill"]>): T;
+  clipPath(value: string): T;
 }
 
 /**
@@ -441,6 +445,9 @@ export interface TextProps extends SpanProps, LayoutProps {
   /** text orientation in degrees — affects layout dimensions */
   orientation?: 0 | 90 | 180 | 270;
 
+  /** image to display through text letterforms (clip-image effect) */
+  clipImage?: PhotoNode;
+
   /** resolved paragraph (internal) */
   blocks?: SoneParagraphBlock[];
 }
@@ -515,6 +522,7 @@ export interface TextPropsBuilder<T>
   tabStops(...values: number[]): T;
   autofit(value?: Required<TextProps["autofit"]>): T;
   orientation(value: 0 | 90 | 180 | 270): T;
+  clipImage(value: PhotoNode): T;
 }
 
 /**
@@ -1144,6 +1152,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.orientation = value;
       return this as unknown as T;
     },
+    clipImage(value: PhotoNode): T {
+      props.clipImage = value;
+      return this as unknown as T;
+    },
     props,
   };
 }
@@ -1342,6 +1354,10 @@ export function Photo(src: string | Uint8Array): PhotoNode {
     },
     fill(value) {
       props.fill = value;
+      return this;
+    },
+    clipPath(value: string) {
+      props.clipPath = value;
       return this;
     },
   };

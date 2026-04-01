@@ -22,9 +22,9 @@
 - [x] Table Column Span, Row Span
 - [x] Improve Line Breaking Algorithm
 - [ ] Polygon Shape
-- [ ] SVG Color Fill
+- [x] SVG Color Fill
 - [ ] Mask
-- [ ] Image Clip Mask with Text
+- [x] Image Clip Path with Text
 - [ ] Text Sticker
 - [ ] Browser
 - [ ] Sone Editor

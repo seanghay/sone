@@ -1,0 +1,161 @@
+{
+  "type": "column",
+  "props": {
+    "background": ["#dfe6e9"],
+    "padding": 30
+  },
+  "children": [
+    {
+      "type": "row",
+      "props": {
+        "gap": 20,
+        "flexDirection": "row"
+      },
+      "children": [
+        {
+          "type": "photo",
+          "props": {
+            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+            "width": 150,
+            "height": 150,
+            "clipPath": "M 75 0 L 150 150 L 0 150 Z",
+            "image": {}
+          },
+          "children": [],
+          "x": 30,
+          "y": 30,
+          "width": 150,
+          "height": 150,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          },
+          "padding": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "photo",
+          "props": {
+            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+            "width": 150,
+            "height": 150,
+            "clipPath": "M 75 5 L 95 65 L 150 65 L 105 100 L 120 150 L 75 115 L 30 150 L 45 100 L 0 65 L 55 65 Z",
+            "image": {}
+          },
+          "children": [],
+          "x": 200,
+          "y": 30,
+          "width": 150,
+          "height": 150,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 170,
+            "right": 0
+          },
+          "padding": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        },
+        {
+          "type": "photo",
+          "props": {
+            "src": "/Users/seanghay/Projects/github/sone/test/image/kouprey.jpg",
+            "width": 150,
+            "height": 150,
+            "clipPath": "M 75 0 L 150 75 L 75 150 L 0 75 Z",
+            "image": {}
+          },
+          "children": [],
+          "x": 370,
+          "y": 30,
+          "width": 150,
+          "height": 150,
+          "position": {
+            "top": 0,
+            "bottom": 0,
+            "left": 340,
+            "right": 0
+          },
+          "padding": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "margin": {
+            "top": 0,
+            "left": 0,
+            "right": 0,
+            "bottom": 0
+          }
+        }
+      ],
+      "x": 30,
+      "y": 30,
+      "width": 490,
+      "height": 150,
+      "position": {
+        "top": 30,
+        "bottom": 0,
+        "left": 30,
+        "right": 0
+      },
+      "padding": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "margin": {
+        "top": 0,
+        "left": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "width": 550,
+  "height": 210,
+  "position": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "padding": {
+    "top": 30,
+    "left": 30,
+    "right": 30,
+    "bottom": 30
+  },
+  "margin": {
+    "top": 0,
+    "left": 0,
+    "right": 0,
+    "bottom": 0
+  }
+}
