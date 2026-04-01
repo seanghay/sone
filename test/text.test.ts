@@ -266,6 +266,84 @@ test("createParagraph drops leading wrap whitespace on the next line", async () 
   );
 });
 
+test("createParagraph keeps word-joined spans intact when wrapping", () => {
+  const cases = [
+    {
+      text: "Alpha\u2060 Beta Gamma",
+      firstLine: "Alpha\u2060 Beta",
+    },
+    {
+      text: "Alpha \u2060Beta Gamma",
+      firstLine: "Alpha \u2060Beta",
+    },
+    {
+      text: "Alpha \u2060 Beta Gamma",
+      firstLine: "Alpha \u2060 Beta",
+    },
+  ];
+
+  for (const lineBreak of [undefined, "greedy", "knuth-plass"] as const) {
+    for (const { text, firstLine } of cases) {
+      const props = textProps({
+        font: ["GeistMono"],
+        lineBreak,
+        size: 20,
+      });
+      const maxWidth = renderer.measureText(firstLine, props).width + 1;
+      const paragraph = createParagraph(
+        [text],
+        maxWidth,
+        props,
+        renderer.measureText,
+        renderer.breakIterator,
+      )[0].paragraph;
+
+      expect(getLineTexts(paragraph)).toEqual([firstLine, "Gamma"]);
+    }
+  }
+});
+
+test("createParagraph keeps non-breaking spaces intact when wrapping", () => {
+  const cases = [
+    {
+      text: "Alpha\u00a0Beta Gamma",
+      firstLine: "Alpha\u00a0Beta",
+    },
+    {
+      text: "Alpha\u00a0 Beta Gamma",
+      firstLine: "Alpha\u00a0 Beta",
+    },
+    {
+      text: "Alpha \u00a0Beta Gamma",
+      firstLine: "Alpha \u00a0Beta",
+    },
+    {
+      text: "Alpha \u00a0 Beta Gamma",
+      firstLine: "Alpha \u00a0 Beta",
+    },
+  ];
+
+  for (const lineBreak of [undefined, "greedy", "knuth-plass"] as const) {
+    for (const { text, firstLine } of cases) {
+      const props = textProps({
+        font: ["GeistMono"],
+        lineBreak,
+        size: 20,
+      });
+      const maxWidth = renderer.measureText(firstLine, props).width + 1;
+      const paragraph = createParagraph(
+        [text],
+        maxWidth,
+        props,
+        renderer.measureText,
+        renderer.breakIterator,
+      )[0].paragraph;
+
+      expect(getLineTexts(paragraph)).toEqual([firstLine, "Gamma"]);
+    }
+  }
+});
+
 test("createParagraph honors nowrap under constrained width", () => {
   const blocks = createParagraph(
     ["AAAA AAAA AAAA AAAA"],
