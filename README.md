@@ -5,6 +5,9 @@
 [![Tests](https://github.com/seanghay/sone/actions/workflows/tests.yaml/badge.svg)](https://github.com/seanghay/sone/actions/workflows/tests.yaml)
 [![install size](https://packagephobia.com/badge?p=sone)](https://packagephobia.com/result?p=sone)
 
+
+### Why Sone.js?
+
 - Declarative API
 - Flex Layout
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
