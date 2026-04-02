@@ -214,8 +214,10 @@ async function composite(
   ctx.fillText(`Δh = ${delta}px`, PAD, totalH - PAD - 4);
 
   const outPath = path.join(OUT_DIR, `lineheight-compare-${slug}.png`);
-  // @ts-expect-error skia-canvas buffer API
-  await fs.writeFile(outPath, await canvas.toBuffer("png", { density: 1 }));
+  await fs.writeFile(
+    outPath,
+    await (canvas as any).toBuffer("png", { density: 1 }),
+  );
   console.log(`  saved ${path.basename(outPath)}  (Δh=${delta}px)`);
 }
 

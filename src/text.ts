@@ -286,10 +286,7 @@ function recomputeFinalizedLine(
   line.height = lineAbove + lineBelow - lineOffsetMin + lineOffsetMax;
 }
 
-function recomputeParagraphMetrics(
-  paragraph: SoneParagraph,
-  baseProps: TextProps,
-) {
+function recomputeParagraphMetrics(paragraph: SoneParagraph) {
   paragraph.width = 0;
   paragraph.height = 0;
 
@@ -307,22 +304,6 @@ function recomputeParagraphMetrics(
   }
 
   paragraph.offsetY = 0;
-  if (
-    paragraph.lines.length > 0 &&
-    baseProps.lineHeight != null &&
-    !Number.isNaN(baseProps.lineHeight)
-  ) {
-    const lh = Math.max(0, baseProps.lineHeight - 1);
-    for (const segment of paragraph.lines[0].segments) {
-      const m = segment.metrics;
-      const value =
-        -((m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2) * lh;
-
-      if (value < paragraph.offsetY) {
-        paragraph.offsetY = value;
-      }
-    }
-  }
 }
 
 function trimTrailingSegments(
@@ -501,7 +482,7 @@ function applyTextOverflow(
     );
   }
 
-  recomputeParagraphMetrics(paragraph, baseProps);
+  recomputeParagraphMetrics(paragraph);
 }
 
 function finalizeParagraph(
