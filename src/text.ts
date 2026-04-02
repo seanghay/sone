@@ -1296,8 +1296,7 @@ export function drawTextNode(
             ctx.fillStyle = segment.props.underlineColor ?? segment.props.color;
           }
 
-          const underlineHeight =
-            (segment.height * segment.props.underline) / 18;
+          const underlineHeight = segment.props.size! * 0.08;
 
           ctx.fillRect(
             textX,
@@ -1316,7 +1315,8 @@ export function drawTextNode(
             ctx.fillStyle = segment.props.overlineColor ?? segment.props.color;
           }
 
-          const overlineHeight = (segment.height * segment.props.overline) / 18;
+          const overlineHeight = segment.props.size! * 0.08;
+
           ctx.fillRect(
             textX,
             textY - segment.metrics.fontBoundingBoxAscent,
@@ -1399,8 +1399,7 @@ export function drawTextNode(
               segment.props.lineThroughColor ?? segment.props.color;
           }
 
-          const lineThroughHeight =
-            (segment.height * segment.props.lineThrough) / 18;
+          const lineThroughHeight = segment.props.size! * 0.08;
 
           ctx.fillRect(
             textX,
