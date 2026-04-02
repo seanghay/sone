@@ -80,7 +80,7 @@ const root = Column(
     ),
     card(
       "unclamped-reference",
-      Text("Reference:\n" + latin)
+      Text(`Reference:\n${latin}`)
         .font("GeistMono")
         .size(20)
         .width(260)

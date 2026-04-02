@@ -1720,7 +1720,8 @@ export interface ClipGroupProps extends LayoutProps {
 /**
  * A layout container that clips all its children to an arbitrary SVG path shape.
  */
-export interface ClipGroupNode extends LayoutPropsBuilder<ClipGroupNode> {
+export interface ClipGroupNode
+  extends LayoutPropsBuilder<ClipGroupNode, ClipGroupProps> {
   id: number;
   type: "clip-group";
   children: SoneNode[];

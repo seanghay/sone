@@ -321,7 +321,8 @@ async function renderSone(
   if (lineHeight !== "default") node = node.lineHeight(lineHeight);
 
   const { canvas } = await sone(node).canvasWithMetadata();
-  return (canvas as any).toBuffer("png", { density: 1 });
+  // @ts-expect-error skia-canvas toBuffer not in HTMLCanvasElement types
+  return (canvas as HTMLCanvasElement).toBuffer("png", { density: 1 });
 }
 
 // ─── composite helper ──────────────────────────────────────────────────────────
@@ -393,7 +394,8 @@ async function composite(
   const outPath = path.join(OUT_DIR, `lineheight-compare-${slug}.png`);
   await fs.writeFile(
     outPath,
-    await (canvas as any).toBuffer("png", { density: 1 }),
+    // @ts-expect-error skia-canvas toBuffer not in HTMLCanvasElement types
+    await (canvas as HTMLCanvasElement).toBuffer("png", { density: 1 }),
   );
   console.log(`  saved ${path.basename(outPath)}  (Δh=${delta}px)`);
 }
