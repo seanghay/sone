@@ -20,8 +20,8 @@ export function drawPhoto(
   const containerHeight = layout.getComputedHeight();
   const scaleType = node.props.scaleType ?? "fill";
 
-  let sourceWidth = image.width;
-  let sourceHeight = image.height;
+  const sourceWidth = image.width;
+  const sourceHeight = image.height;
   let destX = x;
   let destY = y;
   let destWidth = containerWidth;
@@ -37,15 +37,11 @@ export function drawPhoto(
       if (imageRatio > containerRatio) {
         // Image is wider than container (relatively)
         const newWidth = (image.width * containerHeight) / image.height;
-        sourceWidth = image.width;
-        sourceHeight = image.height;
         destWidth = newWidth;
         destHeight = containerHeight;
         destX = x + (containerWidth - newWidth) * alignment;
       } else {
         const newHeight = (image.height * containerWidth) / image.width;
-        sourceWidth = image.width;
-        sourceHeight = image.height;
         destWidth = containerWidth;
         destHeight = newHeight;
         destY = y + (containerHeight - newHeight) * alignment;
@@ -67,33 +63,21 @@ export function drawPhoto(
   ctx.save();
 
   // create clip path — custom SVG path or default rounded rect
+  const roundedRectPath = createSmoothRoundRect(
+    renderer,
+    containerWidth,
+    containerHeight,
+    parseRadius(
+      props.cornerRadius ?? [0],
+      Math.min(containerWidth, containerHeight),
+    ),
+    props.cornerSmoothing,
+  );
+
   const clipShape =
     props.clipPath != null
       ? new renderer.Path2D(props.clipPath)
-      : createSmoothRoundRect(
-          renderer,
-          containerWidth,
-          containerHeight,
-          parseRadius(
-            props.cornerRadius ?? [0],
-            Math.min(containerWidth, containerHeight),
-          ),
-          props.cornerSmoothing,
-        );
-
-  const roundedRectPath =
-    props.clipPath != null
-      ? createSmoothRoundRect(
-          renderer,
-          containerWidth,
-          containerHeight,
-          parseRadius(
-            props.cornerRadius ?? [0],
-            Math.min(containerWidth, containerHeight),
-          ),
-          props.cornerSmoothing,
-        )
-      : clipShape;
+      : roundedRectPath;
 
   ctx.translate(x, y);
   ctx.clip(clipShape);

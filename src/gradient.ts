@@ -81,20 +81,15 @@ function getColorsAndLocations(
   colorStops: ColorStop[],
   maxWidth?: number,
 ): ColorsAndLocations {
-  return colorStops.reduce(
-    (acc, color, index) => {
-      acc.colors = [...acc.colors, getColor(color)];
-      const locationValue = getPixelsForColor(
-        color,
-        colorStops.length,
-        index,
-        maxWidth,
-      );
-      acc.locations = [...acc.locations, locationValue];
-      return acc;
-    },
-    { colors: [], locations: [] } as ColorsAndLocations,
-  );
+  const colors: string[] = [];
+  const locations: number[] = [];
+  for (let i = 0; i < colorStops.length; i++) {
+    colors.push(getColor(colorStops[i]!));
+    locations.push(
+      getPixelsForColor(colorStops[i]!, colorStops.length, i, maxWidth),
+    );
+  }
+  return { colors, locations };
 }
 
 function getRepeatingColorsAndLocations(
@@ -105,7 +100,7 @@ function getRepeatingColorsAndLocations(
   const { colors: initialColors, locations: initialLocations } =
     getColorsAndLocations(colorStops, maxWidth);
 
-  const t = initialLocations.slice(-1)[0];
+  const t = initialLocations[initialLocations.length - 1];
   const maxValue = typeof t === "number" ? t : Number.parseFloat(t);
   if (!maxValue || !Number.isFinite(maxValue))
     return { colors: [], locations: [] };

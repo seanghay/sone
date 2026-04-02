@@ -2,6 +2,8 @@ let segmenter: Intl.Segmenter | null = null;
 
 const END_SYM = "។៕)]?!»៖$រៗ%,;:";
 const START_SYM = "([«$#@";
+const END_SYM_SET = new Set([...END_SYM]);
+const START_SYM_SET = new Set([...START_SYM]);
 const NON_BREAKING_SPACE = "\u00a0";
 const WORD_JOINER = "\u2060";
 const GLUE_CHARACTERS = new Set([NON_BREAKING_SPACE, WORD_JOINER]);
@@ -76,9 +78,9 @@ export function* defaultLineBreakerIterator(
     if (segment.segment.endsWith("\u17d2")) continue;
     if (protectedBoundaries.has(segment.index)) continue;
     const next = text[segment.index];
-    if (next !== undefined && END_SYM.indexOf(next) !== -1) continue;
+    if (next !== undefined && END_SYM_SET.has(next)) continue;
     const prev = text[segment.index - 1];
-    if (prev !== undefined && START_SYM.indexOf(prev) !== -1) continue;
+    if (prev !== undefined && START_SYM_SET.has(prev)) continue;
     yield segment.index;
   }
 }

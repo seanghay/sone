@@ -1,5 +1,4 @@
 import { dequal } from "dequal";
-import { klona } from "klona";
 import { Edge, type Node } from "yoga-layout/load";
 import type { SpanNode, SpanProps, TextNode, TextProps } from "./core.ts";
 import { createGradientFillStyleList } from "./gradient.ts";
@@ -7,8 +6,11 @@ import type { SoneRenderer } from "./renderer.ts";
 import { applySpanProps, indicesOf, isWhitespace } from "./utils.ts";
 
 function countSpaces(value: string): number {
-  const matches = value.match(/ /g);
-  return matches == null ? 0 : matches.length;
+  let count = 0;
+  for (let i = 0; i < value.length; i++) {
+    if (value[i] === " ") count++;
+  }
+  return count;
 }
 
 function nextTabStop(tabStops: number[], currentX: number): number {
@@ -926,9 +928,7 @@ export function createBlocks(
       if (typeof span === "string") {
         blocks[blocks.length - 1].push(textChunk);
       } else {
-        const cloned = klona(span);
-        cloned.children = textChunk;
-        blocks[blocks.length - 1].push(cloned);
+        blocks[blocks.length - 1].push({ ...span, children: textChunk });
       }
 
       if (i < indices.length - 1) blocks.push([]);

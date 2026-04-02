@@ -14,7 +14,7 @@ export interface CssShadowProperties {
 function parseValue(str: string): CssShadowProperties {
   const parts = str.split(PARTS_REG);
   const inset = parts.includes("inset");
-  const last = parts.slice(-1)[0];
+  const last = parts[parts.length - 1];
   const color = !isLength(last) ? last : undefined;
 
   const nums = parts

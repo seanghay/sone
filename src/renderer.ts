@@ -1050,14 +1050,11 @@ export async function compile<T extends SoneNode>(
         ? Text((listStyle as (index: number) => SpanNode)(itemIndex))
         : isSpanMarker
           ? (() => {
-              const cloned = klona(listStyle as SpanNode);
-              if (cloned.children.includes("{}")) {
-                cloned.children = cloned.children.replace(
-                  "{}",
-                  `${startIndex + itemIndex}`,
-                );
-              }
-              return Text(cloned);
+              const ls = listStyle as SpanNode;
+              const children = ls.children.includes("{}")
+                ? ls.children.replace("{}", `${startIndex + itemIndex}`)
+                : ls.children;
+              return Text({ ...ls, children });
             })()
           : Text(
               resolveMarker(
