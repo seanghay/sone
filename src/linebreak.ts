@@ -1,11 +1,18 @@
 let segmenter: Intl.Segmenter | null = null;
 
-const END_SYM = "។៕)]?!»៖$រៗ%";
-const START_SYM = "([«$";
+const END_SYM = "។៕)]?!»៖$រៗ%,;:";
+const START_SYM = "([«$#@";
 const NON_BREAKING_SPACE = "\u00a0";
 const WORD_JOINER = "\u2060";
 const GLUE_CHARACTERS = new Set([NON_BREAKING_SPACE, WORD_JOINER]);
 const INLINE_WHITESPACE = /[^\S\r\n]/u;
+
+// Absolute URLs (http/https/ftp) and bare www. URLs
+const URL_PATTERN =
+  /(?:https?|ftp):\/\/[^\s<>"{}|\\^`[\]]+|www\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+(?:[^\s<>"{}|\\^`[\]]*)/gu;
+
+// Digit–separator–digit: protects hyphens/dots between digit groups (e.g. phone numbers)
+const PHONE_SEP_PATTERN = /\d[-.\u2010\u2011\u2012\u2013]\d/gu;
 
 function isInlineWhitespace(value: string | undefined): boolean {
   return value != null && INLINE_WHITESPACE.test(value);
@@ -14,6 +21,7 @@ function isInlineWhitespace(value: string | undefined): boolean {
 function collectProtectedBoundaries(text: string): Set<number> {
   const boundaries = new Set<number>();
 
+  // Glue characters: non-breaking space and word joiner
   for (let index = 0; index < text.length; index++) {
     if (!GLUE_CHARACTERS.has(text[index]!)) continue;
 
@@ -32,6 +40,23 @@ function collectProtectedBoundaries(text: string): Set<number> {
     }
   }
 
+  // URLs: protect all internal positions; leave the start and end open
+  // so text can still wrap before or after the URL.
+  for (const match of text.matchAll(URL_PATTERN)) {
+    const start = match.index!;
+    const end = start + match[0].length;
+    for (let pos = start + 1; pos < end; pos++) {
+      boundaries.add(pos);
+    }
+  }
+
+  // Phone number separators: protect digit–separator–digit sequences so
+  // "123-4567" and "123.456" are never broken at the separator.
+  for (const match of text.matchAll(PHONE_SEP_PATTERN)) {
+    boundaries.add(match.index! + 1);
+    boundaries.add(match.index! + 2);
+  }
+
   return boundaries;
 }
 
@@ -44,16 +69,12 @@ export function* defaultLineBreakerIterator(
     });
   }
 
-  const protectedBoundaries = Array.from(GLUE_CHARACTERS).some((char) =>
-    text.includes(char),
-  )
-    ? collectProtectedBoundaries(text)
-    : null;
+  const protectedBoundaries = collectProtectedBoundaries(text);
 
   for (const segment of segmenter.segment(text)) {
     // Skip Khmer subscript characters
     if (segment.segment.endsWith("\u17d2")) continue;
-    if (protectedBoundaries?.has(segment.index)) continue;
+    if (protectedBoundaries.has(segment.index)) continue;
     const next = text[segment.index];
     if (next !== undefined && END_SYM.indexOf(next) !== -1) continue;
     const prev = text[segment.index - 1];
