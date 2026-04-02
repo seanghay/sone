@@ -1846,19 +1846,27 @@ export async function renderWithMetadata<T = HTMLCanvasElement>(
     config,
   );
 
-  // render
-  const canvas = renderer.createCanvas(
-    layout.getComputedWidth(),
-    layout.getComputedHeight(),
-  );
+  try {
+    // render
+    const canvas = renderer.createCanvas(
+      layout.getComputedWidth(),
+      layout.getComputedHeight(),
+    );
 
-  drawOnCanvas(canvas, compiledNode, renderer, layout, config) as unknown as T;
+    drawOnCanvas(
+      canvas,
+      compiledNode,
+      renderer,
+      layout,
+      config,
+    ) as unknown as T;
 
-  const metadata = createMetadata(compiledNode, layout);
-  layout.freeRecursive();
-  freeGridLayouts(compiledNode);
-
-  return { canvas, metadata };
+    const metadata = createMetadata(compiledNode, layout);
+    return { canvas, metadata };
+  } finally {
+    layout.freeRecursive();
+    freeGridLayouts(compiledNode);
+  }
 }
 
 export function drawOnCanvas(
@@ -1923,8 +1931,11 @@ export function drawOnCanvas(
           // Draw text onto offscreen (without clipImage to avoid recursion)
           const savedClipImage = node.props.clipImage;
           node.props.clipImage = undefined;
-          drawTextNode(renderer, offCtx, node, layout, 0, 0);
-          node.props.clipImage = savedClipImage;
+          try {
+            drawTextNode(renderer, offCtx, node, layout, 0, 0);
+          } finally {
+            node.props.clipImage = savedClipImage;
+          }
 
           // Composite image over text shape
           offCtx.globalCompositeOperation = "source-atop";
@@ -2449,14 +2460,17 @@ export async function render<T = HTMLCanvasElement>(
     renderer,
     config,
   );
-  const canvas = renderer.createCanvas(
-    layout.getComputedWidth(),
-    layout.getComputedHeight(),
-  );
-  drawOnCanvas(canvas, compiledNode, renderer, layout, config);
-  layout.freeRecursive();
-  freeGridLayouts(compiledNode);
-  return canvas as unknown as T;
+  try {
+    const canvas = renderer.createCanvas(
+      layout.getComputedWidth(),
+      layout.getComputedHeight(),
+    );
+    drawOnCanvas(canvas, compiledNode, renderer, layout, config);
+    return canvas as unknown as T;
+  } finally {
+    layout.freeRecursive();
+    freeGridLayouts(compiledNode);
+  }
 }
 
 /**

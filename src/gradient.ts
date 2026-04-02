@@ -57,9 +57,11 @@ function getPixelsForColor(
   colorsLength: number,
   index: number,
   maxWidth?: number,
-) {
+): number {
   const { length } = color;
-  if (!length) return (1 / (colorsLength - 1)) * index;
+  if (!length) {
+    return colorsLength <= 1 ? 0 : (1 / (colorsLength - 1)) * index;
+  }
   if (length.type === "px") return Number.parseFloat(length.value);
   if (length.type === "%") {
     if (maxWidth) {
@@ -67,6 +69,7 @@ function getPixelsForColor(
     }
     return Number(length.value) / 100;
   }
+  return 0;
 }
 
 interface ColorsAndLocations {
@@ -87,7 +90,7 @@ function getColorsAndLocations(
         index,
         maxWidth,
       );
-      acc.locations = [...acc.locations, locationValue!];
+      acc.locations = [...acc.locations, locationValue];
       return acc;
     },
     { colors: [], locations: [] } as ColorsAndLocations,
@@ -104,6 +107,8 @@ function getRepeatingColorsAndLocations(
 
   const t = initialLocations.slice(-1)[0];
   const maxValue = typeof t === "number" ? t : Number.parseFloat(t);
+  if (!maxValue || !Number.isFinite(maxValue))
+    return { colors: [], locations: [] };
   const increment = maxValue / maxWidth;
   const maxChunks = Math.round(maxWidth / maxValue);
 
