@@ -623,6 +623,7 @@ export type SoneNode =
   | TableCellNode
   | ListNode
   | ListItemNode
+  | ClipGroupNode
   | null
   | undefined;
 
@@ -1705,5 +1706,52 @@ export function ListItem(...children: SoneNode[]): ListItemNode {
     type: "list-item",
     children,
     ...layoutPropsBuilder<ListItemNode>(),
+  };
+}
+
+/**
+ * Layout props for a clip-group container
+ */
+export interface ClipGroupProps extends LayoutProps {
+  /** SVG path data that defines the clip region for all children */
+  clipPath?: string;
+}
+
+/**
+ * A layout container that clips all its children to an arbitrary SVG path shape.
+ */
+export interface ClipGroupNode extends LayoutPropsBuilder<ClipGroupNode> {
+  id: number;
+  type: "clip-group";
+  children: SoneNode[];
+  /** Update the clip path after construction */
+  clipPath(value: string): ClipGroupNode;
+}
+
+/**
+ * Creates a layout container that clips all children to an SVG path shape.
+ * Useful for shape-masked composites: photo collages, custom avatar frames, etc.
+ * @param path - SVG path string defining the clip region (coordinates relative to the node's top-left corner)
+ * @param children - content nodes rendered inside the clip
+ * @example
+ * ClipGroup("M 75 0 L 150 150 L 0 150 Z",
+ *   Photo(img).size(150, 150),
+ * ).size(150, 150)
+ */
+export function ClipGroup(
+  path: string,
+  ...children: SoneNode[]
+): ClipGroupNode {
+  const props: ClipGroupProps = { clipPath: path };
+  return {
+    id: -1,
+    type: "clip-group",
+    children,
+    ...layoutPropsBuilder<ClipGroupNode>(props),
+    props,
+    clipPath(value: string) {
+      props.clipPath = value;
+      return this;
+    },
   };
 }

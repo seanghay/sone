@@ -13,6 +13,7 @@ import {
   type Yoga as YogaLayout,
 } from "yoga-layout/load";
 import {
+  type ClipGroupNode,
   type ColorValue,
   Column,
   type ColumnNode,
@@ -1980,6 +1981,19 @@ export function drawOnCanvas(
         return;
       }
 
+      if (node.type === "clip-group") {
+        drawLayoutNode(renderer, ctx, node, layout, x, y);
+        if (node.props.clipPath) {
+          ctx.translate(x, y);
+          ctx.clip(new renderer.Path2D(node.props.clipPath));
+          ctx.translate(-x, -y);
+        }
+        for (const child of getNodeChildren(node, layout)) {
+          draw(child.child, child.layout, x + child.offsetX, y + child.offsetY);
+        }
+        return;
+      }
+
       drawLayoutNode(renderer, ctx, node, layout, x, y);
 
       for (const child of getNodeChildren(node, layout)) {
@@ -2514,7 +2528,8 @@ export function drawLayoutNode(
     | TableRowNode
     | TableCellNode
     | ListNode
-    | ListItemNode,
+    | ListItemNode
+    | ClipGroupNode,
   layout: Node,
   x: number,
   y: number,
