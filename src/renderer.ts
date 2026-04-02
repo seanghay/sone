@@ -1034,7 +1034,12 @@ export async function compile<T extends SoneNode>(
       node.props.flexDirection = "column";
     }
 
-    const { listStyle, startIndex = 1, markerGap = 8 } = node.props;
+    const {
+      listStyle,
+      startIndex = 1,
+      markerGap = 8,
+      listStyleOffset = 0,
+    } = node.props;
     const isFnMarker = typeof listStyle === "function";
     const isSpanMarker =
       !isFnMarker &&
@@ -1064,6 +1069,7 @@ export async function compile<T extends SoneNode>(
               ),
             );
       markerNode.props.nowrap = true;
+      if (listStyleOffset > 0) markerNode.props.paddingLeft = listStyleOffset;
 
       // Propagate lineHeight from the first text content child so the marker
       // baseline aligns with the content's first line.
