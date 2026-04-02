@@ -69,7 +69,7 @@ const root = Column(
       .lineHeight(1.3)
       .rounded(44)
       .cornerSmoothing(0.7)
-      .padding(60, 24)
+      .padding(24, 24)
       .align("justify")
       .indent(64)
       .borderColor("white")

@@ -1064,6 +1064,19 @@ export async function compile<T extends SoneNode>(
               ),
             );
       markerNode.props.nowrap = true;
+
+      // Propagate lineHeight from the first text content child so the marker
+      // baseline aligns with the content's first line.
+      const firstTextChild = child.children.find(
+        (c): c is TextNode =>
+          c?.type === "text" &&
+          c.props.lineHeight != null &&
+          !Number.isNaN(c.props.lineHeight),
+      );
+      if (firstTextChild != null) {
+        markerNode.props.lineHeight = firstTextChild.props.lineHeight;
+      }
+
       itemIndex++;
 
       const contentCol = Column(...child.children).flex(1);
