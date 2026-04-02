@@ -1617,8 +1617,8 @@ export interface ListProps extends LayoutProps {
     | ((index: number) => SpanNode);
   /** Gap between marker and item content (default: 8) */
   markerGap?: number;
-  /** Left offset applied to the marker — indents markers from the left edge of the list (default: 0) */
-  listStyleOffset?: number;
+  /** Top and bottom padding applied to each marker (default: 0) */
+  markerOffset?: number;
   /** Starting number for decimal lists — named startIndex because "start" is taken by LayoutProps (CSS inset-inline-start) */
   startIndex?: number;
 }
@@ -1626,7 +1626,7 @@ export interface ListProps extends LayoutProps {
 export interface ListPropsBuilder<T> extends LayoutPropsBuilder<T, ListProps> {
   listStyle(value: Required<ListProps["listStyle"]>): T;
   markerGap(value: Required<ListProps["markerGap"]>): T;
-  listStyleOffset(value: Required<ListProps["listStyleOffset"]>): T;
+  markerOffset(value: Required<ListProps["markerOffset"]>): T;
   startIndex(value: Required<ListProps["startIndex"]>): T;
 }
 
@@ -1660,8 +1660,8 @@ function listPropsBuilder<T>(props: ListProps = {}): ListPropsBuilder<T> {
       props.markerGap = value;
       return this as unknown as T;
     },
-    listStyleOffset(value) {
-      props.listStyleOffset = value;
+    markerOffset(value) {
+      props.markerOffset = value;
       return this as unknown as T;
     },
     startIndex(value) {
