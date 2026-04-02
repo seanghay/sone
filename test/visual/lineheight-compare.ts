@@ -35,6 +35,10 @@ const notoSansKhmerBase64 = (
   await fs.readFile(relative("../font/NotoSansKhmer.ttf"))
 ).toString("base64");
 
+const moulBase64 = (
+  await fs.readFile(relative("../font/Moul-Regular.ttf"))
+).toString("base64");
+
 // ─── font registry ─────────────────────────────────────────────────────────────
 
 type FontEntry = {
@@ -56,6 +60,12 @@ const FONTS: Record<string, FontEntry> = {
     base64: notoSansKhmerBase64,
     format: "truetype",
     soneName: "NotoSansKhmer",
+  },
+  Moul: {
+    family: "Moul",
+    base64: moulBase64,
+    format: "truetype",
+    soneName: "Moul",
   },
 };
 
@@ -168,6 +178,49 @@ const CASES = [
     fontSize: 32,
     lineHeight: 1.5,
     font: "NotoSansKhmer",
+  },
+  // Khmer / Moul
+  {
+    slug: "moul-single-lh1.2",
+    text: "ភ្នំពេញ",
+    fontSize: 20,
+    lineHeight: 1.2,
+    font: "Moul",
+  },
+  {
+    slug: "moul-single-lh1.5",
+    text: "ភ្នំពេញ",
+    fontSize: 20,
+    lineHeight: 1.5,
+    font: "Moul",
+  },
+  {
+    slug: "moul-multiline-lh1.2",
+    text: "ក្រសួងការពារជាតិ\nកម្ពុជា",
+    fontSize: 20,
+    lineHeight: 1.2,
+    font: "Moul",
+  },
+  {
+    slug: "moul-multiline-lh1.5",
+    text: "ក្រសួងការពារជាតិ\nកម្ពុជា",
+    fontSize: 20,
+    lineHeight: 1.5,
+    font: "Moul",
+  },
+  {
+    slug: "moul-large-lh1.3",
+    text: "សួស្តី\nពិភពលោក",
+    fontSize: 32,
+    lineHeight: 1.3,
+    font: "Moul",
+  },
+  {
+    slug: "moul-large-lh1.5",
+    text: "សួស្តី\nពិភពលោក",
+    fontSize: 32,
+    lineHeight: 1.5,
+    font: "Moul",
   },
 ];
 

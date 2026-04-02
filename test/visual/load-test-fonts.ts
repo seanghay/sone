@@ -10,6 +10,7 @@ export async function loadVisualTestFonts() {
 
   await Font.load("NotoSansKhmer", relative("../font/NotoSansKhmer.ttf"));
   await Font.load("GeistMono", relative("../font/GeistMono-Regular.ttf"));
+  await Font.load("Moul", relative("../font/Moul-Regular.ttf"));
 
   loaded = true;
 }
