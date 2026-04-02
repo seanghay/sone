@@ -1070,8 +1070,8 @@ export async function compile<T extends SoneNode>(
             );
       markerNode.props.nowrap = true;
       if (markerOffset !== 0) {
-        markerNode.props.paddingTop = markerOffset;
-        markerNode.props.paddingBottom = markerOffset;
+        markerNode.props.marginTop = markerOffset;
+        markerNode.props.marginBottom = markerOffset;
       }
 
       // Propagate lineHeight from the first text content child so the marker
