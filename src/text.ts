@@ -254,14 +254,23 @@ function recomputeFinalizedLine(
       ? 1.0
       : baseProps.lineHeight;
 
-  let rawHeight = 0;
-  let rawBaseline = 0;
+  let lineAbove = 0;
+  let lineBelow = 0;
   let lineOffsetMax = 0;
   let lineOffsetMin = Number.POSITIVE_INFINITY;
 
   for (const segment of line.segments) {
-    rawHeight = Math.max(rawHeight, segment.height);
-    rawBaseline = Math.max(rawBaseline, segment.metrics.fontBoundingBoxAscent);
+    const fontSize = segment.props.size ?? baseProps.size ?? 16;
+    const lineBoxH = fontSize * lineMultiplier;
+    const halfLeading = (lineBoxH - segment.height) / 2;
+    lineAbove = Math.max(
+      lineAbove,
+      halfLeading + segment.metrics.fontBoundingBoxAscent,
+    );
+    lineBelow = Math.max(
+      lineBelow,
+      halfLeading + segment.metrics.fontBoundingBoxDescent,
+    );
     const offset = segment.props.offsetY ?? 0;
     if (offset > lineOffsetMax) lineOffsetMax = offset;
     if (offset < lineOffsetMin) lineOffsetMin = offset;
@@ -273,8 +282,8 @@ function recomputeFinalizedLine(
 
   line.width =
     lineIndentWidth(index, baseProps) + segmentTextWidth(line.segments);
-  line.baseline = rawBaseline * lineMultiplier - lineOffsetMin;
-  line.height = rawHeight * lineMultiplier - lineOffsetMin + lineOffsetMax;
+  line.baseline = lineAbove - lineOffsetMin;
+  line.height = lineAbove + lineBelow - lineOffsetMin + lineOffsetMax;
 }
 
 function recomputeParagraphMetrics(
@@ -505,32 +514,44 @@ function finalizeParagraph(
       ? 1.0
       : baseProps.lineHeight;
 
-  let linePosition = 0;
-  for (const line of lines) {
+  for (let linePosition = 0; linePosition < lines.length; linePosition++) {
+    const line = lines[linePosition]!;
     trimTrailingWhitespace(line, measureText);
-    line.baseline *= lineMultiplier;
-    line.height *= lineMultiplier;
 
+    let lineAbove = 0;
+    let lineBelow = 0;
     let lineOffsetMax = 0;
     let lineOffsetMin = Number.POSITIVE_INFINITY;
 
     for (const segment of line.segments) {
+      const fontSize = segment.props.size ?? baseProps.size ?? 16;
+      const lineBoxH = fontSize * lineMultiplier;
+      const halfLeading = (lineBoxH - segment.height) / 2;
+      lineAbove = Math.max(
+        lineAbove,
+        halfLeading + segment.metrics.fontBoundingBoxAscent,
+      );
+      lineBelow = Math.max(
+        lineBelow,
+        halfLeading + segment.metrics.fontBoundingBoxDescent,
+      );
       const offset = segment.props.offsetY ?? 0;
       if (offset > lineOffsetMax) lineOffsetMax = offset;
       if (offset < lineOffsetMin) lineOffsetMin = offset;
     }
 
-    line.baseline -= lineOffsetMin;
-    line.height -= lineOffsetMin;
-    line.height += lineOffsetMax;
+    if (lineOffsetMin === Number.POSITIVE_INFINITY) {
+      lineOffsetMin = 0;
+    }
+
+    line.baseline = lineAbove - lineOffsetMin;
+    line.height = lineAbove + lineBelow - lineOffsetMin + lineOffsetMax;
 
     if (linePosition < lines.length - 1) {
       for (const segment of line.segments) {
         line.spacesCount += countSpaces(segment.text);
       }
     }
-
-    linePosition++;
   }
 
   let totalHeight = 0;
@@ -541,29 +562,11 @@ function finalizeParagraph(
     maxLineWidth = Math.max(maxLineWidth, line.width);
   }
 
-  let offsetY = 0;
-  if (
-    lines.length > 0 &&
-    baseProps.lineHeight != null &&
-    !Number.isNaN(baseProps.lineHeight)
-  ) {
-    const lh = Math.max(0, baseProps.lineHeight - 1);
-    for (const segment of lines[0].segments) {
-      const m = segment.metrics;
-      const value =
-        -((m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2) * lh;
-
-      if (value < offsetY) {
-        offsetY = value;
-      }
-    }
-  }
-
   return {
     width: maxLineWidth,
     height: totalHeight,
     lines,
-    offsetY,
+    offsetY: 0,
   };
 }
 
