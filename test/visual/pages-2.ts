@@ -9,7 +9,6 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const INK = "#0f172a";
 const MUTED = "#64748b";
 const ACCENT = "#2563eb";
-const GREEN = "#15803d";
 const RULE = "#e2e8f0";
 const HEADER_BG = "#1e3a5f";
 const FOOTER_BG = "#f1f5f9";

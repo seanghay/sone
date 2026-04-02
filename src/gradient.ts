@@ -48,7 +48,7 @@ function getColor(color: ColorStop) {
     case "literal":
       return color.value;
     default:
-      return `${color.type}(${color.value.join(",")})`;
+      return `${color.type}(${Array.isArray(color.value) ? color.value.join(",") : color.value})`;
   }
 }
 
@@ -217,7 +217,9 @@ export function generateGradient(
       type === "linear-gradient"
         ? getColorsAndLocations(colorStops)
         : getRepeatingColorsAndLocations(colorStops, size);
-    const vec = getVectorsByOrientation(orientation!);
+    const vec = getVectorsByOrientation(
+      orientation as DirectionalNode | AngularNode | undefined,
+    );
     const item = {
       ...colorsAndLocations,
       ...vec,

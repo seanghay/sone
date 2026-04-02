@@ -1639,7 +1639,9 @@ export function createLayoutNode(
 
         // Real cell: compensate for any accumulated missing flex space.
         if (accumulated > 0) {
-          const existingMargin = entry.node.props.marginLeft ?? 0;
+          const existingMarginRaw = entry.node.props.marginLeft ?? 0;
+          const existingMargin =
+            typeof existingMarginRaw === "number" ? existingMarginRaw : 0;
           yogaNode
             .getChild(r)
             .getChild(entry.domIndex)
@@ -1910,11 +1912,10 @@ export function drawOnCanvas(
         if (node.props.clipImage?.props?.image != null) {
           const w = Math.ceil(layout.getComputedWidth());
           const h = Math.ceil(layout.getComputedHeight());
-          const dpr = renderer.dpr ?? 1;
+          const dpr = renderer.dpr();
           const offCanvas = renderer.createCanvas(
             Math.ceil(w * dpr),
             Math.ceil(h * dpr),
-            1,
           );
           const offCtx = offCanvas.getContext("2d") as CanvasRenderingContext2D;
           offCtx.scale(dpr, dpr);
@@ -2428,7 +2429,7 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
     };
   }
 
-  return drawWithMeta(compiledNode, layout, 0, 0);
+  return drawWithMeta(compiledNode, layout, 0, 0)!;
 }
 
 /**

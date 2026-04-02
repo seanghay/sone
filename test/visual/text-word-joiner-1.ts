@@ -106,13 +106,18 @@ const card = ({
   title,
 }: (typeof samples)[number]) => {
   const width =
-    Math.ceil(renderer.measureText(expectedFirstLine, baseProps).width) + 1;
+    Math.ceil(
+      renderer.measureText(expectedFirstLine, {
+        ...baseProps,
+        font: [...baseProps.font],
+      }).width,
+    ) + 1;
 
   return Column(
     Text(title).font("GeistMono").size(16).weight("bold").color("#6d4c41"),
     Text(label).font("GeistMono").size(12).color("#8b6b5a"),
     Text(text)
-      .font(...baseProps.font)
+      .font(...(baseProps.font as unknown as string[]))
       .size(baseProps.size)
       .lineHeight(baseProps.lineHeight)
       .width(width)

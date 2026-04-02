@@ -1,4 +1,5 @@
 import { expect, test } from "vitest";
+import type { LayoutProps } from "../src/core.ts";
 import { Column, Grid, Text } from "../src/core.ts";
 import type { SoneMetadata } from "../src/metadata.ts";
 import { renderer, renderWithMetadata } from "../src/node.ts";
@@ -34,9 +35,9 @@ test("Grid builder stores track and placement props", () => {
   expect(root.props.rows).toEqual(["auto", 80]);
   expect(root.props.autoRows).toEqual([40]);
   expect(root.props.autoColumns).toEqual(["auto"]);
-  expect(root.children[0]!.props.gridColumnStart).toBe(2);
-  expect(root.children[0]!.props.gridColumnSpan).toBe(2);
-  expect(root.children[0]!.props.gridRowStart).toBe(3);
+  expect((root.children[0]!.props as LayoutProps).gridColumnStart).toBe(2);
+  expect((root.children[0]!.props as LayoutProps).gridColumnSpan).toBe(2);
+  expect((root.children[0]!.props as LayoutProps).gridRowStart).toBe(3);
 });
 
 test("Grid auto placement creates new rows", async () => {

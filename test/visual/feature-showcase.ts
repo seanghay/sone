@@ -18,9 +18,7 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 
 await Font.load("GeistMono", relative("../font/GeistMono-Regular.ttf"));
-await Font.load("GeistMono", [relative("../font/GeistMono-Bold.ttf")], {
-  weight: "bold",
-});
+await Font.load("GeistMono", [relative("../font/GeistMono-Bold.ttf")]);
 
 // ── Page geometry ──────────────────────────────────────────────────────────────
 const PAGE_W = 816; // Letter @ 96 dpi (8.5 in × 96)

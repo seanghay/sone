@@ -22,7 +22,7 @@ test("isColor rejects invalid colors", () => {
 test("generateGradient creates linear gradient data", () => {
   const mockGradient: GradientNode = {
     type: "linear-gradient",
-    orientation: { type: "angular", value: "90deg" },
+    orientation: { type: "angular", value: "90", unit: "deg" as const },
     colorStops: [
       { type: "literal", value: "red", length: { type: "%", value: "0%" } },
       { type: "literal", value: "blue", length: { type: "%", value: "100%" } },
@@ -58,7 +58,7 @@ test("generateGradient skips radial gradients", () => {
 test("createGradientFillStyleList processes gradients", () => {
   const mockGradient: GradientNode = {
     type: "linear-gradient",
-    orientation: { type: "angular", value: "90deg" },
+    orientation: { type: "angular", value: "90", unit: "deg" as const },
     colorStops: [
       { type: "literal", value: "red", length: { type: "%", value: "0%" } },
       { type: "literal", value: "blue", length: { type: "%", value: "100%" } },
@@ -127,7 +127,7 @@ test("generateGradient with different orientations", () => {
   // Angular gradient (degrees)
   const angularGradient: GradientNode = {
     type: "linear-gradient",
-    orientation: { type: "angular", value: "45deg" },
+    orientation: { type: "angular", value: "45", unit: "deg" as const },
     colorStops: [
       { type: "literal", value: "red" },
       { type: "literal", value: "blue" },
@@ -162,7 +162,7 @@ test("generateGradient with different orientations", () => {
 test("generateGradient with multiple color stops", () => {
   const multiStopGradient: GradientNode = {
     type: "linear-gradient",
-    orientation: { type: "angular", value: "0deg" },
+    orientation: { type: "angular", value: "0", unit: "deg" as const },
     colorStops: [
       { type: "literal", value: "red", length: { type: "%", value: "0%" } },
       { type: "literal", value: "yellow", length: { type: "%", value: "50%" } },
@@ -183,7 +183,7 @@ test("generateGradient with multiple color stops", () => {
 test("generateGradient with hex color stops", () => {
   const hexGradient: GradientNode = {
     type: "linear-gradient",
-    orientation: { type: "angular", value: "90deg" },
+    orientation: { type: "angular", value: "90", unit: "deg" as const },
     colorStops: [
       { type: "hex", value: "ff0000" },
       { type: "hex", value: "00ff00" },
