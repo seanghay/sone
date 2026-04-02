@@ -26,74 +26,159 @@ const OUT_DIR = relative(".");
 const CHROME_PATH =
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
-// Embed the woff2 as base64 so the browser page can load it without a server.
-const fontBase64 = (
+// Embed fonts as base64 so the browser page can load them without a server.
+const geistMonoBase64 = (
   await fs.readFile(relative("../font/GeistMono-Regular.woff2"))
 ).toString("base64");
+
+const notoSansKhmerBase64 = (
+  await fs.readFile(relative("../font/NotoSansKhmer.ttf"))
+).toString("base64");
+
+// ─── font registry ─────────────────────────────────────────────────────────────
+
+type FontEntry = {
+  family: string;
+  base64: string;
+  format: "woff2" | "truetype";
+  soneName: string;
+};
+
+const FONTS: Record<string, FontEntry> = {
+  GeistMono: {
+    family: "GeistMono",
+    base64: geistMonoBase64,
+    format: "woff2",
+    soneName: "GeistMono",
+  },
+  NotoSansKhmer: {
+    family: "NotoSansKhmer",
+    base64: notoSansKhmerBase64,
+    format: "truetype",
+    soneName: "NotoSansKhmer",
+  },
+};
 
 // ─── test cases ────────────────────────────────────────────────────────────────
 
 const CASES = [
+  // Latin / GeistMono
   {
     slug: "single-line-lh1",
     text: "Hello World",
     fontSize: 20,
     lineHeight: 1.0,
+    font: "GeistMono",
   },
   {
     slug: "single-line-lh1.2",
     text: "Hello World",
     fontSize: 20,
     lineHeight: 1.2,
+    font: "GeistMono",
   },
   {
     slug: "single-line-lh1.5",
     text: "Hello World",
     fontSize: 20,
     lineHeight: 1.5,
+    font: "GeistMono",
   },
   {
     slug: "multiline-lh1.2",
     text: "Hello World\nLine two here\nLine three",
     fontSize: 20,
     lineHeight: 1.2,
+    font: "GeistMono",
   },
   {
     slug: "multiline-lh1.5",
     text: "Hello World\nLine two here\nLine three",
     fontSize: 20,
     lineHeight: 1.5,
+    font: "GeistMono",
   },
   {
     slug: "large-font-lh1.2",
     text: "The quick brown fox\njumps over the lazy dog",
     fontSize: 36,
     lineHeight: 1.2,
+    font: "GeistMono",
   },
   {
     slug: "large-font-lh1.5",
     text: "The quick brown fox\njumps over the lazy dog",
     fontSize: 36,
     lineHeight: 1.5,
+    font: "GeistMono",
   },
   {
     slug: "small-font-lh1.2",
     text: "pack my box with\nfive dozen liquor jugs",
     fontSize: 14,
     lineHeight: 1.2,
+    font: "GeistMono",
   },
   {
     slug: "small-font-lh2",
     text: "pack my box with\nfive dozen liquor jugs",
     fontSize: 14,
     lineHeight: 2.0,
+    font: "GeistMono",
+  },
+  // Khmer / NotoSansKhmer
+  {
+    slug: "khmer-single-lh1.2",
+    text: "ភ្នំពេញ",
+    fontSize: 20,
+    lineHeight: 1.2,
+    font: "NotoSansKhmer",
+  },
+  {
+    slug: "khmer-single-lh1.5",
+    text: "ភ្នំពេញ",
+    fontSize: 20,
+    lineHeight: 1.5,
+    font: "NotoSansKhmer",
+  },
+  {
+    slug: "khmer-multiline-lh1.2",
+    text: "ក្រសួងការពារជាតិ\nកម្ពុជា",
+    fontSize: 20,
+    lineHeight: 1.2,
+    font: "NotoSansKhmer",
+  },
+  {
+    slug: "khmer-multiline-lh1.5",
+    text: "ក្រសួងការពារជាតិ\nកម្ពុជា",
+    fontSize: 20,
+    lineHeight: 1.5,
+    font: "NotoSansKhmer",
+  },
+  {
+    slug: "khmer-large-lh1.3",
+    text: "សួស្តី\nពិភពលោក",
+    fontSize: 32,
+    lineHeight: 1.3,
+    font: "NotoSansKhmer",
+  },
+  {
+    slug: "khmer-large-lh1.5",
+    text: "សួស្តី\nពិភពលោក",
+    fontSize: 32,
+    lineHeight: 1.5,
+    font: "NotoSansKhmer",
   },
 ];
 
 // ─── browser helper ────────────────────────────────────────────────────────────
 
-function buildHtml(text: string, fontSize: number, lineHeight: number): string {
-  // Use <br> for newlines; white-space:pre for spacing.
+function buildHtml(
+  text: string,
+  fontSize: number,
+  lineHeight: number,
+  fontEntry: FontEntry,
+): string {
   const escaped = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -106,15 +191,15 @@ function buildHtml(text: string, fontSize: number, lineHeight: number): string {
 <meta charset="utf-8">
 <style>
   @font-face {
-    font-family: 'GeistMono';
-    src: url('data:font/woff2;base64,${fontBase64}') format('woff2');
+    font-family: '${fontEntry.family}';
+    src: url('data:font/${fontEntry.format === "woff2" ? "woff2" : "truetype"};base64,${fontEntry.base64}') format('${fontEntry.format}');
     font-weight: normal;
     font-style: normal;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: white; }
   .text {
-    font-family: 'GeistMono', monospace;
+    font-family: '${fontEntry.family}', sans-serif;
     font-size: ${fontSize}px;
     line-height: ${lineHeight};
     color: black;
@@ -134,17 +219,17 @@ async function renderSone(
   text: string,
   fontSize: number,
   lineHeight: number,
+  fontEntry: FontEntry,
 ): Promise<Buffer> {
   const root = Text(text)
-    .font("GeistMono")
+    .font(fontEntry.soneName)
     .size(fontSize)
     .lineHeight(lineHeight)
     .color("black")
     .bg("white");
 
   const { canvas } = await sone(root).canvasWithMetadata();
-  // @ts-expect-error skia-canvas buffer API
-  return canvas.toBuffer("png", { density: 1 });
+  return (canvas as any).toBuffer("png", { density: 1 });
 }
 
 // ─── composite helper ──────────────────────────────────────────────────────────
@@ -237,10 +322,14 @@ try {
   for (const tc of CASES) {
     console.log(`\n[${tc.slug}]`);
 
+    const fontEntry = FONTS[tc.font];
+    if (!fontEntry) throw new Error(`Unknown font: ${tc.font}`);
+
     // --- browser render ---
     const page = await browser.newPage();
-    await page.setContent(buildHtml(tc.text, tc.fontSize, tc.lineHeight));
-    // wait for @font-face to finish loading
+    await page.setContent(
+      buildHtml(tc.text, tc.fontSize, tc.lineHeight, fontEntry),
+    );
     await page.evaluate(() => document.fonts.ready);
     const element = await page.$(".text");
     if (!element) throw new Error("element not found");
@@ -248,7 +337,12 @@ try {
     await page.close();
 
     // --- sone render ---
-    const sonePng = await renderSone(tc.text, tc.fontSize, tc.lineHeight);
+    const sonePng = await renderSone(
+      tc.text,
+      tc.fontSize,
+      tc.lineHeight,
+      fontEntry,
+    );
 
     // --- composite ---
     await composite(tc.slug, browserPng, sonePng, tc);
