@@ -71,7 +71,15 @@ const FONTS: Record<string, FontEntry> = {
 
 // ─── test cases ────────────────────────────────────────────────────────────────
 
-const CASES = [
+type TestCase = {
+  slug: string;
+  text: string;
+  fontSize: number;
+  lineHeight: number | "default";
+  font: string;
+};
+
+const CASES: TestCase[] = [
   // Latin / GeistMono
   {
     slug: "single-line-lh1",
@@ -222,6 +230,35 @@ const CASES = [
     lineHeight: 1.5,
     font: "Moul",
   },
+  // Default line-height: browser uses `normal`, Sone uses NaN → 1.0
+  {
+    slug: "default-lh-geistmono",
+    text: "Hello World\nLine two here",
+    fontSize: 20,
+    lineHeight: "default",
+    font: "GeistMono",
+  },
+  {
+    slug: "default-lh-noto-khmer",
+    text: "ក្រសួងការពារជាតិ\nកម្ពុជា",
+    fontSize: 20,
+    lineHeight: "default",
+    font: "NotoSansKhmer",
+  },
+  {
+    slug: "default-lh-moul",
+    text: "ក្រសួងការពារជាតិ\nកម្ពុជា",
+    fontSize: 20,
+    lineHeight: "default",
+    font: "Moul",
+  },
+  {
+    slug: "default-lh-moul-large",
+    text: "សួស្តី\nពិភពលោក",
+    fontSize: 32,
+    lineHeight: "default",
+    font: "Moul",
+  },
 ];
 
 // ─── browser helper ────────────────────────────────────────────────────────────
@@ -229,7 +266,7 @@ const CASES = [
 function buildHtml(
   text: string,
   fontSize: number,
-  lineHeight: number,
+  lineHeight: number | "default",
   fontEntry: FontEntry,
 ): string {
   const escaped = text
@@ -237,6 +274,8 @@ function buildHtml(
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/\n/g, "<br>");
+
+  const lhCss = lineHeight === "default" ? "normal" : lineHeight;
 
   return `<!DOCTYPE html>
 <html>
@@ -254,7 +293,7 @@ function buildHtml(
   .text {
     font-family: '${fontEntry.family}', sans-serif;
     font-size: ${fontSize}px;
-    line-height: ${lineHeight};
+    line-height: ${lhCss};
     color: black;
     background: white;
     display: inline-block;
@@ -271,17 +310,17 @@ function buildHtml(
 async function renderSone(
   text: string,
   fontSize: number,
-  lineHeight: number,
+  lineHeight: number | "default",
   fontEntry: FontEntry,
 ): Promise<Buffer> {
-  const root = Text(text)
+  let node = Text(text)
     .font(fontEntry.soneName)
     .size(fontSize)
-    .lineHeight(lineHeight)
     .color("black")
     .bg("white");
+  if (lineHeight !== "default") node = node.lineHeight(lineHeight);
 
-  const { canvas } = await sone(root).canvasWithMetadata();
+  const { canvas } = await sone(node).canvasWithMetadata();
   return (canvas as any).toBuffer("png", { density: 1 });
 }
 
@@ -296,7 +335,7 @@ async function composite(
   slug: string,
   browserPng: Buffer,
   sonePng: Buffer,
-  meta: { text: string; fontSize: number; lineHeight: number },
+  meta: { text: string; fontSize: number; lineHeight: number | "default" },
 ): Promise<void> {
   const bImg = await loadImage(browserPng);
   const sImg = await loadImage(sonePng);
@@ -316,7 +355,7 @@ async function composite(
   ctx.fillStyle = "#333";
   ctx.font = `bold ${FONT_LABEL}`;
   ctx.fillText(
-    `"${meta.text.replace(/\n/g, "\\n")}"  size=${meta.fontSize}  lh=${meta.lineHeight}`,
+    `"${meta.text.replace(/\n/g, "\\n")}"  size=${meta.fontSize}  lh=${meta.lineHeight === "default" ? "normal(browser) / 1.0(sone)" : meta.lineHeight}`,
     PAD,
     PAD + 18,
   );

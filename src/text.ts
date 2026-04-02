@@ -249,10 +249,11 @@ function recomputeFinalizedLine(
   index: number,
   baseProps: TextProps,
 ) {
-  const lineMultiplier =
-    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight)
-      ? 1.0
-      : baseProps.lineHeight;
+  const isDefaultLineHeight =
+    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight);
+  const lineMultiplier = isDefaultLineHeight
+    ? 1.0
+    : (baseProps.lineHeight ?? 1.0);
 
   let lineAbove = 0;
   let lineBelow = 0;
@@ -261,7 +262,9 @@ function recomputeFinalizedLine(
 
   for (const segment of line.segments) {
     const fontSize = segment.props.size ?? baseProps.size ?? 16;
-    const lineBoxH = fontSize * lineMultiplier;
+    const lineBoxH = isDefaultLineHeight
+      ? segment.height
+      : fontSize * lineMultiplier;
     const halfLeading = (lineBoxH - segment.height) / 2;
     lineAbove = Math.max(
       lineAbove,
@@ -490,10 +493,11 @@ function finalizeParagraph(
   baseProps: TextProps,
   measureText: SoneRenderer["measureText"],
 ): SoneParagraph {
-  const lineMultiplier =
-    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight)
-      ? 1.0
-      : baseProps.lineHeight;
+  const isDefaultLineHeight =
+    baseProps.lineHeight == null || Number.isNaN(baseProps.lineHeight);
+  const lineMultiplier = isDefaultLineHeight
+    ? 1.0
+    : (baseProps.lineHeight ?? 1.0);
 
   for (let linePosition = 0; linePosition < lines.length; linePosition++) {
     const line = lines[linePosition]!;
@@ -506,7 +510,9 @@ function finalizeParagraph(
 
     for (const segment of line.segments) {
       const fontSize = segment.props.size ?? baseProps.size ?? 16;
-      const lineBoxH = fontSize * lineMultiplier;
+      const lineBoxH = isDefaultLineHeight
+        ? segment.height
+        : fontSize * lineMultiplier;
       const halfLeading = (lineBoxH - segment.height) / 2;
       lineAbove = Math.max(
         lineAbove,
