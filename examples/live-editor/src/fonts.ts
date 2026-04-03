@@ -29,6 +29,10 @@ export async function fetchAllFonts(): Promise<FontMeta[]> {
 
 const CDN = "https://cdn.jsdelivr.net/fontsource/fonts";
 
+type LoadedFontSource =
+  | { kind: "cdn"; link: HTMLLinkElement }
+  | { kind: "custom" };
+
 /** Static font URL: {id}@{version}/{subset}-{weight}-{style}.woff2 */
 function staticUrl(id: string, subset: string, weight = 400, style = "normal", version = "latest") {
   return `${CDN}/${id}@${version}/${subset}-${weight}-${style}.woff2`;
@@ -69,7 +73,19 @@ async function loadSubsetDirect(name: string, fontId: string, subset: string, we
   }
 }
 
-const loadedFonts = new Map<string, HTMLLinkElement>();
+const loadedFonts = new Map<string, LoadedFontSource>();
+
+function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") resolve(reader.result);
+      else reject(new Error("Failed to read font file."));
+    };
+    reader.onerror = () => reject(reader.error ?? new Error("Failed to read font file."));
+    reader.readAsDataURL(file);
+  });
+}
 
 /**
  * Load a font from the jsDelivr FontSource CDN.
@@ -90,7 +106,7 @@ export async function loadFontFromCDN(
   link.href = `${CDN}/${fontId}@latest/index.css`;
   link.crossOrigin = "anonymous";
   document.head.appendChild(link);
-  loadedFonts.set(fontId, link);
+  loadedFonts.set(fontId, { kind: "cdn", link });
 
   // Register latin via the renderer so hasFont(name) returns true in Sone
   const latinUrls = [variableUrl(fontId, "latin"), staticUrl(fontId, "latin", weight)];
@@ -127,13 +143,26 @@ export async function loadFontFromCDN(
   await document.fonts.ready;
 }
 
+export async function loadCustomFontFile(
+  fontId: string,
+  name: string,
+  file: File,
+): Promise<void> {
+  if (loadedFonts.has(fontId)) return;
+
+  const source = await fileToDataUrl(file);
+  await browserRenderer.registerFont(name, source);
+  workerBridge.registerFont(name, source);
+  loadedFonts.set(fontId, { kind: "custom" });
+  await document.fonts.ready;
+}
+
 export function unloadFont(fontId: string, name: string): void {
-  const link = loadedFonts.get(fontId);
-  if (link) {
-    document.head.removeChild(link);
-    loadedFonts.delete(fontId);
+  const loaded = loadedFonts.get(fontId);
+  if (loaded?.kind === "cdn") {
+    document.head.removeChild(loaded.link);
   }
+  loadedFonts.delete(fontId);
   browserRenderer.unregisterFont(name);
   workerBridge.unregisterFont(name);
 }
-

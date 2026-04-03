@@ -1,6 +1,12 @@
-import { Check, Loader2, Plus, Search, X } from "lucide-react";
+import { Check, Copy, Loader2, Plus, Search, Upload, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { fetchAllFonts, loadFontFromCDN, type FontMeta, unloadFont } from "../fonts";
+import {
+  fetchAllFonts,
+  loadCustomFontFile,
+  loadFontFromCDN,
+  type FontMeta,
+  unloadFont,
+} from "../fonts";
 
 interface LoadedFont {
   id: string;
@@ -22,7 +28,9 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
   const [loadedFonts, setLoadedFonts] = useState<LoadedFont[]>([]);
   const [loading, setLoading] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [copiedFontId, setCopiedFontId] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchAllFonts()
@@ -54,9 +62,57 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
     }
   }
 
+  async function handleUpload(fileList: FileList | null) {
+    if (!fileList?.length) return;
+
+    setLoadError(null);
+    const existingNames = new Set(loadedFonts.map((font) => font.name));
+
+    for (const file of Array.from(fileList)) {
+      const valid = /\.ttf$/i.test(file.name) || file.type === "font/ttf";
+      if (!valid) {
+        setLoadError(`Unsupported file "${file.name}". Upload a .ttf font.`);
+        continue;
+      }
+
+      const id = `custom:${file.name}:${file.lastModified}:${file.size}`;
+      if (loadedFonts.find((font) => font.id === id)) continue;
+
+      const rawName = file.name.replace(/\.[^.]+$/, "").trim() || "Custom Font";
+      let name = rawName;
+      let suffix = 2;
+      while (existingNames.has(name)) {
+        name = `${rawName} ${suffix++}`;
+      }
+      existingNames.add(name);
+
+      setLoading(id);
+      try {
+        await loadCustomFontFile(id, name, file);
+        setLoadedFonts((prev) => [...prev, { id, name }]);
+      } catch {
+        setLoadError(`Failed to load "${file.name}".`);
+      } finally {
+        setLoading(null);
+      }
+    }
+  }
+
   function handleUnload(id: string, name: string) {
     unloadFont(id, name);
     setLoadedFonts((prev) => prev.filter((f) => f.id !== id));
+  }
+
+  async function handleCopyFontName(id: string, name: string) {
+    try {
+      await navigator.clipboard.writeText(name);
+      setCopiedFontId(id);
+      window.setTimeout(() => {
+        setCopiedFontId((current) => (current === id ? null : current));
+      }, 1200);
+    } catch {
+      setLoadError(`Failed to copy "${name}".`);
+    }
   }
 
   return (
@@ -71,6 +127,26 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
 
       {/* Search */}
       <div className="px-3 py-2 border-b border-neutral-100 shrink-0">
+        <div className="mb-2 flex items-center gap-2">
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="flex items-center gap-1.5 rounded border border-neutral-200 bg-white px-2.5 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 cursor-pointer"
+          >
+            <Upload size={12} />
+            Upload TTF
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".ttf,font/ttf"
+            multiple
+            className="hidden"
+            onChange={(e) => {
+              void handleUpload(e.target.files);
+              e.target.value = "";
+            }}
+          />
+        </div>
         <div className="flex items-center gap-2 px-2.5 py-1.5 bg-neutral-50 border border-neutral-200 rounded">
           <Search size={12} className="text-neutral-400 shrink-0" />
           <input
@@ -100,12 +176,26 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
                   <span className="font-medium truncate block">{name}</span>
                   <span className="text-neutral-400">.font("{name}")</span>
                 </div>
-                <button
-                  onClick={() => handleUnload(id, name)}
-                  className="ml-2 p-0.5 hover:bg-neutral-200 rounded cursor-pointer text-neutral-400 shrink-0"
-                >
-                  <X size={11} />
-                </button>
+                <div className="ml-2 flex items-center gap-1 shrink-0">
+                  <button
+                    onClick={() => void handleCopyFontName(id, name)}
+                    title={copiedFontId === id ? "Copied" : "Copy font name"}
+                    className={`p-1 rounded cursor-pointer ${
+                      copiedFontId === id
+                        ? "bg-green-100 text-green-700"
+                        : "hover:bg-neutral-200 text-neutral-400"
+                    }`}
+                  >
+                    {copiedFontId === id ? <Check size={11} /> : <Copy size={11} />}
+                  </button>
+                  <button
+                    onClick={() => handleUnload(id, name)}
+                    className="p-1 hover:bg-neutral-200 rounded cursor-pointer text-neutral-400"
+                    title="Unload font"
+                  >
+                    <X size={11} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
