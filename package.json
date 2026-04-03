@@ -57,6 +57,16 @@
         "types": "./dist/node.d.cts",
         "default": "./dist/node.cjs"
       }
+    },
+    "./shiki": {
+      "import": {
+        "types": "./dist/shiki.d.mts",
+        "default": "./dist/shiki.mjs"
+      },
+      "require": {
+        "types": "./dist/shiki.d.cts",
+        "default": "./dist/shiki.cjs"
+      }
     }
   },
   "scripts": {
@@ -82,6 +92,7 @@
     "vitest": "^4.1.2"
   },
   "peerDependencies": {
+    "shiki": "^4.0.2",
     "skia-canvas": "^3.0.4"
   },
   "dependencies": {
