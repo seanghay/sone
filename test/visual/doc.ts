@@ -5,6 +5,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import type { BundledLanguage } from "shiki";
 import {
   ClipGroup,
   Column,
@@ -24,8 +25,14 @@ import {
   TextDefault,
 } from "../../src/node.ts";
 import type { SonePageInfo } from "../../src/renderer.ts";
+import { createSoneHighlighter } from "../../src/shiki.ts";
 
 const dir = path.dirname(fileURLToPath(import.meta.url));
+
+const highlight = await createSoneHighlighter({
+  themes: ["github-light"],
+  langs: ["typescript", "bash"],
+});
 
 // ── Page geometry ─────────────────────────────────────────────────────────────
 const PAGE_W = 816; // Letter @ 96 dpi
@@ -82,13 +89,19 @@ const labelBox = (t: string, bg: string, c = W) =>
     .rounded(3)
     .alignSelf("flex-start");
 
-const codeBlock = (t: string) =>
-  Column(Text(t).size(10).font("monospace").color(INK).lineHeight(1.7))
-    .bg(CODE_BG)
-    .padding(12)
+const codeBlock = (t: string, lang: BundledLanguage = "typescript") =>
+  highlight
+    .Code(t, {
+      lang,
+      fontSize: 10,
+      lineHeight: 1.7,
+      paddingX: 12,
+      paddingY: 12,
+    })
     .rounded(6)
     .borderWidth(1)
-    .borderColor(RULE);
+    .borderColor(RULE)
+    .overflow("hidden");
 
 // ── Cover ─────────────────────────────────────────────────────────────────────
 const cover = Column(
@@ -175,7 +188,7 @@ const quickStart = Column(
 
   card(
     h3("Install"),
-    codeBlock("npm install sone\n# or\npnpm add sone").marginTop(8),
+    codeBlock("npm install sone\n# or\npnpm add sone", "bash").marginTop(8),
   ),
 
   card(
