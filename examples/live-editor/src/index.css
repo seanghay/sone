@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.checkerboard {
+  background-color: #f5f5f5;
+  background-image: radial-gradient(circle, #c0c0c0 1px, transparent 1px);
+  background-size: 16px 16px;
+}

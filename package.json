@@ -74,6 +74,7 @@
     "test": "vitest --run",
     "test:dev": "vitest",
     "lint": "tsc --noEmit",
+    "bench": "tsx test/benchmark.ts",
     "format": "biome format --write src/ test/",
     "prepublishOnly": "npm run build",
     "prepack": "npm run build"

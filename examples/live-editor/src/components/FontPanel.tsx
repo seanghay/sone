@@ -1,0 +1,171 @@
+import { Check, Loader2, Plus, Search, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { fetchAllFonts, loadFontFromCDN, type FontMeta, unloadFont } from "../fonts";
+
+interface LoadedFont {
+  id: string;
+  name: string;
+}
+
+interface FontPanelProps {
+  onClose: () => void;
+}
+
+const MAX_RESULTS = 80;
+
+export function FontPanel({ onClose }: FontPanelProps) {
+  const [allFonts, setAllFonts] = useState<FontMeta[]>([]);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [isFetching, setIsFetching] = useState(true);
+  const [query, setQuery] = useState("");
+  const [loadedFonts, setLoadedFonts] = useState<LoadedFont[]>([]);
+  const [loading, setLoading] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    fetchAllFonts()
+      .then(setAllFonts)
+      .catch((e) => setFetchError(e.message))
+      .finally(() => setIsFetching(false));
+    searchRef.current?.focus();
+  }, []);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const filtered = q
+      ? allFonts.filter((f) => f.family.toLowerCase().includes(q) || f.id.includes(q))
+      : allFonts;
+    return filtered.slice(0, MAX_RESULTS);
+  }, [allFonts, query]);
+
+  async function handleLoad(id: string, name: string) {
+    if (loadedFonts.find((f) => f.id === id)) return;
+    setLoading(id);
+    setLoadError(null);
+    try {
+      await loadFontFromCDN(id, name);
+      setLoadedFonts((prev) => [...prev, { id, name }]);
+    } catch {
+      setLoadError(`Failed to load "${name}".`);
+    } finally {
+      setLoading(null);
+    }
+  }
+
+  function handleUnload(id: string, name: string) {
+    unloadFont(id, name);
+    setLoadedFonts((prev) => prev.filter((f) => f.id !== id));
+  }
+
+  return (
+    <div className="w-72 h-full bg-white border-l border-neutral-200 flex flex-col shrink-0">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 h-12 border-b border-neutral-200 shrink-0">
+        <span className="text-sm font-semibold">Fonts</span>
+        <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded cursor-pointer">
+          <X size={14} />
+        </button>
+      </div>
+
+      {/* Search */}
+      <div className="px-3 py-2 border-b border-neutral-100 shrink-0">
+        <div className="flex items-center gap-2 px-2.5 py-1.5 bg-neutral-50 border border-neutral-200 rounded">
+          <Search size={12} className="text-neutral-400 shrink-0" />
+          <input
+            ref={searchRef}
+            type="text"
+            placeholder="Search fonts…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="flex-1 text-xs bg-transparent focus:outline-none"
+          />
+          {query && (
+            <button onClick={() => setQuery("")} className="text-neutral-400 hover:text-neutral-600 cursor-pointer">
+              <X size={11} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Loaded fonts */}
+      {loadedFonts.length > 0 && (
+        <div className="px-3 pt-3 pb-1 border-b border-neutral-100 shrink-0">
+          <p className="text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1.5">Loaded</p>
+          <div className="space-y-1">
+            {loadedFonts.map(({ id, name }) => (
+              <div key={id} className="flex items-center justify-between px-2.5 py-1.5 bg-neutral-50 rounded text-xs">
+                <div className="min-w-0">
+                  <span className="font-medium truncate block">{name}</span>
+                  <span className="text-neutral-400">.font("{name}")</span>
+                </div>
+                <button
+                  onClick={() => handleUnload(id, name)}
+                  className="ml-2 p-0.5 hover:bg-neutral-200 rounded cursor-pointer text-neutral-400 shrink-0"
+                >
+                  <X size={11} />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {loadError && (
+        <p className="mx-3 mt-2 text-xs text-red-600 bg-red-50 px-2 py-1.5 rounded shrink-0">{loadError}</p>
+      )}
+
+      {/* Font list */}
+      <div className="flex-1 overflow-y-auto">
+        {isFetching ? (
+          <div className="flex items-center justify-center h-24 text-neutral-400">
+            <Loader2 size={16} className="animate-spin" />
+          </div>
+        ) : fetchError ? (
+          <p className="px-3 py-4 text-xs text-red-600">{fetchError}</p>
+        ) : (
+          <>
+            <div className="px-3 pt-2 pb-1">
+              <p className="text-xs text-neutral-400">
+                {query
+                  ? `${results.length} of ${allFonts.filter((f) => f.family.toLowerCase().includes(query.toLowerCase())).length} results`
+                  : `${allFonts.length} fonts — showing ${results.length}`}
+              </p>
+            </div>
+            <div>
+              {results.map(({ id, family, variable, category }) => {
+                const isLoaded = loadedFonts.some((f) => f.id === id);
+                const isLoading = loading === id;
+                return (
+                  <button
+                    key={id}
+                    onClick={() => handleLoad(id, family)}
+                    disabled={isLoaded || isLoading}
+                    className="flex items-center justify-between w-full px-3 py-2 text-xs hover:bg-neutral-50 disabled:cursor-default cursor-pointer text-left border-b border-neutral-50"
+                  >
+                    <div className="min-w-0">
+                      <span className="block font-medium truncate">{family}</span>
+                      <span className="text-neutral-400">
+                        {category}
+                        {variable && <span className="ml-1 text-neutral-300">· variable</span>}
+                      </span>
+                    </div>
+                    <div className="ml-2 shrink-0">
+                      {isLoading ? (
+                        <Loader2 size={11} className="animate-spin text-neutral-400" />
+                      ) : isLoaded ? (
+                        <Check size={11} className="text-green-600" />
+                      ) : (
+                        <Plus size={11} className="text-neutral-300" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

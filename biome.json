@@ -8,6 +8,9 @@
     "lineWidth": 80,
     "lineEnding": "lf"
   },
+  "files": {
+    "includes": ["src/**/*", "test/**/*", "!examples/**/*"]
+  },
   "assist": {
     "actions": {
       "source": {
