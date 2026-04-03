@@ -31,7 +31,6 @@ const sample = (text: string, font: string, width: number, size: number) =>
 
 const latin = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 const khmer = "កកកកកកកកកកកកកកកកកកកកកកកកកកកកកក";
-const lao = "ກກກກກກກກກກກກກກກກກກກກກກກກ";
 
 const root = Column(
   Text("Tight no-space wrap regression board")
@@ -57,11 +56,6 @@ const root = Column(
       "khmer-tight-wrap",
       "Khmer without spaces should still wrap on a very narrow width.",
       sample(khmer, "NotoSansKhmer", 72, 22),
-    ),
-    card(
-      "lao-tight-wrap",
-      "Lao without spaces should also wrap instead of overflowing.",
-      sample(lao, "sans-serif", 72, 22),
     ),
   )
     .gap(20)

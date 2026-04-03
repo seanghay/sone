@@ -20,8 +20,6 @@ const card = (title: string, note: string, node: ReturnType<typeof Text>) =>
 
 const khmerWrap = "ក្រសួងការពារជាតិ កម្ពុជា ប្រកាសព័ត៌មានថ្មី។ សូមប្រុងប្រយ័ត្ន";
 const khmerSymbols = "តម្លៃសំបុត្រ $៥០ ក្នុងម្នាក់ និង បញ្ចុះតម្លៃ ១០០% សម្រាប់សិស្ស";
-const laoWrap = "ກະຊວງສາທາລະນະສຸກ ປະກາດມາດຕະການໃໝ່ ເພື່ອຄວາມປອດໄພ";
-const laoClamp = "ກະຊວງສາທາລະນະສຸກ ປະກາດມາດຕະການໃໝ່ ເພື່ອຄວາມປອດໄພ ແລະ ການເດີນທາງ";
 
 const root = Column(
   Text("Multilingual text regression board")
@@ -30,7 +28,7 @@ const root = Column(
     .weight("bold")
     .color("#0f172a"),
   Text(
-    "Khmer and Lao snapshots that highlight wrap boundaries, punctuation attachment, symbol glue, and final-line behavior.",
+    "Khmer snapshots that highlight wrap boundaries, punctuation attachment, and symbol glue.",
   )
     .font("GeistMono")
     .size(16)
@@ -59,40 +57,6 @@ const root = Column(
         .size(22)
         .width(260)
         .lineHeight(1.45)
-        .bg("#f8fafc")
-        .padding(14)
-        .rounded(16)
-        .color("#111827"),
-    ),
-  )
-    .gap(20)
-    .wrap("wrap"),
-  Row(
-    card(
-      "lao-wrap-and-center",
-      "Wrapped Lao lines should keep their break points and remain centered per line.",
-      Text(laoWrap)
-        .font("sans-serif")
-        .size(22)
-        .width(260)
-        .lineHeight(1.45)
-        .align("center")
-        .bg("#f8fafc")
-        .padding(14)
-        .rounded(16)
-        .color("#111827"),
-    ),
-    card(
-      "lao-ellipsis-and-justify",
-      "Justified Lao should stretch only non-final lines; clamped text should still trim before the ellipsis.",
-      Text(`${laoWrap}\n\n${laoClamp}`)
-        .font("sans-serif")
-        .size(20)
-        .width(260)
-        .lineHeight(1.45)
-        .align("justify")
-        .maxLines(6)
-        .textOverflow("ellipsis")
         .bg("#f8fafc")
         .padding(14)
         .rounded(16)

@@ -11,6 +11,7 @@ const promises: Promise<unknown>[] = [];
 
 for (const file of scripts) {
   const name = path.parse(file).name;
+  console.log(name);
   const p = import(url.pathToFileURL(path.join(dirname, name)).href);
   promises.push(p);
 }
