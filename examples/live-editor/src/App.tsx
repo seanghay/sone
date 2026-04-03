@@ -1,4 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Group,
+  Panel,
+  Separator,
+} from "react-resizable-panels";
 import { render, type SoneNode } from "sone";
 import { Editor } from "./components/Editor";
 import { FontPanel } from "./components/FontPanel";
@@ -32,6 +37,35 @@ function bitmapToCanvas(bitmap: ImageBitmap): HTMLCanvasElement {
   return canvas;
 }
 
+function ResizeHandle() {
+  return (
+    <Separator className="resize-handle group relative flex w-2 shrink-0 items-stretch justify-center bg-neutral-100 transition-colors hover:bg-neutral-200">
+      <div className="my-3 w-px rounded-full bg-neutral-300 transition-colors group-hover:bg-neutral-400" />
+    </Separator>
+  );
+}
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 767px)").matches
+      : false,
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = (event: MediaQueryListEvent | MediaQueryList) => {
+      setIsMobile(event.matches);
+    };
+
+    update(media);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
 export default function App() {
   const [code, setCode] = useState(loadCode);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
@@ -41,6 +75,8 @@ export default function App() {
   const [fontsOpen, setFontsOpen] = useState(false);
   const [autoRun, setAutoRun] = useState(true);
   const [debugEnabled, setDebugEnabled] = useState(false);
+  const [mobileTab, setMobileTab] = useState<"code" | "preview">("code");
+  const isMobile = useIsMobile();
 
   const workerRef = useRef<Worker | null>(null);
   const requestIdRef = useRef(0);
@@ -137,15 +173,70 @@ export default function App() {
         autoRun={autoRun}
         debugEnabled={debugEnabled}
       />
-      <div className="flex flex-1 min-h-0">
-        <div className="flex-1 min-w-0 border-r border-neutral-200">
-          <Editor value={code} onChange={handleCodeChange} onRun={handleRun} error={error} />
+      {isMobile ? (
+        <div className="relative flex flex-1 min-h-0 flex-col">
+          <div className="flex h-10 shrink-0 items-center gap-1 border-b border-neutral-200 bg-neutral-50 px-2">
+            {[
+              { id: "code", label: "Code" },
+              { id: "preview", label: "Preview" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setMobileTab(tab.id as "code" | "preview")}
+                className={`flex-1 rounded px-3 py-1.5 text-xs font-medium transition-colors ${
+                  mobileTab === tab.id
+                    ? "bg-white text-black shadow-sm"
+                    : "text-neutral-500 hover:bg-white/70 hover:text-neutral-700"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex-1 min-h-0">
+            {mobileTab === "code" ? (
+              <Editor value={code} onChange={handleCodeChange} onRun={handleRun} error={error} />
+            ) : (
+              <Preview canvas={canvas} isRunning={isRunning} borderless />
+            )}
+          </div>
+
+          {fontsOpen && (
+            <div className="absolute inset-0 z-20 bg-white">
+              <FontPanel onClose={() => setFontsOpen(false)} mobile />
+            </div>
+          )}
         </div>
-        <div className="flex-1 min-w-0">
-          <Preview canvas={canvas} isRunning={isRunning} />
-        </div>
-        {fontsOpen && <FontPanel onClose={() => setFontsOpen(false)} />}
-      </div>
+      ) : (
+        <Group
+          orientation="horizontal"
+          className="flex-1 min-h-0"
+        >
+          <Panel id="editor" minSize="25%" defaultSize={fontsOpen ? "42%" : "50%"}>
+            <div className="h-full min-w-0 border-r border-neutral-200">
+              <Editor value={code} onChange={handleCodeChange} onRun={handleRun} error={error} />
+            </div>
+          </Panel>
+
+          <ResizeHandle />
+
+          <Panel id="preview" minSize="25%" defaultSize={fontsOpen ? "36%" : "50%"}>
+            <div className="h-full min-w-0">
+              <Preview canvas={canvas} isRunning={isRunning} />
+            </div>
+          </Panel>
+
+          {fontsOpen && (
+            <>
+              <ResizeHandle />
+              <Panel id="fonts" minSize="18%" maxSize="35%" defaultSize="22%">
+                <FontPanel onClose={() => setFontsOpen(false)} />
+              </Panel>
+            </>
+          )}
+        </Group>
+      )}
     </div>
   );
 }

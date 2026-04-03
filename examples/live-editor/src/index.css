@@ -18,3 +18,7 @@ body,
   background-image: radial-gradient(circle, #c0c0c0 1px, transparent 1px);
   background-size: 16px 16px;
 }
+
+.resize-handle {
+  touch-action: none;
+}

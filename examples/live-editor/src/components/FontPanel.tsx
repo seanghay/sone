@@ -9,11 +9,12 @@ interface LoadedFont {
 
 interface FontPanelProps {
   onClose: () => void;
+  mobile?: boolean;
 }
 
 const MAX_RESULTS = 80;
 
-export function FontPanel({ onClose }: FontPanelProps) {
+export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
   const [allFonts, setAllFonts] = useState<FontMeta[]>([]);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -59,7 +60,7 @@ export function FontPanel({ onClose }: FontPanelProps) {
   }
 
   return (
-    <div className="w-72 h-full bg-white border-l border-neutral-200 flex flex-col shrink-0">
+    <div className={`h-full w-full min-w-0 bg-white flex flex-col ${mobile ? "" : "border-l border-neutral-200"}`}>
       {/* Header */}
       <div className="flex items-center justify-between px-4 h-12 border-b border-neutral-200 shrink-0">
         <span className="text-sm font-semibold">Fonts</span>

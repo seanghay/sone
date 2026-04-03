@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 interface PreviewProps {
   canvas: HTMLCanvasElement | null;
   isRunning: boolean;
+  borderless?: boolean;
 }
 
-export function Preview({ canvas, isRunning }: PreviewProps) {
+export function Preview({ canvas, isRunning, borderless = false }: PreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState(1);
 
@@ -21,7 +22,7 @@ export function Preview({ canvas, isRunning }: PreviewProps) {
   const resetZoom = () => setZoom(1);
 
   return (
-    <div className="flex flex-col h-full bg-neutral-50 border-l border-neutral-200">
+    <div className={`flex flex-col h-full bg-neutral-50 ${borderless ? "" : "border-l border-neutral-200"}`}>
       {/* Preview header */}
       <div className="flex items-center gap-2 px-3 h-8 bg-neutral-100 border-b border-neutral-200 text-xs text-neutral-500 shrink-0">
         <span className="font-medium text-neutral-700">Preview</span>
@@ -68,13 +69,14 @@ export function Preview({ canvas, isRunning }: PreviewProps) {
         )}
 
         {canvas ? (
-          <div className="min-h-full min-w-full flex items-center justify-center p-8">
+          <div className="min-h-full min-w-full flex items-start justify-center p-4 md:p-8">
             <div
               style={{
                 transform: `scale(${zoom})`,
-                transformOrigin: "center center",
+                transformOrigin: "top center",
                 transition: "transform 0.15s ease",
-                display: "inline-block",
+                display: "block",
+                width: "100%",
               }}
             >
               <CanvasDisplay canvas={canvas} />
@@ -102,8 +104,11 @@ function CanvasDisplay({ canvas }: { canvas: HTMLCanvasElement }) {
   
     const naturalW = canvas.width;
     const naturalH = canvas.height;
-    canvas.style.width = `${naturalW / devicePixelRatio}px`;
-    canvas.style.height = `${naturalH / devicePixelRatio}px`;
+    void naturalW;
+    void naturalH;
+    canvas.style.width = "100%";
+    canvas.style.height = "auto";
+    canvas.style.maxWidth = "100%";
     canvas.style.display = "block";
 
     el.appendChild(canvas);
@@ -112,8 +117,8 @@ function CanvasDisplay({ canvas }: { canvas: HTMLCanvasElement }) {
   return (
     <div
       ref={ref}
-      className="shadow-lg rounded overflow-hidden"
-      style={{ display: "inline-block" }}
+      className="w-full overflow-hidden rounded shadow-lg"
+      style={{ display: "block" }}
     />
   );
 }
