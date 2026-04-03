@@ -3,6 +3,7 @@
     "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite-plugin-svgr/client"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",

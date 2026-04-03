@@ -2,6 +2,7 @@ import { ChevronDown, Download, LayoutTemplate, Play, Type, Zap } from "lucide-r
 import { useRef, useState } from "react";
 import { EXPORT_SCALES, type ExportScale } from "../export";
 import { TEMPLATES } from "../templates";
+import Icon from '../sone.svg?react'
 
 interface ToolbarProps {
   onRun: () => void;
@@ -41,8 +42,8 @@ export function Toolbar({
     <div className="flex items-center gap-2 px-4 h-12 bg-black text-white shrink-0 select-none">
       {/* Brand */}
       <div className="flex items-center gap-2 mr-3">
-        <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
-          <div className="w-3 h-3 bg-black rounded-xs" />
+        <div className="w-5 h-5 rounded-sm flex items-center justify-center">
+          <Icon/>
         </div>
         <span className="text-sm font-semibold tracking-tight">Sone Live Editor</span>
       </div>
