@@ -337,6 +337,78 @@ test("createParagraph trims wrap whitespace at span boundaries", async () => {
   expect(getLineText(paragraph.lines[1])).toBe("$Beta");
 });
 
+test("createParagraph wraps long unspaced runs at tight widths across scripts", () => {
+  const cases = [
+    {
+      font: ["GeistMono"],
+      size: 20,
+      text: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      width: 30,
+    },
+    {
+      font: ["sans-serif"],
+      size: 18,
+      text: "ກກກກກກກກກກກກກກກກກກກກກກກກ",
+      width: 30,
+    },
+    {
+      font: ["NotoSansKhmer"],
+      size: 18,
+      text: "កកកកកកកកកកកកកកកកកកកកកកកកកកកកកក",
+      width: 30,
+    },
+  ];
+
+  for (const { font, size, text, width } of cases) {
+    const paragraph = createParagraph(
+      [text],
+      width,
+      textProps({
+        font,
+        size,
+        lineBreak: "greedy",
+      }),
+      renderer.measureText,
+      renderer.breakIterator,
+    )[0].paragraph;
+
+    expect(paragraph.lines.length).toBeGreaterThan(1);
+    expect(getLineTexts(paragraph).join("")).toBe(text);
+    expect(paragraph.lines.every((line) => line.width <= width)).toBe(true);
+    expect(getLineTexts(paragraph).every((line) => line.length > 0)).toBe(true);
+  }
+});
+
+test("createParagraph falls back from Knuth-Plass to tight wrapping for long unspaced text", () => {
+  const text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  const width = 30;
+  const greedy = createParagraph(
+    [text],
+    width,
+    textProps({
+      font: ["GeistMono"],
+      size: 20,
+      lineBreak: "greedy",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const knuthPlass = createParagraph(
+    [text],
+    width,
+    textProps({
+      font: ["GeistMono"],
+      size: 20,
+      lineBreak: "knuth-plass",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(knuthPlass)).toEqual(getLineTexts(greedy));
+  expect(knuthPlass.lines.every((line) => line.width <= width)).toBe(true);
+});
+
 test("createParagraph keeps word-joined spans intact when wrapping", () => {
   const cases = [
     {

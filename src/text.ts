@@ -617,12 +617,131 @@ function trimLeadingWrapWhitespace(text: string): string {
   return text.replace(/^[ \t]+/u, "");
 }
 
+function findFittingWrapBoundary(
+  text: string,
+  props: SpanProps,
+  availableWidth: number,
+  currentX: number,
+  tabStops: number[] | undefined,
+  measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"],
+) {
+  const boundaries = [...getPrefixBoundaries(text, breakIterator), text.length]
+    .filter((boundary, index, items) => {
+      return boundary > 0 && items.indexOf(boundary) === index;
+    })
+    .sort((a, b) => a - b);
+
+  let fallback = text.length;
+  let best = 0;
+
+  for (const boundary of boundaries) {
+    if (fallback === text.length) fallback = boundary;
+
+    const width = measureTabExpandedWidth(
+      text.slice(0, boundary),
+      props,
+      tabStops,
+      currentX,
+      measureText,
+    );
+
+    if (width <= availableWidth) {
+      best = boundary;
+      continue;
+    }
+
+    break;
+  }
+
+  return best > 0 ? best : fallback;
+}
+
+function appendWrappedText(
+  lines: SoneParagraphLine[],
+  currentLine: SoneParagraphLine,
+  text: string,
+  props: SpanProps,
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"],
+  shouldWrap: boolean,
+) {
+  let remainingText = text;
+
+  while (remainingText.length > 0) {
+    const segmentWidth = measureTabExpandedWidth(
+      remainingText,
+      props,
+      baseProps.tabStops,
+      currentLine.width,
+      measureText,
+    );
+
+    if (
+      !shouldWrap ||
+      !Number.isFinite(maxWidth) ||
+      currentLine.width + segmentWidth <= maxWidth
+    ) {
+      pushSegments(
+        currentLine,
+        remainingText,
+        props,
+        baseProps.tabStops,
+        baseProps.tabLeader,
+        measureText,
+      );
+      break;
+    }
+
+    if (currentLine.segments.length > 0) {
+      currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
+      lines.push(currentLine);
+
+      remainingText = trimLeadingWrapWhitespace(remainingText);
+      if (remainingText.length === 0) break;
+      continue;
+    }
+
+    const availableWidth = Math.max(0, maxWidth - currentLine.width);
+    const boundary = findFittingWrapBoundary(
+      remainingText,
+      props,
+      availableWidth,
+      currentLine.width,
+      baseProps.tabStops,
+      measureText,
+      breakIterator,
+    );
+
+    const lineText = remainingText.slice(0, boundary);
+    pushSegments(
+      currentLine,
+      lineText,
+      props,
+      baseProps.tabStops,
+      baseProps.tabLeader,
+      measureText,
+    );
+
+    remainingText = trimLeadingWrapWhitespace(remainingText.slice(boundary));
+    if (remainingText.length === 0) break;
+
+    currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
+    lines.push(currentLine);
+  }
+
+  return currentLine;
+}
+
 function createGreedyMultilineParagraph(
   spans: Array<string | SpanNode>,
   breakpoints: number[][],
   maxWidth: number,
   baseProps: TextProps,
   measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"],
 ): SoneParagraph {
   const shouldWrap = baseProps.nowrap !== true;
   const lines: SoneParagraphLine[] = [];
@@ -637,34 +756,16 @@ function createGreedyMultilineParagraph(
     const spanBreakpoints = breakpoints[spanIndex] || [];
 
     if (spanBreakpoints.length === 0) {
-      let lineText = text;
-      const segmentWidth = measureTabExpandedWidth(
-        lineText,
-        props,
-        baseProps.tabStops,
-        currentLine.width,
-        measureText,
-      );
-
-      if (
-        shouldWrap &&
-        currentLine.width + segmentWidth > maxWidth &&
-        currentLine.segments.length > 0
-      ) {
-        currentLine = createEmptyLine();
-        lines.push(currentLine);
-
-        lineText = trimLeadingWrapWhitespace(lineText);
-        if (lineText.length === 0) continue;
-      }
-
-      pushSegments(
+      currentLine = appendWrappedText(
+        lines,
         currentLine,
-        lineText,
+        text,
         props,
-        baseProps.tabStops,
-        baseProps.tabLeader,
+        maxWidth,
+        baseProps,
         measureText,
+        breakIterator,
+        shouldWrap,
       );
       continue;
     }
@@ -679,80 +780,31 @@ function createGreedyMultilineParagraph(
         continue;
       }
 
-      const segmentWidth = measureTabExpandedWidth(
-        segmentText,
-        props,
-        baseProps.tabStops,
-        currentLine.width,
-        measureText,
-      );
-
-      if (
-        shouldWrap &&
-        currentLine.width + segmentWidth > maxWidth &&
-        currentLine.segments.length > 0
-      ) {
-        currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
-        lines.push(currentLine);
-
-        const lineText = trimLeadingWrapWhitespace(segmentText);
-        if (lineText.length === 0) {
-          lastBreakpoint = breakpoint;
-          continue;
-        }
-
-        pushSegments(
-          currentLine,
-          lineText,
-          props,
-          baseProps.tabStops,
-          baseProps.tabLeader,
-          measureText,
-        );
-        lastBreakpoint = breakpoint;
-        continue;
-      }
-
-      pushSegments(
+      currentLine = appendWrappedText(
+        lines,
         currentLine,
         segmentText,
         props,
-        baseProps.tabStops,
-        baseProps.tabLeader,
+        maxWidth,
+        baseProps,
         measureText,
+        breakIterator,
+        shouldWrap,
       );
       lastBreakpoint = breakpoint;
     }
 
     if (lastBreakpoint < text.length) {
-      let remainingText = text.substring(lastBreakpoint);
-      const segmentWidth = measureTabExpandedWidth(
-        remainingText,
-        props,
-        baseProps.tabStops,
-        currentLine.width,
-        measureText,
-      );
-
-      if (
-        shouldWrap &&
-        currentLine.width + segmentWidth > maxWidth &&
-        currentLine.segments.length > 0
-      ) {
-        currentLine = createEmptyLine();
-        lines.push(currentLine);
-
-        remainingText = trimLeadingWrapWhitespace(remainingText);
-        if (remainingText.length === 0) continue;
-      }
-
-      pushSegments(
+      currentLine = appendWrappedText(
+        lines,
         currentLine,
-        remainingText,
+        text.substring(lastBreakpoint),
         props,
-        baseProps.tabStops,
-        baseProps.tabLeader,
+        maxWidth,
+        baseProps,
         measureText,
+        breakIterator,
+        shouldWrap,
       );
     }
   }
@@ -887,6 +939,7 @@ export function createMultilineParagraph(
   maxWidth: number,
   baseProps: TextProps,
   measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"] = function* () {},
 ): SoneParagraph {
   if (
     baseProps.lineBreak === "knuth-plass" &&
@@ -910,6 +963,7 @@ export function createMultilineParagraph(
     maxWidth,
     baseProps,
     measureText,
+    breakIterator,
   );
 }
 
@@ -982,6 +1036,7 @@ export function createParagraph(
       maxWidth,
       baseProps,
       measureText,
+      breakIterator,
     );
     applyTextOverflow(
       paragraph,
