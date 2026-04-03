@@ -1,4 +1,4 @@
-import { ChevronDown, Download, LayoutTemplate, Play, Type, Zap } from "lucide-react";
+import { Bug, ChevronDown, Download, LayoutTemplate, Play, Type, Zap } from "lucide-react";
 import { useState } from "react";
 import { TEMPLATES } from "../templates";
 import Icon from '../sone.svg?react'
@@ -10,10 +10,12 @@ interface ToolbarProps {
   onLoadTemplate: (code: string) => void;
   onToggleFonts: () => void;
   onToggleAutoRun: () => void;
+  onToggleDebug: () => void;
   isRunning: boolean;
   hasCanvas: boolean;
   fontsOpen: boolean;
   autoRun: boolean;
+  debugEnabled: boolean;
 }
 
 export function Toolbar({
@@ -23,10 +25,12 @@ export function Toolbar({
   onLoadTemplate,
   onToggleFonts,
   onToggleAutoRun,
+  onToggleDebug,
   isRunning,
   hasCanvas,
   fontsOpen,
   autoRun,
+  debugEnabled,
 }: ToolbarProps) {
   const [exportOpen, setExportOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
@@ -81,6 +85,17 @@ export function Toolbar({
       >
         <Zap size={12} />
         Auto
+      </button>
+
+      <button
+        onClick={onToggleDebug}
+        title={debugEnabled ? "Debug mode on" : "Debug mode off"}
+        className={`flex items-center gap-1.5 px-3 h-7 text-xs font-medium rounded transition-colors cursor-pointer ${
+          debugEnabled ? "bg-white text-black" : "bg-neutral-800 text-white hover:bg-neutral-700"
+        }`}
+      >
+        <Bug size={12} />
+        Debug
       </button>
 
       {/* Run button */}

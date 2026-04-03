@@ -8,11 +8,13 @@ import {
 } from "sone";
 import { transform } from "sucrase";
 import { transformCode } from "./execute";
+import type { RenderDebugOptions } from "./renderer";
 
 // OffscreenCanvas-based renderer — runs entirely off the main thread
 const measureCanvas = new OffscreenCanvas(1, 1);
 const registeredFonts = new Set<string>();
 let currentDpr = 1;
+let currentDebug: RenderDebugOptions = { layout: false, text: false };
 
 // workers expose fonts via WorkerGlobalScope.fonts
 const workerFonts = (self as unknown as { fonts: FontFaceSet }).fonts;
@@ -77,9 +79,9 @@ const workerRenderer: SoneRenderer = {
   },
 
   getDefaultTextProps: () => DEFAULT_TEXT_PROPS,
-  dpr: () => currentDpr,
+  dpr: () => 1,
   Path2D,
-  debug: () => ({ layout: false, text: false }),
+  debug: () => ({...currentDebug, layout: false}),
 };
 
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
@@ -88,8 +90,14 @@ self.onmessage = async (e: MessageEvent) => {
   const msg = e.data as Record<string, unknown>;
 
   if (msg.type === "render") {
-    const { id, code, dpr } = msg as { id: number; code: string; dpr: number };
+    const { id, code, dpr, debug } = msg as {
+      id: number;
+      code: string;
+      dpr: number;
+      debug?: RenderDebugOptions;
+    };
     currentDpr = dpr;
+    currentDebug = debug ?? { layout: false, text: false };
     try {
       const { code: js } = transform(code as string, {
         transforms: ["typescript"],

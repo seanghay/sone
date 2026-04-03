@@ -6,7 +6,7 @@ import { Preview } from "./components/Preview";
 import { Toolbar } from "./components/Toolbar";
 import { DEFAULT_CODE } from "./default-code";
 import { exportAsJPEG, exportAsPNG } from "./export";
-import { browserRenderer, createRenderer } from "./renderer";
+import { browserRenderer, createRenderer, type RenderDebugOptions } from "./renderer";
 import { executeCode } from "./execute";
 import { workerBridge } from "./worker-bridge";
 import RenderWorker from "./render-worker.ts?worker";
@@ -40,6 +40,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [fontsOpen, setFontsOpen] = useState(false);
   const [autoRun, setAutoRun] = useState(true);
+  const [debugEnabled, setDebugEnabled] = useState(false);
 
   const workerRef = useRef<Worker | null>(null);
   const requestIdRef = useRef(0);
@@ -81,13 +82,17 @@ export default function App() {
     setError(null);
 
     const dpr = browserRenderer.dpr();
-    workerRef.current!.postMessage({ type: "render", id, code: codeToRun, dpr });
+    const debug: RenderDebugOptions = {
+      layout: debugEnabled,
+      text: debugEnabled,
+    };
+    workerRef.current!.postMessage({ type: "render", id, code: codeToRun, dpr, debug });
 
     // Also evaluate on main thread to keep lastNode up-to-date for exports
     executeCode(codeToRun)
       .then((node) => { if (node != null) setLastNode(node); })
       .catch(() => {});
-  }, []);
+  }, [debugEnabled]);
 
   const handleRun = useCallback(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -102,15 +107,19 @@ export default function App() {
     debounceRef.current = setTimeout(() => runCode(newCode), 60);
   }, [autoRun, runCode]);
 
-  useEffect(() => { runCode(code); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { runCode(code); }, [debugEnabled]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => { if (debounceRef.current) clearTimeout(debounceRef.current); }, []);
 
   const handleExport = useCallback(async (format: "png" | "jpeg") => {
     if (!lastNode) return;
-    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(1));
+    const debug: RenderDebugOptions = {
+      layout: debugEnabled,
+      text: debugEnabled,
+    };
+    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(1, debug));
     if (format === "png") exportAsPNG(exportCanvas);
     else exportAsJPEG(exportCanvas);
-  }, [lastNode]);
+  }, [debugEnabled, lastNode]);
 
   return (
     <div className="flex flex-col h-full bg-white">
@@ -121,10 +130,12 @@ export default function App() {
         onLoadTemplate={(c) => { setCode(c); saveCode(c); runCode(c); }}
         onToggleFonts={() => setFontsOpen((v) => !v)}
         onToggleAutoRun={() => setAutoRun((v) => !v)}
+        onToggleDebug={() => setDebugEnabled((v) => !v)}
         isRunning={isRunning}
         hasCanvas={canvas !== null}
         fontsOpen={fontsOpen}
         autoRun={autoRun}
+        debugEnabled={debugEnabled}
       />
       <div className="flex flex-1 min-h-0">
         <div className="flex-1 min-w-0 border-r border-neutral-200">

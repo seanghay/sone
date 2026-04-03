@@ -5,6 +5,11 @@ import {
   type SoneRenderer,
 } from "sone";
 
+export interface RenderDebugOptions {
+  layout: boolean;
+  text: boolean;
+}
+
 const registeredFonts = new Set<string>();
 const measureCanvas = document.createElement("canvas");
 
@@ -82,8 +87,11 @@ const sharedMethods: Omit<SoneRenderer, "dpr"> = {
   debug: () => ({ layout: false, text: false }),
 };
 
-export function createRenderer(dpr: number): SoneRenderer {
-  return { ...sharedMethods, dpr: () => dpr };
+export function createRenderer(
+  dpr: number,
+  debug: RenderDebugOptions = { layout: false, text: false },
+): SoneRenderer {
+  return { ...sharedMethods, dpr: () => dpr, debug: () => debug };
 }
 
 /** Preview renderer — renders at 2x device pixel ratio for display */
