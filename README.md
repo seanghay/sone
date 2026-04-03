@@ -9,12 +9,12 @@
 ### Why Sone.js?
 
 - Declarative API
-- Flex Layout
+- Flex Layout & CSS Grid
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
 - Rich Text — spans, justification, tab stops, tab leaders, text orientation (0°/90°/180°/270°)
-- Lists
-- Squircle, QR Code, Photo
-- Table
+- Syntax Highlighting — via `sone/shiki` (Shiki integration)
+- Lists, Tables, Photos, SVG Paths, QR Codes
+- Squircle, ClipGroup
 - Custom font loading — any language or script
 - Output as SVG, PDF, PNG, JPG, WebP
 - Fully Typed
@@ -28,7 +28,7 @@
 
 ### Overview
 
-- This project uses `skia-canvas` if you encounter an installation issue, please follow [the skia-canvas instruction](https://github.com/samizdatco/skia-canvas)
+- This project uses `skia-canvas` — if you encounter an installation issue, follow [the skia-canvas instructions](https://github.com/samizdatco/skia-canvas)
 - Node.js 16+ or equivalent
 
 ```shell
@@ -53,11 +53,58 @@ const buffer = await sone(Document()).jpg();
 
 // save to file
 import fs from "node:fs/promises";
-
 await fs.writeFile("image.jpg", buffer);
 ```
 
-More examples can be found at [test/visual](test/visual) directory.
+More examples can be found in the [test/visual](test/visual) directory.
+
+---
+
+**Syntax Highlighting**
+
+Install [Shiki](https://shiki.style/) as a peer dependency, then import from `sone/shiki`:
+
+```shell
+npm install shiki
+```
+
+```javascript
+import { Column, sone } from "sone";
+import { createSoneHighlighter } from "sone/shiki";
+
+// Pre-load themes and languages once
+const highlight = await createSoneHighlighter({
+  themes: ["github-dark"],
+  langs: ["typescript", "javascript", "bash"],
+});
+
+// Code() returns a ColumnNode — compose it like any other node
+const doc = Column(
+  highlight.Code(`const greet = (name: string) => \`Hello, \${name}!\``, {
+    lang: "typescript",
+    theme: "github-dark",
+    fontSize: 13,
+    fontFamily: ["monospace"],
+    lineHeight: 1.6,
+  }),
+).padding(24).bg("white");
+
+await sone(doc).pdf();
+```
+
+`CodeOptions`:
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `lang` | `BundledLanguage` | — | Shiki language identifier. |
+| `theme` | `BundledTheme` | first loaded theme | Shiki theme. |
+| `fontSize` | `number` | `12` | Font size in pixels. |
+| `fontFamily` | `string[]` | `["monospace"]` | Font families in priority order. |
+| `lineHeight` | `number` | inherited | Line height multiplier. |
+| `paddingX` | `number` | `12` | Horizontal padding inside the block. |
+| `paddingY` | `number` | `8` | Vertical padding inside the block. |
+
+---
 
 **Multi-Page PDF**
 
@@ -163,9 +210,12 @@ List(
 ```javascript
 import { Font } from 'sone';
 
-if (!Font.has("NotoSansKhmer")) {
-  await Font.load('NotoSansKhmer', "test/font/NotoSansKhmer.ttf");
-}
+await Font.load("NotoSansKhmer", "test/font/NotoSansKhmer.ttf");
+
+// Load a specific weight variant
+await Font.load("GeistMono", ["/path/to/GeistMono-Bold.ttf"], { weight: "bold" });
+
+Font.has("NotoSansKhmer") // → boolean
 ```
 
 **Next.js**
@@ -189,7 +239,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
 ```
 
 ---
@@ -278,7 +327,7 @@ Flex layout containers. `Column` stacks children vertically, `Row` horizontally.
 | `top(v)` / `right(v)` / `bottom(v)` / `left(v)` | Offset for absolute positioning. |
 | `overflow(v)` | `"visible"` `"hidden"`. |
 | `display(v)` | `"flex"` `"none"` `"contents"`. |
-| `bg(v)` | Background color or gradient string. |
+| `bg(v)` | Background color, gradient string, or `Photo` node. |
 | `borderWidth(…v)` | CSS shorthand: 1–4 values (top, right, bottom, left). |
 | `borderColor(v)` | Border color. |
 | `rounded(…v)` | Border radius (CSS shorthand). |
@@ -290,6 +339,35 @@ Flex layout containers. `Column` stacks children vertically, `Row` horizontally.
 | `scale(v)` | Uniform scale, or `scale(x, y)`. |
 | `translateX(v)` / `translateY(v)` | Transform offset. |
 | `pageBreak(v)` | `"before"` `"after"` `"avoid"`. |
+
+---
+
+#### `Grid(...children)`
+
+CSS Grid layout container. Children are auto-placed or explicitly positioned.
+
+| Method | Description |
+|---|---|
+| `columns(...v)` | Column track sizes: fixed px, `"auto"`, or `"Nfr"`. |
+| `rows(...v)` | Row track sizes. |
+| `autoRows(...v)` | Implicit row track sizes. |
+| `autoColumns(...v)` | Implicit column track sizes. |
+| `columnGap(v)` / `rowGap(v)` | Gap between tracks. |
+
+Children support explicit placement via layout methods:
+
+| Method | Description |
+|---|---|
+| `gridColumn(start, span?)` | Column start index and optional span count. |
+| `gridRow(start, span?)` | Row start index and optional span count. |
+
+```javascript
+Grid(
+  Column(Text("Hero")).gridColumn(1, 2).gridRow(1),  // spans 2 cols
+  Column(Text("Side")).gridColumn(3).gridRow(1),
+  Column(Text("Footer")).gridColumn(1, 3),           // spans all 3
+).columns("1fr", "1fr", "200px").columnGap(12).rowGap(12)
+```
 
 ---
 
@@ -338,6 +416,23 @@ Span("highlighted").color("orange").weight("bold").size(14)
 ```
 
 Supports all text styling methods: `color`, `size`, `weight`, `font`, `style`, `letterSpacing`, `wordSpacing`, `underline`, `lineThrough`, `overline`, `highlight`, `strokeColor`, `strokeWidth`, `dropShadow`, `offsetY`.
+
+---
+
+#### `TextDefault(...children)`
+
+A layout container that cascades text styling to all descendant `Text` and `Span` nodes. Useful for setting document-wide defaults without repeating props on every node.
+
+```javascript
+TextDefault(
+  Column(
+    Text("Heading").size(20).weight("bold"),
+    Text("Body copy that inherits the font.").size(12),
+  ).gap(8),
+).font("GeistMono").color("#111")
+```
+
+Supports all text styling methods (same as `Text`) plus all layout methods.
 
 ---
 
@@ -402,6 +497,21 @@ Draws an SVG path string.
 | `scalePath(v)` | Scale the path geometry. |
 
 Plus all layout methods.
+
+---
+
+#### `ClipGroup(path, ...children)`
+
+Clips its children to an SVG path shape. The path is scaled to fit the node's layout dimensions.
+
+```javascript
+ClipGroup(
+  "M 0 0 L 100 0 L 100 100 Z",  // SVG path string
+  Photo("./image.jpg").size(150, 150),
+).size(150, 150)
+```
+
+Supports all layout methods plus `.clipPath(v)` to update the path after construction.
 
 ---
 
