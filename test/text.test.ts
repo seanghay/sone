@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { beforeAll, expect, test } from "vitest";
-import type { TextProps } from "../src/core.ts";
+import type { TextNode, TextProps } from "../src/core.ts";
 import type { SoneMetadata } from "../src/metadata.ts";
 import {
   compile,
@@ -14,6 +14,7 @@ import {
   createBlocks,
   createMultilineParagraph,
   createParagraph,
+  createTextRuns,
 } from "../src/text.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
@@ -68,6 +69,38 @@ function getLineTexts(paragraph: {
 
 function getLineText(line: { segments: Array<{ text: string }> }) {
   return line.segments.map((segment) => segment.text).join("");
+}
+
+function createLayoutStub(width: number): Parameters<typeof createTextRuns>[1] {
+  return {
+    getComputedWidth: () => width,
+    getComputedBorder: () => 0,
+    getComputedPadding: () => 0,
+  } as unknown as Parameters<typeof createTextRuns>[1];
+}
+
+async function compileTextNodeWithBlocks(node: TextNode, maxWidth: number) {
+  const compiledNode = await compile(node, createContext());
+  if (compiledNode == null || compiledNode.type !== "text") {
+    throw new Error("Expected compiled text node");
+  }
+
+  compiledNode.props.blocks = createParagraph(
+    compiledNode.children,
+    maxWidth,
+    compiledNode.props,
+    renderer.measureText,
+    renderer.breakIterator,
+  );
+  return compiledNode;
+}
+
+function getLastRunRight(line: {
+  segments: Array<{ run?: { x: number; width: number } }>;
+}) {
+  const run = line.segments[line.segments.length - 1]?.run;
+  if (run == null) throw new Error("Expected run metadata");
+  return run.x + run.width;
 }
 
 test("create paragraph without max width", async () => {
@@ -268,6 +301,40 @@ test("createParagraph drops leading wrap whitespace on the next line", async () 
     renderer.measureText("Beta", compiledNode!.props).width,
     3,
   );
+});
+
+test("createParagraph trims wrap whitespace from remaining text", async () => {
+  const node = Text("Alpha $Beta").font("GeistMono").size(20);
+  const compiledNode = await compile(node, createContext());
+
+  const paragraph = createParagraph(
+    compiledNode!.children,
+    71,
+    compiledNode!.props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual(["Alpha", "$Beta"]);
+  expect(getLineText(paragraph.lines[1])).toBe("$Beta");
+});
+
+test("createParagraph trims wrap whitespace at span boundaries", async () => {
+  const node = Text("Alpha", Span(" $Beta").color("red"))
+    .font("GeistMono")
+    .size(20);
+  const compiledNode = await compile(node, createContext());
+
+  const paragraph = createParagraph(
+    compiledNode!.children,
+    71,
+    compiledNode!.props,
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual(["Alpha", "$Beta"]);
+  expect(getLineText(paragraph.lines[1])).toBe("$Beta");
 });
 
 test("createParagraph keeps word-joined spans intact when wrapping", () => {
@@ -481,6 +548,98 @@ test("createParagraph trims whitespace before inserting ellipsis", () => {
 
   expect(getLineText(paragraph.lines[0])).not.toContain(" …");
   expect(getLineText(paragraph.lines[0]).endsWith("…")).toBe(true);
+});
+
+test("createTextRuns centers a single line within the layout width", async () => {
+  const width = 200;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("Alpha").font("GeistMono").size(20).align("center"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const run = compiledNode.props.blocks![0].paragraph.lines[0].segments[0].run;
+  expect(run).toBeDefined();
+  expect(run!.x).toBeCloseTo((width - run!.width) / 2, 3);
+});
+
+test("createTextRuns right-aligns a single line within the layout width", async () => {
+  const width = 200;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("Alpha").font("GeistMono").size(20).align("right"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const run = compiledNode.props.blocks![0].paragraph.lines[0].segments[0].run;
+  expect(run).toBeDefined();
+  expect(run!.x).toBeCloseTo(width - run!.width, 3);
+});
+
+test("createTextRuns justifies wrapped non-final lines but leaves the final line ragged", async () => {
+  const width = 150;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("Alpha Beta Gamma Delta").font("GeistMono").size(20).align("justify"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const lines = compiledNode.props.blocks![0].paragraph.lines;
+  expect(getLineTexts(compiledNode.props.blocks![0].paragraph)).toEqual([
+    "Alpha Beta",
+    "Gamma Delta",
+  ]);
+  expect(getLastRunRight(lines[0])).toBeCloseTo(width, 3);
+  expect(getLastRunRight(lines[1])).toBeCloseTo(lines[1].width, 3);
+  expect(getLastRunRight(lines[1])).toBeLessThan(width);
+});
+
+test("createTextRuns applies indent to the first line and hanging indent to wrapped lines", async () => {
+  const width = 100;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("Alpha Beta Gamma")
+      .font("GeistMono")
+      .size(20)
+      .indent(12)
+      .hangingIndent(28),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const lines = compiledNode.props.blocks![0].paragraph.lines;
+  expect(getLineTexts(compiledNode.props.blocks![0].paragraph)).toEqual([
+    "Alpha",
+    "Beta",
+    "Gamma",
+  ]);
+  expect(lines[0].segments[0].run?.x).toBeCloseTo(12, 3);
+  expect(lines[1].segments[0].run?.x).toBeCloseTo(28, 3);
+  expect(lines[2].segments[0].run?.x).toBeCloseTo(28, 3);
+});
+
+test("createTextRuns stacks explicit newline paragraphs vertically", async () => {
+  const width = 200;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("Alpha\nBeta").font("GeistMono").size(20),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const blocks = compiledNode.props.blocks!;
+  expect(blocks).toHaveLength(2);
+
+  const firstRun = blocks[0].paragraph.lines[0].segments[0].run;
+  const secondRun = blocks[1].paragraph.lines[0].segments[0].run;
+
+  expect(firstRun).toBeDefined();
+  expect(secondRun).toBeDefined();
+  expect(secondRun!.y).toBeGreaterThan(firstRun!.y);
+  expect(secondRun!.y - firstRun!.y).toBeCloseTo(blocks[0].paragraph.height, 3);
 });
 
 test("nowrap + autofit shrinks font to fit within width", async () => {
@@ -912,6 +1071,131 @@ test("createParagraph truncates Khmer text with ellipsis", () => {
   expect(paragraph.width).toBeLessThanOrEqual(150);
 });
 
+test("createParagraph wraps Khmer text at word boundaries", () => {
+  const paragraph = createParagraph(
+    ["ក្រសួងការពារជាតិ កម្ពុជា ប្រកាសព័ត៌មានថ្មី"],
+    120,
+    textProps({
+      font: ["NotoSansKhmer"],
+      size: 18,
+      lineHeight: 1.3,
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual([
+    "ក្រសួងការពារជាតិ",
+    "កម្ពុជា ប្រកាស",
+    "ព័ត៌មានថ្មី",
+  ]);
+});
+
+test("createParagraph keeps Khmer punctuation attached when wrapping", () => {
+  const paragraph = createParagraph(
+    ["ក្រសួងការពារជាតិ កម្ពុជា ប្រកាសព័ត៌មានថ្មី។ សូមប្រុងប្រយ័ត្ន"],
+    120,
+    textProps({
+      font: ["NotoSansKhmer"],
+      size: 18,
+      lineHeight: 1.3,
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual([
+    "ក្រសួងការពារជាតិ",
+    "កម្ពុជា ប្រកាស",
+    "ព័ត៌មានថ្មី។ សូម",
+    "ប្រុងប្រយ័ត្ន",
+  ]);
+  expect(getLineTexts(paragraph).some((line) => line.startsWith("។"))).toBe(
+    false,
+  );
+});
+
+test("createParagraph keeps Khmer currency, percent, and reduplication markers attached", () => {
+  const cases = [
+    {
+      text: "តម្លៃសំបុត្រ $៥០ ក្នុងម្នាក់",
+      width: 95,
+      lines: ["តម្លៃសំបុត្រ", "$៥០ ក្នុងម្នាក់"],
+    },
+    {
+      text: "បញ្ចុះតម្លៃ ១០០% សម្រាប់សិស្ស",
+      width: 110,
+      lines: ["បញ្ចុះតម្លៃ", "១០០% សម្រាប់", "សិស្ស"],
+    },
+    {
+      text: "ឧទាហរណ៍ រៗ បន្ថែម",
+      width: 90,
+      lines: ["ឧទាហរណ៍", "រៗ បន្ថែម"],
+    },
+  ];
+
+  for (const { text, width, lines } of cases) {
+    const paragraph = createParagraph(
+      [text],
+      width,
+      textProps({
+        font: ["NotoSansKhmer"],
+        size: 18,
+        lineHeight: 1.3,
+      }),
+      renderer.measureText,
+      renderer.breakIterator,
+    )[0].paragraph;
+
+    expect(getLineTexts(paragraph)).toEqual(lines);
+    expect(getLineTexts(paragraph).some((line) => line.startsWith(" "))).toBe(
+      false,
+    );
+  }
+});
+
+test("createTextRuns centers wrapped Khmer lines within the layout width", async () => {
+  const width = 180;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("ក្រសួងការពារជាតិ កម្ពុជា ប្រកាសព័ត៌មានថ្មី")
+      .font("NotoSansKhmer")
+      .size(18)
+      .align("center"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  for (const line of compiledNode.props.blocks![0].paragraph.lines) {
+    const run = line.segments[0].run;
+    expect(run).toBeDefined();
+    expect(run!.x).toBeCloseTo((width - line.width) / 2, 3);
+  }
+});
+
+test("createTextRuns justifies wrapped Khmer lines but keeps the final line ragged", async () => {
+  const width = 180;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("ក្រសួងការពារជាតិ កម្ពុជា ប្រកាសព័ត៌មានថ្មី")
+      .font("NotoSansKhmer")
+      .size(18)
+      .align("justify"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const lines = compiledNode.props.blocks![0].paragraph.lines;
+  expect(getLineTexts(compiledNode.props.blocks![0].paragraph)).toEqual([
+    "ក្រសួងការពារជាតិ កម្ពុជា",
+    "ប្រកាសព័ត៌មានថ្មី",
+  ]);
+  expect(lines[0].spacesCount).toBeGreaterThan(0);
+  expect(getLastRunRight(lines[0])).toBeCloseTo(width, 3);
+  expect(getLastRunRight(lines[1])).toBeCloseTo(lines[1].width, 3);
+  expect(getLastRunRight(lines[1])).toBeLessThan(width);
+});
+
 test("createParagraph truncates Thai text with ellipsis", () => {
   const text =
     "กระทรวงสาธารณสุขประกาศมาตรการใหม่เพื่อดูแลประชาชนและเพิ่มความปลอดภัยในการเดินทางช่วงเทศกาล";
@@ -932,6 +1216,124 @@ test("createParagraph truncates Thai text with ellipsis", () => {
   expect(paragraph.lines).toHaveLength(2);
   expect(lastLineText.endsWith("…")).toBe(true);
   expect(paragraph.width).toBeLessThanOrEqual(150);
+});
+
+test("createParagraph wraps Lao text at expected break points", () => {
+  const paragraph = createParagraph(
+    ["ກະຊວງສາທາລະນະສຸກ ປະກາດມາດຕະການໃໝ່"],
+    140,
+    textProps({
+      font: ["sans-serif"],
+      size: 18,
+      lineHeight: 1.3,
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(getLineTexts(paragraph)).toEqual([
+    "ກະຊວງສາທາລະນະສຸກ",
+    "ປະກາດມາດຕະການ",
+    "ໃໝ່",
+  ]);
+});
+
+test("createParagraph keeps Lao currency and percent markers attached when wrapping", () => {
+  const cases = [
+    {
+      text: "ລາຄາ $50 ຕໍ່ຄົນ",
+      width: 95,
+      lines: ["ລາຄາ $50 ຕໍ່", "ຄົນ"],
+    },
+    {
+      text: "ສ່ວນຫຼຸດ 100% ສຳລັບນັກຮຽນ",
+      width: 120,
+      lines: ["ສ່ວນຫຼຸດ 100%", "ສຳລັບນັກຮຽນ"],
+    },
+  ];
+
+  for (const { text, width, lines } of cases) {
+    const paragraph = createParagraph(
+      [text],
+      width,
+      textProps({
+        font: ["sans-serif"],
+        size: 18,
+        lineHeight: 1.3,
+      }),
+      renderer.measureText,
+      renderer.breakIterator,
+    )[0].paragraph;
+
+    expect(getLineTexts(paragraph)).toEqual(lines);
+    expect(getLineTexts(paragraph).some((line) => line.startsWith(" "))).toBe(
+      false,
+    );
+  }
+});
+
+test("createParagraph truncates Lao text with ellipsis", () => {
+  const text = "ກະຊວງສາທາລະນະສຸກ ປະກາດມາດຕະການໃໝ່ ເພື່ອຄວາມປອດໄພ ແລະ ການເດີນທາງ";
+  const paragraph = createParagraph(
+    [text],
+    150,
+    textProps({
+      font: ["sans-serif"],
+      size: 18,
+      maxLines: 2,
+      textOverflow: "ellipsis",
+    }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+  const lastLineText = getLineText(paragraph.lines[paragraph.lines.length - 1]);
+
+  expect(paragraph.lines).toHaveLength(2);
+  expect(lastLineText.endsWith("…")).toBe(true);
+  expect(lastLineText.includes(" …")).toBe(false);
+  expect(paragraph.width).toBeLessThanOrEqual(150);
+});
+
+test("createTextRuns centers wrapped Lao lines within the layout width", async () => {
+  const width = 180;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("ກະຊວງສາທາລະນະສຸກ ປະກາດມາດຕະການໃໝ່")
+      .font("sans-serif")
+      .size(18)
+      .align("center"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  for (const line of compiledNode.props.blocks![0].paragraph.lines) {
+    const run = line.segments[0].run;
+    expect(run).toBeDefined();
+    expect(run!.x).toBeCloseTo((width - line.width) / 2, 3);
+  }
+});
+
+test("createTextRuns justifies non-final Lao lines and leaves the final line ragged", async () => {
+  const width = 210;
+  const compiledNode = await compileTextNodeWithBlocks(
+    Text("ກະຊວງສາທາລະນະສຸກ ປະກາດ ມາດຕະການໃໝ່")
+      .font("sans-serif")
+      .size(18)
+      .align("justify"),
+    width,
+  );
+
+  createTextRuns(compiledNode, createLayoutStub(width), 0, 0);
+
+  const lines = compiledNode.props.blocks![0].paragraph.lines;
+  expect(getLineTexts(compiledNode.props.blocks![0].paragraph)).toEqual([
+    "ກະຊວງສາທາລະນະສຸກ ປະກາດ",
+    "ມາດຕະການໃໝ່",
+  ]);
+  expect(lines[0].spacesCount).toBeGreaterThan(0);
+  expect(getLastRunRight(lines[0])).toBeCloseTo(width, 3);
+  expect(getLastRunRight(lines[1])).toBeCloseTo(lines[1].width, 3);
+  expect(getLastRunRight(lines[1])).toBeLessThan(width);
 });
 
 test("tab leader segment stores pre-computed leader string", () => {

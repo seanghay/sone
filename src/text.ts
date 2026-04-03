@@ -613,6 +613,10 @@ function createParagraphChunks(
   return chunks;
 }
 
+function trimLeadingWrapWhitespace(text: string): string {
+  return text.replace(/^[ \t]+/u, "");
+}
+
 function createGreedyMultilineParagraph(
   spans: Array<string | SpanNode>,
   breakpoints: number[][],
@@ -633,8 +637,9 @@ function createGreedyMultilineParagraph(
     const spanBreakpoints = breakpoints[spanIndex] || [];
 
     if (spanBreakpoints.length === 0) {
+      let lineText = text;
       const segmentWidth = measureTabExpandedWidth(
-        text,
+        lineText,
         props,
         baseProps.tabStops,
         currentLine.width,
@@ -648,11 +653,14 @@ function createGreedyMultilineParagraph(
       ) {
         currentLine = createEmptyLine();
         lines.push(currentLine);
+
+        lineText = trimLeadingWrapWhitespace(lineText);
+        if (lineText.length === 0) continue;
       }
 
       pushSegments(
         currentLine,
-        text,
+        lineText,
         props,
         baseProps.tabStops,
         baseProps.tabLeader,
@@ -687,11 +695,22 @@ function createGreedyMultilineParagraph(
         currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
         lines.push(currentLine);
 
-        // Break whitespace should not become leading content on the next line.
-        if (isWhitespace(segmentText.replace(/\t+/gu, " "))) {
+        const lineText = trimLeadingWrapWhitespace(segmentText);
+        if (lineText.length === 0) {
           lastBreakpoint = breakpoint;
           continue;
         }
+
+        pushSegments(
+          currentLine,
+          lineText,
+          props,
+          baseProps.tabStops,
+          baseProps.tabLeader,
+          measureText,
+        );
+        lastBreakpoint = breakpoint;
+        continue;
       }
 
       pushSegments(
@@ -706,7 +725,7 @@ function createGreedyMultilineParagraph(
     }
 
     if (lastBreakpoint < text.length) {
-      const remainingText = text.substring(lastBreakpoint);
+      let remainingText = text.substring(lastBreakpoint);
       const segmentWidth = measureTabExpandedWidth(
         remainingText,
         props,
@@ -722,6 +741,9 @@ function createGreedyMultilineParagraph(
       ) {
         currentLine = createEmptyLine();
         lines.push(currentLine);
+
+        remainingText = trimLeadingWrapWhitespace(remainingText);
+        if (remainingText.length === 0) continue;
       }
 
       pushSegments(

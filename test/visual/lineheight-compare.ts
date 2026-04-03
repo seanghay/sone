@@ -12,6 +12,7 @@
  *   npx tsx test/visual/lineheight-compare.ts
  */
 
+import { Buffer } from "node:buffer";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -332,14 +333,18 @@ const GAP = 4;
 const PAD = 8;
 const FONT_LABEL = "14px monospace";
 
+function asNodeBuffer(data: Uint8Array): Buffer {
+  return Buffer.isBuffer(data) ? data : Buffer.from(data);
+}
+
 async function composite(
   slug: string,
-  browserPng: Buffer,
-  sonePng: Buffer,
+  browserPng: Uint8Array,
+  sonePng: Uint8Array,
   meta: { text: string; fontSize: number; lineHeight: number | "default" },
 ): Promise<void> {
-  const bImg = await loadImage(browserPng);
-  const sImg = await loadImage(sonePng);
+  const bImg = await loadImage(asNodeBuffer(browserPng));
+  const sImg = await loadImage(asNodeBuffer(sonePng));
 
   const totalW = PAD + bImg.width + GAP + sImg.width + PAD;
   const totalH =
@@ -427,7 +432,7 @@ try {
     await page.evaluate(() => document.fonts.ready);
     const element = await page.$(".text");
     if (!element) throw new Error("element not found");
-    const browserPng = (await element.screenshot({ type: "png" })) as Buffer;
+    const browserPng = asNodeBuffer(await element.screenshot({ type: "png" }));
     await page.close();
 
     // --- sone render ---
