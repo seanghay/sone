@@ -5,7 +5,7 @@ import { FontPanel } from "./components/FontPanel";
 import { Preview } from "./components/Preview";
 import { Toolbar } from "./components/Toolbar";
 import { DEFAULT_CODE } from "./default-code";
-import { exportAsJPEG, exportAsPDF, exportAsPNG, type ExportScale } from "./export";
+import { exportAsJPEG, exportAsPNG } from "./export";
 import { browserRenderer, createRenderer } from "./renderer";
 import { executeCode } from "./execute";
 import { workerBridge } from "./worker-bridge";
@@ -105,21 +105,19 @@ export default function App() {
   useEffect(() => { runCode(code); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => { if (debounceRef.current) clearTimeout(debounceRef.current); }, []);
 
-  const handleExport = useCallback(async (scale: ExportScale, format: "png" | "jpeg" | "pdf") => {
+  const handleExport = useCallback(async (format: "png" | "jpeg") => {
     if (!lastNode) return;
-    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(scale));
-    if (format === "png") exportAsPNG(exportCanvas, scale);
-    else if (format === "jpeg") exportAsJPEG(exportCanvas, scale);
-    else exportAsPDF(exportCanvas, scale);
+    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(1));
+    if (format === "png") exportAsPNG(exportCanvas);
+    else exportAsJPEG(exportCanvas);
   }, [lastNode]);
 
   return (
     <div className="flex flex-col h-full bg-white">
       <Toolbar
         onRun={handleRun}
-        onExportPNG={(scale) => handleExport(scale, "png")}
-        onExportJPEG={(scale) => handleExport(scale, "jpeg")}
-        onExportPDF={(scale) => handleExport(scale, "pdf")}
+        onExportPNG={() => handleExport("png")}
+        onExportJPEG={() => handleExport("jpeg")}
         onLoadTemplate={(c) => { setCode(c); saveCode(c); runCode(c); }}
         onToggleFonts={() => setFontsOpen((v) => !v)}
         onToggleAutoRun={() => setAutoRun((v) => !v)}

@@ -1,14 +1,12 @@
 import { ChevronDown, Download, LayoutTemplate, Play, Type, Zap } from "lucide-react";
-import { useRef, useState } from "react";
-import { EXPORT_SCALES, type ExportScale } from "../export";
+import { useState } from "react";
 import { TEMPLATES } from "../templates";
 import Icon from '../sone.svg?react'
 
 interface ToolbarProps {
   onRun: () => void;
-  onExportPNG: (scale: ExportScale) => void;
-  onExportJPEG: (scale: ExportScale) => void;
-  onExportPDF: (scale: ExportScale) => void;
+  onExportPNG: () => void;
+  onExportJPEG: () => void;
   onLoadTemplate: (code: string) => void;
   onToggleFonts: () => void;
   onToggleAutoRun: () => void;
@@ -22,7 +20,6 @@ export function Toolbar({
   onRun,
   onExportPNG,
   onExportJPEG,
-  onExportPDF,
   onLoadTemplate,
   onToggleFonts,
   onToggleAutoRun,
@@ -33,8 +30,6 @@ export function Toolbar({
 }: ToolbarProps) {
   const [exportOpen, setExportOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
-  const [scale, setScale] = useState<ExportScale>(1);
-  const exportRef = useRef<HTMLDivElement>(null);
 
   const close = () => setExportOpen(false);
 
@@ -99,7 +94,7 @@ export function Toolbar({
       </button>
 
       {/* Export dropdown */}
-      <div className="relative" ref={exportRef}>
+      <div className="relative">
         <button
           onClick={() => setExportOpen((v) => !v)}
           disabled={!hasCanvas}
@@ -112,31 +107,10 @@ export function Toolbar({
 
         {exportOpen && (
           <div className="absolute right-0 top-9 w-44 bg-white text-black rounded shadow-lg border border-neutral-200 py-2 z-50">
-            {/* Scale picker */}
-            <div className="px-3 pb-2">
-              <p className="text-xs text-neutral-400 mb-1.5">Scale</p>
-              <div className="flex gap-1">
-                {EXPORT_SCALES.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setScale(s)}
-                    className={`flex-1 py-1 text-xs font-medium rounded cursor-pointer transition-colors ${
-                      scale === s
-                        ? "bg-black text-white"
-                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-                    }`}
-                  >
-                    {s}x
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="border-t border-neutral-100 pt-1">
+            <div>
               {[
-                { label: "PNG", action: () => { onExportPNG(scale); close(); } },
-                { label: "JPEG", action: () => { onExportJPEG(scale); close(); } },
-                { label: "PDF", action: () => { onExportPDF(scale); close(); } },
+                { label: "PNG", action: () => { onExportPNG(); close(); } },
+                { label: "JPEG", action: () => { onExportJPEG(); close(); } },
               ].map(({ label, action }) => (
                 <button
                   key={label}
