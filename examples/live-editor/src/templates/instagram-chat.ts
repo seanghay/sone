@@ -72,7 +72,8 @@ export default function Root() {
       .paddingLeft(12)
       .paddingRight(12)
       .bg(side === "right" ? "#d62976" : "white")
-      .shadow("0 2px 10px rgba(17,24,39,0.08)");
+      .borderWidth(1)
+      .borderColor("rgba(148,163,184,0.35)");
     return side === "right"
       ? card.cornerRadius(18, 18, 6, 18)
       : card.cornerRadius(18, 18, 18, 6);
@@ -141,7 +142,8 @@ export default function Root() {
       .paddingRight(10)
       .bg("white")
       .cornerRadius(20)
-      .shadow("0 2px 12px rgba(17,24,39,0.08)"),
+      .borderWidth(1)
+      .borderColor("#d1d5db"),
   )
     .padding(16)
     .gap(14)

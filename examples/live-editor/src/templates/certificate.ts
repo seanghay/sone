@@ -13,7 +13,8 @@ export default function Root() {
     .cornerRadius(28)
     .alignItems("center")
     .justifyContent("center")
-    .shadow("0 2px 8px rgba(217,119,6,0.3)");
+    .borderWidth(1)
+    .borderColor("#d1d5db");
 
   const line = (w: number) =>
     Column().width(w).height(2).bg("#e5e7eb").cornerRadius(1);

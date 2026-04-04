@@ -133,5 +133,6 @@ export default function Root() {
     .bg("white")
     .width(620)
     .cornerRadius(20)
-    .shadow("0 12px 30px rgba(17,24,39,0.08)");
+    .borderWidth(1)
+    .borderColor("#d1d5db");
 }

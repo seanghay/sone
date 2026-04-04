@@ -35,8 +35,7 @@ export default function Root() {
       .borderWidth(1)
       .borderColor("#d1d5db")
       .cornerRadius(2)
-      .padding(6)
-      .shadow("0 1px 2px rgba(0,0,0,0.06)");
+      .padding(6);
 
   const dotted = () =>
     Column().height(1).bg("transparent").borderWidth(1).borderColor("#d1d5db");
@@ -77,7 +76,8 @@ export default function Root() {
         .bg("white")
         .alignItems("flex-start")
     )
-      .shadow("0 4px 12px rgba(0,0,0,0.12)")
+      .borderWidth(1)
+      .borderColor("#d1d5db")
       .cornerRadius(8)
       .overflow("hidden"),
 
@@ -117,7 +117,8 @@ export default function Root() {
       .padding(20)
       .bg("white")
       .cornerRadius(8)
-      .shadow("0 2px 8px rgba(0,0,0,0.08)")
+      .borderWidth(1)
+      .borderColor("#d1d5db")
       .alignItems("stretch")
       .marginTop(16)
   )

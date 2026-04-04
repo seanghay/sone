@@ -17,7 +17,8 @@ export default function Root() {
     .padding(16)
     .bg("white")
     .cornerRadius(12)
-    .shadow("0 2px 8px rgba(0,0,0,0.08)");
+    .borderWidth(1)
+    .borderColor("#d1d5db");
 
   return Column(
     Text(

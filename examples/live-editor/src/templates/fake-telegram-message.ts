@@ -70,7 +70,8 @@ export default function Root() {
       .paddingRight(12)
       .bg(mine ? "#d9fdd3" : "white")
       .cornerRadius(mine ? 16 : 16, 16, mine ? 4 : 16, mine ? 16 : 4)
-      .shadow("0 2px 10px rgba(17,24,39,0.08)");
+      .borderWidth(1)
+      .borderColor("rgba(148,163,184,0.35)");
 
   const messageRow = (
     sender: string,
@@ -135,7 +136,8 @@ export default function Root() {
       .paddingRight(10)
       .bg("white")
       .cornerRadius(18)
-      .shadow("0 2px 12px rgba(17,24,39,0.08)"),
+      .borderWidth(1)
+      .borderColor("#d1d5db"),
   )
     .padding(16)
     .gap(14)

@@ -117,7 +117,7 @@ function CanvasDisplay({ canvas }: { canvas: HTMLCanvasElement }) {
   return (
     <div
       ref={ref}
-      className="w-full overflow-hidden rounded shadow-lg"
+      className="w-full overflow-hidden rounded border border-neutral-300"
       style={{ display: "block" }}
     />
   );

@@ -29,7 +29,8 @@ export default function Root() {
       .padding(18)
       .bg("linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(239,246,255,0.92) 100%)")
       .cornerRadius(16)
-      .shadow("0 4px 18px rgba(15,23,42,0.06)");
+      .borderWidth(1)
+      .borderColor("#d1d5db");
 
   const bar = (label: string, width: number, value: string, color: string) =>
     Column(
@@ -74,7 +75,8 @@ export default function Root() {
         .padding(14)
         .bg("linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)")
         .cornerRadius(14)
-        .shadow("0 4px 18px rgba(15,23,42,0.06)"),
+        .borderWidth(1)
+        .borderColor("#d1d5db"),
     ).alignItems("flex-start"),
 
     Row(
@@ -96,7 +98,8 @@ export default function Root() {
         .padding(20)
         .bg("linear-gradient(180deg, #ffffff 0%, #eff6ff 100%)")
         .cornerRadius(18)
-        .shadow("0 4px 18px rgba(15,23,42,0.06)"),
+        .borderWidth(1)
+        .borderColor("#d1d5db"),
       Column(
         Text("Key Insights").size(14).weight("700").color("#0f172a"),
         ...report.insights.map((item) => bullet(item).marginTop(14)),
@@ -105,7 +108,8 @@ export default function Root() {
         .padding(20)
         .bg("white")
         .cornerRadius(18)
-        .shadow("0 4px 18px rgba(15,23,42,0.06)"),
+        .borderWidth(1)
+        .borderColor("#d1d5db"),
     )
       .gap(14)
       .marginTop(18),
@@ -123,7 +127,8 @@ export default function Root() {
       .padding(20)
       .bg("white")
       .cornerRadius(18)
-      .shadow("0 4px 18px rgba(15,23,42,0.06)")
+      .borderWidth(1)
+      .borderColor("#d1d5db")
       .marginTop(18),
   )
     .padding(26)
