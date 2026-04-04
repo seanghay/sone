@@ -1,7 +1,7 @@
 import MonacoEditor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as Monaco from "monaco-editor";
 import githubLight from "./github.json";
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { setupMonaco } from "../monaco-setup";
 
 loader.init().then((monaco) => {
@@ -16,11 +16,20 @@ interface EditorProps {
   error: string | null;
 }
 
-export function Editor({ value, onChange, onRun, error }: EditorProps) {
+export interface EditorHandle {
+  insertAtCursor: (text: string) => void;
+}
+
+export const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
+  { value, onChange, onRun, error },
+  ref,
+) {
   const monacoRef = useRef<typeof Monaco | null>(null);
+  const editorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null);
 
   const handleMount: OnMount = (editor, monaco) => {
     monacoRef.current = monaco;
+    editorRef.current = editor;
     setupMonaco(monaco); // synchronous now — no fetch involved
 
     // Cmd/Ctrl+Enter to run
@@ -31,6 +40,31 @@ export function Editor({ value, onChange, onRun, error }: EditorProps) {
     // Focus editor
     editor.focus();
   };
+
+  useImperativeHandle(ref, () => ({
+    insertAtCursor(text: string) {
+      const editor = editorRef.current;
+      const monaco = monacoRef.current;
+      const model = editor?.getModel();
+      if (!editor || !monaco || !model) return;
+
+      const selection = editor.getSelection() ?? new monaco.Selection(
+        model.getLineCount(),
+        model.getLineMaxColumn(model.getLineCount()),
+        model.getLineCount(),
+        model.getLineMaxColumn(model.getLineCount()),
+      );
+
+      editor.executeEdits("insert-photo", [
+        {
+          range: selection,
+          text,
+          forceMoveMarkers: true,
+        },
+      ]);
+      editor.focus();
+    },
+  }), []);
 
   // Re-register run shortcut when onRun changes
   useEffect(() => {}, [onRun]);
@@ -80,4 +114,4 @@ export function Editor({ value, onChange, onRun, error }: EditorProps) {
       )}
     </div>
   );
-}
+});

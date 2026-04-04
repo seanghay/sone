@@ -2,30 +2,32 @@ import { Check, Copy, Loader2, Plus, Search, Upload, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   fetchAllFonts,
+  getLoadedFonts,
   loadCustomFontFile,
   loadFontFromCDN,
   type FontMeta,
+  type LoadedFontInfo,
   unloadFont,
 } from "../fonts";
 
-interface LoadedFont {
-  id: string;
-  name: string;
-}
-
 interface FontPanelProps {
-  onClose: () => void;
+  onClose?: () => void;
   mobile?: boolean;
+  embedded?: boolean;
 }
 
 const MAX_RESULTS = 80;
 
-export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
+export function FontPanel({
+  onClose,
+  mobile = false,
+  embedded = false,
+}: FontPanelProps) {
   const [allFonts, setAllFonts] = useState<FontMeta[]>([]);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(true);
   const [query, setQuery] = useState("");
-  const [loadedFonts, setLoadedFonts] = useState<LoadedFont[]>([]);
+  const [loadedFonts, setLoadedFonts] = useState<LoadedFontInfo[]>(() => getLoadedFonts());
   const [loading, setLoading] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [copiedFontId, setCopiedFontId] = useState<string | null>(null);
@@ -37,6 +39,7 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
       .then(setAllFonts)
       .catch((e) => setFetchError(e.message))
       .finally(() => setIsFetching(false));
+    setLoadedFonts(getLoadedFonts());
     searchRef.current?.focus();
   }, []);
 
@@ -116,17 +119,17 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
   }
 
   return (
-    <div className={`h-full w-full min-w-0 bg-white flex flex-col ${mobile ? "" : "border-l border-neutral-200"}`}>
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 h-12 border-b border-neutral-200 shrink-0">
-        <span className="text-sm font-semibold">Fonts</span>
-        <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded cursor-pointer">
-          <X size={14} />
-        </button>
-      </div>
+    <div className={`h-full w-full min-w-0 bg-white flex flex-col ${mobile || embedded ? "" : "border-l border-neutral-200"}`}>
+      {!embedded && (
+        <div className="flex items-center justify-between px-4 h-12 border-b border-neutral-200 shrink-0">
+          <span className="text-sm font-semibold">Fonts</span>
+          <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded cursor-pointer">
+            <X size={14} />
+          </button>
+        </div>
+      )}
 
-      {/* Search */}
-      <div className="px-3 py-2 border-b border-neutral-100 shrink-0">
+      <div className={`px-3 py-2 border-b border-neutral-100 shrink-0 ${embedded ? "pt-3" : ""}`}>
         <div className="mb-2 flex items-center gap-2">
           <button
             onClick={() => fileInputRef.current?.click()}
@@ -165,7 +168,6 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
         </div>
       </div>
 
-      {/* Loaded fonts */}
       {loadedFonts.length > 0 && (
         <div className="px-3 pt-3 pb-1 border-b border-neutral-100 shrink-0">
           <p className="text-xs font-medium text-neutral-400 uppercase tracking-wide mb-1.5">Loaded</p>
@@ -206,7 +208,6 @@ export function FontPanel({ onClose, mobile = false }: FontPanelProps) {
         <p className="mx-3 mt-2 text-xs text-red-600 bg-red-50 px-2 py-1.5 rounded shrink-0">{loadError}</p>
       )}
 
-      {/* Font list */}
       <div className="flex-1 overflow-y-auto">
         {isFetching ? (
           <div className="flex items-center justify-center h-24 text-neutral-400">

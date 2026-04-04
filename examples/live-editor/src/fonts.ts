@@ -29,9 +29,14 @@ export async function fetchAllFonts(): Promise<FontMeta[]> {
 
 const CDN = "https://cdn.jsdelivr.net/fontsource/fonts";
 
-type LoadedFontSource =
-  | { kind: "cdn"; link: HTMLLinkElement }
-  | { kind: "custom" };
+export interface LoadedFontInfo {
+  id: string;
+  name: string;
+}
+
+type LoadedFontRecord =
+  | { id: string; name: string; kind: "cdn"; link: HTMLLinkElement }
+  | { id: string; name: string; kind: "custom" };
 
 /** Static font URL: {id}@{version}/{subset}-{weight}-{style}.woff2 */
 function staticUrl(id: string, subset: string, weight = 400, style = "normal", version = "latest") {
@@ -73,7 +78,11 @@ async function loadSubsetDirect(name: string, fontId: string, subset: string, we
   }
 }
 
-const loadedFonts = new Map<string, LoadedFontSource>();
+const loadedFonts = new Map<string, LoadedFontRecord>();
+
+export function getLoadedFonts(): LoadedFontInfo[] {
+  return Array.from(loadedFonts.values()).map(({ id, name }) => ({ id, name }));
+}
 
 function fileToDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -106,7 +115,7 @@ export async function loadFontFromCDN(
   link.href = `${CDN}/${fontId}@latest/index.css`;
   link.crossOrigin = "anonymous";
   document.head.appendChild(link);
-  loadedFonts.set(fontId, { kind: "cdn", link });
+  loadedFonts.set(fontId, { id: fontId, name, kind: "cdn", link });
 
   // Register latin via the renderer so hasFont(name) returns true in Sone
   const latinUrls = [variableUrl(fontId, "latin"), staticUrl(fontId, "latin", weight)];
@@ -153,7 +162,7 @@ export async function loadCustomFontFile(
   const source = await fileToDataUrl(file);
   await browserRenderer.registerFont(name, source);
   workerBridge.registerFont(name, source);
-  loadedFonts.set(fontId, { kind: "custom" });
+  loadedFonts.set(fontId, { id: fontId, name, kind: "custom" });
   await document.fonts.ready;
 }
 

@@ -1,5 +1,13 @@
-import { Bug, ChevronDown, Download, LayoutTemplate, Play, Type, Zap } from "lucide-react";
-import { useState } from "react";
+import {
+  Bug,
+  ChevronDown,
+  Download,
+  LayoutTemplate,
+  Play,
+  SlidersHorizontal,
+  Zap,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { TEMPLATES } from "../templates";
 import Icon from '../sone.svg?react'
 
@@ -8,12 +16,12 @@ interface ToolbarProps {
   onExportPNG: () => void;
   onExportJPEG: () => void;
   onLoadTemplate: (code: string) => void;
-  onToggleFonts: () => void;
+  onToggleProperties: () => void;
   onToggleAutoRun: () => void;
   onToggleDebug: () => void;
   isRunning: boolean;
   hasCanvas: boolean;
-  fontsOpen: boolean;
+  propertiesOpen: boolean;
   autoRun: boolean;
   debugEnabled: boolean;
 }
@@ -23,19 +31,46 @@ export function Toolbar({
   onExportPNG,
   onExportJPEG,
   onLoadTemplate,
-  onToggleFonts,
+  onToggleProperties,
   onToggleAutoRun,
   onToggleDebug,
   isRunning,
   hasCanvas,
-  fontsOpen,
+  propertiesOpen,
   autoRun,
   debugEnabled,
 }: ToolbarProps) {
   const [exportOpen, setExportOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
+  const exportRef = useRef<HTMLDivElement>(null);
+  const templatesRef = useRef<HTMLDivElement>(null);
 
-  const close = () => setExportOpen(false);
+  useEffect(() => {
+    if (!exportOpen && !templatesOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (!target) return;
+
+      if (
+        exportRef.current?.contains(target) ||
+        templatesRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      setExportOpen(false);
+      setTemplatesOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [exportOpen, templatesOpen]);
+
+  const closeMenus = () => {
+    setExportOpen(false);
+    setTemplatesOpen(false);
+  };
 
   return (
     <div className="flex items-center gap-2 px-4 h-12 bg-black text-white shrink-0 select-none">
@@ -48,9 +83,12 @@ export function Toolbar({
       </div>
 
       {/* Templates dropdown */}
-      <div className="relative">
+      <div ref={templatesRef} className="relative">
         <button
-          onClick={() => setTemplatesOpen((v) => !v)}
+          onClick={() => {
+            setExportOpen(false);
+            setTemplatesOpen((v) => !v);
+          }}
           className="flex items-center gap-1.5 px-3 h-7 bg-neutral-800 text-white text-xs font-medium rounded hover:bg-neutral-700 transition-colors cursor-pointer"
         >
           <LayoutTemplate size={12} />
@@ -58,11 +96,14 @@ export function Toolbar({
           <ChevronDown size={10} className={`transition-transform ${templatesOpen ? "rotate-180" : ""}`} />
         </button>
         {templatesOpen && (
-          <div className="absolute left-0 top-9 w-56 bg-white text-black rounded shadow-lg border border-neutral-200 py-1 z-50">
+          <div className="absolute left-0 top-9 z-50 w-56 rounded border border-neutral-300 bg-white py-1 text-black">
             {TEMPLATES.map((t) => (
               <button
                 key={t.id}
-                onClick={() => { onLoadTemplate(t.code); setTemplatesOpen(false); }}
+                onClick={() => {
+                  onLoadTemplate(t.code);
+                  closeMenus();
+                }}
                 className="w-full text-left px-3 py-2 hover:bg-neutral-50 cursor-pointer"
               >
                 <p className="text-xs font-medium text-neutral-900">{t.label}</p>
@@ -109,9 +150,12 @@ export function Toolbar({
       </button>
 
       {/* Export dropdown */}
-      <div className="relative">
+      <div ref={exportRef} className="relative">
         <button
-          onClick={() => setExportOpen((v) => !v)}
+          onClick={() => {
+            setTemplatesOpen(false);
+            setExportOpen((v) => !v);
+          }}
           disabled={!hasCanvas}
           className="flex items-center gap-1.5 px-3 h-7 bg-neutral-800 text-white text-xs font-medium rounded hover:bg-neutral-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
         >
@@ -121,11 +165,11 @@ export function Toolbar({
         </button>
 
         {exportOpen && (
-          <div className="absolute right-0 top-9 w-44 bg-white text-black rounded shadow-lg border border-neutral-200 py-2 z-50">
+          <div className="absolute right-0 top-9 z-50 w-44 rounded border border-neutral-300 bg-white py-2 text-black">
             <div>
               {[
-                { label: "PNG", action: () => { onExportPNG(); close(); } },
-                { label: "JPEG", action: () => { onExportJPEG(); close(); } },
+                { label: "PNG", action: () => { onExportPNG(); closeMenus(); } },
+                { label: "JPEG", action: () => { onExportJPEG(); closeMenus(); } },
               ].map(({ label, action }) => (
                 <button
                   key={label}
@@ -140,15 +184,14 @@ export function Toolbar({
         )}
       </div>
 
-      {/* Fonts toggle */}
       <button
-        onClick={onToggleFonts}
+        onClick={onToggleProperties}
         className={`flex items-center gap-1.5 px-3 h-7 text-xs font-medium rounded transition-colors cursor-pointer ${
-          fontsOpen ? "bg-white text-black" : "bg-neutral-800 text-white hover:bg-neutral-700"
+          propertiesOpen ? "bg-white text-black" : "bg-neutral-800 text-white hover:bg-neutral-700"
         }`}
       >
-        <Type size={12} />
-        Fonts
+        <SlidersHorizontal size={12} />
+        Properties
       </button>
     </div>
   );
