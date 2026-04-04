@@ -1,8 +1,10 @@
+/**
+ * Verify YOLO bbox correctness by converting normalised coords back to pixels
+ * and drawing them on a fresh render of the same scene.
+ */
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { TextProps } from "../../src/core.ts";
-import type { SoneMetadata } from "../../src/metadata.ts";
 import {
   Column,
   Row,
@@ -23,6 +25,7 @@ const HEADER_BG = "#1e3a5f";
 const ALT_BG = "#f8fafc";
 
 const T = [340, 460, 560] as const;
+const T2 = [280, 380, 480] as const;
 
 const divider = (color = RULE, h = 1) =>
   Row().height(h).bg(color).alignSelf("stretch");
@@ -100,8 +103,6 @@ const totalRow = (
     divider(ACCENT),
   ).gap(5);
 
-const T2 = [280, 380, 480] as const;
-
 const marginRow = (
   label: string,
   fy23: string,
@@ -125,7 +126,6 @@ const marginRow = (
     .color("#334155")
     .tag("margin-row");
 
-// ── Same root as tab-stops-1.ts ───────────────────────────────────────────────
 const root = Column(
   Column(
     Text("ATLAS MERIDIAN CORPORATION")
@@ -159,16 +159,13 @@ const root = Column(
     row("  Hardware & other", " 6,740", "  7,090", " +5.2%", "up"),
     row("  Contra revenue / refunds", "(1,205)", "(1,380)", " +14.5%", "down"),
     subtotalRow("Total Revenue", "102,625", "124,480", "+21.3%", "up"),
-
     sectionLabel("COST OF REVENUE"),
     row("  Cloud infrastructure", "18,320", " 21,900", "+19.5%", "down"),
     row("  Support & operations", " 7,460", "  8,110", " +8.7%", "down"),
     row("  Third-party licenses", " 3,210", "  3,580", "+11.5%", "down"),
     subtotalRow("Total Cost of Revenue", "28,990", "33,590", "+15.9%", "down"),
-
     Row().height(4),
     totalRow("Gross Profit", " 73,635", " 90,890", "+23.4%", "up"),
-
     sectionLabel("OPERATING EXPENSES"),
     row("  Sales & marketing", "22,180", " 26,340", "+18.7%", "down"),
     row("  Research & development", "18,950", " 24,610", "+29.9%", "down"),
@@ -176,24 +173,20 @@ const root = Column(
     row("  Restructuring charges", "    —", "  1,200", "  n/m", "down"),
     row("  Stock-based compensation", " 6,840", "  8,120", "+18.7%", "down"),
     subtotalRow("Total OpEx", "57,290", " 70,320", "+22.7%", "down"),
-
     Row().height(4),
     totalRow("Operating Income (EBIT)", "16,345", " 20,570", "+25.9%", "up"),
     row("  D&A add-back", " 4,210", "  5,330", "+26.6%", "up"),
     subtotalRow("EBITDA", "20,555", " 25,900", "+26.0%", "up"),
-
     sectionLabel("BELOW THE LINE"),
     row("  Interest income", "   620", "  1,140", "+83.9%", "up"),
     row("  Interest expense", "(2,450)", "(2,280)", " −7.3%", "up"),
     row("  FX gain / (loss)", "  (340)", "    280", "n/m", "up"),
     row("  Other income", "   180", "    220", "+22.2%", "up"),
-
     Row().height(4),
     totalRow("Pre-tax Income", "14,355", " 19,930", "+38.8%", "up"),
     row("  Income tax provision", "(3,230)", "(4,630)", "+43.3%", "down"),
     Row().height(4),
     totalRow("Net Income", "11,125", " 15,300", "+37.5%", "up"),
-
     Row().height(6),
     sectionLabel("PER SHARE DATA"),
     row("  Basic EPS", "  $2.41", "  $3.29", "+36.5%", "up"),
@@ -255,114 +248,72 @@ const root = Column(
   .rounded(6)
   .shadow("0 4px 24px rgba(0,0,0,0.10)");
 
-// ── Render + overlay bboxes ───────────────────────────────────────────────────
+// ── Render ────────────────────────────────────────────────────────────────────
 const { canvas, metadata } = await sone(root).canvasWithMetadata();
 const ctx = (canvas as any).getContext("2d") as CanvasRenderingContext2D;
 
-const PALETTE: Record<string, { stroke: string; fill: string }> = {
-  "col-header": { stroke: "#06b6d4", fill: "rgba(6,182,212,0.15)" },
-  section: { stroke: "#a855f7", fill: "rgba(168,85,247,0.15)" },
-  row: { stroke: "#3b82f6", fill: "rgba(59,130,246,0.12)" },
-  subtotal: { stroke: "#f59e0b", fill: "rgba(245,158,11,0.15)" },
-  total: { stroke: "#ff4040", fill: "rgba(255,64,64,0.15)" },
-  "margin-row": { stroke: "#22c55e", fill: "rgba(34,197,94,0.12)" },
-  change: { stroke: "#f97316", fill: "rgba(249,115,22,0.20)" },
-  delta: { stroke: "#ec4899", fill: "rgba(236,72,153,0.20)" },
-};
-
-const DEFAULT_COLOR = { stroke: "#94a3b8", fill: "rgba(148,163,184,0.10)" };
-
-const LABEL_FONT_SIZE = 8;
-
-function drawLabel(text: string, x: number, y: number, color: string) {
-  const pad = 2;
-  ctx.save();
-  ctx.font = `bold ${LABEL_FONT_SIZE}px monospace`;
-  const tw = ctx.measureText(text).width;
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y - LABEL_FONT_SIZE, tw + pad * 2, LABEL_FONT_SIZE + 1);
-  ctx.fillStyle = "white";
-  ctx.fillText(text, x + pad, y - 1);
-  ctx.restore();
-}
-
-function overlayBboxes(node: SoneMetadata) {
-  if (node.type === "text") {
-    const props = node.props as TextProps;
-    const blocks = props.blocks;
-    if (!blocks?.length) return;
-
-    const nodeTag = node.tag;
-    const nodeColors = (nodeTag && PALETTE[nodeTag]) ?? DEFAULT_COLOR;
-
-    for (const { paragraph } of blocks) {
-      for (const line of paragraph.lines) {
-        for (const segment of line.segments) {
-          const r = segment.run;
-          if (r == null || r.width === 0) continue;
-          if (segment.isTab || segment.text.trim() === "") continue;
-
-          // Determine color: prefer span tag, fall back to node tag
-          const spanTag = segment.props?.tag;
-          const { stroke, fill } = (spanTag && PALETTE[spanTag]) ?? nodeColors;
-
-          ctx.save();
-          ctx.fillStyle = fill;
-          ctx.fillRect(r.x, r.y, r.width, r.height);
-          ctx.strokeStyle = stroke;
-          ctx.lineWidth = 1;
-          ctx.strokeRect(r.x + 0.5, r.y + 0.5, r.width - 1, r.height - 1);
-          ctx.restore();
-
-          // Draw label for tagged segments or tagged text nodes
-          const label = spanTag ?? nodeTag;
-          if (label) {
-            drawLabel(label, r.x, r.y, stroke);
-          }
-        }
-      }
-    }
-
-    return;
-  }
-
-  if (Array.isArray(node.children)) {
-    for (const child of node.children) {
-      if (child != null && typeof child === "object" && "type" in child) {
-        overlayBboxes(child as SoneMetadata);
-      }
-    }
-  }
-}
-
-overlayBboxes(metadata);
-
-const dir = path.parse(fileURLToPath(import.meta.url)).dir;
-
-await fs.writeFile(
-  path.join(dir, "tab-stops-1-bbox.jpg"),
-  // @ts-expect-error skia-canvas Buffer API
-  await (canvas as any).toBuffer("jpg", { density: 2 }),
-);
-
-// ── YOLO bbox export ──────────────────────────────────────────────────────────
+// ── Build YOLO dataset ────────────────────────────────────────────────────────
 const ds = toYoloDataset(metadata, {
   granularity: "segment",
   include: ["text"],
   catchAllClass: null,
 });
 
-await fs.writeFile(path.join(dir, "tab-stops-1-bbox.txt"), ds.toTxt());
+// ── Class → colour mapping ────────────────────────────────────────────────────
+const CLASS_COLORS: Record<string, string> = {
+  "col-header": "#06b6d4",
+  section: "#a855f7",
+  row: "#3b82f6",
+  subtotal: "#f59e0b",
+  total: "#ef4444",
+  "margin-row": "#22c55e",
+  change: "#f97316",
+  delta: "#ec4899",
+};
+const FALLBACK_COLORS = ["#64748b", "#0ea5e9", "#84cc16", "#f43f5e"];
+const colorForClass = (name: string, id: number) =>
+  CLASS_COLORS[name] ?? FALLBACK_COLORS[id % FALLBACK_COLORS.length];
 
-const classesLines = [...ds.classes.entries()]
-  .sort((a, b) => a[1] - b[1])
-  .map(([name, id]) => `${id}: ${name}`)
-  .join("\n");
+// ── Draw boxes from normalised YOLO coords ────────────────────────────────────
+const { imageWidth: iw, imageHeight: ih } = ds;
+const LABEL_H = 9;
 
-await fs.writeFile(
-  path.join(dir, "tab-stops-1-bbox.classes.txt"),
-  classesLines,
+for (const b of ds.boxes) {
+  // Convert normalised → pixel
+  const px = b.cx * iw - (b.w * iw) / 2;
+  const py = b.cy * ih - (b.h * ih) / 2;
+  const pw = b.w * iw;
+  const ph = b.h * ih;
+
+  const color = colorForClass(b.className, b.classId);
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.strokeRect(px + 0.5, py + 0.5, pw - 1, ph - 1);
+
+  // Label chip
+  ctx.font = `bold ${LABEL_H}px monospace`;
+  const label = `${b.classId}:${b.className}`;
+  const tw = ctx.measureText(label).width;
+  ctx.fillStyle = color;
+  ctx.fillRect(px, py - LABEL_H - 1, tw + 4, LABEL_H + 2);
+  ctx.fillStyle = "white";
+  ctx.fillText(label, px + 2, py - 2);
+  ctx.restore();
+}
+
+// ── Save ──────────────────────────────────────────────────────────────────────
+const outFile = path.join(
+  path.parse(fileURLToPath(import.meta.url)).dir,
+  "tab-stops-1-bbox-yolo.jpg",
 );
 
-console.log(`boxes : ${ds.boxes.length}`);
-console.log(`classes:\n${classesLines}`);
+await fs.writeFile(
+  outFile,
+  // @ts-expect-error skia-canvas Buffer API
+  await (canvas as any).toBuffer("jpg", { density: 2 }),
+);
+
+console.log(`saved → ${outFile}`);
+console.log(`boxes: ${ds.boxes.length}  classes: ${ds.classes.size}`);

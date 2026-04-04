@@ -1,0 +1,8 @@
+0: change
+1: col-header
+2: delta
+3: margin-row
+4: row
+5: section
+6: subtotal
+7: total

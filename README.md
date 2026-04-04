@@ -12,13 +12,15 @@
 - Flex Layout & CSS Grid
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
 - Rich Text — spans, justification, tab stops, tab leaders, text orientation (0°/90°/180°/270°)
+- Bidirectional text — RTL support for Arabic, Hebrew, and mixed LTR/RTL paragraphs
 - Syntax Highlighting — via `sone/shiki` (Shiki integration)
 - Lists, Tables, Photos, SVG Paths, QR Codes
 - Squircle, ClipGroup
 - Custom font loading — any language or script
 - Output as SVG, PDF, PNG, JPG, WebP
 - Fully Typed
-- Metadata API (Text Recognition Dataset Generation)
+- Metadata API — access per-node layout, text segment bboxes, and `.tag()` labels
+- YOLO Dataset Export — generate bounding-box datasets for document layout analysis
 - All features from [skia-canvas](https://skia-canvas.org/)
 
 ---
@@ -404,6 +406,8 @@ Text("Hello ", Span("world").color("blue").weight("bold")).size(16)
 | `strokeColor(v)` / `strokeWidth(v)` | Text outline. |
 | `dropShadow(v)` | CSS text-shadow string. |
 | `nowrap()` | Disable text wrapping. |
+| `baseDir(v)` | Paragraph base direction: `"ltr"`, `"rtl"`, or `"auto"` (auto-detected from first strong character). |
+| `tag(v)` | Debug label attached to the node — surfaced in the Metadata API and used as a YOLO class name. |
 
 ---
 
@@ -416,6 +420,13 @@ Span("highlighted").color("orange").weight("bold").size(14)
 ```
 
 Supports all text styling methods: `color`, `size`, `weight`, `font`, `style`, `letterSpacing`, `wordSpacing`, `underline`, `lineThrough`, `overline`, `highlight`, `strokeColor`, `strokeWidth`, `dropShadow`, `offsetY`.
+
+Additional span-level methods:
+
+| Method | Description |
+|---|---|
+| `tag(v)` | Debug label for this span — surfaced in the Metadata API and takes priority over the parent `Text` node tag when used as a YOLO class. |
+| `textDir(v)` | Per-span canvas direction override: `"ltr"` or `"rtl"`. Overrides the paragraph `baseDir`. |
 
 ---
 
@@ -560,6 +571,132 @@ await Font.load("MyFont", ["/path/to/bold.ttf"], { weight: "bold" })
 Font.has("MyFont")   // → boolean
 await Font.unload("MyFont")
 ```
+
+---
+
+**Bidirectional Text (RTL)**
+
+RTL paragraphs are detected automatically from the first strong character (Unicode P2–P3 rules). You can override with `.baseDir()` on `Text` or force a per-span direction with `.textDir()` on `Span`.
+
+```javascript
+import { Font, sone, Column, Text, Span } from "sone";
+
+await Font.load("NotoSansArabic", "fonts/NotoSansArabic.ttf");
+await Font.load("NotoSansHebrew", "fonts/NotoSansHebrew.ttf");
+
+Column(
+  // Auto-detected RTL (first strong char is Arabic)
+  Text("مرحبا بالعالم").font("NotoSansArabic").size(32),
+
+  // Explicit RTL override
+  Text("שלום עולם").font("NotoSansHebrew").size(32).baseDir("rtl"),
+
+  // Mixed — LTR paragraph with an RTL span
+  Text(
+    "Total: ",
+    Span("١٢٣").font("NotoSansArabic").textDir("rtl"),
+    " items",
+  ).size(18),
+)
+```
+
+| Method | Description |
+|---|---|
+| `Text.baseDir(v)` | `"ltr"` `"rtl"` `"auto"` — sets paragraph direction. `"auto"` uses the first strong character heuristic. Default is `"auto"`. |
+| `Span.textDir(v)` | `"ltr"` `"rtl"` — overrides canvas direction for this span only. |
+
+---
+
+**Metadata API**
+
+`canvasWithMetadata()` and `renderWithMetadata()` return a `SoneMetadata` tree alongside the rendered canvas. Each node carries its computed layout position, dimensions, padding, margin, and — for `Text` nodes — fully laid-out paragraph blocks with per-segment bounding boxes.
+
+```javascript
+import { sone, Column, Text, Span } from "sone";
+
+const { canvas, metadata } = await sone(root).canvasWithMetadata();
+
+// metadata mirrors the node tree:
+// metadata.x / .y / .width / .height  — layout position
+// metadata.tag                         — value from .tag() on the node
+// metadata.type                        — "text" | "photo" | "column" | …
+
+// For text nodes, access per-segment runs:
+const props = metadata.props;          // TextProps
+for (const { paragraph } of props.blocks) {
+  for (const line of paragraph.lines) {
+    for (const segment of line.segments) {
+      const r = segment.run;           // { x, y, width, height } in canvas pixels
+      const spanTag = segment.props.tag;
+    }
+  }
+}
+```
+
+Tags are set with `.tag()` on any node or span:
+
+```javascript
+Column(
+  Text("Title").tag("title"),
+  Text("Body text").tag("content"),
+  Text(
+    "Revenue: ",
+    Span("+22%").color("green").tag("change"),
+  ).tag("row"),
+)
+```
+
+---
+
+**YOLO Dataset Export**
+
+`toYoloDataset()` transforms a `SoneMetadata` tree into a YOLO bounding-box dataset. Class IDs are auto-assigned alphabetically from all `.tag()` labels found in the tree.
+
+```javascript
+import { sone, toYoloDataset } from "sone";
+
+const { metadata } = await sone(root).canvasWithMetadata();
+
+const ds = toYoloDataset(metadata, {
+  granularity: "segment",       // "segment" | "line" | "block" | "node"
+  include: ["text", "photo"],   // "text" | "photo" | "layout"
+  catchAllClass: "content",     // null = skip untagged items
+});
+
+ds.classes      // Map<string, number>  e.g. { "change": 0, "row": 1, "title": 2 }
+ds.boxes        // YoloBox[]
+ds.imageWidth   // derived from root metadata
+ds.imageHeight
+
+ds.toTxt()      // YOLO .txt format: "classId cx cy w h" per line (normalised [0,1])
+ds.toJSON()     // { imageWidth, imageHeight, classes, boxes }
+```
+
+**`YoloExportOptions`**
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `granularity` | `"segment" \| "line" \| "block" \| "node"` | `"node"` | Granularity for text nodes. Non-text nodes always emit at node level. |
+| `include` | `Array<"text" \| "photo" \| "layout">` | all three | Which node types to include. |
+| `catchAllClass` | `string \| null` | `"__unlabeled__"` | Class name for untagged items. `null` skips them. |
+
+**Granularity levels**
+
+| Value | Emits | Tag source |
+|---|---|---|
+| `"segment"` | One box per text run | `Span.tag()` → `Text.tag()` → `catchAllClass` |
+| `"line"` | Union of segments on a line | `Text.tag()` → `catchAllClass` |
+| `"block"` | Union of lines in a paragraph | `Text.tag()` → `catchAllClass` |
+| `"node"` | Full layout bbox of the node | `node.tag()` → `catchAllClass` |
+
+**`YoloBox`**
+
+| Field | Description |
+|---|---|
+| `classId` | Numeric class ID |
+| `className` | Human-readable class name |
+| `cx` `cy` `w` `h` | Normalised center and size `[0, 1]` |
+| `x` `y` `pixelWidth` `pixelHeight` | Absolute pixel coordinates |
 
 ---
 
