@@ -936,6 +936,62 @@ function createKnuthPlassMultilineParagraph(
   return finalizeParagraph(lines, baseProps, measureText);
 }
 
+function createBalancedParagraph(
+  spans: Array<string | SpanNode>,
+  breakpoints: number[][],
+  maxWidth: number,
+  baseProps: TextProps,
+  measureText: SoneRenderer["measureText"],
+  breakIterator: SoneRenderer["breakIterator"],
+): SoneParagraph {
+  // First, lay out at full width to get the target number of lines.
+  const reference = createGreedyMultilineParagraph(
+    spans,
+    breakpoints,
+    maxWidth,
+    baseProps,
+    measureText,
+    breakIterator,
+  );
+  const targetLineCount = reference.lines.length;
+
+  // Nothing to balance if it fits on a single line or has no content.
+  if (targetLineCount <= 1) return reference;
+
+  // Binary search for the smallest width that still produces targetLineCount lines.
+  // Lower bound: the widest single line in the reference layout gives us the minimum
+  // possible width (we can't go narrower than the widest word).
+  let lo = reference.width / targetLineCount;
+  let hi = maxWidth;
+  const PRECISION = 0.5; // stop when the search window is < 0.5px
+
+  while (hi - lo > PRECISION) {
+    const mid = (lo + hi) / 2;
+    const attempt = createGreedyMultilineParagraph(
+      spans,
+      breakpoints,
+      mid,
+      baseProps,
+      measureText,
+      breakIterator,
+    );
+    if (attempt.lines.length <= targetLineCount) {
+      hi = mid;
+    } else {
+      lo = mid;
+    }
+  }
+
+  return createGreedyMultilineParagraph(
+    spans,
+    breakpoints,
+    hi,
+    baseProps,
+    measureText,
+    breakIterator,
+  );
+}
+
 export function createMultilineParagraph(
   spans: Array<string | SpanNode>,
   breakpoints: number[][],
@@ -944,6 +1000,21 @@ export function createMultilineParagraph(
   measureText: SoneRenderer["measureText"],
   breakIterator: SoneRenderer["breakIterator"] = function* () {},
 ): SoneParagraph {
+  if (
+    baseProps.textWrap === "balance" &&
+    baseProps.nowrap !== true &&
+    Number.isFinite(maxWidth)
+  ) {
+    return createBalancedParagraph(
+      spans,
+      breakpoints,
+      maxWidth,
+      baseProps,
+      measureText,
+      breakIterator,
+    );
+  }
+
   if (
     baseProps.lineBreak === "knuth-plass" &&
     baseProps.nowrap !== true &&
@@ -1139,8 +1210,13 @@ export function createTextRuns(
   let paragraphOffsetY = 0;
 
   for (const { paragraph } of blocks) {
-    paragraph.width =
-      Math.max(layout.getComputedWidth(), paragraph.width) - spaceX;
+    // For balanced text the paragraph width is the balanced content width — do not
+    // expand it to fill the full node width, so alignment is relative to the
+    // narrower balanced block rather than the container.
+    if (props.textWrap !== "balance") {
+      paragraph.width =
+        Math.max(layout.getComputedWidth(), paragraph.width) - spaceX;
+    }
 
     const paddingLeft =
       props.boxSizing === "content-box"

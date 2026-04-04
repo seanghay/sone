@@ -456,6 +456,13 @@ export interface TextProps extends SpanProps, LayoutProps {
   /** text alignment */
   align?: "left" | "right" | "center" | "justify";
 
+  /**
+   * Text wrap mode.
+   * - "wrap": default line-breaking (greedy or knuth-plass)
+   * - "balance": balance line lengths so all lines are roughly equal width
+   */
+  textWrap?: "wrap" | "balance";
+
   autofit?: boolean;
 
   /**
@@ -557,6 +564,7 @@ export interface TextPropsBuilder<T>
   orientation(value: 0 | 90 | 180 | 270): T;
   clipImage(value: PhotoNode): T;
   baseDir(value: Required<TextProps["baseDir"]>): T;
+  textWrap(value: Required<TextProps["textWrap"]>): T;
 }
 
 /**
@@ -1215,6 +1223,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     clipImage(value: PhotoNode): T {
       props.clipImage = value;
+      return this as unknown as T;
+    },
+    textWrap(value: Required<TextProps["textWrap"]>): T {
+      props.textWrap = value;
       return this as unknown as T;
     },
     props,

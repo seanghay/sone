@@ -1373,3 +1373,118 @@ test("multiple tab stops each get their own leader", () => {
   expect(typeof segments[1].tabLeader).toBe("string");
   expect(typeof segments[3].tabLeader).toBe("string");
 });
+
+// ─── textWrap: "balance" ────────────────────────────────────────────────────
+
+test("textWrap balance produces same line count as default", () => {
+  const text =
+    "The quick brown fox jumps over the lazy dog near the river bank";
+
+  const maxWidth = 300;
+  const defaultParagraph = createParagraph(
+    [text],
+    maxWidth,
+    textProps({ size: 20 }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  const balanced = createParagraph(
+    [text],
+    maxWidth,
+    textProps({ size: 20, textWrap: "balance" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(balanced.lines.length).toBe(defaultParagraph.lines.length);
+});
+
+test("textWrap balance makes lines more equal in width", () => {
+  const text =
+    "The quick brown fox jumps over the lazy dog near the river bank";
+
+  const maxWidth = 300;
+  const greedy = createParagraph(
+    [text],
+    maxWidth,
+    textProps({ size: 20 }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  const balanced = createParagraph(
+    [text],
+    maxWidth,
+    textProps({ size: 20, textWrap: "balance" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  function lineWidthVariance(lines: Array<{ width: number }>): number {
+    const widths = lines.map((l) => l.width);
+    const mean = widths.reduce((a, b) => a + b, 0) / widths.length;
+    return widths.reduce((sum, w) => sum + (w - mean) ** 2, 0) / widths.length;
+  }
+
+  const greedyVariance = lineWidthVariance(greedy.lines);
+  const balancedVariance = lineWidthVariance(balanced.lines);
+  expect(balancedVariance).toBeLessThanOrEqual(greedyVariance);
+});
+
+test("textWrap balance on a single-line text is a no-op", () => {
+  const text = "Short";
+
+  const balanced = createParagraph(
+    [text],
+    500,
+    textProps({ size: 20, textWrap: "balance" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(balanced.lines).toHaveLength(1);
+  expect(balanced.lines[0].segments[0].text).toBe("Short");
+});
+
+test("textWrap balance respects maxWidth — lines never exceed it", () => {
+  const text =
+    "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor";
+
+  const maxWidth = 300;
+  const balanced = createParagraph(
+    [text],
+    maxWidth,
+    textProps({ size: 20, textWrap: "balance" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  for (const line of balanced.lines) {
+    expect(line.width).toBeLessThanOrEqual(maxWidth + 1); // +1 for floating-point tolerance
+  }
+});
+
+test("textWrap balance with styled spans preserves span props", () => {
+  const spans = [
+    "Hello ",
+    Span("beautiful").color("red"),
+    " world, this is a long balanced sentence",
+  ];
+
+  const balanced = createParagraph(
+    spans,
+    250,
+    textProps({ size: 18, textWrap: "balance" }),
+    renderer.measureText,
+    renderer.breakIterator,
+  )[0].paragraph;
+
+  expect(balanced.lines.length).toBeGreaterThan(1);
+
+  const redSegment = balanced.lines
+    .flatMap((l) => l.segments)
+    .find((s) => s.props.color === "red");
+  expect(redSegment).toBeDefined();
+  expect(redSegment!.text).toBe("beautiful");
+});
