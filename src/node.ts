@@ -20,6 +20,7 @@ export * from "./linebreak.ts";
 export * from "./qrcode.ts";
 export * from "./renderer.ts";
 export { applySpanProps, fontBuilder } from "./utils.ts";
+export * from "./yolo.ts";
 
 /** Temporary canvas for text measurement */
 const dummyCanvas = new skia.Canvas(1, 1);

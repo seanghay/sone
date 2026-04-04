@@ -10,3 +10,4 @@ export * from "./linebreak.ts";
 export * from "./qrcode.ts";
 export * from "./renderer.ts";
 export { applySpanProps, fontBuilder } from "./utils.ts";
+export * from "./yolo.ts";
