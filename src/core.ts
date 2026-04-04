@@ -463,6 +463,17 @@ export interface TextProps extends SpanProps, LayoutProps {
    */
   textWrap?: "wrap" | "balance";
 
+  /**
+   * Hyphenation locale.
+   * - `true` / `"en"` — English (US) hyphenation
+   * - A BCP-47-like locale string: `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`,
+   *   `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, `"fi"`, etc.
+   * - `false` / omitted — no hyphenation (default)
+   *
+   * Requires the `hyphen` npm package to be installed.
+   */
+  hyphenation?: string | boolean;
+
   autofit?: boolean;
 
   /**
@@ -565,6 +576,8 @@ export interface TextPropsBuilder<T>
   clipImage(value: PhotoNode): T;
   baseDir(value: Required<TextProps["baseDir"]>): T;
   textWrap(value: Required<TextProps["textWrap"]>): T;
+  /** Enable hyphenation. Omit locale to default to English. */
+  hyphenate(locale?: string | boolean): T;
 }
 
 /**
@@ -1227,6 +1240,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     textWrap(value: Required<TextProps["textWrap"]>): T {
       props.textWrap = value;
+      return this as unknown as T;
+    },
+    hyphenate(locale?: string | boolean): T {
+      props.hyphenation = locale ?? true;
       return this as unknown as T;
     },
     props,

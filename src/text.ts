@@ -3,6 +3,7 @@ import { Edge, type Node } from "yoga-layout/load";
 import { resolveParagraphDirection } from "./bidi.ts";
 import type { SpanNode, SpanProps, TextNode, TextProps } from "./core.ts";
 import { createGradientFillStyleList } from "./gradient.ts";
+import { getHyphenBreaks, resolveHyphenLocale } from "./hyphenation.ts";
 import type { SoneRenderer } from "./renderer.ts";
 import { applySpanProps, indicesOf, isWhitespace } from "./utils.ts";
 
@@ -628,7 +629,62 @@ function findFittingWrapBoundary(
   tabStops: number[] | undefined,
   measureText: SoneRenderer["measureText"],
   breakIterator: SoneRenderer["breakIterator"],
-) {
+  hyphenLocale: string | null = null,
+): { boundary: number; addHyphen: boolean } {
+  // When hyphenation is enabled, use a separate path that combines word-level
+  // breaks with valid hyphenation points. This avoids raw grapheme splits that
+  // would produce mid-word breaks without a hyphen character.
+  if (hyphenLocale != null && availableWidth > 0) {
+    const hyphenWidth = measureText("-", props).width;
+
+    // Collect all candidate break positions with whether they need a hyphen.
+    // Word-level boundaries (spaces, punctuation transitions) → no hyphen.
+    // Hyphenation points inside words → hyphen needed.
+    const candidates: Array<{ pos: number; addHyphen: boolean }> = [];
+
+    // Word-level boundaries from the break iterator
+    for (const idx of breakIterator(text)) {
+      if (idx > 0 && idx < text.length) {
+        candidates.push({ pos: idx, addHyphen: false });
+      }
+    }
+    candidates.push({ pos: text.length, addHyphen: false });
+
+    // Hyphenation points across all letter-sequences in the text
+    for (const wMatch of text.matchAll(/\p{L}+/gu)) {
+      const wordStart = wMatch.index;
+      for (const b of getHyphenBreaks(wMatch[0], hyphenLocale)) {
+        candidates.push({ pos: wordStart + b, addHyphen: true });
+      }
+    }
+
+    // Sort descending by position so we try the longest fitting prefix first
+    candidates.sort((a, b) => b.pos - a.pos);
+
+    let fallback: { pos: number; addHyphen: boolean } | null = null;
+    for (const { pos, addHyphen } of candidates) {
+      if (pos <= 0) continue;
+      if (fallback === null) fallback = { pos, addHyphen };
+
+      const extra = addHyphen ? hyphenWidth : 0;
+      const width = measureTabExpandedWidth(
+        text.slice(0, pos),
+        props,
+        tabStops,
+        currentX,
+        measureText,
+      );
+      if (width + extra <= availableWidth) {
+        return { boundary: pos, addHyphen };
+      }
+    }
+
+    return fallback != null
+      ? { boundary: fallback.pos, addHyphen: fallback.addHyphen }
+      : { boundary: text.length, addHyphen: false };
+  }
+
+  // Default path (no hyphenation) — use grapheme + word boundaries
   const boundaries = [...getPrefixBoundaries(text, breakIterator), text.length]
     .filter((boundary, index, items) => {
       return boundary > 0 && items.indexOf(boundary) === index;
@@ -657,7 +713,7 @@ function findFittingWrapBoundary(
     break;
   }
 
-  return best > 0 ? best : fallback;
+  return { boundary: best > 0 ? best : fallback, addHyphen: false };
 }
 
 function appendWrappedText(
@@ -670,6 +726,7 @@ function appendWrappedText(
   measureText: SoneRenderer["measureText"],
   breakIterator: SoneRenderer["breakIterator"],
   shouldWrap: boolean,
+  hyphenLocale: string | null = null,
 ) {
   let remainingText = text;
 
@@ -699,6 +756,9 @@ function appendWrappedText(
     }
 
     if (currentLine.segments.length > 0) {
+      // Current line has content and remainingText doesn't fit as-is.
+      // Flush the line and retry — findFittingWrapBoundary will handle
+      // hyphenation on the now-empty next line.
       currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
       lines.push(currentLine);
 
@@ -708,7 +768,7 @@ function appendWrappedText(
     }
 
     const availableWidth = Math.max(0, maxWidth - currentLine.width);
-    const boundary = findFittingWrapBoundary(
+    const { boundary, addHyphen } = findFittingWrapBoundary(
       remainingText,
       props,
       availableWidth,
@@ -716,12 +776,13 @@ function appendWrappedText(
       baseProps.tabStops,
       measureText,
       breakIterator,
+      hyphenLocale,
     );
 
     const lineText = remainingText.slice(0, boundary);
     pushSegments(
       currentLine,
-      lineText,
+      addHyphen ? `${lineText}-` : lineText,
       props,
       baseProps.tabStops,
       baseProps.tabLeader,
@@ -747,6 +808,10 @@ function createGreedyMultilineParagraph(
   breakIterator: SoneRenderer["breakIterator"],
 ): SoneParagraph {
   const shouldWrap = baseProps.nowrap !== true;
+  const hyphenLocale =
+    baseProps.hyphenation != null && baseProps.hyphenation !== false
+      ? resolveHyphenLocale(baseProps.hyphenation)
+      : null;
   const lines: SoneParagraphLine[] = [];
 
   let currentLine = createEmptyLine(baseProps.indentSize ?? 0);
@@ -769,6 +834,7 @@ function createGreedyMultilineParagraph(
         measureText,
         breakIterator,
         shouldWrap,
+        hyphenLocale,
       );
       continue;
     }
@@ -793,6 +859,7 @@ function createGreedyMultilineParagraph(
         measureText,
         breakIterator,
         shouldWrap,
+        hyphenLocale,
       );
       lastBreakpoint = breakpoint;
     }
@@ -808,6 +875,7 @@ function createGreedyMultilineParagraph(
         measureText,
         breakIterator,
         shouldWrap,
+        hyphenLocale,
       );
     }
   }

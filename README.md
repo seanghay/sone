@@ -13,6 +13,8 @@
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
 - Rich Text — spans, justification, tab stops, tab leaders, text orientation (0°/90°/180°/270°)
 - Bidirectional text — RTL support for Arabic, Hebrew, and mixed LTR/RTL paragraphs
+- Hyphenation — automatic word hyphenation for 80+ languages via `.hyphenate(locale)`
+- Balanced line wrapping — evenly distributed line lengths via `.textWrap("balance")`
 - Syntax Highlighting — via `sone/shiki` (Shiki integration)
 - Lists, Tables, Photos, SVG Paths, QR Codes
 - Squircle, ClipGroup
@@ -163,6 +165,53 @@ Text("Revenue\t$1,200,000")
   .tabLeader("-")
   .size(13)
 ```
+
+**Balanced Line Wrapping**
+
+`.textWrap("balance")` narrows the effective line-break width so all lines end up roughly equal in length — useful for headings, pull-quotes, and card titles where a ragged last line looks awkward. The text node itself shrinks to the balanced content width, so it composes naturally inside flex containers.
+
+```javascript
+// Heading — balanced lines vs. greedy default
+Text("Breaking News: Scientists Discover New Species in the Amazon Rainforest")
+  .font("sans-serif")
+  .size(28)
+  .weight("bold")
+  .maxWidth(480)
+  .textWrap("balance")
+```
+
+**Hyphenation**
+
+`.hyphenate(locale?)` inserts typographic hyphens at valid syllable boundaries using Knuth–Liang patterns from the [`hyphen`](https://github.com/nicowillis/hypher) package (80+ languages). Install it as a dependency first:
+
+```shell
+npm install hyphen
+```
+
+```javascript
+// English (default)
+Text("The internationalization of software requires typographical care.")
+  .font("sans-serif")
+  .size(16)
+  .maxWidth(200)
+  .hyphenate()         // same as .hyphenate("en")
+
+// French
+Text("Le développement international de logiciels nécessite une typographie soignée.")
+  .hyphenate("fr")
+
+// German — compound words benefit greatly
+Text("Die Softwareentwicklung erfordert typografische Überlegungen.")
+  .hyphenate("de")
+
+// Hyphenation composes with textWrap balance
+Text("Extraordinary accomplishments in internationalization.")
+  .maxWidth(220)
+  .hyphenate("en")
+  .textWrap("balance")
+```
+
+Supported locale examples: `"en"` / `"en-us"` / `"en-gb"`, `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`, `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, `"fi"`, `"hu"`, `"ro"`, `"cs"`, `"tr"`, `"uk"`, `"bg"`, `"el"`, `"la"`, and more. Pass `true` for English.
 
 **Text Orientation**
 
@@ -406,6 +455,8 @@ Text("Hello ", Span("world").color("blue").weight("bold")).size(16)
 | `strokeColor(v)` / `strokeWidth(v)` | Text outline. |
 | `dropShadow(v)` | CSS text-shadow string. |
 | `nowrap()` | Disable text wrapping. |
+| `textWrap(v)` | `"wrap"` (default) or `"balance"` — balance distributes text so all lines are roughly equal in width. |
+| `hyphenate(locale?)` | Enable automatic hyphenation. Omit locale for English (`"en"`). Accepts BCP-47-like codes: `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`, `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, and 70+ more. Requires the `hyphen` package. |
 | `baseDir(v)` | Paragraph base direction: `"ltr"`, `"rtl"`, or `"auto"` (auto-detected from first strong character). |
 | `tag(v)` | Debug label attached to the node — surfaced in the Metadata API and used as a YOLO class name. |
 
