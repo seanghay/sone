@@ -20,7 +20,7 @@
 - Output as SVG, PDF, PNG, JPG, WebP
 - Fully Typed
 - Metadata API — access per-node layout, text segment bboxes, and `.tag()` labels
-- YOLO Dataset Export — generate bounding-box datasets for document layout analysis
+- YOLO / COCO Dataset Export — generate bounding-box datasets for document layout analysis
 - All features from [skia-canvas](https://skia-canvas.org/)
 
 ---
@@ -697,6 +697,41 @@ ds.toJSON()     // { imageWidth, imageHeight, classes, boxes }
 | `className` | Human-readable class name |
 | `cx` `cy` `w` `h` | Normalised center and size `[0, 1]` |
 | `x` `y` `pixelWidth` `pixelHeight` | Absolute pixel coordinates |
+
+---
+
+**COCO Dataset Export**
+
+`toCocoDataset()` produces the same bounding boxes as `toYoloDataset` but in COCO JSON format — a single object with `images`, `annotations`, and `categories` arrays. Category and annotation IDs are 1-based. Bboxes are absolute pixels in `[x, y, width, height]` format.
+
+```javascript
+import { sone, toCocoDataset } from "sone";
+
+const { metadata } = await sone(root).canvasWithMetadata();
+
+const ds = toCocoDataset(metadata, {
+  granularity: "line",
+  include: ["text", "photo"],
+  catchAllClass: "content",
+  fileName: "invoice-001.jpg",   // recorded in the images entry
+  imageId: 1,                    // default: 1
+  supercategory: "document",     // default: "layout"
+});
+
+// ds.images       — [{ id, file_name, width, height }]
+// ds.annotations  — [{ id, image_id, category_id, bbox, area, segmentation, iscrowd }]
+// ds.categories   — [{ id, name, supercategory }]
+
+await fs.writeFile("annotations.json", JSON.stringify(ds.toJSON(), null, 2));
+```
+
+**Additional `CocoExportOptions`** (extends `YoloExportOptions`):
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `imageId` | `number` | `1` | Numeric ID for the image entry. |
+| `fileName` | `string` | `"image.jpg"` | File name recorded in the image entry. |
+| `supercategory` | `string` | `"layout"` | `supercategory` field on every category. |
 
 ---
 

@@ -425,3 +425,137 @@ export function toYoloDataset(
     },
   };
 }
+
+// ── COCO types ────────────────────────────────────────────────────────────────
+
+export interface CocoExportOptions extends YoloExportOptions {
+  /**
+   * Numeric ID assigned to the image entry.
+   * @default 1
+   */
+  imageId?: number;
+  /**
+   * File name recorded in the image entry.
+   * @default "image.jpg"
+   */
+  fileName?: string;
+  /**
+   * `supercategory` field written to every category entry.
+   * @default "layout"
+   */
+  supercategory?: string;
+}
+
+export interface CocoImage {
+  id: number;
+  file_name: string;
+  width: number;
+  height: number;
+}
+
+export interface CocoAnnotation {
+  /** 1-based annotation ID. */
+  id: number;
+  image_id: number;
+  category_id: number;
+  /** Absolute pixel bbox: [x, y, width, height] (top-left origin). */
+  bbox: [number, number, number, number];
+  /** Bbox area in pixels². */
+  area: number;
+  /** Segmentation polygons (empty — bbox-only dataset). */
+  segmentation: number[][];
+  iscrowd: 0 | 1;
+}
+
+export interface CocoCategory {
+  /** 1-based category ID. */
+  id: number;
+  name: string;
+  supercategory: string;
+}
+
+export interface CocoDatasetJSON {
+  images: CocoImage[];
+  annotations: CocoAnnotation[];
+  categories: CocoCategory[];
+}
+
+export interface CocoDataset {
+  images: CocoImage[];
+  annotations: CocoAnnotation[];
+  /** Categories sorted by ID (1-based, alphabetical by name). */
+  categories: CocoCategory[];
+  /** Serialise to a plain JSON-safe object ready for `JSON.stringify`. */
+  toJSON(): CocoDatasetJSON;
+}
+
+/**
+ * Transform a `SoneMetadata` tree into a COCO bounding-box dataset.
+ *
+ * Reuses the same granularity / include / catchAllClass options as
+ * `toYoloDataset`. Category IDs are 1-based and assigned alphabetically.
+ * Bbox coordinates are absolute pixels in `[x, y, width, height]` format.
+ *
+ * @example
+ * ```ts
+ * const { metadata } = await sone(root).canvasWithMetadata();
+ *
+ * const ds = toCocoDataset(metadata, {
+ *   granularity: "line",
+ *   include: ["text", "photo"],
+ *   catchAllClass: "content",
+ *   fileName: "invoice-001.jpg",
+ * });
+ *
+ * await fs.writeFile("annotations.json", JSON.stringify(ds.toJSON(), null, 2));
+ * ```
+ */
+export function toCocoDataset(
+  metadata: SoneMetadata,
+  options: CocoExportOptions = {},
+): CocoDataset {
+  const imageId = options.imageId ?? 1;
+  const fileName = options.fileName ?? "image.jpg";
+  const supercategory = options.supercategory ?? "layout";
+
+  // Reuse YOLO extraction — absolute pixel coords live on every YoloBox
+  const ds = toYoloDataset(metadata, {
+    granularity: options.granularity,
+    include: options.include,
+    catchAllClass: options.catchAllClass,
+  });
+
+  // Categories: 1-based IDs, sorted by the 0-based YOLO ID for consistency
+  const categories: CocoCategory[] = [...ds.classes.entries()]
+    .sort((a, b) => a[1] - b[1])
+    .map(([name, id]) => ({ id: id + 1, name, supercategory }));
+
+  // Annotations: 1-based IDs, absolute pixel bbox
+  const annotations: CocoAnnotation[] = ds.boxes.map((b, i) => ({
+    id: i + 1,
+    image_id: imageId,
+    category_id: b.classId + 1,
+    bbox: [b.x, b.y, b.pixelWidth, b.pixelHeight],
+    area: b.pixelWidth * b.pixelHeight,
+    segmentation: [],
+    iscrowd: 0,
+  }));
+
+  const images: CocoImage[] = [
+    {
+      id: imageId,
+      file_name: fileName,
+      width: ds.imageWidth,
+      height: ds.imageHeight,
+    },
+  ];
+
+  return {
+    images,
+    annotations,
+    categories,
+    toJSON(): CocoDatasetJSON {
+      return { images, annotations, categories };
+    },
+  };
+}

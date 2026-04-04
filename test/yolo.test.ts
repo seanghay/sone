@@ -8,6 +8,7 @@ import {
   renderWithMetadata,
   Span,
   Text,
+  toCocoDataset,
   toYoloDataset,
 } from "../src/node.ts";
 
@@ -312,4 +313,169 @@ test("imageWidth and imageHeight match root metadata dimensions", async () => {
   const ds = toYoloDataset(meta);
   expect(ds.imageWidth).toBe(meta.width);
   expect(ds.imageHeight).toBe(meta.height);
+});
+
+// ── COCO ──────────────────────────────────────────────────────────────────────
+
+test("toCocoDataset: categories are 1-based and sorted alphabetically", async () => {
+  const meta = await buildMeta(
+    Column(
+      Text("Title").tag("title"),
+      Text("Body").tag("content"),
+      Row().tag("footer").height(20),
+    ).width(400),
+  );
+
+  const ds = toCocoDataset(meta);
+  const ids = ds.categories.map((c) => c.id);
+  const names = ds.categories.map((c) => c.name);
+
+  // IDs must be 1-based and contiguous
+  expect(ids[0]).toBe(1);
+  expect(ids).toEqual([...ids].sort((a, b) => a - b));
+  // Names sorted alphabetically (same order as YOLO, offset by 1)
+  expect(names).toEqual([...names].sort());
+});
+
+test("toCocoDataset: annotations bbox is absolute pixels [x,y,w,h]", async () => {
+  const meta = await buildMeta(
+    Column(Row().tag("box").width(80).height(40)).width(200),
+  );
+
+  const yolo = toYoloDataset(meta, {
+    include: ["layout"],
+    catchAllClass: null,
+  });
+  const coco = toCocoDataset(meta, {
+    include: ["layout"],
+    catchAllClass: null,
+  });
+
+  expect(coco.annotations.length).toBeGreaterThan(0);
+  for (let i = 0; i < coco.annotations.length; i++) {
+    const ann = coco.annotations[i];
+    const box = yolo.boxes[i];
+    expect(ann.bbox).toEqual([box.x, box.y, box.pixelWidth, box.pixelHeight]);
+    expect(ann.area).toBe(box.pixelWidth * box.pixelHeight);
+  }
+});
+
+test("toCocoDataset: annotation category_id matches category list (1-based)", async () => {
+  const meta = await buildMeta(
+    Column(Text("A").tag("alpha"), Text("B").tag("beta")).width(200),
+  );
+
+  const ds = toCocoDataset(meta, { catchAllClass: null });
+  const catById = new Map(ds.categories.map((c) => [c.id, c]));
+
+  for (const ann of ds.annotations) {
+    expect(catById.has(ann.category_id)).toBe(true);
+  }
+});
+
+test("toCocoDataset: annotation IDs are 1-based and unique", async () => {
+  const meta = await buildMeta(
+    Column(
+      Text("One").tag("t"),
+      Text("Two").tag("t"),
+      Text("Three").tag("t"),
+    ).width(200),
+  );
+
+  const ds = toCocoDataset(meta, { catchAllClass: null });
+  const ids = ds.annotations.map((a) => a.id);
+
+  expect(ids[0]).toBe(1);
+  expect(new Set(ids).size).toBe(ids.length); // unique
+  expect(ids).toEqual([...ids].sort((a, b) => a - b)); // ascending
+});
+
+test("toCocoDataset: images entry uses imageId and fileName options", async () => {
+  const meta = await buildMeta(Column(Text("Hi")).width(300));
+
+  const ds = toCocoDataset(meta, { imageId: 42, fileName: "doc-042.jpg" });
+
+  expect(ds.images).toHaveLength(1);
+  expect(ds.images[0].id).toBe(42);
+  expect(ds.images[0].file_name).toBe("doc-042.jpg");
+  expect(ds.images[0].width).toBe(meta.width);
+  expect(ds.images[0].height).toBe(meta.height);
+});
+
+test("toCocoDataset: supercategory option is applied to all categories", async () => {
+  const meta = await buildMeta(Column(Text("Hi").tag("title")).width(200));
+
+  const ds = toCocoDataset(meta, {
+    supercategory: "document",
+    catchAllClass: null,
+  });
+
+  expect(ds.categories.every((c) => c.supercategory === "document")).toBe(true);
+});
+
+test("toCocoDataset: catchAllClass=null skips untagged, same as YOLO", async () => {
+  const meta = await buildMeta(
+    Column(Text("Tagged").tag("label"), Text("Untagged")).width(300),
+  );
+
+  const yolo = toYoloDataset(meta, { catchAllClass: null });
+  const coco = toCocoDataset(meta, { catchAllClass: null });
+
+  expect(coco.annotations.length).toBe(yolo.boxes.length);
+});
+
+test("toCocoDataset: iscrowd is always 0 and segmentation is empty", async () => {
+  const meta = await buildMeta(Column(Text("Check").tag("t")).width(200));
+
+  const ds = toCocoDataset(meta, { catchAllClass: null });
+  expect(ds.annotations.every((a) => a.iscrowd === 0)).toBe(true);
+  expect(
+    ds.annotations.every(
+      (a) => Array.isArray(a.segmentation) && a.segmentation.length === 0,
+    ),
+  ).toBe(true);
+});
+
+test("toCocoDataset: toJSON() is JSON-serialisable", async () => {
+  const meta = await buildMeta(
+    Column(Text("A").tag("a"), Row().tag("b").height(10)).width(200),
+  );
+
+  const ds = toCocoDataset(meta);
+  expect(() => JSON.stringify(ds.toJSON())).not.toThrow();
+
+  const json = ds.toJSON();
+  expect(json).toHaveProperty("images");
+  expect(json).toHaveProperty("annotations");
+  expect(json).toHaveProperty("categories");
+});
+
+test("toCocoDataset: granularity and include options forwarded correctly", async () => {
+  const meta = await buildMeta(
+    Column(
+      Text("Line one\nLine two").tag("line"),
+      Row().tag("spacer").height(10),
+    ).width(400),
+  );
+
+  const cocoLines = toCocoDataset(meta, {
+    granularity: "line",
+    include: ["text"],
+    catchAllClass: null,
+  });
+
+  const yoloLines = toYoloDataset(meta, {
+    granularity: "line",
+    include: ["text"],
+    catchAllClass: null,
+  });
+
+  expect(cocoLines.annotations.length).toBe(yoloLines.boxes.length);
+  // No layout nodes included
+  expect(
+    cocoLines.annotations.every((a) => {
+      const cat = cocoLines.categories.find((c) => c.id === a.category_id);
+      return cat?.name === "line";
+    }),
+  ).toBe(true);
 });
