@@ -83,6 +83,8 @@ const LOCALE_ALIASES: Record<string, string> = {
 
 type SyncHyphenateFn = (word: string) => string;
 
+const LETTER_RE = /\p{L}+/gu;
+
 // Cache: locale → sync hyphenator (null if unavailable)
 const hyphenatorCache = new Map<string, SyncHyphenateFn | null>();
 
@@ -170,5 +172,6 @@ export function hyphenateText(text: string, locale: string): string {
   const hyphenate = loadHyphenModule(locale);
   if (hyphenate == null) return text;
   // Only hyphenate sequences of Unicode letters
-  return text.replace(/\p{L}+/gu, (word) => hyphenate(word));
+  LETTER_RE.lastIndex = 0;
+  return text.replace(LETTER_RE, (word) => hyphenate(word));
 }

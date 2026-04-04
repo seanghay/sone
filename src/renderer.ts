@@ -1375,7 +1375,7 @@ export function createLayoutNode(
       let blockWidth = 0;
       let blockHeight = 0;
 
-      const baseProps = klona(props);
+      const baseProps = { ...props };
 
       const isRotated = props.orientation === 90 || props.orientation === 270;
       // For 90°/270°, use the height constraint as the text wrapping width

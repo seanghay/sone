@@ -89,6 +89,10 @@ interface ParagraphChunk {
 }
 
 const ELLIPSIS = "…";
+const TRAILING_WHITESPACE_RE = /[ \t]+$/u;
+const LEADING_WHITESPACE_RE = /^[ \t]+/u;
+const TAB_RE = /\t+/gu;
+const LETTER_SEQUENCE_RE = /\p{L}+/gu;
 let graphemeSegmenter: Intl.Segmenter | null = null;
 
 function createEmptyLine(width = 0): SoneParagraphLine {
@@ -200,7 +204,7 @@ function trimTrailingWhitespace(
       continue;
     }
 
-    const trimmedText = tail.text.replace(/[ \t]+$/u, "");
+    const trimmedText = tail.text.replace(TRAILING_WHITESPACE_RE, "");
     if (trimmedText === tail.text) break;
 
     if (trimmedText.length === 0) {
@@ -263,8 +267,10 @@ function recomputeFinalizedLine(
   let lineBelow = 0;
   let lineOffsetMax = 0;
   let lineOffsetMin = Number.POSITIVE_INFINITY;
+  let segmentsWidth = 0;
 
   for (const segment of line.segments) {
+    segmentsWidth += segment.width;
     const fontSize = segment.props.size ?? baseProps.size ?? 16;
     const lineBoxH = isDefaultLineHeight
       ? segment.height
@@ -287,8 +293,7 @@ function recomputeFinalizedLine(
     lineOffsetMin = 0;
   }
 
-  line.width =
-    lineIndentWidth(index, baseProps) + segmentTextWidth(line.segments);
+  line.width = lineIndentWidth(index, baseProps) + segmentsWidth;
   line.baseline = lineAbove - lineOffsetMin;
   line.height = lineAbove + lineBelow - lineOffsetMin + lineOffsetMax;
 }
@@ -325,7 +330,7 @@ function trimTrailingSegments(
       continue;
     }
 
-    const trimmedText = tail.text.replace(/[ \t]+$/u, "");
+    const trimmedText = tail.text.replace(TRAILING_WHITESPACE_RE, "");
     if (trimmedText === tail.text) break;
 
     if (trimmedText.length === 0) {
@@ -352,7 +357,7 @@ function getPrefixBoundaries(
 ) {
   const boundaries = new Set<number>([0]);
 
-  for (const index of Array.from(breakIterator(text))) {
+  for (const index of breakIterator(text)) {
     if (index > 0 && index < text.length) boundaries.add(index);
   }
 
@@ -386,10 +391,13 @@ function fitLineWithEllipsis(
   const working = line.segments.map((segment) => ({ ...segment }));
   trimTrailingSegments(working, measureText);
 
-  const lastTextSegment =
-    [...working]
-      .reverse()
-      .find((segment) => !segment.isTab && segment.text.length > 0) ?? null;
+  let lastTextSegment: (typeof working)[number] | null = null;
+  for (let i = working.length - 1; i >= 0; i--) {
+    if (!working[i].isTab && working[i].text.length > 0) {
+      lastTextSegment = working[i];
+      break;
+    }
+  }
   const ellipsisProps = lastTextSegment?.props ?? baseProps;
   const ellipsisSegment = createMeasuredSegment(
     ELLIPSIS,
@@ -416,7 +424,9 @@ function fitLineWithEllipsis(
 
     for (const boundary of boundaries) {
       if (boundary >= tail.text.length) continue;
-      const nextText = tail.text.slice(0, boundary).replace(/[ \t]+$/u, "");
+      const nextText = tail.text
+        .slice(0, boundary)
+        .replace(TRAILING_WHITESPACE_RE, "");
       if (nextText === tail.text) continue;
       if (nextText.length === 0) continue;
 
@@ -503,6 +513,9 @@ function finalizeParagraph(
     ? 1.0
     : (baseProps.lineHeight ?? 1.0);
 
+  let totalHeight = 0;
+  let maxLineWidth = 0;
+
   for (let linePosition = 0; linePosition < lines.length; linePosition++) {
     const line = lines[linePosition]!;
     trimTrailingWhitespace(line, measureText);
@@ -543,14 +556,9 @@ function finalizeParagraph(
         line.spacesCount += countSpaces(segment.text);
       }
     }
-  }
 
-  let totalHeight = 0;
-  let maxLineWidth = 0;
-
-  for (const line of lines) {
     totalHeight += line.height;
-    maxLineWidth = Math.max(maxLineWidth, line.width);
+    if (line.width > maxLineWidth) maxLineWidth = line.width;
   }
 
   return {
@@ -618,7 +626,7 @@ function createParagraphChunks(
 }
 
 function trimLeadingWrapWhitespace(text: string): string {
-  return text.replace(/^[ \t]+/u, "");
+  return text.replace(LEADING_WHITESPACE_RE, "");
 }
 
 function findFittingWrapBoundary(
@@ -651,7 +659,8 @@ function findFittingWrapBoundary(
     candidates.push({ pos: text.length, addHyphen: false });
 
     // Hyphenation points across all letter-sequences in the text
-    for (const wMatch of text.matchAll(/\p{L}+/gu)) {
+    LETTER_SEQUENCE_RE.lastIndex = 0;
+    for (const wMatch of text.matchAll(LETTER_SEQUENCE_RE)) {
       const wordStart = wMatch.index;
       for (const b of getHyphenBreaks(wMatch[0], hyphenLocale)) {
         candidates.push({ pos: wordStart + b, addHyphen: true });
@@ -684,17 +693,17 @@ function findFittingWrapBoundary(
       : { boundary: text.length, addHyphen: false };
   }
 
-  // Default path (no hyphenation) — use grapheme + word boundaries
-  const boundaries = [...getPrefixBoundaries(text, breakIterator), text.length]
-    .filter((boundary, index, items) => {
-      return boundary > 0 && items.indexOf(boundary) === index;
-    })
-    .sort((a, b) => a - b);
-
+  // Default path (no hyphenation) — use grapheme + word boundaries.
+  // getPrefixBoundaries already uses a Set so there are no duplicates;
+  // it returns positions in descending order. Reverse to iterate ascending.
+  const prefixBoundaries = getPrefixBoundaries(text, breakIterator);
+  // prefixBoundaries is sorted descending; iterate in reverse for ascending.
   let fallback = text.length;
   let best = 0;
 
-  for (const boundary of boundaries) {
+  for (let i = prefixBoundaries.length - 1; i >= 0; i--) {
+    const boundary = prefixBoundaries[i];
+    if (boundary <= 0) continue;
     if (fallback === text.length) fallback = boundary;
 
     const width = measureTabExpandedWidth(
@@ -711,6 +720,18 @@ function findFittingWrapBoundary(
     }
 
     break;
+  }
+
+  // Also check text.length itself (entire segment fits)
+  if (best === 0) {
+    const fullWidth = measureTabExpandedWidth(
+      text,
+      props,
+      tabStops,
+      currentX,
+      measureText,
+    );
+    if (fullWidth <= availableWidth) best = text.length;
   }
 
   return { boundary: best > 0 ? best : fallback, addHyphen: false };
@@ -903,7 +924,7 @@ function createKnuthPlassMultilineParagraph(
 
   const prefixWidths = [0];
   const trimmedWidths = chunks.map((chunk) => {
-    const trimmedText = chunk.text.replace(/[ \t]+$/u, "");
+    const trimmedText = chunk.text.replace(TRAILING_WHITESPACE_RE, "");
     if (trimmedText.length === 0) return 0;
     if (trimmedText === chunk.text) return chunk.width;
     return measureText(trimmedText, chunk.props).width;
@@ -922,7 +943,7 @@ function createKnuthPlassMultilineParagraph(
     let effectiveEnd = end;
     while (
       effectiveEnd > start &&
-      isWhitespace(chunks[effectiveEnd - 1].text.replace(/\t+/gu, " "))
+      isWhitespace(chunks[effectiveEnd - 1].text.replace(TAB_RE, " "))
     ) {
       effectiveEnd--;
     }

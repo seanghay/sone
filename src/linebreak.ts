@@ -2,8 +2,8 @@ let segmenter: Intl.Segmenter | null = null;
 
 const END_SYM = "។៕)]?!»៖$រៗ%,;:";
 const START_SYM = "([«$#@";
-const END_SYM_SET = new Set([...END_SYM]);
-const START_SYM_SET = new Set([...START_SYM]);
+const END_SYM_SET = new Set(END_SYM);
+const START_SYM_SET = new Set(START_SYM);
 const NON_BREAKING_SPACE = "\u00a0";
 const WORD_JOINER = "\u2060";
 const GLUE_CHARACTERS = new Set([NON_BREAKING_SPACE, WORD_JOINER]);
