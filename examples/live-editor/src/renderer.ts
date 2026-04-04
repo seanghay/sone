@@ -67,7 +67,7 @@ const sharedMethods: Omit<SoneRenderer, "dpr"> = {
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.onload = () => resolve(img);
-      img.onerror = (e) => reject(e);
+      img.onerror = (error) => reject(error);
       if (typeof src === "string") {
         img.src = src;
       } else {
@@ -76,6 +76,10 @@ const sharedMethods: Omit<SoneRenderer, "dpr"> = {
         img.onload = () => {
           URL.revokeObjectURL(url);
           resolve(img);
+        };
+        img.onerror = (error) => {
+          URL.revokeObjectURL(url);
+          reject(error);
         };
         img.src = url;
       }

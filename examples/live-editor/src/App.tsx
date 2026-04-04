@@ -86,6 +86,9 @@ export default function App() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const uploadedImagesRef = useRef<UploadedImageAsset[]>([]);
   const editorRef = useRef<EditorHandle | null>(null);
+  const renderCacheRef = useRef<
+    Map<string | Uint8Array, Awaited<ReturnType<typeof browserRenderer.loadImage>>>
+  >(new Map());
 
   // Spawn worker once
   useEffect(() => {
@@ -155,6 +158,8 @@ export default function App() {
   }, [uploadedImages]);
   useEffect(() => () => {
     for (const image of uploadedImagesRef.current) {
+      renderCacheRef.current.delete(image.url);
+      workerBridge.clearImageCache(image.url);
       revokeUploadedImageAsset(image);
     }
   }, []);
@@ -165,7 +170,9 @@ export default function App() {
       layout: debugEnabled,
       text: debugEnabled,
     };
-    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(1, debug));
+    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(1, debug), {
+      cache: renderCacheRef.current,
+    });
     if (format === "png") exportAsPNG(exportCanvas);
     else exportAsJPEG(exportCanvas);
   }, [debugEnabled, lastNode]);
@@ -198,7 +205,11 @@ export default function App() {
   const handleRemoveImage = useCallback((id: string) => {
     setUploadedImages((current) => {
       const image = current.find((item) => item.id === id);
-      if (image) revokeUploadedImageAsset(image);
+      if (image) {
+        renderCacheRef.current.delete(image.url);
+        workerBridge.clearImageCache(image.url);
+        revokeUploadedImageAsset(image);
+      }
       return current.filter((item) => item.id !== id);
     });
   }, []);

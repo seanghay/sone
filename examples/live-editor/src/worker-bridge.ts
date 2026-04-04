@@ -9,4 +9,8 @@ export const workerBridge = {
   unregisterFont(name: string) {
     this.worker?.postMessage({ type: "unregisterFont", name });
   },
+
+  clearImageCache(url?: string) {
+    this.worker?.postMessage({ type: "clearImageCache", url });
+  },
 };

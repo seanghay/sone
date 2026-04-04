@@ -13,6 +13,7 @@ import type { RenderDebugOptions } from "./renderer";
 // OffscreenCanvas-based renderer — runs entirely off the main thread
 const measureCanvas = new OffscreenCanvas(1, 1);
 const registeredFonts = new Set<string>();
+const renderCache = new Map<string | Uint8Array, Awaited<ReturnType<SoneRenderer["loadImage"]>>>();
 let currentDpr = 1;
 let currentDebug: RenderDebugOptions = { layout: false, text: false };
 
@@ -120,6 +121,7 @@ self.onmessage = async (e: MessageEvent) => {
       const canvas = (await render(
         node,
         workerRenderer,
+        { cache: renderCache },
       )) as unknown as OffscreenCanvas;
       const { width, height } = canvas;
       const bitmap = canvas.transferToImageBitmap();
@@ -149,5 +151,16 @@ self.onmessage = async (e: MessageEvent) => {
 
   if (msg.type === "unregisterFont") {
     await workerRenderer.unregisterFont((msg as { name: string }).name);
+    return;
+  }
+
+  if (msg.type === "clearImageCache") {
+    const { url } = msg as { url?: string };
+    if (url == null) {
+      renderCache.clear();
+    } else {
+      renderCache.delete(url);
+    }
+    return;
   }
 };
