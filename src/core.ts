@@ -405,6 +405,14 @@ export interface SpanProps {
   /** vertical offset for baseline adjustment */
   offsetY?: number;
 
+  /**
+   * Text rendering direction for this span.
+   * Overrides the paragraph-level baseDir for this specific span.
+   * Use "rtl" for RTL scripts (Arabic, Hebrew) embedded in LTR text,
+   * or "ltr" for LTR text embedded in RTL paragraphs.
+   */
+  textDir?: "ltr" | "rtl";
+
   /** underline thickness */
   underline?: number;
   underlineColor?: ColorValue | null;
@@ -447,6 +455,17 @@ export interface TextProps extends SpanProps, LayoutProps {
   align?: "left" | "right" | "center" | "justify";
 
   autofit?: boolean;
+
+  /**
+   * Base paragraph direction for bidirectional text rendering.
+   * - "ltr": left-to-right (default)
+   * - "rtl": right-to-left (Arabic, Hebrew, etc.)
+   * - "auto": auto-detect from the first strong directional character
+   *
+   * When set to "rtl" or resolved "rtl" via "auto", text segments are
+   * rendered from right to left and the default alignment becomes "right".
+   */
+  baseDir?: "ltr" | "rtl" | "auto";
 
   /** text orientation in degrees — affects layout dimensions */
   orientation?: 0 | 90 | 180 | 270;
@@ -492,6 +511,7 @@ export interface SpanPropsBuilder<T> {
   strokeColor: (value: Required<TextProps["strokeColor"]>) => T;
   strokeWidth: (value: Required<TextProps["strokeWidth"]>) => T;
   offsetY: (value: Required<TextProps["offsetY"]>) => T;
+  textDir: (value: Required<SpanProps["textDir"]>) => T;
 }
 
 /**
@@ -533,6 +553,7 @@ export interface TextPropsBuilder<T>
   autofit(value?: Required<TextProps["autofit"]>): T;
   orientation(value: 0 | 90 | 180 | 270): T;
   clipImage(value: PhotoNode): T;
+  baseDir(value: Required<TextProps["baseDir"]>): T;
 }
 
 /**
@@ -1111,6 +1132,10 @@ function spanPropsBuilder<T>(props: SpanProps = {}): SpanPropsBuilder<T> {
       props.strokeWidth = value;
       return this as unknown as T;
     },
+    textDir(value: Required<SpanProps["textDir"]>): T {
+      props.textDir = value;
+      return this as unknown as T;
+    },
     dropShadow(...values: Required<TextProps["dropShadows"]>): T {
       if (props.dropShadows == null) {
         props.dropShadows = [];
@@ -1175,6 +1200,10 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     orientation(value: 0 | 90 | 180 | 270): T {
       props.orientation = value;
+      return this as unknown as T;
+    },
+    baseDir(value: Required<TextProps["baseDir"]>): T {
+      props.baseDir = value;
       return this as unknown as T;
     },
     clipImage(value: PhotoNode): T {

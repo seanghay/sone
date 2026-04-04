@@ -1,5 +1,6 @@
 import { dequal } from "dequal";
 import { Edge, type Node } from "yoga-layout/load";
+import { resolveParagraphDirection } from "./bidi.ts";
 import type { SpanNode, SpanProps, TextNode, TextProps } from "./core.ts";
 import { createGradientFillStyleList } from "./gradient.ts";
 import type { SoneRenderer } from "./renderer.ts";
@@ -72,6 +73,8 @@ export interface SoneParagraph {
   height: number;
   lines: SoneParagraphLine[];
   offsetY: number;
+  /** Resolved paragraph direction for bidi rendering */
+  baseDir?: "ltr" | "rtl";
 }
 
 export interface SoneParagraphBlock {
@@ -1025,6 +1028,15 @@ export function createParagraph(
   const [blocks, blockBreakpoints] = createBlocks(_spans, breakIterator);
   const items: SoneParagraphBlock[] = [];
 
+  // Resolve paragraph direction once for all blocks using the full span text.
+  const fullText = _spans
+    .map((s) => (typeof s === "string" ? s : s.children))
+    .join("");
+  const resolvedBaseDir = resolveParagraphDirection(
+    fullText,
+    baseProps.baseDir,
+  );
+
   for (let b = 0; b < blocks.length; b++) {
     const spans = blocks[b];
     const breakpoints = baseProps.nowrap
@@ -1101,6 +1113,7 @@ export function createParagraph(
       span.segments = segments;
     }
 
+    paragraph.baseDir = resolvedBaseDir;
     items.push({ paragraph });
   }
 
@@ -1145,6 +1158,7 @@ export function createTextRuns(
     const left = paddingLeft + borderLeft;
     const top = paddingTop + borderTop;
     const align = props.align;
+    const isRTL = paragraph.baseDir === "rtl";
 
     let offsetY = paragraph.offsetY + paragraphOffsetY;
     paragraphOffsetY += paragraph.height;
@@ -1159,22 +1173,38 @@ export function createTextRuns(
 
       let offsetX = 0;
 
-      switch (align) {
-        case "center":
-          offsetX = (paragraph.width - line.width) / 2;
-          break;
-        case "right":
-          offsetX = paragraph.width - line.width;
-          break;
-        case "left":
-        case "justify":
-          if (i === 0 && props.indentSize != null) {
-            offsetX += props.indentSize;
-          }
-          if (i > 0 && props.hangingIndentSize != null) {
-            offsetX += props.hangingIndentSize;
-          }
-          break;
+      if (isRTL) {
+        // For RTL, offsetX starts at the right edge and decrements per segment.
+        // Default alignment for RTL is "right"; "left" pins text to left edge.
+        switch (align) {
+          case "center":
+            offsetX = (paragraph.width + line.width) / 2;
+            break;
+          case "left":
+            offsetX = line.width;
+            break;
+          default:
+            offsetX = paragraph.width;
+            break;
+        }
+      } else {
+        switch (align) {
+          case "center":
+            offsetX = (paragraph.width - line.width) / 2;
+            break;
+          case "right":
+            offsetX = paragraph.width - line.width;
+            break;
+          case "left":
+          case "justify":
+            if (i === 0 && props.indentSize != null) {
+              offsetX += props.indentSize;
+            }
+            if (i > 0 && props.hangingIndentSize != null) {
+              offsetX += props.hangingIndentSize;
+            }
+            break;
+        }
       }
 
       for (let s = 0; s < line.segments.length; s++) {
@@ -1187,7 +1217,16 @@ export function createTextRuns(
           segmentWidth += addedSpaceWidth * segmentSpaces;
         }
 
-        const textX = x + left + offsetX;
+        let textX: number;
+        if (isRTL) {
+          // Decrement first so offsetX points to the left edge of this segment.
+          offsetX -= segmentWidth;
+          textX = x + left + offsetX;
+        } else {
+          textX = x + left + offsetX;
+          offsetX += segmentWidth;
+        }
+
         const textY = y + line.baseline + top + offsetY + spanOffsetY;
         const actualTextY =
           textY - segment.height + segment.metrics.fontBoundingBoxDescent;
@@ -1198,8 +1237,6 @@ export function createTextRuns(
           width: segmentWidth,
           height: segment.height,
         };
-
-        offsetX += segmentWidth;
       }
 
       offsetY += line.height;
@@ -1300,6 +1337,7 @@ export function drawTextNode(
     const left = paddingLeft + borderLeft;
     const top = paddingTop + borderTop;
     const align = props.align;
+    const isRTL = paragraph.baseDir === "rtl";
 
     // root
     applySpanProps(ctx, props);
@@ -1319,24 +1357,42 @@ export function drawTextNode(
 
       let offsetX = 0;
 
-      switch (align) {
-        case "center":
-          offsetX = (paragraph.width - line.width) / 2;
-          break;
-        case "right":
-          offsetX = paragraph.width - line.width;
-          break;
-        case "left":
-        case "justify":
-          if (i === 0 && props.indentSize != null) {
-            offsetX += props.indentSize;
-          }
+      if (isRTL) {
+        // RTL: offsetX starts at the right edge and decrements per segment.
+        // When align is unset or "right", text is flush to the right (natural RTL).
+        // "left" pins the text block to the left edge of the container.
+        switch (align) {
+          case "center":
+            offsetX = (paragraph.width + line.width) / 2;
+            break;
+          case "left":
+            offsetX = line.width;
+            break;
+          default:
+            // "right" or unset (default for RTL)
+            offsetX = paragraph.width;
+            break;
+        }
+      } else {
+        switch (align) {
+          case "center":
+            offsetX = (paragraph.width - line.width) / 2;
+            break;
+          case "right":
+            offsetX = paragraph.width - line.width;
+            break;
+          case "left":
+          case "justify":
+            if (i === 0 && props.indentSize != null) {
+              offsetX += props.indentSize;
+            }
 
-          if (i > 0 && props.hangingIndentSize != null) {
-            offsetX += props.hangingIndentSize;
-          }
+            if (i > 0 && props.hangingIndentSize != null) {
+              offsetX += props.hangingIndentSize;
+            }
 
-          break;
+            break;
+        }
       }
 
       for (let s = 0; s < line.segments.length; s++) {
@@ -1351,7 +1407,18 @@ export function drawTextNode(
           segmentWidth += addedSpaceWidth * segmentSpaces;
         }
 
-        const textX = x + left + offsetX;
+        // textX is always the LEFT edge of the segment (used for fillRect decorations).
+        // fillX is the fillText anchor: left edge for LTR, right edge for RTL.
+        let textX: number;
+        let fillX: number;
+        if (isRTL) {
+          offsetX -= segmentWidth;
+          textX = x + left + offsetX;
+          fillX = textX + segmentWidth;
+        } else {
+          textX = x + left + offsetX;
+          fillX = textX;
+        }
         const textY = y + line.baseline + top + offsetY + spanOffsetY;
 
         // underline
@@ -1407,10 +1474,15 @@ export function drawTextNode(
           ctx.wordSpacing = `${(segment.props.wordSpacing ?? 0) + addedSpaceWidth}px`;
         }
 
+        // Determine canvas direction for this segment.
+        // Per-span textDir overrides paragraph baseDir.
+        const segDir = segment.props.textDir ?? (isRTL ? "rtl" : "ltr");
+
         if (segment.props.dropShadows) {
           for (const shadowProperties of segment.props.dropShadows) {
             if (typeof shadowProperties === "string") continue;
             ctx.save();
+            ctx.direction = segDir;
             ctx.shadowOffsetX = shadowProperties.offsetX;
             ctx.shadowOffsetY = shadowProperties.offsetY;
             ctx.shadowBlur = shadowProperties.blurRadius;
@@ -1418,12 +1490,13 @@ export function drawTextNode(
               ctx.shadowColor = shadowProperties.color;
               ctx.fillStyle = shadowProperties.color;
             }
-            ctx.fillText(renderText, textX, textY);
+            ctx.fillText(renderText, fillX, textY);
             ctx.restore();
           }
         }
 
         ctx.save();
+        ctx.direction = segDir;
         if (
           segment.props.strokeColor != null &&
           segment.props.strokeWidth != null &&
@@ -1433,7 +1506,7 @@ export function drawTextNode(
           ctx.lineJoin = "round";
           ctx.miterLimit = 2;
           ctx.lineWidth = segment.props.strokeWidth;
-          ctx.strokeText(renderText, textX, textY);
+          ctx.strokeText(renderText, fillX, textY);
         }
 
         if (
@@ -1453,7 +1526,7 @@ export function drawTextNode(
           }
         }
 
-        ctx.fillText(renderText, textX, textY);
+        ctx.fillText(renderText, fillX, textY);
         ctx.restore();
 
         // draw line-through
@@ -1491,7 +1564,9 @@ export function drawTextNode(
           ctx.restore();
         }
 
-        offsetX += segmentWidth;
+        if (!isRTL) {
+          offsetX += segmentWidth;
+        }
       }
 
       offsetY += line.height;
