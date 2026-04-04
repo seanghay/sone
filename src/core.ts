@@ -382,6 +382,8 @@ export type FontValue = "sans-serif" | "serif" | "monospace" | (string & {});
  * Text styling properties for spans and text
  */
 export interface SpanProps {
+  /** Debug identifier for development */
+  tag?: string;
   /** font size in pixels */
   size?: number;
   /** text color or gradient */
@@ -512,6 +514,7 @@ export interface SpanPropsBuilder<T> {
   strokeWidth: (value: Required<TextProps["strokeWidth"]>) => T;
   offsetY: (value: Required<TextProps["offsetY"]>) => T;
   textDir: (value: Required<SpanProps["textDir"]>) => T;
+  tag: (value: Required<SpanProps["tag"]>) => T;
 }
 
 /**
@@ -1134,6 +1137,10 @@ function spanPropsBuilder<T>(props: SpanProps = {}): SpanPropsBuilder<T> {
     },
     textDir(value: Required<SpanProps["textDir"]>): T {
       props.textDir = value;
+      return this as unknown as T;
+    },
+    tag(value: Required<SpanProps["tag"]>): T {
+      props.tag = value;
       return this as unknown as T;
     },
     dropShadow(...values: Required<TextProps["dropShadows"]>): T {

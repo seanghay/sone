@@ -16,6 +16,15 @@ export interface SoneMetadataPosition {
   right: number;
 }
 
+export interface SoneMetadataSegment {
+  tag?: string;
+  text: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 export interface SoneMetadata {
   tag?: string;
   type: string;

@@ -2436,6 +2436,7 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
       }
 
       return {
+        tag: props.tag,
         type,
         children: node.children,
         props,
@@ -2466,6 +2467,7 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
     }
 
     return {
+      tag: (props as LayoutProps).tag,
       type,
       props,
       children,
