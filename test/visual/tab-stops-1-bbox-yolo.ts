@@ -250,6 +250,7 @@ const root = Column(
 
 // ── Render ────────────────────────────────────────────────────────────────────
 const { canvas, metadata } = await sone(root).canvasWithMetadata();
+// biome-ignore lint/suspicious/noExplicitAny: skia-canvas lacks TS types
 const ctx = (canvas as any).getContext("2d") as CanvasRenderingContext2D;
 
 // ── Build YOLO dataset ────────────────────────────────────────────────────────
@@ -311,7 +312,7 @@ const outFile = path.join(
 
 await fs.writeFile(
   outFile,
-  // @ts-expect-error skia-canvas Buffer API
+  // biome-ignore lint/suspicious/noExplicitAny: skia-canvas lacks TS types
   await (canvas as any).toBuffer("jpg", { density: 2 }),
 );
 
