@@ -44,6 +44,89 @@
 </table>
 </details>
 
+<details>
+<summary><strong>Documents &amp; templates</strong> — resume, certificate, app UI, multi-page PDF</summary>
+<br>
+<table>
+  <tr>
+    <td><img src="test/visual/resume-1.jpg" alt="Resume" width="340" /></td>
+    <td><img src="test/visual/certificate-1.jpg" alt="Certificate" width="340" /></td>
+  </tr>
+  <tr>
+    <td><img src="test/visual/app-1.jpg" alt="App UI" width="340" /></td>
+    <td><img src="test/visual/pages-1-p1.jpg" alt="Multi-page PDF" width="340" /></td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary><strong>Tables</strong> — basic table, colspan &amp; rowspan</summary>
+<br>
+<table>
+  <tr>
+    <td><img src="test/visual/table-1.jpg" alt="Table" width="340" /></td>
+    <td><img src="test/visual/table-span-combined.jpg" alt="Table span" width="340" /></td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary><strong>Typography</strong> — styling, wrap balance, hyphenation, orientation</summary>
+<br>
+<table>
+  <tr>
+    <td><img src="test/visual/text-styling-1.jpg" alt="Text styling" width="340" /></td>
+    <td><img src="test/visual/text-wrap-balance-1.jpg" alt="Wrap balance" width="340" /></td>
+  </tr>
+  <tr>
+    <td><img src="test/visual/text-hyphenation-1.jpg" alt="Hyphenation" width="340" /></td>
+    <td><img src="test/visual/text-orientation-1.jpg" alt="Text orientation" width="340" /></td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary><strong>Tab stops &amp; bidirectional text</strong></summary>
+<br>
+<table>
+  <tr>
+    <td><img src="test/visual/tab-leader-1.jpg" alt="Tab leaders" width="340" /></td>
+    <td><img src="test/visual/bidi-mixed.jpg" alt="Bidirectional text" width="340" /></td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary><strong>Grid layout &amp; lists</strong></summary>
+<br>
+<table>
+  <tr>
+    <td><img src="test/visual/grid-1.jpg" alt="Grid 1" width="340" /></td>
+    <td><img src="test/visual/grid-2.jpg" alt="Grid 2" width="340" /></td>
+  </tr>
+  <tr>
+    <td><img src="test/visual/list.jpg" alt="Lists" width="340" /></td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary><strong>Paths, photos &amp; clip groups</strong></summary>
+<br>
+<table>
+  <tr>
+    <td><img src="test/visual/path-gradient.jpg" alt="Path gradient" width="340" /></td>
+    <td><img src="test/visual/clip-group.jpg" alt="Clip group" width="340" /></td>
+  </tr>
+</table>
+</details>
+
+<details>
+<summary><strong>Syntax highlighting</strong> — via <code>sone/shiki</code></summary>
+<br>
+<img src="test/visual/shiki-1.jpg" alt="Syntax highlighting" width="680" />
+</details>
+
 ### Overview
 
 - This project uses `skia-canvas` — if you encounter an installation issue, follow [the skia-canvas instructions](https://github.com/samizdatco/skia-canvas)
