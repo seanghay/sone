@@ -33,7 +33,7 @@ const root = Column(
     ),
     // Another group with rowspan
     TableRow(
-      TableCell(Text("Products").weight("bold").color("white"))
+      TableCell(Text("Products").nowrap().weight("bold").color("white"))
         .rowspan(2)
         .bg("#e67e22"),
       TableCell(Text("Laptop")),
