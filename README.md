@@ -29,6 +29,20 @@
 
 <img width=720 height=720 src="https://github.com/user-attachments/assets/9a5bce63-33ca-4086-873a-a552b147f99a" alt="">
 
+<details>
+<summary><strong>Business documents</strong> — invoice, report, quotation, bank statement (<a href="examples/business-documents/">source</a>)</summary>
+<br>
+<table>
+  <tr>
+    <td><img src="examples/business-documents/output/invoice.jpg" alt="Invoice" width="340" /></td>
+    <td><img src="examples/business-documents/output/report.jpg" alt="Report" width="340" /></td>
+  </tr>
+  <tr>
+    <td><img src="examples/business-documents/output/quotation.jpg" alt="Quotation" width="340" /></td>
+    <td><img src="examples/business-documents/output/bank-statement.jpg" alt="Bank Statement" width="340" /></td>
+  </tr>
+</table>
+</details>
 
 ### Overview
 
