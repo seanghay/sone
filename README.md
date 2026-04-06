@@ -883,6 +883,96 @@ await fs.writeFile("annotations.json", JSON.stringify(ds.toJSON(), null, 2));
 
 ---
 
+
+## Frequently Asked Questions (FAQ)
+
+<details>
+<summary><strong>What is Sone and what is it built for?</strong></summary>
+
+**Sone** is a declarative Canvas layout engine for JavaScript with advanced rich text support. It is specifically built for real-world document and image generation at scale—such as invoices, multi-page reports, resumes, open graph images, and app UIs. Instead of calculating positions manually, you describe your layout as a tree of composable nodes (like `Column`, `Row`, `Text`, and `Photo`), and Sone automatically figures out where everything goes.
+</details>
+
+<details>
+<summary><strong>Why choose Sone over HTML/CSS headless browser engines?</strong></summary>
+
+HTML and CSS are built for the web, not strictly for programmatic mass document generation. Generating PDFs or images via headless browsers (like Puppeteer) comes with massive overhead, and alternative HTML-to-PDF engines rarely support the full HTML/CSS spec, leading to confusing gaps and broken layouts. 
+
+Sone is built to solve this pain point directly:
+* **No missing specs:** You aren't guessing which CSS features an engine supports. Sone's API is fully typed and tailored specifically for its rendering engine.
+* **Inline, declarative styling:** Like Tailwind CSS, Sone embraces inline styling via a chained API, which is proven to be an incredibly efficient way to build layouts.
+* **Mass generation without the pain:** No browser, no Puppeteer, no Chrome DevTools Protocol (CDP). Sone renders directly through native Skia bindings, meaning images generate in single-digit milliseconds and multi-page PDFs in tens of milliseconds.
+</details>
+
+<details>
+<summary><strong>Do I need a build step, JSX, or a compiler?</strong></summary>
+
+**No.** Sone is just plain JavaScript. There is no JSX, no HTML parser, no transpiler configuration, and no hidden compiler magic. Its API consists of plain function calls that work out of the box with zero setup beyond `npm install sone`.
+</details>
+
+<details>
+<summary><strong>What environments does Sone support?</strong></summary>
+
+Sone works virtually anywhere modern JavaScript runs. It is heavily tested and fully compatible with **Node.js (16+)**, **Deno**, and **Bun**. 
+
+*Note: Sone can also be used directly in the browser, though SVG and PDF output support are currently limited to server-side environments.*
+</details>
+
+<details>
+<summary><strong>How does the layout system work?</strong></summary>
+
+Sone uses **Flexbox** as its primary layout model, powered by `yoga-layout` (the exact same highly-optimized layout engine used by React Native). If you know CSS Flexbox, you already know how to position elements in Sone. It also features robust support for **CSS Grid** for more complex, grid-based templating.
+</details>
+
+<details>
+<summary><strong>Can I generate multi-page PDFs?</strong></summary>
+
+**Yes.** Multi-page documents are a first-class citizen in Sone. By simply providing a `pageHeight` to the configuration, Sone will automatically slice your node tree across multiple pages. You can easily add repeating headers and footers (with dynamic page numbers), define custom margins, and force explicit page breaks using the `PageBreak()` node.
+</details>
+
+<details>
+<summary><strong>Does Sone support advanced typography and internationalization?</strong></summary>
+
+Absolutely. Rich text is built directly into Sone's core:
+* **Bidirectional Text:** Automatic RTL support for Arabic, Hebrew, and mixed LTR/RTL paragraphs.
+* **Hyphenation:** Automatic, syllable-aware word hyphenation for 80+ languages using Knuth–Liang patterns.
+* **Balanced Line Wrapping:** The `.textWrap("balance")` method ensures evenly distributed line lengths for aesthetically pleasing titles and headings.
+* **Tab Stops & Leaders:** Perfect for table of contents or financial reports without needing complex table nodes.
+* **Custom Fonts:** Load any custom `.ttf` or `.otf` font file for any language or script.
+</details>
+
+<details>
+<summary><strong>What are the YOLO and COCO dataset export features?</strong></summary>
+
+Sone includes a unique **Metadata API** that extracts the exact computed layout positions of every node, text block, and segment. Sone allows you to export this data directly into YOLO (`.toYoloDataset()`) or COCO (`.toCocoDataset()`) formats. This is incredibly useful for machine learning engineers who need to programmatically generate mass amounts of annotated documents to train Document Layout Analysis (DLA) or OCR models.
+</details>
+
+<details>
+<summary><strong>Can I use Sone with Next.js?</strong></summary>
+
+Yes! You just need to update your `next.config.js` or `next.config.ts` to externalize the `skia-canvas` dependency so Webpack doesn't try to bundle the native binaries:
+
+```typescript
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  serverExternalPackages: ["skia-canvas"],
+  webpack: (config, options) => {
+    if (options.isServer) {
+      config.externals = [
+        ...config.externals,
+        { "skia-canvas": "commonjs skia-canvas" },
+      ];
+    }
+    return config;
+  },
+};
+
+export default nextConfig;
+```
+</details>
+
+---
+
 ### Acknowledgements
 
 - Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
