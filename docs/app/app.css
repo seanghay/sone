@@ -105,6 +105,20 @@ html > body[data-scroll-locked] {
   animation: sone-gradient-drift 18s ease-in-out infinite alternate;
 }
 
+/* Dark-mode variant — the original deep blues/violets get muddy on a near-
+   black background. Lift luminosity across the ramp and reduce saturation
+   on the darkest stop so the headline reads cleanly without losing the
+   blue→cyan brand identity. */
+.dark .text-sone-gradient {
+  background-image: linear-gradient(
+    110deg,
+    #8aa6ff 0%,
+    #a890ff 28%,
+    #6cc4ff 62%,
+    #6ef0ff 100%
+  );
+}
+
 @keyframes sone-gradient-drift {
   0% {
     background-position: 0% 50%;
