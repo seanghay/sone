@@ -1,31 +1,34 @@
 // Generates Open Graph images at request time using Sone itself.
 // Used by /og/docs/*.jpg to produce per-page social-share cards.
 
+import { writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { Column, Font, Row, Span, Text, sone } from 'sone';
+// `?inline` embeds the font as a base64 data URL in the SSR bundle so the
+// bytes ship inside the Vercel function (no separate asset file needed).
+// React Router otherwise moves emitted assets to the client-only build,
+// where the function cannot read them at runtime.
+import fontDataUrl from '../fonts/GoogleSans-Variable.ttf?inline';
 
 const FG = '#0a0a0a';
 const FG_MUTED = '#525252';
 const BORDER = '#e5e5e5';
 
-// Load Google Sans once at module init. The font ships in the repo at
-// app/fonts/ so it's available in any deploy environment that bundles the
-// app's `app/` tree (Vercel functions include it because we reference it
-// from server code).
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const FONT_PATH = path.resolve(__dirname, '..', 'fonts', 'GoogleSans-Variable.ttf');
-
 let fontReady: Promise<void> | undefined;
 async function ensureFonts(): Promise<void> {
   if (fontReady) return fontReady;
   fontReady = (async () => {
-    if (!Font.has('GoogleSans')) {
-      try {
-        await Font.load('GoogleSans', FONT_PATH);
-      } catch (err) {
-        console.warn('[og] could not load GoogleSans:', err);
-      }
+    if (Font.has('GoogleSans')) return;
+    const base64 = fontDataUrl.split(',', 2)[1];
+    const bytes = Buffer.from(base64, 'base64');
+    const fontPath = path.join(tmpdir(), 'sone-google-sans.ttf');
+    await writeFile(fontPath, bytes);
+    try {
+      await Font.load('GoogleSans', fontPath);
+    } catch (err) {
+      console.error('[og] could not load GoogleSans:', err);
+      throw err;
     }
   })();
   return fontReady;
