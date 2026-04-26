@@ -25,8 +25,9 @@ export function Hero() {
         <h1 className="text-5xl sm:text-6xl font-medium tracking-tight text-fd-foreground">
           Sone
         </h1>
-        <p className="mt-6 max-w-2xl text-xl sm:text-2xl text-fd-foreground leading-snug font-semibold tracking-tight">
-          Tailwind for the canvas. Beautiful images at scale.
+        <p className="mt-6 max-w-2xl text-xl sm:text-2xl text-fd-foreground leading-snug font-medium tracking-tight">
+          A layout engine for image generation in JavaScript. Compose images
+          like you write components.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

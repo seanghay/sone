@@ -19,9 +19,9 @@ import {
 } from '@/lib/code-examples.server';
 
 export function meta({}: Route.MetaArgs) {
-  const title = 'Sone — Tailwind for the canvas. Beautiful images at scale.';
+  const title = 'Sone — A layout engine for image generation in JavaScript.';
   const description =
-    'A declarative Canvas layout engine for JavaScript. Build beautiful, dynamic images, OG cards, posters, dashboards, multi-page PDFs, and invoices — at scale, without a browser.';
+    'Compose images like you write components. Build beautiful, dynamic images, OG cards, posters, dashboards, multi-page PDFs, and invoices — at scale, without a browser.';
   const ogImage = 'https://sone.seanghay.com/og/docs/index.jpg';
   const canonical = 'https://sone.seanghay.com/';
   return [
