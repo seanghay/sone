@@ -7,4 +7,7 @@ import * as MdxConfig from './source.config';
 
 export default defineConfig({
   plugins: [mdx(MdxConfig), tailwindcss(), reactRouter(), tsconfigPaths()],
+  ssr: {
+    external: ['skia-canvas'],
+  },
 });
