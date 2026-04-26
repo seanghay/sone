@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
+    "vercel-build": "npm --prefix .. install --no-audit --no-fund && npm --prefix .. run build && react-router build",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && fumadocs-mdx && tsc --noEmit",
     "prepare-gallery": "node scripts/copy-gallery.mjs",
