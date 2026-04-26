@@ -1,0 +1,47 @@
+---
+title: Browser usage
+description: Run Sone in the browser with a custom renderer.
+icon: Globe
+---
+
+Sone ships two entries:
+
+- **`sone`** — Node.js entry, backed by `skia-canvas`. Default for server-side use.
+- **`sone/browser`** — browser entry. Exports the core API but **requires a custom `SoneRenderer`** since browsers don't expose the same APIs as `skia-canvas`.
+
+## Limitations
+
+The browser entry currently supports:
+
+- ✅ PNG / JPG / WebP via `HTMLCanvasElement.toBlob()`
+- ✅ Raw Canvas access
+- ❌ PDF output (Node-only)
+- ❌ SVG output (Node-only)
+
+If your app generates PDFs from user input, run the renderer on the server and stream the buffer to the client.
+
+## Bringing your own renderer
+
+`SoneRenderer` is the platform abstraction layer. Implement these methods:
+
+```ts
+interface SoneRenderer {
+  createCanvas(width: number, height: number): /* CanvasLike */;
+  registerFont(name: string, source: ...): Promise<void>;
+  loadImage(src: string | Uint8Array): Promise<...>;
+  measureText(text: string, font: ...): TextMetrics;
+  breakIterator(...): Iterator;
+  dpr: number;
+  debug: boolean;
+}
+```
+
+A browser renderer typically uses `document.createElement("canvas")` plus the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [Intl.Segmenter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter).
+
+## Use cases for the browser entry
+
+- In-browser document previews where the user edits inputs and sees a live render.
+- Client-side OG image generation for static sites.
+- Offline-capable documentation generators.
+
+For most server-rendered use cases (invoice services, OG endpoints, batch jobs), stick with the Node entry — it's faster and supports all output formats.

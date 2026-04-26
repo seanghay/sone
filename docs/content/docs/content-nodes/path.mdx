@@ -1,0 +1,59 @@
+---
+title: Path
+description: Render arbitrary SVG paths with fill, stroke, and gradient support.
+icon: Spline
+---
+
+`Path(d)` accepts an SVG path string and renders it inside the node's layout box.
+
+```ts
+Path("M 0 0 L 100 0 L 50 87 Z")
+  .width(100).height(87)
+  .fill("black")
+```
+
+## Fill & stroke
+
+```ts
+Path("M 0 0 L 100 0 L 50 87 Z")
+  .fill("linear-gradient(135deg, #000, #555)")
+  .stroke("white")
+  .strokeWidth(2)
+```
+
+| Method | Description |
+| --- | --- |
+| `fill(v)` | Solid color or gradient string. |
+| `fillRule(v)` | `"evenodd"` or `"nonzero"`. |
+| `stroke(v)` | Stroke color. |
+| `strokeWidth(v)` | Pixels. |
+| `strokeLineCap(v)` | `"butt"` `"round"` `"square"`. |
+| `strokeLineJoin(v)` | `"bevel"` `"miter"` `"round"`. |
+| `strokeDashArray(...v)` | Dash pattern, e.g. `strokeDashArray(5, 5)`. |
+| `strokeDashOffset(v)` | Dash offset. |
+| `scalePath(v)` | Scale the path geometry without changing the layout box. |
+
+## Sizing
+
+The path is drawn at its native coordinates inside the layout box. To control how large the path renders, set `width` / `height` and `scalePath` together:
+
+```ts
+Path("M 0 0 L 24 0 L 12 21 Z")     // 24x21 native coordinates
+  .width(48).height(42)
+  .scalePath(2)                     // 2x larger
+  .fill("black")
+```
+
+## Common shapes
+
+```ts
+// Circle approximation (rounded rect with full radius works too)
+Path("M 50 0 A 50 50 0 1 0 50 100 A 50 50 0 1 0 50 0 Z")
+  .width(100).height(100).fill("black")
+
+// Star
+Path("M 50 0 L 61 35 L 98 35 L 68 57 L 79 91 L 50 70 L 21 91 L 32 57 L 2 35 L 39 35 Z")
+  .width(100).height(91).fill("gold")
+```
+
+For non-decorative shapes, prefer using `Column`/`Row` with `.rounded()` and `.bg()` — they're cheaper than parsing path geometry.

@@ -1,0 +1,98 @@
+---
+title: Core concepts
+description: How Sone turns a tree of function calls into pixels.
+icon: Compass
+---
+
+Sone has a small mental model. Once you have it, everything else is detail.
+
+## 1. A document is a tree of nodes
+
+Every Sone document is built from **node builders** — functions that return a node:
+
+```ts
+Column(
+  Text("Title").size(24).weight("bold"),
+  Row(
+    Photo("./logo.png").width(48).height(48),
+    Text("Subtitle").size(14),
+  ).gap(12),
+).padding(24).gap(8)
+```
+
+Builders fall into a few categories:
+
+- **Containers** — `Column`, `Row`, `Grid`, `List`, `Table`, `ClipGroup`. Hold children; control layout.
+- **Leaves** — `Text`, `Span`, `Photo`, `Path`. Terminal content.
+- **Pagination** — `PageBreak`. Used inside multi-page documents.
+
+## 2. Builders are fluent
+
+Every layout property is a method that returns the same node, so calls chain:
+
+```ts
+Text("Hello")
+  .size(24)
+  .color("blue")
+  .weight("bold")
+  .padding(16)
+```
+
+Property order doesn't matter. `.size(24).weight("bold")` and `.weight("bold").size(24)` are identical.
+
+## 3. Layout is flexbox (with grid available)
+
+Containers use the same flexbox model as CSS, powered by [yoga-layout](https://yogalayout.dev/). If you know CSS flex, you already know Sone:
+
+| CSS | Sone |
+| --- | --- |
+| `display: flex; flex-direction: column` | `Column(...)` |
+| `display: flex; flex-direction: row` | `Row(...)` |
+| `padding: 8px 16px` | `.padding(8, 16)` |
+| `gap: 12px` | `.gap(12)` |
+| `align-items: center` | `.alignItems("center")` |
+| `flex: 1` | `.flex(1)` |
+
+For 2D layouts, `Grid(...)` exposes CSS Grid. See [Grid](/docs/layout/grid).
+
+## 4. Render is a separate, explicit step
+
+The node tree is just a description. Nothing is painted until you call `sone(root).png()` (or `.pdf()`, etc.):
+
+```ts
+const tree = Document();          // pure data — nothing has rendered yet
+const buffer = await sone(tree).pdf();  // now Sone runs layout, then paint
+```
+
+This means you can serialize trees, build them in workers, cache them, transform them — they're plain values until rendered.
+
+## 5. Pages are just layout
+
+There's no special "page" node. You set `pageHeight` in the render config, and Sone slices the same node tree across as many pages as needed. Headers and footers are ordinary `Column`/`Row` nodes passed as config:
+
+```ts
+await sone(content, {
+  pageHeight: 1056,
+  header: Row(Text("My Report").size(10)).padding(16),
+  footer: ({ pageNumber, totalPages }) =>
+    Row(Text(`${pageNumber} / ${totalPages}`).size(10)).padding(16),
+}).pdf();
+```
+
+See [Multi-page documents](/docs/multi-page/page-height).
+
+## 6. Text is rich by default
+
+A single `Text` node holds inline `Span` segments — each with its own color, weight, font, decorations, even gradients. There is no separate "rich text" mode; every text node is rich.
+
+```ts
+Text(
+  "Revenue grew ",
+  Span("+22%").color("green").weight("bold"),
+  " year over year.",
+).size(16)
+```
+
+See [Text & Span](/docs/typography/text-and-span).
+
+That's the whole model. Everything in this documentation is a variation on these six ideas.

@@ -1,0 +1,48 @@
+---
+title: PNG, JPG, WebP
+description: Bitmap image output.
+icon: FileImage
+---
+
+```ts
+const png = await sone(doc).png();        // lossless, alpha
+const jpg = await sone(doc).jpg(0.9);     // quality 0–1
+const webp = await sone(doc).webp();      // smaller than PNG, alpha
+```
+
+All three return `Promise<Buffer>` — write directly to disk:
+
+```ts
+import fs from "node:fs/promises";
+await fs.writeFile("out.png", await sone(doc).png());
+```
+
+## Choosing a format
+
+| Format | Use when |
+| --- | --- |
+| **PNG** | You need transparency, or pixel-perfect output for UI/screenshots. |
+| **JPG** | Photos, gradients, large file-size constraints. No transparency. |
+| **WebP** | Modern web targets — ~30% smaller than PNG with the same fidelity, supports alpha. |
+
+For OG images and social previews, JPG at quality 0.9 is usually the sweet spot.
+
+## Sizing
+
+By default, the canvas auto-sizes to fit content. Set `width` / `height` explicitly when you need fixed dimensions (OG images, fixed-size cards):
+
+```ts
+await sone(doc, { width: 1200, height: 630 }).jpg(0.9);   // OG image
+```
+
+## Background
+
+```ts
+await sone(doc, { background: "white" }).jpg();
+```
+
+Without `background`, transparent areas come out as transparent in PNG/WebP and as black in JPG.
+
+## DPR (high-DPI rendering)
+
+Renderer DPR is platform-controlled — the Node renderer uses 1.0. To produce 2× output, scale `width`/`height` and let downstream consumers handle the scale factor.

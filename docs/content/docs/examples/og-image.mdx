@@ -1,0 +1,78 @@
+---
+title: Open Graph image
+description: 1200×630 social-share images at single-digit-millisecond render time.
+icon: Share2
+---
+
+![OG image rendered by Sone](/examples/og-image.jpg)
+
+OG images are Sone's natural domain — fixed-size, programmatic, generated per request. Here's a typical blog-post OG image.
+
+```ts
+import { Column, Photo, Row, Span, Text, sone } from "sone";
+
+function OgImage({ title, author, readTime }: {
+  title: string;
+  author: string;
+  readTime: number;
+}) {
+  return Column(
+    // Top: brand
+    Row(
+      Photo("./logo.png").width(36).height(36),
+      Text("acme.dev").size(16).color("#999").weight("bold"),
+    ).gap(12).alignItems("center"),
+
+    // Middle: title (autofit + balanced wrap = always looks good)
+    Text(title)
+      .size(64)
+      .weight("bold")
+      .lineHeight(1.1)
+      .color("white")
+      .textWrap("balance")
+      .flex(1),
+
+    // Bottom: byline
+    Row(
+      Photo("./avatar.jpg").width(40).height(40).rounded(20),
+      Column(
+        Text(author).size(15).weight("bold").color("white"),
+        Text(`${readTime} min read`).size(13).color("#999"),
+      ).gap(2),
+    ).gap(12).alignItems("center"),
+  )
+    .width(1200).height(630)
+    .padding(64)
+    .gap(24)
+    .bg("black")
+    .justifyContent("space-between");
+}
+
+const buffer = await sone(
+  OgImage({
+    title: "How we cut PDF render time from 2 seconds to 30 milliseconds",
+    author: "Alex Chen",
+    readTime: 8,
+  }),
+).jpg(0.92);
+```
+
+## Notes
+
+- **Balanced wrap** on the title means short and long titles both look polished — no awkwardly short last lines.
+- **Use `.jpg(0.92)`** for OG images. Most social platforms re-encode anyway; quality 0.92 keeps file size under 200KB.
+- **Caching** — for high-traffic blogs, cache the rendered buffer. The same title always produces the same bytes.
+
+## In a Next.js / Hono / Express handler
+
+```ts
+// Next.js — app/og/route.ts
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const title = searchParams.get("title") ?? "Untitled";
+  const buffer = await sone(OgImage({ title, author: "—", readTime: 1 })).jpg(0.92);
+  return new Response(buffer, { headers: { "Content-Type": "image/jpeg" } });
+}
+```
+
+Single-digit millisecond render means you can afford to render on every request — no need for build-time pre-rendering.

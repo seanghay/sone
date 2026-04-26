@@ -1,0 +1,71 @@
+---
+title: Page height
+description: Slice a single node tree across multiple pages.
+icon: Ruler
+---
+
+Pass `pageHeight` to `sone(...)` and Sone will slice the same node tree into as many pages as needed:
+
+```ts
+const buffer = await sone(content, {
+  pageHeight: 1056,    // Letter height @ 96 dpi
+}).pdf();
+```
+
+That's it. There is no special "page" node. Your content is laid out continuously, and the painter slices it into page-sized rects.
+
+## Common page heights
+
+| Format | Width × Height @ 96 dpi |
+| --- | --- |
+| US Letter (portrait) | `816 × 1056` |
+| US Letter (landscape) | `1056 × 816` |
+| A4 (portrait) | `794 × 1123` |
+| A4 (landscape) | `1123 × 794` |
+| A5 (portrait) | `559 × 794` |
+
+Pair with `width` to set the page width. Without `width`, the canvas auto-sizes to content width.
+
+```ts
+await sone(content, { width: 816, pageHeight: 1056 }).pdf();
+```
+
+## Margins
+
+```ts
+await sone(content, {
+  pageHeight: 1056,
+  margin: 48,
+}).pdf();
+```
+
+Margin accepts:
+
+- A single number — applied to all sides.
+- `{ top, right, bottom, left }` — per-side overrides.
+
+```ts
+margin: { top: 64, right: 48, bottom: 64, left: 48 }
+```
+
+## Last page behavior
+
+By default, every page is `pageHeight` tall, even if the last page only has a few lines. Set `lastPageHeight: "content"` to trim the last page to its actual content:
+
+```ts
+await sone(content, {
+  pageHeight: 1056,
+  lastPageHeight: "content",   // trim trailing whitespace from last page
+}).pdf();
+```
+
+## Multi-page output formats
+
+Multi-page works for `.pdf()`, `.pages()` (returns one Canvas per page), and you can render each page individually:
+
+```ts
+const pages = await sone(content, { pageHeight: 1056 }).pages();
+// pages: Canvas[]
+```
+
+Use `.pages()` when you need each page as an image (e.g., generating thumbnails).

@@ -1,0 +1,52 @@
+---
+title: Page break
+description: Force, prevent, or hint at page breaks.
+icon: SeparatorHorizontal
+---
+
+## Explicit page break
+
+`PageBreak()` is a zero-height node that forces the next sibling onto a new page:
+
+```ts
+import { Column, PageBreak, Text } from "sone";
+
+Column(
+  SectionOne,
+  PageBreak(),
+  SectionTwo,
+).gap(16)
+```
+
+## Hint at break behavior
+
+Any node accepts `.pageBreak(behavior)`:
+
+```ts
+sectionTitle.pageBreak("before")   // start this node on a new page
+section.pageBreak("avoid")         // try to keep this whole node on one page
+section.pageBreak("after")         // page break after this node
+```
+
+| Value | Meaning |
+| --- | --- |
+| `"before"` | Force a break before this node. |
+| `"after"` | Force a break after this node. |
+| `"avoid"` | Try not to split this node across pages. |
+
+`"avoid"` is a *hint* — if the node is taller than a single page, it will still be split.
+
+## Practical example
+
+```ts
+Column(
+  coverPage,
+  PageBreak(),
+  tocPage,
+  PageBreak(),
+  Column(
+    chapterHeading,         // pageBreak("before") would also work here
+    chapterBody,
+  ).pageBreak("avoid"),
+).gap(0)
+```

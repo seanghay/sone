@@ -1,0 +1,62 @@
+---
+title: Headers & footers
+description: Repeating page chrome with dynamic page numbers.
+icon: LayoutTemplate
+---
+
+`header` and `footer` nodes repeat on every page. They can be static nodes or functions that receive per-page info.
+
+## Static
+
+```ts
+import { Row, Text, sone } from "sone";
+
+await sone(content, {
+  pageHeight: 1056,
+  header: Row(Text("My Report").size(10)).padding(8, 16),
+  footer: Row(Text("Confidential").size(10)).padding(8, 16),
+}).pdf();
+```
+
+## Dynamic — page numbers
+
+Pass a function. Sone calls it with `{ pageNumber, totalPages }`:
+
+```ts
+const footer = ({ pageNumber, totalPages }) =>
+  Row(
+    Text(Span(`${pageNumber}`).weight("bold"), ` / ${totalPages}`).size(10),
+  )
+    .padding(8, 16)
+    .justifyContent("flex-end");
+
+await sone(content, { pageHeight: 1056, footer }).pdf();
+```
+
+## Header / footer height
+
+Sone subtracts the rendered header/footer height from each page automatically. You don't have to reserve space — your `content` flows in the remaining area. Tall headers reduce content area accordingly.
+
+## Different chrome on first page
+
+Since header/footer are functions, branch on `pageNumber`:
+
+```ts
+const header = ({ pageNumber }) => {
+  if (pageNumber === 1) return Row().height(0);   // empty header on cover
+  return Row(Text("Annual Report 2025").size(10)).padding(8, 16);
+};
+```
+
+## Composes with margins
+
+`margin` is applied around the full page; `header` sits inside the top margin, and `footer` inside the bottom margin. They don't double-count.
+
+```ts
+await sone(content, {
+  pageHeight: 1056,
+  margin: 48,
+  header,
+  footer,
+}).pdf();
+```

@@ -1,0 +1,47 @@
+---
+title: Bidirectional text (RTL)
+description: Arabic, Hebrew, and mixed LTR/RTL paragraphs with auto-detected base direction.
+icon: Languages
+---
+
+Sone implements the Unicode Bidirectional Algorithm (UBA). Paragraphs are detected as RTL or LTR from the first strong character; mixed-direction inline content within a paragraph is reordered correctly without you having to think about it.
+
+```ts
+import { Font, Column, Text, Span } from "sone";
+
+await Font.load("NotoSansArabic", "fonts/NotoSansArabic.ttf");
+await Font.load("NotoSansHebrew", "fonts/NotoSansHebrew.ttf");
+
+Column(
+  // Auto-detected RTL (first strong char is Arabic)
+  Text("مرحبا بالعالم").font("NotoSansArabic").size(32),
+
+  // Explicit RTL override
+  Text("שלום עולם").font("NotoSansHebrew").size(32).baseDir("rtl"),
+
+  // Mixed — LTR paragraph with an inline RTL span
+  Text(
+    "Total: ",
+    Span("١٢٣").font("NotoSansArabic").textDir("rtl"),
+    " items",
+  ).size(18),
+)
+```
+
+## API
+
+| Method | Description |
+| --- | --- |
+| `Text.baseDir(v)` | `"ltr"` `"rtl"` `"auto"`. `"auto"` (default) uses the first strong character heuristic. |
+| `Span.textDir(v)` | `"ltr"` `"rtl"`. Overrides canvas direction for this span only. |
+
+## When to override
+
+You usually don't need to. Auto-detection handles ~95% of cases. Set `baseDir` explicitly when:
+
+- A paragraph starts with a non-letter character (digit, punctuation) and the first strong letter is in the wrong script.
+- You want to force a paragraph to render right-aligned in an LTR-dominant document.
+
+## Fonts
+
+You'll need a font that contains the glyphs for the script you're rendering. Sone does not ship fonts. See [Loading fonts](/docs/typography/fonts).

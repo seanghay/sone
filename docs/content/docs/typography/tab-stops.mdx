@@ -1,0 +1,44 @@
+---
+title: Tab stops & leaders
+description: Aligned columns inside a single Text node, with optional dot leaders.
+icon: IndentIncrease
+---
+
+For tabular content where you don't need full table semantics — table of contents entries, financial line items, key/value pairs — a `Text` node with `\t` separators and tab stops is faster and cleaner than a `Table`.
+
+```ts
+Text("Name\tAmount\tDate")
+  .tabStops(200, 320)
+  .font("GeistMono")
+  .size(12)
+```
+
+Each `\t` snaps the next segment to the next tab stop x-position.
+
+## Tab leaders
+
+`.tabLeader(char)` fills the gap between segments with a repeating character. Classic Word-style tables of contents:
+
+```ts
+Text("Introduction\t1")
+  .tabStops(360)
+  .tabLeader(".")
+  .size(13)
+```
+
+Any character works:
+
+```ts
+// Financial report — dash leader
+Text("Revenue\t$1,200,000")
+  .tabStops(300)
+  .tabLeader("-")
+  .size(13)
+```
+
+## When to use this vs. Table
+
+- **Tab stops** — single line per row, ≤ 3 columns, no per-cell styling needed.
+- **Table** — multi-line cells, colspan/rowspan, cell backgrounds, complex per-cell content.
+
+See [Table](/docs/content-nodes/table) for the full table API.

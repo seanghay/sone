@@ -1,0 +1,33 @@
+---
+title: SVG
+description: Vector output for the web.
+icon: FileCode
+---
+
+```ts
+const svg = await sone(doc).svg();
+```
+
+Returns a `Buffer` containing an SVG document. Save to disk or serve directly:
+
+```ts
+import fs from "node:fs/promises";
+await fs.writeFile("out.svg", await sone(doc).svg());
+```
+
+## When to use SVG
+
+- Icons and small graphics where lossless scaling matters.
+- Charts and infographics.
+- Email-friendly logos.
+- Diagrams that need to remain editable in vector tooling.
+
+## Caveats
+
+- **Photos** are embedded as data URLs (base64), which inflates file size. SVG is rarely the right format for photo-heavy documents.
+- **Custom fonts** are *not* embedded — viewers must have the font installed, or you must outline text first. For documents with custom typography, prefer PDF.
+- **Browser environments** — like PDF, SVG output requires the Node.js renderer.
+
+## Stylable output
+
+Sone's SVG output uses semantic attributes where possible. You can post-process the output (e.g., with `svgo`) to clean it up further, or hand-edit if you need to retarget colors.

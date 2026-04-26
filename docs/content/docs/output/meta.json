@@ -1,0 +1,5 @@
+{
+  "title": "Output formats",
+  "icon": "Download",
+  "pages": ["render-config", "png-jpg-webp", "pdf", "svg", "canvas-raw"]
+}

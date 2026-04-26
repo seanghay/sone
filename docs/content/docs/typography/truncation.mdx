@@ -1,0 +1,72 @@
+---
+title: Truncation & autofit
+description: Cap text at N lines, add an ellipsis, or scale font size to fit.
+icon: AlignLeft
+---
+
+For UI elements where text length is variable but space is fixed — card titles, table cells, list rows — use these methods to keep layout predictable.
+
+## Cap to N lines
+
+```ts
+Text("A very long product description that would otherwise wrap many lines.")
+  .maxLines(2)
+  .textOverflow("ellipsis")
+  .size(14)
+  .lineHeight(1.4)
+  .maxWidth(240)
+```
+
+`maxLines(n)` clamps the visible text to `n` lines. Anything past line `n` is dropped. `textOverflow("ellipsis")` adds `…` at the cut point. `textOverflow("clip")` (the default) just hides without an ellipsis.
+
+## Single-line truncation
+
+```ts
+Text("Long subject line that should never wrap.")
+  .nowrap()
+  .textOverflow("ellipsis")
+  .maxWidth(240)
+```
+
+`.nowrap()` is shorthand for "treat as a single line, ignore the width and don't wrap" — combined with `maxWidth` and `textOverflow("ellipsis")`, you get classic single-line ellipsis.
+
+## Autofit — scale to fill
+
+For hero titles or card titles with variable content but a fixed visual size, `.autofit()` shrinks the font size until the text fits:
+
+```ts
+// Fit on a single line within available width
+Text("Auto-sizing hero title")
+  .autofit()
+  .nowrap()
+  .maxWidth(640)
+  .size(96)        // upper bound — actual size shrinks if needed
+  .weight("bold")
+```
+
+```ts
+// Fit inside a fixed-height box (multi-line allowed)
+Column(
+  Text("Could be short or very long depending on the data...")
+    .autofit()
+    .size(48)      // upper bound
+    .maxWidth(400),
+).height(200)
+```
+
+The `size(...)` you set is the **maximum** — autofit only ever shrinks down. Pair with `maxWidth` and `nowrap` for single-line headlines, or `maxWidth` and a parent height for multi-line bounded boxes.
+
+## When to use what
+
+| Goal | Use |
+| --- | --- |
+| Cap a paragraph to N lines with `…` | `.maxLines(n).textOverflow("ellipsis")` |
+| Single-line ellipsis on a title | `.nowrap().textOverflow("ellipsis").maxWidth(W)` |
+| Hero title that resizes to fit width | `.autofit().nowrap().maxWidth(W).size(MAX)` |
+| Fit varying content into a fixed box | `.autofit().maxWidth(W).size(MAX)` inside a sized parent |
+
+## Edge cases
+
+- **Mixed-script text**: ellipsis is added in the paragraph's base direction; for RTL paragraphs it appears on the left.
+- **Very small `maxWidth`**: `autofit` has a sensible minimum (~6px). Below that, text is rendered at the floor and may still overflow.
+- **`maxLines` + `maxWidth`**: Sone counts wrapped lines, so reducing `maxWidth` increases the line count. Combine intentionally.

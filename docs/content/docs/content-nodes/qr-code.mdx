@@ -1,0 +1,39 @@
+---
+title: QR codes
+description: Generate QR codes inline with the Path node.
+icon: QrCode
+---
+
+Sone bundles [`uqr`](https://github.com/antfu/uqr) for QR generation. The output is an SVG path string you can drop into a `Path` node.
+
+```ts
+import { renderSVG } from "uqr";
+import { Path } from "sone";
+
+const { d, size } = renderSVG("https://example.com");
+
+Path(d).width(size).height(size).fill("black")
+```
+
+## Sizing
+
+`uqr` returns the path geometry at its native module size (the number of black/white squares wide). Set `width`/`height` to your target render size — Sone will scale the path:
+
+```ts
+Path(d).width(120).height(120).scalePath(120 / size).fill("black")
+```
+
+## Embedding in a layout
+
+Wrap the QR in a flex container so it composes with surrounding nodes:
+
+```ts
+Column(
+  Path(d).width(80).height(80).fill("black"),
+  Text("Scan to view receipt").size(10).color("#666"),
+).gap(8).alignItems("center")
+```
+
+## Foreground color & contrast
+
+Make sure the QR has enough contrast with its background. Black on white is the safe default. Avoid coloring the QR with low-contrast palettes — most scanners require a roughly 4:1 contrast ratio.

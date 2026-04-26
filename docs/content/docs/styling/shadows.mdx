@@ -1,0 +1,73 @@
+---
+title: Shadows
+description: Box and text shadows with the same syntax as CSS.
+icon: CloudFog
+---
+
+```ts
+Column(...).shadow("0 4px 12px rgba(0, 0, 0, 0.15)")
+Text("Hello").dropShadow("0 1px 2px rgba(0, 0, 0, 0.4)")
+```
+
+`shadow(v)` on any container takes a CSS `box-shadow` string. `dropShadow(v)` on `Text` or `Span` takes a CSS `text-shadow` string.
+
+## Box shadows
+
+```ts
+Column(...).shadow("0 4px 12px rgba(0, 0, 0, 0.15)")
+
+// Multiple comma-separated shadows
+Column(...).shadow(
+  "0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.1)"
+)
+
+// Inset shadow
+Column(...).shadow("inset 0 1px 2px rgba(0,0,0,0.08)")
+```
+
+The full CSS box-shadow syntax is supported: `[inset] x-offset y-offset blur-radius spread-radius color`.
+
+## Text & span drop shadows
+
+```ts
+Text("Hero")
+  .size(64).weight("bold")
+  .dropShadow("0 4px 16px rgba(0, 0, 0, 0.4)")
+
+Text(
+  "Glow ",
+  Span("text")
+    .color("#fff")
+    .dropShadow("0 0 12px #00d4ff, 0 0 24px #00d4ff"),
+)
+```
+
+Multiple drop-shadows compose into a glow effect — stack 2–3 at increasing blur radii.
+
+## Tasteful defaults
+
+A common "elevated card" look:
+
+```ts
+Column(...)
+  .bg("white")
+  .rounded(12)
+  .shadow("0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.08)")
+```
+
+A subtle pressed/inset look for dim wells:
+
+```ts
+Column(...)
+  .bg("#fafafa")
+  .rounded(8)
+  .shadow("inset 0 1px 0 rgba(255,255,255,0.6), inset 0 0 0 1px rgba(0,0,0,0.04)")
+```
+
+## When NOT to use shadows
+
+- Edge-to-edge documents (banners, OG images): rarely benefit from shadows.
+- Print-targeted PDFs: shadows render as raster artifacts and add file size — prefer thin borders.
+- Very dense layouts: shadows hurt legibility more than they help.
+
+When in doubt, use a single 1px border instead of a shadow — it scales better across export formats.

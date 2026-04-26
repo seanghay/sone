@@ -1,0 +1,118 @@
+---
+title: Flexbox (Column & Row)
+description: Stack children vertically or horizontally with the flexbox model you already know.
+icon: Columns3
+---
+
+`Column` and `Row` are flex containers. `Column` stacks children top-to-bottom, `Row` stacks them left-to-right.
+
+```ts
+Column(
+  Text("Hello"),
+  Text("World"),
+).gap(8).padding(16)
+```
+
+## Spacing
+
+```ts
+Row(...).gap(12)              // gap between children
+Column(...).rowGap(8)         // explicit row gap
+Row(...).columnGap(8)         // explicit column gap
+
+Column(...).padding(16)               // all sides
+Column(...).padding(8, 16)            // y, x
+Column(...).padding(8, 16, 12, 16)    // top, right, bottom, left
+
+Column(...).margin(0, "auto")         // CSS-style shorthand
+```
+
+## Alignment
+
+```ts
+Row(...)
+  .justifyContent("space-between")   // main axis
+  .alignItems("center")              // cross axis
+```
+
+| Method | Values |
+| --- | --- |
+| `justifyContent` | `"flex-start"` `"flex-end"` `"center"` `"space-between"` `"space-around"` `"space-evenly"` |
+| `alignItems` | `"flex-start"` `"flex-end"` `"center"` `"stretch"` `"baseline"` |
+| `alignSelf` | self override on a child |
+| `alignContent` | multi-line cross-axis alignment |
+
+## Sizing
+
+```ts
+Column(...)
+  .width(400)            // fixed
+  .maxWidth(600)         // upper bound
+  .minHeight(200)        // lower bound
+  .flex(1)               // grow to fill
+  .grow(1).shrink(0)     // explicit
+  .basis(120)            // flex-basis
+```
+
+## Wrapping & direction
+
+```ts
+Row(...).wrap("wrap")              // wrap to new line when full
+Row(...).direction("row-reverse")  // reverse order
+```
+
+## Backgrounds & borders
+
+```ts
+Column(...)
+  .bg("white")
+  .borderWidth(1)
+  .borderColor("#e5e7eb")
+  .rounded(12)
+  .borderSmoothing(0.6)   // squircle smoothing
+```
+
+`bg(...)` accepts colors, gradient strings, and `Photo` nodes (for background images).
+
+## Positioning
+
+Most layouts only need flex. For overlays, use absolute positioning relative to the nearest positioned ancestor:
+
+```ts
+Column(
+  Photo("./hero.jpg").width(800).height(400),
+  Text("Caption")
+    .position("absolute")
+    .bottom(16)
+    .left(16)
+    .color("white"),
+).position("relative")
+```
+
+## Common patterns
+
+**Centered card:**
+
+```ts
+Column(
+  Text("Centered").size(20),
+).alignItems("center").justifyContent("center").width(400).height(200)
+```
+
+**Sticky footer in a fixed-height layout:**
+
+```ts
+Column(
+  Column(...content).flex(1),
+  footer,
+).height(900)
+```
+
+**Two-column with a sidebar:**
+
+```ts
+Row(
+  sidebar.width(240),
+  Column(...main).flex(1),
+).gap(24)
+```

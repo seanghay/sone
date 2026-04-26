@@ -1,0 +1,130 @@
+---
+title: Render config
+description: Every option you can pass to sone(node, config) — size, background, margins, paginate, cache.
+icon: Settings2
+---
+
+`sone(node, config?)` accepts an optional `SoneRenderConfig` as its second argument. This page is the comprehensive reference.
+
+```ts
+sone(root, {
+  width: 1200,
+  height: 630,
+  background: "white",
+  pageHeight: 1056,
+  margin: { top: 48, right: 48, bottom: 48, left: 48 },
+  header: ({ pageNumber, totalPages }) => Row(...),
+  footer: ({ pageNumber }) => Row(...),
+  lastPageHeight: "content",
+  cache: imageCache,
+}).pdf();
+```
+
+## Sizing
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `width` | `number` | Canvas width in pixels. When set, margins inset content within it. Without `width`, Sone auto-sizes to content width. |
+| `height` | `number` | Canvas height in pixels. Without `height`, Sone auto-sizes to content height. |
+| `background` | `string` | Canvas background fill. Accepts any color or gradient string. |
+
+```ts
+// OG image — fixed canvas
+await sone(doc, { width: 1200, height: 630, background: "white" }).png();
+
+// Auto-sized — useful for hero cards where height varies
+await sone(doc, { width: 800 }).png();
+```
+
+## Pagination
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `pageHeight` | `number` | Enables multi-page output. Each page is this many pixels tall. |
+| `header` | `SoneNode \| (info) => SoneNode` | Repeating header on every page. |
+| `footer` | `SoneNode \| (info) => SoneNode` | Repeating footer on every page. |
+| `margin` | `number \| { top, right, bottom, left }` | Page margins. |
+| `lastPageHeight` | `"uniform" \| "content"` | `"content"` trims the last page to its actual content. Default `"uniform"`. |
+
+`info` passed to header/footer functions is `{ pageNumber: number, totalPages: number }`.
+
+```ts
+await sone(content, {
+  width: 816,
+  pageHeight: 1056,                    // US Letter at 96 dpi
+  margin: { top: 64, right: 48, bottom: 64, left: 48 },
+  header: Row(Text("Annual Report").size(10)).padding(8, 16),
+  footer: ({ pageNumber, totalPages }) =>
+    Row(Text(`${pageNumber} / ${totalPages}`).size(10).align("right"))
+      .padding(8, 16),
+  lastPageHeight: "content",
+}).pdf();
+```
+
+See [Multi-page documents](/docs/multi-page/page-height) for the full guide.
+
+## Image caching
+
+| Option | Type | Description |
+| --- | --- | --- |
+| `cache` | `Map` | Image decode cache shared across renders. |
+
+For high-throughput pipelines (per-request OG images, batch PDF generation), pass a long-lived `Map` so decoded images are reused:
+
+```ts
+const imageCache = new Map();
+
+// First call decodes /logo.png
+await sone(card1, { cache: imageCache }).png();
+
+// Subsequent calls reuse the decoded image
+await sone(card2, { cache: imageCache }).png();
+await sone(card3, { cache: imageCache }).png();
+```
+
+The cache key is the image source (path / URL / Uint8Array reference).
+
+## Output density
+
+`SoneRenderConfig` doesn't expose density directly, but you can drop down to the underlying skia-canvas Canvas to control it:
+
+```ts
+const canvas = await sone(doc, { width: 1200, height: 630 }).canvas();
+canvas.density = 2;  // 2× pixel density
+const buffer = await canvas.toBuffer("jpeg", { quality: 0.92, density: 2 });
+```
+
+The CSS dimensions stay 1200×630 but the output buffer is 2400×1260, so it looks crisp on retina displays.
+
+## Type signature
+
+```ts
+interface SoneRenderConfig {
+  width?: number;
+  height?: number;
+  background?: string;
+  pageHeight?: number;
+  header?: SoneNode | ((info: SonePageInfo) => SoneNode);
+  footer?: SoneNode | ((info: SonePageInfo) => SoneNode);
+  margin?: number | { top: number; right: number; bottom: number; left: number };
+  lastPageHeight?: "uniform" | "content";
+  cache?: Map<unknown, unknown>;
+}
+
+interface SonePageInfo {
+  pageNumber: number;
+  totalPages: number;
+}
+```
+
+## Common page sizes
+
+| Format | Width × Height @ 96 dpi |
+| --- | --- |
+| US Letter (portrait) | `816 × 1056` |
+| US Letter (landscape) | `1056 × 816` |
+| A4 (portrait) | `794 × 1123` |
+| A4 (landscape) | `1123 × 794` |
+| A5 (portrait) | `559 × 794` |
+| OG image | `1200 × 630` |
+| Twitter card | `1200 × 600` |

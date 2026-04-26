@@ -1,0 +1,62 @@
+---
+title: Quick start
+description: Render your first document in 30 seconds.
+icon: Zap
+---
+
+This is the smallest useful Sone program — a hero "Hello, World" headline rendered to a JPG.
+
+```ts
+import { Column, Span, sone, Text } from "sone";
+import fs from "node:fs/promises";
+
+function Document() {
+  return Column(
+    Text("Hello, ", Span("World").color("white").weight("bold"))
+      .size(44)
+      .color("white"),
+  )
+    .padding(24)
+    .bg("black");
+}
+
+const buffer = await sone(Document()).jpg();
+await fs.writeFile("image.jpg", buffer);
+```
+
+Three things to notice:
+
+1. **Builders return values, not JSX.** `Column(...)` and `Text(...)` are plain functions. `.padding(24)` returns the same node, so calls chain fluently.
+2. **Children come first, props chain after.** `Text("Hello, ", Span("World")...)` declares the content; `.size(44)` configures it.
+3. **`sone(node).jpg()` is the render call.** Everything before it is layout description; this line actually paints to a Canvas and returns a buffer.
+
+## Other output formats
+
+The same node tree can render to any format Sone supports:
+
+```ts
+const root = Document();
+
+await sone(root).png();      // PNG buffer
+await sone(root).jpg(0.9);   // JPG buffer (quality 0–1)
+await sone(root).webp();     // WebP buffer
+await sone(root).pdf();      // PDF buffer
+await sone(root).svg();      // SVG buffer
+await sone(root).canvas();   // raw skia-canvas Canvas
+```
+
+See [Output formats](/docs/output/png-jpg-webp) for the full list.
+
+## Sizing
+
+By default, Sone auto-sizes the canvas to fit content. Pass `width` / `height` to fix it:
+
+```ts
+await sone(root, { width: 1200, height: 630 }).png(); // perfect for OG images
+```
+
+## What now?
+
+- [Core concepts](/docs/getting-started/concepts) — how the node tree, layout, and render passes fit together.
+- [Flexbox layout](/docs/layout/flexbox) — Column, Row, padding, gap, alignment.
+- [Multi-page PDFs](/docs/multi-page/page-height) — when a single page isn't enough.

@@ -1,0 +1,56 @@
+---
+title: Installation
+description: Install Sone and its native rendering peer dependency.
+icon: Download
+---
+
+## Requirements
+
+- **Node.js 16+** (or Deno / Bun).
+- A platform with a [skia-canvas](https://github.com/samizdatco/skia-canvas) prebuilt binary — macOS, Linux, and Windows on common architectures are supported.
+
+## Install
+
+```bash
+npm install sone
+```
+
+`skia-canvas` is a peer dependency. On most platforms `npm install` will pick up a prebuilt native binary automatically. If installation fails, follow the [skia-canvas instructions](https://github.com/samizdatco/skia-canvas) for your platform.
+
+## Optional dependencies
+
+- **Syntax highlighting** — `npm install shiki` to enable code blocks via `sone/shiki`. See [Shiki integration](/docs/advanced/shiki).
+
+> Hyphenation patterns ship with Sone, so `.hyphenate(locale)` works out of the box — no extra install needed.
+
+## TypeScript
+
+Sone ships with full TypeScript types. No additional `@types/*` package required.
+
+## Next.js
+
+Externalize the native module so the bundler doesn't try to inline it:
+
+```ts
+// next.config.ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  serverExternalPackages: ["skia-canvas"],
+  webpack: (config, options) => {
+    if (options.isServer) {
+      config.externals = [
+        ...config.externals,
+        { "skia-canvas": "commonjs skia-canvas" },
+      ];
+    }
+    return config;
+  },
+};
+
+export default nextConfig;
+```
+
+## Browser
+
+Import from the browser entry instead of the default. The browser build does **not** include PDF or SVG output — those require the Node.js backend. See [Browser usage](/docs/advanced/browser).

@@ -1,0 +1,69 @@
+---
+title: Metadata API
+description: Inspect the laid-out node tree, with bounding boxes for every node, line, and text segment.
+icon: Database
+---
+
+Sone exposes the computed layout of every node — useful for hit-testing, building debug overlays, generating ML training data, or post-processing after layout.
+
+```ts
+import { sone, Column, Text, Span } from "sone";
+
+const { canvas, metadata } = await sone(doc).canvasWithMetadata();
+```
+
+## What's in the metadata tree
+
+The metadata tree mirrors the node tree. Each node carries its computed layout:
+
+```ts
+metadata.x          // pixels from canvas left
+metadata.y          // pixels from canvas top
+metadata.width
+metadata.height
+metadata.tag        // value from .tag() on the node
+metadata.type       // "text" | "photo" | "column" | "row" | ...
+metadata.children   // child metadata
+```
+
+For text nodes, the metadata also contains paragraph blocks with per-line and per-segment bounding boxes:
+
+```ts
+const textMeta = metadata.children[0];           // assume a Text node
+for (const { paragraph } of textMeta.props.blocks) {
+  for (const line of paragraph.lines) {
+    for (const segment of line.segments) {
+      const r = segment.run;       // { x, y, width, height } in canvas pixels
+      const tag = segment.props.tag;
+    }
+  }
+}
+```
+
+## Tagging nodes
+
+Add `.tag(name)` to any node or span to mark it for downstream processing:
+
+```ts
+Column(
+  Text("Title").tag("title"),
+  Text("Body text").tag("content"),
+  Text(
+    "Revenue: ",
+    Span("+22%").color("green").tag("change"),
+  ).tag("row"),
+)
+```
+
+Tags surface in the metadata tree and are used as class names in YOLO/COCO export.
+
+## Use cases
+
+- **Debug overlays** — paint colored boxes over each tagged region for visual inspection.
+- **Hit testing** — convert click coordinates to "what tag was hit".
+- **Document layout analysis** — export bounding boxes as ML training data ([YOLO/COCO](/docs/advanced/yolo-coco-export)).
+- **Spelling/grammar pipelines** — extract per-segment bboxes and feed them to OCR-style annotators.
+
+## See also
+
+- [`renderWithMetadata()`](/docs/advanced/yolo-coco-export) — the same data, exported in ML-friendly formats.

@@ -1,0 +1,47 @@
+---
+title: PDF
+description: Single-page or multi-page PDF output.
+icon: FileText
+---
+
+```ts
+const pdf = await sone(doc).pdf();
+```
+
+The same call handles both single- and multi-page documents. To enable pagination, pass `pageHeight` (and usually `width`):
+
+```ts
+const pdf = await sone(doc, {
+  width: 816,
+  pageHeight: 1056,
+  margin: 48,
+}).pdf();
+```
+
+See [Page height](/docs/multi-page/page-height) for paper sizes.
+
+## Vector vs. raster
+
+Sone's PDF output is *vector* for paths and text, *raster* for embedded photos. Text remains selectable and high-DPI-friendly.
+
+## Embedded fonts
+
+Custom fonts loaded via `Font.load()` are embedded into the PDF automatically.
+
+```ts
+await Font.load("Inter", "fonts/Inter-Regular.ttf");
+await Font.load("Inter", "fonts/Inter-Bold.ttf", { weight: "bold" });
+
+const pdf = await sone(doc).pdf();   // Inter is embedded
+```
+
+## File size
+
+PDF size is dominated by:
+
+- **Embedded fonts** — full unicode fonts can be megabytes; subset to needed glyphs at the source if file size matters.
+- **Embedded photos** — they're stored at their natural resolution. Resize/recompress images before passing them to `Photo()`.
+
+## Browser environments
+
+PDF output requires the Node.js renderer. The browser entry does not include PDF support; for browser-side generation use `.png()` / `.jpg()` / `.webp()` and serve the document differently.

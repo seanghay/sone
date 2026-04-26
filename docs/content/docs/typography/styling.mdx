@@ -1,0 +1,84 @@
+---
+title: Styling
+description: Every text-styling method on Text and Span.
+icon: Paintbrush
+---
+
+## Size, color, weight, font
+
+```ts
+Text("Heading").size(28).color("#111").weight("bold").font("Inter")
+```
+
+| Method | Description |
+| --- | --- |
+| `size(v)` | Font size in pixels. |
+| `color(v)` | Color string or gradient. |
+| `weight(v)` | `"normal"` `"bold"` or a numeric weight. |
+| `font(v)` | Font family name. Single name or array (in priority order). |
+| `style(v)` | `"normal"` `"italic"` `"oblique"`. |
+| `lineHeight(v)` | Line-height multiplier (e.g. `1.5`). |
+
+## Alignment & spacing
+
+```ts
+Text("Body copy")
+  .align("justify")
+  .letterSpacing(0.5)
+  .wordSpacing(2)
+  .indent(16)
+```
+
+| Method | Description |
+| --- | --- |
+| `align(v)` | `"left"` `"right"` `"center"` `"justify"`. |
+| `letterSpacing(v)` | Pixels. |
+| `wordSpacing(v)` | Pixels. |
+| `indent(v)` | First-line indent in pixels. |
+
+## Decorations
+
+```ts
+Text("Underlined").underline()
+Text("Strikethrough").lineThrough()
+Text("Overlined").overline()
+Span("highlighted").highlight("yellow")
+```
+
+Decoration methods optionally take a thickness number: `.underline(2)`.
+
+## Outline & shadow
+
+```ts
+Text("Outlined").strokeColor("black").strokeWidth(1).color("white")
+Text("Drop shadow").dropShadow("0 2px 4px rgba(0,0,0,0.4)")
+```
+
+`dropShadow` takes any CSS `text-shadow` string; you can pass multiple comma-separated shadows.
+
+## Wrapping behavior
+
+```ts
+Text("won't wrap").nowrap()
+Text("balanced").textWrap("balance")    // see Balanced wrapping
+```
+
+## Fitting text to a box
+
+```ts
+Text("Big bold")
+  .autofit()              // fit by height
+  .nowrap()               // single-line, fit by width
+```
+
+`.autofit()` scales font size up or down to fill the available height. Combined with `.nowrap()` it scales to fit a single line within the available width — perfect for hero titles in fixed boxes.
+
+## Color gradients
+
+```ts
+Text("Gradient")
+  .color("linear-gradient(90deg, #ff7a00, #f000ff)")
+  .size(48).weight("bold")
+```
+
+Sone parses CSS gradient syntax. Linear, radial, and conic gradients are supported.

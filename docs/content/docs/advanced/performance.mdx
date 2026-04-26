@@ -1,0 +1,116 @@
+---
+title: Performance
+description: Caching, font reuse, batch rendering, and rendering at scale.
+icon: Gauge
+---
+
+Sone renders quickly out of the box — single-digit milliseconds for images, tens of milliseconds for multi-page PDFs. For high-throughput services (per-request OG images, batch invoice generation), the tips below squeeze out another 10–50%.
+
+## Reuse a single image cache
+
+Image decoding is the most expensive per-render step. Reuse a long-lived `Map` across renders so the same image is decoded only once:
+
+```ts
+const imageCache = new Map();
+
+async function generateCard(data) {
+  const buf = await sone(buildCard(data), { cache: imageCache }).png();
+  return buf;
+}
+```
+
+Suitable for: brand logos, avatars, icons, and any photo asset that appears across many documents.
+
+## Load fonts once at startup
+
+`Font.load()` registers fonts with the renderer and persists for the process lifetime. Call it ONCE at app startup, not per render:
+
+```ts
+// app boot
+await Font.load("Inter", "fonts/Inter-Regular.ttf");
+await Font.load("Inter", "fonts/Inter-Bold.ttf", { weight: "bold" });
+await Font.load("GeistMono", "fonts/GeistMono-Regular.ttf");
+
+// per request — fonts are already loaded
+async function og(req) {
+  return sone(doc(req)).jpg(0.92);
+}
+```
+
+Loading fonts inside the render path adds 5–20ms per call.
+
+## Pre-build static fragments
+
+If a document has invariant chrome (header, footer, branding), build it once at module top level and reuse:
+
+```ts
+const BRAND_HEADER = Row(
+  Photo("./logo.png").width(36).height(36),
+  Text("Acme").size(16).weight("bold"),
+).gap(12).padding(16, 24);
+
+function invoice(data) {
+  return Column(BRAND_HEADER, ...buildBody(data));
+}
+```
+
+Sharing nodes across trees is safe — Sone treats them as immutable during layout.
+
+## Choose the right output format
+
+For OG images and per-request use cases:
+
+| Format | Speed | Notes |
+| --- | --- | --- |
+| `.jpg(0.9)` | Fastest for photos | Best for content with images. ~30% smaller than PNG. |
+| `.png()` | Slightly slower | Lossless, transparent. Use when you need pixel fidelity or alpha. |
+| `.webp()` | Comparable to PNG | ~30% smaller than PNG with alpha. Best for modern web targets. |
+| `.pdf()` | Slowest | Vector text, raster photos. Multi-page PDFs scale linearly with page count. |
+
+For batch document pipelines, render to PDF directly rather than rendering each page to PNG and stitching.
+
+## Batch identical layouts
+
+When generating thousands of variations of the same template, build the tree once and only swap the dynamic data:
+
+```ts
+const template = (data) =>
+  Column(
+    Text(data.title).size(24).weight("bold"),
+    Text(data.body).size(14),
+  ).padding(40);
+
+const cache = new Map();
+for (const item of items) {
+  const buf = await sone(template(item), { cache }).jpg(0.92);
+  await fs.writeFile(`out/${item.id}.jpg`, buf);
+}
+```
+
+The shared `cache` carries decoded images across iterations.
+
+## Avoid filter chains in hot paths
+
+Image filters (`.blur`, `.grayscale`, `.brightness`, etc.) each add a render pass. For a one-off hero with a blurred background it's fine. For a 1000-row report where every row applies a filter, baking the desired colors into the source data is much faster.
+
+## Parallelize at the process level, not the request level
+
+Sone is synchronous within a render but `skia-canvas` releases the event loop between async boundaries. For Node servers, prefer:
+
+- Multiple Node processes (PM2, systemd, K8s replicas) for parallelism
+- One render at a time per process
+- Connection-level keepalive on your HTTP server
+
+This pattern saturates CPU more efficiently than `Promise.all` of many concurrent renders within one process.
+
+## Measure before optimizing
+
+For most apps, "fast enough" is well below the bar where these tips matter. Time your actual workload first:
+
+```ts
+const t0 = performance.now();
+const buf = await sone(doc).jpg(0.92);
+console.log(`render: ${(performance.now() - t0).toFixed(1)}ms`);
+```
+
+If your hot path is under 50ms per render, focus elsewhere.

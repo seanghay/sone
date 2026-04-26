@@ -1,0 +1,46 @@
+---
+title: Hyphenation
+description: Automatic word hyphenation for 80+ languages via Knuth–Liang patterns.
+icon: Minus
+---
+
+Long words at narrow widths cause loose, awkward justification. Hyphenation breaks words at valid syllable boundaries so lines stay tight.
+
+```ts
+Text("The internationalization of software requires typographical care.")
+  .font("sans-serif")
+  .size(16)
+  .maxWidth(200)
+  .hyphenate()         // same as .hyphenate("en")
+```
+
+Knuth–Liang hyphenation patterns ship with Sone — no extra dependency required.
+
+## Locales
+
+```ts
+Text("Le développement international de logiciels nécessite une typographie soignée.")
+  .hyphenate("fr")
+
+Text("Die Softwareentwicklung erfordert typografische Überlegungen.")
+  .hyphenate("de")    // German compounds benefit greatly
+```
+
+`.hyphenate()` accepts BCP-47-style codes: `"en"` / `"en-us"` / `"en-gb"`, `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`, `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, `"fi"`, `"hu"`, `"ro"`, `"cs"`, `"tr"`, `"uk"`, `"bg"`, `"el"`, `"la"`, and 60+ more. Pass `true` for English.
+
+## Composes with balanced wrap
+
+```ts
+Text("Extraordinary accomplishments in internationalization.")
+  .maxWidth(220)
+  .hyphenate("en")
+  .textWrap("balance")
+```
+
+## When to use it
+
+- Narrow-column body copy (sidebars, multi-column layouts).
+- Justified text — without hyphenation, justification creates large word gaps.
+- Languages with long compound words (German, Dutch, Swedish, Finnish).
+
+For wide single-column body copy in English, hyphenation is rarely necessary — the language averages short words.

@@ -1,0 +1,59 @@
+---
+title: Shiki integration
+description: Syntax-highlighted code blocks via the sone/shiki entry.
+icon: Palette
+---
+
+For documents that include code samples — technical reports, blog social cards, code screenshots — Sone ships a [Shiki](https://shiki.style/) integration on the `sone/shiki` subpath.
+
+## Install
+
+```bash
+npm install shiki
+```
+
+`shiki` is a peer dependency.
+
+## Use
+
+```ts
+import { Column, sone } from "sone";
+import { createSoneHighlighter } from "sone/shiki";
+
+// Pre-load themes and languages once
+const highlight = await createSoneHighlighter({
+  themes: ["github-dark"],
+  langs: ["typescript", "javascript", "bash"],
+});
+
+// Code() returns a Sone node — compose like any other
+const doc = Column(
+  highlight.Code(`const greet = (name: string) => \`Hello, \${name}!\``, {
+    lang: "typescript",
+    theme: "github-dark",
+    fontSize: 13,
+    fontFamily: ["GeistMono", "monospace"],
+    lineHeight: 1.6,
+  }),
+).padding(24).bg("white");
+
+await sone(doc).pdf();
+```
+
+## CodeOptions
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `lang` | `BundledLanguage` | — | Shiki language identifier. |
+| `theme` | `BundledTheme` | first loaded theme | Shiki theme. |
+| `fontSize` | `number` | `12` | Font size in pixels. |
+| `fontFamily` | `string[]` | `["monospace"]` | Font families in priority order. |
+| `lineHeight` | `number` | inherited | Line-height multiplier. |
+| `paddingX` | `number` | `12` | Horizontal padding inside the block. |
+| `paddingY` | `number` | `8` | Vertical padding inside the block. |
+
+## Performance
+
+`createSoneHighlighter` is a one-time async setup that loads themes and grammars. After that, `highlight.Code(...)` is synchronous and cheap — call it as many times as you want during a single render.
+
+For high-throughput pipelines, share one highlighter across many documents.

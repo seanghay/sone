@@ -1,0 +1,63 @@
+---
+title: Loading fonts
+description: Register custom fonts before render with the Font API.
+icon: Pen
+---
+
+Sone does not ship fonts. The system fonts on your machine are available, but for reproducible cross-platform output you should register the exact `.ttf` / `.otf` files your document uses.
+
+```ts
+import { Font } from "sone";
+
+await Font.load("NotoSansKhmer", "test/font/NotoSansKhmer.ttf");
+await Font.load("Inter", "fonts/Inter-Regular.ttf");
+```
+
+Once loaded, refer to the font by name in `.font(...)`:
+
+```ts
+Text("Hello").font("Inter").size(16)
+```
+
+## Loading weight & style variants
+
+To get different weights or styles, load each variant under the same family with options:
+
+```ts
+await Font.load("Inter", ["fonts/Inter-Regular.ttf"]);
+await Font.load("Inter", ["fonts/Inter-Bold.ttf"], { weight: "bold" });
+await Font.load("Inter", ["fonts/Inter-Italic.ttf"], { style: "italic" });
+```
+
+After this, `.font("Inter").weight("bold")` will pick the bold variant.
+
+## Multiple files in a single call
+
+```ts
+await Font.load("Inter", [
+  "fonts/Inter-Regular.ttf",
+  "fonts/Inter-Bold.ttf",
+]);
+```
+
+## API
+
+| Method | Description |
+| --- | --- |
+| `Font.load(name, path \| paths, options?)` | Register a font under `name`. Options: `{ weight, style }`. |
+| `Font.has(name)` | Returns `true` if a font with this name is loaded. |
+| `Font.unload(name)` | Remove a previously loaded font. |
+
+## CJK, Khmer, Arabic, Hebrew
+
+Sone fully supports complex scripts via [skia-canvas](https://skia-canvas.org/) — including shaping, ligatures, and combining marks. Just load the appropriate font:
+
+```ts
+await Font.load("NotoSansKhmer", "fonts/NotoSansKhmer.ttf");
+
+Text("សួស្តី").font("NotoSansKhmer").size(24)
+```
+
+## Where to put font registration
+
+Run `await Font.load(...)` once at app startup, before rendering any document that uses the font. Fonts persist for the lifetime of the process.

@@ -1,0 +1,77 @@
+---
+title: Borders & corners
+description: Borders, rounded corners, and Figma-style squircle smoothing on any node.
+icon: Square
+---
+
+```ts
+Column(...)
+  .borderWidth(1)
+  .borderColor("#e5e5e5")
+  .rounded(12)
+```
+
+## Borders
+
+```ts
+Column(...)
+  .borderWidth(2)                       // all sides
+  .borderWidth(2, 0)                    // y, x
+  .borderWidth(2, 0, 4, 0)              // top, right, bottom, left
+  .borderColor("#171717")
+```
+
+`borderWidth` accepts 1–4 numbers in CSS shorthand order. To draw only a top border, pass `(2, 0, 0, 0)`.
+
+## Rounded corners
+
+```ts
+Column(...).rounded(12)                          // all corners
+Column(...).rounded(12, 12, 0, 0)                // top-left, top-right, bottom-right, bottom-left
+Column(...).rounded(0, 0, 24, 24)                // bottom corners only
+```
+
+For a fully circular avatar, set `rounded` to half the size:
+
+```ts
+Photo("./avatar.jpg").width(48).height(48).rounded(24)
+```
+
+Or use a very large radius (`9999`) for a "pill" shape on tag-style elements — the radius is clamped to the half-size so it always renders correctly.
+
+## Squircle smoothing (Figma-style)
+
+CSS `border-radius` produces a sharp corner-to-edge transition. Squircle corners blend the curve into the straight edge with a continuous tangent — visually softer, the look popular in iOS and Figma.
+
+```ts
+Column(...)
+  .rounded(16)
+  .borderSmoothing(0.6)
+```
+
+`borderSmoothing(v)` ranges from `0.0` (sharp CSS-style corner) to `1.0` (full squircle). `0.6` is a good default — visibly softer without being obvious.
+
+| Value | Look |
+| --- | --- |
+| `0.0` | Standard CSS border-radius. |
+| `0.4` | Subtle rounding that's tighter than CSS. |
+| `0.6` | Recognizable squircle, the iOS feel. |
+| `1.0` | Maximum smoothing, very organic. |
+
+Best on cards, buttons, and avatars. For very small radii (≤4px) the difference is imperceptible; for larger radii (≥24px) the squircle look is striking.
+
+## Combining with `.bg(...)`
+
+Borders and rounded corners clip the background — gradient backgrounds follow the rounded shape.
+
+```ts
+Column(Text("CTA").color("white"))
+  .bg("linear-gradient(135deg, #2f00ff, #00d4ff)")
+  .padding(12, 24)
+  .rounded(9999)
+  .borderSmoothing(0.6)
+```
+
+## Borders on Path / Photo
+
+`Path` uses `.stroke(color)` and `.strokeWidth(v)` for outlines (not `borderColor`/`borderWidth`). `Photo` uses the standard layout border methods.

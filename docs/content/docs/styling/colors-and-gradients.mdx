@@ -1,0 +1,107 @@
+---
+title: Colors & gradients
+description: Every place you can pass a color value, plus how to use CSS gradient syntax for fills, text, and backgrounds.
+icon: Droplet
+---
+
+Anywhere Sone takes a "color", it accepts the full set of CSS color formats plus CSS gradient strings.
+
+## Accepted color formats
+
+```ts
+.color("red")                   // CSS named color
+.color("#ff7a00")               // hex (3 / 4 / 6 / 8 digits)
+.color("rgb(255 122 0)")        // modern rgb()
+.color("rgba(255, 122, 0, 0.6)")// rgba with alpha
+.color("hsl(28 100% 50%)")
+.color("hsla(28, 100%, 50%, 0.6)")
+.color("oklch(70% 0.15 50)")    // OKLCH (modern, perceptual)
+```
+
+Functional notation supports both legacy and modern (space-separated) syntax — `rgb(255, 122, 0)` and `rgb(255 122 0)` both work.
+
+## Where colors apply
+
+| Method | Applies to |
+| --- | --- |
+| `.color(v)` | Text fill (Text, Span). |
+| `.bg(v)` | Background of any container. Also accepts a gradient or `Photo` node. |
+| `.borderColor(v)` | Border color on any container. |
+| `.strokeColor(v)` | Text outline / Path stroke color. |
+| `.highlight(v)` | Span background highlight. |
+| `.fill(v)` | Path fill color. |
+| `.stroke(v)` | Path stroke color. |
+| `.underlineColor(v)` / `.lineThroughColor(v)` / `.overlineColor(v)` | Decoration colors (default: same as text). |
+
+## Gradients
+
+Sone parses CSS gradient syntax — `linear-gradient`, `radial-gradient`, and `conic-gradient`. Pass the full gradient string anywhere a color is accepted.
+
+```ts
+// Gradient text
+Text("Brand")
+  .color("linear-gradient(135deg, #2f00ff, #00ddff)")
+  .size(48).weight("bold")
+
+// Gradient background
+Column(...)
+  .bg("linear-gradient(180deg, #0a0a0a, #1a1a1a)")
+  .padding(24)
+
+// Radial highlight on a button
+Column(Text("Click me").color("white"))
+  .bg("radial-gradient(circle at 30% 0%, #5a2bff, #1e1bff)")
+  .padding(12, 24).rounded(999)
+```
+
+### Linear gradients
+
+```ts
+.bg("linear-gradient(to right, red, blue)")
+.bg("linear-gradient(135deg, red 0%, orange 50%, yellow 100%)")
+```
+
+Supports any number of stops, percentage or length-based positions, and the full angle syntax.
+
+### Radial gradients
+
+```ts
+.bg("radial-gradient(circle, #fff, #000)")
+.bg("radial-gradient(ellipse 80% 60% at 50% 0%, #2f00ff, transparent 70%)")
+```
+
+### Conic gradients
+
+```ts
+.bg("conic-gradient(from 0deg, red, yellow, lime, blue, red)")
+```
+
+Useful for color wheels, pie-chart-style decorations, and angular highlights.
+
+## Per-glyph gradients
+
+Apply a gradient to a `Span` and only that span gets it:
+
+```ts
+Text(
+  "Hello, ",
+  Span("World").color("linear-gradient(90deg, #f97316, #c026d3)").weight("bold"),
+  ".",
+).size(48)
+```
+
+The gradient is computed against the span's individual bounding box, not the whole paragraph.
+
+## Common palettes
+
+For a coherent monochrome dark UI, the colors in this site's snippets work well:
+
+```ts
+const FG = "#171717";       // primary text
+const FG_MUTED = "#525252"; // secondary text
+const FG_FAINT = "#a3a3a3"; // tertiary
+const BORDER = "#e5e5e5";   // hairlines
+const BG = "white";
+```
+
+Drop these into a `consts` module and reuse across documents — they read consistently against printed output.

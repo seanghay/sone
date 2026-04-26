@@ -1,0 +1,233 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/black.css';
+@import 'fumadocs-ui/css/preset.css';
+
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+
+@theme {
+  --font-sans:
+    'Google Sans', 'Google Sans Display', system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  --font-mono:
+    'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --fd-layout-width: 1400px;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Stop the document itself from scrolling horizontally. Inner elements with
+   their own `overflow-x: auto` (e.g. the comparison table on narrow
+   viewports) keep working — only the page-level horizontal scroll is killed. */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+pre code,
+pre code * {
+  font-weight: 500;
+}
+
+@layer utilities {
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    --tw-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+  }
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0 !important;
+  --removed-body-scroll-bar-size: 0 !important;
+}
+
+/* Vercel-style dotted backdrop. Apply `bg-dot-grid` to any element to paint
+   a subtle radial-dot pattern behind it. Color follows the theme via the
+   `--dot-color` CSS variable. */
+:root {
+  --dot-color: hsl(0 0% 0% / 0.09);
+}
+
+.dark {
+  --dot-color: hsl(0 0% 100% / 0.08);
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--dot-color) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+/* Sone brand gradient — anchored to the logo's blue→cyan ramp but warmed up
+   with a violet midpoint and a slight diagonal sweep so wide headings feel
+   dynamic rather than flat. Animation drifts the gradient slowly so headings
+   shimmer subtly without becoming distracting. */
+.text-sone-gradient {
+  background-image: linear-gradient(
+    110deg,
+    #1e1bff 0%,
+    #5a2bff 28%,
+    #2c8fff 62%,
+    #00d4ff 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: sone-gradient-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes sone-gradient-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-sone-gradient {
+    animation: none;
+  }
+}
+
+/* Hero radial gradient — uses CSS vars so light vs dark theme each get a
+   palette-appropriate glow. Light mode subtly darkens, dark mode subtly
+   lightens. */
+:root {
+  --hero-glow-1: hsl(0 0% 0% / 0.07);
+  --hero-glow-2: hsl(0 0% 0% / 0.03);
+}
+
+.dark {
+  --hero-glow-1: hsl(0 0% 100% / 0.10);
+  --hero-glow-2: hsl(0 0% 100% / 0.04);
+}
+
+.hero-glow {
+  background-image:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      var(--hero-glow-1),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 50% 100%,
+      var(--hero-glow-2),
+      transparent 70%
+    );
+}
+
+/* Logo marquee animation for the "Used by" strip */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Lighten the active sidebar nav item — Fumadocs default is bg-fd-primary/10
+   which reads as too dark on a near-black background. */
+.dark #nd-sidebar [data-active='true'],
+.dark #nd-sidebar-mobile [data-active='true'] {
+  background-color: hsl(0 0% 100% / 0.16);
+  color: var(--color-fd-foreground);
+}
+
+/* Shiki blocks rendered inside .shiki-host wrappers — strip Shiki's own
+   background/margins so the wrapper's card chrome shows through, and inherit
+   our mono font + 500 weight. */
+.shiki-host pre.shiki {
+  background-color: transparent !important;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.shiki-host pre.shiki code {
+  display: block;
+  font-weight: 500;
+}
+
+/* Switch Shiki dual-theme colors based on the .dark class set by RootProvider.
+   Shiki emits inline `color: var(--shiki-light)` plus a `--shiki-dark` value
+   on each token; we swap which variable wins. */
+.shiki-host pre.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki-host pre.shiki span {
+  color: var(--shiki-dark);
+}
+
+/* Shrink the sidebar nav items — defaults are 14px / p-2 / size-4 icons.
+   These overrides reduce text, padding, gap, and icon size for a more
+   compact tree of links. */
+#nd-sidebar,
+#nd-sidebar-mobile {
+  font-size: 13px;
+}
+
+#nd-sidebar a,
+#nd-sidebar button:not([aria-label*='theme' i]):not([aria-label*='language' i]):not(.rounded-full),
+#nd-sidebar-mobile a,
+#nd-sidebar-mobile button:not([aria-label*='theme' i]):not([aria-label*='language' i]):not(.rounded-full) {
+  gap: 0.375rem; /* 6px */
+  padding-block: 0.3125rem; /* 5px top/bottom */
+  padding-inline-end: 0.5rem; /* 8px end */
+  /* leave padding-inline-start to Fumadocs' --sidebar-item-offset so nested
+     items keep their depth indent and clear the vertical guide line */
+  border-radius: 0.5rem;
+}
+
+#nd-sidebar a svg,
+#nd-sidebar button:not([aria-label*='theme' i]):not([aria-label*='language' i]):not(.rounded-full) svg,
+#nd-sidebar-mobile a svg,
+#nd-sidebar-mobile button:not([aria-label*='theme' i]):not([aria-label*='language' i]):not(.rounded-full) svg {
+  width: 0.875rem; /* 14px */
+  height: 0.875rem;
+}
+
+/* Section headers (folder titles) get the same treatment but stay slightly
+   bolder for hierarchy. */
+#nd-sidebar p,
+#nd-sidebar-mobile p {
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}

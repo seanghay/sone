@@ -1,0 +1,54 @@
+---
+title: Transforms & visual effects
+description: Rotate, scale, translate, blur, and round any node.
+icon: Move3d
+---
+
+Every node accepts visual transforms. They run after layout, so the box keeps its laid-out size — only the painted pixels change.
+
+## Rotation & scale
+
+```ts
+Photo("./logo.png").rotate(15)        // degrees
+Column(...).scale(1.1)                // uniform
+Column(...).scale(1.1, 0.9)           // x, y
+```
+
+## Translation
+
+```ts
+Column(...).translateX(8).translateY(-4)
+```
+
+## Opacity & blur
+
+```ts
+Column(...).opacity(0.6)
+Column(...).blur(8)            // pixels
+```
+
+## Rounded corners & squircle
+
+```ts
+Column(...).rounded(12)
+Column(...).rounded(12, 12, 0, 0)     // top-left, top-right, bottom-right, bottom-left
+Column(...).rounded(12).borderSmoothing(0.6)   // squircle (figma-style)
+```
+
+`borderSmoothing` ranges from `0.0` (sharp CSS-style corners) to `1.0` (full squircle).
+
+<Callout type="info">
+The site you are reading globally disables shadows for visual consistency. Sone itself supports `.shadow("0 4px 12px rgba(0,0,0,0.15)")` on any node — see the API reference for full CSS box-shadow syntax.
+</Callout>
+
+## Page-break behavior
+
+In multi-page documents, control how a node interacts with page boundaries:
+
+```ts
+Column(...).pageBreak("before")   // start on a new page
+Column(...).pageBreak("avoid")    // try to keep on one page
+Column(...).pageBreak("after")    // force a break after this node
+```
+
+See [Page break](/docs/multi-page/page-break) for details.

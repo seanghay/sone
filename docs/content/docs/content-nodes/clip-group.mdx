@@ -1,0 +1,42 @@
+---
+title: ClipGroup
+description: Clip a subtree of children to an arbitrary SVG path shape.
+icon: Scissors
+---
+
+`ClipGroup(path, ...children)` clips its children to an SVG path. The path is automatically scaled to fit the node's layout box.
+
+```ts
+ClipGroup(
+  "M 0 0 L 100 0 L 100 100 Z",          // SVG path string
+  Photo("./image.jpg").size(150, 150),
+).size(150, 150)
+```
+
+This renders only the part of the photo that falls inside the triangle.
+
+## Use cases
+
+- Hero photos clipped to brand shapes (chevrons, circles, blobs).
+- Avatars clipped to non-circular shapes.
+- Decorative typography masking — clip text to a custom shape.
+
+## API
+
+```ts
+ClipGroup(path, ...children)
+  .clipPath(newPath)   // update path after construction
+  .size(w, h)          // layout-box size; path scales to fit
+```
+
+`ClipGroup` supports all standard layout methods on the wrapper itself (`padding`, `margin`, `position`, etc.), but only the *children* are clipped — the wrapper's background and border render normally.
+
+## Composing with rounded
+
+For simple rounded clipping, prefer `.rounded(r).overflow("hidden")` on a container — it's cheaper than parsing a path:
+
+```ts
+Column(Photo("./hero.jpg")).rounded(16).overflow("hidden").width(400).height(200)
+```
+
+Use `ClipGroup` when the shape isn't expressible as a rectangle with rounded corners.

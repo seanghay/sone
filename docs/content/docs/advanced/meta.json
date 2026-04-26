@@ -1,0 +1,5 @@
+{
+  "title": "Advanced",
+  "icon": "Sparkles",
+  "pages": ["metadata-api", "yolo-coco-export", "shiki", "performance", "browser"]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "react-router build",
+  "outputDirectory": "build",
+  "functions": {
+    "app/**/*.{ts,tsx}": {
+      "runtime": "nodejs22.x",
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  }
+}

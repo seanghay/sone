@@ -1,0 +1,90 @@
+---
+title: Filters & effects
+description: Blur, brightness, contrast, saturation, sepia, grayscale, invert, hue-rotate — applied to any node.
+icon: Wand2
+---
+
+Every node accepts a set of CSS-style image filters. They run after layout and paint, so they don't affect positioning — only the painted pixels.
+
+```ts
+Photo("./hero.jpg").width(800).height(400).blur(8)
+Column(...).opacity(0.6)
+Photo("./avatar.jpg").grayscale(1)
+```
+
+## API
+
+| Method | Range | Description |
+| --- | --- | --- |
+| `.opacity(v)` | `0.0`–`1.0` | Element transparency. |
+| `.blur(v)` | pixels | Gaussian blur radius. |
+| `.brightness(v)` | `0.0`+ | `1.0` is unchanged; `0` is black; `2` doubles brightness. |
+| `.contrast(v)` | `0.0`+ | `1.0` is unchanged; `0` is gray; `2` doubles contrast. |
+| `.saturate(v)` | `0.0`+ | `1.0` is unchanged; `0` is grayscale; `2` doubles saturation. |
+| `.grayscale(v)` | `0.0`–`1.0` | `0` no effect, `1` fully grayscale. |
+| `.sepia(v)` | `0.0`–`1.0` | `0` no effect, `1` fully sepia. |
+| `.invert(v)` | `0.0`–`1.0` | `0` no effect, `1` fully inverted colors. |
+| `.huerotate(v)` | degrees | Rotate hue around the color wheel. |
+
+Filters compose — chain multiple methods to combine effects.
+
+## Common patterns
+
+### Disable / faded state
+
+```ts
+Column(...)
+  .opacity(0.4)
+  .grayscale(0.6)
+```
+
+### Blurred photo backdrop
+
+```ts
+Column(
+  Photo("./hero.jpg")
+    .width(800).height(400)
+    .blur(24)
+    .scaleType("cover"),
+  Column(Text("Hero").color("white"))
+    .position("absolute").inset(0)
+    .alignItems("center").justifyContent("center"),
+).position("relative").width(800).height(400)
+```
+
+### Subtle photo grading
+
+```ts
+Photo("./product.jpg")
+  .saturate(1.1)
+  .contrast(1.05)
+  .brightness(0.98)
+```
+
+A 10–15% bump on saturation and contrast, paired with a small brightness drop, gives photos a hint of editorial polish without looking processed.
+
+### Old-print sepia treatment
+
+```ts
+Photo("./archive.jpg")
+  .sepia(0.7)
+  .saturate(0.5)
+  .brightness(0.95)
+```
+
+### Hue cycle
+
+Rotate brand colors:
+
+```ts
+Column(...)
+  .huerotate(30)   // shifts the entire subtree's hues 30° around the wheel
+```
+
+Useful when you have a base color theme and want a single derivative variant — change the hue without re-defining every color.
+
+## Performance
+
+Filters add a render pass per node. For documents with hundreds of nodes (long reports, image grids), prefer hard-coding desired colors over filter chains where possible — it keeps render times in the single-digit-millisecond range.
+
+For one-off hero treatments, filter chains are fine.

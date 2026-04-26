@@ -1,0 +1,18 @@
+{
+  "title": "Documentation",
+  "pages": [
+    "index",
+    "---Foundations---",
+    "getting-started",
+    "layout",
+    "typography",
+    "styling",
+    "---Composing documents---",
+    "content-nodes",
+    "multi-page",
+    "output",
+    "---Going further---",
+    "advanced",
+    "examples"
+  ]
+}

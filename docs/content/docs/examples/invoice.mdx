@@ -1,0 +1,78 @@
+---
+title: Invoice
+description: Build a multi-line invoice with totals, tax, and a header.
+icon: Receipt
+---
+
+![Invoice rendered by Sone](/gallery/invoice.jpg)
+
+A common business document. This example shows how the core builders compose into a full invoice — header, line-items table, totals row, and footer.
+
+```ts
+import { Column, Row, Span, sone, Table, TableCell, TableRow, Text } from "sone";
+
+const lineItems = [
+  { sku: "A-1", desc: "Design audit", qty: 1, price: 1500 },
+  { sku: "A-2", desc: "Component library", qty: 1, price: 4200 },
+  { sku: "A-3", desc: "Brand guidelines", qty: 1, price: 800 },
+];
+
+const subtotal = lineItems.reduce((s, x) => s + x.qty * x.price, 0);
+const tax = subtotal * 0.08;
+const total = subtotal + tax;
+
+const fmt = (n: number) =>
+  `$${n.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+
+const Invoice = Column(
+  // Header
+  Row(
+    Column(
+      Text("Acme Inc.").size(20).weight("bold"),
+      Text("123 Market St, San Francisco CA").size(11).color("#666"),
+    ).gap(4),
+    Column(
+      Text("INVOICE").size(20).weight("bold").align("right"),
+      Text("#1024").size(12).color("#666").align("right"),
+      Text("Due 2026-05-01").size(12).color("#666").align("right"),
+    ).gap(4),
+  ).justifyContent("space-between"),
+
+  // Line items
+  Table(
+    TableRow(
+      TableCell(Text("SKU").weight("bold").size(11)),
+      TableCell(Text("Description").weight("bold").size(11)),
+      TableCell(Text("Qty").weight("bold").size(11).align("right")),
+      TableCell(Text("Price").weight("bold").size(11).align("right")),
+    ).bg("#f5f5f5"),
+    ...lineItems.map((item) =>
+      TableRow(
+        TableCell(Text(item.sku).size(11)),
+        TableCell(Text(item.desc).size(11)),
+        TableCell(Text(String(item.qty)).size(11).align("right")),
+        TableCell(Text(fmt(item.price)).size(11).align("right")),
+      ),
+    ),
+  ).spacing(0).borderWidth(1).borderColor("#e5e5e5"),
+
+  // Totals
+  Column(
+    Text(`Subtotal\t${fmt(subtotal)}`).tabStops(420).size(11),
+    Text(`Tax (8%)\t${fmt(tax)}`).tabStops(420).size(11),
+    Text(`Total\t${fmt(total)}`).tabStops(420).size(13).weight("bold"),
+  ).gap(4).alignSelf("flex-end"),
+
+  // Footer
+  Text("Thank you for your business.").size(10).color("#666").align("center"),
+).padding(48).gap(32).bg("white").width(816);
+
+const buffer = await sone(Invoice).pdf();
+```
+
+## Notes
+
+- **Width** is fixed to `816` (US Letter @ 96 dpi) so the layout is reproducible across renders.
+- **Tab stops** in the totals block align values without nesting another table.
+- **Header row background** uses `bg("#f5f5f5")` directly on the `TableRow` — cells inherit it.
+- For a multi-page version, add `pageHeight: 1056` and a footer that prints the page number. See [Multi-page](/docs/multi-page/page-height).

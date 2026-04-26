@@ -166,3 +166,8 @@ Temporary Items
 editor/
 CLAUDE.md
 AGENTS.md
+
+# Docs site (Fumadocs / React Router / Vite)
+docs/.react-router/
+docs/build/
+docs/.source/

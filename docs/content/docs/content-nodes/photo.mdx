@@ -1,0 +1,66 @@
+---
+title: Photo
+description: Display images from a path, URL, or buffer.
+icon: Image
+---
+
+```ts
+Photo("./hero.jpg").width(800).height(400)
+Photo("https://example.com/avatar.png").width(64).height(64).rounded(32)
+Photo(buffer).width(200).height(200)   // Uint8Array also accepted
+```
+
+`Photo` accepts:
+
+- A local file path
+- A remote URL (fetched at render time)
+- A `Uint8Array` buffer
+
+## Scale modes
+
+```ts
+Photo("./hero.jpg").width(800).height(400).scaleType("cover")        // default
+Photo("./hero.jpg").width(800).height(400).scaleType("contain")
+Photo("./hero.jpg").width(800).height(400).scaleType("fill")
+```
+
+| Mode | Behavior |
+| --- | --- |
+| `"cover"` | Fill the box; crop overflow. Aspect-ratio preserved. |
+| `"contain"` | Fit inside the box; letterbox if needed. Aspect-ratio preserved. |
+| `"fill"` | Stretch to fill. Aspect-ratio not preserved. |
+
+Pass an alignment with cover/contain to control which edge is anchored:
+
+```ts
+Photo("./hero.jpg").scaleType("cover", "start")    // anchor top/left
+Photo("./hero.jpg").scaleType("cover", "center")   // default
+Photo("./hero.jpg").scaleType("cover", "end")      // anchor bottom/right
+```
+
+## Mirroring
+
+```ts
+Photo("./avatar.png").flipHorizontal()
+Photo("./icon.png").flipVertical()
+```
+
+## As a background
+
+A `Photo` node can be passed to `.bg(...)` on any container — useful for hero sections:
+
+```ts
+Column(
+  Text("Hero title").color("white"),
+).bg(Photo("./hero.jpg").scaleType("cover")).padding(64)
+```
+
+## Caching
+
+To avoid re-decoding the same image across many renders, pass a shared cache to `sone(...)`:
+
+```ts
+const imageCache = new Map();
+await sone(doc, { cache: imageCache }).png();
+await sone(doc2, { cache: imageCache }).png();   // reuses decoded images
+```

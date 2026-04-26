@@ -1,0 +1,15 @@
+{
+  "title": "Typography",
+  "icon": "Type",
+  "pages": [
+    "text-and-span",
+    "styling",
+    "balanced-wrap",
+    "hyphenation",
+    "truncation",
+    "tab-stops",
+    "orientation",
+    "bidi-rtl",
+    "fonts"
+  ]
+}

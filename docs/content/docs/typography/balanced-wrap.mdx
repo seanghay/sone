@@ -1,0 +1,43 @@
+---
+title: Balanced wrapping
+description: Distribute lines so they end at roughly equal widths.
+icon: AlignCenter
+---
+
+Default text wrapping is *greedy*: each line takes as many words as fit, leaving the last line short and ragged. For headings and pull-quotes, balanced wrapping looks better — every line ends at roughly the same point.
+
+```ts
+Text("Breaking News: Scientists Discover New Species in the Amazon Rainforest")
+  .font("sans-serif")
+  .size(28)
+  .weight("bold")
+  .maxWidth(480)
+  .textWrap("balance")
+```
+
+## How it works
+
+`.textWrap("balance")` shrinks the *effective* line-break width until all lines have roughly equal width, then sizes the node to that narrowed content. The result: ragged-right text that doesn't have an awkwardly short last line.
+
+The text node itself sizes down to the balanced content width, so it composes naturally inside flex containers — no extra trailing whitespace on the right.
+
+## When to use it
+
+- Headings (`h1`–`h3`).
+- Pull-quotes.
+- Card titles.
+- Hero subtitles.
+- Anything short where the last line would otherwise be 1–2 words.
+
+For body copy, prefer the default `"wrap"` — balanced wrapping is more expensive and visual benefit is small at body-text size.
+
+## Composes with hyphenation
+
+```ts
+Text("Extraordinary accomplishments in internationalization.")
+  .maxWidth(220)
+  .hyphenate("en")
+  .textWrap("balance")
+```
+
+Hyphenation creates more break opportunities; balance distributes them across lines.

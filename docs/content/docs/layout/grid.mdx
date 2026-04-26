@@ -1,0 +1,57 @@
+---
+title: Grid
+description: 2D layout with explicit column and row tracks.
+icon: LayoutDashboard
+---
+
+`Grid(...)` is a CSS-Grid container. Use it when content has a clear 2D structure — dashboards, photo grids, multi-column documents.
+
+```ts
+Grid(
+  Column(Text("Hero")).gridColumn(1, 2).gridRow(1),  // spans 2 columns
+  Column(Text("Side")).gridColumn(3).gridRow(1),
+  Column(Text("Footer")).gridColumn(1, 3),           // spans all 3
+)
+  .columns("1fr", "1fr", "200px")
+  .columnGap(12)
+  .rowGap(12)
+```
+
+## Tracks
+
+```ts
+Grid(...)
+  .columns("1fr", "1fr", "200px")  // 3 columns: two flexible, one fixed
+  .rows("auto", 100, "1fr")        // 3 rows
+  .autoColumns("1fr")              // implicit columns
+  .autoRows(80)                    // implicit rows
+```
+
+Track sizes accept:
+
+- A pixel number: `120`
+- `"auto"` — size to content
+- An `"Nfr"` string — fractional flex unit
+
+## Gaps
+
+```ts
+Grid(...).columnGap(12).rowGap(8)
+```
+
+## Placement
+
+Children opt into explicit placement via two layout methods:
+
+```ts
+Column(...)
+  .gridColumn(1, 2)   // start at column 1, span 2
+  .gridRow(2)         // start at row 2
+```
+
+If children don't set placement, they auto-flow into the next available cell.
+
+## When to use Grid vs. Flex
+
+- **Grid** when you have a true 2D layout — content needs to align both vertically and horizontally across rows and columns.
+- **Flex** for everything else. Most documents are stacks of rows and columns; flex is enough.

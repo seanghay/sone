@@ -1,0 +1,79 @@
+---
+title: Text & Span
+description: How rich text composition works in Sone.
+icon: Pilcrow
+---
+
+`Text(...)` is a paragraph block. `Span(...)` is an inline styled segment inside it. A single `Text` node can contain a mix of plain strings and `Span`s, each with its own styling.
+
+```ts
+Text(
+  "Revenue grew ",
+  Span("+22%").color("green").weight("bold"),
+  " year over year.",
+).size(16)
+```
+
+This is the core of Sone's rich-text model. There is no separate "rich text" mode — every `Text` node is rich.
+
+## Plain text
+
+When you don't need inline styling, just pass strings:
+
+```ts
+Text("A simple paragraph of body copy.").size(14).lineHeight(1.6)
+```
+
+## Mixed strings and spans
+
+Children of `Text` can be any mix of strings and `Span`s:
+
+```ts
+Text(
+  "We just released ",
+  Span("v2.0").weight("bold"),
+  " — ",
+  Span("read the announcement").color("blue").underline(),
+  ".",
+).size(14)
+```
+
+## Span — what it can do
+
+A `Span` accepts every text-styling method that `Text` does, plus a few span-specific ones:
+
+```ts
+Span("highlighted")
+  .color("orange")
+  .weight("bold")
+  .size(14)
+  .underline(2)
+  .highlight("yellow")
+  .strokeColor("black").strokeWidth(0.5)
+  .dropShadow("0 1px 2px rgba(0,0,0,0.4)")
+  .offsetY(-2)         // baseline offset
+```
+
+## TextDefault — inherited styling
+
+`TextDefault(...)` cascades text styling to all descendant `Text` and `Span` nodes. Useful when many nodes share the same font or color:
+
+```ts
+TextDefault(
+  Column(
+    Text("Heading").size(20).weight("bold"),
+    Text("Body copy that inherits the font and color.").size(12),
+  ).gap(8),
+)
+  .font("GeistMono")
+  .color("#111")
+```
+
+Per-node properties always win over inherited defaults.
+
+## What's next
+
+- **Per-property reference** — see [Styling](/docs/typography/styling).
+- **Multi-line typography** — see [Balanced wrapping](/docs/typography/balanced-wrap) and [Hyphenation](/docs/typography/hyphenation).
+- **Tabular content without a table node** — see [Tab stops](/docs/typography/tab-stops).
+- **Loading custom fonts** — see [Fonts](/docs/typography/fonts).

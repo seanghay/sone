@@ -1,0 +1,42 @@
+{
+  "name": "sone-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "react-router dev",
+    "build": "react-router build",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && fumadocs-mdx && tsc --noEmit",
+    "prepare-gallery": "node scripts/copy-gallery.mjs",
+    "generate-examples": "node scripts/generate-examples.mjs"
+  },
+  "dependencies": {
+    "@react-router/node": "^7.7.0",
+    "@react-router/serve": "^7.7.0",
+    "@vercel/react-router": "^1.2.6",
+    "fumadocs-core": "^15.5.0",
+    "fumadocs-mdx": "^11.6.0",
+    "fumadocs-ui": "^15.5.0",
+    "isbot": "^5.1.27",
+    "lucide-react": "^0.475.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.7.0",
+    "shiki": "^3.0.0",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.7.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "skia-canvas": "^3.0.4",
+    "sone": "^1.4.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^7.0.0",
+    "vite-tsconfig-paths": "^5.1.0"
+  }
+}

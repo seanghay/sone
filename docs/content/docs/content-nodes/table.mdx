@@ -1,0 +1,60 @@
+---
+title: Table
+description: Tabular layout with colspan, rowspan, and cell spacing.
+icon: Table
+---
+
+For tabular data with multiple columns, multi-line cells, or per-cell styling, use `Table` / `TableRow` / `TableCell`:
+
+```ts
+Table(
+  TableRow(
+    TableCell(Text("Name").weight("bold")),
+    TableCell(Text("Score").weight("bold")),
+  ),
+  TableRow(
+    TableCell(Text("Alice")),
+    TableCell(Text("98")),
+  ),
+  TableRow(
+    TableCell(Text("Bob")),
+    TableCell(Text("87")),
+  ),
+).spacing(4)
+```
+
+## Cell spacing
+
+```ts
+Table(...).spacing(4)        // gap between cells in both directions
+```
+
+## Spanning
+
+```ts
+TableCell(Text("Spanning header"))
+  .colspan(3)
+  .rowspan(1)
+```
+
+Both `colspan` and `rowspan` are 1-based — `1` is the default (no span).
+
+## Cell content & styling
+
+A `TableCell` is a flex container, so it accepts all layout methods:
+
+```ts
+TableCell(
+  Text("Total: ").size(12),
+  Text("$1,200").size(12).weight("bold").align("right"),
+).padding(8, 12).bg("#f5f5f5").rounded(4)
+```
+
+## When to use Table vs. tab stops
+
+- **`Table`** — multi-line cells, per-cell backgrounds, colspan/rowspan, complex content.
+- **Tab stops** — single-line rows, no per-cell styling. See [Tab stops](/docs/typography/tab-stops).
+
+## When to use Table vs. Grid
+
+`Table` enforces tabular semantics (rows wrap, cells align across rows). `Grid` is a 2D layout for visual placement. Use `Table` for data; `Grid` for design.

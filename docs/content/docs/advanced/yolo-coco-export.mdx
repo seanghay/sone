@@ -1,0 +1,87 @@
+---
+title: YOLO & COCO export
+description: Generate annotated bounding-box datasets for ML training.
+icon: ScanSearch
+---
+
+`toYoloDataset()` and `toCocoDataset()` transform a Sone metadata tree into a YOLO or COCO bounding-box dataset. This is built for one specific use case: programmatically generating large amounts of synthetic, perfectly-annotated documents to train Document Layout Analysis (DLA) or OCR models.
+
+## Tag your nodes
+
+Annotation comes from `.tag()`. Tags become class names in the dataset:
+
+```ts
+Column(
+  Text("Acme Inc.").tag("brand"),
+  Row(
+    Text("Invoice #1024").tag("invoice-number"),
+    Text("Due 2026-05-01").tag("due-date"),
+  ),
+  Table(...).tag("line-items"),
+)
+```
+
+## YOLO export
+
+```ts
+import { sone, toYoloDataset } from "sone";
+
+const { metadata } = await sone(invoice).canvasWithMetadata();
+
+const ds = toYoloDataset(metadata, {
+  granularity: "segment",        // "segment" | "line" | "block" | "node"
+  include: ["text", "photo"],    // which node types to include
+  catchAllClass: "content",      // class for untagged nodes (null = skip)
+});
+
+ds.classes        // Map<string, number>  e.g. { "brand": 0, "due-date": 1, ... }
+ds.boxes          // YoloBox[]
+ds.imageWidth
+ds.imageHeight
+
+ds.toTxt()        // YOLO .txt format ("classId cx cy w h" per line, normalized 0–1)
+ds.toJSON()       // structured JSON
+```
+
+## COCO export
+
+```ts
+import { toCocoDataset } from "sone";
+
+const ds = toCocoDataset(metadata, {
+  granularity: "line",
+  include: ["text", "photo"],
+  catchAllClass: "content",
+  fileName: "invoice-001.jpg",
+  imageId: 1,
+  supercategory: "document",
+});
+
+await fs.writeFile(
+  "annotations.json",
+  JSON.stringify(ds.toJSON(), null, 2),
+);
+```
+
+## Granularity
+
+Controls what counts as a "box" for text nodes:
+
+| Value | Emits | Tag source |
+| --- | --- | --- |
+| `"segment"` | One box per styled run | `Span.tag()` → `Text.tag()` → catch-all |
+| `"line"` | Union of segments per line | `Text.tag()` → catch-all |
+| `"block"` | Union of lines per paragraph | `Text.tag()` → catch-all |
+| `"node"` | Full node bbox | `node.tag()` → catch-all |
+
+Non-text nodes always emit at node-level regardless of granularity.
+
+## Workflow
+
+1. Build a Sone document with `.tag()` on every region you want labeled.
+2. Render to PNG/JPG and save the image.
+3. Capture metadata from the same render with `canvasWithMetadata()`.
+4. Pass the metadata to `toYoloDataset()` or `toCocoDataset()`.
+5. Write the annotation file alongside the image.
+
+Repeat with randomized content to generate the dataset.

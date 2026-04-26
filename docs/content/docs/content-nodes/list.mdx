@@ -1,0 +1,88 @@
+---
+title: List
+description: Ordered, unordered, and custom-marker lists with nesting.
+icon: List
+---
+
+```ts
+List(
+  ListItem(Text("Automatic page breaking").size(12)),
+  ListItem(Text("Repeating headers & footers").size(12)),
+).listStyle("disc").markerGap(10).gap(8)
+```
+
+## Built-in markers
+
+```ts
+List(...).listStyle("disc")      // •
+List(...).listStyle("circle")    // ○
+List(...).listStyle("square")    // ▪
+List(...).listStyle("decimal")   // 1. 2. 3.
+List(...).listStyle("dash")      // –
+List(...).listStyle("none")
+```
+
+## Numbered lists
+
+```ts
+List(
+  ListItem(Text("npm install sone").size(12)),
+  ListItem(Text("Compose your node tree").size(12)),
+  ListItem(Text("sone(root).pdf()").size(12)),
+).listStyle("decimal").startIndex(1).gap(8)
+```
+
+## Custom Span markers
+
+Pass a `Span` for full typographic control:
+
+```ts
+List(
+  ListItem(Text("Tab stops").size(12)),
+  ListItem(Text("Text orientation").size(12)),
+).listStyle(Span("→").color("black").weight("bold")).markerGap(10).gap(8)
+```
+
+## Dynamic markers
+
+A function `(index: number) => Span` gives per-item control:
+
+```ts
+const labels = ["①", "②", "③"];
+
+List(
+  ListItem(Text("Install dependencies").size(12)),
+  ListItem(Text("Configure the environment").size(12)),
+  ListItem(Text("Run the build").size(12)),
+)
+  .listStyle((index) => Span(labels[index]).color("royalblue").weight("bold"))
+  .gap(8)
+```
+
+The index is 0-based.
+
+## Nesting
+
+`ListItem` accepts any `SoneNode` children, so nested lists are just nested calls:
+
+```ts
+List(
+  ListItem(Text("First item").size(12)),
+  ListItem(
+    Text("Nested").size(12).weight("bold"),
+    List(
+      ListItem(Text("Child item").size(11)),
+    ).listStyle(Span("·").color("gray")).markerGap(6),
+  ),
+).listStyle("disc").gap(8)
+```
+
+## API
+
+| Method | Description |
+| --- | --- |
+| `listStyle(v)` | Built-in keyword, `Span`, or `(i) => Span`. |
+| `markerGap(v)` | Pixels between marker and content. Default `8`. |
+| `startIndex(v)` | Starting number for numeric lists. |
+
+`ListItem` supports all layout methods and accepts arbitrary children.

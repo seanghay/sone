@@ -1,0 +1,87 @@
+---
+title: Resume
+description: A clean two-column resume with contact, experience, and skills sections.
+icon: Contact
+---
+
+![Resume rendered by Sone](/gallery/resume-1.jpg)
+
+```ts
+import { Column, Photo, Row, Span, Text, sone } from "sone";
+
+const Section = (title: string, ...children: any[]) =>
+  Column(
+    Text(title).size(11).weight("bold").color("#111"),
+    ...children,
+  ).gap(8);
+
+const Job = (role: string, company: string, dates: string, bullets: string[]) =>
+  Column(
+    Row(
+      Text(role).size(11).weight("bold"),
+      Text(dates).size(10).color("#666").align("right").flex(1),
+    ),
+    Text(company).size(10).color("#444"),
+    Column(
+      ...bullets.map((b) => Text("• ", b).size(10).lineHeight(1.5)),
+    ).gap(2),
+  ).gap(4);
+
+const Resume = Row(
+  // Sidebar
+  Column(
+    Photo("./avatar.jpg").width(96).height(96).rounded(48),
+    Text("Alex Chen").size(20).weight("bold"),
+    Text("Senior Product Designer").size(12).color("#666"),
+
+    Section(
+      "CONTACT",
+      Text("alex@example.com").size(10),
+      Text("+1 415 555 0100").size(10),
+      Text("San Francisco, CA").size(10),
+    ),
+
+    Section(
+      "SKILLS",
+      Text("Design Systems · Figma · Webflow").size(10).lineHeight(1.5),
+      Text("Brand · Typography · Motion").size(10).lineHeight(1.5),
+    ),
+  ).width(220).gap(20).padding(32).bg("#fafafa"),
+
+  // Main column
+  Column(
+    Section(
+      "EXPERIENCE",
+      Job(
+        "Senior Product Designer",
+        "Acme Inc.",
+        "2022 — Present",
+        [
+          "Led the design system that ships across 4 product surfaces.",
+          "Mentored 3 designers; ran weekly critiques.",
+        ],
+      ),
+      Job(
+        "Product Designer",
+        "Beta Co.",
+        "2019 — 2022",
+        [
+          "Owned the onboarding flow; +18% activation lift.",
+        ],
+      ),
+    ),
+    Section(
+      "EDUCATION",
+      Text("BFA, Graphic Design — RISD, 2019").size(10),
+    ),
+  ).flex(1).padding(40).gap(24),
+).bg("white").width(816);
+
+const buffer = await sone(Resume).jpg(0.95);
+```
+
+## Notes
+
+- **Helpers** (`Section`, `Job`) keep the tree readable and reusable. They're just functions that return Sone nodes.
+- **Sidebar width** is fixed at `220` so the main column auto-flexes to fill the rest with `flex(1)`.
+- For a printable A4 version, swap `width(816)` for `794` and consider `pageHeight: 1123`.

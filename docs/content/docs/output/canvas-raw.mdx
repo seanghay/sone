@@ -1,0 +1,52 @@
+---
+title: Canvas & raw buffer
+description: Get direct access to the underlying skia-canvas Canvas.
+icon: Code2
+---
+
+For custom rendering pipelines, drop down to the underlying canvas:
+
+```ts
+const canvas = await sone(doc).canvas();   // skia-canvas Canvas
+const raw = await sone(doc).raw();         // raw pixel buffer
+```
+
+## When to use `.canvas()`
+
+- Stamp the rendered output onto a larger composite Canvas you're building elsewhere.
+- Pass the Canvas to a third-party library that expects a Canvas (e.g., a video encoder).
+- Read pixel data via `getContext("2d").getImageData(...)`.
+
+```ts
+const canvas = await sone(doc).canvas();
+const ctx = canvas.getContext("2d");
+const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+```
+
+## When to use `.raw()`
+
+When you need the raw pixel bytes without going through Canvas APIs — for example, feeding into a video pipeline or computing image hashes:
+
+```ts
+const raw = await sone(doc).raw();   // RGBA byte buffer
+```
+
+## Multi-page
+
+For multi-page documents, use `.pages()` — it returns one Canvas per page:
+
+```ts
+const pages = await sone(doc, { pageHeight: 1056 }).pages();
+// pages: Canvas[] — one per page
+```
+
+Useful for generating per-page thumbnails:
+
+```ts
+import fs from "node:fs/promises";
+
+const pages = await sone(doc, { pageHeight: 1056 }).pages();
+for (const [i, canvas] of pages.entries()) {
+  await fs.writeFile(`page-${i + 1}.png`, await canvas.toBuffer("png"));
+}
+```

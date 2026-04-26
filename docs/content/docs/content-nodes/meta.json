@@ -1,0 +1,5 @@
+{
+  "title": "Content nodes",
+  "icon": "Boxes",
+  "pages": ["photo", "path", "clip-group", "table", "list", "qr-code"]
+}

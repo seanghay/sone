@@ -1,0 +1,32 @@
+---
+title: Text orientation
+description: Rotate text 0°, 90°, 180°, or 270° while preserving flex layout.
+icon: RotateCw
+---
+
+`.orientation(degrees)` rotates a `Text` node — but unlike `.rotate()`, the layout footprint *swaps* width and height at 90° / 270°, so surrounding flex children flow correctly.
+
+```ts
+Text("Rotated").size(16).orientation(90)
+```
+
+| Value | Effect |
+| --- | --- |
+| `0` | Default. Horizontal left-to-right. |
+| `90` | Reads bottom to top. Layout box: tall and narrow. |
+| `180` | Upside down. Same footprint as `0`. |
+| `270` | Reads top to bottom. Layout box: tall and narrow. |
+
+## Use cases
+
+- Y-axis chart labels.
+- Vertical book/spine titles.
+- Sidebar typography.
+- Legal page-edge labels.
+
+Because the layout box swaps dimensions at 90°/270°, you can compose rotated text inside a `Row` and the row's height grows to fit it naturally — no manual offset math.
+
+## When to use orientation vs. rotate
+
+- **`.orientation()`** — for *text* you want to read at a 90°/180°/270° angle and have laid out as a vertical strip. Recommended for any cardinal rotation.
+- **`.rotate()`** — for arbitrary angles or visual flair where the layout footprint should *not* swap.
