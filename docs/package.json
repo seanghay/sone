@@ -10,6 +10,7 @@
     "typecheck": "react-router typegen && fumadocs-mdx && tsc --noEmit",
     "prepare-gallery": "node scripts/copy-gallery.mjs",
     "generate-examples": "node scripts/generate-examples.mjs",
+    "generate-business-docs": "node scripts/generate-business-docs.mjs",
     "generate-api-docs": "node scripts/generate-api-docs.mjs"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.7.0",
+    "react-top-loading-bar": "^3.0.2",
     "shiki": "^3.0.0",
     "skia-canvas": "^3.0.4",
     "sone": "^1.4.0",

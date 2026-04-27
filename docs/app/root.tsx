@@ -9,6 +9,7 @@ import {
 import { RootProvider } from 'fumadocs-ui/provider/react-router';
 import type { Route } from './+types/root';
 import './app.css';
+import { TopLoadingBar } from './components/top-loading-bar';
 import NotFound from './routes/not-found';
 
 export const links: Route.LinksFunction = () => [
@@ -39,6 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="flex flex-col min-h-screen bg-fd-background text-fd-foreground antialiased">
+        <TopLoadingBar />
         <RootProvider theme={{ defaultTheme: 'dark' }}>{children}</RootProvider>
         <ScrollRestoration />
         <Scripts />
