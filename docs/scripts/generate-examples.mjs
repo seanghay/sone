@@ -20,28 +20,77 @@ const FG_MUTED = '#525252';
 const FG_FAINT = '#a3a3a3';
 const BORDER = '#e5e5e5';
 
-// 1) OG image — fixed-size social card with hero title
+// 1) OG image — realistic blog-post social card. Three-row layout
+//    (brand + category, title + excerpt, author + read time) on white,
+//    with a single accent color used for the avatar dot and one Span
+//    inside the title. Photo() in the docs example is replaced here with
+//    rounded-rectangle placeholders so the script renders without
+//    external image files.
 function ogImage() {
+  const ACCENT = '#0DF';
   return Column(
+    // Header — brand mark + category eyebrow
     Row(
-      Text('sone.dev')
-        .size(18)
-        .color(FG_MUTED)
+      Row(
+        Column().width(28).height(28).rounded(6).bg(FG),
+        Text('sone.dev')
+          .size(16)
+          .weight('bold')
+          .color(FG)
+          .letterSpacing(0.2),
+      )
+        .gap(10)
+        .alignItems('center'),
+      Text('ENGINEERING')
+        .size(12)
         .weight('bold')
-        .letterSpacing(0.5),
-    ),
-    Text('Generate documents at scale, without a browser.')
-      .size(72)
-      .weight('bold')
-      .lineHeight(1.1)
-      .color(FG)
-      .maxWidth(1000),
+        .color(FG)
+        .letterSpacing(1.6),
+    )
+      .justifyContent('space-between')
+      .alignItems('center'),
+
+    // Title + excerpt — Span highlights the punch line in accent color
+    Column(
+      Text(
+        'How we cut PDF render time from ',
+        Span('2 seconds').color(FG_MUTED),
+        ' to ',
+        Span('30 milliseconds').color(ACCENT).weight('bold'),
+      )
+        .size(64)
+        .weight('bold')
+        .lineHeight(1.1)
+        .color(FG)
+        .maxWidth(1040),
+      Text(
+        'An honest look at the architectural changes that made our document pipeline 60× faster.',
+      )
+        .size(20)
+        .lineHeight(1.4)
+        .color(FG_MUTED)
+        .maxWidth(900),
+    ).gap(18),
+
+    // Footer — author block on left, read time on right
     Row(
-      Column(
-        Text('Read more').size(15).weight('bold').color(FG),
-        Text('5 min read').size(13).color(FG_MUTED),
-      ).gap(2),
-    ),
+      Row(
+        Column().width(40).height(40).rounded(20).bg(ACCENT),
+        Column(
+          Text('Alex Chen').size(15).weight('bold').color(FG),
+          Text('Engineering Lead').size(13).color(FG_MUTED),
+        ).gap(2),
+      )
+        .gap(12)
+        .alignItems('center'),
+      Text('8 MIN READ')
+        .size(12)
+        .weight('bold')
+        .color(FG_MUTED)
+        .letterSpacing(1.6),
+    )
+      .justifyContent('space-between')
+      .alignItems('center'),
   )
     .width(1200)
     .height(630)

@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
-    "vercel-build": "npm --prefix .. install --no-audit --no-fund && npm --prefix .. run build && react-router build",
+    "vercel-build": "npm --prefix .. install --no-audit --no-fund && npm --prefix .. run build && npm run generate-api-docs && react-router build",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && fumadocs-mdx && tsc --noEmit",
     "prepare-gallery": "node scripts/copy-gallery.mjs",
-    "generate-examples": "node scripts/generate-examples.mjs"
+    "generate-examples": "node scripts/generate-examples.mjs",
+    "generate-api-docs": "node scripts/generate-api-docs.mjs"
   },
   "dependencies": {
     "@react-router/node": "^7.7.0",
@@ -35,6 +36,7 @@
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "fumadocs-typescript": "^4.0.5",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
     "vite": "^7.0.0",

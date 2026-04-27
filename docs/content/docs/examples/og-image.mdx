@@ -6,52 +6,89 @@ icon: Share2
 
 ![OG image rendered by Sone](/examples/og-image.jpg)
 
-OG images are Sone's natural domain — fixed-size, programmatic, generated per request. Here's a typical blog-post OG image.
+OG images are Sone's natural domain — fixed-size, programmatic, generated per request. The example below is a realistic blog-post card: brand mark and category eyebrow up top, title with one inline accent span, author block and read-time at the bottom.
 
 ```ts
-import { Column, Photo, Row, Span, Text, sone } from "sone";
+import { Column, Photo, Row, Span, sone, Text } from "sone";
 
-function OgImage({ title, author, readTime }: {
+const ACCENT = "#0DF";
+const FG = "#0a0a0a";
+const FG_MUTED = "#525252";
+
+type OgProps = {
+  brand: { name: string; logo: string };
+  category: string;
   title: string;
-  author: string;
+  highlight: string;
+  excerpt: string;
+  author: { name: string; role: string; avatar: string };
   readTime: number;
-}) {
+};
+
+function OgImage({ brand, category, title, highlight, excerpt, author, readTime }: OgProps) {
+  // Split the title at `highlight` so the punch line gets the accent color.
+  const [before, after] = title.split(highlight);
+
   return Column(
-    // Top: brand
+    // Header — brand mark + category eyebrow
     Row(
-      Photo("./logo.png").width(36).height(36),
-      Text("acme.dev").size(16).color("#999").weight("bold"),
-    ).gap(12).alignItems("center"),
+      Row(
+        Photo(brand.logo).width(32).height(32).rounded(6),
+        Text(brand.name).size(16).weight("bold").color(FG).letterSpacing(0.2),
+      )
+        .gap(10)
+        .alignItems("center"),
+      Text(category).size(12).weight("bold").color(FG).letterSpacing(1.6),
+    )
+      .justifyContent("space-between")
+      .alignItems("center"),
 
-    // Middle: title (autofit + balanced wrap = always looks good)
-    Text(title)
-      .size(64)
-      .weight("bold")
-      .lineHeight(1.1)
-      .color("white")
-      .textWrap("balance")
-      .flex(1),
+    // Title + excerpt
+    Column(
+      Text(before, Span(highlight).color(ACCENT).weight("bold"), after)
+        .size(64)
+        .weight("bold")
+        .lineHeight(1.1)
+        .color(FG)
+        .maxWidth(1040),
+      Text(excerpt)
+        .size(20)
+        .lineHeight(1.4)
+        .color(FG_MUTED)
+        .maxWidth(900),
+    ).gap(18),
 
-    // Bottom: byline
+    // Footer — author block + read time
     Row(
-      Photo("./avatar.jpg").width(40).height(40).rounded(20),
-      Column(
-        Text(author).size(15).weight("bold").color("white"),
-        Text(`${readTime} min read`).size(13).color("#999"),
-      ).gap(2),
-    ).gap(12).alignItems("center"),
+      Row(
+        Photo(author.avatar).width(40).height(40).rounded(20),
+        Column(
+          Text(author.name).size(15).weight("bold").color(FG),
+          Text(author.role).size(13).color(FG_MUTED),
+        ).gap(2),
+      )
+        .gap(12)
+        .alignItems("center"),
+      Text(`${readTime} MIN READ`).size(12).weight("bold").color(FG_MUTED).letterSpacing(1.6),
+    )
+      .justifyContent("space-between")
+      .alignItems("center"),
   )
-    .width(1200).height(630)
+    .width(1200)
+    .height(630)
     .padding(64)
-    .gap(24)
-    .bg("black")
+    .bg("white")
     .justifyContent("space-between");
 }
 
 const buffer = await sone(
   OgImage({
+    brand: { name: "sone.dev", logo: "./logo.png" },
+    category: "ENGINEERING",
     title: "How we cut PDF render time from 2 seconds to 30 milliseconds",
-    author: "Alex Chen",
+    highlight: "30 milliseconds",
+    excerpt: "An honest look at the architectural changes that made our document pipeline 60× faster.",
+    author: { name: "Alex Chen", role: "Engineering Lead", avatar: "./alex.jpg" },
     readTime: 8,
   }),
 ).jpg(0.92);
@@ -59,20 +96,36 @@ const buffer = await sone(
 
 ## Notes
 
-- **Balanced wrap** on the title means short and long titles both look polished — no awkwardly short last lines.
-- **Use `.jpg(0.92)`** for OG images. Most social platforms re-encode anyway; quality 0.92 keeps file size under 200KB.
-- **Caching** — for high-traffic blogs, cache the rendered buffer. The same title always produces the same bytes.
+- **Inline `Span` in the title** is how Sone does selective emphasis. One bold-and-colored phrase reads as the headline punch without needing a separate element above or below.
+- **`.justifyContent("space-between")` on the outer column** spaces the three rows evenly across the 630 px canvas — the title block grows to fill whatever's left.
+- **`.jpg(0.92)`** is the right output for OG. Most social platforms re-encode the image anyway; quality 0.92 keeps file size well under 200 KB and is visually indistinguishable from quality 1.
+- **Caching** — for high-traffic blogs, key the rendered buffer by `(title, highlight, author, readTime)`. Identical inputs always produce identical bytes.
 
-## In a Next.js / Hono / Express handler
+## In a request handler
 
 ```ts
-// Next.js — app/og/route.ts
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const title = searchParams.get("title") ?? "Untitled";
-  const buffer = await sone(OgImage({ title, author: "—", readTime: 1 })).jpg(0.92);
-  return new Response(buffer, { headers: { "Content-Type": "image/jpeg" } });
-}
+// Hono / Express / Next.js — render fresh per request
+app.get("/og", async (req, res) => {
+  const buffer = await sone(
+    OgImage({
+      brand: { name: "sone.dev", logo: "./public/logo.png" },
+      category: req.query.category as string,
+      title: req.query.title as string,
+      highlight: (req.query.highlight as string) ?? "",
+      excerpt: req.query.excerpt as string,
+      author: {
+        name: req.query.author as string,
+        role: req.query.role as string,
+        avatar: `./public/avatars/${req.query.authorId}.jpg`,
+      },
+      readTime: Number(req.query.readTime),
+    }),
+  ).jpg(0.92);
+
+  res.setHeader("Content-Type", "image/jpeg");
+  res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=86400");
+  res.end(buffer);
+});
 ```
 
-Single-digit millisecond render means you can afford to render on every request — no need for build-time pre-rendering.
+Single-digit-millisecond render means you can afford to render on every request — no need for build-time pre-rendering or background workers.

@@ -1,9 +1,12 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
+import { ApiReference, ApiReferenceToc } from './api-reference';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
+    ApiReference,
+    ApiReferenceToc,
     ...components,
   } satisfies MDXComponents;
 }
