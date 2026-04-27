@@ -263,7 +263,7 @@ export function Comparison() {
         </div>
 
         <div className="w-full max-w-full overflow-x-auto rounded-lg border border-fd-border bg-fd-background">
-          <table className="w-max min-w-full text-xs">
+          <table className="w-full min-w-full text-xs">
             <thead>
               <tr className="border-b border-fd-border bg-fd-card">
                 <th className="text-left px-3 py-2 font-medium text-fd-muted-foreground w-1/3 whitespace-nowrap">
