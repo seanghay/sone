@@ -4,51 +4,98 @@ description: A declarative Canvas layout engine for JavaScript with advanced ric
 icon: BookOpen
 ---
 
-**Sone** is a declarative Canvas layout engine for JavaScript. You describe your document as a tree of composable nodes — `Column`, `Row`, `Text`, `Photo`, `Table` — and Sone figures out where everything goes. Output to **PNG**, **JPG**, **WebP**, **PDF**, or **SVG**.
+import {
+  BookOpen,
+  Compass,
+  FileText,
+  Rocket,
+  Type,
+} from 'lucide-react';
 
-It is built for one thing: **programmatic document and image generation at scale**. Invoices. Multi-page reports. Resumes. Certificates. Open Graph images. App UI snapshots. Anything that needs to look good when rendered by a machine, repeatedly, at speed.
-
-## Why Sone exists
-
-HTML and CSS were designed for the web — interactive, scrollable, reflowable. They were not designed to be a layout engine for batch document generation. Most engines that try to bridge that gap fall into one of two camps:
-
-| Approach | Trade-off |
-| --- | --- |
-| **Headless browser** (Puppeteer, Playwright) | Full CSS support, but Chrome overhead — hundreds of MB of memory and 100ms+ per render. |
-| **HTML-to-PDF / image** (Satori, html-to-image) | Lightweight, but only a fraction of CSS works. Missing features become silent layout breakage. |
-
-Sone takes a third path: a **first-party, fully-typed layout API** built on top of [yoga-layout](https://yogalayout.dev/) and [skia-canvas](https://skia-canvas.org/). The API surface is exactly what the engine supports — no missing specs, no guessing what works.
-
-## What Sone gives you
-
-- **Flexbox & CSS Grid** for layout — the same model you already know.
-- **Rich text** as a first-class citizen — mixed-style spans, justification, decorations, gradients, drop shadows.
-- **Multi-page PDFs** — automatic page breaking, repeating headers and footers, page margins, manual `PageBreak()`.
-- **Bidirectional text** — automatic RTL detection for Arabic and Hebrew, mixed paragraphs.
-- **Hyphenation** in 80+ languages.
-- **Balanced line wrapping** for headings and pull quotes.
-- **Six output formats** — PNG, JPG, WebP, PDF, SVG, raw Canvas.
-- **Metadata API** — every laid-out node, line, and segment carries its bounding box. Export YOLO or COCO datasets for ML training.
-
-## Hello, world
+**Sone** turns a tree of JavaScript function calls into pixel-perfect images and PDFs — without a browser, without a templating language, without a missing-feature-shaped hole somewhere in your CSS.
 
 ```ts
 import { Column, Span, sone, Text } from "sone";
 
-const doc = Column(
-  Text("Hello, ", Span("World").color("white").weight("bold"))
-    .size(44)
-    .color("white"),
+const card = Column(
+  Text("Hello, ", Span("World").color("#0DF").weight("bold")).size(44),
+  Text("A layout engine for image generation.").size(18).color("#9aa"),
 )
-  .padding(24)
-  .bg("black");
+  .gap(8)
+  .padding(40)
+  .bg("#0a0a0a");
 
-const buffer = await sone(doc).jpg();
+await sone(card).jpg(); // → Buffer
 ```
 
-## Where to next
+That's the whole API surface: composable nodes (`Column`, `Row`, `Text`, `Photo`, `Table`, …) with a fluent, typed builder. Sone runs the layout, paints to a canvas, and hands you a buffer.
 
-- New here? Start with [Installation](/docs/getting-started/install) and the [Quick start](/docs/getting-started/quick-start).
-- Want to understand the model? Read [Core concepts](/docs/getting-started/concepts).
-- Coming for the typography? [Text & Span](/docs/typography/text-and-span) is the right entry point.
-- Building a multi-page document? Jump to [Page height](/docs/multi-page/page-height).
+## What Sone is for
+
+Programmatic document and image generation **at scale**. Invoices. Multi-page reports. Resumes. Certificates. Open Graph images. App UI snapshots. Anything that needs to look right when a machine renders it, repeatedly, in milliseconds.
+
+If you're rendering one document for a human to read in a browser, you don't need Sone — write HTML. If you're rendering ten thousand documents an hour to a queue, or a single multi-page PDF that has to look exactly right every time, that's the gap Sone is built for.
+
+## Why not just use HTML?
+
+HTML and CSS were designed for an interactive, scrollable, reflowable web. Bending them into a batch document pipeline ends up in one of two places:
+
+| Approach | What you give up |
+| --- | --- |
+| **Headless browser** (Puppeteer, Playwright) | Hundreds of MB of memory per worker, ~100 ms per render, a full Chrome to babysit. |
+| **HTML-to-image / PDF** (Satori, html-to-image) | Most of CSS. Missing features fail silently — your layout looks fine until it doesn't. |
+| **Sone** | The browser. You write directly against the layout engine instead of through a translation layer. |
+
+Sone is a first-party, fully-typed layout API on top of [yoga-layout](https://yogalayout.dev/) (the engine behind React Native) and [skia-canvas](https://skia-canvas.org/) (Skia, the same graphics library that powers Chrome). The API surface is exactly what the engine supports — if a method exists, it works; if it doesn't, TypeScript tells you.
+
+<Callout title="Why not a markup language?">
+  Markup decouples syntax from the engine that renders it — and that gap is
+  where silent layout breakage lives. Sone keeps the API and the engine in
+  lockstep on purpose. Loops, conditionals, and helpers are just JavaScript.
+</Callout>
+
+## What's in the box
+
+- **Flexbox & CSS Grid** — the same mental model you already know, powered by yoga-layout.
+- **Rich text first-class** — mixed-style spans, justification, decorations, drop shadows, per-glyph gradients.
+- **Bidirectional text** — automatic RTL handling for Arabic and Hebrew, mixed paragraphs.
+- **Hyphenation in 80+ languages** — Knuth–Liang patterns, no extra deps to install.
+- **Balanced line wrapping** for headlines and pull quotes.
+- **Multi-page PDFs** — automatic page breaking, repeating headers/footers, manual `PageBreak()`.
+- **Six output formats** — PNG, JPG, WebP, PDF, SVG, raw Canvas.
+- **Metadata API** — every laid-out node, line, and segment carries its bounding box. Export YOLO or COCO datasets for ML training.
+
+## Where to start
+
+<Cards>
+  <Card
+    icon={<Rocket />}
+    title="Install & run in 60 seconds"
+    href="/docs/getting-started/install"
+    description="Add Sone, render your first JPG, see where the file lands."
+  />
+  <Card
+    icon={<Compass />}
+    title="Core concepts"
+    href="/docs/getting-started/concepts"
+    description="Node tree, builders, and how Sone walks from your code to a pixel."
+  />
+  <Card
+    icon={<Type />}
+    title="Typography"
+    href="/docs/typography/text-and-span"
+    description="Text, Span, and the rich-text features that set Sone apart."
+  />
+  <Card
+    icon={<FileText />}
+    title="Multi-page documents"
+    href="/docs/multi-page/page-height"
+    description="Page sizing, repeating headers and footers, manual breaks."
+  />
+  <Card
+    icon={<BookOpen />}
+    title="Worked examples"
+    href="/docs/examples/invoice"
+    description="Full source for an invoice, a resume, a certificate, an OG card."
+  />
+</Cards>

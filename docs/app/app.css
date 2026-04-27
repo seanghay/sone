@@ -135,8 +135,7 @@ html > body[data-scroll-locked] {
 
 /* Sone brand gradient — anchored to the logo's blue→cyan ramp but warmed up
    with a violet midpoint and a slight diagonal sweep so wide headings feel
-   dynamic rather than flat. Animation drifts the gradient slowly so headings
-   shimmer subtly without becoming distracting. */
+   dynamic rather than flat. */
 .text-sone-gradient {
   background-image: linear-gradient(
     110deg,
@@ -147,11 +146,8 @@ html > body[data-scroll-locked] {
   );
   background-clip: text;
   -webkit-background-clip: text;
-  background-size: 220% 100%;
-  background-position: 0% 50%;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  animation: sone-gradient-drift 18s ease-in-out infinite alternate;
 }
 
 /* Dark-mode variant — the original deep blues/violets get muddy on a near-
@@ -166,21 +162,6 @@ html > body[data-scroll-locked] {
     #6cc4ff 62%,
     #6ef0ff 100%
   );
-}
-
-@keyframes sone-gradient-drift {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .text-sone-gradient {
-    animation: none;
-  }
 }
 
 /* Hero radial gradient — uses CSS vars so light vs dark theme each get a
