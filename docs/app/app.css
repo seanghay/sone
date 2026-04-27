@@ -20,6 +20,12 @@
 
 html {
   scrollbar-gutter: stable;
+  /* Disable mobile auto-text-inflation. Without this, Chrome mobile (and
+     mobile-emulation in DevTools) scales font sizes up in columns it deems
+     "too narrow," pushing content wider than the viewport even when desktop
+     narrow-width rendering is fine at the same pixel width. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Stop the document itself from scrolling horizontally. Inner elements with
@@ -50,6 +56,28 @@ main > * {
   min-width: 0;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+/* Cascade min-width:0 to every descendant. Flex/grid children default to
+   `min-width: auto`, refusing to shrink below their content's intrinsic
+   min-width — that's what lets a long unbreakable line in a deep grid cell
+   blow out the whole page on mobile. Setting this universally is safe
+   because elements with explicit `width` still keep their width. */
+main * {
+  min-width: 0;
+}
+
+/* The real mobile-overflow culprit. Even with overflow-x:auto wrappers,
+   Chrome mobile (and DevTools mobile emulation) still measures intrinsic
+   content width when computing the layout viewport — a wide table or
+   long code line inside an overflow:auto wrapper can expand the layout
+   viewport from device-width to ~2× device-width, which then makes the
+   fixed nav header span the larger viewport and produce horizontal
+   scroll. `contain: layout` isolates the wrapper's layout from the
+   parent's layout-viewport calculation while leaving overflow:auto
+   scrolling intact. */
+main .overflow-x-auto {
+  contain: layout;
 }
 
 body {
