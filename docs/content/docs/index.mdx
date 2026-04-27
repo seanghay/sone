@@ -38,15 +38,17 @@ If you're rendering one document for a human to read in a browser, you don't nee
 
 ## Why not just use HTML?
 
-HTML and CSS were designed for an interactive, scrollable, reflowable web. Bending them into a batch document pipeline ends up in one of two places:
+HTML and CSS are markup. Markup doesn't render anything — it describes a document and hands it to a *rendering engine*. The only rendering engines that fully implement HTML and CSS are browser engines: Blink, WebKit, Gecko. There are no others. Each is a decades-long accretion of specs you don't need to put pixels in a JPG: a JavaScript runtime, a network stack, history and navigation, IME and a11y trees, video and WebGL, autoplay and content-security policies, scrollbar quirks, focus rings, dozens of CSS features layered on top of dozens more.
+
+Your invoice doesn't need any of that. It needs flexbox, text layout, a few drawing primitives, and a way to write the result to a buffer. So when you bend HTML into a batch document pipeline, you end up in one of two places:
 
 | Approach | What you give up |
 | --- | --- |
-| **Headless browser** (Puppeteer, Playwright) | Hundreds of MB of memory per worker, ~100 ms per render, a full Chrome to babysit. |
-| **HTML-to-image / PDF** (Satori, html-to-image) | Most of CSS. Missing features fail silently — your layout looks fine until it doesn't. |
-| **Sone** | The browser. You write directly against the layout engine instead of through a translation layer. |
+| **Headless browser** (Puppeteer, Playwright) | Hundreds of MB of memory per worker, ~100 ms per render, a full Chrome to babysit. You're paying for the entire engine to render four flexboxes and some text. |
+| **HTML-to-image / PDF** (Satori, html-to-image) | Most of CSS. These are partial reimplementations of a browser engine — the surface area is huge, the parity is approximate, and missing features fail silently. Your layout looks fine until it doesn't. |
+| **Sone** | The browser engine, entirely. You write directly against the layout primitives ([yoga-layout](https://yogalayout.dev/) — the same engine behind React Native) and a 2D rasterizer ([skia-canvas](https://skia-canvas.org/) — the same Skia that powers Chrome's painting). Nothing in between. |
 
-Sone is a first-party, fully-typed layout API on top of [yoga-layout](https://yogalayout.dev/) (the engine behind React Native) and [skia-canvas](https://skia-canvas.org/) (Skia, the same graphics library that powers Chrome). The API surface is exactly what the engine supports — if a method exists, it works; if it doesn't, TypeScript tells you.
+The API surface is exactly what the engine supports. If a method exists, it works; if it doesn't, TypeScript tells you. There is no parity gap, because there is no translation layer.
 
 <Callout title="Why not a markup language?">
   Markup decouples syntax from the engine that renders it — and that gap is
