@@ -17,19 +17,34 @@ import {
   soneBridgeHtml,
   tailwindBridgeHtml,
 } from '@/lib/code-examples.server';
+import {
+  absoluteUrl,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_TYPE,
+  OG_IMAGE_WIDTH,
+  SITE_LOCALE,
+  SITE_NAME,
+} from '@/lib/site';
 
 export function meta({}: Route.MetaArgs) {
   const title = 'Sone — A layout engine for image generation in JavaScript.';
   const description =
     'Compose images like you write components. Build beautiful, dynamic images, OG cards, posters, dashboards, multi-page PDFs, and invoices — at scale, without a browser.';
-  const ogImage = 'https://sone.seanghay.com/og/docs/index.jpg';
-  const canonical = 'https://sone.seanghay.com/';
+  const ogImage = absoluteUrl('/og.jpg');
+  const canonical = absoluteUrl('/');
   return [
     { title },
     { name: 'description', content: description },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:locale', content: SITE_LOCALE },
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:image', content: ogImage },
+    { property: 'og:image:secure_url', content: ogImage },
+    { property: 'og:image:type', content: OG_IMAGE_TYPE },
+    { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+    { property: 'og:image:alt', content: title },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: canonical },
     { name: 'twitter:card', content: 'summary_large_image' },

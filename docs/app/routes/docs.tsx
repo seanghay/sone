@@ -14,7 +14,15 @@ import { docs } from '../../source.generated';
 import { baseOptions } from '@/lib/layout.shared';
 import { useMDXComponents } from '@/components/mdx';
 import { attachTreeIcons } from '@/lib/tree-icons';
-import { absoluteUrl, ogImagePath } from '@/lib/site';
+import {
+  absoluteUrl,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_TYPE,
+  OG_IMAGE_WIDTH,
+  ogImagePath,
+  SITE_LOCALE,
+  SITE_NAME,
+} from '@/lib/site';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const slugs = (params['*'] ?? '').split('/').filter((v) => v.length > 0);
@@ -38,9 +46,16 @@ export function meta({ data }: Route.MetaArgs) {
   return [
     { title },
     description ? { name: 'description', content: description } : null,
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:locale', content: SITE_LOCALE },
     { property: 'og:title', content: title },
     description ? { property: 'og:description', content: description } : null,
     { property: 'og:image', content: data.ogImage },
+    { property: 'og:image:secure_url', content: data.ogImage },
+    { property: 'og:image:type', content: OG_IMAGE_TYPE },
+    { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+    { property: 'og:image:alt', content: title },
     { property: 'og:type', content: 'article' },
     { property: 'og:url', content: data.canonical },
     { name: 'twitter:card', content: 'summary_large_image' },
