@@ -24,6 +24,23 @@ import {
   SITE_NAME,
 } from '@/lib/site';
 
+const SECTION_LABELS: Record<string, string> = {
+  'getting-started': 'Getting started',
+  layout: 'Layout',
+  typography: 'Typography',
+  styling: 'Styling',
+  'content-nodes': 'Content nodes',
+  'multi-page': 'Multi-page',
+  output: 'Output formats',
+  advanced: 'Advanced',
+  examples: 'Examples',
+};
+
+function inferSection(slugs: string[]): string {
+  if (slugs.length === 0) return 'Documentation';
+  return SECTION_LABELS[slugs[0]] ?? 'Documentation';
+}
+
 export async function loader({ params }: Route.LoaderArgs) {
   const slugs = (params['*'] ?? '').split('/').filter((v) => v.length > 0);
   const page = source.getPage(slugs);
@@ -34,6 +51,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     tree: source.getPageTree(),
     title: page.data.title,
     description: page.data.description,
+    section: inferSection(slugs),
     ogImage: absoluteUrl(ogImagePath(slugs)),
     canonical: absoluteUrl(page.url),
   };
@@ -58,6 +76,7 @@ export function meta({ data }: Route.MetaArgs) {
     { property: 'og:image:alt', content: title },
     { property: 'og:type', content: 'article' },
     { property: 'og:url', content: data.canonical },
+    { property: 'article:section', content: data.section },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: title },
     description ? { name: 'twitter:description', content: description } : null,

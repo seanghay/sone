@@ -11,7 +11,14 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
+  /** Display string, e.g. "April 26, 2026". */
   date: string;
+  /** ISO 8601 datetime — used for og:article:published_time. */
+  publishedTime: string;
+  /** ISO 8601 datetime — used for og:article:modified_time. */
+  modifiedTime?: string;
+  author: string;
+  tags?: string[];
   readTime: string;
   body: Block[];
 };
@@ -27,6 +34,9 @@ export const posts: BlogPost[] = [
     excerpt:
       'Sone 1.4 ships first-class multi-page PDF rendering, balanced line wrapping for headlines, and a Metadata API that exports every laid-out node and segment as YOLO or COCO datasets.',
     date: 'April 26, 2026',
+    publishedTime: '2026-04-26T00:00:00Z',
+    author: 'Seanghay Yath',
+    tags: ['release', 'pdf', 'metadata'],
     readTime: '6 min read',
     body: [
       p(
@@ -71,6 +81,9 @@ export const posts: BlogPost[] = [
     excerpt:
       'A short writeup on the trade-offs between headless browsers and a first-party layout engine, and why those trade-offs add up at scale.',
     date: 'April 12, 2026',
+    publishedTime: '2026-04-12T00:00:00Z',
+    author: 'Seanghay Yath',
+    tags: ['design', 'architecture'],
     readTime: '4 min read',
     body: [
       p(

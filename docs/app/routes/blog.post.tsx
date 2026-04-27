@@ -5,6 +5,14 @@ import { ArrowLeft, Calendar } from 'lucide-react';
 import { baseOptions } from '@/lib/layout.shared';
 import { posts } from '@/lib/blog-posts';
 import { Footer } from '@/components/footer';
+import {
+  absoluteUrl,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_TYPE,
+  OG_IMAGE_WIDTH,
+  SITE_LOCALE,
+  SITE_NAME,
+} from '@/lib/site';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const post = posts.find((p) => p.slug === params.slug);
@@ -14,9 +22,43 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   if (!data) return [{ title: 'Post not found · Sone' }];
+  const { post } = data;
+  const title = `${post.title} · Sone Blog`;
+  const description = post.excerpt;
+  // Blog posts share the home OG card for now. When we add per-post OG
+  // generation, swap this for absoluteUrl(`/og/blog/${post.slug}.jpg`).
+  const ogImage = absoluteUrl('/og.jpg');
+  const canonical = absoluteUrl(`/blog/${post.slug}`);
+  const tagTags =
+    post.tags?.map((tag) => ({ property: 'article:tag', content: tag })) ?? [];
   return [
-    { title: `${data.post.title} · Sone Blog` },
-    { name: 'description', content: data.post.excerpt },
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:site_name', content: SITE_NAME },
+    { property: 'og:locale', content: SITE_LOCALE },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: ogImage },
+    { property: 'og:image:secure_url', content: ogImage },
+    { property: 'og:image:type', content: OG_IMAGE_TYPE },
+    { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+    { property: 'og:image:alt', content: post.title },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: canonical },
+    { property: 'article:author', content: post.author },
+    { property: 'article:published_time', content: post.publishedTime },
+    {
+      property: 'article:modified_time',
+      content: post.modifiedTime ?? post.publishedTime,
+    },
+    { property: 'article:section', content: 'Blog' },
+    ...tagTags,
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: ogImage },
+    { tagName: 'link', rel: 'canonical', href: canonical },
   ];
 }
 
