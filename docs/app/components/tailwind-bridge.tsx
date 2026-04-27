@@ -29,7 +29,6 @@ const mappings: { group: string; rows: Mapping[] }[] = [
       { tw: 'w-full', sone: '.width("100%")' },
       { tw: 'w-96', sone: '.width(384)' },
       { tw: 'max-w-sm', sone: '.maxWidth(384)' },
-      { tw: 'h-screen', sone: '.height("100vh")' },
     ],
   },
   {
