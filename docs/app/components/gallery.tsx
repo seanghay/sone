@@ -12,26 +12,26 @@ const items: GalleryItem[] = [
     src: '/gallery/invoice.jpg',
     title: 'Invoice',
     caption: 'Header, line-items table, totals, and footer in one node tree.',
-    source: 'examples/business-documents/invoice.ts',
+    source: 'examples/business-documents/documents/invoice.js',
   },
   {
     src: '/gallery/report.jpg',
     title: 'Report',
     caption: 'Section headings, mixed typography, charts, and signatures.',
-    source: 'examples/business-documents/report.ts',
+    source: 'examples/business-documents/documents/report.js',
   },
   {
     src: '/gallery/quotation.jpg',
     title: 'Quotation',
     caption:
       'Itemized pricing with branded header — same render as the invoice.',
-    source: 'examples/business-documents/quotation.ts',
+    source: 'examples/business-documents/documents/quotation.js',
   },
   {
     src: '/gallery/bank-statement.jpg',
     title: 'Bank statement',
     caption: 'Tabular transactions with running balances and categorization.',
-    source: 'examples/business-documents/bank-statement.ts',
+    source: 'examples/business-documents/documents/bank-statement.js',
   },
   {
     src: '/gallery/resume-1.jpg',
