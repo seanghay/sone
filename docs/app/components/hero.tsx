@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { ArrowRight, Github } from 'lucide-react';
 import { CopyCommand } from './copy-command';
+import { HeroParticles } from './hero-particles';
 
 export function Hero() {
   return (
@@ -10,6 +11,7 @@ export function Hero() {
         aria-hidden
         className="hero-glow pointer-events-none absolute inset-0 -z-10"
       />
+      <HeroParticles />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-fd-border to-transparent -z-10"
