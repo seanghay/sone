@@ -32,6 +32,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      # npm 10 (bundled with Node 20/22) crashes resolving tsdown's optional
+      # `@vitejs/devtools: *` peer with "Cannot read properties of null
+      # (reading 'edgesOut')". npm 11 handles it, so upgrade before installing.
+      - run: npm install -g npm@11
+
       - run: npm install
       - run: npm test
       - run: npm run build
@@ -49,7 +54,10 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
-      
+
+      # See the note in run-tests: npm 10 crashes on tsdown's optional peer.
+      - run: npm install -g npm@11
+
       - run: npm install
       - run: npm publish --provenance --access public
         env:
