@@ -13,7 +13,6 @@
 - Multi-Page PDF — automatic page breaking, repeating headers & footers, margins
 - Rich Text — spans, justification, tab stops, tab leaders, text orientation (0°/90°/180°/270°)
 - Bidirectional text — RTL support for Arabic, Hebrew, and mixed LTR/RTL paragraphs
-- Hyphenation — automatic word hyphenation for 80+ languages via `.hyphenate(locale)`
 - Balanced line wrapping — evenly distributed line lengths via `.textWrap("balance")`
 - Syntax Highlighting — via `sone/shiki` (Shiki integration)
 - Lists, Tables, Photos, SVG Paths, QR Codes
@@ -23,7 +22,7 @@
 - Fully Typed
 - Metadata API — access per-node layout, text segment bboxes, and `.tag()` labels
 - YOLO / COCO Dataset Export — generate bounding-box datasets for document layout analysis
-- All features from [skia-canvas](https://skia-canvas.org/)
+- Runs anywhere — Node.js, browsers and edge runtimes, from one WebAssembly build
 
 ---
 
@@ -71,7 +70,7 @@
 </details>
 
 <details>
-<summary><strong>Typography</strong> — styling, wrap balance, hyphenation, orientation</summary>
+<summary><strong>Typography</strong> — styling, wrap balance, orientation</summary>
 <br>
 <table>
   <tr>
@@ -79,7 +78,6 @@
     <td><img src="test/visual/text-wrap-balance-1.jpg" alt="Wrap balance" width="340" /></td>
   </tr>
   <tr>
-    <td><img src="test/visual/text-hyphenation-1.jpg" alt="Hyphenation" width="340" /></td>
     <td><img src="test/visual/text-orientation-1.jpg" alt="Text orientation" width="340" /></td>
   </tr>
 </table>
@@ -129,8 +127,12 @@
 
 ### Overview
 
-- This project uses `skia-canvas` — if you encounter an installation issue, follow [the skia-canvas instructions](https://github.com/samizdatco/skia-canvas)
-- Node.js 16+ or equivalent
+- Rendering is powered by [`skia`](https://github.com/seanghay/skia-web) — Skia compiled to WebAssembly. There is no native addon, so there is nothing to compile and no prebuilt binaries to download.
+- Node.js 18+ or equivalent
+
+> **Fonts must be registered.** The WebAssembly build has no access to system
+> fonts, so `Font.load()` must be called at least once before rendering any
+> text. See [Fonts](#fonts).
 
 ```shell
 npm install sone
@@ -277,38 +279,6 @@ Text("Breaking News: Scientists Discover New Species in the Amazon Rainforest")
   .textWrap("balance")
 ```
 
-**Hyphenation**
-
-`.hyphenate(locale?)` inserts typographic hyphens at valid syllable boundaries using Knuth–Liang patterns from the [`hyphen`](https://github.com/nicowillis/hypher) package (80+ languages). Install it as a dependency first:
-
-```shell
-npm install hyphen
-```
-
-```javascript
-// English (default)
-Text("The internationalization of software requires typographical care.")
-  .font("sans-serif")
-  .size(16)
-  .maxWidth(200)
-  .hyphenate()         // same as .hyphenate("en")
-
-// French
-Text("Le développement international de logiciels nécessite une typographie soignée.")
-  .hyphenate("fr")
-
-// German — compound words benefit greatly
-Text("Die Softwareentwicklung erfordert typografische Überlegungen.")
-  .hyphenate("de")
-
-// Hyphenation composes with textWrap balance
-Text("Extraordinary accomplishments in internationalization.")
-  .maxWidth(220)
-  .hyphenate("en")
-  .textWrap("balance")
-```
-
-Supported locale examples: `"en"` / `"en-us"` / `"en-gb"`, `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`, `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, `"fi"`, `"hu"`, `"ro"`, `"cs"`, `"tr"`, `"uk"`, `"bg"`, `"el"`, `"la"`, and more. Pass `true` for English.
 
 **Text Orientation**
 
@@ -353,41 +323,39 @@ List(
 ).listStyle((index) => Span(labels[index]).color("royalblue").weight("bold")).gap(8)
 ```
 
+<a id="fonts"></a>
+
 **Font Registration**
+
+Sone renders through a WebAssembly build of Skia, which has no access to the
+host system's fonts. **At least one font must be registered before any text is
+rendered** — otherwise rendering throws a `SoneFontError`.
 
 ```javascript
 import { Font } from 'sone';
 
 await Font.load("NotoSansKhmer", "test/font/NotoSansKhmer.ttf");
 
-// Load a specific weight variant
-await Font.load("GeistMono", ["/path/to/GeistMono-Bold.ttf"], { weight: "bold" });
+// Several files can back one family
+await Font.load("GeistMono", ["/path/to/Regular.ttf", "/path/to/Bold.ttf"]);
+
+// Raw bytes work too — the only option in edge runtimes with no filesystem
+await Font.load("Inter", await fetch("/fonts/Inter.ttf").then((r) => r.arrayBuffer()));
 
 Font.has("NotoSansKhmer") // → boolean
+await Font.unload("NotoSansKhmer");
 ```
+
+The generic CSS families (`sans-serif`, `serif`, `monospace`, …) resolve to the
+**first** font you register, and every other registered family becomes a
+fallback. That fallback chain is what lets a Latin-primary font still render
+Khmer, Arabic or Hebrew runs correctly — so register a font covering each script
+your documents use.
 
 **Next.js**
 
-To make it work with Next.js, update your config file:
-
-```typescript
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  serverExternalPackages: ["skia-canvas"],
-  webpack: (config, options) => {
-    if (options.isServer) {
-      config.externals = [
-        ...config.externals,
-        { "skia-canvas": "commonjs skia-canvas" },
-      ];
-    }
-    return config;
-  },
-};
-
-export default nextConfig;
-```
+Sone works with Next.js out of the box — there are no native binaries to
+externalize.
 
 ---
 
@@ -405,7 +373,7 @@ Built for real-world document generation: **invoices, letters, open graph images
 
 **Pages are just layout.** `pageHeight` slices the same node tree into pages. Headers, footers, and page breaks are ordinary nodes. No special mode, no different API.
 
-**Performance.** No browser, no Puppeteer, no CDP. Rendering goes directly through [skia-canvas](https://skia-canvas.org/) — a native Skia binding for Node.js. Images render in single-digit milliseconds, multi-page PDFs in tens of milliseconds.
+**Performance.** No browser, no Puppeteer, no CDP. Rendering goes directly through [`skia`](https://github.com/seanghay/skia-web) — Skia compiled to WebAssembly. Simple images render in around a millisecond, rich documents in tens of milliseconds.
 
 ---
 
@@ -553,7 +521,6 @@ Text("Hello ", Span("world").color("blue").weight("bold")).size(16)
 | `dropShadow(v)` | CSS text-shadow string. |
 | `nowrap()` | Disable text wrapping. |
 | `textWrap(v)` | `"wrap"` (default) or `"balance"` — balance distributes text so all lines are roughly equal in width. |
-| `hyphenate(locale?)` | Enable automatic hyphenation. Omit locale for English (`"en"`). Accepts BCP-47-like codes: `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`, `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, and 70+ more. Requires the `hyphen` package. |
 | `baseDir(v)` | Paragraph base direction: `"ltr"`, `"rtl"`, or `"auto"` (auto-detected from first strong character). |
 | `tag(v)` | Debug label attached to the node — surfaced in the Metadata API and used as a YOLO class name. |
 
@@ -934,7 +901,6 @@ Sone uses **Flexbox** as its primary layout model, powered by `yoga-layout` (the
 
 Absolutely. Rich text is built directly into Sone's core:
 * **Bidirectional Text:** Automatic RTL support for Arabic, Hebrew, and mixed LTR/RTL paragraphs.
-* **Hyphenation:** Automatic, syllable-aware word hyphenation for 80+ languages using Knuth–Liang patterns.
 * **Balanced Line Wrapping:** The `.textWrap("balance")` method ensures evenly distributed line lengths for aesthetically pleasing titles and headings.
 * **Tab Stops & Leaders:** Perfect for table of contents or financial reports without needing complex table nodes.
 * **Custom Fonts:** Load any custom `.ttf` or `.otf` font file for any language or script.
@@ -949,25 +915,14 @@ Sone includes a unique **Metadata API** that extracts the exact computed layout 
 <details>
 <summary><strong>Can I use Sone with Next.js?</strong></summary>
 
-Yes! You just need to update your `next.config.js` or `next.config.ts` to externalize the `skia-canvas` dependency so Webpack doesn't try to bundle the native binaries:
+Yes, with no extra configuration. Sone renders through WebAssembly rather than a native addon, so there are no platform binaries for Webpack to trip over — the `serverExternalPackages` workaround earlier versions needed is no longer required.
+
+If your bundler does not emit `canvaskit.wasm` next to the module, point the loader at it explicitly before your first render:
 
 ```typescript
-import type { NextConfig } from "next";
+import { configureSkia } from "sone";
 
-const nextConfig: NextConfig = {
-  serverExternalPackages: ["skia-canvas"],
-  webpack: (config, options) => {
-    if (options.isServer) {
-      config.externals = [
-        ...config.externals,
-        { "skia-canvas": "commonjs skia-canvas" },
-      ];
-    }
-    return config;
-  },
-};
-
-export default nextConfig;
+configureSkia({ wasmFile: "https://cdn.example.com/canvaskit.wasm" });
 ```
 </details>
 
@@ -976,7 +931,7 @@ export default nextConfig;
 ### Acknowledgements
 
 - Thanks [Dmitry Iv.](https://github.com/dy) for donating the `sone` package name.
-- [skia-canvas](https://skia-canvas.org/) Awesome JavaScript Skia Canvas binding
+- [skia](https://github.com/seanghay/skia-web) WebAssembly bindings for the Skia graphics library
 - [node-canvas](https://github.com/Automattic/node-canvas)
 - [@napi-rs/canvas](https://github.com/Brooooooklyn/canvas)
 - [dropflow](https://github.com/chearon/dropflow)

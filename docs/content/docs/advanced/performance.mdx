@@ -95,7 +95,7 @@ Image filters (`.blur`, `.grayscale`, `.brightness`, etc.) each add a render pas
 
 ## Parallelize at the process level, not the request level
 
-Sone is synchronous within a render but `skia-canvas` releases the event loop between async boundaries. For Node servers, prefer:
+Sone is synchronous within a render but `skia` releases the event loop between async boundaries. For Node servers, prefer:
 
 - Multiple Node processes (PM2, systemd, K8s replicas) for parallelism
 - One render at a time per process

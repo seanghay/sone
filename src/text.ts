@@ -3,9 +3,11 @@ import { Edge, type Node } from "yoga-layout/load";
 import { resolveParagraphDirection } from "./bidi.ts";
 import type { SpanNode, SpanProps, TextNode, TextProps } from "./core.ts";
 import { createGradientFillStyleList } from "./gradient.ts";
-import { getHyphenBreaks, resolveHyphenLocale } from "./hyphenation.ts";
-import type { SoneRenderer } from "./renderer.ts";
-import { applySpanProps, indicesOf, isWhitespace } from "./utils.ts";
+import type { SoneRenderer, SoneTextMetrics } from "./renderer.ts";
+import type { SkPaint } from "./skia/arena.ts";
+import { parseColor } from "./skia/color.ts";
+import { type Painter, withSave } from "./skia/painter.ts";
+import { indicesOf, isWhitespace } from "./utils.ts";
 
 function countSpaces(value: string): number {
   let count = 0;
@@ -49,7 +51,7 @@ export interface SoneParagraphLineRun {
 }
 
 export interface SoneParagraphLineSegment {
-  metrics: TextMetrics;
+  metrics: SoneTextMetrics;
   props: SpanProps;
   text: string;
   width: number;
@@ -92,7 +94,6 @@ const ELLIPSIS = "…";
 const TRAILING_WHITESPACE_RE = /[ \t]+$/u;
 const LEADING_WHITESPACE_RE = /^[ \t]+/u;
 const TAB_RE = /\t+/gu;
-const LETTER_SEQUENCE_RE = /\p{L}+/gu;
 let graphemeSegmenter: Intl.Segmenter | null = null;
 
 function createEmptyLine(width = 0): SoneParagraphLine {
@@ -637,63 +638,7 @@ function findFittingWrapBoundary(
   tabStops: number[] | undefined,
   measureText: SoneRenderer["measureText"],
   breakIterator: SoneRenderer["breakIterator"],
-  hyphenLocale: string | null = null,
-): { boundary: number; addHyphen: boolean } {
-  // When hyphenation is enabled, use a separate path that combines word-level
-  // breaks with valid hyphenation points. This avoids raw grapheme splits that
-  // would produce mid-word breaks without a hyphen character.
-  if (hyphenLocale != null && availableWidth > 0) {
-    const hyphenWidth = measureText("-", props).width;
-
-    // Collect all candidate break positions with whether they need a hyphen.
-    // Word-level boundaries (spaces, punctuation transitions) → no hyphen.
-    // Hyphenation points inside words → hyphen needed.
-    const candidates: Array<{ pos: number; addHyphen: boolean }> = [];
-
-    // Word-level boundaries from the break iterator
-    for (const idx of breakIterator(text)) {
-      if (idx > 0 && idx < text.length) {
-        candidates.push({ pos: idx, addHyphen: false });
-      }
-    }
-    candidates.push({ pos: text.length, addHyphen: false });
-
-    // Hyphenation points across all letter-sequences in the text
-    LETTER_SEQUENCE_RE.lastIndex = 0;
-    for (const wMatch of text.matchAll(LETTER_SEQUENCE_RE)) {
-      const wordStart = wMatch.index;
-      for (const b of getHyphenBreaks(wMatch[0], hyphenLocale)) {
-        candidates.push({ pos: wordStart + b, addHyphen: true });
-      }
-    }
-
-    // Sort descending by position so we try the longest fitting prefix first
-    candidates.sort((a, b) => b.pos - a.pos);
-
-    let fallback: { pos: number; addHyphen: boolean } | null = null;
-    for (const { pos, addHyphen } of candidates) {
-      if (pos <= 0) continue;
-      if (fallback === null) fallback = { pos, addHyphen };
-
-      const extra = addHyphen ? hyphenWidth : 0;
-      const width = measureTabExpandedWidth(
-        text.slice(0, pos),
-        props,
-        tabStops,
-        currentX,
-        measureText,
-      );
-      if (width + extra <= availableWidth) {
-        return { boundary: pos, addHyphen };
-      }
-    }
-
-    return fallback != null
-      ? { boundary: fallback.pos, addHyphen: fallback.addHyphen }
-      : { boundary: text.length, addHyphen: false };
-  }
-
-  // Default path (no hyphenation) — use grapheme + word boundaries.
+): number {
   // getPrefixBoundaries already uses a Set so there are no duplicates;
   // it returns positions in descending order. Reverse to iterate ascending.
   const prefixBoundaries = getPrefixBoundaries(text, breakIterator);
@@ -734,7 +679,7 @@ function findFittingWrapBoundary(
     if (fullWidth <= availableWidth) best = text.length;
   }
 
-  return { boundary: best > 0 ? best : fallback, addHyphen: false };
+  return best > 0 ? best : fallback;
 }
 
 function appendWrappedText(
@@ -747,7 +692,6 @@ function appendWrappedText(
   measureText: SoneRenderer["measureText"],
   breakIterator: SoneRenderer["breakIterator"],
   shouldWrap: boolean,
-  hyphenLocale: string | null = null,
 ) {
   let remainingText = text;
 
@@ -778,8 +722,7 @@ function appendWrappedText(
 
     if (currentLine.segments.length > 0) {
       // Current line has content and remainingText doesn't fit as-is.
-      // Flush the line and retry — findFittingWrapBoundary will handle
-      // hyphenation on the now-empty next line.
+      // Flush the line and retry on the now-empty next line.
       currentLine = createEmptyLine(baseProps.hangingIndentSize ?? 0);
       lines.push(currentLine);
 
@@ -789,7 +732,7 @@ function appendWrappedText(
     }
 
     const availableWidth = Math.max(0, maxWidth - currentLine.width);
-    const { boundary, addHyphen } = findFittingWrapBoundary(
+    const boundary = findFittingWrapBoundary(
       remainingText,
       props,
       availableWidth,
@@ -797,13 +740,12 @@ function appendWrappedText(
       baseProps.tabStops,
       measureText,
       breakIterator,
-      hyphenLocale,
     );
 
     const lineText = remainingText.slice(0, boundary);
     pushSegments(
       currentLine,
-      addHyphen ? `${lineText}-` : lineText,
+      lineText,
       props,
       baseProps.tabStops,
       baseProps.tabLeader,
@@ -829,10 +771,6 @@ function createGreedyMultilineParagraph(
   breakIterator: SoneRenderer["breakIterator"],
 ): SoneParagraph {
   const shouldWrap = baseProps.nowrap !== true;
-  const hyphenLocale =
-    baseProps.hyphenation != null && baseProps.hyphenation !== false
-      ? resolveHyphenLocale(baseProps.hyphenation)
-      : null;
   const lines: SoneParagraphLine[] = [];
 
   let currentLine = createEmptyLine(baseProps.indentSize ?? 0);
@@ -855,7 +793,6 @@ function createGreedyMultilineParagraph(
         measureText,
         breakIterator,
         shouldWrap,
-        hyphenLocale,
       );
       continue;
     }
@@ -880,7 +817,6 @@ function createGreedyMultilineParagraph(
         measureText,
         breakIterator,
         shouldWrap,
-        hyphenLocale,
       );
       lastBreakpoint = breakpoint;
     }
@@ -896,7 +832,6 @@ function createGreedyMultilineParagraph(
         measureText,
         breakIterator,
         shouldWrap,
-        hyphenLocale,
       );
     }
   }
@@ -1409,9 +1344,25 @@ export function createTextRuns(
   }
 }
 
+/**
+ * Resolve a decoration colour.
+ *
+ * Canvas2D carried `fillStyle` between draws, so an unset decoration colour
+ * used to inherit whatever the previous draw happened to leave behind. Skia has
+ * no such implicit state, so the fallback is stated explicitly: the span's own
+ * colour, or black when that colour is a gradient.
+ */
+function decorationColor(
+  override: string | null | undefined,
+  color: SpanProps["color"],
+): string {
+  if (override != null) return override;
+  return typeof color === "string" ? color : "black";
+}
+
 export function drawTextNode(
   renderer: SoneRenderer,
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node: TextNode,
   layout: Node,
   x: number,
@@ -1423,27 +1374,48 @@ export function drawTextNode(
 
   const orientation = props.orientation ?? 0;
 
-  if (orientation !== 0) {
-    ctx.save();
-    const w = layout.getComputedWidth();
-    const h = layout.getComputedHeight();
+  if (orientation === 0) {
+    drawTextBlocks(renderer, p, node, layout, x, y, orientation);
+    return;
+  }
+
+  const w = layout.getComputedWidth();
+  const h = layout.getComputedHeight();
+
+  // Skia's rotate() takes degrees where Canvas2D takes radians, and it takes a
+  // pivot — after the translate the pivot is the new origin, so (0, 0) here
+  // reproduces the Canvas2D translate-then-rotate pair exactly.
+  withSave(p, () => {
     switch (orientation) {
       case 90:
-        ctx.translate(x + w, y);
-        ctx.rotate(Math.PI / 2);
+        p.canvas.translate(x + w, y);
+        p.canvas.rotate(90, 0, 0);
         break;
       case 180:
-        ctx.translate(x + w, y + h);
-        ctx.rotate(Math.PI);
+        p.canvas.translate(x + w, y + h);
+        p.canvas.rotate(180, 0, 0);
         break;
       case 270:
-        ctx.translate(x, y + h);
-        ctx.rotate(-Math.PI / 2);
+        p.canvas.translate(x, y + h);
+        p.canvas.rotate(-90, 0, 0);
         break;
     }
-    x = 0;
-    y = 0;
-  }
+    drawTextBlocks(renderer, p, node, layout, 0, 0, orientation);
+  });
+}
+
+function drawTextBlocks(
+  renderer: SoneRenderer,
+  p: Painter,
+  node: TextNode,
+  layout: Node,
+  x: number,
+  y: number,
+  orientation: number,
+) {
+  const { props } = node;
+  const { blocks } = props;
+  if (blocks == null) return;
 
   // For 90°/270°, remap padding/border edges to match the local drawing frame.
   //   90°  CW:  local +x→screen down,  local +y→screen left
@@ -1503,9 +1475,6 @@ export function drawTextNode(
     const top = paddingTop + borderTop;
     const align = props.align;
     const isRTL = paragraph.baseDir === "rtl";
-
-    // root
-    applySpanProps(ctx, props);
 
     let offsetY = paragraph.offsetY + paragraphOffsetY;
 
@@ -1572,18 +1541,13 @@ export function drawTextNode(
           segmentWidth += addedSpaceWidth * segmentSpaces;
         }
 
-        // textX is always the LEFT edge of the segment (used for fillRect decorations).
-        // fillX is the fillText anchor: left edge for LTR, right edge for RTL.
-        let textX: number;
-        let fillX: number;
-        if (isRTL) {
-          offsetX -= segmentWidth;
-          textX = x + left + offsetX;
-          fillX = textX + segmentWidth;
-        } else {
-          textX = x + left + offsetX;
-          fillX = textX;
-        }
+        // textX is the LEFT edge of the segment, used both for the decoration
+        // rects and as the run origin. Canvas2D needed a separate right-edge
+        // anchor for RTL; a Skia paragraph is always placed by its left edge
+        // and right-aligns its RTL content inside the width it was laid out at.
+        // Decrement first for RTL so offsetX points at that left edge.
+        if (isRTL) offsetX -= segmentWidth;
+        const textX = x + left + offsetX;
         const textY = y + line.baseline + top + offsetY + spanOffsetY;
 
         // underline
@@ -1591,17 +1555,21 @@ export function drawTextNode(
           typeof segment.props.underline === "number" &&
           segment.props.underline !== 0
         ) {
-          if (typeof segment.props.color === "string") {
-            ctx.fillStyle = segment.props.underlineColor ?? segment.props.color;
-          }
-
           const underlineHeight = segment.props.size! * 0.08;
 
-          ctx.fillRect(
-            textX,
-            textY + underlineHeight,
-            segmentWidth,
-            underlineHeight,
+          p.canvas.drawRect(
+            p.ck.XYWHRect(
+              textX,
+              textY + underlineHeight,
+              segmentWidth,
+              underlineHeight,
+            ),
+            p.arena.fill(
+              decorationColor(
+                segment.props.underlineColor,
+                segment.props.color,
+              ),
+            ),
           );
         }
 
@@ -1610,17 +1578,18 @@ export function drawTextNode(
           typeof segment.props.overline === "number" &&
           segment.props.overline !== 0
         ) {
-          if (typeof segment.props.color === "string") {
-            ctx.fillStyle = segment.props.overlineColor ?? segment.props.color;
-          }
-
           const overlineHeight = segment.props.size! * 0.08;
 
-          ctx.fillRect(
-            textX,
-            textY - segment.metrics.fontBoundingBoxAscent,
-            segmentWidth,
-            overlineHeight,
+          p.canvas.drawRect(
+            p.ck.XYWHRect(
+              textX,
+              textY - segment.metrics.fontBoundingBoxAscent,
+              segmentWidth,
+              overlineHeight,
+            ),
+            p.arena.fill(
+              decorationColor(segment.props.overlineColor, segment.props.color),
+            ),
           );
         }
 
@@ -1629,91 +1598,125 @@ export function drawTextNode(
 
         // draw span highlightColor
         if (segment.props.highlightColor != null) {
-          ctx.fillStyle = segment.props.highlightColor;
-          ctx.fillRect(textX, actualTextY, segmentWidth, segment.height);
+          p.canvas.drawRect(
+            p.ck.XYWHRect(textX, actualTextY, segmentWidth, segment.height),
+            p.arena.fill(segment.props.highlightColor),
+          );
         }
 
-        // draw segment
-        applySpanProps(ctx, segment.props);
-        if (align === "justify" && segmentSpaces > 0) {
-          ctx.wordSpacing = `${(segment.props.wordSpacing ?? 0) + addedSpaceWidth}px`;
-        }
+        // draw segment — font, spacing and colour travel through the props
+        // rather than through context state.
+        const drawProps: SpanProps =
+          align === "justify" && segmentSpaces > 0
+            ? {
+                ...segment.props,
+                wordSpacing: (segment.props.wordSpacing ?? 0) + addedSpaceWidth,
+              }
+            : segment.props;
 
-        // Determine canvas direction for this segment.
+        // Determine text direction for this segment.
         // Per-span textDir overrides paragraph baseDir.
         const segDir = segment.props.textDir ?? (isRTL ? "rtl" : "ltr");
 
         if (segment.props.dropShadows) {
           for (const shadowProperties of segment.props.dropShadows) {
             if (typeof shadowProperties === "string") continue;
-            ctx.save();
-            ctx.direction = segDir;
-            ctx.shadowOffsetX = shadowProperties.offsetX;
-            ctx.shadowOffsetY = shadowProperties.offsetY;
-            ctx.shadowBlur = shadowProperties.blurRadius;
-            if (shadowProperties.color) {
-              ctx.shadowColor = shadowProperties.color;
-              ctx.fillStyle = shadowProperties.color;
-            }
-            ctx.fillText(renderText, fillX, textY);
-            ctx.restore();
+            // Canvas2D's default shadowColor is fully transparent, so an
+            // unset colour draws nothing — same as before.
+            const shadowColor = shadowProperties.color ?? "transparent";
+            // Canvas2D's shadowBlur is twice the Gaussian sigma Skia takes.
+            const sigma = shadowProperties.blurRadius / 2;
+            const filter = p.arena.own(
+              p.ck.ImageFilter.MakeDropShadowOnly(
+                shadowProperties.offsetX,
+                shadowProperties.offsetY,
+                sigma,
+                sigma,
+                parseColor(shadowColor),
+                null,
+              ),
+            );
+            p.canvas.saveLayer(p.arena.layer({ filter }));
+            p.text.drawRun(p.canvas, p.arena, renderText, drawProps, {
+              x: textX,
+              baselineY: textY,
+              width: segmentWidth,
+              direction: segDir,
+              fill: p.arena.fill(shadowColor),
+            });
+            p.canvas.restore();
           }
         }
 
-        ctx.save();
-        ctx.direction = segDir;
+        let stroke: SkPaint | undefined;
         if (
           segment.props.strokeColor != null &&
           segment.props.strokeWidth != null &&
           segment.props.strokeWidth !== 0
         ) {
-          ctx.strokeStyle = segment.props.strokeColor;
-          ctx.lineJoin = "round";
-          ctx.miterLimit = 2;
-          ctx.lineWidth = segment.props.strokeWidth;
-          ctx.strokeText(renderText, fillX, textY);
+          stroke = p.arena.stroke(
+            segment.props.strokeColor,
+            segment.props.strokeWidth,
+            { join: "round", miterLimit: 2 },
+          );
         }
 
-        if (
-          typeof segment.props.color !== "string" &&
-          Array.isArray(segment.props.color)
-        ) {
+        let fill: SkPaint;
+        if (Array.isArray(segment.props.color)) {
+          fill = p.arena.fill("black");
           for (const gradient of segment.props.color) {
-            const [fill] = createGradientFillStyleList(
-              ctx,
+            const [shader] = createGradientFillStyleList(
+              p,
               [gradient],
               x,
               y,
               segment.width,
               segment.height,
             );
-            ctx.fillStyle = fill;
+            if (shader != null) fill = p.arena.shaderFill(shader);
           }
+        } else {
+          fill = p.arena.fill(
+            typeof segment.props.color === "string"
+              ? segment.props.color
+              : "black",
+          );
         }
 
-        ctx.fillText(renderText, fillX, textY);
-        ctx.restore();
+        // One call: drawRun paints the stroke then the fill, matching the
+        // strokeText-then-fillText order.
+        p.text.drawRun(p.canvas, p.arena, renderText, drawProps, {
+          x: textX,
+          baselineY: textY,
+          width: segmentWidth,
+          direction: segDir,
+          fill,
+          stroke,
+        });
 
         // draw line-through
         if (
           typeof segment.props.lineThrough === "number" &&
           segment.props.lineThrough !== 0
         ) {
-          if (typeof segment.props.color === "string") {
-            ctx.fillStyle =
-              segment.props.lineThroughColor ?? segment.props.color;
-          }
-
           const lineThroughHeight = segment.props.size! * 0.08;
 
-          ctx.fillRect(
-            textX,
-            textY -
-              (segment.metrics.fontBoundingBoxAscent -
-                segment.metrics.fontBoundingBoxDescent) /
-                2,
-            segmentWidth,
-            lineThroughHeight,
+          p.canvas.drawRect(
+            p.ck.XYWHRect(
+              textX,
+              textY -
+                (segment.metrics.fontBoundingBoxAscent -
+                  segment.metrics.fontBoundingBoxDescent) /
+                  2,
+              segmentWidth,
+              lineThroughHeight,
+            ),
+            p.arena.fill(
+              decorationColor(
+                segment.props.lineThroughColor,
+                segment.props.color,
+              ),
+            ),
           );
         }
 
@@ -1721,12 +1724,11 @@ export function drawTextNode(
         const debug = renderer.debug();
 
         if (debug.text) {
-          ctx.save();
           // draw debug rect
-          ctx.lineWidth = renderer.dpr() * 2;
-          ctx.strokeStyle = "cyan";
-          ctx.strokeRect(textX, actualTextY, segmentWidth, segment.height);
-          ctx.restore();
+          p.canvas.drawRect(
+            p.ck.XYWHRect(textX, actualTextY, segmentWidth, segment.height),
+            p.arena.stroke("cyan", renderer.dpr() * 2),
+          );
         }
 
         if (!isRTL) {
@@ -1736,9 +1738,5 @@ export function drawTextNode(
 
       offsetY += line.height;
     }
-  }
-
-  if (orientation !== 0) {
-    ctx.restore();
   }
 }

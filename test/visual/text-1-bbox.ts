@@ -13,6 +13,11 @@ import {
   TextDefault,
 } from "../../src/node.ts";
 
+// Side-effect import: registers the visual test fonts (CanvasKit has no
+// system fonts, so this must run before anything renders).
+import "./load-test-fonts.ts";
+import { createOverlay } from "./utils.ts";
+
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 const imageUrl = relative("../image/kouprey.jpg");
 
@@ -163,7 +168,7 @@ const root = Column(
 
 // ── render ───────────────────────────────────────────────────────────────────
 const { canvas, metadata } = await sone(root).canvasWithMetadata();
-const ctx = (canvas as any).getContext("2d") as CanvasRenderingContext2D;
+const ctx = createOverlay(canvas);
 
 // Color palette — one color per text node
 const PALETTE = [
@@ -199,13 +204,8 @@ function overlayBboxes(node: SoneMetadata) {
           if (r == null || r.width === 0) continue;
           if (segment.isTab || segment.text.trim() === "") continue;
 
-          ctx.save();
-          ctx.fillStyle = fill;
-          ctx.fillRect(r.x, r.y, r.width, r.height);
-          ctx.strokeStyle = stroke;
-          ctx.lineWidth = 1.5;
-          ctx.strokeRect(r.x, r.y, r.width, r.height);
-          ctx.restore();
+          ctx.fillRect(r.x, r.y, r.width, r.height, fill);
+          ctx.strokeRect(r.x, r.y, r.width, r.height, stroke, 1.5);
         }
       }
     }
@@ -229,8 +229,4 @@ const outFile = path.join(
   "text-1-bbox.jpg",
 );
 
-await fs.writeFile(
-  outFile,
-  // @ts-expect-error skia-canvas Buffer API
-  await (canvas as any).toBuffer("jpg", { density: 2 }),
-);
+await fs.writeFile(outFile, await canvas.toBuffer("jpg", { density: 2 }));

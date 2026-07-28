@@ -7,6 +7,8 @@
  */
 
 import { Column, Row, Span, sone, Text } from "../src/node.ts";
+// Side-effect import: registers fonts (CanvasKit has no system fonts).
+import "./visual/load-test-fonts.ts";
 
 // ── CLI args ──────────────────────────────────────────────────────────────────
 const args = Object.fromEntries(

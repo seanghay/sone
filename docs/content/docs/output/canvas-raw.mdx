@@ -1,13 +1,13 @@
 ---
 title: Canvas & raw buffer
-description: Get direct access to the underlying skia-canvas Canvas.
+description: Get direct access to the underlying SoneCanvas.
 icon: Code2
 ---
 
 For custom rendering pipelines, drop down to the underlying canvas:
 
 ```ts
-const canvas = await sone(doc).canvas();   // skia-canvas Canvas
+const canvas = await sone(doc).canvas();   // SoneCanvas
 const raw = await sone(doc).raw();         // raw pixel buffer
 ```
 

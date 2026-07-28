@@ -26,7 +26,7 @@ await fs.writeFile("out.svg", await sone(doc).svg());
 
 - **Photos** are embedded as data URLs (base64), which inflates file size. SVG is rarely the right format for photo-heavy documents.
 - **Custom fonts** are *not* embedded — viewers must have the font installed, or you must outline text first. For documents with custom typography, prefer PDF.
-- **Browser environments** — like PDF, SVG output requires the Node.js renderer.
+- **Browser environments** — SVG output works everywhere Sone runs, including browsers and edge runtimes.
 
 ## Stylable output
 

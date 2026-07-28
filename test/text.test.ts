@@ -832,7 +832,13 @@ test("createParagraph with Knuth-Plass preserves styled spans across lines", () 
   const paragraph = createParagraph(
     [
       "lorem ",
-      Span("ipsum dolor ").color("red"),
+      // Size and font are set explicitly because createParagraph is called
+      // directly here, bypassing compile(), which is what normally cascades a
+      // Text node's props onto its spans.
+      Span("ipsum dolor ")
+        .color("red")
+        .size(18)
+        .font("GeistMono"),
       "sit amet consectetur adipiscing",
     ],
     220,

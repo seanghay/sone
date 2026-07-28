@@ -6,8 +6,8 @@ icon: Globe
 
 Sone ships two entries:
 
-- **`sone`** — Node.js entry, backed by `skia-canvas`. Default for server-side use.
-- **`sone/browser`** — browser entry. Exports the core API but **requires a custom `SoneRenderer`** since browsers don't expose the same APIs as `skia-canvas`.
+- **`sone`** — Node.js entry, backed by `skia`. Default for server-side use.
+- **`sone/browser`** — browser entry. Exports the core API but **requires a custom `SoneRenderer`** since browsers don't expose the same APIs as `skia`.
 
 ## Limitations
 
@@ -15,8 +15,8 @@ The browser entry currently supports:
 
 - ✅ PNG / JPG / WebP via `HTMLCanvasElement.toBlob()`
 - ✅ Raw Canvas access
-- ❌ PDF output (Node-only)
-- ❌ SVG output (Node-only)
+- ✅ PDF output
+- ✅ SVG output
 
 If your app generates PDFs from user input, run the renderer on the server and stream the buffer to the client.
 

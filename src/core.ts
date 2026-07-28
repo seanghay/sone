@@ -1,6 +1,7 @@
 import type { GradientNode } from "gradient-parser";
 import { colors } from "./color.ts";
 import type { CssShadowProperties } from "./shadow.ts";
+import type { SoneImage } from "./skia/image.ts";
 import type { SoneParagraphBlock } from "./text.ts";
 
 /**
@@ -337,10 +338,10 @@ export interface PhotoProps extends LayoutProps {
   fill?: ColorValue;
 
   /** image source */
-  src?: string | Uint8Array | HTMLImageElement;
+  src?: string | Uint8Array | SoneImage;
 
   /** resolved image (set during compilation) */
-  image?: HTMLImageElement;
+  image?: SoneImage;
 
   /** SVG path string to clip the image (path coords relative to photo top-left) */
   clipPath?: string;
@@ -463,17 +464,6 @@ export interface TextProps extends SpanProps, LayoutProps {
    */
   textWrap?: "wrap" | "balance";
 
-  /**
-   * Hyphenation locale.
-   * - `true` / `"en"` — English (US) hyphenation
-   * - A BCP-47-like locale string: `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`,
-   *   `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, `"fi"`, etc.
-   * - `false` / omitted — no hyphenation (default)
-   *
-   * Requires the `hyphen` npm package to be installed.
-   */
-  hyphenation?: string | boolean;
-
   autofit?: boolean;
 
   /**
@@ -576,8 +566,6 @@ export interface TextPropsBuilder<T>
   clipImage(value: PhotoNode): T;
   baseDir(value: Required<TextProps["baseDir"]>): T;
   textWrap(value: Required<TextProps["textWrap"]>): T;
-  /** Enable hyphenation. Omit locale to default to English. */
-  hyphenate(locale?: string | boolean): T;
 }
 
 /**
@@ -1240,10 +1228,6 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
     },
     textWrap(value: Required<TextProps["textWrap"]>): T {
       props.textWrap = value;
-      return this as unknown as T;
-    },
-    hyphenate(locale?: string | boolean): T {
-      props.hyphenation = locale ?? true;
       return this as unknown as T;
     },
     props,

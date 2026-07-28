@@ -12,6 +12,11 @@ import {
   toYoloDataset,
 } from "../../src/node.ts";
 
+// Side-effect import: registers the visual test fonts (CanvasKit has no
+// system fonts, so this must run before anything renders).
+import "./load-test-fonts.ts";
+import { createOverlay } from "./utils.ts";
+
 // ── Palette ───────────────────────────────────────────────────────────────────
 const INK = "#0f172a";
 const MUTED = "#64748b";
@@ -257,7 +262,7 @@ const root = Column(
 
 // ── Render + overlay bboxes ───────────────────────────────────────────────────
 const { canvas, metadata } = await sone(root).canvasWithMetadata();
-const ctx = (canvas as any).getContext("2d") as CanvasRenderingContext2D;
+const ctx = createOverlay(canvas);
 
 const PALETTE: Record<string, { stroke: string; fill: string }> = {
   "col-header": { stroke: "#06b6d4", fill: "rgba(6,182,212,0.15)" },
@@ -276,14 +281,15 @@ const LABEL_FONT_SIZE = 8;
 
 function drawLabel(text: string, x: number, y: number, color: string) {
   const pad = 2;
-  ctx.save();
-  ctx.font = `bold ${LABEL_FONT_SIZE}px monospace`;
-  const tw = ctx.measureText(text).width;
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y - LABEL_FONT_SIZE, tw + pad * 2, LABEL_FONT_SIZE + 1);
-  ctx.fillStyle = "white";
-  ctx.fillText(text, x + pad, y - 1);
-  ctx.restore();
+  const tw = ctx.measureText(text, LABEL_FONT_SIZE);
+  ctx.fillRect(
+    x,
+    y - LABEL_FONT_SIZE,
+    tw + pad * 2,
+    LABEL_FONT_SIZE + 1,
+    color,
+  );
+  ctx.fillText(text, x + pad, y - 1, "white", LABEL_FONT_SIZE);
 }
 
 function overlayBboxes(node: SoneMetadata) {
@@ -306,13 +312,14 @@ function overlayBboxes(node: SoneMetadata) {
           const spanTag = segment.props?.tag;
           const { stroke, fill } = (spanTag && PALETTE[spanTag]) ?? nodeColors;
 
-          ctx.save();
-          ctx.fillStyle = fill;
-          ctx.fillRect(r.x, r.y, r.width, r.height);
-          ctx.strokeStyle = stroke;
-          ctx.lineWidth = 1;
-          ctx.strokeRect(r.x + 0.5, r.y + 0.5, r.width - 1, r.height - 1);
-          ctx.restore();
+          ctx.fillRect(r.x, r.y, r.width, r.height, fill);
+          ctx.strokeRect(
+            r.x + 0.5,
+            r.y + 0.5,
+            r.width - 1,
+            r.height - 1,
+            stroke,
+          );
 
           // Draw label for tagged segments or tagged text nodes
           const label = spanTag ?? nodeTag;
@@ -341,8 +348,7 @@ const dir = path.parse(fileURLToPath(import.meta.url)).dir;
 
 await fs.writeFile(
   path.join(dir, "tab-stops-1-bbox.jpg"),
-  // @ts-expect-error skia-canvas Buffer API
-  await (canvas as any).toBuffer("jpg", { density: 2 }),
+  await canvas.toBuffer("jpg", { density: 2 }),
 );
 
 // ── YOLO bbox export ──────────────────────────────────────────────────────────

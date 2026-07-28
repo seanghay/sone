@@ -27,6 +27,10 @@ import {
 import type { SonePageInfo } from "../../src/renderer.ts";
 import { createSoneHighlighter } from "../../src/shiki.ts";
 
+// Side-effect import: registers the visual test fonts (CanvasKit has no
+// system fonts, so this must run before anything renders).
+import "./load-test-fonts.ts";
+
 const dir = path.dirname(fileURLToPath(import.meta.url));
 
 const highlight = await createSoneHighlighter({
@@ -214,7 +218,7 @@ const quickStart = Column(
           [".svg()", "Promise<Buffer> — SVG vector"],
           [".webp()", "Promise<Buffer> — WebP image"],
           [".raw()", "Promise<Buffer> — Raw pixel data"],
-          [".canvas()", "Promise<Canvas> — skia-canvas Canvas instance"],
+          [".canvas()", "Promise<SoneCanvas> — recorded canvas instance"],
         ] as [string, string][]
       ).flatMap(([m, d]) => [
         Row(
@@ -1463,7 +1467,7 @@ const pdfSection = Column(
       Column(
         Text('"uniform"').size(11).weight("bold").color(INK).font("monospace"),
         body(
-          "All pages have the same height. Default — required for multi-page PDF with skia-canvas.",
+          "All pages have the same height. Default — required for multi-page PDF.",
         ),
       )
         .flex(1)

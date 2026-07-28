@@ -46,7 +46,7 @@ Your invoice doesn't need any of that. It needs flexbox, text layout, a few draw
 | --- | --- |
 | **Headless browser** (Puppeteer, Playwright) | Hundreds of MB of memory per worker, ~100 ms per render, a full Chrome to babysit. You're paying for the entire engine to render four flexboxes and some text. |
 | **HTML-to-image / PDF** (Satori, html-to-image) | Most of CSS. These are partial reimplementations of a browser engine — the surface area is huge, the parity is approximate, and missing features fail silently. Your layout looks fine until it doesn't. |
-| **Sone** | The browser engine, entirely. You write directly against the layout primitives ([yoga-layout](https://yogalayout.dev/) — the same engine behind React Native) and a 2D rasterizer ([skia-canvas](https://skia-canvas.org/) — the same Skia that powers Chrome's painting). Nothing in between. |
+| **Sone** | The browser engine, entirely. You write directly against the layout primitives ([yoga-layout](https://yogalayout.dev/) — the same engine behind React Native) and a 2D rasterizer ([skia](https://github.com/seanghay/skia-web) — the same Skia that powers Chrome's painting). Nothing in between. |
 
 The API surface is exactly what the engine supports. If a method exists, it works; if it doesn't, TypeScript tells you. There is no parity gap, because there is no translation layer.
 
@@ -61,7 +61,6 @@ The API surface is exactly what the engine supports. If a method exists, it work
 - **Flexbox & CSS Grid** — the same mental model you already know, powered by yoga-layout.
 - **Rich text first-class** — mixed-style spans, justification, decorations, drop shadows, per-glyph gradients.
 - **Bidirectional text** — automatic RTL handling for Arabic and Hebrew, mixed paragraphs.
-- **Hyphenation in 80+ languages** — Knuth–Liang patterns, no extra deps to install.
 - **Balanced line wrapping** for headlines and pull quotes.
 - **Multi-page PDFs** — automatic page breaking, repeating headers/footers, manual `PageBreak()`.
 - **Six output formats** — PNG, JPG, WebP, PDF, SVG, raw Canvas.

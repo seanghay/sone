@@ -4,6 +4,10 @@ import { fileURLToPath } from "node:url";
 import { Column, Row, Span, sone, Text } from "../../src/node.ts";
 import type { SonePageInfo } from "../../src/renderer.ts";
 
+// Side-effect import: registers the visual test fonts (CanvasKit has no
+// system fonts, so this must run before anything renders).
+import "./load-test-fonts.ts";
+
 const dir = path.dirname(fileURLToPath(import.meta.url));
 
 // ── Page geometry ─────────────────────────────────────────────────────────────

@@ -86,7 +86,7 @@ The cache key is the image source (path / URL / Uint8Array reference).
 
 ## Output density
 
-`SoneRenderConfig` doesn't expose density directly, but you can drop down to the underlying skia-canvas Canvas to control it:
+`SoneRenderConfig` doesn't expose density directly, but you can drop down to the underlying SoneCanvas to control it:
 
 ```ts
 const canvas = await sone(doc, { width: 1200, height: 630 }).canvas();

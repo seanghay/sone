@@ -1,32 +1,77 @@
 /**
- * Node.js platform implementation using skia-canvas for server-side rendering
+ * Node.js platform implementation, backed by the `skia` CanvasKit WASM build.
+ *
+ * Pure WebAssembly: no native addon, no prebuilt binaries, and identical output
+ * on every OS. Font bytes are read from disk here; everything else is shared
+ * with the browser entry.
  */
 import { Buffer } from "node:buffer";
-import skia, { Canvas, type ExportOptions, FontLibrary } from "skia-canvas";
+import { readFile } from "node:fs/promises";
 import type { SoneNode } from "./core.ts";
 import { defaultLineBreakerIterator } from "./linebreak.ts";
 import {
   DEFAULT_TEXT_PROPS,
+  type FontSource,
   render,
   renderPages,
   renderWithMetadata,
   type SoneRenderConfig,
   type SoneRenderer,
 } from "./renderer.ts";
-import { applySpanProps } from "./utils.ts";
+import { Arena } from "./skia/arena.ts";
+import {
+  combineToPdf,
+  type ExportOptions,
+  type OutputFormat,
+  SoneCanvas,
+} from "./skia/canvas.ts";
+import { FontRegistry } from "./skia/fonts.ts";
+import { SoneImage } from "./skia/image.ts";
+import { ck, ready } from "./skia/init.ts";
+import { TextMeasurer } from "./skia/measure.ts";
+import type { Painter } from "./skia/painter.ts";
+import { ParagraphPainter } from "./skia/paragraph.ts";
+import { SonePath } from "./skia/path.ts";
 
 export * from "./core.ts";
 export * from "./linebreak.ts";
 export * from "./qrcode.ts";
 export * from "./renderer.ts";
-export { applySpanProps, fontBuilder } from "./utils.ts";
+export { SoneCanvas } from "./skia/canvas.ts";
+export { SoneImage } from "./skia/image.ts";
+export { configureSkia } from "./skia/init.ts";
+export { SonePath } from "./skia/path.ts";
+export { fontBuilder } from "./utils.ts";
 export * from "./yolo.ts";
 
-/** Temporary canvas for text measurement */
-const dummyCanvas = new skia.Canvas(1, 1);
+const fonts = new FontRegistry();
+const measurer = new TextMeasurer(fonts);
+const paragraphs = new ParagraphPainter(fonts, measurer);
+
+/** Resolve any accepted font source to raw bytes. */
+async function loadFontBytes(source: FontSource): Promise<Uint8Array[]> {
+  if (source instanceof Uint8Array) return [source];
+  if (source instanceof ArrayBuffer) return [new Uint8Array(source)];
+  if (source instanceof URL) {
+    if (source.protocol === "file:") {
+      return [new Uint8Array(await readFile(source))];
+    }
+    const response = await fetch(source);
+    return [new Uint8Array(await response.arrayBuffer())];
+  }
+  if (Array.isArray(source)) {
+    const all = await Promise.all(source.map((entry) => loadFontBytes(entry)));
+    return all.flat();
+  }
+  if (/^https?:\/\//.test(source)) {
+    const response = await fetch(source);
+    return [new Uint8Array(await response.arrayBuffer())];
+  }
+  return [new Uint8Array(await readFile(source))];
+}
 
 /**
- * Node.js renderer implementation using skia-canvas
+ * Node.js renderer implementation.
  */
 export const renderer: SoneRenderer = {
   /** Debug configuration for development */
@@ -36,39 +81,66 @@ export const renderer: SoneRenderer = {
       text: false,
     };
   },
-  /** Check if font is registered with skia-canvas */
-  hasFont: (name) => FontLibrary.has(name),
-  /** Path2D constructor for SVG path rendering */
-  Path2D: skia.Path2D as typeof Path2D,
+  /** Instantiate CanvasKit. Idempotent. */
+  async ready() {
+    await ready();
+  },
+  /** Check if font is registered */
+  hasFont: (name) => fonts.has(name),
+  /** Path constructor for SVG path rendering */
+  Path2D: SonePath,
   /** Generate word break positions using Intl.Segmenter */
   breakIterator: defaultLineBreakerIterator,
-  /** Create skia-canvas instance */
+  /** Create a picture-recording canvas */
   createCanvas(width, height) {
-    return new skia.Canvas(width, height) as unknown as HTMLCanvasElement;
+    return new SoneCanvas(width, height);
   },
-  /** Measure text using temporary canvas context */
+  /** Build the drawing seam for a canvas */
+  createPainter(canvas): Painter {
+    const kit = ck();
+    return {
+      ck: kit,
+      canvas: canvas.getCanvas(),
+      arena: new Arena(kit),
+      fonts,
+      measurer,
+      text: paragraphs,
+      dpr: 1,
+    };
+  },
+  /** Measure a single shaped run */
   measureText(text, props) {
-    const ctx = dummyCanvas.getContext(
-      "2d",
-    ) as unknown as CanvasRenderingContext2D;
-    applySpanProps(ctx, props);
-    return ctx.measureText(text);
+    return measurer.measure(text, props);
   },
-  /** Register font file with skia-canvas */
+  /** Register a font from a path, glob-free URL, or raw bytes */
   async registerFont(name, source) {
-    skia.FontLibrary.use(name, source);
+    await ready();
+    for (const bytes of await loadFontBytes(source)) {
+      fonts.register(name, bytes);
+    }
   },
-  /** Font unregistration not supported in skia-canvas */
-  async unregisterFont() {},
+  /** Remove a registered font */
+  async unregisterFont(name) {
+    fonts.unregister(name);
+  },
   /** Reset all registered fonts */
   resetFonts() {
-    skia.FontLibrary.reset();
+    fonts.reset();
   },
-  /** Load image from URL or buffer using skia-canvas */
+  /** Load and decode an image from a path, URL or buffer */
   async loadImage(src) {
-    return skia.loadImage(
-      typeof src === "string" ? src : Buffer.from(src),
-    ) as unknown as HTMLImageElement;
+    await ready();
+    if (typeof src !== "string") return SoneImage.decode(src);
+    if (/^https?:\/\//.test(src)) {
+      const response = await fetch(src);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to load image from ${JSON.stringify(src)} (HTTP ${response.status})`,
+        );
+      }
+      return SoneImage.decode(new Uint8Array(await response.arrayBuffer()));
+    }
+    return SoneImage.decode(new Uint8Array(await readFile(src)));
   },
   /** Get default text properties */
   getDefaultTextProps() {
@@ -80,6 +152,9 @@ export const renderer: SoneRenderer = {
   },
 };
 
+/** Node returns Buffers, matching the previous public API. */
+const toBuffer = (bytes: Uint8Array) => Buffer.from(bytes);
+
 /**
  * Creates a Sone renderer with multiple export format options
  * @param node - The SoneNode to render
@@ -88,7 +163,10 @@ export const renderer: SoneRenderer = {
  */
 export function sone(node: SoneNode, config?: SoneRenderConfig) {
   // Build function that renders the node to a Canvas using the specified renderer
-  const build = async () => render<Canvas>(node, renderer, config);
+  const build = async () => render<SoneCanvas>(node, renderer, config);
+
+  const encode = async (format: OutputFormat, options?: ExportOptions) =>
+    toBuffer((await build()).toBuffer(format, options));
 
   return {
     /**
@@ -97,45 +175,35 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
      * @returns Promise<Buffer> - JPEG image buffer
      */
     jpg: async (quality = 1.0, options?: ExportOptions) =>
-      (await build()).toBuffer("jpg", { quality, ...options }),
+      encode("jpg", { quality, ...options }),
 
     /**
      * Export as PNG image
      * @returns Promise<Buffer> - PNG image buffer
      */
-    png: async (options?: ExportOptions) =>
-      (await build()).toBuffer("png", options),
+    png: async (options?: ExportOptions) => encode("png", options),
 
     /**
-     * Export as SVG vector graphic
-     * @param outline - Whether to include outline information (default: true)
+     * Export as SVG vector graphic. Text is emitted as live `<text>` elements
+     * rather than outlined paths.
      * @returns Promise<Buffer> - SVG image buffer
      */
-    svg: async (options?: ExportOptions) =>
-      (await build()).toBuffer("svg", options),
+    svg: async (options?: ExportOptions) => encode("svg", options),
 
     /**
      * Export as PDF document. When pageHeight is set in config, produces a
      * multi-page PDF with one page per canvas returned by renderPages().
+     * Text stays selectable and fonts are embedded subsetted.
      * @param options - Optional PDF export settings
      * @returns Promise<Buffer> - PDF document buffer
      */
     pdf: async (options?: ExportOptions) => {
       if (config?.pageHeight) {
-        const pageCanvases = await renderPages(node, renderer, config);
-        if (pageCanvases.length === 0) return Buffer.alloc(0);
-        const root = pageCanvases[0] as unknown as Canvas;
-        for (let i = 1; i < pageCanvases.length; i++) {
-          const pc = pageCanvases[i] as unknown as Canvas;
-          const pageCtx = root.newPage(pc.width, pc.height);
-          // drawCanvas is a skia-canvas extension that composites natively
-          // without rasterising to a bitmap first, preserving vector quality.
-          // biome-ignore lint/suspicious/noExplicitAny: skia-canvas extension
-          (pageCtx as any).drawCanvas(pc, 0, 0);
-        }
-        return root.toBuffer("pdf", options);
+        const pages = await renderPages(node, renderer, config);
+        if (pages.length === 0) return Buffer.alloc(0);
+        return toBuffer(combineToPdf(pages));
       }
-      return (await build()).toBuffer("pdf", options);
+      return encode("pdf", options);
     },
 
     /**
@@ -143,58 +211,55 @@ export function sone(node: SoneNode, config?: SoneRenderConfig) {
      * @param options - Optional WebP export settings
      * @returns Promise<Buffer> - WebP image buffer
      */
-    webp: async (options?: ExportOptions) =>
-      (await build()).toBuffer("webp", options),
+    webp: async (options?: ExportOptions) => encode("webp", options),
 
     /**
      * Export as raw buffer data
      * @returns Promise<Buffer> - Raw image data buffer
      */
-    raw: async (options?: ExportOptions) =>
-      (await build()).toBuffer("raw", options),
+    raw: async (options?: ExportOptions) => encode("raw", options),
 
     /**
      * Get the rendered Canvas object directly
-     * @returns Promise<Canvas> - The rendered Canvas instance
+     * @returns Promise<SoneCanvas> - The rendered canvas
      */
     canvas: async () => build(),
     canvasWithMetadata: async () =>
-      renderWithMetadata<Canvas>(node, renderer, config),
+      renderWithMetadata<SoneCanvas>(node, renderer, config),
 
     /**
      * Render into one Canvas per page using the pageHeight from config.
-     * @returns Promise<Canvas[]> - One Canvas per page
+     * @returns Promise<SoneCanvas[]> - One Canvas per page
      */
-    pages: async (): Promise<Canvas[]> => {
-      const htmlCanvases = await renderPages(node, renderer, config);
-      return htmlCanvases as unknown as Canvas[];
-    },
+    pages: async (): Promise<SoneCanvas[]> =>
+      renderPages(node, renderer, config),
   };
 }
 
 /**
  * Font management utility for handling font loading, unloading, and checking availability.
- * This module provides a clean interface to interact with the underlying renderer's font system.
+ *
+ * CanvasKit has no access to system fonts, so at least one font must be
+ * registered before rendering any text.
  */
 export const Font = {
   /**
    * Loads a font and registers it with the renderer for use in rendering operations.
    *
    * @param name - The name identifier for the font (used to reference it later)
-   * @param source - The source path, URL, or data for the font file
+   * @param source - A file path, URL, or raw font bytes
    * @returns Promise that resolves when the font is successfully loaded and registered
    *
    * @example
    * await Font.load('MyCustomFont', '/assets/fonts/custom-font.ttf');
-   * await Font.load('MyCustomFont', ['/assets/fonts/custom-font.ttf']);
+   * await Font.load('MyCustomFont', ['/assets/fonts/regular.ttf', '/assets/fonts/bold.ttf']);
    */
-  async load(name: string, source: string | string[]) {
+  async load(name: string, source: FontSource) {
     return renderer.registerFont(name, source);
   },
 
   /**
    * Unloads a previously loaded font and removes it from the renderer.
-   * This frees up memory and removes the font from the available font list.
    *
    * @param name - The name identifier of the font to unload
    * @returns Promise that resolves when the font is successfully unloaded
@@ -206,18 +271,16 @@ export const Font = {
     return renderer.unregisterFont(name);
   },
 
+  /** Remove every registered font. */
+  reset() {
+    renderer.resetFonts();
+  },
+
   /**
    * Checks if a font with the given name is currently loaded and available.
    *
    * @param name - The name identifier of the font to check
    * @returns true if the font is loaded and available, false otherwise
-   *
-   * @example
-   * if (Font.has('MyCustomFont')) {
-   *   // Use the font in rendering
-   * } else {
-   *   // Load the font first or use a fallback
-   * }
    */
   has(name: string): boolean {
     return renderer.hasFont(name);

@@ -39,9 +39,9 @@ const pdf = await sone(doc).pdf();   // Inter is embedded
 
 PDF size is dominated by:
 
-- **Embedded fonts** — full unicode fonts can be megabytes; subset to needed glyphs at the source if file size matters.
+- **Embedded fonts** — fonts are subsetted automatically to the glyphs actually used, so a full unicode font does not become a multi-megabyte payload.
 - **Embedded photos** — they're stored at their natural resolution. Resize/recompress images before passing them to `Photo()`.
 
 ## Browser environments
 
-PDF output requires the Node.js renderer. The browser entry does not include PDF support; for browser-side generation use `.png()` / `.jpg()` / `.webp()` and serve the document differently.
+PDF output works in the browser and in edge runtimes too — the renderer is WebAssembly, not a native addon, so every output format is available on every platform.

@@ -88,10 +88,6 @@ const items: GalleryItem[] = [
     source: 'test/visual/text-wrap-balance-1.ts',
   },
   {
-    src: '/gallery/text-hyphenation-1.jpg',
-    title: 'Hyphenation',
-    caption: 'Knuth–Liang hyphenation for 80+ languages.',
-    source: 'test/visual/text-hyphenation-1.ts',
   },
   {
     src: '/gallery/tab-leader-1.jpg',

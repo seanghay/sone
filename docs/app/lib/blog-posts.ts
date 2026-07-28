@@ -96,7 +96,7 @@ export const posts: BlogPost[] = [
         `At scale the calculus changes. Each Chrome instance costs hundreds of megabytes of RAM and takes 100ms+ to render even a simple page. CDP traffic adds latency. Cold-starts hurt serverless functions. Hosted services like Browserless cost real money. And every CSS feature you reach for has a chance of behaving slightly differently across versions.`,
       ),
       p(
-        `Sone takes a different bet: build the layout engine ourselves, on top of <a href="https://yogalayout.dev/">yoga-layout</a> (the same engine React Native uses) and <a href="https://skia-canvas.org/">skia-canvas</a> (native Skia bindings for Node). The API surface is exactly what the engine implements — there is no missing-CSS-spec problem because there is no CSS.`,
+        `Sone takes a different bet: build the layout engine ourselves, on top of <a href="https://yogalayout.dev/">yoga-layout</a> (the same engine React Native uses) and <a href="https://skia.org/">skia</a> (native Skia bindings for Node). The API surface is exactly what the engine implements — there is no missing-CSS-spec problem because there is no CSS.`,
       ),
       p(
         `Render times drop into the single-digit-millisecond range for images and tens of milliseconds for multi-page PDFs. Memory stays flat. The same node tree renders to PNG, JPG, WebP, PDF, and SVG with no special modes.`,
