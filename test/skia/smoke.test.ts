@@ -293,6 +293,11 @@ test("decodes PNG, JPEG and WebP images", async () => {
  */
 const SURFACE = 512;
 
+// Several hundred real render/encode passes take multiple seconds on CI runners
+// without a GPU, well past vitest's 5s default. The high iteration count is what
+// makes the heap signal reliable, so raise the timeout rather than shrink it.
+const HEAP_TEST_TIMEOUT = 60_000;
+
 function drawPicture(
   provider: ReturnType<CanvasKit["TypefaceFontProvider"]["Make"]>,
 ) {
@@ -321,55 +326,67 @@ function drawPicture(
   return picture;
 }
 
-test("Paint and Picture round-trip without leaking", () => {
-  const before = heapSize();
-  for (let i = 0; i < 300; i++) {
-    const paint = new CK.Paint();
-    paint.delete();
-    const recorder = new CK.PictureRecorder();
-    recorder.beginRecording(CK.LTRBRect(0, 0, SURFACE, SURFACE));
-    const picture = recorder.finishRecordingAsPicture();
-    picture.delete();
-    recorder.delete();
-  }
-  expect(heapSize()).toBe(before);
-});
+test(
+  "Paint and Picture round-trip without leaking",
+  () => {
+    const before = heapSize();
+    for (let i = 0; i < 300; i++) {
+      const paint = new CK.Paint();
+      paint.delete();
+      const recorder = new CK.PictureRecorder();
+      recorder.beginRecording(CK.LTRBRect(0, 0, SURFACE, SURFACE));
+      const picture = recorder.finishRecordingAsPicture();
+      picture.delete();
+      recorder.delete();
+    }
+    expect(heapSize()).toBe(before);
+  },
+  HEAP_TEST_TIMEOUT,
+);
 
 /**
  * Regression marker, not an aspiration: this documents an upstream leak we must
  * design around. If it ever starts failing, `MakeSurface` was fixed upstream
  * and the surface pool in `SoneCanvas` can be simplified.
  */
-test("MakeSurface leaks its backing store on delete (upstream)", () => {
-  for (let i = 0; i < 10; i++) CK.MakeSurface(SURFACE, SURFACE)?.delete();
-  const before = heapSize();
-  for (let i = 0; i < 300; i++) CK.MakeSurface(SURFACE, SURFACE)?.delete();
-  expect(heapSize()).toBeGreaterThan(before);
-});
+test(
+  "MakeSurface leaks its backing store on delete (upstream)",
+  () => {
+    for (let i = 0; i < 10; i++) CK.MakeSurface(SURFACE, SURFACE)?.delete();
+    const before = heapSize();
+    for (let i = 0; i < 300; i++) CK.MakeSurface(SURFACE, SURFACE)?.delete();
+    expect(heapSize()).toBeGreaterThan(before);
+  },
+  HEAP_TEST_TIMEOUT,
+);
 
-test("a pooled surface renders repeatedly without growing the heap", () => {
-  const provider = providerFor(geistBytes, "Geist");
-  const surface = CK.MakeSurface(SURFACE, SURFACE);
-  expect(surface).toBeTruthy();
+test(
+  "a pooled surface renders repeatedly without growing the heap",
+  () => {
+    const provider = providerFor(geistBytes, "Geist");
+    const surface = CK.MakeSurface(SURFACE, SURFACE);
+    expect(surface).toBeTruthy();
 
-  const renderOnce = () => {
-    const picture = drawPicture(provider);
-    const canvas = surface!.getCanvas();
-    canvas.clear(CK.WHITE);
-    canvas.drawPicture(picture);
-    const image = surface!.makeImageSnapshot();
-    image.encodeToBytes(CK.ImageFormat.PNG);
-    image.delete();
-    picture.delete();
-  };
+    const renderOnce = () => {
+      const picture = drawPicture(provider);
+      const canvas = surface!.getCanvas();
+      canvas.clear(CK.WHITE);
+      canvas.drawPicture(picture);
+      const image = surface!.makeImageSnapshot();
+      image.encodeToBytes(CK.ImageFormat.PNG);
+      image.delete();
+      picture.delete();
+    };
 
-  // Warm up so one-time allocations settle, then assert the heap is stable.
-  for (let i = 0; i < 10; i++) renderOnce();
-  const settled = heapSize();
-  for (let i = 0; i < 400; i++) renderOnce();
+    // Warm up so one-time allocations settle, then assert the heap is stable.
+    for (let i = 0; i < 10; i++) renderOnce();
+    const settled = heapSize();
+    for (let i = 0; i < 400; i++) renderOnce();
 
-  expect(heapSize()).toBe(settled);
+    expect(heapSize()).toBe(settled);
 
-  surface!.delete();
-  provider.delete();
-});
+    surface!.delete();
+    provider.delete();
+  },
+  HEAP_TEST_TIMEOUT,
+);

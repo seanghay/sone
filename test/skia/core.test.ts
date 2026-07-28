@@ -383,4 +383,5 @@ test("surfaces are pooled, so repeated exports do not grow the heap", () => {
 
   expect(heap()).toBe(settled);
   releaseSurfacePool();
-});
+  // 100+ full render/encode passes run several seconds on a GPU-less CI runner.
+}, 60_000);
