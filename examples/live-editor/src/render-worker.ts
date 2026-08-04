@@ -21,6 +21,21 @@ import { transformCode } from "./execute";
 // Point CanvasKit at the bundled wasm before the first render.
 configureSkia({ wasmFile: wasmUrl });
 
+// Auto-register a default sans font so the editor renders out of the box —
+// CanvasKit has no system fonts. jsDelivr serves the google/fonts TTF with
+// CORS; this build parses TTF/OTF/WOFF (not woff2), so a variable TTF is used
+// to get the full weight range. Registered first, it also backs the generic
+// `sans-serif` family that untyped text falls back to.
+const DEFAULT_FONT_NAME = "Inter";
+const DEFAULT_FONT_URL =
+  "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/inter/Inter%5Bopsz,wght%5D.ttf";
+
+const fontsReady = Font.load(DEFAULT_FONT_NAME, DEFAULT_FONT_URL).catch(
+  (err) => {
+    console.error("Failed to load the default font:", err);
+  },
+);
+
 // Image decode cache, shared across renders (keyed by url / bytes).
 const renderCache = new Map<string | Uint8Array, SoneImage>();
 
@@ -45,6 +60,7 @@ self.onmessage = async (e: MessageEvent) => {
   if (msg.type === "render") {
     const { id, code, dpr } = msg as { id: number; code: string; dpr: number };
     try {
+      await fontsReady;
       const node = await buildNode(code);
       if (node == null) {
         self.postMessage({
@@ -55,8 +71,11 @@ self.onmessage = async (e: MessageEvent) => {
         });
         return;
       }
-      // Render at device density so the preview is crisp on hi-dpi screens.
-      const png = await sone(node, { cache: renderCache }).png({ density: dpr });
+      // Render above device density: the preview stretches the canvas to fill
+      // the pane, so the extra resolution keeps it crisp when upscaled.
+      const png = await sone(node, { cache: renderCache }).png({
+        density: dpr + 1,
+      });
       const bitmap = await createImageBitmap(new Blob([png as BlobPart]));
       (self as unknown as Worker).postMessage(
         { type: "result", id, bitmap, width: bitmap.width, height: bitmap.height },
@@ -79,6 +98,7 @@ self.onmessage = async (e: MessageEvent) => {
       format: "png" | "jpeg" | "pdf" | "svg";
     };
     try {
+      await fontsReady;
       const node = await buildNode(code);
       if (node == null) {
         self.postMessage({ type: "exportError", id, message: "Nothing to export." });
