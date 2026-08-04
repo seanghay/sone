@@ -65,7 +65,7 @@ const h3 = (t: string) => Text(t).size(13).weight("bold").color(INK);
 const body = (t: string) => Text(t).size(11).color(SUB).lineHeight(1.65);
 const caption = (t: string) => Text(t).size(9).color(DIM).lineHeight(1.5);
 const eyebrow = (t: string) =>
-  Text(t).size(9).weight("bold").color(DIM).font("monospace");
+  Text(t).size(9).weight("bold").color(DIM).font(MONO);
 const rule = () => Row().height(1).bg(RULE).alignSelf("stretch");
 
 const sectionHead = (num: string, title: string, subtitle?: string) =>
@@ -93,10 +93,15 @@ const labelBox = (t: string, bg: string, c = W) =>
     .rounded(3)
     .alignSelf("flex-start");
 
+// The generic "monospace" family resolves to the first registered font
+// (a proportional sans), so code must name a real monospace face explicitly.
+const MONO = "GeistMono";
+
 const codeBlock = (t: string, lang: BundledLanguage = "typescript") =>
   highlight
     .Code(t, {
       lang,
+      fontFamily: [MONO],
       fontSize: 10,
       lineHeight: 1.7,
       paddingX: 12,
@@ -222,12 +227,7 @@ const quickStart = Column(
         ] as [string, string][]
       ).flatMap(([m, d]) => [
         Row(
-          Text(m)
-            .size(10)
-            .font("monospace")
-            .color(CODE_INK)
-            .width(140)
-            .shrink(0),
+          Text(m).size(10).font(MONO).color(CODE_INK).width(140).shrink(0),
           body(d).flex(1),
         )
           .padding(7, 0)
@@ -259,12 +259,7 @@ const quickStart = Column(
         ] as [string, string][]
       ).flatMap(([opt, desc]) => [
         Row(
-          Text(opt)
-            .size(10)
-            .font("monospace")
-            .color(CODE_INK)
-            .width(160)
-            .shrink(0),
+          Text(opt).size(10).font(MONO).color(CODE_INK).width(160).shrink(0),
           body(desc).flex(1),
         )
           .padding(7, 0)
@@ -390,12 +385,7 @@ const layoutSection = Column(
         ] as [string, string][]
       ).map(([prop, desc]) =>
         Row(
-          Text(prop)
-            .size(9)
-            .font("monospace")
-            .color(CODE_INK)
-            .width(160)
-            .shrink(0),
+          Text(prop).size(9).font(MONO).color(CODE_INK).width(160).shrink(0),
           Text(desc).size(9).color(DIM).flex(1),
         ).padding(5, 0),
       ),
@@ -529,7 +519,7 @@ const gridSection = Column(
         ] as [string, string, string][]
       ).map(([val, desc, color]) =>
         Column(
-          Text(val).size(14).weight("bold").color(color).font("monospace"),
+          Text(val).size(14).weight("bold").color(color).font(MONO),
           body(desc).marginTop(4),
         )
           .flex(1)
@@ -653,10 +643,7 @@ const textSection = Column(
           ["letterSpacing(px)", "Extra space between chars"],
         ] as [string, string][]
       ).map(([m, d]) =>
-        Column(
-          Text(m).size(9).font("monospace").color(CODE_INK),
-          body(d).marginTop(2),
-        )
+        Column(Text(m).size(9).font(MONO).color(CODE_INK), body(d).marginTop(2))
           .padding(8)
           .bg(MUTED)
           .rounded(4),
@@ -1441,12 +1428,7 @@ const pdfSection = Column(
         ] as [string, string][]
       ).flatMap(([val, desc]) => [
         Row(
-          Text(val)
-            .size(10)
-            .font("monospace")
-            .color(CODE_INK)
-            .width(130)
-            .shrink(0),
+          Text(val).size(10).font(MONO).color(CODE_INK).width(130).shrink(0),
           body(desc).flex(1),
         )
           .padding(7, 0)
@@ -1465,7 +1447,7 @@ const pdfSection = Column(
     h3("lastPageHeight"),
     Row(
       Column(
-        Text('"uniform"').size(11).weight("bold").color(INK).font("monospace"),
+        Text('"uniform"').size(11).weight("bold").color(INK).font(MONO),
         body(
           "All pages have the same height. Default — required for multi-page PDF.",
         ),
@@ -1475,7 +1457,7 @@ const pdfSection = Column(
         .bg(MUTED)
         .rounded(4),
       Column(
-        Text('"content"').size(11).weight("bold").color(INK).font("monospace"),
+        Text('"content"').size(11).weight("bold").color(INK).font(MONO),
         body(
           "Last page canvas is trimmed to actual content height. Ideal for individual page images.",
         ),
@@ -1553,7 +1535,7 @@ const advancedSection = Column(
           .size(10)
           .weight("bold")
           .color(DIM)
-          .font("monospace")
+          .font(MONO)
           .tabStops(200, 290),
         rule(),
         ...(
@@ -1571,7 +1553,7 @@ const advancedSection = Column(
             Span(rank).weight("bold").color(ACCENT),
           )
             .size(11)
-            .font("monospace")
+            .font(MONO)
             .tabStops(200, 290),
           rule(),
         ]),
@@ -1670,7 +1652,7 @@ const referenceSection = Column(
         ] as [string, string][]
       ).map(([name, desc]) =>
         Column(
-          Text(name).size(9).font("monospace").color(CODE_INK),
+          Text(name).size(9).font(MONO).color(CODE_INK),
           body(desc).size(9).marginTop(2),
         )
           .padding(8)
@@ -1711,12 +1693,7 @@ const referenceSection = Column(
         ] as [string, string][]
       ).map(([name, desc]) =>
         Row(
-          Text(name)
-            .size(9)
-            .font("monospace")
-            .color(CODE_INK)
-            .width(190)
-            .shrink(0),
+          Text(name).size(9).font(MONO).color(CODE_INK).width(190).shrink(0),
           body(desc).size(9).flex(1),
         ).padding(5, 0),
       ),
