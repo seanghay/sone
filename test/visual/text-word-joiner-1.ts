@@ -1,4 +1,5 @@
-import { Column, Row, renderer, Text } from "../../src/node.ts";
+import { renderer } from "../../src/backend.ts";
+import { Column, Row, Text } from "../../src/index.ts";
 import { loadVisualTestFonts } from "./load-test-fonts.ts";
 import { writeCanvasToFile } from "./utils.ts";
 

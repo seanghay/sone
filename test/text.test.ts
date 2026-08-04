@@ -1,15 +1,10 @@
 import { fileURLToPath } from "node:url";
 import { beforeAll, expect, test } from "vitest";
+import { renderer } from "../src/backend.ts";
 import type { TextNode, TextProps } from "../src/core.ts";
+import { renderWithMetadata, Span, Text } from "../src/index.ts";
 import type { SoneMetadata } from "../src/metadata.ts";
-import {
-  compile,
-  renderer,
-  renderWithMetadata,
-  SoneCompileContext,
-  Span,
-  Text,
-} from "../src/node.ts";
+import { compile, SoneCompileContext } from "../src/renderer.ts";
 import {
   createBlocks,
   createMultilineParagraph,
@@ -723,7 +718,6 @@ test("nowrap + autofit shrinks font to fit within width", async () => {
       .width(containerWidth)
       .nowrap()
       .autofit(),
-    renderer,
   );
 
   const blocks = getTextParagraphs(metadata as SoneMetadata);
@@ -744,7 +738,6 @@ test("nowrap + autofit grows font to fill a wide container", async () => {
       .width(containerWidth)
       .nowrap()
       .autofit(),
-    renderer,
   );
 
   const blocks = getTextParagraphs(metadata as SoneMetadata);
@@ -765,7 +758,6 @@ test("nowrap + autofit always produces a single line", async () => {
       .width(containerWidth)
       .nowrap()
       .autofit(),
-    renderer,
   );
 
   const blocks = getTextParagraphs(metadata as SoneMetadata);
@@ -908,7 +900,6 @@ test("renderWithMetadata distributes justify spacing on non-final lines only", a
       .size(20)
       .width(120)
       .align("justify"),
-    renderer,
   );
 
   const paragraph = getTextParagraphs(metadata as SoneMetadata)[0].paragraph;
@@ -940,7 +931,6 @@ test("renderWithMetadata keeps truncated final line out of justify expansion", a
       .align("justify")
       .maxLines(2)
       .textOverflow("ellipsis"),
-    renderer,
   );
 
   const paragraph = getTextParagraphs(metadata as SoneMetadata)[0].paragraph;
@@ -963,7 +953,6 @@ test("renderWithMetadata applies first-line and hanging indents to text runs", a
       .maxWidth(120)
       .indent(18)
       .hangingIndent(36),
-    renderer,
   );
 
   const paragraph = getTextParagraphs(metadata as SoneMetadata)[0].paragraph;
@@ -976,11 +965,9 @@ test("renderWithMetadata applies first-line and hanging indents to text runs", a
 test("renderWithMetadata swaps text footprint for 270 degree orientation", async () => {
   const { metadata: horizontal } = await renderWithMetadata(
     Text("rotate me").font("GeistMono").size(20),
-    renderer,
   );
   const { metadata: rotated } = await renderWithMetadata(
     Text("rotate me").font("GeistMono").size(20).orientation(270),
-    renderer,
   );
 
   expect((rotated as SoneMetadata).width).toBeCloseTo(
@@ -1060,10 +1047,9 @@ test("createParagraph expands tab stops into explicit spacing", async () => {
 });
 
 test("text orientation swaps the layout footprint at 90 degrees", async () => {
-  const normal = await renderWithMetadata(Text("Rotate me").size(24), renderer);
+  const normal = await renderWithMetadata(Text("Rotate me").size(24));
   const rotated = await renderWithMetadata(
     Text("Rotate me").size(24).orientation(90),
-    renderer,
   );
 
   expect(Math.round((rotated.metadata as SoneMetadata).width)).toBe(
@@ -1077,7 +1063,6 @@ test("text orientation swaps the layout footprint at 90 degrees", async () => {
 test("justified text distributes extra width across every space", async () => {
   const { metadata } = await renderWithMetadata(
     Text("Alpha  Beta   Gamma Delta").size(20).align("justify").width(140),
-    renderer,
   );
 
   const blocks = getTextParagraphs(metadata as SoneMetadata);
@@ -1095,7 +1080,6 @@ test("justified text distributes extra width across every space", async () => {
 test("justified wrapped lines trim trailing whitespace before layout", async () => {
   const { metadata } = await renderWithMetadata(
     Text("Alpha Beta Gamma Delta").size(20).align("justify").width(120),
-    renderer,
   );
 
   const firstLine = getTextParagraphs(metadata as SoneMetadata)[0].paragraph
@@ -1111,7 +1095,6 @@ test("renderWithMetadata keeps Knuth-Plass output in compiled text props", async
     "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor";
   const { metadata } = await renderWithMetadata(
     Text(text).font("GeistMono").size(20).width(300).lineBreak("knuth-plass"),
-    renderer,
   );
 
   const paragraph = getTextParagraphs(metadata as SoneMetadata)[0].paragraph;

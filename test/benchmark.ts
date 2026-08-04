@@ -6,7 +6,7 @@
  *   npx tsx test/benchmark.ts --iterations=50
  */
 
-import { Column, Row, Span, sone, Text } from "../src/node.ts";
+import { Column, Row, Span, sone, Text } from "../src/index.ts";
 // Side-effect import: registers fonts (CanvasKit has no system fonts).
 import "./visual/load-test-fonts.ts";
 

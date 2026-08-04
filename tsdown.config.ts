@@ -1,7 +1,7 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  entry: ["src/node.ts", "src/browser.ts", "src/shiki.ts"],
+  entry: ["src/index.ts", "src/shiki.ts"],
   sourcemap: false,
   clean: true,
   minify: false,

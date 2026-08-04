@@ -43,8 +43,13 @@ export class FontRegistry {
   // biome-ignore lint/suspicious/noExplicitAny: CanvasKit Font, keyed by family|size
   private readonly fontCache = new Map<string, any>();
 
-  /** Fires whenever registration changes, so measurement caches can clear. */
-  onChange: (() => void) | null = null;
+  /** Listeners fired whenever registration changes, so caches can clear. */
+  private readonly listeners = new Set<() => void>();
+
+  /** Subscribe to registration changes (measurement/shaping caches). */
+  subscribe(listener: () => void): void {
+    this.listeners.add(listener);
+  }
 
   register(family: string, bytes: Uint8Array): void {
     const kit = ck();
@@ -172,7 +177,7 @@ export class FontRegistry {
     this.cachedProvider = null;
     for (const font of this.fontCache.values()) font?.delete?.();
     this.fontCache.clear();
-    this.onChange?.();
+    for (const listener of this.listeners) listener();
   }
 }
 

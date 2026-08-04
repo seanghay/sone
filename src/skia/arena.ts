@@ -16,6 +16,9 @@ import type { CanvasKit } from "./init.ts";
 type SkPaint = InstanceType<CanvasKit["Paint"]>;
 type Disposable = { delete(): void; isDeleted?(): boolean };
 
+/** A CanvasKit `ImageFilter` handle (as accepted by `layer({ filter })`). */
+export type SkImageFilter = Parameters<SkPaint["setImageFilter"]>[0];
+
 export interface StrokeOptions {
   /** Butt | Round | Square — Canvas2D `lineCap` */
   cap?: "butt" | "round" | "square";

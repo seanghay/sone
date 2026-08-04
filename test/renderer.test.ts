@@ -1,5 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
+import { renderer } from "../src/backend.ts";
 import {
   Column,
   ColumnNode,
@@ -12,7 +13,6 @@ import {
   TextDefault,
   TextNode,
 } from "../src/core.ts";
-import { renderer } from "../src/node.ts";
 import { compile, findFonts, SoneCompileContext } from "../src/renderer.ts";
 
 const sampleImageFile = fileURLToPath(
@@ -90,7 +90,7 @@ test("resolve async photo with preserveAspectRatio", async () => {
 });
 
 test("compile a simple Row node with direction override", async () => {
-  const node = await compile(Row().direction("column"), defaultContext);
+  const node = await compile(Row().flexDirection("column"), defaultContext);
 
   expect(node).not.toBeNull();
   expect(node!.props.flexDirection).toBe("column");

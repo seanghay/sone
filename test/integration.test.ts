@@ -1,14 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
-import {
-  Column,
-  Photo,
-  Row,
-  render,
-  renderer,
-  Span,
-  Text,
-} from "../src/node.ts";
+import { Column, Photo, Row, render, Span, Text } from "../src/index.ts";
 
 const sampleImageFile = fileURLToPath(
   new URL("./image/kouprey.jpg", import.meta.url),
@@ -50,7 +42,7 @@ test("render complex layout with mixed components", async () => {
     .width(600)
     .height(400);
 
-  const canvas = await render(component, renderer);
+  const canvas = await render(component);
 
   expect(canvas).toBeDefined();
   expect(canvas.width).toBe(600);
@@ -75,7 +67,7 @@ test("render text with various decorations", async () => {
     .height(200)
     .padding(20);
 
-  const canvas = await render(component, renderer);
+  const canvas = await render(component);
 
   expect(canvas).toBeDefined();
   expect(canvas.width).toBe(500);
@@ -102,7 +94,7 @@ test("render with backgrounds and borders", async () => {
     .padding(20)
     .bg("white");
 
-  const canvas = await render(component, renderer);
+  const canvas = await render(component);
 
   expect(canvas).toBeDefined();
   expect(canvas.width).toBe(400);
@@ -119,7 +111,7 @@ test("render with transforms and filters", async () => {
     .height(300)
     .padding(20);
 
-  const canvas = await render(component, renderer);
+  const canvas = await render(component);
 
   expect(canvas).toBeDefined();
   expect(canvas.width).toBe(300);
@@ -140,7 +132,7 @@ test("render responsive text wrapping", async () => {
     .height(400)
     .padding(20);
 
-  const canvas = await render(component, renderer);
+  const canvas = await render(component);
 
   expect(canvas).toBeDefined();
   expect(canvas.width).toBe(300);

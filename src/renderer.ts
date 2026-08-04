@@ -12,6 +12,10 @@ import {
   PositionType,
   type Yoga as YogaLayout,
 } from "yoga-layout/load";
+// The single backend, imported directly. `render()` and friends read it at call
+// time only, so the backend.ts <-> renderer.ts import cycle is closure-only and
+// safe. See backend.ts for why direct import beats runtime injection here.
+import { renderer } from "./backend.ts";
 import {
   type ClipGroupNode,
   type ColorValue,
@@ -45,10 +49,14 @@ import { applyPropsToYogaNode } from "./serde.ts";
 import { type CssShadowProperties, parseShadow } from "./shadow.ts";
 import type { SkPaint } from "./skia/arena.ts";
 import type { SoneCanvas } from "./skia/canvas.ts";
-import { parseColor } from "./skia/color.ts";
 import { parseCssFilter } from "./skia/filter.ts";
 import type { SoneImage as SkiaImage } from "./skia/image.ts";
-import { clipRect, type Painter, withSave } from "./skia/painter.ts";
+import {
+  clipRect,
+  dropShadowFilter,
+  type Painter,
+  withSave,
+} from "./skia/painter.ts";
 import { type FillRule, SonePath } from "./skia/path.ts";
 import { createParagraph, createTextRuns, drawTextNode } from "./text.ts";
 
@@ -820,7 +828,7 @@ export interface SoneRenderer {
    */
   ready(): Promise<void>;
   /** Generate word/character break points for text wrapping */
-  breakIterator(text: string): Generator<number, void, boolean>;
+  breakIterator(text: string): Generator<number, void, unknown>;
   /** Create canvas with specified dimensions */
   createCanvas(width: number, height: number): SoneCanvas;
   /** Build the drawing seam for a canvas */
@@ -846,8 +854,6 @@ export interface SoneRenderer {
   /** Get debug configuration */
   debug(): SoneDebugConfig;
 }
-
-export type SoneImage = Awaited<ReturnType<SoneRenderer["loadImage"]>>;
 
 /**
  * Context passed during node compilation phase
@@ -884,6 +890,27 @@ function configurePhotoProps(
   props.image = image;
 }
 
+/** Expand any CSS shadow strings in a list into parsed shadow properties. */
+function resolveShadowList(
+  list: Array<CssShadowProperties | string>,
+): CssShadowProperties[] {
+  const items: CssShadowProperties[] = [];
+  for (const item of list) {
+    if (typeof item === "string") items.push(...parseShadow(item));
+    else items.push(item);
+  }
+  return items;
+}
+
+/** Parse a string `color` prop into a gradient descriptor; leave plain colors. */
+function resolveGradientColor(props: {
+  color?: ColorValue | GradientNode[];
+}): void {
+  if (typeof props.color === "string" && !isColor(props.color)) {
+    props.color = parse(props.color);
+  }
+}
+
 /**
  * Compile and resolve node tree - loads images, parses gradients, cascades text properties
  * @param node - root node to compile
@@ -903,15 +930,7 @@ export async function compile<T extends SoneNode>(
 
     // transform regular box shadow
     if (node.props.shadows != null && Array.isArray(node.props.shadows)) {
-      const items: CssShadowProperties[] = [];
-      for (const item of node.props.shadows) {
-        if (typeof item === "string") {
-          items.push(...parseShadow(item));
-        } else {
-          items.push(item);
-        }
-      }
-      node.props.shadows = items;
+      node.props.shadows = resolveShadowList(node.props.shadows);
     }
 
     // gradient parser and image resolver
@@ -969,23 +988,11 @@ export async function compile<T extends SoneNode>(
       node.props.dropShadows != null &&
       Array.isArray(node.props.dropShadows)
     ) {
-      const items: CssShadowProperties[] = [];
-      for (const item of node.props.dropShadows) {
-        if (typeof item === "string") {
-          items.push(...parseShadow(item));
-        } else {
-          items.push(item);
-        }
-      }
-      node.props.dropShadows = items;
+      node.props.dropShadows = resolveShadowList(node.props.dropShadows);
     }
 
     // text color
-    if (typeof node.props.color === "string") {
-      if (!isColor(node.props.color)) {
-        node.props.color = parse(node.props.color);
-      }
-    }
+    resolveGradientColor(node.props);
 
     node.children.map((item) => {
       if (typeof item === "string") return item;
@@ -1024,23 +1031,11 @@ export async function compile<T extends SoneNode>(
         item.props.dropShadows != null &&
         Array.isArray(item.props.dropShadows)
       ) {
-        const spanItems: CssShadowProperties[] = [];
-        for (const spanItem of item.props.dropShadows) {
-          if (typeof spanItem === "string") {
-            spanItems.push(...parseShadow(spanItem));
-          } else {
-            spanItems.push(spanItem);
-          }
-        }
-        item.props.dropShadows = spanItems;
+        item.props.dropShadows = resolveShadowList(item.props.dropShadows);
       }
 
       // transform span color
-      if (typeof item.props.color === "string") {
-        if (!isColor(item.props.color)) {
-          item.props.color = parse(item.props.color);
-        }
-      }
+      resolveGradientColor(item.props);
 
       return item;
     });
@@ -1797,7 +1792,7 @@ export interface SoneRenderConfig {
   /** canvas background color */
   background?: ColorValue;
   /** image cache for performance */
-  cache?: Map<string | Uint8Array, SoneImage>;
+  cache?: Map<string | Uint8Array, SkiaImage>;
   /** When set, enables pagination — each page is this many pixels tall */
   pageHeight?: number;
   /**
@@ -1829,15 +1824,6 @@ export interface SoneRenderConfig {
 
 export async function calculateLayout(
   node: SoneNode,
-  renderer: Pick<
-    SoneRenderer,
-    | "hasFont"
-    | "breakIterator"
-    | "getDefaultTextProps"
-    | "loadImage"
-    | "measureText"
-  > &
-    Partial<Pick<SoneRenderer, "ready">>,
   config?: SoneRenderConfig,
 ) {
   // Every synchronous backend call below (measureText, createCanvas, Path2D)
@@ -1868,7 +1854,7 @@ export async function calculateLayout(
 
   const cache =
     config == null || config.cache == null
-      ? new Map<string | Uint8Array, SoneImage>()
+      ? new Map<string | Uint8Array, SkiaImage>()
       : config.cache;
 
   let currentId = 0;
@@ -1905,14 +1891,9 @@ export async function calculateLayout(
  */
 export async function renderWithMetadata<T = SoneCanvas>(
   node: SoneNode,
-  renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ) {
-  const { compiledNode, layout } = await calculateLayout(
-    node,
-    renderer,
-    config,
-  );
+  const { compiledNode, layout } = await calculateLayout(node, config);
 
   try {
     // render
@@ -2049,7 +2030,7 @@ export function drawOnCanvas(
 
       // draw over the children
       if (node.type === "table") {
-        drawTableNode(renderer, p, node, layout, x, y);
+        drawTableNode(p, node, layout, x, y);
       }
     } finally {
       sk.restoreToCount(depth);
@@ -2245,7 +2226,6 @@ function parseMargin(margin: SoneRenderConfig["margin"]) {
 
 export async function renderPages(
   node: SoneNode,
-  renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ): Promise<SoneCanvas[]> {
   // ── 1. Resolve margins first so content layout can use the correct width ──
@@ -2263,7 +2243,6 @@ export async function renderPages(
   // ── 2. Layout main content ────────────────────────────────────────────────
   const { layout, compiledNode } = await calculateLayout(
     node,
-    renderer,
     contentLayoutConfig,
   );
   const totalWidth = layout.getComputedWidth();
@@ -2298,11 +2277,7 @@ export async function renderPages(
   let headerLayout: Node | undefined;
   let headerCompiled: SoneNode | undefined;
   if (config?.header != null) {
-    const r = await calculateLayout(
-      resolveHF(config.header, PROBE),
-      renderer,
-      hfConfig,
-    );
+    const r = await calculateLayout(resolveHF(config.header, PROBE), hfConfig);
     headerH = r.layout.getComputedHeight();
     if (typeof config.header !== "function") {
       headerLayout = r.layout;
@@ -2316,11 +2291,7 @@ export async function renderPages(
   let footerLayout: Node | undefined;
   let footerCompiled: SoneNode | undefined;
   if (config?.footer != null) {
-    const r = await calculateLayout(
-      resolveHF(config.footer, PROBE),
-      renderer,
-      hfConfig,
-    );
+    const r = await calculateLayout(resolveHF(config.footer, PROBE), hfConfig);
     footerH = r.layout.getComputedHeight();
     if (typeof config.footer !== "function") {
       footerLayout = r.layout;
@@ -2377,11 +2348,7 @@ export async function renderPages(
     let hLayout = headerLayout;
     let hCompiled = headerCompiled;
     if (config?.header != null && typeof config.header === "function") {
-      const r = await calculateLayout(
-        resolveHF(config.header, info),
-        renderer,
-        hfConfig,
-      );
+      const r = await calculateLayout(resolveHF(config.header, info), hfConfig);
       hLayout = r.layout;
       hCompiled = r.compiledNode;
     }
@@ -2404,11 +2371,7 @@ export async function renderPages(
     let fLayout = footerLayout;
     let fCompiled = footerCompiled;
     if (config?.footer != null && typeof config.footer === "function") {
-      const r = await calculateLayout(
-        resolveHF(config.footer, info),
-        renderer,
-        hfConfig,
-      );
+      const r = await calculateLayout(resolveHF(config.footer, info), hfConfig);
       fLayout = r.layout;
       fCompiled = r.compiledNode;
     }
@@ -2533,14 +2496,9 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
  */
 export async function render<T = SoneCanvas>(
   node: SoneNode,
-  renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ): Promise<T> {
-  const { layout, compiledNode } = await calculateLayout(
-    node,
-    renderer,
-    config,
-  );
+  const { layout, compiledNode } = await calculateLayout(node, config);
   try {
     const canvas = renderer.createCanvas(
       layout.getComputedWidth(),
@@ -2601,18 +2559,7 @@ export function drawLayoutNode(
     for (const shadow of props.shadows) {
       if (typeof shadow === "string") continue;
       withSave(p, () => {
-        // Canvas2D shadowBlur is 2*sigma; Skia takes sigma directly.
-        const sigma = shadow.blurRadius / 2;
-        const filter = p.arena.own(
-          p.ck.ImageFilter.MakeDropShadowOnly(
-            shadow.offsetX,
-            shadow.offsetY,
-            sigma,
-            sigma,
-            parseColor(shadow.color ?? "black"),
-            null,
-          ),
-        );
+        const filter = dropShadowFilter(p, shadow, shadow.color ?? "black");
         p.canvas.translate(x, y);
         p.canvas.drawPath(roundedRectPath.path, p.arena.layer({ filter }));
       });
@@ -2861,7 +2808,6 @@ export function drawPathNode(
 }
 
 export function drawTableNode(
-  _renderer: SoneRenderer,
   p: Painter,
   node: TableNode,
   layout: Node,

@@ -1,12 +1,5 @@
 import { expect, test } from "vitest";
-import {
-  Column,
-  PageBreak,
-  Row,
-  renderer,
-  renderPages,
-  Text,
-} from "../src/node.ts";
+import { Column, PageBreak, Row, renderPages, Text } from "../src/index.ts";
 
 const block = (label: string, height = 70) =>
   Column(Text(label).size(14).color("white"))
@@ -18,7 +11,6 @@ const block = (label: string, height = 70) =>
 test("renderPages creates multiple pages from automatic overflow", async () => {
   const pages = await renderPages(
     Column(block("A", 90), block("B", 90), block("C", 90)).gap(10),
-    renderer,
     { width: 320, pageHeight: 100, margin: { left: 20, right: 30 } },
   );
 
@@ -31,7 +23,6 @@ test("renderPages creates multiple pages from automatic overflow", async () => {
 test("renderPages respects explicit page breaks and trims the last page", async () => {
   const pages = await renderPages(
     Column(block("First", 60), PageBreak(), block("Second", 40)),
-    renderer,
     { pageHeight: 140, lastPageHeight: "content" },
   );
 
@@ -46,7 +37,6 @@ test("dynamic headers and footers receive final page numbers", async () => {
 
   const pages = await renderPages(
     Column(block("A", 90), block("B", 90), block("C", 90)).gap(10),
-    renderer,
     {
       width: 260,
       pageHeight: 140,
@@ -77,7 +67,7 @@ test("dynamic headers and footers receive final page numbers", async () => {
 });
 
 test("auto-sized canvas width includes margins when width is omitted", async () => {
-  const pages = await renderPages(Column(block("Only", 60)), renderer, {
+  const pages = await renderPages(Column(block("Only", 60)), {
     pageHeight: 120,
     margin: 12,
   });

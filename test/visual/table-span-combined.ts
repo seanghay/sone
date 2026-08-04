@@ -1,4 +1,4 @@
-import { Column, Table, TableCell, TableRow, Text } from "../../src/node.ts";
+import { Column, Table, TableCell, TableRow, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 // Invoice-style table combining colspan and rowspan

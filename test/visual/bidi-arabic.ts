@@ -1,5 +1,5 @@
+import { renderer } from "../../src/backend.ts";
 import { Column, Span, Text, TextDefault } from "../../src/core";
-import { renderer } from "../../src/node";
 import { writeCanvasToFile } from "./utils";
 
 renderer.registerFont("NotoSansArabic", "./test/font/NotoSansArabic.ttf");

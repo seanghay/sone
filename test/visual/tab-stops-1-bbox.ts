@@ -2,7 +2,6 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { TextProps } from "../../src/core.ts";
-import type { SoneMetadata } from "../../src/metadata.ts";
 import {
   Column,
   Row,
@@ -10,7 +9,8 @@ import {
   sone,
   Text,
   toYoloDataset,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
+import type { SoneMetadata } from "../../src/metadata.ts";
 
 // Side-effect import: registers the visual test fonts (CanvasKit has no
 // system fonts, so this must run before anything renders).

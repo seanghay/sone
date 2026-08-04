@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { Column, Font, Span, sone, Text } from "../src/node.ts";
+import { Column, Font, Span, sone, Text } from "../src/index.ts";
 
 test("generate a simple jpeg buffer", async () => {
   function Document() {

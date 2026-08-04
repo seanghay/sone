@@ -4,7 +4,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { Column, Row, sone, Text } from "../../src/node.ts";
+import { Column, Row, sone, Text } from "../../src/index.ts";
 import { createSoneHighlighter } from "../../src/shiki.ts";
 import { loadVisualTestFonts } from "./load-test-fonts.ts";
 

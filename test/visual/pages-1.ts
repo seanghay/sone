@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { Column, Row, sone, Text } from "../../src/node.ts";
+import { Column, Row, sone, Text } from "../../src/index.ts";
 
 // Side-effect import: registers the visual test fonts (CanvasKit has no
 // system fonts, so this must run before anything renders).

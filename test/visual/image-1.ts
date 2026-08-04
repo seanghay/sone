@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { Column, Photo, qrcode, Row } from "../../src/node.ts";
+import { Column, Photo, qrcode, Row } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));

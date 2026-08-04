@@ -1,4 +1,4 @@
-import { ClipGroup, Column, Photo, Row, Text } from "../../src/node.ts";
+import { ClipGroup, Column, Photo, Row, Text } from "../../src/index.ts";
 import { relative, writeCanvasToFile } from "./utils.ts";
 
 const img = relative("../image/kouprey.jpg");

@@ -43,7 +43,7 @@ export class TextMeasurer {
   constructor(fonts: FontRegistry) {
     this.fonts = fonts;
     // Registration changes invalidate every cached measurement.
-    fonts.onChange = () => this.clear();
+    fonts.subscribe(() => this.clear());
   }
 
   clear(): void {

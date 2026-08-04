@@ -1,4 +1,4 @@
-import { Column, Grid, Row, Text } from "../../src/node.ts";
+import { Column, Grid, Row, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const surface = (...children: Parameters<typeof Column>) =>

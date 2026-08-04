@@ -1,15 +1,14 @@
 import { expect, test } from "vitest";
-import type { SoneMetadata } from "../src/metadata.ts";
-import type { SpanNode } from "../src/node.ts";
+import type { SpanNode } from "../src/index.ts";
 import {
   Column,
   Grid,
   Row,
-  renderer,
   renderWithMetadata,
   Span,
   Text,
-} from "../src/node.ts";
+} from "../src/index.ts";
+import type { SoneMetadata } from "../src/metadata.ts";
 
 function findByTag(node: SoneMetadata, tag: string): SoneMetadata {
   if (node.props.tag === tag) return node;
@@ -42,7 +41,6 @@ test("renderWithMetadata preserves nested positions, padding, and margins", asyn
           .marginLeft(7),
       ).padding(10),
     ).padding(6),
-    renderer,
   );
 
   const card = findByTag(metadata, "card");
@@ -60,7 +58,6 @@ test("renderWithMetadata preserves nested positions, padding, and margins", asyn
 test("renderWithMetadata keeps raw text children for text nodes", async () => {
   const { metadata } = await renderWithMetadata(
     Text("Hello ", Span("World").weight("bold")),
-    renderer,
   );
 
   expect(metadata.type).toBe("text");
@@ -72,7 +69,6 @@ test("renderWithMetadata keeps raw text children for text nodes", async () => {
 test("renderWithMetadata recurses through grid children", async () => {
   const { metadata } = await renderWithMetadata(
     Grid(Column().tag("tile").height(24)).columns(100),
-    renderer,
   );
 
   expect(metadata.type).toBe("grid");

@@ -12,7 +12,7 @@ import {
   sone,
   Text,
   toYoloDataset,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
 
 // Side-effect import: registers the visual test fonts (CanvasKit has no
 // system fonts, so this must run before anything renders).

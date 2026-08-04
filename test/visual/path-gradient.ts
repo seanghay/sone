@@ -1,4 +1,4 @@
-import { Column, Path, Row } from "../../src/node.ts";
+import { Column, Path, Row } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const heartPath =

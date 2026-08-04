@@ -22,18 +22,17 @@ import { expect, test } from "vitest";
 import { colors } from "../src/color.ts";
 import type { SpanProps } from "../src/core.ts";
 import { generateGradient, isColor } from "../src/gradient.ts";
-import { defaultLineBreakerIterator } from "../src/linebreak.ts";
 import {
   Column,
   Grid,
   Row,
-  renderer,
   renderWithMetadata,
   Span,
   Text,
   toCocoDataset,
   toYoloDataset,
-} from "../src/node.ts";
+} from "../src/index.ts";
+import { defaultLineBreakerIterator } from "../src/linebreak.ts";
 import { getBoundingBoxRectRotation, parseRadius } from "../src/rect.ts";
 import { parseShadow } from "../src/shadow.ts";
 import { fontBuilder, indicesOf, isWhitespace } from "../src/utils.ts";
@@ -87,7 +86,7 @@ function makePrng(seed: number) {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 async function buildMeta(root: ReturnType<typeof Column>) {
-  const { metadata } = await renderWithMetadata(root, renderer);
+  const { metadata } = await renderWithMetadata(root);
   return metadata;
 }
 
@@ -844,7 +843,6 @@ test("rendering: Row with flex properties does not crash", async () => {
       .justifyContent("space-between")
       .alignItems("center")
       .width(400),
-    renderer,
   );
   expect(metadata).toBeDefined();
 });
@@ -954,7 +952,6 @@ test("rendering: Grid layout does not crash", async () => {
       .rows("auto", "auto")
       .gap(8)
       .width(300),
-    renderer,
   );
   expect(metadata).toBeDefined();
 });

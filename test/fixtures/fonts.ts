@@ -9,7 +9,7 @@
  */
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { Font } from "../../src/node.ts";
+import { Font } from "../../src/index.ts";
 
 const fontPath = (name: string) =>
   fileURLToPath(new URL(`../font/${name}`, import.meta.url));

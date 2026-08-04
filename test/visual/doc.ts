@@ -23,7 +23,7 @@ import {
   TableRow,
   Text,
   TextDefault,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
 import type { SonePageInfo } from "../../src/renderer.ts";
 import { createSoneHighlighter } from "../../src/shiki.ts";
 
@@ -765,7 +765,7 @@ const stylingSection = Column(
   card(
     h3("CSS Filters"),
     codeBlock(
-      `.blur(4)          // blur(4px)\n.brightness(1.4)  // brightness(1.4)\n.contrast(1.5)    // contrast(1.5)\n.grayscale(1)     // grayscale(1)\n.invert(1)        // invert(1)\n.sepia(1)         // sepia(1)\n.saturate(2)      // saturate(2)\n.huerotate(180)   // hue-rotate(180)`,
+      `.blur(4)          // blur(4px)\n.brightness(1.4)  // brightness(1.4)\n.contrast(1.5)    // contrast(1.5)\n.grayscale(1)     // grayscale(1)\n.invert(1)        // invert(1)\n.sepia(1)         // sepia(1)\n.saturate(2)      // saturate(2)\n.hueRotate(180)   // hue-rotate(180)`,
     ).marginTop(8),
     Row(
       ...(
@@ -774,7 +774,7 @@ const stylingSection = Column(
           ["grayscale", (c: any) => c.grayscale(1)],
           ["sepia", (c: any) => c.sepia(1)],
           ["invert", (c: any) => c.invert(1)],
-          ["huerotate", (c: any) => c.huerotate(120)],
+          ["hueRotate", (c: any) => c.hueRotate(120)],
         ] as [string, ((c: any) => any) | undefined][]
       ).map(([lbl, f]) => {
         const base = Column(Text(lbl).size(9).color(W))

@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { Font } from "../../src/node.ts";
+import { Font } from "../../src/index.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 

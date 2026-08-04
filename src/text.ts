@@ -5,8 +5,7 @@ import type { SpanNode, SpanProps, TextNode, TextProps } from "./core.ts";
 import { createGradientFillStyleList } from "./gradient.ts";
 import type { SoneRenderer, SoneTextMetrics } from "./renderer.ts";
 import type { SkPaint } from "./skia/arena.ts";
-import { parseColor } from "./skia/color.ts";
-import { type Painter, withSave } from "./skia/painter.ts";
+import { dropShadowFilter, type Painter, withSave } from "./skia/painter.ts";
 import { indicesOf, isWhitespace } from "./utils.ts";
 
 function countSpaces(value: string): number {
@@ -1624,25 +1623,14 @@ function drawTextBlocks(
             // Canvas2D's default shadowColor is fully transparent, so an
             // unset colour draws nothing — same as before.
             const shadowColor = shadowProperties.color ?? "transparent";
-            // Canvas2D's shadowBlur is twice the Gaussian sigma Skia takes.
-            const sigma = shadowProperties.blurRadius / 2;
-            const filter = p.arena.own(
-              p.ck.ImageFilter.MakeDropShadowOnly(
-                shadowProperties.offsetX,
-                shadowProperties.offsetY,
-                sigma,
-                sigma,
-                parseColor(shadowColor),
-                null,
-              ),
-            );
+            const filter = dropShadowFilter(p, shadowProperties, shadowColor);
             p.canvas.saveLayer(p.arena.layer({ filter }));
             p.text.drawRun(p.canvas, p.arena, renderText, drawProps, {
               x: textX,
               baselineY: textY,
               width: segmentWidth,
               direction: segDir,
-              fill: p.arena.fill(shadowColor),
+              fillColor: shadowColor,
             });
             p.canvas.restore();
           }
@@ -1661,8 +1649,11 @@ function drawTextBlocks(
           );
         }
 
-        let fill: SkPaint;
+        let fill: SkPaint | undefined;
+        let fillColor: string | undefined;
         if (Array.isArray(segment.props.color)) {
+          // Gradient: the shader is position-dependent, so it bypasses the
+          // paragraph cache and always builds fresh.
           fill = p.arena.fill("black");
           for (const gradient of segment.props.color) {
             const [shader] = createGradientFillStyleList(
@@ -1676,11 +1667,14 @@ function drawTextBlocks(
             if (shader != null) fill = p.arena.shaderFill(shader);
           }
         } else {
-          fill = p.arena.fill(
+          const color =
             typeof segment.props.color === "string"
               ? segment.props.color
-              : "black",
-          );
+              : "black";
+          // Solid colour with no stroke takes the cached fast path; a stroke
+          // needs a second paint pass, so keep it on the build-per-call path.
+          if (stroke == null) fillColor = color;
+          else fill = p.arena.fill(color);
         }
 
         // One call: drawRun paints the stroke then the fill, matching the
@@ -1691,6 +1685,7 @@ function drawTextBlocks(
           width: segmentWidth,
           direction: segDir,
           fill,
+          fillColor,
           stroke,
         });
 

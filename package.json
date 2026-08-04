@@ -22,41 +22,21 @@
     "text-rendering"
   ],
   "sideEffects": false,
-  "main": "dist/node.mjs",
-  "module": "dist/node.mjs",
-  "types": "dist/node.d.mts",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "browser": {
-        "import": {
-          "types": "./dist/browser.d.mts",
-          "default": "./dist/browser.mjs"
-        },
-        "require": {
-          "types": "./dist/browser.d.cts",
-          "default": "./dist/browser.cjs"
-        }
-      },
-      "node": {
-        "import": {
-          "types": "./dist/node.d.mts",
-          "default": "./dist/node.mjs"
-        },
-        "require": {
-          "types": "./dist/node.d.cts",
-          "default": "./dist/node.cjs"
-        }
-      },
       "import": {
-        "types": "./dist/node.d.mts",
-        "default": "./dist/node.mjs"
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
       },
       "require": {
-        "types": "./dist/node.d.cts",
-        "default": "./dist/node.cjs"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     },
     "./shiki": {

@@ -2,7 +2,7 @@
  * Visual test: balanced text in card/blog-post layouts
  * Shows how balance helps article cards with varying title lengths
  */
-import { Column, Row, Text } from "../../src/node.ts";
+import { Column, Row, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 interface CardProps {

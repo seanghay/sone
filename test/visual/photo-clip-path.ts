@@ -1,4 +1,4 @@
-import { Column, Photo, Row } from "../../src/node.ts";
+import { Column, Photo, Row } from "../../src/index.ts";
 import { relative, writeCanvasToFile } from "./utils.ts";
 
 const img = relative("../image/kouprey.jpg");

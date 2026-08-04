@@ -1,8 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { SoneCanvas, SoneNode } from "../../src/node.ts";
-import { renderer, sone } from "../../src/node.ts";
+import { renderer } from "../../src/backend.ts";
+import type { SoneCanvas, SoneNode } from "../../src/index.ts";
+import { sone } from "../../src/index.ts";
 // Side-effect import: registers the visual test fonts. CanvasKit has no system
 // fonts, so this must happen before anything renders.
 import "./load-test-fonts.ts";

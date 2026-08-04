@@ -148,10 +148,3 @@ export const colors = {
   yellow: "#ffff00",
   yellowgreen: "#9acd32",
 } as const;
-
-export function randomColor() {
-  const keys = Object.keys(colors);
-  const index = Math.floor(Math.random() * keys.length);
-  const key = keys[index] as keyof typeof colors;
-  return colors[key];
-}

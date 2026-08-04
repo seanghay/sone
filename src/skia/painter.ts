@@ -10,8 +10,10 @@
  * The matrix and clip stack are the one part of Canvas2D that maps directly —
  * Skia has a real save/restore stack — so `save()`/`restore()` survive intact.
  */
-import type { Arena } from "./arena.ts";
+import type { CssShadowProperties } from "../shadow.ts";
+import type { Arena, SkImageFilter } from "./arena.ts";
 import type { SkCanvas } from "./canvas.ts";
+import { parseColor } from "./color.ts";
 import type { FontRegistry } from "./fonts.ts";
 import type { CanvasKit } from "./init.ts";
 import type { TextMeasurer } from "./measure.ts";
@@ -78,6 +80,32 @@ export function withLayer<T>(
   } finally {
     painter.canvas.restore();
   }
+}
+
+/**
+ * Build an owned drop-shadow-only image filter from a parsed shadow.
+ *
+ * Centralises the Canvas2D→Skia blur conversion: Canvas2D's `shadowBlur` is
+ * twice the Gaussian sigma Skia takes, so sigma is `blurRadius / 2`. `color` is
+ * passed in resolved because callers differ on the default (an unset box shadow
+ * is black; an unset text shadow is transparent).
+ */
+export function dropShadowFilter(
+  painter: Painter,
+  shadow: CssShadowProperties,
+  color: string,
+): SkImageFilter {
+  const sigma = shadow.blurRadius / 2;
+  return painter.arena.own(
+    painter.ck.ImageFilter.MakeDropShadowOnly(
+      shadow.offsetX,
+      shadow.offsetY,
+      sigma,
+      sigma,
+      parseColor(color),
+      null,
+    ),
+  );
 }
 
 /** Translate, run, restore. */

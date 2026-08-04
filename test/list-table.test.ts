@@ -1,12 +1,10 @@
 import { expect, test } from "vitest";
-import type { SoneMetadata } from "../src/metadata.ts";
-import type { SoneCompileContext, SpanNode, TextNode } from "../src/node.ts";
+import { renderer } from "../src/backend.ts";
+import type { SpanNode, TextNode } from "../src/index.ts";
 import {
   Column,
-  compile,
   List,
   ListItem,
-  renderer,
   renderWithMetadata,
   Span,
   Table,
@@ -14,7 +12,9 @@ import {
   TableRow,
   Text,
   TextDefault,
-} from "../src/node.ts";
+} from "../src/index.ts";
+import type { SoneMetadata } from "../src/metadata.ts";
+import { compile, SoneCompileContext } from "../src/renderer.ts";
 
 const defaultContext: SoneCompileContext = {
   defaultTextProps: renderer.getDefaultTextProps(),
@@ -165,7 +165,6 @@ test("colspan cell width spans multiple columns", async () => {
         TableCell(Text("C")),
       ),
     ),
-    renderer,
   );
 
   const spanCell = findByTag(metadata, "span-cell");
@@ -184,7 +183,6 @@ test("colspan=3 cell spans all three columns", async () => {
         TableCell(Text("C")).tag("c"),
       ),
     ),
-    renderer,
   );
 
   const header = findByTag(metadata, "header");
@@ -203,7 +201,6 @@ test("rowspan cell height spans multiple rows", async () => {
       ),
       TableRow(TableCell(Text("R1C1")).tag("r1c1")),
     ),
-    renderer,
   );
 
   const spanCell = findByTag(metadata, "span-cell");
@@ -225,7 +222,6 @@ test("rowspan cell y position matches its host row", async () => {
       ),
       TableRow(TableCell(Text("R1C1"))),
     ),
-    renderer,
   );
 
   const spanCell = findByTag(metadata, "span-cell");
@@ -248,7 +244,6 @@ test("colspan and rowspan together", async () => {
         TableCell(Text("Bot-Right")),
       ),
     ),
-    renderer,
   );
 
   const tl = findByTag(metadata, "tl");
@@ -262,7 +257,6 @@ test("table spacing becomes cell padding metadata", async () => {
     Table(
       TableRow(TableCell(Text("A")).tag("cell-a"), TableCell(Text("B"))),
     ).spacing(10, 20),
-    renderer,
   );
 
   const cell = findByTag(metadata, "cell-a");

@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 import type { LayoutProps } from "../src/core.ts";
 import { Column, Grid, Text } from "../src/core.ts";
+import { renderWithMetadata } from "../src/index.ts";
 import type { SoneMetadata } from "../src/metadata.ts";
-import { renderer, renderWithMetadata } from "../src/node.ts";
 
 function findByTag(node: SoneMetadata, tag: string): SoneMetadata {
   if (node.props.tag === tag) return node;
@@ -50,7 +50,6 @@ test("Grid auto placement creates new rows", async () => {
       .columns(100, 100)
       .columnGap(10)
       .rowGap(5),
-    renderer,
   );
 
   const a = findByTag(metadata, "a");
@@ -78,7 +77,6 @@ test("Grid explicit placement and spans resolve to expected bounds", async () =>
       .columns(100, 100, 80)
       .columnGap(5)
       .rowGap(10),
-    renderer,
   );
 
   const hero = findByTag(metadata, "hero");
@@ -104,7 +102,6 @@ test("Grid distributes fr tracks inside a definite width", async () => {
       .columns(100, "1fr")
       .columnGap(20)
       .width(320),
-    renderer,
   );
 
   const fixed = findByTag(metadata, "fixed");
@@ -118,6 +115,6 @@ test("Grid distributes fr tracks inside a definite width", async () => {
 
 test("Grid rejects invalid placement values", async () => {
   await expect(
-    renderWithMetadata(Grid(Column().gridColumn(0)).columns(100), renderer),
+    renderWithMetadata(Grid(Column().gridColumn(0)).columns(100)),
   ).rejects.toThrow("Grid placement values must be greater than 0.");
 });

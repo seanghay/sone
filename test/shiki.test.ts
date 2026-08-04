@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { Column } from "../src/core.ts";
-import { sone } from "../src/node.ts";
+import { sone } from "../src/index.ts";
 import { createSoneHighlighter } from "../src/shiki.ts";
 
 test("createSoneHighlighter returns a Code builder", async () => {

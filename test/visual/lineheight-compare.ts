@@ -16,15 +16,15 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer-core";
+import { renderer } from "../../src/backend.ts";
 import {
   Column,
   Photo,
   Row,
-  renderer,
   type SoneNode,
   sone,
   Text,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
 import { loadVisualTestFonts } from "./load-test-fonts.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));

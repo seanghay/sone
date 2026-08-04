@@ -13,7 +13,7 @@ import {
   Wrap,
 } from "yoga-layout/load";
 
-import type { LayoutProps, Required } from "./core.ts";
+import type { LayoutProps, NonUndefined } from "./core.ts";
 
 /**
  * Apply Sone layout properties to Yoga layout node
@@ -215,7 +215,7 @@ export function applyPropsToYogaNode(props: LayoutProps, node: Node) {
 /**
  * Convert CSS align-content value to Yoga enum
  */
-function alignContent(str: Required<LayoutProps["alignContent"]>) {
+function alignContent(str: NonUndefined<LayoutProps["alignContent"]>) {
   switch (str) {
     case "flex-start":
       return Align.FlexStart;
@@ -237,7 +237,7 @@ function alignContent(str: Required<LayoutProps["alignContent"]>) {
 /**
  * Convert CSS align-items value to Yoga enum
  */
-function alignItems(str: Required<LayoutProps["alignItems"]>) {
+function alignItems(str: NonUndefined<LayoutProps["alignItems"]>) {
   switch (str) {
     case "flex-start":
       return Align.FlexStart;
@@ -255,7 +255,7 @@ function alignItems(str: Required<LayoutProps["alignItems"]>) {
 /**
  * Convert CSS box-sizing value to Yoga enum
  */
-function boxSizing(str: Required<LayoutProps["boxSizing"]>) {
+function boxSizing(str: NonUndefined<LayoutProps["boxSizing"]>) {
   switch (str) {
     case "border-box":
       return BoxSizing.BorderBox;
@@ -267,7 +267,7 @@ function boxSizing(str: Required<LayoutProps["boxSizing"]>) {
 /**
  * Convert CSS direction value to Yoga enum
  */
-function direction(str: Required<LayoutProps["direction"]>) {
+function direction(str: NonUndefined<LayoutProps["direction"]>) {
   switch (str) {
     case "ltr":
       return Direction.LTR;
@@ -279,7 +279,7 @@ function direction(str: Required<LayoutProps["direction"]>) {
 /**
  * Convert CSS display value to Yoga enum
  */
-function display(str: Required<LayoutProps["display"]>) {
+function display(str: NonUndefined<LayoutProps["display"]>) {
   switch (str) {
     case "none":
       return Display.None;
@@ -293,7 +293,7 @@ function display(str: Required<LayoutProps["display"]>) {
 /**
  * Convert CSS flex-direction value to Yoga enum
  */
-function flexDirection(str: Required<LayoutProps["flexDirection"]>) {
+function flexDirection(str: NonUndefined<LayoutProps["flexDirection"]>) {
   switch (str) {
     case "row":
       return FlexDirection.Row;
@@ -309,7 +309,7 @@ function flexDirection(str: Required<LayoutProps["flexDirection"]>) {
 /**
  * Convert CSS flex-wrap value to Yoga enum
  */
-function flexWrap(str: Required<LayoutProps["flexWrap"]>) {
+function flexWrap(str: NonUndefined<LayoutProps["flexWrap"]>) {
   switch (str) {
     case "wrap":
       return Wrap.Wrap;
@@ -323,7 +323,7 @@ function flexWrap(str: Required<LayoutProps["flexWrap"]>) {
 /**
  * Convert CSS justify-content value to Yoga enum
  */
-function justifyContent(str: Required<LayoutProps["justifyContent"]>) {
+function justifyContent(str: NonUndefined<LayoutProps["justifyContent"]>) {
   switch (str) {
     case "flex-start":
       return Justify.FlexStart;
@@ -343,7 +343,7 @@ function justifyContent(str: Required<LayoutProps["justifyContent"]>) {
 /**
  * Convert CSS overflow value to Yoga enum
  */
-function overflow(str: Required<LayoutProps["overflow"]>) {
+function overflow(str: NonUndefined<LayoutProps["overflow"]>) {
   switch (str) {
     case "visible":
       return Overflow.Visible;
@@ -357,7 +357,7 @@ function overflow(str: Required<LayoutProps["overflow"]>) {
 /**
  * Convert CSS position value to Yoga enum
  */
-function position(str: Required<LayoutProps["position"]>) {
+function position(str: NonUndefined<LayoutProps["position"]>) {
   switch (str) {
     case "absolute":
       return PositionType.Absolute;
