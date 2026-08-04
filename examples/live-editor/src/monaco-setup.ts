@@ -37,7 +37,8 @@ declare module "sone" {
     grow(value: number): T;
     shrink(value: number): T;
     basis(value: number | string): T;
-    direction(value: FlexDirection): T;
+    flexDirection(value: FlexDirection): T;
+    direction(value: "ltr" | "rtl"): T;
     wrap(value?: boolean): T;
     gap(value: number): T;
     rowGap(value: number): T;
@@ -200,27 +201,47 @@ declare module "sone" {
     pageHeight?: number;
   }
 
-  export interface SoneRenderer {
-    createCanvas(width: number, height: number): HTMLCanvasElement;
-    measureText(text: string, props: any): TextMetrics;
-    hasFont(name: string): boolean;
-    registerFont(name: string, source: string | string[]): Promise<void>;
-    unregisterFont(name: string): Promise<void>;
-    resetFonts(): void;
-    loadImage(src: string | Uint8Array): Promise<HTMLImageElement>;
-    getDefaultTextProps(): any;
-    dpr(): number;
-    Path2D: typeof Path2D;
-    debug(): { layout?: boolean; text?: boolean };
-    breakIterator(text: string): Generator<number, void, unknown>;
+  export interface ExportOptions {
+    quality?: number;
+    density?: number;
   }
 
-  export function render<T = HTMLCanvasElement>(node: SoneNode, renderer: SoneRenderer, config?: SoneRenderConfig): Promise<T>;
-  export function renderPages<T = HTMLCanvasElement>(node: SoneNode, renderer: SoneRenderer, config?: SoneRenderConfig): Promise<T[]>;
-  export const DEFAULT_TEXT_PROPS: any;
+  export interface SoneCanvas {
+    readonly width: number;
+    readonly height: number;
+    density: number;
+    toBuffer(format: "png" | "jpg" | "jpeg" | "webp" | "raw" | "pdf" | "svg", options?: ExportOptions): Uint8Array;
+    delete(): void;
+  }
+
+  export interface SoneExport {
+    png(options?: ExportOptions): Promise<Uint8Array>;
+    jpg(quality?: number, options?: ExportOptions): Promise<Uint8Array>;
+    webp(options?: ExportOptions): Promise<Uint8Array>;
+    pdf(options?: ExportOptions): Promise<Uint8Array>;
+    svg(options?: ExportOptions): Promise<Uint8Array>;
+    raw(options?: ExportOptions): Promise<Uint8Array>;
+    canvas(): Promise<SoneCanvas>;
+  }
+
+  /** Render a node. In the browser the byte methods return a Uint8Array. */
+  export function sone(node: SoneNode, config?: SoneRenderConfig): SoneExport;
+
+  /** Font management. Register at least one font before rendering text. */
+  export const Font: {
+    load(name: string, source: string | string[] | Uint8Array | ArrayBuffer | URL): Promise<void>;
+    unload(name: string): Promise<void>;
+    reset(): void;
+    has(name: string): boolean;
+  };
+
+  /** Point CanvasKit at a specific wasm binary (before the first render). */
+  export function configureSkia(options: { wasmFile: string }): void;
+
+  export function render<T = SoneCanvas>(node: SoneNode, config?: SoneRenderConfig): Promise<T>;
+  export function renderPages<T = SoneCanvas>(node: SoneNode, config?: SoneRenderConfig): Promise<T[]>;
   export function defaultLineBreakerIterator(text: string): Generator<number, void, unknown>;
   export function fontBuilder(props: any): string;
-  export function applySpanProps(ctx: CanvasRenderingContext2D, props: any): void;
   export function qrcode(data: string, options?: any): any;
 }
 `;

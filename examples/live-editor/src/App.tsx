@@ -4,18 +4,17 @@ import {
   Panel,
   Separator,
 } from "react-resizable-panels";
-import { render, type SoneNode } from "sone";
 import { Editor, type EditorHandle } from "./components/Editor";
 import { PropertiesPanel } from "./components/PropertiesPanel";
 import { Preview } from "./components/Preview";
 import { Toolbar } from "./components/Toolbar";
 import { DEFAULT_CODE } from "./default-code";
-import { exportAsJPEG, exportAsPNG } from "./export";
+import { downloadExport } from "./export";
 import { createUploadedImageAsset, revokeUploadedImageAsset, type UploadedImageAsset } from "./images";
-import { browserRenderer, createRenderer, type RenderDebugOptions } from "./renderer";
-import { executeCode } from "./execute";
 import { workerBridge } from "./worker-bridge";
 import RenderWorker from "./render-worker.ts?worker";
+
+type ExportFormat = "png" | "jpeg" | "pdf" | "svg";
 
 const STORAGE_KEY = "sone-editor-code";
 
@@ -70,14 +69,12 @@ function useIsMobile() {
 export default function App() {
   const [code, setCode] = useState(loadCode);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
-  const [lastNode, setLastNode] = useState<SoneNode>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [propertiesOpen, setPropertiesOpen] = useState(false);
   const [propertiesTab, setPropertiesTab] = useState<"fonts" | "images">("fonts");
   const [uploadedImages, setUploadedImages] = useState<UploadedImageAsset[]>([]);
   const [autoRun, setAutoRun] = useState(true);
-  const [debugEnabled, setDebugEnabled] = useState(false);
   const [mobileTab, setMobileTab] = useState<"code" | "preview">("code");
   const isMobile = useIsMobile();
 
@@ -86,9 +83,8 @@ export default function App() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const uploadedImagesRef = useRef<UploadedImageAsset[]>([]);
   const editorRef = useRef<EditorHandle | null>(null);
-  const renderCacheRef = useRef<
-    Map<string | Uint8Array, Awaited<ReturnType<typeof browserRenderer.loadImage>>>
-  >(new Map());
+  const codeRef = useRef(code);
+  useEffect(() => { codeRef.current = code; }, [code]);
 
   // Spawn worker once
   useEffect(() => {
@@ -98,15 +94,24 @@ export default function App() {
 
     worker.onmessage = (e: MessageEvent) => {
       const msg = e.data as Record<string, unknown>;
-      const { id } = msg as { id: number };
 
-      // Ignore stale responses
-      if (id !== requestIdRef.current) return;
+      // Export results are user-initiated and not tied to the render id.
+      if (msg.type === "export") {
+        const { bytes, format } = msg as { bytes: Uint8Array; format: ExportFormat };
+        downloadExport(bytes, format);
+        return;
+      }
+      if (msg.type === "exportError") {
+        setError((msg as { message: string }).message);
+        return;
+      }
+
+      // Ignore stale render responses.
+      if ((msg as { id: number }).id !== requestIdRef.current) return;
 
       setIsRunning(false);
       if (msg.type === "result") {
-        const { bitmap, width, height } = msg as { bitmap: ImageBitmap; width: number; height: number };
-        void width; void height;
+        const { bitmap } = msg as { bitmap: ImageBitmap };
         setCanvas(bitmapToCanvas(bitmap));
         setError(null);
       } else if (msg.type === "error") {
@@ -124,19 +129,9 @@ export default function App() {
     const id = ++requestIdRef.current;
     setIsRunning(true);
     setError(null);
-
-    const dpr = browserRenderer.dpr();
-    const debug: RenderDebugOptions = {
-      layout: debugEnabled,
-      text: debugEnabled,
-    };
-    workerRef.current!.postMessage({ type: "render", id, code: codeToRun, dpr, debug });
-
-    // Also evaluate on main thread to keep lastNode up-to-date for exports
-    executeCode(codeToRun)
-      .then((node) => { if (node != null) setLastNode(node); })
-      .catch(() => {});
-  }, [debugEnabled]);
+    const dpr = window.devicePixelRatio || 1;
+    workerRef.current!.postMessage({ type: "render", id, code: codeToRun, dpr });
+  }, []);
 
   const handleRun = useCallback(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -151,31 +146,21 @@ export default function App() {
     debounceRef.current = setTimeout(() => runCode(newCode), 60);
   }, [autoRun, runCode]);
 
-  useEffect(() => { runCode(code); }, [debugEnabled]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => { if (debounceRef.current) clearTimeout(debounceRef.current); }, []);
   useEffect(() => {
     uploadedImagesRef.current = uploadedImages;
   }, [uploadedImages]);
   useEffect(() => () => {
     for (const image of uploadedImagesRef.current) {
-      renderCacheRef.current.delete(image.url);
       workerBridge.clearImageCache(image.url);
       revokeUploadedImageAsset(image);
     }
   }, []);
 
-  const handleExport = useCallback(async (format: "png" | "jpeg") => {
-    if (!lastNode) return;
-    const debug: RenderDebugOptions = {
-      layout: debugEnabled,
-      text: debugEnabled,
-    };
-    const exportCanvas = await render<HTMLCanvasElement>(lastNode, createRenderer(1, debug), {
-      cache: renderCacheRef.current,
-    });
-    if (format === "png") exportAsPNG(exportCanvas);
-    else exportAsJPEG(exportCanvas);
-  }, [debugEnabled, lastNode]);
+  const handleExport = useCallback((format: ExportFormat) => {
+    const id = ++requestIdRef.current;
+    workerRef.current?.postMessage({ type: "export", id, code: codeRef.current, format });
+  }, []);
 
   const handleToggleProperties = useCallback(() => {
     setPropertiesOpen((current) => !current);
@@ -206,7 +191,6 @@ export default function App() {
     setUploadedImages((current) => {
       const image = current.find((item) => item.id === id);
       if (image) {
-        renderCacheRef.current.delete(image.url);
         workerBridge.clearImageCache(image.url);
         revokeUploadedImageAsset(image);
       }
@@ -226,17 +210,14 @@ export default function App() {
     <div className="flex flex-col h-full bg-white">
       <Toolbar
         onRun={handleRun}
-        onExportPNG={() => handleExport("png")}
-        onExportJPEG={() => handleExport("jpeg")}
+        onExport={handleExport}
         onLoadTemplate={(c) => { setCode(c); saveCode(c); runCode(c); }}
         onToggleProperties={handleToggleProperties}
         onToggleAutoRun={() => setAutoRun((v) => !v)}
-        onToggleDebug={() => setDebugEnabled((v) => !v)}
         isRunning={isRunning}
         hasCanvas={canvas !== null}
         propertiesOpen={propertiesOpen}
         autoRun={autoRun}
-        debugEnabled={debugEnabled}
       />
       {isMobile ? (
         <div className="relative flex flex-1 min-h-0 flex-col">

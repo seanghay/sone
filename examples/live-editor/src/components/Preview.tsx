@@ -1,6 +1,9 @@
 import { Loader2, ZoomIn, ZoomOut } from "lucide-react";
-import { browserRenderer } from "../renderer";
 import { useEffect, useRef, useState } from "react";
+
+// The worker renders at device density, so divide displayed pixels back to
+// logical CSS pixels for the size label.
+const DPR = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
 
 interface PreviewProps {
   canvas: HTMLCanvasElement | null;
@@ -28,8 +31,8 @@ export function Preview({ canvas, isRunning, borderless = false }: PreviewProps)
         <span className="font-medium text-neutral-700">Preview</span>
         {canvas && (
           <span className="text-neutral-400">
-            {Math.round(canvas.width / browserRenderer.dpr())} ×{" "}
-            {Math.round(canvas.height / browserRenderer.dpr())} px
+            {Math.round(canvas.width / DPR)} ×{" "}
+            {Math.round(canvas.height / DPR)} px
           </span>
         )}
         <div className="ml-auto flex items-center gap-1">

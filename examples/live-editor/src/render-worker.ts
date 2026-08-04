@@ -1,132 +1,65 @@
-import * as soneAll from "sone";
+/**
+ * Render worker.
+ *
+ * Sone now ships a single WebAssembly (CanvasKit) backend that runs in the
+ * browser directly, so there is no custom renderer any more — the worker just
+ * drives sone's built-in pipeline off the main thread. It renders to PNG for
+ * the live preview and encodes PNG/JPEG/PDF/SVG on demand for export.
+ */
 import {
-  DEFAULT_TEXT_PROPS,
-  defaultLineBreakerIterator,
-  fontBuilder,
-  render,
-  type SoneRenderer,
+  configureSkia,
+  Font,
+  sone,
+  type SoneImage,
+  type SoneNode,
 } from "sone";
+// Vite resolves the CanvasKit wasm shipped with `skia` to an asset URL.
+import wasmUrl from "skia/canvaskit.wasm?url";
 import { transform } from "sucrase";
 import { transformCode } from "./execute";
-import type { RenderDebugOptions } from "./renderer";
 
-// OffscreenCanvas-based renderer — runs entirely off the main thread
-const measureCanvas = new OffscreenCanvas(1, 1);
-const registeredFonts = new Set<string>();
-const renderCache = new Map<string | Uint8Array, Awaited<ReturnType<SoneRenderer["loadImage"]>>>();
-let currentDpr = 1;
-let currentDebug: RenderDebugOptions = { layout: false, text: false };
+// Point CanvasKit at the bundled wasm before the first render.
+configureSkia({ wasmFile: wasmUrl });
 
-// workers expose fonts via WorkerGlobalScope.fonts
-const workerFonts = (self as unknown as { fonts: FontFaceSet }).fonts;
-
-const workerRenderer: SoneRenderer = {
-  breakIterator: defaultLineBreakerIterator,
-
-  createCanvas(w: number, h: number) {
-    const dpr = currentDpr + 1;
-    const canvas = new OffscreenCanvas(w * dpr, h * dpr) as unknown as HTMLCanvasElement;
-    canvas.getContext("2d")?.scale(dpr, dpr)
-    return canvas;
-  },
-
-  measureText(text: string, props: Parameters<SoneRenderer["measureText"]>[1]) {
-    const ctx = measureCanvas.getContext("2d")!;
-    ctx.font = fontBuilder(props);
-    ctx.letterSpacing = `${props.letterSpacing ?? 0}px`;
-    ctx.wordSpacing = `${props.wordSpacing ?? 0}px`;
-    return ctx.measureText(text);
-  },
-
-  hasFont: (name: string) => registeredFonts.has(name),
-
-  async registerFont(name: string, source: string | string[]) {
-    const srcs = Array.isArray(source) ? source : [source];
-    const face = new FontFace(name, srcs.map((s) => `url(${s})`).join(", "));
-    await face.load();
-    workerFonts.add(face);
-    registeredFonts.add(name);
-  },
-
-  async unregisterFont(name: string) {
-    for (const face of workerFonts) {
-      if (face.family === name || face.family === `"${name}"`) {
-        workerFonts.delete(face);
-      }
-    }
-    registeredFonts.delete(name);
-  },
-
-  resetFonts() {
-    for (const name of registeredFonts) {
-      for (const face of workerFonts) {
-        if (face.family === name || face.family === `"${name}"`) {
-          workerFonts.delete(face);
-        }
-      }
-    }
-    registeredFonts.clear();
-  },
-
-  async loadImage(src: string | Uint8Array): Promise<HTMLImageElement> {
-    let blob: Blob;
-    if (typeof src === "string") {
-      const resp = await fetch(src);
-      blob = await resp.blob();
-    } else {
-      blob = new Blob([src.buffer as ArrayBuffer]);
-    }
-    return createImageBitmap(blob) as unknown as HTMLImageElement;
-  },
-
-  getDefaultTextProps: () => DEFAULT_TEXT_PROPS,
-  dpr: () => 1,
-  Path2D,
-  debug: () => ({...currentDebug, layout: false}),
-};
+// Image decode cache, shared across renders (keyed by url / bytes).
+const renderCache = new Map<string | Uint8Array, SoneImage>();
 
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+
+/** Transform + evaluate user code into a Sone node. */
+async function buildNode(code: string): Promise<SoneNode> {
+  const { code: js } = transform(code, { transforms: ["typescript"] });
+  const transformed = transformCode(js);
+  const fn = new AsyncFunction(
+    "__sone",
+    `${transformed}\nreturn typeof __default === "function" ? __default() : __default;`,
+  );
+  // The user's `import ... from "sone"` is rewritten to read from __sone.
+  const soneAll = await import("sone");
+  return fn(soneAll);
+}
 
 self.onmessage = async (e: MessageEvent) => {
   const msg = e.data as Record<string, unknown>;
 
   if (msg.type === "render") {
-    const { id, code, dpr, debug } = msg as {
-      id: number;
-      code: string;
-      dpr: number;
-      debug?: RenderDebugOptions;
-    };
-    currentDpr = dpr;
-    currentDebug = debug ?? { layout: false, text: false };
+    const { id, code, dpr } = msg as { id: number; code: string; dpr: number };
     try {
-      const { code: js } = transform(code as string, {
-        transforms: ["typescript"],
-      });
-      const transformed = transformCode(js);
-      const fn = new AsyncFunction(
-        "__sone",
-        `${transformed}\nreturn typeof __default === "function" ? __default() : __default;`,
-      );
-      const node = await fn(soneAll);
+      const node = await buildNode(code);
       if (node == null) {
         self.postMessage({
           type: "error",
           id,
           message:
-            "Nothing returned. Make sure you have `export default function Root() { return ... }`",
+            'Nothing returned. Make sure you have `export default function Root() { return ... }`',
         });
         return;
       }
-      const canvas = (await render(
-        node,
-        workerRenderer,
-        { cache: renderCache },
-      )) as unknown as OffscreenCanvas;
-      const { width, height } = canvas;
-      const bitmap = canvas.transferToImageBitmap();
+      // Render at device density so the preview is crisp on hi-dpi screens.
+      const png = await sone(node, { cache: renderCache }).png({ density: dpr });
+      const bitmap = await createImageBitmap(new Blob([png as BlobPart]));
       (self as unknown as Worker).postMessage(
-        { type: "result", id, bitmap, width, height },
+        { type: "result", id, bitmap, width: bitmap.width, height: bitmap.height },
         [bitmap],
       );
     } catch (err) {
@@ -139,28 +72,62 @@ self.onmessage = async (e: MessageEvent) => {
     return;
   }
 
+  if (msg.type === "export") {
+    const { id, code, format } = msg as {
+      id: number;
+      code: string;
+      format: "png" | "jpeg" | "pdf" | "svg";
+    };
+    try {
+      const node = await buildNode(code);
+      if (node == null) {
+        self.postMessage({ type: "exportError", id, message: "Nothing to export." });
+        return;
+      }
+      const doc = sone(node, { cache: renderCache });
+      // Raster exports render at 2x; pdf/svg are vector and ignore density.
+      const bytes =
+        format === "png"
+          ? await doc.png({ density: 2 })
+          : format === "jpeg"
+            ? await doc.jpg(0.95, { density: 2 })
+            : format === "pdf"
+              ? await doc.pdf()
+              : await doc.svg();
+      const buffer = new Uint8Array(bytes); // own a transferable copy
+      (self as unknown as Worker).postMessage(
+        { type: "export", id, format, bytes: buffer },
+        [buffer.buffer],
+      );
+    } catch (err) {
+      self.postMessage({
+        type: "exportError",
+        id,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
   if (msg.type === "registerFont") {
     const { name, url } = msg as { name: string; url: string };
     try {
-      await workerRenderer.registerFont(name, url);
+      await Font.load(name, url);
     } catch {
-      /* subset unavailable */
+      /* subset unavailable in this build (e.g. woff2 without decompression) */
     }
     return;
   }
 
   if (msg.type === "unregisterFont") {
-    await workerRenderer.unregisterFont((msg as { name: string }).name);
+    await Font.unload((msg as { name: string }).name);
     return;
   }
 
   if (msg.type === "clearImageCache") {
     const { url } = msg as { url?: string };
-    if (url == null) {
-      renderCache.clear();
-    } else {
-      renderCache.delete(url);
-    }
+    if (url == null) renderCache.clear();
+    else renderCache.delete(url);
     return;
   }
 };

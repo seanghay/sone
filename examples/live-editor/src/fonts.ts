@@ -1,4 +1,3 @@
-import { browserRenderer } from "./renderer";
 import { workerBridge } from "./worker-bridge";
 
 export interface FontEntry {
@@ -63,21 +62,6 @@ const SUBSETS = [
   "khmer",
 ];
 
-/** Load a single subset FontFace directly into document.fonts (no renderer tracking). */
-async function loadSubsetDirect(name: string, fontId: string, subset: string, weight: number): Promise<void> {
-  const urls = [variableUrl(fontId, subset), staticUrl(fontId, subset, weight)];
-  for (const url of urls) {
-    try {
-      const face = new FontFace(name, `url(${url})`);
-      await face.load();
-      document.fonts.add(face);
-      return;
-    } catch {
-      // try next URL / next subset
-    }
-  }
-}
-
 const loadedFonts = new Map<string, LoadedFontRecord>();
 
 export function getLoadedFonts(): LoadedFontInfo[] {
@@ -98,9 +82,10 @@ function fileToDataUrl(file: File): Promise<string> {
 
 /**
  * Load a font from the jsDelivr FontSource CDN.
- * Registers the latin subset via the Sone renderer (so hasFont() works),
- * then loads all other subsets directly so canvas rendering covers every
- * character range.
+ *
+ * Rendering happens in the worker (sone's WASM backend), so each subset is
+ * registered there via {@link workerBridge}. The CSS stylesheet and directly
+ * loaded FontFaces cover the editor's own HTML rendering of the font.
  */
 export async function loadFontFromCDN(
   fontId: string,
@@ -117,21 +102,23 @@ export async function loadFontFromCDN(
   document.head.appendChild(link);
   loadedFonts.set(fontId, { id: fontId, name, kind: "cdn", link });
 
-  // Register latin via the renderer so hasFont(name) returns true in Sone
-  const latinUrls = [variableUrl(fontId, "latin"), staticUrl(fontId, "latin", weight)];
-  let registeredUrl: string | null = null;
-  for (const url of latinUrls) {
+  // Register the latin subset in the render worker so sone can shape with it.
+  const latinUrl = variableUrl(fontId, "latin");
+  workerBridge.registerFont(name, latinUrl);
+  try {
+    const face = new FontFace(name, `url(${latinUrl})`);
+    await face.load();
+    document.fonts.add(face);
+  } catch {
+    // Fall back to the static latin file for HTML rendering.
+    const url = staticUrl(fontId, "latin", weight);
+    workerBridge.registerFont(name, url);
     try {
-      await browserRenderer.registerFont(name, url);
-      registeredUrl = url;
-      break;
-    } catch {
-      // try next
-    }
+      const face = new FontFace(name, `url(${url})`);
+      await face.load();
+      document.fonts.add(face);
+    } catch { /* latin unavailable */ }
   }
-
-  // Mirror the registration into the render worker so canvas output uses it too
-  if (registeredUrl) workerBridge.registerFont(name, registeredUrl);
 
   // Load remaining subsets directly in parallel (skipping latin, already done above)
   await Promise.all(
@@ -160,8 +147,12 @@ export async function loadCustomFontFile(
   if (loadedFonts.has(fontId)) return;
 
   const source = await fileToDataUrl(file);
-  await browserRenderer.registerFont(name, source);
   workerBridge.registerFont(name, source);
+  try {
+    const face = new FontFace(name, `url(${source})`);
+    await face.load();
+    document.fonts.add(face);
+  } catch { /* still usable by the worker even if the browser rejects it */ }
   loadedFonts.set(fontId, { id: fontId, name, kind: "custom" });
   await document.fonts.ready;
 }
@@ -172,6 +163,10 @@ export function unloadFont(fontId: string, name: string): void {
     document.head.removeChild(loaded.link);
   }
   loadedFonts.delete(fontId);
-  browserRenderer.unregisterFont(name);
+  for (const face of document.fonts) {
+    if (face.family === name || face.family === `"${name}"`) {
+      document.fonts.delete(face);
+    }
+  }
   workerBridge.unregisterFont(name);
 }
