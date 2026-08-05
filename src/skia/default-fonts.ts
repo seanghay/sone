@@ -9,6 +9,9 @@
  *
  * This module is imported lazily (only when a render finds no registered font),
  * so applications that register their own fonts never load these URLs.
+ *
+ * Both fonts are licensed under the SIL Open Font License 1.1; the license text
+ * ships alongside them (GoogleSans-OFL.txt, GeistMono-OFL.txt in ./fonts).
  */
 
 /** Family name the bundled sans is registered under; backs `sans-serif`. */
