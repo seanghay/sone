@@ -827,6 +827,11 @@ export interface SoneRenderer {
    * and every synchronous call happens downstream of that await.
    */
   ready(): Promise<void>;
+  /**
+   * Register the bundled default fonts, once, if the application registered
+   * none. A no-op when any font is already registered.
+   */
+  ensureFonts?(): Promise<void>;
   /** Generate word/character break points for text wrapping */
   breakIterator(text: string): Generator<number, void, unknown>;
   /** Create canvas with specified dimensions */
@@ -1830,6 +1835,8 @@ export async function calculateLayout(
   // depends on CanvasKit already being instantiated. This is the single choke
   // point — render, renderPages and renderWithMetadata all funnel through here.
   await renderer.ready?.();
+  // Fall back to the bundled default fonts when nothing was registered.
+  await renderer.ensureFonts?.();
 
   // create yoga
   const Yoga = await getYogaLayout();

@@ -95,6 +95,31 @@ const dpr = () =>
     ? globalThis.devicePixelRatio
     : 1;
 
+// The bundled default fonts load lazily, once, and only when nothing else is
+// registered — applications that call `Font.load()` never touch these URLs.
+let defaultFontsPromise: Promise<void> | null = null;
+
+async function ensureDefaultFonts(): Promise<void> {
+  if (fonts.families().length > 0) return;
+  if (defaultFontsPromise == null) {
+    defaultFontsPromise = (async () => {
+      const df = await import("./skia/default-fonts.ts");
+      // Sans first, so it backs the generic families (sans-serif, serif, …).
+      for (const bytes of await loadFontBytes(df.SANS_URL)) {
+        fonts.register(df.SANS_FAMILY, bytes);
+      }
+      for (const url of df.MONO_URLS) {
+        for (const bytes of await loadFontBytes(url)) {
+          fonts.register(df.MONO_FAMILY, bytes);
+        }
+      }
+      // …and monospace maps to the bundled mono face rather than the sans.
+      fonts.alias("monospace", df.MONO_FAMILY);
+    })();
+  }
+  return defaultFontsPromise;
+}
+
 /**
  * The single rendering backend. There is no pluggable seam: `render()` uses
  * this internally. It is exported for direct measurement and advanced use, but
@@ -108,6 +133,8 @@ export const renderer: SoneRenderer = {
   async ready() {
     await ready();
   },
+  /** Register the bundled default fonts if the app registered none. */
+  ensureFonts: ensureDefaultFonts,
   hasFont: (name) => fonts.has(name),
   Path2D: SonePath,
   breakIterator: defaultLineBreakerIterator,
@@ -140,6 +167,7 @@ export const renderer: SoneRenderer = {
   },
   resetFonts() {
     fonts.reset();
+    defaultFontsPromise = null;
   },
   async loadImage(src) {
     await ready();

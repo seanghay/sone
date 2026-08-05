@@ -46,9 +46,21 @@ export class FontRegistry {
   /** Listeners fired whenever registration changes, so caches can clear. */
   private readonly listeners = new Set<() => void>();
 
+  /**
+   * Generic family -> registered family. Lets `monospace` resolve to a real
+   * monospace face rather than the first-registered font. Used by the bundled
+   * default fonts; cleared on reset.
+   */
+  private readonly aliases = new Map<string, string>();
+
   /** Subscribe to registration changes (measurement/shaping caches). */
   subscribe(listener: () => void): void {
     this.listeners.add(listener);
+  }
+
+  /** Point a generic family name at a specific registered family. */
+  alias(generic: string, family: string): void {
+    this.aliases.set(generic, family);
   }
 
   register(family: string, bytes: Uint8Array): void {
@@ -86,6 +98,7 @@ export class FontRegistry {
       for (const entry of entries) entry.typeface?.delete?.();
     }
     this.faces.clear();
+    this.aliases.clear();
     this.invalidate();
   }
 
@@ -134,8 +147,16 @@ export class FontRegistry {
     };
 
     for (const family of requested) {
-      if (this.faces.has(family)) add(family);
-      else if (GENERIC_FAMILIES.has(family)) add(available[0]);
+      if (this.faces.has(family)) {
+        add(family);
+      } else if (GENERIC_FAMILIES.has(family)) {
+        // A generic maps to its alias if one is registered (e.g. monospace ->
+        // the bundled mono font); otherwise to the first registered family.
+        const aliased = this.aliases.get(family);
+        add(
+          aliased != null && this.faces.has(aliased) ? aliased : available[0],
+        );
+      }
     }
 
     // Append every other registered family as a fallback chain. Skia's
