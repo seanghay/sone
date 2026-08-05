@@ -12,7 +12,12 @@ import {
   sone,
   Text,
   toYoloDataset,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
+
+// Side-effect import: registers the visual test fonts (CanvasKit has no
+// system fonts, so this must run before anything renders).
+import "./load-test-fonts.ts";
+import { createOverlay } from "./utils.ts";
 
 // ── Palette ───────────────────────────────────────────────────────────────────
 const INK = "#0f172a";
@@ -250,8 +255,7 @@ const root = Column(
 
 // ── Render ────────────────────────────────────────────────────────────────────
 const { canvas, metadata } = await sone(root).canvasWithMetadata();
-// biome-ignore lint/suspicious/noExplicitAny: skia-canvas lacks TS types
-const ctx = (canvas as any).getContext("2d") as CanvasRenderingContext2D;
+const ctx = createOverlay(canvas);
 
 // ── Build YOLO dataset ────────────────────────────────────────────────────────
 const ds = toYoloDataset(metadata, {
@@ -288,20 +292,14 @@ for (const b of ds.boxes) {
 
   const color = colorForClass(b.className, b.classId);
 
-  ctx.save();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 1;
-  ctx.strokeRect(px + 0.5, py + 0.5, pw - 1, ph - 1);
+  ctx.strokeRect(px + 0.5, py + 0.5, pw - 1, ph - 1, color);
 
   // Label chip
-  ctx.font = `bold ${LABEL_H}px monospace`;
+
   const label = `${b.classId}:${b.className}`;
-  const tw = ctx.measureText(label).width;
-  ctx.fillStyle = color;
-  ctx.fillRect(px, py - LABEL_H - 1, tw + 4, LABEL_H + 2);
-  ctx.fillStyle = "white";
-  ctx.fillText(label, px + 2, py - 2);
-  ctx.restore();
+  const tw = ctx.measureText(label, LABEL_H);
+  ctx.fillRect(px, py - LABEL_H - 1, tw + 4, LABEL_H + 2, color);
+  ctx.fillText(label, px + 2, py - 2, "white", LABEL_H);
 }
 
 // ── Save ──────────────────────────────────────────────────────────────────────
@@ -312,7 +310,6 @@ const outFile = path.join(
 
 await fs.writeFile(
   outFile,
-  // biome-ignore lint/suspicious/noExplicitAny: skia-canvas lacks TS types
   await (canvas as any).toBuffer("jpg", { density: 2 }),
 );
 

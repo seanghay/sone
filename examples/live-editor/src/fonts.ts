@@ -1,4 +1,3 @@
-import { browserRenderer } from "./renderer";
 import { workerBridge } from "./worker-bridge";
 
 export interface FontEntry {
@@ -38,14 +37,14 @@ type LoadedFontRecord =
   | { id: string; name: string; kind: "cdn"; link: HTMLLinkElement }
   | { id: string; name: string; kind: "custom" };
 
-/** Static font URL: {id}@{version}/{subset}-{weight}-{style}.woff2 */
+/**
+ * Static font URL as TTF: {id}@{version}/{subset}-{weight}-{style}.ttf
+ *
+ * TTF, not woff2: sone's WASM backend parses TTF/OTF/WOFF but not woff2, and
+ * fontsource only publishes its variable fonts as woff2.
+ */
 function staticUrl(id: string, subset: string, weight = 400, style = "normal", version = "latest") {
-  return `${CDN}/${id}@${version}/${subset}-${weight}-${style}.woff2`;
-}
-
-/** Variable font URL: {id}:vf@{version}/{subset}-{axes}-{style}.woff2 */
-function variableUrl(id: string, subset: string, axes = "wght", style = "normal", version = "latest") {
-  return `${CDN}/${id}:vf@${version}/${subset}-${axes}-${style}.woff2`;
+  return `${CDN}/${id}@${version}/${subset}-${weight}-${style}.ttf`;
 }
 
 // Ordered by likelihood — latin first so the primary registration succeeds fast
@@ -62,21 +61,6 @@ const SUBSETS = [
   "thai",
   "khmer",
 ];
-
-/** Load a single subset FontFace directly into document.fonts (no renderer tracking). */
-async function loadSubsetDirect(name: string, fontId: string, subset: string, weight: number): Promise<void> {
-  const urls = [variableUrl(fontId, subset), staticUrl(fontId, subset, weight)];
-  for (const url of urls) {
-    try {
-      const face = new FontFace(name, `url(${url})`);
-      await face.load();
-      document.fonts.add(face);
-      return;
-    } catch {
-      // try next URL / next subset
-    }
-  }
-}
 
 const loadedFonts = new Map<string, LoadedFontRecord>();
 
@@ -98,9 +82,10 @@ function fileToDataUrl(file: File): Promise<string> {
 
 /**
  * Load a font from the jsDelivr FontSource CDN.
- * Registers the latin subset via the Sone renderer (so hasFont() works),
- * then loads all other subsets directly so canvas rendering covers every
- * character range.
+ *
+ * Rendering happens in the worker (sone's WASM backend), so each subset is
+ * registered there via {@link workerBridge}. The CSS stylesheet and directly
+ * loaded FontFaces cover the editor's own HTML rendering of the font.
  */
 export async function loadFontFromCDN(
   fontId: string,
@@ -109,7 +94,8 @@ export async function loadFontFromCDN(
 ): Promise<void> {
   if (loadedFonts.has(fontId)) return;
 
-  // Inject CSS stylesheet — defines @font-face rules with unicode-range for HTML rendering
+  // Inject CSS stylesheet — @font-face rules with unicode-range for the editor's
+  // own HTML rendering (the browser handles woff2 there).
   const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = `${CDN}/${fontId}@latest/index.css`;
@@ -117,37 +103,26 @@ export async function loadFontFromCDN(
   document.head.appendChild(link);
   loadedFonts.set(fontId, { id: fontId, name, kind: "cdn", link });
 
-  // Register latin via the renderer so hasFont(name) returns true in Sone
-  const latinUrls = [variableUrl(fontId, "latin"), staticUrl(fontId, "latin", weight)];
-  let registeredUrl: string | null = null;
-  for (const url of latinUrls) {
+  // Register static TTF in the render worker (sone can't parse woff2). Latin
+  // gets regular + bold; other subsets get regular. Missing files 404 and are
+  // skipped silently in the worker's Font.load.
+  const registerTtf = async (subset: string, w: number) => {
+    const url = staticUrl(fontId, subset, w);
+    workerBridge.registerFont(name, url);
     try {
-      await browserRenderer.registerFont(name, url);
-      registeredUrl = url;
-      break;
+      const face = new FontFace(name, `url(${url})`, { weight: String(w) });
+      await face.load();
+      document.fonts.add(face);
     } catch {
-      // try next
+      /* subset/weight unavailable */
     }
-  }
+  };
 
-  // Mirror the registration into the render worker so canvas output uses it too
-  if (registeredUrl) workerBridge.registerFont(name, registeredUrl);
-
-  // Load remaining subsets directly in parallel (skipping latin, already done above)
-  await Promise.all(
-    SUBSETS.filter((s) => s !== "latin").map(async (subset) => {
-      const urls = [variableUrl(fontId, subset), staticUrl(fontId, subset, weight)];
-      for (const url of urls) {
-        try {
-          const face = new FontFace(name, `url(${url})`);
-          await face.load();
-          document.fonts.add(face);
-          workerBridge.registerFont(name, url); // sync to worker
-          return;
-        } catch { /* subset unavailable */ }
-      }
-    })
-  );
+  await Promise.all([
+    registerTtf("latin", 400),
+    registerTtf("latin", 700),
+    ...SUBSETS.filter((s) => s !== "latin").map((s) => registerTtf(s, weight)),
+  ]);
 
   await document.fonts.ready;
 }
@@ -159,9 +134,15 @@ export async function loadCustomFontFile(
 ): Promise<void> {
   if (loadedFonts.has(fontId)) return;
 
+  // sone's WASM backend parses TTF/OTF/WOFF (not woff2); a woff2 upload will be
+  // rejected by the worker and simply won't render.
   const source = await fileToDataUrl(file);
-  await browserRenderer.registerFont(name, source);
   workerBridge.registerFont(name, source);
+  try {
+    const face = new FontFace(name, `url(${source})`);
+    await face.load();
+    document.fonts.add(face);
+  } catch { /* still usable by the worker even if the browser rejects it */ }
   loadedFonts.set(fontId, { id: fontId, name, kind: "custom" });
   await document.fonts.ready;
 }
@@ -172,6 +153,10 @@ export function unloadFont(fontId: string, name: string): void {
     document.head.removeChild(loaded.link);
   }
   loadedFonts.delete(fontId);
-  browserRenderer.unregisterFont(name);
+  for (const face of document.fonts) {
+    if (face.family === name || face.family === `"${name}"`) {
+      document.fonts.delete(face);
+    }
+  }
   workerBridge.unregisterFont(name);
 }

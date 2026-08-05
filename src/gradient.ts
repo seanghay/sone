@@ -5,6 +5,8 @@ import {
   type GradientNode,
 } from "gradient-parser";
 import { colors } from "./color.ts";
+import { parseColor } from "./skia/color.ts";
+import type { Painter } from "./skia/painter.ts";
 
 const REGEX_COLOR_RGB = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/;
 
@@ -230,8 +232,14 @@ export function generateGradient(
   return values;
 }
 
+/**
+ * Build Skia gradient shaders for a list of parsed CSS gradients.
+ *
+ * Shaders are handed to the painter's arena so they are released with the rest
+ * of the node's paint pass — CanvasKit objects are not garbage collected.
+ */
 export function createGradientFillStyleList(
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   gradients: GradientNode[],
   x: number,
   y: number,
@@ -239,24 +247,35 @@ export function createGradientFillStyleList(
   height: number,
 ) {
   const items = generateGradient(gradients, { width, height });
-  const values: CanvasGradient[] = [];
+  // biome-ignore lint/suspicious/noExplicitAny: CanvasKit Shader
+  const values: any[] = [];
 
   for (const item of items) {
-    const gradient = ctx.createLinearGradient(
-      x + item.start!.x * width,
-      y + item.start!.y * height,
-      x + item.end!.x * width,
-      y + item.end!.y * height,
-    );
+    const stops: number[] = [];
+    const colors: Float32Array[] = [];
 
     for (let i = 0; i < item.colors.length; i++) {
-      const color = item.colors[i];
       let location = item.locations[i];
       if (location < 0) location = 0;
       if (location > 1) location = 1;
-      gradient.addColorStop(location, color);
+      stops.push(location);
+      colors.push(parseColor(item.colors[i]));
     }
-    values.push(gradient);
+
+    // Skia requires monotonically increasing stops; CSS allows a later stop to
+    // sit before an earlier one, in which case it is clamped forward.
+    for (let i = 1; i < stops.length; i++) {
+      if (stops[i] < stops[i - 1]) stops[i] = stops[i - 1];
+    }
+
+    const shader = p.ck.Shader.MakeLinearGradient(
+      [x + item.start!.x * width, y + item.start!.y * height],
+      [x + item.end!.x * width, y + item.end!.y * height],
+      colors,
+      stops,
+      p.ck.TileMode.Clamp,
+    );
+    values.push(p.arena.own(shader));
   }
   return values;
 }

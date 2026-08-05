@@ -3,10 +3,11 @@ import type { PhotoNode } from "./core.ts";
 import { drawBorder } from "./op.ts";
 import { createSmoothRoundRect, parseRadius } from "./rect.ts";
 import type { SoneRenderer } from "./renderer.ts";
+import { type Painter, withSave } from "./skia/painter.ts";
 
 export function drawPhoto(
   renderer: SoneRenderer,
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node: PhotoNode,
   layout: Node,
   x: number,
@@ -60,8 +61,6 @@ export function drawPhoto(
       break;
   }
 
-  ctx.save();
-
   // create clip path — custom SVG path or default rounded rect
   const roundedRectPath = createSmoothRoundRect(
     renderer,
@@ -76,47 +75,44 @@ export function drawPhoto(
 
   const clipShape =
     props.clipPath != null
-      ? new renderer.Path2D(props.clipPath)
+      ? p.arena.own(new renderer.Path2D(props.clipPath))
       : roundedRectPath;
 
-  ctx.translate(x, y);
-  ctx.clip(clipShape);
-  ctx.translate(-x, -y);
+  withSave(p, () => {
+    p.canvas.translate(x, y);
+    p.canvas.clipPath(clipShape.path, p.ck.ClipOp.Intersect, true);
+    p.canvas.translate(-x, -y);
 
-  // render layout props
-  if (props.background) {
-    for (const bg of props.background) {
-      if (typeof bg === "string") {
-        ctx.fillStyle = bg;
-        ctx.fillRect(x, y, containerWidth, containerHeight);
+    // render layout props
+    if (props.background) {
+      for (const bg of props.background) {
+        if (typeof bg === "string") {
+          p.canvas.drawRect(
+            p.ck.XYWHRect(x, y, containerWidth, containerHeight),
+            p.arena.fill(bg),
+          );
+        }
       }
     }
-  }
 
-  const flipHorizontal = props.flipHorizontal ?? false;
-  const flipVertical = props.flipVertical ?? false;
+    const flipHorizontal = props.flipHorizontal ?? false;
+    const flipVertical = props.flipVertical ?? false;
 
-  if (flipHorizontal || flipVertical) {
-    const centerX = destX + destWidth / 2;
-    const centerY = destY + destHeight / 2;
-    ctx.translate(centerX, centerY);
-    ctx.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
-    ctx.translate(-centerX, -centerY);
-  }
+    if (flipHorizontal || flipVertical) {
+      const centerX = destX + destWidth / 2;
+      const centerY = destY + destHeight / 2;
+      p.canvas.translate(centerX, centerY);
+      p.canvas.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
+      p.canvas.translate(-centerX, -centerY);
+    }
 
-  ctx.drawImage(
-    image,
-    0,
-    0,
-    sourceWidth,
-    sourceHeight,
-    destX,
-    destY,
-    destWidth,
-    destHeight,
-  );
-
-  ctx.restore();
+    p.canvas.drawImageRect(
+      image.image,
+      p.ck.XYWHRect(0, 0, sourceWidth, sourceHeight),
+      p.ck.XYWHRect(destX, destY, destWidth, destHeight),
+      p.arena.fill("black"),
+    );
+  });
 
   // border
   if (
@@ -126,6 +122,6 @@ export function drawPhoto(
     props.borderRightWidth != null ||
     props.borderBottomWidth != null
   ) {
-    drawBorder(ctx, layout, props, roundedRectPath, x, y);
+    drawBorder(p, layout, props, roundedRectPath, x, y);
   }
 }

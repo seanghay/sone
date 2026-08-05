@@ -12,13 +12,19 @@
  *   npx tsx test/visual/lineheight-compare.ts
  */
 
-import { Buffer } from "node:buffer";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer-core";
-import { Canvas, loadImage } from "skia-canvas";
-import { sone, Text } from "../../src/node.ts";
+import { renderer } from "../../src/backend.ts";
+import {
+  Column,
+  Photo,
+  Row,
+  type SoneNode,
+  sone,
+  Text,
+} from "../../src/index.ts";
 import { loadVisualTestFonts } from "./load-test-fonts.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
@@ -313,7 +319,7 @@ async function renderSone(
   fontSize: number,
   lineHeight: number | "default",
   fontEntry: FontEntry,
-): Promise<Buffer> {
+): Promise<Uint8Array> {
   let node = Text(text)
     .font(fontEntry.soneName)
     .size(fontSize)
@@ -322,86 +328,76 @@ async function renderSone(
   if (lineHeight !== "default") node = node.lineHeight(lineHeight);
 
   const { canvas } = await sone(node).canvasWithMetadata();
-  // @ts-expect-error skia-canvas toBuffer not in HTMLCanvasElement types
-  return (canvas as HTMLCanvasElement).toBuffer("png", { density: 1 });
+  return canvas.toBuffer("png", { density: 1 });
 }
 
 // ─── composite helper ──────────────────────────────────────────────────────────
 
-const LABEL_H = 28;
 const GAP = 4;
 const PAD = 8;
-const FONT_LABEL = "14px monospace";
+const LABEL_FONT = "GeistMono";
 
-function asNodeBuffer(data: Uint8Array): Buffer {
-  return Buffer.isBuffer(data) ? data : Buffer.from(data);
-}
-
+/**
+ * Composite the two renders side by side.
+ *
+ * Built with sone itself rather than a raw 2D context — the Skia backend has no
+ * Canvas2D API, and this doubles as a check that Photo/Row/Column behave.
+ */
 async function composite(
   slug: string,
   browserPng: Uint8Array,
   sonePng: Uint8Array,
   meta: { text: string; fontSize: number; lineHeight: number | "default" },
 ): Promise<void> {
-  const bImg = await loadImage(asNodeBuffer(browserPng));
-  const sImg = await loadImage(asNodeBuffer(sonePng));
+  const bImg = await renderer.loadImage(browserPng);
+  const sImg = await renderer.loadImage(sonePng);
 
-  const totalW = PAD + bImg.width + GAP + sImg.width + PAD;
-  const totalH =
-    PAD + LABEL_H + GAP + Math.max(bImg.height, sImg.height) + LABEL_H + PAD;
-
-  const canvas = new Canvas(totalW, totalH);
-  const ctx = canvas.getContext("2d");
-
-  // background
-  ctx.fillStyle = "#f0f0f0";
-  ctx.fillRect(0, 0, totalW, totalH);
-
-  // title label
-  ctx.fillStyle = "#333";
-  ctx.font = `bold ${FONT_LABEL}`;
-  ctx.fillText(
-    `"${meta.text.replace(/\n/g, "\\n")}"  size=${meta.fontSize}  lh=${meta.lineHeight === "default" ? "normal(browser) / 1.0(sone)" : meta.lineHeight}`,
-    PAD,
-    PAD + 18,
-  );
-
-  const imgY = PAD + LABEL_H + GAP;
-
-  // browser image
-  const bX = PAD;
-  ctx.drawImage(bImg, bX, imgY);
-  ctx.strokeStyle = "#0074D9";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(bX, imgY, bImg.width, bImg.height);
-
-  // sone image
-  const sX = PAD + bImg.width + GAP;
-  ctx.drawImage(sImg, sX, imgY);
-  ctx.strokeStyle = "#FF4136";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(sX, imgY, sImg.width, sImg.height);
-
-  // sub-labels
-  const labelY = imgY + Math.max(bImg.height, sImg.height) + 16;
-  ctx.fillStyle = "#0074D9";
-  ctx.font = FONT_LABEL;
-  ctx.fillText(`browser  ${bImg.width}×${bImg.height}`, bX, labelY);
-  ctx.fillStyle = "#FF4136";
-  ctx.fillText(`sone     ${sImg.width}×${sImg.height}`, sX, labelY);
-
-  // height delta indicator
   const delta = Math.abs(bImg.height - sImg.height);
-  ctx.fillStyle = delta === 0 ? "#2ECC40" : delta <= 2 ? "#FF851B" : "#FF4136";
-  ctx.font = `bold ${FONT_LABEL}`;
-  ctx.fillText(`Δh = ${delta}px`, PAD, totalH - PAD - 4);
+  const deltaColor =
+    delta === 0 ? "#2ECC40" : delta <= 2 ? "#FF851B" : "#FF4136";
+  const lh =
+    meta.lineHeight === "default"
+      ? "normal(browser) / 1.0(sone)"
+      : String(meta.lineHeight);
+
+  const panel = (
+    bytes: Uint8Array,
+    image: typeof bImg,
+    label: string,
+    color: string,
+  ): SoneNode =>
+    Column(
+      Photo(bytes).borderWidth(2).borderColor(color),
+      Text(`${label}  ${image.width}×${image.height}`)
+        .font(LABEL_FONT)
+        .size(14)
+        .color(color),
+    ).gap(GAP);
+
+  const sheet = Column(
+    Text(
+      `"${meta.text.replace(/\n/g, "\\n")}"  size=${meta.fontSize}  lh=${lh}`,
+    )
+      .font(LABEL_FONT)
+      .size(14)
+      .weight(700)
+      .color("#333"),
+    Row(
+      panel(browserPng, bImg, "browser", "#0074D9"),
+      panel(sonePng, sImg, "sone", "#FF4136"),
+    ).gap(GAP),
+    Text(`Δh = ${delta}px`)
+      .font(LABEL_FONT)
+      .size(14)
+      .weight(700)
+      .color(deltaColor),
+  )
+    .gap(GAP)
+    .padding(PAD)
+    .background("#f0f0f0");
 
   const outPath = path.join(OUT_DIR, `lineheight-compare-${slug}.png`);
-  await fs.writeFile(
-    outPath,
-    // @ts-expect-error skia-canvas toBuffer not in HTMLCanvasElement types
-    await (canvas as HTMLCanvasElement).toBuffer("png", { density: 1 }),
-  );
+  await fs.writeFile(outPath, await sone(sheet).png());
   console.log(`  saved ${path.basename(outPath)}  (Δh=${delta}px)`);
 }
 
@@ -432,7 +428,7 @@ try {
     await page.evaluate(() => document.fonts.ready);
     const element = await page.$(".text");
     if (!element) throw new Error("element not found");
-    const browserPng = asNodeBuffer(await element.screenshot({ type: "png" }));
+    const browserPng = await element.screenshot({ type: "png" });
     await page.close();
 
     // --- sone render ---

@@ -1,4 +1,4 @@
-import { Column, Path, Text } from "../../src/node.ts";
+import { Column, Path, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const root = Column(

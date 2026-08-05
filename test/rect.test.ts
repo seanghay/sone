@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { renderer } from "../src/node.ts";
+import { renderer } from "../src/backend.ts";
 import {
   createSmoothRoundRect,
   getBoundingBoxRectRotation,

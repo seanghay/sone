@@ -7,7 +7,7 @@ icon: Download
 ## Requirements
 
 - **Node.js 16+** (or Deno / Bun).
-- A platform with a [skia-canvas](https://github.com/samizdatco/skia-canvas) prebuilt binary — macOS, Linux, and Windows on common architectures are supported.
+- A platform with a [skia](https://github.com/samizdatco/skia) prebuilt binary — macOS, Linux, and Windows on common architectures are supported.
 
 ## Install
 
@@ -15,13 +15,12 @@ icon: Download
 npm install sone
 ```
 
-`skia-canvas` is a peer dependency. On most platforms `npm install` will pick up a prebuilt native binary automatically. If installation fails, follow the [skia-canvas instructions](https://github.com/samizdatco/skia-canvas) for your platform.
+`skia` is a peer dependency. On most platforms `npm install` will pick up a prebuilt native binary automatically. If installation fails, follow the [skia instructions](https://github.com/samizdatco/skia) for your platform.
 
 ## Optional dependencies
 
 - **Syntax highlighting** — `npm install shiki` to enable code blocks via `sone/shiki`. See [Shiki integration](/docs/advanced/shiki).
 
-> Hyphenation patterns ship with Sone, so `.hyphenate(locale)` works out of the box — no extra install needed.
 
 ## TypeScript
 
@@ -36,12 +35,12 @@ Externalize the native module so the bundler doesn't try to inline it:
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["skia-canvas"],
+  serverExternalPackages: [],
   webpack: (config, options) => {
     if (options.isServer) {
       config.externals = [
         ...config.externals,
-        { "skia-canvas": "commonjs skia-canvas" },
+        
       ];
     }
     return config;

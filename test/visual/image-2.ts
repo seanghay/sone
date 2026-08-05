@@ -1,4 +1,4 @@
-import { Photo, Row } from "../../src/node.ts";
+import { Photo, Row } from "../../src/index.ts";
 import { relative, writeCanvasToFile } from "./utils.ts";
 
 const root = Row(

@@ -4,13 +4,12 @@ import {
   Column,
   Photo,
   Row,
-  renderer,
   renderWithMetadata,
   Span,
   Text,
   toCocoDataset,
   toYoloDataset,
-} from "../src/node.ts";
+} from "../src/index.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 const imageUrl = relative("image/kouprey.jpg");
@@ -18,7 +17,7 @@ const imageUrl = relative("image/kouprey.jpg");
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 async function buildMeta(root: ReturnType<typeof Column>) {
-  const { metadata } = await renderWithMetadata(root, renderer);
+  const { metadata } = await renderWithMetadata(root);
   return metadata;
 }
 

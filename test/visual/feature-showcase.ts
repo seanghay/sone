@@ -11,7 +11,7 @@ import {
   Span,
   sone,
   Text,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
 import type { SonePageInfo } from "../../src/renderer.ts";
 
 const dir = path.dirname(fileURLToPath(import.meta.url));

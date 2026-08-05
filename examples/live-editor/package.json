@@ -15,7 +15,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-resizable-panels": "^4.9.0",
-    "sone": "latest",
+    "skia": "0.3.0",
+    "sone": "file:../..",
     "sucrase": "^3.35.1",
     "vite-plugin-svgr": "^5.2.0"
   },

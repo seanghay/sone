@@ -1,12 +1,13 @@
 import type { GradientNode } from "gradient-parser";
 import { colors } from "./color.ts";
 import type { CssShadowProperties } from "./shadow.ts";
+import type { SoneImage } from "./skia/image.ts";
 import type { SoneParagraphBlock } from "./text.ts";
 
 /**
  * Utility type to ensure non-undefined values
  */
-export type Required<T> = T extends undefined ? never : T;
+export type NonUndefined<T> = T extends undefined ? never : T;
 
 /**
  * Color values - predefined color names or CSS color strings
@@ -148,13 +149,13 @@ interface LayoutPropsBuilder<T, P = LayoutProps> {
   /** Apply multiple properties at once */
   apply(value: LayoutProps): T;
   /** Set debug tag */
-  tag(value: Required<LayoutProps["tag"]>): T;
+  tag(value: NonUndefined<LayoutProps["tag"]>): T;
 
   // methods
-  alignContent(value: Required<LayoutProps["alignContent"]>): T;
-  alignItems(value: Required<LayoutProps["alignItems"]>): T;
-  alignSelf(value: Required<LayoutProps["alignSelf"]>): T;
-  aspectRatio(value: Required<LayoutProps["aspectRatio"]>): T;
+  alignContent(value: NonUndefined<LayoutProps["alignContent"]>): T;
+  alignItems(value: NonUndefined<LayoutProps["alignItems"]>): T;
+  alignSelf(value: NonUndefined<LayoutProps["alignSelf"]>): T;
+  aspectRatio(value: NonUndefined<LayoutProps["aspectRatio"]>): T;
 
   /**
    * Border width with CSS-like shorthand values
@@ -168,108 +169,110 @@ interface LayoutPropsBuilder<T, P = LayoutProps> {
   borderWidth(top: number, leftRight: number, bottom: number): T;
   borderWidth(top: number, right: number, bottom: number, left: number): T;
 
-  borderColor(value: Required<LayoutProps["borderColor"]>): T;
+  borderColor(value: NonUndefined<LayoutProps["borderColor"]>): T;
 
   /** Margin with CSS-like shorthand (same pattern as borderWidth) */
-  margin(all: Required<LayoutProps["margin"]>): T;
+  margin(all: NonUndefined<LayoutProps["margin"]>): T;
   margin(
-    topBottom: Required<LayoutProps["marginTop"]>,
-    leftRight: Required<LayoutProps["marginLeft"]>,
+    topBottom: NonUndefined<LayoutProps["marginTop"]>,
+    leftRight: NonUndefined<LayoutProps["marginLeft"]>,
   ): T;
 
   margin(
-    top: Required<LayoutProps["marginTop"]>,
-    leftRight: Required<LayoutProps["marginRight"]>,
-    bottom: Required<LayoutProps["marginBottom"]>,
+    top: NonUndefined<LayoutProps["marginTop"]>,
+    leftRight: NonUndefined<LayoutProps["marginRight"]>,
+    bottom: NonUndefined<LayoutProps["marginBottom"]>,
   ): T;
 
   margin(
-    top: Required<LayoutProps["marginTop"]>,
-    right: Required<LayoutProps["marginRight"]>,
-    bottom: Required<LayoutProps["marginBottom"]>,
-    left: Required<LayoutProps["marginLeft"]>,
+    top: NonUndefined<LayoutProps["marginTop"]>,
+    right: NonUndefined<LayoutProps["marginRight"]>,
+    bottom: NonUndefined<LayoutProps["marginBottom"]>,
+    left: NonUndefined<LayoutProps["marginLeft"]>,
   ): T;
 
-  marginTop(value: Required<LayoutProps["marginTop"]>): T;
-  marginBottom(value: Required<LayoutProps["marginBottom"]>): T;
-  marginLeft(value: Required<LayoutProps["marginLeft"]>): T;
-  marginRight(value: Required<LayoutProps["marginRight"]>): T;
+  marginTop(value: NonUndefined<LayoutProps["marginTop"]>): T;
+  marginBottom(value: NonUndefined<LayoutProps["marginBottom"]>): T;
+  marginLeft(value: NonUndefined<LayoutProps["marginLeft"]>): T;
+  marginRight(value: NonUndefined<LayoutProps["marginRight"]>): T;
 
   /** Padding with CSS-like shorthand (same pattern as borderWidth) */
-  padding(all: Required<LayoutProps["padding"]>): T;
+  padding(all: NonUndefined<LayoutProps["padding"]>): T;
   padding(
-    topBottom: Required<LayoutProps["paddingTop"]>,
-    leftRight: Required<LayoutProps["paddingLeft"]>,
+    topBottom: NonUndefined<LayoutProps["paddingTop"]>,
+    leftRight: NonUndefined<LayoutProps["paddingLeft"]>,
   ): T;
 
   padding(
-    top: Required<LayoutProps["paddingTop"]>,
-    leftRight: Required<LayoutProps["paddingRight"]>,
-    bottom: Required<LayoutProps["paddingBottom"]>,
+    top: NonUndefined<LayoutProps["paddingTop"]>,
+    leftRight: NonUndefined<LayoutProps["paddingRight"]>,
+    bottom: NonUndefined<LayoutProps["paddingBottom"]>,
   ): T;
 
   padding(
-    top: Required<LayoutProps["paddingTop"]>,
-    right: Required<LayoutProps["paddingRight"]>,
-    bottom: Required<LayoutProps["paddingBottom"]>,
-    left: Required<LayoutProps["paddingLeft"]>,
+    top: NonUndefined<LayoutProps["paddingTop"]>,
+    right: NonUndefined<LayoutProps["paddingRight"]>,
+    bottom: NonUndefined<LayoutProps["paddingBottom"]>,
+    left: NonUndefined<LayoutProps["paddingLeft"]>,
   ): T;
 
-  paddingTop(value: Required<LayoutProps["paddingTop"]>): T;
-  paddingBottom(value: Required<LayoutProps["paddingBottom"]>): T;
-  paddingLeft(value: Required<LayoutProps["paddingLeft"]>): T;
-  paddingRight(value: Required<LayoutProps["paddingRight"]>): T;
+  paddingTop(value: NonUndefined<LayoutProps["paddingTop"]>): T;
+  paddingBottom(value: NonUndefined<LayoutProps["paddingBottom"]>): T;
+  paddingLeft(value: NonUndefined<LayoutProps["paddingLeft"]>): T;
+  paddingRight(value: NonUndefined<LayoutProps["paddingRight"]>): T;
 
-  boxSizing(value: Required<LayoutProps["boxSizing"]>): T;
-  display(value: Required<LayoutProps["display"]>): T;
-  flex(value: Required<LayoutProps["flex"]>): T;
-  basis(value: Required<LayoutProps["flexBasis"]>): T;
-  direction(value: Required<LayoutProps["flexDirection"]>): T;
-  rowGap(value: Required<LayoutProps["rowGap"]>): T;
-  gap(value: Required<LayoutProps["gap"]>): T;
-  columnGap(value: Required<LayoutProps["columnGap"]>): T;
-  grow(value: Required<LayoutProps["flexGrow"]>): T;
-  shrink(value: Required<LayoutProps["flexShrink"]>): T;
-  wrap(value: Required<LayoutProps["flexWrap"]>): T;
-  justifyContent(value: Required<LayoutProps["justifyContent"]>): T;
+  boxSizing(value: NonUndefined<LayoutProps["boxSizing"]>): T;
+  display(value: NonUndefined<LayoutProps["display"]>): T;
+  flex(value: NonUndefined<LayoutProps["flex"]>): T;
+  basis(value: NonUndefined<LayoutProps["flexBasis"]>): T;
+  flexDirection(value: NonUndefined<LayoutProps["flexDirection"]>): T;
+  /** Text/box writing direction (CSS `direction`: `"ltr"` | `"rtl"`). */
+  direction(value: NonUndefined<LayoutProps["direction"]>): T;
+  rowGap(value: NonUndefined<LayoutProps["rowGap"]>): T;
+  gap(value: NonUndefined<LayoutProps["gap"]>): T;
+  columnGap(value: NonUndefined<LayoutProps["columnGap"]>): T;
+  grow(value: NonUndefined<LayoutProps["flexGrow"]>): T;
+  shrink(value: NonUndefined<LayoutProps["flexShrink"]>): T;
+  wrap(value: NonUndefined<LayoutProps["flexWrap"]>): T;
+  justifyContent(value: NonUndefined<LayoutProps["justifyContent"]>): T;
   gridColumn(
-    start: Required<LayoutProps["gridColumnStart"]>,
-    span?: Required<LayoutProps["gridColumnSpan"]>,
+    start: NonUndefined<LayoutProps["gridColumnStart"]>,
+    span?: NonUndefined<LayoutProps["gridColumnSpan"]>,
   ): T;
   gridRow(
-    start: Required<LayoutProps["gridRowStart"]>,
-    span?: Required<LayoutProps["gridRowSpan"]>,
+    start: NonUndefined<LayoutProps["gridRowStart"]>,
+    span?: NonUndefined<LayoutProps["gridRowSpan"]>,
   ): T;
 
   // position
-  left(value: Required<LayoutProps["left"]>): T;
-  right(value: Required<LayoutProps["right"]>): T;
-  bottom(value: Required<LayoutProps["bottom"]>): T;
-  top(value: Required<LayoutProps["top"]>): T;
-  start(value: Required<LayoutProps["start"]>): T;
-  end(value: Required<LayoutProps["end"]>): T;
+  left(value: NonUndefined<LayoutProps["left"]>): T;
+  right(value: NonUndefined<LayoutProps["right"]>): T;
+  bottom(value: NonUndefined<LayoutProps["bottom"]>): T;
+  top(value: NonUndefined<LayoutProps["top"]>): T;
+  start(value: NonUndefined<LayoutProps["start"]>): T;
+  end(value: NonUndefined<LayoutProps["end"]>): T;
 
   /**
    * Set width and height together - height defaults to width if omitted (square)
    */
   size(
-    width: Required<LayoutProps["width"]>,
-    height?: Required<LayoutProps["height"]>,
+    width: NonUndefined<LayoutProps["width"]>,
+    height?: NonUndefined<LayoutProps["height"]>,
   ): T;
 
-  width(value: Required<LayoutProps["width"]>): T;
-  height(value: Required<LayoutProps["height"]>): T;
+  width(value: NonUndefined<LayoutProps["width"]>): T;
+  height(value: NonUndefined<LayoutProps["height"]>): T;
 
-  maxWidth(value: Required<LayoutProps["maxWidth"]>): T;
-  maxHeight(value: Required<LayoutProps["maxHeight"]>): T;
+  maxWidth(value: NonUndefined<LayoutProps["maxWidth"]>): T;
+  maxHeight(value: NonUndefined<LayoutProps["maxHeight"]>): T;
 
-  minWidth(value: Required<LayoutProps["minWidth"]>): T;
-  minHeight(value: Required<LayoutProps["minHeight"]>): T;
+  minWidth(value: NonUndefined<LayoutProps["minWidth"]>): T;
+  minHeight(value: NonUndefined<LayoutProps["minHeight"]>): T;
 
-  position(value: Required<LayoutProps["position"]>): T;
-  inset(value: Required<LayoutProps["inset"]>): T;
-  overflow(value: Required<LayoutProps["overflow"]>): T;
-  pageBreak(value: Required<LayoutProps["pageBreak"]>): T;
+  position(value: NonUndefined<LayoutProps["position"]>): T;
+  inset(value: NonUndefined<LayoutProps["inset"]>): T;
+  overflow(value: NonUndefined<LayoutProps["overflow"]>): T;
+  pageBreak(value: NonUndefined<LayoutProps["pageBreak"]>): T;
 
   /** CSS-like transforms */
   translateX(value: number): T;
@@ -287,18 +290,18 @@ interface LayoutPropsBuilder<T, P = LayoutProps> {
    * @example .bg("linear-gradient(...)")
    * @example .bg(Photo("url"))
    */
-  bg(...values: Required<LayoutProps["background"]>): T;
-  background(...values: Required<LayoutProps["background"]>): T;
-  opacity(value: Required<LayoutProps["opacity"]>): T;
+  bg(...values: NonUndefined<LayoutProps["background"]>): T;
+  background(...values: NonUndefined<LayoutProps["background"]>): T;
+  opacity(value: NonUndefined<LayoutProps["opacity"]>): T;
 
   // border radius
-  rounded(...values: Required<LayoutProps["cornerRadius"]>): T;
-  borderRadius(...values: Required<LayoutProps["cornerRadius"]>): T;
-  borderSmoothing(value: Required<LayoutProps["cornerSmoothing"]>): T;
+  rounded(...values: NonUndefined<LayoutProps["cornerRadius"]>): T;
+  borderRadius(...values: NonUndefined<LayoutProps["cornerRadius"]>): T;
+  borderSmoothing(value: NonUndefined<LayoutProps["cornerSmoothing"]>): T;
 
-  cornerRadius(...values: Required<LayoutProps["cornerRadius"]>): T;
-  cornerSmoothing(value: Required<LayoutProps["cornerSmoothing"]>): T;
-  corner(value: Required<LayoutProps["corner"]>): T;
+  cornerRadius(...values: NonUndefined<LayoutProps["cornerRadius"]>): T;
+  cornerSmoothing(value: NonUndefined<LayoutProps["cornerSmoothing"]>): T;
+  corner(value: NonUndefined<LayoutProps["corner"]>): T;
 
   /**
    * CSS box-shadow
@@ -314,7 +317,7 @@ interface LayoutPropsBuilder<T, P = LayoutProps> {
   /** @param value 0.0 to 1.0 */
   grayscale(value: number): T;
   /** @param value hue rotation in degrees */
-  huerotate(value: number): T;
+  hueRotate(value: number): T;
   /** @param value 0.0 to 1.0 */
   invert(value: number): T;
   /** @param value 1.0 = normal */
@@ -337,10 +340,10 @@ export interface PhotoProps extends LayoutProps {
   fill?: ColorValue;
 
   /** image source */
-  src?: string | Uint8Array | HTMLImageElement;
+  src?: string | Uint8Array | SoneImage;
 
   /** resolved image (set during compilation) */
-  image?: HTMLImageElement;
+  image?: SoneImage;
 
   /** SVG path string to clip the image (path coords relative to photo top-left) */
   clipPath?: string;
@@ -349,19 +352,21 @@ export interface PhotoProps extends LayoutProps {
 export interface PhotoPropsBuilder<T>
   extends LayoutPropsBuilder<T, PhotoProps> {
   scaleType(
-    value: Required<PhotoProps["scaleType"]>,
-    alignment?: Required<PhotoProps["scaleAlignment"]>,
+    value: NonUndefined<PhotoProps["scaleType"]>,
+    alignment?: NonUndefined<PhotoProps["scaleAlignment"]>,
   ): T;
 
   scaleType(
-    value: Required<PhotoProps["scaleType"]>,
+    value: NonUndefined<PhotoProps["scaleType"]>,
     alignment?: "center" | "end" | "start",
   ): T;
 
-  preserveAspectRatio(value?: Required<PhotoProps["preserveAspectRatio"]>): T;
-  flipHorizontal(value?: Required<PhotoProps["flipHorizontal"]>): T;
-  flipVertical(value?: Required<PhotoProps["flipVertical"]>): T;
-  fill(value: Required<PhotoProps["fill"]>): T;
+  preserveAspectRatio(
+    value?: NonUndefined<PhotoProps["preserveAspectRatio"]>,
+  ): T;
+  flipHorizontal(value?: NonUndefined<PhotoProps["flipHorizontal"]>): T;
+  flipVertical(value?: NonUndefined<PhotoProps["flipVertical"]>): T;
+  fill(value: NonUndefined<PhotoProps["fill"]>): T;
   clipPath(value: string): T;
 }
 
@@ -463,17 +468,6 @@ export interface TextProps extends SpanProps, LayoutProps {
    */
   textWrap?: "wrap" | "balance";
 
-  /**
-   * Hyphenation locale.
-   * - `true` / `"en"` — English (US) hyphenation
-   * - A BCP-47-like locale string: `"fr"`, `"de"`, `"es"`, `"it"`, `"pt"`,
-   *   `"nl"`, `"ru"`, `"pl"`, `"sv"`, `"da"`, `"nb"`, `"fi"`, etc.
-   * - `false` / omitted — no hyphenation (default)
-   *
-   * Requires the `hyphen` npm package to be installed.
-   */
-  hyphenation?: string | boolean;
-
   autofit?: boolean;
 
   /**
@@ -498,41 +492,44 @@ export interface TextProps extends SpanProps, LayoutProps {
 }
 
 export type RequiredNonNullValues<T> = {
-  [K in keyof T]-?: Required<T[K]>;
+  [K in keyof T]-?: NonUndefined<T[K]>;
 };
 
 export type DefaultTextProps = RequiredNonNullValues<
-  Omit<TextProps, keyof LayoutProps | "clipImage">
+  Omit<
+    TextProps,
+    keyof LayoutProps | "clipImage" | "textWrap" | "baseDir" | "textDir"
+  >
 > &
-  Pick<TextProps, "clipImage">;
+  Pick<TextProps, "clipImage" | "textWrap" | "baseDir" | "textDir">;
 
 export interface SpanPropsBuilder<T> {
   props: SpanProps;
-  color: (value: Required<TextProps["color"]>) => T;
-  size: (value: Required<TextProps["size"]>) => T;
-  font: (...values: Required<TextProps["font"]>) => T;
-  style: (value: Required<TextProps["style"]>) => T;
-  weight: (value: Required<TextProps["weight"]>) => T;
-  letterSpacing: (value: Required<TextProps["letterSpacing"]>) => T;
-  wordSpacing: (value: Required<TextProps["wordSpacing"]>) => T;
+  color: (value: NonUndefined<TextProps["color"]>) => T;
+  size: (value: NonUndefined<TextProps["size"]>) => T;
+  font: (...values: NonUndefined<TextProps["font"]>) => T;
+  style: (value: NonUndefined<TextProps["style"]>) => T;
+  weight: (value: NonUndefined<TextProps["weight"]>) => T;
+  letterSpacing: (value: NonUndefined<TextProps["letterSpacing"]>) => T;
+  wordSpacing: (value: NonUndefined<TextProps["wordSpacing"]>) => T;
 
-  underline: (value?: Required<TextProps["underline"]>) => T;
+  underline: (value?: NonUndefined<TextProps["underline"]>) => T;
   underlineColor: (value?: TextProps["underlineColor"]) => T;
 
-  lineThrough: (value?: Required<TextProps["lineThrough"]>) => T;
+  lineThrough: (value?: NonUndefined<TextProps["lineThrough"]>) => T;
   lineThroughColor: (value?: TextProps["lineThroughColor"]) => T;
 
-  overline: (value?: Required<TextProps["overline"]>) => T;
+  overline: (value?: NonUndefined<TextProps["overline"]>) => T;
   overlineColor: (value?: TextProps["overlineColor"]) => T;
 
   highlight: (value?: TextProps["highlightColor"]) => T;
 
-  dropShadow: (...values: Required<TextProps["dropShadows"]>) => T;
-  strokeColor: (value: Required<TextProps["strokeColor"]>) => T;
-  strokeWidth: (value: Required<TextProps["strokeWidth"]>) => T;
-  offsetY: (value: Required<TextProps["offsetY"]>) => T;
-  textDir: (value: Required<SpanProps["textDir"]>) => T;
-  tag: (value: Required<SpanProps["tag"]>) => T;
+  dropShadow: (...values: NonUndefined<TextProps["dropShadows"]>) => T;
+  strokeColor: (value: NonUndefined<TextProps["strokeColor"]>) => T;
+  strokeWidth: (value: NonUndefined<TextProps["strokeWidth"]>) => T;
+  offsetY: (value: NonUndefined<TextProps["offsetY"]>) => T;
+  textDir: (value: NonUndefined<SpanProps["textDir"]>) => T;
+  tag: (value: NonUndefined<SpanProps["tag"]>) => T;
 }
 
 /**
@@ -561,23 +558,21 @@ export interface TextPropsBuilder<T>
     >,
     Omit<SpanPropsBuilder<T>, "props"> {
   nowrap(): T;
-  maxLines(value: Required<TextProps["maxLines"]>): T;
+  maxLines(value: NonUndefined<TextProps["maxLines"]>): T;
   wrap(value?: boolean): T;
-  lineBreak(value: Required<TextProps["lineBreak"]>): T;
-  textOverflow(value: Required<TextProps["textOverflow"]>): T;
-  lineHeight(value: Required<TextProps["lineHeight"]>): T;
-  align(value: Required<TextProps["align"]>): T;
-  indent(value: Required<TextProps["indentSize"]>): T;
-  hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T;
+  lineBreak(value: NonUndefined<TextProps["lineBreak"]>): T;
+  textOverflow(value: NonUndefined<TextProps["textOverflow"]>): T;
+  lineHeight(value: NonUndefined<TextProps["lineHeight"]>): T;
+  align(value: NonUndefined<TextProps["align"]>): T;
+  indent(value: NonUndefined<TextProps["indentSize"]>): T;
+  hangingIndent(value: NonUndefined<TextProps["hangingIndentSize"]>): T;
   tabStops(...values: number[]): T;
-  tabLeader(char: Required<TextProps["tabLeader"]>): T;
-  autofit(value?: Required<TextProps["autofit"]>): T;
+  tabLeader(char: NonUndefined<TextProps["tabLeader"]>): T;
+  autofit(value?: NonUndefined<TextProps["autofit"]>): T;
   orientation(value: 0 | 90 | 180 | 270): T;
   clipImage(value: PhotoNode): T;
-  baseDir(value: Required<TextProps["baseDir"]>): T;
-  textWrap(value: Required<TextProps["textWrap"]>): T;
-  /** Enable hyphenation. Omit locale to default to English. */
-  hyphenate(locale?: string | boolean): T;
+  baseDir(value: NonUndefined<TextProps["baseDir"]>): T;
+  textWrap(value: NonUndefined<TextProps["textWrap"]>): T;
 }
 
 /**
@@ -596,13 +591,13 @@ export interface TextDefaultPropsBuilder<T>
   extends Omit<SpanPropsBuilder<T>, "props"> {
   props: TextDefaultProps;
   nowrap(): T;
-  maxLines(value: Required<TextProps["maxLines"]>): T;
+  maxLines(value: NonUndefined<TextProps["maxLines"]>): T;
   wrap(value?: boolean): T;
-  lineBreak(value: Required<TextProps["lineBreak"]>): T;
-  textOverflow(value: Required<TextProps["textOverflow"]>): T;
-  lineHeight(value: Required<TextProps["lineHeight"]>): T;
-  align(value: Required<TextProps["align"]>): T;
-  indent(value: Required<TextProps["indentSize"]>): T;
+  lineBreak(value: NonUndefined<TextProps["lineBreak"]>): T;
+  textOverflow(value: NonUndefined<TextProps["textOverflow"]>): T;
+  lineHeight(value: NonUndefined<TextProps["lineHeight"]>): T;
+  align(value: NonUndefined<TextProps["align"]>): T;
+  indent(value: NonUndefined<TextProps["indentSize"]>): T;
 }
 
 /**
@@ -672,6 +667,63 @@ export type SoneNode =
   | null
   | undefined;
 
+/** The five prop keys a CSS box shorthand (border/margin/padding) writes to. */
+interface BoxKeys {
+  all: keyof LayoutProps;
+  top: keyof LayoutProps;
+  right: keyof LayoutProps;
+  bottom: keyof LayoutProps;
+  left: keyof LayoutProps;
+}
+
+const BORDER_BOX: BoxKeys = {
+  all: "borderWidth",
+  top: "borderTopWidth",
+  right: "borderRightWidth",
+  bottom: "borderBottomWidth",
+  left: "borderLeftWidth",
+};
+const MARGIN_BOX: BoxKeys = {
+  all: "margin",
+  top: "marginTop",
+  right: "marginRight",
+  bottom: "marginBottom",
+  left: "marginLeft",
+};
+const PADDING_BOX: BoxKeys = {
+  all: "padding",
+  top: "paddingTop",
+  right: "paddingRight",
+  bottom: "paddingBottom",
+  left: "paddingLeft",
+};
+
+/**
+ * Apply a CSS 1–4 value box shorthand.
+ *
+ * With a single value the shorthand prop (`margin`/`padding`/`borderWidth`) is
+ * set directly; otherwise the four sides expand by the CSS rule
+ * `[top, right, bottom ?? top, left ?? right]`.
+ */
+function applyBoxShorthand<V>(
+  props: LayoutProps,
+  keys: BoxKeys,
+  top: V,
+  right?: V,
+  bottom?: V,
+  left?: V,
+): void {
+  const target = props as unknown as Record<keyof LayoutProps, V>;
+  if (right == null && bottom == null && left == null) {
+    target[keys.all] = top;
+    return;
+  }
+  target[keys.top] = top;
+  target[keys.right] = right as V;
+  target[keys.bottom] = bottom ?? top;
+  target[keys.left] = left ?? (right as V);
+}
+
 function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
   const addFilter = (value: string) => {
     if (props.filters == null) {
@@ -680,7 +732,9 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
     props.filters.push(value);
   };
 
-  const addBackground = (...values: Required<LayoutProps["background"]>) => {
+  const addBackground = (
+    ...values: NonUndefined<LayoutProps["background"]>
+  ) => {
     if (props.background == null) {
       props.background = [];
     }
@@ -696,19 +750,19 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       Object.assign(props, value);
       return this as unknown as T;
     },
-    alignContent(value: Required<LayoutProps["alignContent"]>): T {
+    alignContent(value: NonUndefined<LayoutProps["alignContent"]>): T {
       props.alignContent = value;
       return this as unknown as T;
     },
-    alignItems(value: Required<LayoutProps["alignItems"]>): T {
+    alignItems(value: NonUndefined<LayoutProps["alignItems"]>): T {
       props.alignItems = value;
       return this as unknown as T;
     },
-    alignSelf(value: Required<LayoutProps["alignSelf"]>): T {
+    alignSelf(value: NonUndefined<LayoutProps["alignSelf"]>): T {
       props.alignSelf = value;
       return this as unknown as T;
     },
-    aspectRatio(value: Required<LayoutProps["aspectRatio"]>): T {
+    aspectRatio(value: NonUndefined<LayoutProps["aspectRatio"]>): T {
       props.aspectRatio = value;
       return this as unknown as T;
     },
@@ -722,230 +776,152 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       bottom?: number,
       left?: number,
     ): T {
-      // all
-      if (right == null && bottom == null && left == null) {
-        props.borderWidth = top;
-        return this as unknown as T;
-      }
-
-      // topBottom, leftRight
-      if (right != null && bottom == null && left == null) {
-        props.borderTopWidth = top;
-        props.borderBottomWidth = top;
-        props.borderLeftWidth = right;
-        props.borderRightWidth = right;
-        return this as unknown as T;
-      }
-
-      // top, leftRight, bottom
-      if (right != null && bottom != null && left == null) {
-        props.borderTopWidth = top;
-        props.borderBottomWidth = bottom;
-        props.borderLeftWidth = right;
-        props.borderRightWidth = right;
-        return this as unknown as T;
-      }
-
-      props.borderTopWidth = top;
-      props.borderBottomWidth = bottom;
-      props.borderLeftWidth = left;
-      props.borderRightWidth = right;
-
+      applyBoxShorthand(props, BORDER_BOX, top, right, bottom, left);
       return this as unknown as T;
     },
-    borderColor(value: Required<LayoutProps["borderColor"]>): T {
+    borderColor(value: NonUndefined<LayoutProps["borderColor"]>): T {
       props.borderColor = value;
       return this as unknown as T;
     },
     margin(
-      top: Required<LayoutProps["marginTop"]>,
-      right?: Required<LayoutProps["marginRight"]>,
-      bottom?: Required<LayoutProps["marginBottom"]>,
-      left?: Required<LayoutProps["marginLeft"]>,
+      top: NonUndefined<LayoutProps["marginTop"]>,
+      right?: NonUndefined<LayoutProps["marginRight"]>,
+      bottom?: NonUndefined<LayoutProps["marginBottom"]>,
+      left?: NonUndefined<LayoutProps["marginLeft"]>,
     ): T {
-      // all
-      if (right == null && bottom == null && left == null) {
-        props.margin = top;
-        return this as unknown as T;
-      }
-
-      // topBottom, leftRight
-      if (right != null && bottom == null && left == null) {
-        props.marginTop = top;
-        props.marginBottom = top;
-        props.marginLeft = right;
-        props.marginRight = right;
-        return this as unknown as T;
-      }
-
-      // top, leftRight, bottom
-      if (right != null && bottom != null && left == null) {
-        props.marginTop = top;
-        props.marginLeft = right;
-        props.marginRight = right;
-        props.marginBottom = bottom;
-        return this as unknown as T;
-      }
-
-      props.marginTop = top;
-      props.marginLeft = left;
-      props.marginRight = right;
-      props.marginBottom = bottom;
+      applyBoxShorthand(props, MARGIN_BOX, top, right, bottom, left);
       return this as unknown as T;
     },
-    marginTop(value: Required<LayoutProps["marginTop"]>): T {
+    marginTop(value: NonUndefined<LayoutProps["marginTop"]>): T {
       props.marginTop = value;
       return this as unknown as T;
     },
-    marginBottom(value: Required<LayoutProps["marginBottom"]>): T {
+    marginBottom(value: NonUndefined<LayoutProps["marginBottom"]>): T {
       props.marginBottom = value;
       return this as unknown as T;
     },
-    marginLeft(value: Required<LayoutProps["marginLeft"]>): T {
+    marginLeft(value: NonUndefined<LayoutProps["marginLeft"]>): T {
       props.marginLeft = value;
       return this as unknown as T;
     },
-    marginRight(value: Required<LayoutProps["marginRight"]>): T {
+    marginRight(value: NonUndefined<LayoutProps["marginRight"]>): T {
       props.marginRight = value;
       return this as unknown as T;
     },
     padding(
-      top: Required<LayoutProps["paddingTop"]>,
-      right?: Required<LayoutProps["paddingRight"]>,
-      bottom?: Required<LayoutProps["paddingBottom"]>,
-      left?: Required<LayoutProps["paddingLeft"]>,
+      top: NonUndefined<LayoutProps["paddingTop"]>,
+      right?: NonUndefined<LayoutProps["paddingRight"]>,
+      bottom?: NonUndefined<LayoutProps["paddingBottom"]>,
+      left?: NonUndefined<LayoutProps["paddingLeft"]>,
     ): T {
-      // all
-      if (right == null && bottom == null && left == null) {
-        props.padding = top;
-        return this as unknown as T;
-      }
-
-      // topBottom, leftRight
-      if (right != null && bottom == null && left == null) {
-        props.paddingTop = top;
-        props.paddingBottom = top;
-        props.paddingLeft = right;
-        props.paddingRight = right;
-        return this as unknown as T;
-      }
-
-      // top, leftRight, bottom
-      if (right != null && bottom != null && left == null) {
-        props.paddingTop = top;
-        props.paddingLeft = right;
-        props.paddingRight = right;
-        props.paddingBottom = bottom;
-        return this as unknown as T;
-      }
-
-      props.paddingTop = top;
-      props.paddingLeft = left;
-      props.paddingRight = right;
-      props.paddingBottom = bottom;
+      applyBoxShorthand(props, PADDING_BOX, top, right, bottom, left);
       return this as unknown as T;
     },
-    paddingTop(value: Required<LayoutProps["paddingTop"]>): T {
+    paddingTop(value: NonUndefined<LayoutProps["paddingTop"]>): T {
       props.paddingTop = value;
       return this as unknown as T;
     },
-    paddingBottom(value: Required<LayoutProps["paddingBottom"]>): T {
+    paddingBottom(value: NonUndefined<LayoutProps["paddingBottom"]>): T {
       props.paddingBottom = value;
       return this as unknown as T;
     },
-    paddingLeft(value: Required<LayoutProps["paddingLeft"]>): T {
+    paddingLeft(value: NonUndefined<LayoutProps["paddingLeft"]>): T {
       props.paddingLeft = value;
       return this as unknown as T;
     },
-    paddingRight(value: Required<LayoutProps["paddingRight"]>): T {
+    paddingRight(value: NonUndefined<LayoutProps["paddingRight"]>): T {
       props.paddingRight = value;
       return this as unknown as T;
     },
-    boxSizing(value: Required<LayoutProps["boxSizing"]>): T {
+    boxSizing(value: NonUndefined<LayoutProps["boxSizing"]>): T {
       props.boxSizing = value;
       return this as unknown as T;
     },
-    display(value: Required<LayoutProps["display"]>): T {
+    display(value: NonUndefined<LayoutProps["display"]>): T {
       props.display = value;
       return this as unknown as T;
     },
-    flex(value: Required<LayoutProps["flex"]>): T {
+    flex(value: NonUndefined<LayoutProps["flex"]>): T {
       props.flex = value;
       return this as unknown as T;
     },
-    basis(value: Required<LayoutProps["flexBasis"]>): T {
+    basis(value: NonUndefined<LayoutProps["flexBasis"]>): T {
       props.flexBasis = value;
       return this as unknown as T;
     },
-    direction(value: Required<LayoutProps["flexDirection"]>): T {
+    flexDirection(value: NonUndefined<LayoutProps["flexDirection"]>): T {
       props.flexDirection = value;
       return this as unknown as T;
     },
-    rowGap(value: Required<LayoutProps["rowGap"]>): T {
+    direction(value: NonUndefined<LayoutProps["direction"]>): T {
+      props.direction = value;
+      return this as unknown as T;
+    },
+    rowGap(value: NonUndefined<LayoutProps["rowGap"]>): T {
       props.rowGap = value;
       return this as unknown as T;
     },
-    gap(value: Required<LayoutProps["gap"]>): T {
+    gap(value: NonUndefined<LayoutProps["gap"]>): T {
       props.gap = value;
       return this as unknown as T;
     },
-    columnGap(value: Required<LayoutProps["columnGap"]>): T {
+    columnGap(value: NonUndefined<LayoutProps["columnGap"]>): T {
       props.columnGap = value;
       return this as unknown as T;
     },
-    grow(value: Required<LayoutProps["flexGrow"]>): T {
+    grow(value: NonUndefined<LayoutProps["flexGrow"]>): T {
       props.flexGrow = value;
       return this as unknown as T;
     },
-    shrink(value: Required<LayoutProps["flexShrink"]>): T {
+    shrink(value: NonUndefined<LayoutProps["flexShrink"]>): T {
       props.flexShrink = value;
       return this as unknown as T;
     },
-    wrap(value: Required<LayoutProps["flexWrap"]>): T {
+    wrap(value: NonUndefined<LayoutProps["flexWrap"]>): T {
       props.flexWrap = value;
       return this as unknown as T;
     },
-    justifyContent(value: Required<LayoutProps["justifyContent"]>): T {
+    justifyContent(value: NonUndefined<LayoutProps["justifyContent"]>): T {
       props.justifyContent = value;
       return this as unknown as T;
     },
     gridColumn(
-      start: Required<LayoutProps["gridColumnStart"]>,
-      span: Required<LayoutProps["gridColumnSpan"]> = 1,
+      start: NonUndefined<LayoutProps["gridColumnStart"]>,
+      span: NonUndefined<LayoutProps["gridColumnSpan"]> = 1,
     ): T {
       props.gridColumnStart = start;
       props.gridColumnSpan = span;
       return this as unknown as T;
     },
     gridRow(
-      start: Required<LayoutProps["gridRowStart"]>,
-      span: Required<LayoutProps["gridRowSpan"]> = 1,
+      start: NonUndefined<LayoutProps["gridRowStart"]>,
+      span: NonUndefined<LayoutProps["gridRowSpan"]> = 1,
     ): T {
       props.gridRowStart = start;
       props.gridRowSpan = span;
       return this as unknown as T;
     },
-    left(value: Required<LayoutProps["left"]>): T {
+    left(value: NonUndefined<LayoutProps["left"]>): T {
       props.left = value;
       return this as unknown as T;
     },
-    right(value: Required<LayoutProps["right"]>): T {
+    right(value: NonUndefined<LayoutProps["right"]>): T {
       props.right = value;
       return this as unknown as T;
     },
-    bottom(value: Required<LayoutProps["bottom"]>): T {
+    bottom(value: NonUndefined<LayoutProps["bottom"]>): T {
       props.bottom = value;
       return this as unknown as T;
     },
-    top(value: Required<LayoutProps["top"]>): T {
+    top(value: NonUndefined<LayoutProps["top"]>): T {
       props.top = value;
       return this as unknown as T;
     },
-    start(value: Required<LayoutProps["start"]>): T {
+    start(value: NonUndefined<LayoutProps["start"]>): T {
       props.start = value;
       return this as unknown as T;
     },
-    end(value: Required<LayoutProps["end"]>): T {
+    end(value: NonUndefined<LayoutProps["end"]>): T {
       props.end = value;
       return this as unknown as T;
     },
@@ -954,43 +930,43 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       props.height = height == null ? width : height;
       return this as unknown as T;
     },
-    width(value: Required<LayoutProps["width"]>): T {
+    width(value: NonUndefined<LayoutProps["width"]>): T {
       props.width = value;
       return this as unknown as T;
     },
-    height(value: Required<LayoutProps["height"]>): T {
+    height(value: NonUndefined<LayoutProps["height"]>): T {
       props.height = value;
       return this as unknown as T;
     },
-    maxWidth(value: Required<LayoutProps["maxWidth"]>): T {
+    maxWidth(value: NonUndefined<LayoutProps["maxWidth"]>): T {
       props.maxWidth = value;
       return this as unknown as T;
     },
-    maxHeight(value: Required<LayoutProps["maxHeight"]>): T {
+    maxHeight(value: NonUndefined<LayoutProps["maxHeight"]>): T {
       props.maxHeight = value;
       return this as unknown as T;
     },
-    minWidth(value: Required<LayoutProps["minWidth"]>): T {
+    minWidth(value: NonUndefined<LayoutProps["minWidth"]>): T {
       props.minWidth = value;
       return this as unknown as T;
     },
-    minHeight(value: Required<LayoutProps["minHeight"]>): T {
+    minHeight(value: NonUndefined<LayoutProps["minHeight"]>): T {
       props.minHeight = value;
       return this as unknown as T;
     },
-    position(value: Required<LayoutProps["position"]>): T {
+    position(value: NonUndefined<LayoutProps["position"]>): T {
       props.position = value;
       return this as unknown as T;
     },
-    inset(value: Required<LayoutProps["inset"]>): T {
+    inset(value: NonUndefined<LayoutProps["inset"]>): T {
       props.inset = value;
       return this as unknown as T;
     },
-    overflow(value: Required<LayoutProps["overflow"]>): T {
+    overflow(value: NonUndefined<LayoutProps["overflow"]>): T {
       props.overflow = value;
       return this as unknown as T;
     },
-    pageBreak(value: Required<LayoutProps["pageBreak"]>): T {
+    pageBreak(value: NonUndefined<LayoutProps["pageBreak"]>): T {
       props.pageBreak = value;
       return this as unknown as T;
     },
@@ -1010,11 +986,11 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       props.translateY = value;
       return this as unknown as T;
     },
-    bg(...values: Required<LayoutProps["background"]>): T {
+    bg(...values: NonUndefined<LayoutProps["background"]>): T {
       addBackground(...values);
       return this as unknown as T;
     },
-    background(...values: Required<LayoutProps["background"]>): T {
+    background(...values: NonUndefined<LayoutProps["background"]>): T {
       addBackground(...values);
       return this as unknown as T;
     },
@@ -1022,7 +998,7 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       props.opacity = value;
       return this as unknown as T;
     },
-    borderRadius(...values: Required<LayoutProps["cornerRadius"]>): T {
+    borderRadius(...values: NonUndefined<LayoutProps["cornerRadius"]>): T {
       props.cornerRadius = values;
       return this as unknown as T;
     },
@@ -1030,11 +1006,11 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       props.cornerSmoothing = value;
       return this as unknown as T;
     },
-    rounded(...values: Required<LayoutProps["cornerRadius"]>): T {
+    rounded(...values: NonUndefined<LayoutProps["cornerRadius"]>): T {
       props.cornerRadius = values;
       return this as unknown as T;
     },
-    cornerRadius(...values: Required<LayoutProps["cornerRadius"]>): T {
+    cornerRadius(...values: NonUndefined<LayoutProps["cornerRadius"]>): T {
       props.cornerRadius = values;
       return this as unknown as T;
     },
@@ -1065,7 +1041,7 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
       addFilter(`grayscale(${value})`);
       return this as unknown as T;
     },
-    huerotate(value: number): T {
+    hueRotate(value: number): T {
       addFilter(`hue-rotate(${value})`);
       return this as unknown as T;
     },
@@ -1087,7 +1063,7 @@ function layoutPropsBuilder<T>(props: LayoutProps = {}): LayoutPropsBuilder<T> {
 function spanPropsBuilder<T>(props: SpanProps = {}): SpanPropsBuilder<T> {
   return {
     props,
-    underline(value?: Required<TextProps["underline"]>) {
+    underline(value?: NonUndefined<TextProps["underline"]>) {
       props.underline = value == null ? 1.0 : value;
       return this as unknown as T;
     },
@@ -1095,7 +1071,7 @@ function spanPropsBuilder<T>(props: SpanProps = {}): SpanPropsBuilder<T> {
       props.underlineColor = value;
       return this as unknown as T;
     },
-    overline(value?: Required<TextProps["overline"]>) {
+    overline(value?: NonUndefined<TextProps["overline"]>) {
       props.overline = value == null ? 1.0 : value;
       return this as unknown as T;
     },
@@ -1103,7 +1079,7 @@ function spanPropsBuilder<T>(props: SpanProps = {}): SpanPropsBuilder<T> {
       props.overlineColor = value;
       return this as unknown as T;
     },
-    lineThrough(value?: Required<TextProps["lineThrough"]>) {
+    lineThrough(value?: NonUndefined<TextProps["lineThrough"]>) {
       props.lineThrough = value == null ? 1.0 : value;
       return this as unknown as T;
     },
@@ -1120,51 +1096,51 @@ function spanPropsBuilder<T>(props: SpanProps = {}): SpanPropsBuilder<T> {
       props.offsetY = value;
       return this as unknown as T;
     },
-    color(value: Required<TextProps["color"]>): T {
+    color(value: NonUndefined<TextProps["color"]>): T {
       props.color = value;
       return this as unknown as T;
     },
-    size(value: Required<TextProps["size"]>): T {
+    size(value: NonUndefined<TextProps["size"]>): T {
       props.size = value;
       return this as unknown as T;
     },
-    font(...values: Required<TextProps["font"]>): T {
+    font(...values: NonUndefined<TextProps["font"]>): T {
       props.font = values;
       return this as unknown as T;
     },
-    style(value: Required<TextProps["style"]>): T {
+    style(value: NonUndefined<TextProps["style"]>): T {
       props.style = value;
       return this as unknown as T;
     },
-    weight(value: Required<TextProps["weight"]>): T {
+    weight(value: NonUndefined<TextProps["weight"]>): T {
       props.weight = value;
       return this as unknown as T;
     },
-    letterSpacing(value: Required<TextProps["letterSpacing"]>): T {
+    letterSpacing(value: NonUndefined<TextProps["letterSpacing"]>): T {
       props.letterSpacing = value;
       return this as unknown as T;
     },
-    wordSpacing(value: Required<TextProps["wordSpacing"]>): T {
+    wordSpacing(value: NonUndefined<TextProps["wordSpacing"]>): T {
       props.wordSpacing = value;
       return this as unknown as T;
     },
-    strokeColor(value: Required<TextProps["strokeColor"]>): T {
+    strokeColor(value: NonUndefined<TextProps["strokeColor"]>): T {
       props.strokeColor = value;
       return this as unknown as T;
     },
-    strokeWidth(value: Required<TextProps["strokeWidth"]>): T {
+    strokeWidth(value: NonUndefined<TextProps["strokeWidth"]>): T {
       props.strokeWidth = value;
       return this as unknown as T;
     },
-    textDir(value: Required<SpanProps["textDir"]>): T {
+    textDir(value: NonUndefined<SpanProps["textDir"]>): T {
       props.textDir = value;
       return this as unknown as T;
     },
-    tag(value: Required<SpanProps["tag"]>): T {
+    tag(value: NonUndefined<SpanProps["tag"]>): T {
       props.tag = value;
       return this as unknown as T;
     },
-    dropShadow(...values: Required<TextProps["dropShadows"]>): T {
+    dropShadow(...values: NonUndefined<TextProps["dropShadows"]>): T {
       if (props.dropShadows == null) {
         props.dropShadows = [];
       }
@@ -1194,27 +1170,27 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.nowrap = !value;
       return this as unknown as T;
     },
-    lineBreak(value: Required<TextProps["lineBreak"]>): T {
+    lineBreak(value: NonUndefined<TextProps["lineBreak"]>): T {
       props.lineBreak = value;
       return this as unknown as T;
     },
-    textOverflow(value: Required<TextProps["textOverflow"]>): T {
+    textOverflow(value: NonUndefined<TextProps["textOverflow"]>): T {
       props.textOverflow = value;
       return this as unknown as T;
     },
-    lineHeight(value: Required<TextProps["lineHeight"]>): T {
+    lineHeight(value: NonUndefined<TextProps["lineHeight"]>): T {
       props.lineHeight = value;
       return this as unknown as T;
     },
-    align(value: Required<TextProps["align"]>): T {
+    align(value: NonUndefined<TextProps["align"]>): T {
       props.align = value;
       return this as unknown as T;
     },
-    indent(value: Required<TextProps["indentSize"]>): T {
+    indent(value: NonUndefined<TextProps["indentSize"]>): T {
       props.indentSize = value;
       return this as unknown as T;
     },
-    hangingIndent(value: Required<TextProps["hangingIndentSize"]>): T {
+    hangingIndent(value: NonUndefined<TextProps["hangingIndentSize"]>): T {
       props.hangingIndentSize = value;
       return this as unknown as T;
     },
@@ -1222,7 +1198,7 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.tabStops = values;
       return this as unknown as T;
     },
-    tabLeader(char: Required<TextProps["tabLeader"]>): T {
+    tabLeader(char: NonUndefined<TextProps["tabLeader"]>): T {
       props.tabLeader = char;
       return this as unknown as T;
     },
@@ -1230,7 +1206,7 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.orientation = value;
       return this as unknown as T;
     },
-    baseDir(value: Required<TextProps["baseDir"]>): T {
+    baseDir(value: NonUndefined<TextProps["baseDir"]>): T {
       props.baseDir = value;
       return this as unknown as T;
     },
@@ -1238,12 +1214,8 @@ function textPropsBuilder<T>(props: TextProps = {}): TextPropsBuilder<T> {
       props.clipImage = value;
       return this as unknown as T;
     },
-    textWrap(value: Required<TextProps["textWrap"]>): T {
+    textWrap(value: NonUndefined<TextProps["textWrap"]>): T {
       props.textWrap = value;
-      return this as unknown as T;
-    },
-    hyphenate(locale?: string | boolean): T {
-      props.hyphenation = locale ?? true;
       return this as unknown as T;
     },
     props,
@@ -1280,23 +1252,23 @@ function textDefaultPropsBuilder<T>(
       props.nowrap = !value;
       return this as unknown as T;
     },
-    lineBreak(value: Required<TextProps["lineBreak"]>): T {
+    lineBreak(value: NonUndefined<TextProps["lineBreak"]>): T {
       props.lineBreak = value;
       return this as unknown as T;
     },
-    textOverflow(value: Required<TextProps["textOverflow"]>): T {
+    textOverflow(value: NonUndefined<TextProps["textOverflow"]>): T {
       props.textOverflow = value;
       return this as unknown as T;
     },
-    lineHeight(value: Required<TextProps["lineHeight"]>): T {
+    lineHeight(value: NonUndefined<TextProps["lineHeight"]>): T {
       props.lineHeight = value;
       return this as unknown as T;
     },
-    align(value: Required<TextProps["align"]>): T {
+    align(value: NonUndefined<TextProps["align"]>): T {
       props.align = value;
       return this as unknown as T;
     },
-    indent(value: Required<TextProps["indentSize"]>): T {
+    indent(value: NonUndefined<TextProps["indentSize"]>): T {
       props.indentSize = value;
       return this as unknown as T;
     },
@@ -1488,17 +1460,17 @@ export interface PathProps extends LayoutProps {
 }
 
 export interface PathPropsBuilder<T> extends LayoutPropsBuilder<T, PathProps> {
-  stroke(value: Required<PathProps["stroke"]>): T;
-  strokeWidth(value: Required<PathProps["strokeWidth"]>): T;
-  strokeLineCap(value: Required<PathProps["strokeLineCap"]>): T;
-  strokeLineJoin(value: Required<PathProps["strokeLineJoin"]>): T;
-  strokeMiterLimit(value: Required<PathProps["strokeMiterLimit"]>): T;
-  strokeDashArray(...values: Required<PathProps["strokeDashArray"]>): T;
-  strokeDashOffset(value: Required<PathProps["strokeDashOffset"]>): T;
-  fill(value: Required<PathProps["fill"]>): T;
-  fillOpacity(value: Required<PathProps["fillOpacity"]>): T;
-  fillRule(value: Required<PathProps["fillRule"]>): T;
-  scalePath(value: Required<PathProps["scalePath"]>): T;
+  stroke(value: NonUndefined<PathProps["stroke"]>): T;
+  strokeWidth(value: NonUndefined<PathProps["strokeWidth"]>): T;
+  strokeLineCap(value: NonUndefined<PathProps["strokeLineCap"]>): T;
+  strokeLineJoin(value: NonUndefined<PathProps["strokeLineJoin"]>): T;
+  strokeMiterLimit(value: NonUndefined<PathProps["strokeMiterLimit"]>): T;
+  strokeDashArray(...values: NonUndefined<PathProps["strokeDashArray"]>): T;
+  strokeDashOffset(value: NonUndefined<PathProps["strokeDashOffset"]>): T;
+  fill(value: NonUndefined<PathProps["fill"]>): T;
+  fillOpacity(value: NonUndefined<PathProps["fillOpacity"]>): T;
+  fillRule(value: NonUndefined<PathProps["fillRule"]>): T;
+  scalePath(value: NonUndefined<PathProps["scalePath"]>): T;
 }
 
 /**
@@ -1513,47 +1485,47 @@ export function pathPropsBuilder<T>(props: PathProps): PathPropsBuilder<T> {
   return {
     ...layoutPropsBuilder(props),
     props,
-    stroke(value: Required<PathProps["stroke"]>): T {
+    stroke(value: NonUndefined<PathProps["stroke"]>): T {
       props.stroke = value;
       return this as unknown as T;
     },
-    strokeWidth(value: Required<PathProps["strokeWidth"]>): T {
+    strokeWidth(value: NonUndefined<PathProps["strokeWidth"]>): T {
       props.strokeWidth = value;
       return this as unknown as T;
     },
-    strokeLineCap(value: Required<PathProps["strokeLineCap"]>): T {
+    strokeLineCap(value: NonUndefined<PathProps["strokeLineCap"]>): T {
       props.strokeLineCap = value;
       return this as unknown as T;
     },
-    strokeLineJoin(value: Required<PathProps["strokeLineJoin"]>): T {
+    strokeLineJoin(value: NonUndefined<PathProps["strokeLineJoin"]>): T {
       props.strokeLineJoin = value;
       return this as unknown as T;
     },
-    strokeMiterLimit(value: Required<PathProps["strokeMiterLimit"]>): T {
+    strokeMiterLimit(value: NonUndefined<PathProps["strokeMiterLimit"]>): T {
       props.strokeMiterLimit = value;
       return this as unknown as T;
     },
-    strokeDashArray(...values: Required<PathProps["strokeDashArray"]>): T {
+    strokeDashArray(...values: NonUndefined<PathProps["strokeDashArray"]>): T {
       props.strokeDashArray = values;
       return this as unknown as T;
     },
-    strokeDashOffset(value: Required<PathProps["strokeDashOffset"]>): T {
+    strokeDashOffset(value: NonUndefined<PathProps["strokeDashOffset"]>): T {
       props.strokeDashOffset = value;
       return this as unknown as T;
     },
-    fill(value: Required<PathProps["fill"]>): T {
+    fill(value: NonUndefined<PathProps["fill"]>): T {
       props.fill = value;
       return this as unknown as T;
     },
-    fillOpacity(value: Required<PathProps["fillOpacity"]>): T {
+    fillOpacity(value: NonUndefined<PathProps["fillOpacity"]>): T {
       props.fillOpacity = value;
       return this as unknown as T;
     },
-    fillRule(value: Required<PathProps["fillRule"]>): T {
+    fillRule(value: NonUndefined<PathProps["fillRule"]>): T {
       props.fillRule = value;
       return this as unknown as T;
     },
-    scalePath(value: Required<PathProps["scalePath"]>): T {
+    scalePath(value: NonUndefined<PathProps["scalePath"]>): T {
       props.scalePath = value;
       return this as unknown as T;
     },
@@ -1582,7 +1554,7 @@ export interface TableProps extends LayoutProps {
 
 export interface TablePropsBuilder<T>
   extends LayoutPropsBuilder<T, TableProps> {
-  spacing(...values: Required<TableProps["spacing"]>): T;
+  spacing(...values: NonUndefined<TableProps["spacing"]>): T;
 }
 
 export interface TableNode extends TablePropsBuilder<TableNode> {
@@ -1636,8 +1608,8 @@ export interface TableCellProps extends LayoutProps {
 
 export interface TableCellPropsBuilder<T>
   extends LayoutPropsBuilder<T, TableCellProps> {
-  colspan: (value: Required<TableCellProps["colspan"]>) => T;
-  rowspan: (value: Required<TableCellProps["rowspan"]>) => T;
+  colspan: (value: NonUndefined<TableCellProps["colspan"]>) => T;
+  rowspan: (value: NonUndefined<TableCellProps["rowspan"]>) => T;
 }
 
 export interface TableCellNode extends TableCellPropsBuilder<TableCellNode> {
@@ -1690,10 +1662,10 @@ export interface ListProps extends LayoutProps {
 }
 
 export interface ListPropsBuilder<T> extends LayoutPropsBuilder<T, ListProps> {
-  listStyle(value: Required<ListProps["listStyle"]>): T;
-  markerGap(value: Required<ListProps["markerGap"]>): T;
-  markerOffset(value: Required<ListProps["markerOffset"]>): T;
-  startIndex(value: Required<ListProps["startIndex"]>): T;
+  listStyle(value: NonUndefined<ListProps["listStyle"]>): T;
+  markerGap(value: NonUndefined<ListProps["markerGap"]>): T;
+  markerOffset(value: NonUndefined<ListProps["markerOffset"]>): T;
+  startIndex(value: NonUndefined<ListProps["startIndex"]>): T;
 }
 
 /**

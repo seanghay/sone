@@ -1,12 +1,12 @@
 import { fileURLToPath } from "node:url";
 import { beforeAll, describe, expect, test } from "vitest";
+import { renderer } from "../src/backend.ts";
 import {
   detectParagraphDirection,
   hasRTLText,
   resolveParagraphDirection,
 } from "../src/bidi.ts";
 import { Span, Text } from "../src/core.ts";
-import { renderer } from "../src/node.ts";
 import { createParagraph } from "../src/text.ts";
 
 const relative = (p: string) => fileURLToPath(new URL(p, import.meta.url));

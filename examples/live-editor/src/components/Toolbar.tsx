@@ -1,5 +1,4 @@
 import {
-  Bug,
   ChevronDown,
   Download,
   LayoutTemplate,
@@ -11,34 +10,30 @@ import { useEffect, useRef, useState } from "react";
 import { TEMPLATES } from "../templates";
 import Icon from '../sone.svg?react'
 
+type ExportFormat = "png" | "jpeg" | "pdf" | "svg";
+
 interface ToolbarProps {
   onRun: () => void;
-  onExportPNG: () => void;
-  onExportJPEG: () => void;
+  onExport: (format: ExportFormat) => void;
   onLoadTemplate: (code: string) => void;
   onToggleProperties: () => void;
   onToggleAutoRun: () => void;
-  onToggleDebug: () => void;
   isRunning: boolean;
   hasCanvas: boolean;
   propertiesOpen: boolean;
   autoRun: boolean;
-  debugEnabled: boolean;
 }
 
 export function Toolbar({
   onRun,
-  onExportPNG,
-  onExportJPEG,
+  onExport,
   onLoadTemplate,
   onToggleProperties,
   onToggleAutoRun,
-  onToggleDebug,
   isRunning,
   hasCanvas,
   propertiesOpen,
   autoRun,
-  debugEnabled,
 }: ToolbarProps) {
   const [exportOpen, setExportOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
@@ -128,17 +123,6 @@ export function Toolbar({
         Auto
       </button>
 
-      <button
-        onClick={onToggleDebug}
-        title={debugEnabled ? "Debug mode on" : "Debug mode off"}
-        className={`flex items-center gap-1.5 px-3 h-7 text-xs font-medium rounded transition-colors cursor-pointer ${
-          debugEnabled ? "bg-white text-black" : "bg-neutral-800 text-white hover:bg-neutral-700"
-        }`}
-      >
-        <Bug size={12} />
-        Debug
-      </button>
-
       {/* Run button */}
       <button
         onClick={onRun}
@@ -167,16 +151,13 @@ export function Toolbar({
         {exportOpen && (
           <div className="absolute right-0 top-9 z-50 w-44 rounded border border-neutral-300 bg-white py-2 text-black">
             <div>
-              {[
-                { label: "PNG", action: () => { onExportPNG(); closeMenus(); } },
-                { label: "JPEG", action: () => { onExportJPEG(); closeMenus(); } },
-              ].map(({ label, action }) => (
+              {(["png", "jpeg", "pdf", "svg"] as const).map((format) => (
                 <button
-                  key={label}
-                  onClick={action}
+                  key={format}
+                  onClick={() => { onExport(format); closeMenus(); }}
                   className="w-full text-left px-3 py-1.5 text-xs hover:bg-neutral-100 cursor-pointer"
                 >
-                  {label}
+                  {format.toUpperCase()}
                 </button>
               ))}
             </div>

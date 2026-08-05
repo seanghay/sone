@@ -252,7 +252,7 @@ const scenes = [
 ];
 
 for (const { name, node } of scenes) {
-  // Get the underlying skia-canvas Canvas so we can set the pixel density
+  // Get the underlying SoneCanvas so we can set the pixel density
   // before encoding — produces 2× output for retina sharpness.
   const canvas = await sone(node, { background: "white" }).canvas();
   canvas.density = DENSITY;

@@ -1,7 +1,7 @@
 /**
  * Visual test: syntax-highlighted code blocks with two themes side-by-side
  */
-import { Column, Row, Text } from "../../src/node.ts";
+import { Column, Row, Text } from "../../src/index.ts";
 import { createSoneHighlighter } from "../../src/shiki.ts";
 import { loadVisualTestFonts } from "./load-test-fonts.ts";
 import { writeCanvasToFile } from "./utils.ts";

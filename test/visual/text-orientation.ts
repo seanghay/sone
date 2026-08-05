@@ -1,4 +1,4 @@
-import { Column, Row, Text } from "../../src/node.ts";
+import { Column, Row, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const ACCENT = "#2563eb";

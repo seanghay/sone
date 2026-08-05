@@ -14,30 +14,6 @@ export function fontBuilder(props: SpanProps): string {
   return `${style} ${weight} ${size}px ${family}`.trim();
 }
 
-/**
- * Apply span properties to canvas rendering context
- * @param ctx - canvas 2D rendering context
- * @param props - span properties to apply
- */
-export function applySpanProps(
-  ctx: CanvasRenderingContext2D,
-  props: SpanProps,
-) {
-  ctx.font = fontBuilder(props);
-  if (props.letterSpacing != null) {
-    ctx.letterSpacing = `${props.letterSpacing}px`;
-  }
-  if (props.wordSpacing != null) {
-    ctx.wordSpacing = `${props.wordSpacing}px`;
-  }
-
-  if (props.color != null) {
-    if (typeof props.color === "string") {
-      ctx.fillStyle = props.color;
-    }
-  }
-}
-
 export function indicesOf(value: string, c: string): number[] {
   const indices: number[] = [];
   let index = value.indexOf(c);

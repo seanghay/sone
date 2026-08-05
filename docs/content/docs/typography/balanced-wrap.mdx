@@ -31,13 +31,10 @@ The text node itself sizes down to the balanced content width, so it composes na
 
 For body copy, prefer the default `"wrap"` — balanced wrapping is more expensive and visual benefit is small at body-text size.
 
-## Composes with hyphenation
 
 ```ts
 Text("Extraordinary accomplishments in internationalization.")
   .maxWidth(220)
-  .hyphenate("en")
   .textWrap("balance")
 ```
 
-Hyphenation creates more break opportunities; balance distributes them across lines.

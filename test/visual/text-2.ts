@@ -1,4 +1,4 @@
-import { Column, Photo, Span, Text, TextDefault } from "../../src/node.ts";
+import { Column, Photo, Span, Text, TextDefault } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const root = Column(

@@ -6,7 +6,7 @@ import {
   TableRow,
   Text,
   TextDefault,
-} from "../../src/node.ts";
+} from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const root = Column(

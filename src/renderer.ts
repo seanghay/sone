@@ -12,6 +12,10 @@ import {
   PositionType,
   type Yoga as YogaLayout,
 } from "yoga-layout/load";
+// The single backend, imported directly. `render()` and friends read it at call
+// time only, so the backend.ts <-> renderer.ts import cycle is closure-only and
+// safe. See backend.ts for why direct import beats runtime injection here.
+import { renderer } from "./backend.ts";
 import {
   type ClipGroupNode,
   type ColorValue,
@@ -43,6 +47,17 @@ import { drawPhoto } from "./photo.ts";
 import { createSmoothRoundRect, parseRadius } from "./rect.ts";
 import { applyPropsToYogaNode } from "./serde.ts";
 import { type CssShadowProperties, parseShadow } from "./shadow.ts";
+import type { SkPaint } from "./skia/arena.ts";
+import type { SoneCanvas } from "./skia/canvas.ts";
+import { parseCssFilter } from "./skia/filter.ts";
+import type { SoneImage as SkiaImage } from "./skia/image.ts";
+import {
+  clipRect,
+  dropShadowFilter,
+  type Painter,
+  withSave,
+} from "./skia/painter.ts";
+import { type FillRule, SonePath } from "./skia/path.ts";
 import { createParagraph, createTextRuns, drawTextNode } from "./text.ts";
 
 /**
@@ -778,34 +793,72 @@ export interface SoneDebugConfig {
 /**
  * Platform-specific renderer interface for Node.js/browser environments
  */
+/**
+ * The complete text measurement contract sone depends on.
+ *
+ * Sone performs its own line breaking, wrapping, justification, hyphenation and
+ * bidi resolution, so it never needs a platform's paragraph layout — only these
+ * three numbers. Ascent/descent are font-derived and therefore text-independent,
+ * matching CSS `fontBoundingBox*` semantics, which is what keeps line heights
+ * stable regardless of the glyphs on a line.
+ *
+ * Deliberately narrower than the DOM `TextMetrics` interface: it keeps the
+ * layout core free of a DOM lib dependency and makes the surface a backend must
+ * implement explicit.
+ */
+export interface SoneTextMetrics {
+  /** Advance width of the measured run */
+  width: number;
+  /** Distance from the alphabetic baseline to the font's ascent (positive) */
+  fontBoundingBoxAscent: number;
+  /** Distance from the alphabetic baseline to the font's descent (positive) */
+  fontBoundingBoxDescent: number;
+}
+
+/** Anything a font can be loaded from, across Node, browser and edge runtimes. */
+export type FontSource = string | string[] | Uint8Array | ArrayBuffer | URL;
+
 export interface SoneRenderer {
+  /**
+   * Initialize the backend.
+   *
+   * CanvasKit loads asynchronously but `measureText`, `createCanvas` and the
+   * `Path2D` constructor are synchronous. `calculateLayout` awaits this once,
+   * and every synchronous call happens downstream of that await.
+   */
+  ready(): Promise<void>;
+  /**
+   * Register the bundled default fonts, once, if the application registered
+   * none. A no-op when any font is already registered.
+   */
+  ensureFonts?(): Promise<void>;
   /** Generate word/character break points for text wrapping */
-  breakIterator(text: string): Generator<number, void, boolean>;
+  breakIterator(text: string): Generator<number, void, unknown>;
   /** Create canvas with specified dimensions */
-  createCanvas(width: number, height: number): HTMLCanvasElement;
+  createCanvas(width: number, height: number): SoneCanvas;
+  /** Build the drawing seam for a canvas */
+  createPainter(canvas: SoneCanvas): Painter;
   /** Measure text dimensions with given styling */
-  measureText(text: string, props: SpanProps): TextMetrics;
+  measureText(text: string, props: SpanProps): SoneTextMetrics;
   /** Check if font is available */
   hasFont(name: string): boolean;
-  /** Register custom font from file/URL */
-  registerFont(name: string, source: string[] | string): Promise<void>;
+  /** Register custom font from file, URL or raw bytes */
+  registerFont(name: string, source: FontSource): Promise<void>;
   /** Remove registered font */
   unregisterFont(name: string): Promise<void>;
   /** Clear all registered fonts */
   resetFonts(): void;
   /** Load image from URL or buffer */
-  loadImage(src: string | Uint8Array): Promise<HTMLImageElement>;
+  loadImage(src: string | Uint8Array): Promise<SkiaImage>;
   /** Get platform default text properties */
   getDefaultTextProps(): DefaultTextProps;
   /** Get device pixel ratio for high-DPI displays */
   dpr(): number;
-  /** Path2D constructor for drawing paths */
-  Path2D: typeof Path2D;
+  /** Path constructor, kept as `Path2D` so `instanceof` checks still hold */
+  Path2D: typeof SonePath;
   /** Get debug configuration */
   debug(): SoneDebugConfig;
 }
-
-export type SoneImage = Awaited<ReturnType<SoneRenderer["loadImage"]>>;
 
 /**
  * Context passed during node compilation phase
@@ -842,6 +895,27 @@ function configurePhotoProps(
   props.image = image;
 }
 
+/** Expand any CSS shadow strings in a list into parsed shadow properties. */
+function resolveShadowList(
+  list: Array<CssShadowProperties | string>,
+): CssShadowProperties[] {
+  const items: CssShadowProperties[] = [];
+  for (const item of list) {
+    if (typeof item === "string") items.push(...parseShadow(item));
+    else items.push(item);
+  }
+  return items;
+}
+
+/** Parse a string `color` prop into a gradient descriptor; leave plain colors. */
+function resolveGradientColor(props: {
+  color?: ColorValue | GradientNode[];
+}): void {
+  if (typeof props.color === "string" && !isColor(props.color)) {
+    props.color = parse(props.color);
+  }
+}
+
 /**
  * Compile and resolve node tree - loads images, parses gradients, cascades text properties
  * @param node - root node to compile
@@ -861,15 +935,7 @@ export async function compile<T extends SoneNode>(
 
     // transform regular box shadow
     if (node.props.shadows != null && Array.isArray(node.props.shadows)) {
-      const items: CssShadowProperties[] = [];
-      for (const item of node.props.shadows) {
-        if (typeof item === "string") {
-          items.push(...parseShadow(item));
-        } else {
-          items.push(item);
-        }
-      }
-      node.props.shadows = items;
+      node.props.shadows = resolveShadowList(node.props.shadows);
     }
 
     // gradient parser and image resolver
@@ -927,23 +993,11 @@ export async function compile<T extends SoneNode>(
       node.props.dropShadows != null &&
       Array.isArray(node.props.dropShadows)
     ) {
-      const items: CssShadowProperties[] = [];
-      for (const item of node.props.dropShadows) {
-        if (typeof item === "string") {
-          items.push(...parseShadow(item));
-        } else {
-          items.push(item);
-        }
-      }
-      node.props.dropShadows = items;
+      node.props.dropShadows = resolveShadowList(node.props.dropShadows);
     }
 
     // text color
-    if (typeof node.props.color === "string") {
-      if (!isColor(node.props.color)) {
-        node.props.color = parse(node.props.color);
-      }
-    }
+    resolveGradientColor(node.props);
 
     node.children.map((item) => {
       if (typeof item === "string") return item;
@@ -982,23 +1036,11 @@ export async function compile<T extends SoneNode>(
         item.props.dropShadows != null &&
         Array.isArray(item.props.dropShadows)
       ) {
-        const spanItems: CssShadowProperties[] = [];
-        for (const spanItem of item.props.dropShadows) {
-          if (typeof spanItem === "string") {
-            spanItems.push(...parseShadow(spanItem));
-          } else {
-            spanItems.push(spanItem);
-          }
-        }
-        item.props.dropShadows = spanItems;
+        item.props.dropShadows = resolveShadowList(item.props.dropShadows);
       }
 
       // transform span color
-      if (typeof item.props.color === "string") {
-        if (!isColor(item.props.color)) {
-          item.props.color = parse(item.props.color);
-        }
-      }
+      resolveGradientColor(item.props);
 
       return item;
     });
@@ -1755,7 +1797,7 @@ export interface SoneRenderConfig {
   /** canvas background color */
   background?: ColorValue;
   /** image cache for performance */
-  cache?: Map<string | Uint8Array, SoneImage>;
+  cache?: Map<string | Uint8Array, SkiaImage>;
   /** When set, enables pagination — each page is this many pixels tall */
   pageHeight?: number;
   /**
@@ -1787,16 +1829,15 @@ export interface SoneRenderConfig {
 
 export async function calculateLayout(
   node: SoneNode,
-  renderer: Pick<
-    SoneRenderer,
-    | "hasFont"
-    | "breakIterator"
-    | "getDefaultTextProps"
-    | "loadImage"
-    | "measureText"
-  >,
   config?: SoneRenderConfig,
 ) {
+  // Every synchronous backend call below (measureText, createCanvas, Path2D)
+  // depends on CanvasKit already being instantiated. This is the single choke
+  // point — render, renderPages and renderWithMetadata all funnel through here.
+  await renderer.ready?.();
+  // Fall back to the bundled default fonts when nothing was registered.
+  await renderer.ensureFonts?.();
+
   // create yoga
   const Yoga = await getYogaLayout();
 
@@ -1820,7 +1861,7 @@ export async function calculateLayout(
 
   const cache =
     config == null || config.cache == null
-      ? new Map<string | Uint8Array, SoneImage>()
+      ? new Map<string | Uint8Array, SkiaImage>()
       : config.cache;
 
   let currentId = 0;
@@ -1855,16 +1896,11 @@ export async function calculateLayout(
  * @param renderer - platform-specific renderer
  * @param config - rendering configuration
  */
-export async function renderWithMetadata<T = HTMLCanvasElement>(
+export async function renderWithMetadata<T = SoneCanvas>(
   node: SoneNode,
-  renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ) {
-  const { compiledNode, layout } = await calculateLayout(
-    node,
-    renderer,
-    config,
-  );
+  const { compiledNode, layout } = await calculateLayout(node, config);
 
   try {
     // render
@@ -1890,7 +1926,7 @@ export async function renderWithMetadata<T = HTMLCanvasElement>(
 }
 
 export function drawOnCanvas(
-  canvas: HTMLCanvasElement,
+  canvas: SoneCanvas,
   compiledNode: SoneNode,
   renderer: SoneRenderer,
   layout: Node,
@@ -1899,94 +1935,93 @@ export function drawOnCanvas(
   clipRegion?: { top: number; height: number },
   offsetX?: number,
 ) {
-  const ctx = canvas.getContext("2d")!;
+  const p = renderer.createPainter(canvas);
+  const { canvas: sk, ck: kit, arena } = p;
 
   if (config?.background) {
-    ctx.fillStyle = config.background;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    sk.drawRect(
+      kit.XYWHRect(0, 0, canvas.width, canvas.height),
+      arena.fill(config.background as string),
+    );
   }
 
   if (offsetY != null || clipRegion != null || offsetX != null) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(
+    sk.save();
+    clipRect(
+      p,
       0,
       clipRegion?.top ?? 0,
       canvas.width,
       clipRegion?.height ?? canvas.height,
     );
-    ctx.clip();
     const tx = offsetX ?? 0;
     const ty = offsetY ?? 0;
-    if (tx !== 0 || ty !== 0) ctx.translate(tx, ty);
+    if (tx !== 0 || ty !== 0) sk.translate(tx, ty);
   }
 
   function draw(node: SoneNode, layout: Node, x: number, y: number) {
     if (node == null) return;
 
+    // makeTransforms may open a layer for group opacity or filters, so unwind
+    // to the recorded depth rather than assuming a single save.
+    const depth = sk.save();
     try {
-      ctx.save();
-
       if (node.type !== "text-default") {
-        makeTransforms(ctx, node, layout, x, y);
+        makeTransforms(p, node, layout, x, y);
       }
 
       if (node.type === "text-default") return;
 
       // draw text
       if (node.type === "text") {
-        drawLayoutNode(renderer, ctx, node, layout, x, y);
+        drawLayoutNode(renderer, p, node, layout, x, y);
 
         if (node.props.clipImage?.props?.image != null) {
-          const w = Math.ceil(layout.getComputedWidth());
-          const h = Math.ceil(layout.getComputedHeight());
-          const dpr = renderer.dpr();
-          const offCanvas = renderer.createCanvas(
-            Math.ceil(w * dpr),
-            Math.ceil(h * dpr),
-          );
-          const offCtx = offCanvas.getContext("2d") as CanvasRenderingContext2D;
-          offCtx.scale(dpr, dpr);
-
-          // Draw text onto offscreen (without clipImage to avoid recursion)
+          // Paint the text into a layer, then composite the image over it with
+          // SrcATop so the image only shows where glyphs are. This replaces the
+          // Canvas2D approach of an offscreen canvas plus a raster blit —
+          // fewer allocations and no intermediate rasterization.
+          sk.saveLayer();
           const savedClipImage = node.props.clipImage;
           node.props.clipImage = undefined;
           try {
-            drawTextNode(renderer, offCtx, node, layout, 0, 0);
+            drawTextNode(renderer, p, node, layout, x, y);
           } finally {
             node.props.clipImage = savedClipImage;
           }
 
-          // Composite image over text shape
-          offCtx.globalCompositeOperation = "source-atop";
-          drawPhoto(renderer, offCtx, node.props.clipImage, layout, 0, 0);
-          offCtx.globalCompositeOperation = "source-over";
+          sk.saveLayer(arena.layer({ blend: kit.BlendMode.SrcATop }));
+          drawPhoto(renderer, p, node.props.clipImage, layout, x, y);
+          sk.restore();
 
-          // Blit result to main canvas
-          ctx.drawImage(offCanvas as unknown as HTMLImageElement, x, y, w, h);
+          sk.restore();
         } else {
-          drawTextNode(renderer, ctx, node, layout, x, y);
+          drawTextNode(renderer, p, node, layout, x, y);
         }
         return;
       }
 
       if (node.type === "photo") {
-        drawPhoto(renderer, ctx, node, layout, x, y);
+        drawPhoto(renderer, p, node, layout, x, y);
         return;
       }
 
       if (node.type === "path") {
-        drawLayoutNode(renderer, ctx, node, layout, x, y);
-        drawPathNode(renderer, ctx, node, x, y);
+        drawLayoutNode(renderer, p, node, layout, x, y);
+        drawPathNode(renderer, p, node, x, y);
         return;
       }
 
       if (node.type === "clip-group") {
-        drawLayoutNode(renderer, ctx, node, layout, x, y);
+        drawLayoutNode(renderer, p, node, layout, x, y);
         if (node.props.clipPath) {
-          ctx.translate(x, y);
-          ctx.clip(new renderer.Path2D(node.props.clipPath));
-          ctx.translate(-x, -y);
+          sk.translate(x, y);
+          sk.clipPath(
+            arena.own(new renderer.Path2D(node.props.clipPath)).path,
+            kit.ClipOp.Intersect,
+            true,
+          );
+          sk.translate(-x, -y);
         }
         for (const child of getNodeChildren(node, layout)) {
           draw(child.child, child.layout, x + child.offsetX, y + child.offsetY);
@@ -1994,7 +2029,7 @@ export function drawOnCanvas(
         return;
       }
 
-      drawLayoutNode(renderer, ctx, node, layout, x, y);
+      drawLayoutNode(renderer, p, node, layout, x, y);
 
       for (const child of getNodeChildren(node, layout)) {
         draw(child.child, child.layout, x + child.offsetX, y + child.offsetY);
@@ -2002,15 +2037,22 @@ export function drawOnCanvas(
 
       // draw over the children
       if (node.type === "table") {
-        drawTableNode(renderer, ctx, node, layout, x, y);
+        drawTableNode(p, node, layout, x, y);
       }
     } finally {
-      ctx.restore();
+      sk.restoreToCount(depth);
 
       // debug view
       if (renderer.debug().layout) {
-        drawDebugBBox(renderer, ctx, node, layout, x, y);
+        drawDebugBBox(renderer, p, node, layout, x, y);
       }
+
+      // Bound every CanvasKit object's lifetime to a single node's paint pass.
+      // Safe despite recursion: every arena object is consumed synchronously by
+      // the Skia call that follows it (Skia copies paint and path state at draw
+      // time), so a child's reset can never invalidate something a parent still
+      // needs.
+      arena.reset();
     }
   }
 
@@ -2018,8 +2060,10 @@ export function drawOnCanvas(
   draw(compiledNode, layout, 0, 0);
 
   if (offsetY != null || clipRegion != null || offsetX != null) {
-    ctx.restore();
+    sk.restore();
   }
+
+  arena.dispose();
 }
 
 // ── Leaf node types that are treated as indivisible for page breaking ─────────
@@ -2189,9 +2233,8 @@ function parseMargin(margin: SoneRenderConfig["margin"]) {
 
 export async function renderPages(
   node: SoneNode,
-  renderer: SoneRenderer,
   config?: SoneRenderConfig,
-): Promise<HTMLCanvasElement[]> {
+): Promise<SoneCanvas[]> {
   // ── 1. Resolve margins first so content layout can use the correct width ──
   const mg = parseMargin(config?.margin);
 
@@ -2207,7 +2250,6 @@ export async function renderPages(
   // ── 2. Layout main content ────────────────────────────────────────────────
   const { layout, compiledNode } = await calculateLayout(
     node,
-    renderer,
     contentLayoutConfig,
   );
   const totalWidth = layout.getComputedWidth();
@@ -2242,11 +2284,7 @@ export async function renderPages(
   let headerLayout: Node | undefined;
   let headerCompiled: SoneNode | undefined;
   if (config?.header != null) {
-    const r = await calculateLayout(
-      resolveHF(config.header, PROBE),
-      renderer,
-      hfConfig,
-    );
+    const r = await calculateLayout(resolveHF(config.header, PROBE), hfConfig);
     headerH = r.layout.getComputedHeight();
     if (typeof config.header !== "function") {
       headerLayout = r.layout;
@@ -2260,11 +2298,7 @@ export async function renderPages(
   let footerLayout: Node | undefined;
   let footerCompiled: SoneNode | undefined;
   if (config?.footer != null) {
-    const r = await calculateLayout(
-      resolveHF(config.footer, PROBE),
-      renderer,
-      hfConfig,
-    );
+    const r = await calculateLayout(resolveHF(config.footer, PROBE), hfConfig);
     footerH = r.layout.getComputedHeight();
     if (typeof config.footer !== "function") {
       footerLayout = r.layout;
@@ -2287,7 +2321,7 @@ export async function renderPages(
   const pageStarts = [0, ...pageBreaks];
   const totalPages = pageStarts.length;
 
-  const canvases: HTMLCanvasElement[] = [];
+  const canvases: SoneCanvas[] = [];
   const hasClip = headerH > 0 || footerH > 0 || mg.top > 0 || mg.bottom > 0;
 
   for (let i = 0; i < totalPages; i++) {
@@ -2321,11 +2355,7 @@ export async function renderPages(
     let hLayout = headerLayout;
     let hCompiled = headerCompiled;
     if (config?.header != null && typeof config.header === "function") {
-      const r = await calculateLayout(
-        resolveHF(config.header, info),
-        renderer,
-        hfConfig,
-      );
+      const r = await calculateLayout(resolveHF(config.header, info), hfConfig);
       hLayout = r.layout;
       hCompiled = r.compiledNode;
     }
@@ -2348,11 +2378,7 @@ export async function renderPages(
     let fLayout = footerLayout;
     let fCompiled = footerCompiled;
     if (config?.footer != null && typeof config.footer === "function") {
-      const r = await calculateLayout(
-        resolveHF(config.footer, info),
-        renderer,
-        hfConfig,
-      );
+      const r = await calculateLayout(resolveHF(config.footer, info), hfConfig);
       fLayout = r.layout;
       fCompiled = r.compiledNode;
     }
@@ -2423,18 +2449,8 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
     if (type === "text") {
       createTextRuns(node, layout, x, y);
       const props = klona(node.props);
-      if (props.blocks != null) {
-        for (const block of props.blocks) {
-          for (const line of block.paragraph.lines) {
-            for (const segment of line.segments) {
-              if ("lines" in segment.metrics) {
-                delete segment.metrics.lines;
-              }
-            }
-          }
-        }
-      }
-
+      // Segment metrics are already narrowed to SoneTextMetrics by the
+      // renderer's measureText, so no backend-specific fields can leak here.
       return {
         tag: props.tag,
         type,
@@ -2485,16 +2501,11 @@ export function createMetadata(compiledNode: SoneNode, layout: Node) {
  * @param config - rendering configuration
  * @returns rendered canvas
  */
-export async function render<T = HTMLCanvasElement>(
+export async function render<T = SoneCanvas>(
   node: SoneNode,
-  renderer: SoneRenderer,
   config?: SoneRenderConfig,
 ): Promise<T> {
-  const { layout, compiledNode } = await calculateLayout(
-    node,
-    renderer,
-    config,
-  );
+  const { layout, compiledNode } = await calculateLayout(node, config);
   try {
     const canvas = renderer.createCanvas(
       layout.getComputedWidth(),
@@ -2519,7 +2530,7 @@ export async function render<T = HTMLCanvasElement>(
  */
 export function drawLayoutNode(
   renderer: SoneRenderer,
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node:
     | ColumnNode
     | GridNode
@@ -2554,68 +2565,69 @@ export function drawLayoutNode(
   if (props.background != null && props.shadows) {
     for (const shadow of props.shadows) {
       if (typeof shadow === "string") continue;
-      ctx.save();
-      ctx.shadowOffsetX = shadow.offsetX;
-      ctx.shadowOffsetY = shadow.offsetY;
-      ctx.shadowBlur = shadow.blurRadius;
-      if (shadow.color) {
-        ctx.shadowColor = shadow.color;
-        ctx.fillStyle = shadow.color;
-      }
-
-      ctx.translate(x, y);
-      ctx.fill(roundedRectPath);
-      ctx.restore();
+      withSave(p, () => {
+        const filter = dropShadowFilter(p, shadow, shadow.color ?? "black");
+        p.canvas.translate(x, y);
+        p.canvas.drawPath(roundedRectPath.path, p.arena.layer({ filter }));
+      });
     }
   }
 
   // clip
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.clip(roundedRectPath);
-  ctx.translate(-x, -y);
+  withSave(p, () => {
+    p.canvas.translate(x, y);
+    p.canvas.clipPath(roundedRectPath.path, p.ck.ClipOp.Intersect, true);
+    p.canvas.translate(-x, -y);
 
-  if (props.background != null) {
-    for (const bg of props.background) {
-      if (typeof bg === "string") {
-        ctx.fillStyle = bg;
-        ctx.fillRect(x, y, width, height);
-        continue;
+    if (props.background != null) {
+      for (const bg of props.background) {
+        if (typeof bg === "string") {
+          p.canvas.drawRect(
+            p.ck.XYWHRect(x, y, width, height),
+            p.arena.fill(bg),
+          );
+          continue;
+        }
+
+        if (bg.type === "photo") {
+          withSave(p, () => {
+            makeTransforms(p, bg, layout, x, y);
+            drawPhoto(renderer, p, bg, layout, x, y);
+          });
+          continue;
+        }
+
+        // gradient fill
+        const [gradientFill] = createGradientFillStyleList(
+          p,
+          [bg],
+          x,
+          y,
+          width,
+          height,
+        );
+
+        // generateGradient skips gradient types it cannot express (radial and
+        // repeating-radial), so the list can come back empty. Canvas2D absorbed
+        // that as an ignored `fillStyle = undefined`; Skia throws, so skip.
+        if (gradientFill == null) continue;
+
+        p.canvas.drawRect(
+          p.ck.XYWHRect(x, y, width, height),
+          p.arena.shaderFill(gradientFill),
+        );
       }
-
-      if (bg.type === "photo") {
-        ctx.save();
-        makeTransforms(ctx, bg, layout, x, y);
-        drawPhoto(renderer, ctx, bg, layout, x, y);
-        ctx.restore();
-        continue;
-      }
-
-      // gradient fill
-      const [gradientFill] = createGradientFillStyleList(
-        ctx,
-        [bg],
-        x,
-        y,
-        width,
-        height,
-      );
-
-      ctx.fillStyle = gradientFill;
-      ctx.fillRect(x, y, width, height);
     }
-  }
-
-  ctx.restore();
+  });
 
   // stroke / border
-  drawBorder(ctx, layout, props, roundedRectPath, x, y);
+  drawBorder(p, layout, props, roundedRectPath, x, y);
 
   return roundedRectPath;
 }
 
 export function makeTransforms(
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node: SoneNode,
   layout: Node,
   x: number,
@@ -2624,42 +2636,57 @@ export function makeTransforms(
   if (node == null) return;
   if (node.type === "text-default") return;
 
-  // alpha
-  if (typeof node.props.opacity === "number")
-    ctx.globalAlpha = node.props.opacity;
+  const centerX = x + layout.getComputedWidth() / 2;
+  const centerY = y + layout.getComputedHeight() / 2;
+
+  // Opacity and filters both need the node composited as a group. Canvas2D
+  // applied globalAlpha per primitive, so overlapping children double-darkened;
+  // a layer composites once, which is the correct reading of group opacity.
+  // Layers are expensive on a software rasterizer, so one is only opened when
+  // a filter or a non-opaque alpha actually requires it.
+  const opacity =
+    typeof node.props.opacity === "number" ? node.props.opacity : 1;
+  const filters = Array.isArray(node.props.filters) ? node.props.filters : null;
+
+  if (opacity < 1 || (filters != null && filters.length > 0)) {
+    const { filter, disposables } =
+      filters != null && filters.length > 0
+        ? parseCssFilter(p.ck, filters)
+        : { filter: null, disposables: [] };
+    for (const disposable of disposables) p.arena.own(disposable);
+
+    p.canvas.saveLayer(
+      p.arena.layer({
+        alpha: opacity < 1 ? opacity : undefined,
+        filter: filter ?? undefined,
+      }),
+    );
+  }
 
   // translate
   const { translateX, translateY } = node.props;
-  ctx.translate(translateX ?? 0, translateY ?? 0);
+  p.canvas.translate(translateX ?? 0, translateY ?? 0);
 
-  const centerX = x + layout.getComputedWidth() / 2;
-  const centerY = y + layout.getComputedHeight() / 2;
   const rotation = node.props.rotation;
 
-  // rotation
+  // rotation — Skia rotates about a pivot in degrees, collapsing the
+  // translate/rotate/translate triple Canvas2D required.
   if (typeof rotation === "number" && rotation !== 0) {
-    ctx.translate(centerX, centerY);
-    ctx.rotate((rotation * Math.PI) / 180);
-    ctx.translate(-centerX, -centerY);
+    p.canvas.rotate(rotation, centerX, centerY);
   }
 
   // scale
   const scale = node.props.scale;
   if (scale != null && Array.isArray(scale)) {
-    ctx.translate(centerX, centerY);
-    ctx.scale(scale[0], scale[1]);
-    ctx.translate(-centerX, -centerY);
-  }
-
-  if (node.props.filters != null && Array.isArray(node.props.filters)) {
-    const filter = node.props.filters.join(" ");
-    ctx.filter = filter;
+    p.canvas.translate(centerX, centerY);
+    p.canvas.scale(scale[0], scale[1]);
+    p.canvas.translate(-centerX, -centerY);
   }
 }
 
 export function drawDebugBBox(
   renderer: SoneRenderer,
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node: SoneNode,
   layout: Node,
   x: number,
@@ -2668,154 +2695,150 @@ export function drawDebugBBox(
   if (node == null) return;
   if (node.type === "text-default") return;
 
-  ctx.save();
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "cyan";
-  ctx.strokeRect(x, y, layout.getComputedWidth(), layout.getComputedHeight());
+  withSave(p, () => {
+    const outline = () => p.arena.stroke("cyan", 2, { join: "miter" });
 
-  const text =
-    node.props.tag != null ? `${node.type}:${node.props.tag}` : node.type;
+    p.canvas.drawRect(
+      p.ck.XYWHRect(
+        x,
+        y,
+        layout.getComputedWidth(),
+        layout.getComputedHeight(),
+      ),
+      outline(),
+    );
 
-  ctx.font = `${20 * renderer.dpr()}px monospace`;
-  const m = ctx.measureText(text);
+    const text =
+      node.props.tag != null ? `${node.type}:${node.props.tag}` : node.type;
 
-  ctx.fillStyle = "rgba(0,255,255,.6)";
-  ctx.fillRect(
-    x,
-    y,
-    m.width,
-    m.fontBoundingBoxAscent + m.fontBoundingBoxDescent,
-  );
+    const props = {
+      font: ["monospace"],
+      size: 20 * renderer.dpr(),
+      weight: 400,
+      style: "normal",
+    } as unknown as SpanProps;
 
-  ctx.strokeStyle = "cyan";
-  ctx.strokeRect(
-    x,
-    y,
-    m.width,
-    m.fontBoundingBoxAscent + m.fontBoundingBoxDescent,
-  );
-  ctx.fillStyle = "black";
-  ctx.textBaseline = "top";
-  ctx.fillText(text, x, y);
-  ctx.restore();
+    const m = p.measurer.measure(text, props);
+    const height = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+
+    p.canvas.drawRect(
+      p.ck.XYWHRect(x, y, m.width, height),
+      p.arena.fill("rgba(0,255,255,.6)"),
+    );
+    p.canvas.drawRect(p.ck.XYWHRect(x, y, m.width, height), outline());
+
+    // The Canvas2D version set textBaseline="top"; drawRun takes an alphabetic
+    // baseline, so offset by the ascent to land in the same place.
+    p.text.drawRun(p.canvas, p.arena, text, props, {
+      x,
+      baselineY: y + m.fontBoundingBoxAscent,
+      width: m.width,
+      fill: p.arena.fill("black"),
+    });
+  });
 }
 
 export function drawPathNode(
   renderer: SoneRenderer,
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node: PathNode,
   x: number,
   y: number,
 ) {
-  ctx.save();
   const { props } = node;
   const { d } = props;
+  if (!d) return;
 
-  if (!d) {
-    ctx.restore();
-    return;
-  }
+  withSave(p, () => {
+    const path = p.arena.own(new renderer.Path2D(d));
 
-  const path = new renderer.Path2D(d);
+    p.canvas.translate(x, y);
 
-  ctx.translate(x, y);
+    if (props.bounds) {
+      const [left, top] = props.bounds;
+      p.canvas.scale(props.scalePath ?? 1.0, props.scalePath ?? 1.0);
+      p.canvas.translate(-left, -top);
+    }
 
-  if (props.bounds) {
-    const [left, top] = props.bounds;
-    ctx.scale(props.scalePath ?? 1.0, props.scalePath ?? 1.0);
-    ctx.translate(-left, -top);
-  }
+    if (props.fill != null) {
+      // Fold fillOpacity into the paint's alpha rather than opening a layer:
+      // this is a single fill, so a layer would allocate an offscreen for
+      // nothing. It also fixes the old divide-to-restore of globalAlpha, which
+      // produced NaN when fillOpacity was 0.
+      const alpha = props.fillOpacity ?? 1;
 
-  if (props.fill != null) {
-    if (isColor(props.fill)) {
-      ctx.fillStyle = props.fill;
-    } else {
-      // Gradient fill — compute dimensions from path bounds after transforms
-      const [left, top, right, bottom] = props.bounds ?? [0, 0, 100, 100];
-      const scale = props.scalePath ?? 1;
-      const w = (right - left) * scale;
-      const h = (bottom - top) * scale;
-      const fills = createGradientFillStyleList(
-        ctx,
-        parse(props.fill),
-        0,
-        0,
-        w,
-        h,
+      let paint: SkPaint;
+      if (isColor(props.fill)) {
+        paint = p.arena.fill(props.fill, alpha);
+      } else {
+        // Gradient fill — compute dimensions from path bounds after transforms
+        const [left, top, right, bottom] = props.bounds ?? [0, 0, 100, 100];
+        const scale = props.scalePath ?? 1;
+        const w = (right - left) * scale;
+        const h = (bottom - top) * scale;
+        const fills = createGradientFillStyleList(
+          p,
+          parse(props.fill),
+          0,
+          0,
+          w,
+          h,
+        );
+        paint =
+          fills.length > 0
+            ? p.arena.shaderFill(fills[0], alpha)
+            : p.arena.fill("black", alpha);
+      }
+
+      // Fill rule is path state in Skia, not a fill argument, so take a copy
+      // rather than mutating a path that may also be stroked or clipped.
+      const target = props.fillRule
+        ? p.arena.own(path.withFillType(props.fillRule as FillRule))
+        : path;
+
+      p.canvas.drawPath(target.path, paint);
+    }
+
+    if (props.stroke != null) {
+      p.canvas.drawPath(
+        path.path,
+        p.arena.stroke(props.stroke, props.strokeWidth ?? 1, {
+          cap: props.strokeLineCap,
+          join: props.strokeLineJoin,
+          miterLimit: props.strokeMiterLimit,
+          dash: props.strokeDashArray,
+          dashOffset: props.strokeDashOffset,
+        }),
       );
-      if (fills.length > 0) ctx.fillStyle = fills[0];
     }
-
-    if (props.fillOpacity != null) {
-      const currentAlpha = ctx.globalAlpha;
-      ctx.globalAlpha = currentAlpha * props.fillOpacity;
-    }
-
-    if (props.fillRule) {
-      ctx.fill(path, props.fillRule as CanvasFillRule);
-    } else {
-      ctx.fill(path);
-    }
-
-    if (props.fillOpacity != null) {
-      ctx.globalAlpha = ctx.globalAlpha / props.fillOpacity;
-    }
-  }
-
-  if (props.stroke != null) {
-    ctx.strokeStyle = props.stroke;
-
-    if (props.strokeWidth != null) {
-      ctx.lineWidth = props.strokeWidth;
-    }
-
-    if (props.strokeLineCap) {
-      ctx.lineCap = props.strokeLineCap;
-    }
-
-    if (props.strokeLineJoin) {
-      ctx.lineJoin = props.strokeLineJoin;
-    }
-
-    if (props.strokeMiterLimit != null) {
-      ctx.miterLimit = props.strokeMiterLimit;
-    }
-
-    if (props.strokeDashArray != null) {
-      ctx.setLineDash(props.strokeDashArray);
-    }
-
-    if (props.strokeDashOffset != null) {
-      ctx.lineDashOffset = props.strokeDashOffset;
-    }
-
-    ctx.stroke(path);
-  }
-
-  ctx.restore();
+  });
 }
 
 export function drawTableNode(
-  _renderer: SoneRenderer,
-  ctx: CanvasRenderingContext2D,
+  p: Painter,
   node: TableNode,
   layout: Node,
   x: number,
   y: number,
 ) {
-  ctx.save();
   let borderWidth = 0;
-
-  if (node.props.borderColor != null) {
-    ctx.strokeStyle = node.props.borderColor;
-  }
-
   if (node.props.borderWidth != null) {
-    ctx.lineWidth = node.props.borderWidth;
     borderWidth = node.props.borderWidth;
   }
 
-  ctx.beginPath();
+  // The whole grid accumulates into ONE path and is stroked in a single call.
+  // Emitting a drawLine per separator would mean ~100 draw calls per table,
+  // which is a meaningful cost on a software rasterizer.
+  const gridPath = p.arena.own(new SonePath());
+  const strokeGrid = () => {
+    p.canvas.drawPath(
+      gridPath.path,
+      p.arena.stroke(
+        node.props.borderColor ?? "#000000",
+        node.props.borderWidth ?? 1,
+      ),
+    );
+  };
 
   const info = tableLayoutCache.get(node);
 
@@ -2834,8 +2857,8 @@ export function drawTableNode(
       }
 
       if (r === layout.getChildCount() - 1) continue;
-      ctx.moveTo(x, y + child.getComputedHeight() + offsetY + borderWidth);
-      ctx.lineTo(
+      gridPath.moveTo(x, y + child.getComputedHeight() + offsetY + borderWidth);
+      gridPath.lineTo(
         x + layout.getComputedWidth(),
         y + child.getComputedHeight() + offsetY + borderWidth,
       );
@@ -2848,15 +2871,17 @@ export function drawTableNode(
       for (let c = 0; c < maxColChild.getChildCount(); c++) {
         const child = maxColChild.getChild(c);
         if (c > 0) {
-          ctx.moveTo(x + offsetX + borderWidth, y);
-          ctx.lineTo(x + offsetX + borderWidth, y + layout.getComputedHeight());
+          gridPath.moveTo(x + offsetX + borderWidth, y);
+          gridPath.lineTo(
+            x + offsetX + borderWidth,
+            y + layout.getComputedHeight(),
+          );
         }
         offsetX += child.getComputedWidth();
       }
     }
 
-    ctx.stroke();
-    ctx.restore();
+    strokeGrid();
     return;
   }
 
@@ -2897,15 +2922,15 @@ export function drawTableNode(
       if (!spanned && segStart === null) {
         segStart = colOffsetX;
       } else if (spanned && segStart !== null) {
-        ctx.moveTo(x + segStart, lineY);
-        ctx.lineTo(x + colOffsetX, lineY);
+        gridPath.moveTo(x + segStart, lineY);
+        gridPath.lineTo(x + colOffsetX, lineY);
         segStart = null;
       }
       colOffsetX += colWidths[c];
     }
     if (segStart !== null) {
-      ctx.moveTo(x + segStart, lineY);
-      ctx.lineTo(x + colOffsetX, lineY);
+      gridPath.moveTo(x + segStart, lineY);
+      gridPath.lineTo(x + colOffsetX, lineY);
     }
 
     offsetY += rowHeights[r];
@@ -2925,18 +2950,17 @@ export function drawTableNode(
       if (!spanned && segStart === null) {
         segStart = rowOffsetY;
       } else if (spanned && segStart !== null) {
-        ctx.moveTo(lineX, y + segStart);
-        ctx.lineTo(lineX, y + rowOffsetY);
+        gridPath.moveTo(lineX, y + segStart);
+        gridPath.lineTo(lineX, y + rowOffsetY);
         segStart = null;
       }
       rowOffsetY += rowHeights[r];
     }
     if (segStart !== null) {
-      ctx.moveTo(lineX, y + segStart);
-      ctx.lineTo(lineX, y + rowOffsetY);
+      gridPath.moveTo(lineX, y + segStart);
+      gridPath.lineTo(lineX, y + rowOffsetY);
     }
   }
 
-  ctx.stroke();
-  ctx.restore();
+  strokeGrid();
 }

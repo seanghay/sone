@@ -2,7 +2,7 @@
  * Visual test: balanced text at different font sizes and container widths
  * Shows that balance works correctly across a wide range of configurations
  */
-import { Column, Row, Text } from "../../src/node.ts";
+import { Column, Row, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const TEXT =

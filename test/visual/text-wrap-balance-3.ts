@@ -2,7 +2,7 @@
  * Visual test: balanced pull-quotes and editorial callouts
  * Shows how balance improves large display text and pull-quotes
  */
-import { Column, Row, Text } from "../../src/node.ts";
+import { Column, Row, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const W = 520;

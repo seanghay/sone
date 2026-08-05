@@ -9,7 +9,7 @@ const items: Item[] = [
   },
   {
     q: 'Why not Puppeteer or html-to-image?',
-    a: 'Headless browsers carry hundreds of MB of memory and 100ms+ per render. HTML-to-PDF engines support only a fraction of CSS — missing features become silent layout breakage. Sone is a first-party, fully-typed layout API on top of yoga-layout and skia-canvas. The API surface is exactly what the engine supports.',
+    a: 'Headless browsers carry hundreds of MB of memory and 100ms+ per render. HTML-to-PDF engines support only a fraction of CSS — missing features become silent layout breakage. Sone is a first-party, fully-typed layout API on top of yoga-layout and skia. The API surface is exactly what the engine supports.',
   },
   {
     q: 'Do I need a build step, JSX, or a compiler?',
@@ -29,7 +29,6 @@ const items: Item[] = [
   },
   {
     q: 'Does Sone support advanced typography?',
-    a: 'Yes — bidirectional text (Arabic, Hebrew, mixed paragraphs), automatic hyphenation in 80+ languages, balanced line wrapping, tab stops with leaders, text orientation at 0°/90°/180°/270°, mixed-style spans, justification, decorations, drop shadows, and per-glyph gradients.',
   },
   {
     q: 'What output formats are supported?',
@@ -45,7 +44,7 @@ const items: Item[] = [
   },
   {
     q: 'Can I use Sone with Next.js?',
-    a: 'Yes. Externalize `skia-canvas` so the bundler does not try to inline the native binary. See the Installation page for the exact `next.config.ts` snippet.',
+    a: 'Yes. Externalize `skia` so the bundler does not try to inline the native binary. See the Installation page for the exact `next.config.ts` snippet.',
   },
 ];
 

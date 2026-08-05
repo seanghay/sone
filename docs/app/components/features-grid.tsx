@@ -38,9 +38,7 @@ const features: Feature[] = [
   },
   {
     icon: <Hash className="size-5" />,
-    title: 'Hyphenation in 80+ languages',
     description:
-      'Automatic syllable-aware word hyphenation via Knuth–Liang patterns. Composes with balanced wrap.',
   },
   {
     icon: <Layers className="size-5" />,

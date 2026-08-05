@@ -1,4 +1,4 @@
-import { Column, Text } from "../../src/node.ts";
+import { Column, Text } from "../../src/index.ts";
 import { writeCanvasToFile } from "./utils.ts";
 
 const T = 380;

@@ -58,7 +58,7 @@ const rows: Row[] = [
   {
     feature: 'Renderer',
     values: {
-      sone: 'skia-canvas (native Skia)',
+      sone: 'skia (native Skia)',
       takumi: 'Rust + WGPU/Skia',
       satori: 'SVG → resvg / Sharp',
       plutobook: 'C++ + Cairo',
@@ -127,7 +127,6 @@ const rows: Row[] = [
     },
   },
   {
-    feature: 'Hyphenation',
     values: {
       sone: '80+ languages',
       takumi: false,

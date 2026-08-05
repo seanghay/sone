@@ -1,13 +1,9 @@
-import * as soneAll from "sone";
-import type { SoneNode } from "sone";
-import { transform } from "sucrase";
-
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-
 /**
  * Transform user ES module code into something executable via AsyncFunction.
  *
- * Handles:
+ * Rewrites the `sone` imports to read from an injected `__sone` binding and
+ * normalises the default export. Used by the render worker.
+ *
  *   import { Column, Text } from "sone"  →  const { Column, Text } = __sone;
  *   import * as sone from "sone"          →  const sone = __sone;
  *   import type { ... } from "sone"       →  (removed)
@@ -30,14 +26,4 @@ export function transformCode(code: string): string {
       "const __default = function $1"
     )
     .replace(/export\s+default\s+/g, "const __default = ");
-}
-
-export async function executeCode(code: string): Promise<SoneNode> {
-  const { code: js } = transform(code, { transforms: ["typescript"] });
-  const transformed = transformCode(js);
-  const fn = new AsyncFunction(
-    "__sone",
-    `${transformed}\nreturn typeof __default === "function" ? __default() : __default;`
-  );
-  return fn(soneAll);
 }
