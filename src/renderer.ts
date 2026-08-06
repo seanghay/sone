@@ -1205,7 +1205,7 @@ export async function compile<T extends SoneNode>(
       for (const row of node.children) {
         if (row == null) continue;
         for (const child of row.children) {
-          if (child == null) return;
+          if (child == null) continue;
           if (child.type === "text-default") continue;
           if (child.props.paddingLeft == null)
             child.props.paddingLeft = spacingX;
