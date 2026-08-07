@@ -22,6 +22,20 @@ import { ck } from "./init.ts";
 // biome-ignore lint/suspicious/noExplicitAny: CanvasKit Image
 type SkImage = any;
 
+/**
+ * Upper bound on the SVG rasterization surface (per side).
+ *
+ * The raster surface costs `width * height * 4` bytes, and an SVG can *declare*
+ * an arbitrary intrinsic size through its `width`/`height` attributes or its
+ * `viewBox` — none of which is bounded by the document's byte length. A ~100
+ * byte document claiming `60000x60000` would ask CanvasKit for ~14 GB, an
+ * untrusted-input memory-exhaustion DoS. Cap the longest side and scale the
+ * other axis proportionally so the image still renders correctly, just bounded
+ * in resolution. 8192 matches common GPU max-texture limits and is far larger
+ * than any realistic layout target.
+ */
+const MAX_SVG_SIDE = 8192;
+
 const registry = new Map<number, SkImage>();
 let nextId = 1;
 
@@ -105,7 +119,7 @@ function rasterizeSvg(bytes: Uint8Array): SkImage {
   if (dom == null) throw new Error("Failed to parse SVG document.");
 
   try {
-    const [width, height] = readContainerSize(dom, markup);
+    const [width, height] = clampContainerSize(readContainerSize(dom, markup));
     const surface = kit.MakeSurface(Math.ceil(width), Math.ceil(height));
     if (surface == null) {
       throw new Error(`Failed to allocate a ${width}x${height} SVG surface.`);
@@ -141,6 +155,30 @@ function readContainerSize(
   }
 
   return [300, 150]; // CSS default replaced-element size
+}
+
+/**
+ * Bound the rasterization size so an attacker-declared SVG dimension cannot
+ * drive an unbounded surface allocation (memory-exhaustion DoS). Non-finite or
+ * non-positive dimensions (e.g. a malformed `width`/`viewBox`) fall back to the
+ * CSS default replaced-element size rather than reaching `MakeSurface`.
+ */
+function clampContainerSize([width, height]: [number, number]): [
+  number,
+  number,
+] {
+  if (
+    !Number.isFinite(width) ||
+    !Number.isFinite(height) ||
+    width <= 0 ||
+    height <= 0
+  ) {
+    return [300, 150];
+  }
+  const longest = Math.max(width, height);
+  if (longest <= MAX_SVG_SIDE) return [width, height];
+  const scale = MAX_SVG_SIDE / longest;
+  return [width * scale, height * scale];
 }
 
 export type { SkImage };
