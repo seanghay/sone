@@ -127,14 +127,6 @@ const rows: Row[] = [
     },
   },
   {
-    values: {
-      sone: '80+ languages',
-      takumi: false,
-      satori: false,
-      plutobook: 'CSS hyphens',
-    },
-  },
-  {
     feature: 'Balanced line wrapping',
     values: { sone: true, takumi: false, satori: false, plutobook: false },
   },

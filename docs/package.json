@@ -3,14 +3,21 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare-sone": "npm --prefix .. install --no-audit --no-fund && npm --prefix .. run build",
+    "predev": "npm run prepare-sone",
     "dev": "react-router dev",
+    "prebuild": "npm run prepare-sone",
     "build": "react-router build",
-    "vercel-build": "npm --prefix .. install --no-audit --no-fund && npm --prefix .. run build && npm run generate-api-docs && react-router build",
+    "vercel-build": "npm run generate-api-docs && react-router build",
     "start": "react-router-serve ./build/server/index.js",
+    "pretypecheck": "npm run prepare-sone",
     "typecheck": "react-router typegen && fumadocs-mdx && tsc --noEmit",
     "prepare-gallery": "node scripts/copy-gallery.mjs",
+    "pregenerate-examples": "npm run prepare-sone",
     "generate-examples": "node scripts/generate-examples.mjs",
+    "pregenerate-business-docs": "npm run prepare-sone",
     "generate-business-docs": "node scripts/generate-business-docs.mjs",
+    "pregenerate-api-docs": "npm run prepare-sone",
     "generate-api-docs": "node scripts/generate-api-docs.mjs"
   },
   "dependencies": {
@@ -27,8 +34,7 @@
     "react-router": "^7.7.0",
     "react-top-loading-bar": "^3.0.2",
     "shiki": "^3.0.0",
-    "skia-canvas": "^3.0.4",
-    "sone": "^1.4.0",
+    "sone": "file:..",
     "tailwind-merge": "^3.0.0"
   },
   "devDependencies": {

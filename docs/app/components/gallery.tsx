@@ -88,8 +88,6 @@ const items: GalleryItem[] = [
     source: 'test/visual/text-wrap-balance-1.ts',
   },
   {
-  },
-  {
     src: '/gallery/tab-leader-1.jpg',
     title: 'Tab leaders',
     caption: 'Dot or dash leaders fill the gap between aligned columns.',
