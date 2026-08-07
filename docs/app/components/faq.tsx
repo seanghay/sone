@@ -29,6 +29,7 @@ const items: Item[] = [
   },
   {
     q: 'Does Sone support advanced typography?',
+    a: 'Yes — bidirectional text (Arabic, Hebrew, and mixed paragraphs), balanced line wrapping, tab stops with leaders, text orientation at 0°/90°/180°/270°, mixed-style spans, justification, decorations, drop shadows, and per-glyph gradients.',
   },
   {
     q: 'What output formats are supported?',

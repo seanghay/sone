@@ -10,7 +10,7 @@ import { generateDocumentation } from 'fumadocs-typescript';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const docsDir = resolve(__dirname, '..');
-const sonePath = resolve(docsDir, '..', 'dist', 'node.d.mts');
+const sonePath = resolve(docsDir, '..', 'dist', 'index.d.mts');
 
 // Curated groups. We don't dump every internal type — only what a user
 // composing a Sone tree actually reaches for.
@@ -39,7 +39,7 @@ const groups = [
   },
   {
     title: 'Photo',
-    description: 'Image node — local path, URL, or Buffer.',
+    description: 'Image node — local path, URL, or encoded bytes.',
     types: ['PhotoProps'],
   },
   {
@@ -65,7 +65,7 @@ const groups = [
   {
     title: 'Render config',
     description: 'Top-level options passed to sone(tree, config).',
-    types: ['SoneRenderConfig', 'SoneHeaderFooter', 'SoneDebugConfig'],
+    types: ['SoneRenderConfig', 'SoneHeaderFooter'],
   },
 ];
 

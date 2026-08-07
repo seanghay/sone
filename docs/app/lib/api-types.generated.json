@@ -643,6 +643,13 @@
             "deprecated": false
           },
           {
+            "name": "textWrap",
+            "type": "\"wrap\" | \"balance\"",
+            "description": "Text wrap mode.\n- \"wrap\": default line-breaking (greedy or knuth-plass)\n- \"balance\": balance line lengths so all lines are roughly equal width",
+            "required": false,
+            "deprecated": false
+          },
+          {
             "name": "autofit",
             "type": "boolean",
             "description": "",
@@ -1447,13 +1454,6 @@
             "deprecated": false
           },
           {
-            "name": "baseDir",
-            "type": "\"ltr\" | \"rtl\" | \"auto\"",
-            "description": "Base paragraph direction for bidirectional text rendering.\n- \"ltr\": left-to-right (default)\n- \"rtl\": right-to-left (Arabic, Hebrew, etc.)\n- \"auto\": auto-detect from the first strong directional character\n\nWhen set to \"rtl\" or resolved \"rtl\" via \"auto\", text segments are\nrendered from right to left and the default alignment becomes \"right\".",
-            "required": true,
-            "deprecated": false
-          },
-          {
             "name": "orientation",
             "type": "0 | 90 | 180 | 270",
             "description": "text orientation in degrees — affects layout dimensions",
@@ -1545,13 +1545,6 @@
             "deprecated": false
           },
           {
-            "name": "textDir",
-            "type": "\"ltr\" | \"rtl\"",
-            "description": "Text rendering direction for this span.\nOverrides the paragraph-level baseDir for this specific span.\nUse \"rtl\" for RTL scripts (Arabic, Hebrew) embedded in LTR text,\nor \"ltr\" for LTR text embedded in RTL paragraphs.",
-            "required": true,
-            "deprecated": false
-          },
-          {
             "name": "underline",
             "type": "number",
             "description": "underline thickness",
@@ -1604,6 +1597,27 @@
             "name": "clipImage",
             "type": "PhotoNode",
             "description": "image to display through text letterforms (clip-image effect)",
+            "required": false,
+            "deprecated": false
+          },
+          {
+            "name": "textWrap",
+            "type": "\"wrap\" | \"balance\"",
+            "description": "Text wrap mode.\n- \"wrap\": default line-breaking (greedy or knuth-plass)\n- \"balance\": balance line lengths so all lines are roughly equal width",
+            "required": false,
+            "deprecated": false
+          },
+          {
+            "name": "baseDir",
+            "type": "\"ltr\" | \"rtl\" | \"auto\"",
+            "description": "Base paragraph direction for bidirectional text rendering.\n- \"ltr\": left-to-right (default)\n- \"rtl\": right-to-left (Arabic, Hebrew, etc.)\n- \"auto\": auto-detect from the first strong directional character\n\nWhen set to \"rtl\" or resolved \"rtl\" via \"auto\", text segments are\nrendered from right to left and the default alignment becomes \"right\".",
+            "required": false,
+            "deprecated": false
+          },
+          {
+            "name": "textDir",
+            "type": "\"ltr\" | \"rtl\"",
+            "description": "Text rendering direction for this span.\nOverrides the paragraph-level baseDir for this specific span.\nUse \"rtl\" for RTL scripts (Arabic, Hebrew) embedded in LTR text,\nor \"ltr\" for LTR text embedded in RTL paragraphs.",
             "required": false,
             "deprecated": false
           }
@@ -1680,6 +1694,13 @@
             "name": "align",
             "type": "\"left\" | \"right\" | \"center\" | \"justify\"",
             "description": "text alignment",
+            "required": false,
+            "deprecated": false
+          },
+          {
+            "name": "textWrap",
+            "type": "\"wrap\" | \"balance\"",
+            "description": "Text wrap mode.\n- \"wrap\": default line-breaking (greedy or knuth-plass)\n- \"balance\": balance line lengths so all lines are roughly equal width",
             "required": false,
             "deprecated": false
           },
@@ -2629,7 +2650,7 @@
   },
   {
     "title": "Photo",
-    "description": "Image node — local path, URL, or Buffer.",
+    "description": "Image node — local path, URL, or encoded bytes.",
     "types": [
       {
         "name": "PhotoProps",
@@ -2679,14 +2700,14 @@
           },
           {
             "name": "src",
-            "type": "string | Uint8Array<ArrayBufferLike> | HTMLImageElement",
+            "type": "string | Uint8Array<ArrayBufferLike> | SoneImage",
             "description": "image source",
             "required": false,
             "deprecated": false
           },
           {
             "name": "image",
-            "type": "HTMLImageElement",
+            "type": "SoneImage",
             "description": "resolved image (set during compilation)",
             "required": false,
             "deprecated": false
@@ -6811,7 +6832,7 @@
           },
           {
             "name": "cache",
-            "type": "Map<string | Uint8Array<ArrayBufferLike>, HTMLImageElement>",
+            "type": "Map<string | Uint8Array<ArrayBufferLike>, SoneImage>",
             "description": "image cache for performance",
             "required": false,
             "deprecated": false
@@ -6857,26 +6878,6 @@
         "name": "SoneHeaderFooter",
         "description": "A header or footer value: either a static node (same on every page) or a\nfunction that receives page info and returns a node (rendered per-page).",
         "properties": []
-      },
-      {
-        "name": "SoneDebugConfig",
-        "description": "Debug configuration for development",
-        "properties": [
-          {
-            "name": "text",
-            "type": "boolean",
-            "description": "show text measurement debugging",
-            "required": true,
-            "deprecated": false
-          },
-          {
-            "name": "layout",
-            "type": "boolean",
-            "description": "show layout bounding boxes",
-            "required": true,
-            "deprecated": false
-          }
-        ]
       }
     ]
   }

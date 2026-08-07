@@ -38,7 +38,9 @@ const features: Feature[] = [
   },
   {
     icon: <Hash className="size-5" />,
+    title: 'Tab stops & leaders',
     description:
+      'Align text to explicit stops, add dot leaders, and build dense financial or reference layouts.',
   },
   {
     icon: <Layers className="size-5" />,
